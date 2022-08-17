@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import './button.css';
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 export interface Props {
   label?: string;
   type: string;
