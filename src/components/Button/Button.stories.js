@@ -7,6 +7,10 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
+    type: {
+      control: { type: 'select' },
+      options: ['primary', 'secondary', 'icon', 'text', 'outline'],
+    },
     onClick: {},
     size: {
       control: { type: 'select' },
@@ -30,23 +34,29 @@ const Template = (args) => ({
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: 'Button',
+  type: 'primary',
+  label: 'Primary Button',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: 'Button',
+  type: 'secondary',
+  label: 'Secondary Button',
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
+export const Icon = Template.bind({});
+Icon.args = {
+  type: 'icon',
+  label: 'Icon Button',
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+export const Text = Template.bind({});
+Text.args = {
+  type: 'text',
+  label: 'Text Button',
+};
+export const Outline = Template.bind({});
+Outline.args = {
+  type: 'outline',
+  label: 'Outline Button',
 };
