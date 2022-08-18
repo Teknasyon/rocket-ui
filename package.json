@@ -26,6 +26,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@heroicons/vue": "^1.0.6",
     "vue": "^3.2.37"
   },
   "devDependencies": {

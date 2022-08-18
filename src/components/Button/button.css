@@ -1,17 +1,17 @@
 @tailwind components;
 
 .button {
-  @apply min-w-max min-h-max border-none rounded-lg text-sm text-white px-6 py-4 cursor-pointer;
+  @apply min-w-max min-h-max flex items-center justify-center border-none rounded-lg text-sm text-white px-6 py-4 cursor-auto;
 }
 
 .button--primary {
-  @apply bg-teal-400;
+  @apply bg-teal-400 hover:bg-teal-500 active:bg-teal-600 disabled:bg-gray-300;
 }
 .button--secondary {
   @apply bg-slate-300;
 }
 .button--icon {
-  @apply bg-red-500 text-gray-900;
+  @apply px-1 py-2 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
 }
 .button--text {
   @apply text-gray-900 bg-transparent p-0;
@@ -27,4 +27,7 @@
 }
 .button--small {
   @apply font-normal text-sm px-4 py-2;
+}
+.icon {
+  @apply h-5 w-5 mx-2;
 }
