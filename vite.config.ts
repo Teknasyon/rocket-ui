@@ -32,4 +32,7 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    collectCoverage: true,
+  },
 });
