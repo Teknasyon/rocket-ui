@@ -2,20 +2,25 @@ import MyButton from './Button.vue';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Button',
+  title: 'Components/Button',
   component: MyButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-    type: {
+    role: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'icon', 'text', 'outline'],
     },
-    onClick: {},
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
     },
+    type: {
+      control: { type: 'select' },
+      options: ['button', 'submit', 'reset'],
+    },
+    icon: { control: 'text' },
+    onClick: {},
   },
 };
 
@@ -34,29 +39,30 @@ const Template = (args) => ({
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
-  type: 'primary',
+  role: 'primary',
   label: 'Primary Button',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  type: 'secondary',
+  role: 'secondary',
   label: 'Secondary Button',
 };
 
 export const Icon = Template.bind({});
 Icon.args = {
-  type: 'icon',
+  role: 'icon',
   label: 'Icon Button',
+  icon: 'PlusCircleSolid',
 };
 
 export const Text = Template.bind({});
 Text.args = {
-  type: 'text',
+  role: 'text',
   label: 'Text Button',
 };
 export const Outline = Template.bind({});
 Outline.args = {
-  type: 'outline',
+  role: 'outline',
   label: 'Outline Button',
 };
