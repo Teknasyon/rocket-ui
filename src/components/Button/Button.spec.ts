@@ -8,7 +8,7 @@ describe('Button', () => {
     const wrapper = mount(Button, {
       props: {
         label: 'Hello Vitest',
-        role: 'primary',
+        primary: true,
         size: 'large',
         type: 'button',
         backgroundColor: '#fff',
