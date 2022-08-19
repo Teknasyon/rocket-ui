@@ -55,42 +55,51 @@ export default {
   },
 } as Meta<typeof MyButton>;
 
-const Template: StoryFn<typeof MyButton> = (args) => ({
+const PrimaryTemplate: StoryFn<typeof MyButton> = () => ({
   components: { MyButton },
-  setup() {
-    return { args };
-  },
-  template: `<my-button v-bind="args"/>`,
-  parameters: {
-    notes: 'A simple button component',
-  },
+  template: `<my-button primary/>`,
 });
-
-export const Primary = Template.bind({});
+export const Primary = PrimaryTemplate.bind({});
 Primary.args = {
   primary: true,
   label: 'Primary Button',
 };
 
-export const Secondary = Template.bind({});
+const SecondaryTemplate: StoryFn<typeof MyButton> = () => ({
+  components: { MyButton },
+  template: `<my-button secondary/>`,
+});
+export const Secondary = SecondaryTemplate.bind({});
 Secondary.args = {
   secondary: true,
   label: 'Secondary Button',
 };
 
-export const Tertiary = Template.bind({});
+const TertiaryTemplate: StoryFn<typeof MyButton> = () => ({
+  components: { MyButton },
+  template: `<my-button tertiary/>`,
+});
+export const Tertiary = TertiaryTemplate.bind({});
 Tertiary.args = {
   tertiary: true,
-  label: 'Tertiary Button',
   icon: 'PlusCircleSolid',
 };
 
-export const Quaternary = Template.bind({});
+const QuaternaryTemplate: StoryFn<typeof MyButton> = () => ({
+  components: { MyButton },
+  template: `<my-button quaternary/>`,
+});
+export const Quaternary = QuaternaryTemplate.bind({});
 Quaternary.args = {
   quaternary: true,
   label: 'Quaternary Button',
 };
-export const Outline = Template.bind({});
+
+const OutlineTemplate: StoryFn<typeof MyButton> = () => ({
+  components: { MyButton },
+  template: `<my-button outline/>`,
+});
+export const Outline = OutlineTemplate.bind({});
 Outline.args = {
   outline: true,
   label: 'Outline Button',
