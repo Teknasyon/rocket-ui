@@ -10,14 +10,17 @@
 .button--secondary {
   @apply bg-slate-300;
 }
-.button--icon {
+.button--tertiary {
   @apply px-1 py-2 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
 }
-.button--text {
+.button--quaternary {
   @apply text-gray-900 bg-transparent p-0;
 }
 .button--outline {
   @apply bg-transparent border border-solid border-gray-100 text-gray-400;
+}
+.button--loading {
+  @apply animate-pulse;
 }
 .button--large {
   @apply font-semibold text-lg w-full;

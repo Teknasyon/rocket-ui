@@ -5,22 +5,52 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 export default {
   title: 'Components/Button',
   component: MyButton,
+
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-    role: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'icon', 'text', 'outline'],
+    primary: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    secondary: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    tertiary: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    quaternary: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    outline: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    loading: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      defaultValue: false,
     },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
+      defaultValue: 'medium',
     },
     type: {
       control: { type: 'select' },
       options: ['button', 'submit', 'reset'],
+      defaultValue: 'button',
     },
-    icon: { control: 'text' },
+    icon: {
+      control: { type: 'text' },
+      defaultValue: '',
+    },
     onClick: {},
   },
 } as Meta<typeof MyButton>;
@@ -30,35 +60,38 @@ const Template: StoryFn<typeof MyButton> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<my-button v-bind="args" />',
+  template: `<my-button v-bind="args"/>`,
+  parameters: {
+    notes: 'A simple button component',
+  },
 });
 
 export const Primary = Template.bind({});
 Primary.args = {
-  role: 'primary',
+  primary: true,
   label: 'Primary Button',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  role: 'secondary',
+  secondary: true,
   label: 'Secondary Button',
 };
 
-export const Icon = Template.bind({});
-Icon.args = {
-  role: 'icon',
-  label: 'Icon Button',
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  tertiary: true,
+  label: 'Tertiary Button',
   icon: 'PlusCircleSolid',
 };
 
-export const Text = Template.bind({});
-Text.args = {
-  role: 'text',
-  label: 'Text Button',
+export const Quaternary = Template.bind({});
+Quaternary.args = {
+  quaternary: true,
+  label: 'Quaternary Button',
 };
 export const Outline = Template.bind({});
 Outline.args = {
-  role: 'outline',
+  outline: true,
   label: 'Outline Button',
 };
