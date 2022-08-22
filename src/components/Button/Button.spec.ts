@@ -7,14 +7,12 @@ describe('Button', () => {
   it('renders properly', () => {
     const wrapper = mount(Button, {
       props: {
-        label: 'Hello Vitest',
-        primary: true,
+        variant: 'primary',
         size: 'large',
         type: 'button',
         backgroundColor: '#fff',
       },
     });
-    expect(wrapper.text()).toContain('Hello Vitest');
     expect(wrapper.classes()).toContain('button');
     expect(wrapper.classes()).toContain('button--primary');
     expect(wrapper.attributes('type')).toBe('button');
