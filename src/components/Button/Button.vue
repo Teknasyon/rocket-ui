@@ -4,14 +4,9 @@ import { computed } from 'vue';
 import { PlusCircleIcon as PlusCircleOutline } from '@heroicons/vue/outline';
 import { PlusCircleIcon as PlusCircleSolid } from '@heroicons/vue/solid';
 export interface Props {
-  primary?: boolean;
-  secondary?: boolean;
-  tertiary?: boolean; //Icon only
-  quaternary?: boolean; //Text
-  outline?: boolean;
+  variant?: 'primary' | 'secondary' | 'icon' | 'text' | 'outline';
   loading?: boolean;
   disabled?: boolean;
-  label?: string;
   icon?: string;
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
@@ -21,11 +16,7 @@ const props = defineProps<Props>();
 const emit = defineEmits(['click']);
 const classes = computed(() => ({
   button: true,
-  [`button--primary`]: props.primary,
-  [`button--secondary`]: props.secondary,
-  [`button--tertiary`]: props.tertiary,
-  [`button--quaternary`]: props.quaternary,
-  [`button--outline`]: props.outline,
+  [`button--${props.variant}`]: true,
   [`button--loading`]: props.loading,
   [`button--${props.size || 'medium'}`]: true,
 }));
@@ -48,10 +39,7 @@ const onClick = () => {
     @click="onClick"
   >
     <component v-if="props.icon?.length" :is="Icon" class="icon" />
-
-    <slot v-if="$slots.default" />
-    <template v-if="!props.tertiary">
-      {{ props.label }}
-    </template>
+    <slot name="custom-icon" />
+    <slot v-if="props.variant !== 'icon'" />
   </button>
 </template>

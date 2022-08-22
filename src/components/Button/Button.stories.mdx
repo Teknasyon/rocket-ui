@@ -1,0 +1,160 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Button from './Button.vue';
+
+<Meta
+  title="Components/Button"
+  component={Button}
+  argTypes={{
+    variant: {
+      control: {
+        type: 'select',
+        options: ['primary', 'secondary', 'icon', 'text', 'outline'],
+        defaultValue: 'primary',
+      },
+    },
+    loading: {
+      control: {
+        type: 'boolean',
+        defaultValue: false,
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+        defaultValue: false,
+      },
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large'],
+        defaultValue: 'medium',
+      },
+    },
+    icon: {
+      control: {
+        type: 'text',
+        defaultValue: 'PlusCircleSolid',
+      },
+    },
+    type: {
+      control: {
+        type: 'select',
+        options: ['button', 'submit', 'reset'],
+        defaultValue: 'button',
+      },
+    },
+    backgroundColor: {
+      control: {
+        type: 'color',
+      },
+    },
+  }}
+/>
+
+export const Default = ({ slot1, slot2, ...rest }) => {
+  const args = rest;
+  return {
+    components: { Button },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<Button v-bind="args">
+      <template v-slot:default>
+        ${slot1}
+      </template>
+    </Button>`,
+  };
+};
+
+# Primary
+
+<Canvas>
+  <Story
+    name="Primary"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'primary',
+      slot1: '<span>Primary</span>',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Secondary
+
+<Canvas>
+  <Story
+    name="Secondary"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'secondary',
+      slot1: '<span>Secondary</span>',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Icon
+
+<Canvas>
+  <Story
+    name="Icon"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'icon',
+      icon: 'PlusCircleSolid',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Text
+
+<Canvas>
+  <Story
+    name="Text"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'text',
+      slot1: '<span>Text</span>',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Outline
+
+<Canvas>
+  <Story
+    name="Outline"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'outline',
+      slot1: '<span>Outline</span>',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Reference
+
+<ArgsTable />
+
+# Usage
+
+```html
+Default template
+```
+
+```js
+Default template
+```
