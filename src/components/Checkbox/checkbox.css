@@ -1,0 +1,33 @@
+@tailwind components;
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  @apply relative pl-7;
+}
+
+input[type='checkbox'] {
+  @apply appearance-none border-none checked:appearance-none;
+}
+
+.checkbox {
+  @apply transition-transform absolute top-0 left-0 content-center rounded border-solid border w-4 h-4;
+}
+
+.checkbox--empty {
+  @apply text-gray-300 bg-transparent border-gray-300;
+}
+
+.checkbox--checked {
+  @apply text-teal-300 bg-teal-100 border-teal-300;
+}
+.checkbox--required {
+  @apply text-red-300 bg-red-100 border-red-300;
+}
+.checkbox--disabled {
+  @apply text-gray-300 bg-gray-100 border-gray-300;
+}
