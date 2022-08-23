@@ -1,0 +1,47 @@
+@tailwind components;
+
+fieldset {
+  @apply font-sans border-none m-0 p-0;
+}
+
+.textfield__wrapper {
+  @apply flex flex-col items-start justify-start;
+}
+input[type='text'] {
+  @apply border-none h-full w-full bg-transparent focus:outline-none text-base;
+}
+.textfield {
+  @apply flex items-center block h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-4 py-2;
+}
+.textfield--reverse {
+  @apply flex flex-row-reverse gap-1;
+}
+.textfield:hover {
+  @apply border border-solid border-gray-300;
+}
+.textfield:focus {
+  @apply outline-none border border-solid border-teal-400;
+}
+.textfield::placeholder {
+  @apply text-gray-400;
+}
+.textfield__label {
+  @apply text-gray-500 text-sm p-0 mb-3;
+}
+.textfield--error,
+.textfield--error > input[type='text'] {
+  @apply border-red-500 text-red-500 bg-red-100 hover:border-red-500;
+}
+.textfield__error {
+  @apply text-red-500 font-light text-xs tracking-wide mt-1;
+}
+.textfield__error-icon {
+  @apply text-red-500;
+}
+.textfield--loading {
+  @apply animate-pulse;
+}
+
+.textfield--disabled {
+  @apply opacity-50 cursor-not-allowed;
+}

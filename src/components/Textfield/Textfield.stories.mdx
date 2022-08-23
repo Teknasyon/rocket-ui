@@ -1,0 +1,113 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Textfield from './Textfield.vue';
+import IconList from '../Shared/IconList.js';
+export const icons = Object.keys(IconList.solid);
+
+<Meta
+  title="Components/Textfield"
+  component={Textfield}
+  argTypes={{
+    id: {
+      control: {
+        type: 'text',
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
+    errorMsg: {
+      control: {
+        type: 'text',
+      },
+    },
+    icon: {
+      control: {
+        type: 'select',
+        options: icons,
+      },
+    },
+    iconLeft: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    iconColor: {
+      control: {
+        type: 'color',
+      },
+    },
+    loading: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    onChange: {
+      control: {
+        type: 'action',
+      },
+    },
+  }}
+/>
+
+export const Default = (args) => {
+  return {
+    components: { Textfield },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<Textfield v-bind="args" />`,
+  };
+};
+
+# Default
+
+<Canvas>
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+      iconLeft: false,
+      value: '',
+      errorMsg: '',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Reference
+
+<ArgsTable />
+
+# Usage
+
+```html
+Default template
+```
+
+```js
+Default template
+```
