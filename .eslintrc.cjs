@@ -9,7 +9,7 @@ module.exports = {
     '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
     'plugin:storybook/recommended',
-    'plugin:storybook/recommended',
+    'plugin:mdx/recommended',
   ],
   parserOptions: {
     ecmaVersion: 'latest',

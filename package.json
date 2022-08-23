@@ -54,6 +54,7 @@
     "babel-loader": "^8.2.5",
     "chromatic": "^6.7.4",
     "eslint": "^8.21.0",
+    "eslint-plugin-mdx": "^2.0.2",
     "eslint-plugin-storybook": "^0.6.4",
     "eslint-plugin-vue": "^9.3.0",
     "husky": "^8.0.0",
