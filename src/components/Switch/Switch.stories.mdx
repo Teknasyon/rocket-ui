@@ -1,0 +1,133 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Switch from './Switch.vue';
+
+<Meta
+  title="Components/Switch"
+  component={Switch}
+  argTypes={{
+    id: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large'],
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    onChange: {
+      control: {
+        type: 'action',
+      },
+    },
+  }}
+/>
+
+export const Default = (args) => {
+  return {
+    components: { Switch },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: '<Switch v-bind="args" />',
+  };
+};
+
+# All the sizes
+
+<hr />
+
+<Canvas>
+  <Story
+    name="Small"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      value: false,
+      size: 'small',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Medium"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      value: false,
+      size: 'medium',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Large"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      value: false,
+      size: 'large',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Reference
+
+<hr />
+
+<ArgsTable props={Default.argTypes} />
+
+# Notes
+
+<hr />
+<p>
+  This component is a wrapper around the <code>input</code> element.
+</p>
+<p>
+  The <code>value</code> prop is passed to the <code>input</code> element.
+</p>
+<p>
+  The <code>disabled</code> prop is passed to the <code>input</code> element.
+</p>
+<p>
+  The <code>size</code> prop is passed to the <code>input</code> element.
+</p>
+
+# Installation
+
+<hr />
+
+<p>Install the component with:</p>
+
+```js
+import { Switch } from '@/components/Switch';
+```
+
+# Examples
+
+<hr />
+
+<h6>Basic using</h6>
+
+```html
+<Switch :value="false" />
+```
+
+<h6>Advance using</h6>
+
+```html
+<Switch :value="false" size="large" :disabled="false" />
+```
