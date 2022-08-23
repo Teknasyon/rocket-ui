@@ -1,6 +1,8 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Button from './Button.vue';
+import IconList from '../Shared/IconList.js';
+export const icons = Object.keys(IconList.solid);
 
 <Meta
   title="Components/Button"
@@ -10,44 +12,55 @@ import Button from './Button.vue';
       control: {
         type: 'select',
         options: ['primary', 'secondary', 'icon', 'text', 'outline'],
-        defaultValue: 'primary',
       },
     },
     loading: {
       control: {
         type: 'boolean',
-        defaultValue: false,
       },
     },
     disabled: {
       control: {
         type: 'boolean',
-        defaultValue: false,
       },
     },
     size: {
       control: {
         type: 'select',
         options: ['small', 'medium', 'large'],
-        defaultValue: 'medium',
       },
     },
     icon: {
       control: {
-        type: 'text',
-        defaultValue: 'PlusCircleSolid',
+        type: 'select',
+        options: icons,
       },
     },
     type: {
       control: {
         type: 'select',
         options: ['button', 'submit', 'reset'],
-        defaultValue: 'button',
       },
     },
     backgroundColor: {
       control: {
         type: 'color',
+      },
+    },
+    iconColor: {
+      control: {
+        type: 'color',
+      },
+    },
+    iconSize: {
+      control: {
+        type: 'text',
+      },
+    },
+    iconKind: {
+      control: {
+        type: 'radio',
+        options: ['solid', 'outline'],
       },
     },
   }}
@@ -78,6 +91,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
     argTypes={{ ...Default.argTypes }}
     args={{
       variant: 'primary',
+      icon: 'PlusCircleIcon',
       slot1: '<span>Primary</span>',
     }}
   >

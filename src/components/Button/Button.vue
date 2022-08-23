@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import './button.css';
 import { computed } from 'vue';
-import { PlusCircleIcon as PlusCircleOutline } from '@heroicons/vue/outline';
-import { PlusCircleIcon as PlusCircleSolid } from '@heroicons/vue/solid';
+import Icon from '../Icon/Icon.vue';
+import { IconKind, type IconSize } from '../Shared/Enums';
 export interface Props {
   variant?: 'primary' | 'secondary' | 'icon' | 'text' | 'outline';
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
+  iconColor?: string;
+  iconSize?:
+    | IconSize.XSmall
+    | IconSize.Small
+    | IconSize.Medium
+    | IconSize.Large
+    | IconSize.XLarge
+    | string;
+  iconKind?: IconKind.Outline | IconKind.Solid;
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
@@ -23,9 +32,6 @@ const classes = computed(() => ({
 const style = computed(() => ({
   backgroundColor: props.backgroundColor,
 }));
-const Icon = computed(() => {
-  return props.icon?.includes('Outline') ? PlusCircleOutline : PlusCircleSolid;
-});
 const onClick = () => {
   emit('click');
 };
@@ -38,7 +44,13 @@ const onClick = () => {
     :disabled="disabled || loading"
     @click="onClick"
   >
-    <component v-if="props.icon?.length" :is="Icon" class="icon" />
+    <Icon
+      :name="`${icon}`"
+      :size="iconSize || '24'"
+      :color="iconColor"
+      :kind="iconKind || IconKind.Solid"
+      class="icon"
+    />
     <slot name="custom-icon" />
     <slot v-if="props.variant !== 'icon'" />
   </button>
