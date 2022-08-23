@@ -1,0 +1,56 @@
+@tailwind components;
+
+fieldset {
+  @apply font-sans border-none m-0 p-0;
+}
+.switch {
+  @apply relative inline-block w-16 h-9;
+}
+.switch--small {
+  @apply w-12 h-6;
+}
+.switch--large {
+  @apply w-20 h-11;
+}
+.switch input {
+  @apply opacity-0 w-0 h-0 -z-10;
+}
+.slider {
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-gray-300 transition duration-200 ease-in-out;
+}
+.switch--small > .slider::before {
+  @apply w-4 h-4;
+}
+.switch--large > .slider::before {
+  @apply w-9 h-9;
+}
+.slider:before {
+  content: '';
+  @apply absolute h-7 w-7 left-1 bottom-1 bg-white transition duration-200 ease-in-out;
+}
+input:checked + .slider {
+  @apply bg-teal-400;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px;
+  @apply shadow-teal-400;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.switch--large > input:checked + .slider:before {
+  -webkit-transform: translateX(34px);
+  -ms-transform: translateX(34px);
+  transform: translateX(34px);
+}
+.slider.round {
+  @apply rounded-full;
+}
+.slider.round:before {
+  @apply rounded-full;
+}
+.switch--disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
