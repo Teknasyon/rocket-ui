@@ -36,7 +36,7 @@ input[type='text'] {
   @apply text-red-500 font-light text-xs tracking-wide mt-1;
 }
 .textfield__error-icon {
-  @apply text-red-500;
+  @apply animate-bounce text-red-500;
 }
 .textfield--loading {
   @apply animate-pulse;

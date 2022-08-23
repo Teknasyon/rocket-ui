@@ -22,6 +22,9 @@
 .button--loading {
   @apply animate-pulse;
 }
+.button--loading > .icon {
+  @apply animate-bounce;
+}
 .button--large {
   @apply font-semibold text-lg w-full;
 }
