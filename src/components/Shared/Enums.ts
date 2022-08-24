@@ -1,6 +1,7 @@
 export enum IconKind {
   Solid = 'solid',
   Outline = 'outline',
+  Mini = 'mini',
 }
 
 export enum IconSize {

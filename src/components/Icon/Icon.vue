@@ -4,7 +4,7 @@ import IconList from '../Shared/IconList';
 import type { IconKind, IconSize } from '../Shared/Enums';
 export interface Props {
   name: string;
-  kind?: IconKind.Outline | IconKind.Solid | string;
+  kind?: IconKind.Outline | IconKind.Solid | IconKind.Mini | string;
   size?:
     | IconSize.XSmall
     | IconSize.Small
