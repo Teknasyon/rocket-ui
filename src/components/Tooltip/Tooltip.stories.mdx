@@ -1,0 +1,181 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Tooltip from './Tooltip.vue';
+import Icon from '../Icon/Icon.vue';
+import Button from '../Button/Button.vue';
+
+export const Placements = [
+  'auto',
+  'auto-start',
+  'auto-end',
+  'top',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+];
+export const Triggers = ['click', 'hover', 'focus', 'touch'];
+
+export const defaultArgs = {
+  placement: {
+    control: {
+      type: 'select',
+      options: Placements,
+    },
+    defaultValue: 'top',
+  },
+  triggers: {
+    control: {
+      type: 'inline-check',
+      options: Triggers,
+    },
+    defaultValue: [Triggers[1]],
+  },
+  autoHide: { control: { type: 'boolean' }, defaultValue: true },
+  distance: { control: { type: 'number' }, defaultValue: 10 },
+  skidding: { control: { type: 'number' }, defaultValue: 0 },
+  container: { control: { type: 'text' }, defaultValue: '.v-popper' },
+  strategy: {
+    control: {
+      type: 'radio',
+      options: ['absolute', 'fixed'],
+    },
+    defaultValue: 'absolute',
+  },
+  popperClass: {
+    control: { type: 'text' },
+    defaultValue: '',
+  },
+  shown: { control: { type: 'boolean' }, defaultValue: false },
+  theme: {
+    control: {
+      type: 'radio',
+      options: ['tooltip', 'dropdown', 'menu'],
+    },
+    defaultValue: 'tooltip',
+  },
+  content: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Tooltip content',
+  },
+  delay: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  flip: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  autoSize: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  positioningDisabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  handleResize: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  arrowPadding: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+};
+
+<Meta
+  title="Components/Tooltip"
+  component={Tooltip}
+  argTypes={{
+    ...defaultArgs,
+  }}
+/>
+
+export const Default = ({ slot, ...args }) => {
+  return {
+    components: { Tooltip, Icon, Button },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `
+    <Tooltip v-bind="args">
+      ${slot}
+      <template #contentSlot>
+      content with slot
+      </template>
+    </Tooltip>`,
+  };
+};
+
+<Canvas>
+  <Story
+    name="Icon"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      slot: '<Icon name="InformationCircleIcon" size="24" kind="outline" />',
+      content: 'Icon tooltip content prop mdx',
+      placement: 'bottom',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Text"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      slot: '<p>Text tooltip</p>',
+      content: 'Text tooltip content prop mdx',
+      placement: 'bottom',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Button"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      slot: `
+      <Button variant="primary" >
+        Button tooltip
+      </Button>`,
+      content: 'This is a tooltip',
+      distance: 10,
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Reference
+
+<ArgsTable />
