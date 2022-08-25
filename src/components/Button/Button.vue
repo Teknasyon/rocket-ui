@@ -4,7 +4,7 @@ import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
 import { IconKind, type IconSize } from '../Shared/Enums';
 export interface Props {
-  variant?: 'primary' | 'secondary' | 'icon' | 'text' | 'outline';
+  variant: 'primary' | 'secondary' | 'icon' | 'text' | 'outline';
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
@@ -16,7 +16,7 @@ export interface Props {
     | IconSize.Large
     | IconSize.XLarge
     | string;
-  iconKind?: IconKind.Outline | IconKind.Solid;
+  iconKind?: IconKind.Outline | IconKind.Solid | IconKind.Mini | string;
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
