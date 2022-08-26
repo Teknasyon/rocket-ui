@@ -11,7 +11,7 @@
   @apply bg-slate-300;
 }
 .button--icon {
-  @apply px-1 py-2 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
+  @apply p-2 m-0 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
 }
 .button--text {
   @apply text-gray-900 bg-transparent p-0;
@@ -36,4 +36,7 @@
 }
 .icon {
   @apply mr-2;
+}
+.button--icon > .icon {
+  @apply m-0;
 }

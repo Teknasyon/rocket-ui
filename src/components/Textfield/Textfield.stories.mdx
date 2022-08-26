@@ -4,67 +4,79 @@ import Textfield from './Textfield.vue';
 import IconList from '../Shared/IconList.js';
 export const icons = Object.keys(IconList.solid);
 
+export const defaultArgs = {
+  id: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'textfield',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Textfield',
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Placeholder',
+  },
+  value: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  errorMsg: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  icon: {
+    control: {
+      type: 'select',
+      options: icons,
+    },
+    defaultValue: icons[0],
+  },
+  iconLeft: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  iconColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  loading: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  onChange: {
+    control: {
+      type: 'action',
+    },
+  },
+};
+
 <Meta
   title="Components/Textfield"
   component={Textfield}
-  argTypes={{
-    id: {
-      control: {
-        type: 'text',
-      },
-    },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    placeholder: {
-      control: {
-        type: 'text',
-      },
-    },
-    value: {
-      control: {
-        type: 'text',
-      },
-    },
-    errorMsg: {
-      control: {
-        type: 'text',
-      },
-    },
-    icon: {
-      control: {
-        type: 'select',
-        options: icons,
-      },
-    },
-    iconLeft: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    iconColor: {
-      control: {
-        type: 'color',
-      },
-    },
-    loading: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    disabled: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    onChange: {
-      control: {
-        type: 'action',
-      },
-    },
-  }}
+  argTypes={{ ...defaultArgs }}
 />
 
 export const Default = (args) => {

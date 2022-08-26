@@ -2,38 +2,40 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Switch from './Switch.vue';
 
-<Meta
-  title="Components/Switch"
-  component={Switch}
-  argTypes={{
-    id: {
-      control: {
-        type: 'text',
-      },
+export const defaultArgs = {
+  id: {
+    control: {
+      type: 'text',
     },
-    value: {
-      control: {
-        type: 'boolean',
-      },
+    defaultValue: 'switch',
+  },
+  value: {
+    control: {
+      type: 'boolean',
     },
-    size: {
-      control: {
-        type: 'select',
-        options: ['small', 'medium', 'large'],
-      },
+    defaultValue: false,
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
     },
-    disabled: {
-      control: {
-        type: 'boolean',
-      },
+    defaultValue: 'medium',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
     },
-    onChange: {
-      control: {
-        type: 'action',
-      },
+    defaultValue: false,
+  },
+  onChange: {
+    control: {
+      type: 'action',
     },
-  }}
-/>
+  },
+};
+
+<Meta title="Components/Switch" component={Switch} argTypes={{}} />
 
 export const Default = (args) => {
   return {

@@ -2,46 +2,54 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Checkbox from './Checkbox.vue';
 
+export const defaultArgs = {
+  id: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'checkbox',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Checkbox',
+  },
+  right: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  indeterminate: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  required: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  onChange: {
+    control: {
+      type: 'action',
+    },
+  },
+};
+
 <Meta
   title="Components/Checkbox"
   component={Checkbox}
-  argTypes={{
-    id: {
-      control: {
-        type: 'text',
-      },
-    },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    right: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    indeterminate: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    disabled: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    required: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    onChange: {
-      control: {
-        type: 'action',
-      },
-    },
-  }}
+  argTypes={{ ...defaultArgs }}
 />
 
 export const Default = (args) => {
