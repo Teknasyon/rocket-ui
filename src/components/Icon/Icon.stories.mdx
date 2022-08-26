@@ -4,35 +4,37 @@ import Icon from './Icon.vue';
 import IconList from '../Shared/IconList.js';
 export const icons = Object.keys(IconList.solid);
 
-<Meta
-  title="Components/Icon"
-  component={Icon}
-  argTypes={{
-    name: {
-      control: {
-        type: 'select',
-        options: icons,
-      },
+export const defaultArgs = {
+  name: {
+    control: {
+      type: 'select',
+      options: icons,
     },
-    size: {
-      control: {
-        type: 'radio',
-        options: ['20', '24', '32', '48', '64'],
-      },
+    defaultValue: icons[0],
+  },
+  size: {
+    control: {
+      type: 'radio',
+      options: ['20', '24', '32', '48', '64'],
     },
-    color: {
-      control: {
-        type: 'color',
-      },
+    defaultValue: '24',
+  },
+  color: {
+    control: {
+      type: 'color',
     },
-    kind: {
-      control: {
-        type: 'radio',
-        options: ['solid', 'outline', 'mini'],
-      },
+    defaultValue: '',
+  },
+  kind: {
+    control: {
+      type: 'radio',
+      options: ['solid', 'outline', 'mini'],
     },
-  }}
-/>
+    defaultValue: 'solid',
+  },
+};
+
+<Meta title="Components/Icon" component={Icon} argTypes={{ ...defaultArgs }} />
 
 export const Default = (args) => {
   return {
