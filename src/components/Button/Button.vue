@@ -2,21 +2,24 @@
 import './button.css';
 import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
-import { IconKind, type IconSize } from '../Shared/Enums';
+
+export type ButtonType =
+  | 'primary'
+  | 'secondary'
+  | 'icon'
+  | 'text'
+  | 'outline'
+  | 'link'
+  | 'danger';
 export interface Props {
-  variant: 'primary' | 'secondary' | 'icon' | 'text' | 'outline';
+  variant: ButtonType;
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
   iconColor?: string;
-  iconSize?:
-    | IconSize.XSmall
-    | IconSize.Small
-    | IconSize.Medium
-    | IconSize.Large
-    | IconSize.XLarge
-    | string;
-  iconKind?: IconKind.Outline | IconKind.Solid | IconKind.Mini | string;
+  iconSize?: string;
+  iconKind?: string;
+  iconRight?: boolean;
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
@@ -28,6 +31,7 @@ const classes = computed(() => ({
   [`button--${props.variant}`]: true,
   [`button--loading`]: props.loading,
   [`button--${props.size || 'medium'}`]: true,
+  'button--reverse': props.iconRight,
 }));
 const style = computed(() => ({
   backgroundColor: props.backgroundColor,
@@ -48,8 +52,9 @@ const onClick = () => {
       :name="`${icon}`"
       :size="iconSize || '24'"
       :color="iconColor"
-      :kind="iconKind || IconKind.Solid"
-      class="icon"
+      :kind="iconKind || 'solid'"
+      class="button__icon"
+      :class="[iconRight ? 'button__icon--right' : 'button__icon--left']"
     />
     <slot name="custom-icon" />
     <slot v-if="props.variant !== 'icon'" />
