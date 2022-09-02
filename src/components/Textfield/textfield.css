@@ -35,13 +35,12 @@ input[type='text'] {
 .textfield__error {
   @apply text-red-500 font-light text-xs tracking-wide mt-1;
 }
-.textfield__error-icon {
+.textfield__icon--error {
   @apply animate-bounce text-red-500;
 }
 .textfield--loading {
   @apply animate-pulse;
 }
-
 .textfield--disabled {
   @apply opacity-50 cursor-not-allowed;
 }

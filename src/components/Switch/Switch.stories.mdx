@@ -32,10 +32,15 @@ export const defaultArgs = {
     control: {
       type: 'action',
     },
+    action: 'change',
   },
 };
 
-<Meta title="Components/Switch" component={Switch} argTypes={{}} />
+<Meta
+  title="Components/Switch"
+  component={Switch}
+  argTypes={{ ...defaultArgs }}
+/>
 
 export const Default = (args) => {
   return {
