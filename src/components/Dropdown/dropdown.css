@@ -1,0 +1,14 @@
+@tailwind components;
+
+.list {
+  @apply font-sans min-h-max min-w-max p-5;
+}
+.list__header {
+}
+.list__body {
+}
+.list__footer {
+  @apply grid grid-cols-2 gap-2;
+}
+.footer__btn1 {
+}

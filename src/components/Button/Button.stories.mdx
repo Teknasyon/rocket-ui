@@ -36,7 +36,7 @@ export const defaultArgs = {
       type: 'select',
       options: icons,
     },
-    defaultValue: '',
+    defaultValue: icons[0],
   },
   type: {
     control: {
@@ -64,6 +64,13 @@ export const defaultArgs = {
       type: 'radio',
       options: ['solid', 'outline'],
     },
+    defaultValue: 'solid',
+  },
+  iconRight: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   onClick: {
     control: {

@@ -1,0 +1,163 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import Dropdown from './Dropdown.vue';
+
+export const Placements = [
+  'auto',
+  'auto-start',
+  'auto-end',
+  'top',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+];
+export const Triggers = ['click', 'hover'];
+
+export const defaultArgs = {
+  placement: {
+    control: {
+      type: 'select',
+      options: Placements,
+    },
+    defaultValue: 'top',
+  },
+  triggers: {
+    control: {
+      type: 'inline-check',
+      options: Triggers,
+    },
+    defaultValue: [Triggers[0]],
+  },
+  autoHide: { control: { type: 'boolean' }, defaultValue: true },
+  distance: { control: { type: 'number' }, defaultValue: 10 },
+  skidding: { control: { type: 'number' }, defaultValue: 0 },
+  container: { control: { type: 'text' }, defaultValue: '.v-popper' },
+  strategy: {
+    control: {
+      type: 'radio',
+      options: ['absolute', 'fixed'],
+    },
+    defaultValue: 'absolute',
+  },
+  popperClass: {
+    control: { type: 'text' },
+    defaultValue: '',
+  },
+  shown: { control: { type: 'boolean' }, defaultValue: false },
+  content: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Tooltip content',
+  },
+  delay: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  flip: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  shift: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  autoSize: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  positioningDisabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  handleResize: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  arrowPadding: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+  onShow: {
+    control: {
+      type: 'action',
+    },
+    action: 'show',
+  },
+  onHide: {
+    control: {
+      type: 'action',
+    },
+    action: 'hide',
+  },
+  onDispose: {
+    control: {
+      type: 'action',
+    },
+    action: 'dispose',
+  },
+  onResize: {
+    control: {
+      type: 'action',
+    },
+    action: 'resize',
+  },
+};
+
+<Meta
+  title="Components/Dropdown"
+  component={Dropdown}
+  argTypes={{ ...defaultArgs }}
+/>
+
+export const Default = (args) => {
+  return {
+    components: { Dropdown },
+    setup() {
+      return { args };
+    },
+    template: `<Dropdown v-bind="args" />`,
+  };
+};
+
+export const WithIcon = (args) => {
+  return {
+    components: { Dropdown },
+    setup() {
+      return { args };
+    },
+    template: `<Dropdown v-bind="args" />`,
+  };
+};
+
+<Canvas>
+  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}} />
+  <Story name="With Icon" argTypes={{ ...WithIcon.argTypes }} args={{}} />
+</Canvas>
