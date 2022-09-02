@@ -32,8 +32,13 @@ input:checked + .slider {
   @apply bg-teal-400;
 }
 input:focus + .slider {
-  box-shadow: 0 0 1px;
+  box-shadow: 0 0 0.5px;
   @apply shadow-teal-400;
+}
+.switch--small > input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
 }
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);

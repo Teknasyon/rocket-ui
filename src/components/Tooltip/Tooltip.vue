@@ -65,9 +65,7 @@ const resize = () => {
       v-bind="props"
       v-model:shown="state.visible"
       @show="show"
-      @applyShow="show"
       @hide="hide"
-      @applyHide="hide"
       @dispose="dispose"
       @resize="resize"
     >

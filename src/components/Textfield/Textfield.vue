@@ -15,7 +15,7 @@ export interface Props {
   loading?: boolean;
 }
 const props = defineProps<Props>();
-const emit = defineEmits(['change']);
+const emit = defineEmits(['change', 'input', 'focus', 'blur', 'click']);
 const state = reactive({
   value: props.value || '',
 });
@@ -30,6 +30,26 @@ const classes = computed(() => {
 });
 const onChange = () => {
   emit('change', {
+    value: state.value,
+  });
+};
+const onInput = () => {
+  emit('input', {
+    value: state.value,
+  });
+};
+const onFocus = () => {
+  emit('focus', {
+    value: state.value,
+  });
+};
+const onBlur = () => {
+  emit('blur', {
+    value: state.value,
+  });
+};
+const onClick = () => {
+  emit('click', {
     value: state.value,
   });
 };
@@ -48,6 +68,9 @@ const onChange = () => {
           :disabled="props.disabled"
           :placeholder="props.placeholder"
           @change="onChange"
+          @input="onInput"
+          @focus="onFocus"
+          @blur="onBlur"
         />
         <Icon
           v-if="props.errorMsg?.length || props.icon?.length"
@@ -55,7 +78,8 @@ const onChange = () => {
           :color="props.iconColor"
           size="24"
           kind="solid"
-          class="textfield__error-icon"
+          :class="{ 'textfield__icon--error': props.errorMsg?.length }"
+          @click="onClick"
         />
       </div>
     </div>

@@ -85,6 +85,12 @@ export const defaultArgs = {
     },
     defaultValue: true,
   },
+  shift: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
   autoSize: {
     control: {
       type: 'boolean',
@@ -108,6 +114,30 @@ export const defaultArgs = {
       type: 'number',
     },
     defaultValue: 0,
+  },
+  onShow: {
+    control: {
+      type: 'action',
+    },
+    action: 'show',
+  },
+  onHide: {
+    control: {
+      type: 'action',
+    },
+    action: 'hide',
+  },
+  onDispose: {
+    control: {
+      type: 'action',
+    },
+    action: 'dispose',
+  },
+  onResize: {
+    control: {
+      type: 'action',
+    },
+    action: 'resize',
   },
 };
 
