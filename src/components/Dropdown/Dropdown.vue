@@ -38,6 +38,11 @@ export interface Props {
   flip?: boolean;
   shift?: boolean;
   handleResize?: boolean;
+  options: string[];
+  selected: string[];
+  multiple?: boolean;
+  searchable?: boolean;
+  actions?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   popperClass: '',
@@ -58,8 +63,20 @@ const props = withDefaults(defineProps<Props>(), {
   flip: false,
   shift: false,
   handleResize: true,
+  options: () => [],
+  selected: () => [],
+  multiple: false,
+  searchable: true,
+  actions: true,
 });
-const emit = defineEmits(['show', 'hide', 'dispose', 'resize']);
+const emit = defineEmits([
+  'show',
+  'hide',
+  'dispose',
+  'resize',
+  'select',
+  'cancel',
+]);
 const state = reactive({ msg: '', visible: false });
 const onShow = () => {
   state.visible = true;
@@ -74,6 +91,9 @@ const onDispose = () => {
 };
 const onResize = () => {
   emit('resize');
+};
+const onSelect = (value: string) => {
+  emit('select', { value });
 };
 </script>
 <template>
@@ -97,7 +117,16 @@ const onResize = () => {
       </Button>
       <slot v-else />
       <template #popper>
-        <List v-if="!$slots['content']" />
+        <List
+          v-if="!$slots['content']"
+          :options="props.options"
+          :selected="props.selected"
+          :multiple="props.multiple"
+          :searchable="props.searchable"
+          :actions="props.actions"
+          @select="onSelect"
+          @cancel="emit('cancel')"
+        />
         <slot v-else name="content" />
       </template>
     </Dropdown>

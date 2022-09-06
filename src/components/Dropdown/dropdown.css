@@ -1,14 +1,32 @@
 @tailwind components;
 
 .list {
-  @apply font-sans min-h-max min-w-max p-5;
+  @apply font-sans min-h-max min-w-max divide-x-0 divide-y divide-gray-200 divide-solid;
 }
 .list__header {
+  @apply font-bold text-xl text-center p-4;
 }
 .list__body {
+  @apply flex flex-col pl-4;
+}
+.list__items {
+  @apply overflow-y-auto h-24 py-2;
+}
+.list__item {
+  @apply cursor-auto w-auto rounded-sm;
+}
+.list__item--selected {
+  @apply bg-red-100;
+}
+.list__item--selected:hover {
+  @apply bg-gray-100;
+}
+.item-multiple {
+  @apply p-2 w-auto;
+}
+.item-single {
+  @apply cursor-default py-2 m-0 hover:bg-gray-100;
 }
 .list__footer {
-  @apply grid grid-cols-2 gap-2;
-}
-.footer__btn1 {
+  @apply grid grid-cols-2 gap-2 p-4;
 }
