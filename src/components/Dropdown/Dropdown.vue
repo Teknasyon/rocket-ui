@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import List from './List.vue';
 import { Dropdown } from 'floating-vue';
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import 'floating-vue/dist/style.css';
 import Button from '../Button/Button.vue';
 export interface Props {
@@ -43,12 +43,13 @@ export interface Props {
   multiple?: boolean;
   searchable?: boolean;
   actions?: boolean;
+  icon?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   popperClass: '',
   placement: 'auto',
-  content: 'deneme',
-  strategy: 'fixed',
+  content: '',
+  strategy: 'absolute',
   triggers: () => ['click'],
   delay: 0,
   shown: false,
@@ -68,6 +69,7 @@ const props = withDefaults(defineProps<Props>(), {
   multiple: false,
   searchable: true,
   actions: true,
+  icon: '',
 });
 const emit = defineEmits([
   'show',
@@ -95,6 +97,10 @@ const onResize = () => {
 const onSelect = (value: string) => {
   emit('select', { value });
 };
+const iconName = computed(() => {
+  if (props.icon) return props.icon;
+  return state.visible ? 'ChevronUpIcon' : 'ChevronDownIcon';
+});
 </script>
 <template>
   <div style="display: flex">
@@ -109,9 +115,9 @@ const onSelect = (value: string) => {
       <Button
         v-if="!$slots.default"
         iconRight
-        variant="secondary"
+        :variant="props.content?.length > 0 ? 'secondary' : 'icon'"
         iconKind="mini"
-        :icon="state.visible ? 'ChevronUpIcon' : 'ChevronDownIcon'"
+        :icon="iconName"
       >
         {{ props.content }}
       </Button>
