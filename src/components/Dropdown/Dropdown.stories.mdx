@@ -105,6 +105,57 @@ export const defaultArgs = {
     },
     defaultValue: 0,
   },
+  options: {
+    control: {
+      type: 'array',
+    },
+    defaultValue: [
+      {
+        text: 'Option 1',
+        value: 'option1',
+      },
+      {
+        text: 'Option 2',
+        value: 'option2',
+      },
+      {
+        text: 'Option 3',
+        value: 'option3',
+      },
+      {
+        text: 'Option 4',
+        value: 'option4',
+      },
+      {
+        text: 'Option 5',
+        value: 'option5',
+      },
+    ],
+  },
+  selected: {
+    control: {
+      type: 'array',
+    },
+    defaultValue: [],
+  },
+  multiple: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  searchable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  actions: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   onShow: {
     control: {
       type: 'action',
@@ -128,6 +179,18 @@ export const defaultArgs = {
       type: 'action',
     },
     action: 'resize',
+  },
+  onSelect: {
+    control: {
+      type: 'action',
+    },
+    action: 'select',
+  },
+  onCancel: {
+    control: {
+      type: 'action',
+    },
+    action: 'cancel',
   },
 };
 

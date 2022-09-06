@@ -4,13 +4,20 @@ import './checkbox.css';
 import Icon from '../Icon/Icon.vue';
 export interface Props {
   id: string;
-  label: string | number;
+  label?: string | number;
   right?: boolean;
   indeterminate?: boolean;
   disabled?: boolean;
   required?: boolean;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  id: '',
+  label: '',
+  right: false,
+  indeterminate: false,
+  disabled: false,
+  required: false,
+});
 const emit = defineEmits(['change']);
 const state = reactive({
   checked: false,
@@ -40,7 +47,7 @@ const onChange = () => {
 <template>
   <fieldset>
     <label :for="props.id || 'checkbox'">
-      {{ props.label || 'Checkbox' }}
+      {{ props.label }}
       <input
         :id="props.id || 'checkbox'"
         type="checkbox"

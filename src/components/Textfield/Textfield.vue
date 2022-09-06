@@ -4,7 +4,7 @@ import './textfield.css';
 import Icon from '../Icon/Icon.vue';
 export interface Props {
   id: string;
-  value: string;
+  value?: string;
   label?: string;
   placeholder?: string;
   errorMsg?: string;
