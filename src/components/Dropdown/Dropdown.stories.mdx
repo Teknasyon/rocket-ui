@@ -85,7 +85,7 @@ export const defaultArgs = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
+    defaultValue: true,
   },
   positioningDisabled: {
     control: {
@@ -222,5 +222,12 @@ export const WithIcon = (args) => {
 
 <Canvas>
   <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}} />
-  <Story name="With Icon" argTypes={{ ...WithIcon.argTypes }} args={{}} />
+</Canvas>
+
+<Canvas>
+  <Story
+    name="With Icon"
+    argTypes={{ ...WithIcon.argTypes }}
+    args={{ content: '', autoSize: false }}
+  />
 </Canvas>
