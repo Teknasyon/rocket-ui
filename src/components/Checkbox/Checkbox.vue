@@ -9,6 +9,7 @@ export interface Props {
   indeterminate?: boolean;
   disabled?: boolean;
   required?: boolean;
+  checked?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -17,10 +18,11 @@ const props = withDefaults(defineProps<Props>(), {
   indeterminate: false,
   disabled: false,
   required: false,
+  checked: false,
 });
 const emit = defineEmits(['change']);
 const state = reactive({
-  checked: false,
+  checked: props.checked || false,
 });
 const classes = computed(() => {
   return {
