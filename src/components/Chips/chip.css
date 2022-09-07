@@ -1,0 +1,65 @@
+@tailwind components;
+
+.chip {
+  @apply font-sans inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
+}
+
+.chip--primary {
+  @apply text-teal-600 bg-teal-100;
+}
+
+.chip--secondary {
+  @apply text-gray-600 bg-gray-100;
+}
+
+.chip--success {
+  @apply text-green-600 bg-green-100;
+}
+
+.chip--danger {
+  @apply text-red-600 bg-red-100;
+}
+
+.chip--warning {
+  @apply text-yellow-600 bg-yellow-100;
+}
+
+.chip--info {
+  @apply text-blue-600 bg-blue-100;
+}
+
+.chip--light {
+  @apply text-slate-600 bg-slate-100;
+}
+
+.chip--dark {
+  @apply text-white bg-black;
+}
+
+.chip--small {
+  @apply text-xs px-1 py-0.5;
+}
+
+.chip--large {
+  @apply text-base px-3 py-1.5;
+}
+
+.chip--square {
+  @apply rounded-none;
+}
+
+.chip--reverse {
+  @apply flex-row-reverse;
+}
+
+.chip--disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.chip__icon {
+  @apply ml-1 hover:opacity-80 transition-opacity duration-200;
+}
+
+.chip--reverse > .chip__icon {
+  @apply mr-1 ml-0;
+}
