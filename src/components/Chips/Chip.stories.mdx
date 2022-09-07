@@ -1,0 +1,139 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Chip from './Chip.vue';
+import IconList from '../Shared/IconList.js';
+export const icons = [null, ...Object.keys(IconList.solid)];
+
+export const defaultArgs = {
+  variant: {
+    control: {
+      type: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'light',
+        'dark',
+      ],
+    },
+    defaultValue: 'primary',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Chip',
+  },
+  iconLeft: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  icon: {
+    control: {
+      type: 'select',
+      options: icons,
+    },
+    defaultValue: icons[0],
+  },
+  square: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  onClick: {
+    control: {
+      type: 'function',
+    },
+    action: 'click',
+  },
+};
+
+<Meta title="Components/Chips" component={Chip} argTypes={{ ...defaultArgs }} />
+
+export const Default = (args) => ({
+  components: { Chip },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Chip v-bind="args">slot</Chip>
+  `,
+});
+
+# Chips
+
+<Canvas>
+  <Story name="Primary" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Secondary"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'secondary' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Success"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'success' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Danger"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'danger' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Warning"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'warning' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Info"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'info' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Light"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'light' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Dark"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'dark' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Primary" />
