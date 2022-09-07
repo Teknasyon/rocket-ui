@@ -1,5 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import Dropdown from './Dropdown.vue';
+import IconList from '../Shared/IconList.js';
+export const icons = [null, ...Object.keys(IconList.solid)];
 
 export const Placements = [
   'auto',
@@ -52,6 +54,8 @@ export const defaultArgs = {
   },
   shown: { control: { type: 'boolean' }, defaultValue: false },
   content: {
+    description: 'The content of the dropdown',
+    table: { category: 'For Input', defaultValue: { summary: 'null' } },
     control: {
       type: 'text',
     },
@@ -106,55 +110,69 @@ export const defaultArgs = {
     defaultValue: 0,
   },
   options: {
+    table: { category: 'For List' },
     control: {
       type: 'array',
     },
     defaultValue: [
       {
-        text: 'Option 1',
+        label: 'Option 1',
         value: 'option1',
       },
       {
-        text: 'Option 2',
+        label: 'Option 2',
         value: 'option2',
       },
       {
-        text: 'Option 3',
+        label: 'Option 3',
         value: 'option3',
       },
       {
-        text: 'Option 4',
+        label: 'Option 4',
         value: 'option4',
       },
       {
-        text: 'Option 5',
+        label: 'Option 5',
         value: 'option5',
       },
     ],
   },
   selected: {
+    table: { category: 'For List' },
     control: {
       type: 'array',
     },
     defaultValue: [],
   },
   multiple: {
+    table: { category: 'For List' },
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
   searchable: {
+    table: { category: 'For List' },
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    description: '<span>Searchable dropdown</span>',
+  },
+  actions: {
+    table: { category: 'For List' },
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
-  actions: {
+  icon: {
+    table: { category: 'For Input' },
     control: {
-      type: 'boolean',
+      type: 'select',
+      options: icons,
     },
-    defaultValue: false,
+    defaultValue: icons[0],
   },
   onShow: {
     control: {
@@ -192,6 +210,12 @@ export const defaultArgs = {
     },
     action: 'cancel',
   },
+  onSubmit: {
+    control: {
+      type: 'action',
+    },
+    action: 'submit',
+  },
 };
 
 <Meta
@@ -224,6 +248,8 @@ export const WithIcon = (args) => {
   <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}} />
 </Canvas>
 
+<ArgsTable story="Default" />
+
 <Canvas>
   <Story
     name="With Icon"
@@ -231,3 +257,5 @@ export const WithIcon = (args) => {
     args={{ content: '', autoSize: false }}
   />
 </Canvas>
+
+<ArgsTable story="With Icon" />

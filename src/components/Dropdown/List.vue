@@ -4,28 +4,72 @@ import './dropdown.css';
 import Button from '../Button/Button.vue';
 import Textfield from '../Textfield/Textfield.vue';
 import Checkbox from '../Checkbox/Checkbox.vue';
+import type { Option } from './dropdown';
 
 export interface Props {
-  options: string[];
+  popperClass?: string;
+  placement?:
+    | 'auto'
+    | 'auto-start'
+    | 'auto-end'
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+  content?: string;
+  strategy?: 'fixed' | 'absolute';
+  triggers?: ['hover' | 'click' | 'focus' | 'touch'];
+  delay?: number;
+  shown?: boolean;
+  distance?: number;
+  skidding?: number;
+  arrowPadding?: number;
+  container?: string;
+  autoHide?: boolean;
+  disabled?: boolean;
+  positioningDisabled?: boolean;
+  autoSize?: boolean | 'min' | 'max';
+  flip?: boolean;
+  shift?: boolean;
+  handleResize?: boolean;
+  options: Option[];
   selected: string[];
   multiple?: boolean;
   searchable?: boolean;
   actions?: boolean;
+  icon?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  options: () => [],
+  selected: () => [],
   multiple: false,
+  searchable: false,
+  actions: false,
 });
-const emit = defineEmits(['select', 'cancel']);
-const state = reactive({
+const emit = defineEmits(['select', 'cancel', 'submit']);
+const state = reactive<{
+  options: Option[];
+  selected: string[];
+  search: string;
+  shown: boolean;
+}>({
   shown: false,
   search: '',
   selected: props.selected || [],
   options: props.options || [],
 });
 const filteredOptions = computed(() => {
-  return state.options.filter((option) => {
-    return option.text.toLowerCase().includes(state.search.toLowerCase());
+  return state.options.filter((option: Option) => {
+    return option.label.toLowerCase().includes(state.search.toLowerCase());
   });
 });
 const onSearch = (e: { value: string }) => {
@@ -61,14 +105,14 @@ const onSelect = (value: string) => {
         <p v-if="filteredOptions.length === 0">No results found!!</p>
         <div
           v-else
-          v-for="{ text, value } in filteredOptions"
+          v-for="{ label, value } in filteredOptions"
           :key="value"
           class="list__item"
         >
           <Checkbox
             v-if="props.multiple"
             :id="value"
-            :label="text"
+            :label="label"
             class="item-multiple"
             :class="{ 'list-item--selected': state.selected.includes(value) }"
             @change="onSelect(value)"
@@ -80,7 +124,7 @@ const onSelect = (value: string) => {
             :class="{ 'list-item--selected': state.selected.includes(value) }"
             @click="onSelect(value)"
           >
-            {{ text }}
+            {{ label }}
           </p>
         </div>
       </div>
@@ -94,7 +138,12 @@ const onSelect = (value: string) => {
       >
         Cancel
       </Button>
-      <Button class="footer__submit" size="small" variant="primary">
+      <Button
+        class="footer__submit"
+        size="small"
+        variant="primary"
+        @click="emit('submit')"
+      >
         Submit
       </Button>
     </div>

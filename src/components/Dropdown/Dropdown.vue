@@ -4,6 +4,8 @@ import { Dropdown } from 'floating-vue';
 import { reactive, computed } from 'vue';
 import 'floating-vue/dist/style.css';
 import Button from '../Button/Button.vue';
+import type { Option } from './dropdown';
+
 export interface Props {
   popperClass?: string;
   placement?:
@@ -38,7 +40,7 @@ export interface Props {
   flip?: boolean;
   shift?: boolean;
   handleResize?: boolean;
-  options: string[];
+  options: Option[];
   selected: string[];
   multiple?: boolean;
   searchable?: boolean;
@@ -78,6 +80,7 @@ const emit = defineEmits([
   'resize',
   'select',
   'cancel',
+  'submit',
 ]);
 const state = reactive({ msg: '', visible: false });
 const onShow = () => {
@@ -132,6 +135,7 @@ const iconName = computed(() => {
           :actions="props.actions"
           @select="onSelect"
           @cancel="emit('cancel')"
+          @submit="emit('submit')"
         />
         <slot v-else name="content" />
       </template>
