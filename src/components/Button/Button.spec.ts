@@ -24,8 +24,5 @@ describe('Button', () => {
         expect(wrapper.emitted().click).toBeTruthy();
       }).timeout(0);
     });
-    it('renders a button', () => {
-      expect(wrapper.find('.button').exists()).toBe(true);
-    });
   });
 });
