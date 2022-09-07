@@ -56,12 +56,13 @@ const props = withDefaults(defineProps<Props>(), {
   actions: false,
 });
 const emit = defineEmits(['select', 'cancel', 'submit']);
-const state = reactive<{
+type State = {
   options: Option[];
   selected: string[];
   search: string;
   shown: boolean;
-}>({
+};
+const state = reactive<State>({
   shown: false,
   search: '',
   selected: props.selected || [],
@@ -111,6 +112,7 @@ const onSelect = (value: string) => {
         >
           <Checkbox
             v-if="props.multiple"
+            :checked="state.selected.includes(value)"
             :id="value"
             :label="label"
             class="item-multiple"
