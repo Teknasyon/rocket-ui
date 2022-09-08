@@ -8,10 +8,10 @@ fieldset {
   @apply flex flex-col items-start justify-start;
 }
 input[type='text'] {
-  @apply border-none h-full w-full bg-transparent focus:outline-none text-base;
+  @apply w-full border-none h-full bg-transparent focus:outline-none text-base;
 }
 .textfield {
-  @apply flex items-center block h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-4 py-2;
+  @apply w-full flex items-center block h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-4 py-2;
 }
 .textfield--reverse {
   @apply flex flex-row-reverse gap-1;
@@ -43,4 +43,31 @@ input[type='text'] {
 }
 .textfield--disabled {
   @apply opacity-50 cursor-not-allowed;
+}
+.textfield--disabled > input[type='text'] {
+  @apply cursor-not-allowed;
+}
+.textfield--disabled:hover {
+  @apply border border-solid border-gray-100;
+}
+.textfield--clearable > .textfield__icon {
+  @apply cursor-pointer;
+}
+.textfield--small {
+  @apply h-6 text-sm;
+}
+.textfield--small > input[type='text'] {
+  @apply text-sm;
+}
+.textfield__label--small {
+  @apply text-xs;
+}
+.textfield--large {
+  @apply h-10 text-lg;
+}
+.textfield--large > input[type='text'] {
+  @apply text-lg;
+}
+.textfield__label--large {
+  @apply text-base;
 }
