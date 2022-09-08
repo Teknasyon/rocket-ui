@@ -40,7 +40,7 @@ export const defaultArgs = {
       type: 'select',
       options: [null, ...icons],
     },
-    defaultValue: icons[0],
+    // defaultValue: icons[0],
   },
   iconLeft: {
     control: {
@@ -61,6 +61,25 @@ export const defaultArgs = {
     defaultValue: false,
   },
   disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  clearable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  rows: {
     control: {
       type: 'boolean',
     },
@@ -137,7 +156,7 @@ export const Default = (args) => {
 
 # Reference
 
-<ArgsTable />
+<ArgsTable story="Default" />
 
 # Usage
 
