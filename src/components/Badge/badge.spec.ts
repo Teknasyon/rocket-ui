@@ -12,8 +12,6 @@ describe('Badge', () => {
         content: '1',
       },
     });
-    console.log();
-
     expect(wrapper.element.classList.contains('badge'));
     expect(wrapper.element.classList.contains('badge--right'));
     expect(wrapper.element.classList.contains('badge--small'));
