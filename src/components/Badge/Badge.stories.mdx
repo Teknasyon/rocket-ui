@@ -1,0 +1,132 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Badge from './Badge.vue';
+import Icon from '../Icon/Icon.vue';
+import IconList from '../Shared/IconList.js';
+export const icons = [null, ...Object.keys(IconList.solid)];
+
+export const defaultArgs = {
+  placement: {
+    control: {
+      type: 'select',
+      options: ['right', 'bottom', 'left'],
+    },
+    defaultValue: 'right',
+  },
+  bgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '#2dd4bf',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  square: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  overlap: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hover: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  icon: {
+    control: {
+      type: 'select',
+      options: icons,
+    },
+    defaultValue: icons[0],
+  },
+  color: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '#000',
+  },
+  content: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  onClick: {
+    action: 'click',
+  },
+};
+
+<Meta
+  title="Components/Badge"
+  component={Badge}
+  argTypes={{ ...defaultArgs }}
+/>
+
+export const Default = (args) => ({
+  components: { Badge, Icon },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Badge v-bind="args">
+      <Icon name="CubeIcon" size="24" />
+    </Badge>
+  `,
+});
+
+# Badges
+
+<Canvas>
+  <Story
+    name="Right"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'right' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Left"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'left' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Bottom"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'bottom' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story name="Hover" argTypes={{ ...Default.argTypes }} args={{ hover: true }}>
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="With Icon"
+    argTypes={{ ...Default.argTypes }}
+    args={{ icon: 'XCircleIcon' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="With Content"
+    argTypes={{ ...Default.argTypes }}
+    args={{ content: '1' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Right" />

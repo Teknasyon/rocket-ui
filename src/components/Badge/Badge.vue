@@ -1,0 +1,71 @@
+<script setup lang="ts">
+import './badge.css';
+import { defineProps, defineEmits, computed } from 'vue';
+import Icon from '../Icon/Icon.vue';
+
+export interface BadgeProps {
+  placement?: 'right' | 'bottom' | 'left';
+  bgColor?: string;
+  color?: string;
+  size?: 'small' | 'medium' | 'large';
+  square?: boolean;
+  overlap?: boolean;
+  hover?: boolean;
+  icon?: string;
+  content?: string | number;
+}
+const props = withDefaults(defineProps<BadgeProps>(), {
+  placement: 'right',
+  bgColor: '#2dd4bf',
+  color: '#fff',
+  size: 'medium',
+  square: false,
+  overlap: false,
+  hover: false,
+  icon: '',
+  content: '',
+});
+const emit = defineEmits(['click']);
+const classes = computed(() => {
+  return {
+    badge: true,
+    badge__content: props.content,
+    [`badge__content--${props.size}`]: props.size,
+    [`badge--${props.placement}`]: props.placement,
+    [`badge--${props.bgColor}`]: props.bgColor,
+    [`badge--${props.size}`]: props.size,
+    'badge--overlap': props.overlap,
+    'badge--square': props.square,
+    'badge--hover': props.hover,
+  };
+});
+const styles = computed(() => {
+  return {
+    backgroundColor: props.bgColor,
+    color: props.color,
+  };
+});
+const iconSize = computed(() => {
+  return {
+    small: '10px',
+    medium: '12px',
+    large: '14px',
+  }[props.size];
+});
+const onClick = () => emit('click');
+</script>
+<template>
+  <div class="wrapper group">
+    <div v-if="!props.icon" :style="styles" :class="classes" @click="onClick">
+      {{ props.content }}
+    </div>
+    <Icon
+      :name="`${props.icon}`"
+      :class="classes"
+      :color="props.color"
+      :size="iconSize"
+      @click="onClick"
+    />
+    <slot />
+  </div>
+</template>
