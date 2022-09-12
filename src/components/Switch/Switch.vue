@@ -7,7 +7,12 @@ export interface Props {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  id: 'switch',
+  value: false,
+  size: 'medium',
+  disabled: false,
+});
 const emit = defineEmits(['change']);
 const state = reactive({
   value: props.value || false,
@@ -16,7 +21,7 @@ const classes = computed(() => {
   return {
     switch: true,
     'switch--disabled': props.disabled,
-    [`switch--${props.size || 'medium'}`]: props.size,
+    [`switch--${props.size}`]: props.size,
   };
 });
 const onChange = () => {
