@@ -1,0 +1,53 @@
+@tailwind components;
+
+.wrapper {
+  @apply font-sans relative max-w-max p-2;
+}
+
+.badge {
+  @apply h-3 w-3 absolute z-50 rounded-full;
+}
+
+.badge--right {
+  @apply top-0 right-0;
+}
+
+.badge--left {
+  @apply top-0 left-0;
+}
+
+.badge--bottom {
+  @apply right-0 bottom-0;
+}
+
+.badge--overlap {
+  @apply top-1 right-1;
+}
+
+.badge--square {
+  @apply rounded-none;
+}
+
+.badge--hover {
+  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+}
+
+.badge__content {
+  @apply grid place-items-center leading-none text-xs text-white font-bold h-3.5 w-3.5;
+}
+
+.badge--small {
+  @apply h-2 w-2;
+}
+
+.badge__content--small {
+  font-size: 8px;
+}
+
+.badge--large {
+  @apply h-4 w-4;
+}
+
+.badge__content--large {
+  font-size: 1rem;
+}
