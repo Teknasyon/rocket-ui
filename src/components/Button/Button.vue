@@ -24,7 +24,19 @@ export interface Props {
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'primary',
+  loading: false,
+  disabled: false,
+  icon: '',
+  iconColor: '',
+  iconSize: '',
+  iconKind: '',
+  iconRight: false,
+  size: 'medium',
+  type: 'button',
+  backgroundColor: '',
+});
 const emit = defineEmits(['click']);
 const classes = computed(() => ({
   button: true,
