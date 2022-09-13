@@ -36,6 +36,7 @@ const onChange = () => {
         type="checkbox"
         :disabled="props.disabled"
         v-model="state.value"
+        class="switch__input"
         @change="onChange"
       />
       <span class="slider round" />
