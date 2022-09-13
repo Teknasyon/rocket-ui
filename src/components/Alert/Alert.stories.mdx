@@ -1,0 +1,101 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Alert from './Alert.vue';
+
+export const defaultArgs = {
+  type: {
+    control: {
+      type: 'select',
+      options: ['success', 'info', 'warning', 'error'],
+    },
+    defaultValue: 'success',
+    table: {
+      defaultValue: {
+        summary: 'success',
+        detail: 'success | info | warning | error',
+      },
+    },
+    description: 'Type of alert',
+  },
+  title: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Alert Title',
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is an alert description.',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  closable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  closeText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Close',
+  },
+  onClick: {
+    action: 'click',
+  },
+};
+
+<Meta
+  title="Components/Alert"
+  component={Alert}
+  argTypes={{ ...defaultArgs }}
+/>
+
+export const Default = (args) => ({
+  components: { Alert },
+  setup() {
+    return { args };
+  },
+  template: '<Alert v-bind="args" />',
+});
+
+<Canvas>
+  <Story name="Success" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Error"
+    argTypes={{ ...Default.argTypes }}
+    args={{ type: 'error' }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Info"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'info',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+  <Story
+    name="Warning"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'warning',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Success" />

@@ -11,7 +11,8 @@ export interface Props {
     | IconSize.Medium
     | IconSize.Large
     | IconSize.XLarge
-    | string;
+    | string
+    | number;
   color?: string;
 }
 
