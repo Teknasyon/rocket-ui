@@ -1,8 +1,6 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Button from './Button.vue';
-import IconList from '../Shared/IconList.js';
-export const icons = [null, ...Object.keys(IconList.solid)];
 
 export const defaultArgs = {
   variant: {
@@ -33,10 +31,9 @@ export const defaultArgs = {
   },
   icon: {
     control: {
-      type: 'select',
-      options: icons,
+      type: 'text',
     },
-    defaultValue: icons[0],
+    defaultValue: '',
   },
   type: {
     control: {
@@ -111,7 +108,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
     argTypes={{ ...Default.argTypes }}
     args={{
       variant: 'primary',
-      icon: 'PlusCircleIcon',
+      icon: 'add_circle',
       slot1: '<span>Primary</span>',
     }}
   >
@@ -142,7 +139,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
     argTypes={{ ...Default.argTypes }}
     args={{
       variant: 'icon',
-      icon: 'PlusCircleIcon',
+      icon: 'add_circle',
     }}
   >
     {Default.bind({})}

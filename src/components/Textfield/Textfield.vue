@@ -58,8 +58,8 @@ const hasClear = computed(() => {
   return props.clearable && hasValue.value;
 });
 const iconName = computed(() => {
-  if (hasClear.value) return props.icon || 'XMarkIcon';
-  if (hasErrorMsg.value) return props.icon || 'ExclamationCircleIcon';
+  if (hasClear.value) return props.icon || 'clear';
+  if (hasErrorMsg.value) return props.icon || 'error';
   return props.icon;
 });
 const onChange = () => {
@@ -125,7 +125,7 @@ const onClick = () => {
         <Icon
           class="textfield__icon"
           size="24"
-          kind="solid"
+          kind="filled"
           :name="`${iconName}`"
           :color="props.iconColor"
           :class="{ 'textfield__icon--error': hasErrorMsg }"

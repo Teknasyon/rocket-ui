@@ -28,7 +28,6 @@
     "chromatic": "npx chromatic --project-token=deb8b1f53842"
   },
   "dependencies": {
-    "@heroicons/vue": "2.0.10",
     "floating-vue": "^2.0.0-beta.19",
     "material-icons": "^1.11.11",
     "vue": "^3.2.37"

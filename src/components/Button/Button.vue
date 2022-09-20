@@ -61,10 +61,10 @@ const onClick = () => {
     @click="onClick"
   >
     <Icon
-      :name="`${icon}`"
+      :name="icon"
       :size="iconSize || '24'"
       :color="iconColor"
-      :kind="iconKind || 'solid'"
+      kind="filled"
       class="button__icon"
       :class="[iconRight ? 'button__icon--right' : 'button__icon--left']"
     />
