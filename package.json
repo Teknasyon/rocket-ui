@@ -1,6 +1,6 @@
 {
   "name": "design-system-vue",
-  "version": "0.0.7",
+  "version": "0.0.18",
   "type": "module",
   "files": [
     "dist"
@@ -30,6 +30,7 @@
   "dependencies": {
     "@heroicons/vue": "2.0.10",
     "floating-vue": "^2.0.0-beta.19",
+    "material-icons": "^1.11.11",
     "vue": "^3.2.37"
   },
   "devDependencies": {

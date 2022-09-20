@@ -7,15 +7,13 @@ export const icons = Object.keys(IconList.solid);
 export const defaultArgs = {
   name: {
     control: {
-      type: 'select',
-      options: icons,
+      type: 'text',
     },
-    defaultValue: icons[0],
+    defaultValue: 'face',
   },
   size: {
     control: {
-      type: 'radio',
-      options: ['20', '24', '32', '48', '64'],
+      type: 'text',
     },
     defaultValue: '24',
   },
@@ -28,9 +26,16 @@ export const defaultArgs = {
   kind: {
     control: {
       type: 'radio',
-      options: ['solid', 'outline', 'mini'],
+      options: ['filled', 'round', 'outlined', 'sharp', 'two-tone'],
     },
-    defaultValue: 'solid',
+    defaultValue: 'filled',
+  },
+  fontWeight: {
+    control: {
+      type: 'radio',
+      options: ['light', 'regular', 'medium', 'bold'],
+    },
+    defaultValue: 'regular',
   },
 };
 
@@ -53,10 +58,7 @@ export const Default = (args) => {
     name="Default"
     argTypes={{ ...Default.argTypes }}
     args={{
-      name: 'AcademicCapIcon',
-      size: '24',
-      color: '#000',
-      kind: 'solid',
+      name: 'face',
     }}
   >
     {Default.bind({})}
