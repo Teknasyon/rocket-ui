@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
   name: 'face',
   kind: 'outlined',
   size: 24,
-  color: 'currentColor',
+  color: '',
   fontWeight: () => 'regular',
 });
 
@@ -22,6 +22,9 @@ const styles = computed(() => {
     fontSize: `${props.size}px`,
     fontWeight: `${props.fontWeight}`,
     color: props.color,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   };
 });
 
