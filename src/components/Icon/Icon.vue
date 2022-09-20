@@ -1,36 +1,37 @@
 <script setup lang="ts">
+import 'material-icons/iconfont/material-icons.css';
 import { computed } from 'vue';
-import IconList from '../Shared/IconList';
-import type { IconKind, IconSize } from '../Shared/Enums';
+
 export interface Props {
   name: string;
-  kind?: IconKind.Outline | IconKind.Solid | IconKind.Mini | string;
-  size?:
-    | IconSize.XSmall
-    | IconSize.Small
-    | IconSize.Medium
-    | IconSize.Large
-    | IconSize.XLarge
-    | string
-    | number;
+  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
+  size?: string | number;
   color?: string;
+  fontWeight?: 'light' | 'regular' | 'medium' | 'bold';
 }
-
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  name: 'face',
+  kind: 'outlined',
+  size: 24,
+  color: 'currentColor',
+  fontWeight: () => 'regular',
+});
 
 const styles = computed(() => {
-  const { size, color } = props;
   return {
-    color,
-    width: size,
-    height: size,
+    color: props.color,
+    fontSize: `${props.size}px`,
+    fontWeight: `${props.fontWeight}`,
   };
 });
 
-const Icon = computed(() => {
-  return IconList[props.kind || 'solid'][props.name || 'AcademicCapIcon'];
+const classes = computed(() => {
+  if (props.kind === 'filled') {
+    return 'material-icons';
+  }
+  return `material-icons-${props.kind}`;
 });
 </script>
 <template>
-  <component :is="Icon" :style="styles" />
+  <span :class="classes" :style="styles">{{ props.name }}</span>
 </template>
