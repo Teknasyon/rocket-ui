@@ -35,9 +35,9 @@ const classes = computed(() => {
   };
 });
 const icon = computed(() => {
-  if (props.indeterminate && !state.checked) return 'MinusIcon';
-  if (state.checked) return 'CheckIcon';
-  return null;
+  if (props.indeterminate && !state.checked) return 'remove';
+  if (state.checked) return 'check';
+  return '';
 });
 
 const onChange = () => {
@@ -58,7 +58,7 @@ const onChange = () => {
         @change="onChange"
       />
       <div v-if="!icon?.length" class="checkbox checkbox--empty" />
-      <Icon v-else :name="icon" size="18" kind="solid" :class="classes" />
+      <Icon v-else :name="icon" size="18" kind="filled" :class="classes" />
     </label>
   </fieldset>
 </template>

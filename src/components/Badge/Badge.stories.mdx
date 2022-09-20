@@ -2,8 +2,6 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Badge from './Badge.vue';
 import Icon from '../Icon/Icon.vue';
-import IconList from '../Shared/IconList.js';
-export const icons = [null, ...Object.keys(IconList.solid)];
 
 export const defaultArgs = {
   placement: {
@@ -46,10 +44,9 @@ export const defaultArgs = {
   },
   icon: {
     control: {
-      type: 'select',
-      options: icons,
+      type: 'text',
     },
-    defaultValue: icons[0],
+    defaultValue: '',
   },
   color: {
     control: {
@@ -81,7 +78,7 @@ export const Default = (args) => ({
   },
   template: `
     <Badge v-bind="args">
-      <Icon name="CubeIcon" size="24" />
+      <Icon name="alarm_on" size="24" />
     </Badge>
   `,
 });
@@ -116,7 +113,7 @@ export const Default = (args) => ({
   <Story
     name="With Icon"
     argTypes={{ ...Default.argTypes }}
-    args={{ icon: 'XCircleIcon' }}
+    args={{ icon: 'cancel' }}
   >
     {Default.bind({})}
   </Story>

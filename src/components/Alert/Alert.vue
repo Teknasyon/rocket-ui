@@ -31,10 +31,10 @@ const classes = computed(() => {
 });
 const icon = computed(() => {
   return {
-    success: 'CheckCircleIcon',
-    error: 'XCircleIcon',
-    warning: 'ExclamationCircleIcon',
-    info: 'InformationCircleIcon',
+    success: 'check_circle',
+    error: 'error',
+    warning: 'warning',
+    info: 'info',
   }[props.type];
 });
 
@@ -53,7 +53,7 @@ const onClick = () => {
 <template>
   <div :class="classes">
     <div class="icon">
-      <Icon :name="icon" :size="iconSize" />
+      <Icon :name="icon" :size="iconSize" kind="round" />
     </div>
     <div class="texts">
       <div class="texts__title">{{ props.title }}</div>

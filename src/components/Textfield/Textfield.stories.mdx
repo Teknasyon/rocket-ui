@@ -1,8 +1,6 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Textfield from './Textfield.vue';
-import IconList from '../Shared/IconList.js';
-export const icons = Object.keys(IconList.solid);
 
 export const defaultArgs = {
   id: {
@@ -37,10 +35,9 @@ export const defaultArgs = {
   },
   icon: {
     control: {
-      type: 'select',
-      options: [null, ...icons],
+      type: 'text',
     },
-    // defaultValue: icons[0],
+    defaultValue: '',
   },
   iconLeft: {
     control: {

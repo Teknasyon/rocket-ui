@@ -60,7 +60,7 @@ const onClick = () => emit('click');
       {{ props.content }}
     </div>
     <Icon
-      :name="`${props.icon}`"
+      :name="props.icon"
       :class="classes"
       :color="props.color"
       :size="iconSize"
