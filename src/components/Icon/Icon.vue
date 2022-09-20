@@ -19,9 +19,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const styles = computed(() => {
   return {
-    color: props.color,
     fontSize: `${props.size}px`,
     fontWeight: `${props.fontWeight}`,
+    color: props.color,
   };
 });
 

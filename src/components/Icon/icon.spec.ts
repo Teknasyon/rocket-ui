@@ -7,22 +7,19 @@ describe('Icon', () => {
   it('renders properly', () => {
     const wrapper = mount(Icon, {
       props: {
-        name: 'AdjustmentsIcon',
+        name: 'face',
         size: '24',
         color: 'rgb(255, 255, 255)',
-        kind: 'solid',
+        kind: 'outlined',
+        fontWeight: 'bold',
       },
     });
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('svg').exists()).toBe(true);
-    expect(wrapper.find('svg').element.getAttribute('aria-hidden')).toBe(
-      'true'
-    );
-    expect(wrapper.find('svg').element.getAttribute('style')).toBe(
-      'color: rgb(255, 255, 255);'
-    );
-    expect(wrapper.find('svg').element.getAttribute('fill')).toBe(
-      'currentColor'
+    expect(wrapper.find('span').exists()).toBe(true);
+    expect(wrapper.find('span').classes().includes('material-icons-outlined'));
+    expect(wrapper.find('span').text()).toBe('face');
+    expect(wrapper.find('span').attributes('style')).toBe(
+      'font-size: 24px; font-weight: bold; color: rgb(255, 255, 255);'
     );
   });
 });

@@ -16,7 +16,6 @@ describe('Dropdown', () => {
 
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('button').exists()).toBe(true);
-    expect(wrapper.find('svg').exists()).toBe(true);
     expect(wrapper.trigger('click'));
     expect(wrapper.emitted().click).toBeTruthy();
   });
