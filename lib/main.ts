@@ -8,6 +8,8 @@ import '../src/components/Chips/chip.css';
 import '../src/components/Dropdown/dropdown.css';
 import '../src/components/Switch/switch.css';
 import '../src/components/Tooltip/tooltip.css';
+import '../src/components/Tabs/tabs.css';
+import '../src/components/TabItem/tab-item.css';
 
 import Button from '../src/components/Button/Button.vue';
 import Icon from '../src/components/Icon/Icon.vue';
@@ -19,6 +21,8 @@ import Chip from '../src/components/Chips/Chip.vue';
 import Dropdown from '../src/components/Dropdown/Dropdown.vue';
 import Switch from '../src/components/Switch/Switch.vue';
 import Tooltip from '../src/components/Tooltip/Tooltip.vue';
+import Tabs from '../src/components/Tabs/Tabs.vue';
+import TabItem from '../src/components/TabItem/TabItem.vue';
 
 export {
   Button,
@@ -31,4 +35,6 @@ export {
   Dropdown,
   Switch,
   Tooltip,
+  Tabs,
+  TabItem,
 };
