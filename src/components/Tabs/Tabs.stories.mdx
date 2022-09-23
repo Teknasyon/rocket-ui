@@ -1,0 +1,215 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Tabs from './Tabs.vue';
+
+export const defaultArgs = {
+  tabs: {
+    control: {
+      type: 'object',
+    },
+    defaultValue: [
+      { label: 'Tab 1', icon: 'home', iconKind: 'filled', badge: '10' },
+      { label: 'Tab 2', icon: 'add_circle', disabled: true },
+      { label: 'Tab 3', icon: 'favorite' },
+      { label: 'Tab 4', icon: 'face' },
+      { label: 'Tab 5', icon: 'settings' },
+    ],
+  },
+  variant: {
+    control: {
+      type: 'select',
+      options: [
+        'default',
+        'pill',
+        'underline',
+        'icon',
+        'icon-pill',
+        'icon-underline',
+        'icon-only',
+      ],
+    },
+    defaultValue: 'default',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  color: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  bgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  activeColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  activeBgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  align: {
+    control: {
+      type: 'select',
+      options: ['left', 'center', 'right'],
+    },
+    defaultValue: 'center',
+  },
+  scrollable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  onClick: {
+    action: 'click',
+  },
+};
+
+<Meta title="Components/Tabs" component={Tabs} argTypes={{ ...defaultArgs }} />
+
+export const Default = (args) => ({
+  components: { Tabs },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Tabs v-bind="args">
+      <template #tab={activeTab}>
+        <h1>Tab {{activeTab + 1}}</h1>
+        <p>Active tab {{activeTab}}</p>
+      </template>
+    </Tabs>
+  `,
+});
+
+# Default
+
+<Canvas>
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'default' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Icon Only
+
+<Canvas>
+  <Story
+    name="Icon Only"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'icon-only',
+      tabs: [
+        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
+        { label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { label: 'Tab 3', icon: 'favorite', badge: 1 },
+        { label: 'Tab 4', icon: 'face' },
+        { label: 'Tab 5', icon: 'settings' },
+        { label: 'Tab 6', icon: 'search' },
+        { label: 'Tab 7', icon: 'done' },
+        { label: 'Tab 8', icon: 'visibility' },
+        { label: 'Tab 9', icon: 'lock' },
+        { label: 'Tab 10', icon: 'language' },
+      ],
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Pill
+
+<Canvas>
+  <Story
+    name="Pill"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'pill',
+      tabs: [
+        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
+        { label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { label: 'Tab 3', icon: 'favorite' },
+        { label: 'Tab 4', icon: 'face' },
+        { label: 'Tab 5', icon: 'settings' },
+        { label: 'Tab 6', icon: 'search' },
+        { label: 'Tab 7', icon: 'done' },
+        { label: 'Tab 8', icon: 'visibility' },
+        { label: 'Tab 9', icon: 'lock' },
+        { label: 'Tab 10', icon: 'language' },
+      ],
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Icon Pill
+
+<Canvas>
+  <Story
+    name="Icon Pill"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'icon-pill',
+      tabs: [
+        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
+        { label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { label: 'Tab 3', icon: 'favorite' },
+        { label: 'Tab 4', icon: 'face' },
+        { label: 'Tab 5', icon: 'settings' },
+        { label: 'Tab 6', icon: 'search' },
+        { label: 'Tab 7', icon: 'done' },
+        { label: 'Tab 8', icon: 'visibility' },
+        { label: 'Tab 9', icon: 'lock' },
+        { label: 'Tab 10', icon: 'language' },
+      ],
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Text Only
+
+<Canvas>
+  <Story
+    name="Text Only"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'text-only',
+      tabs: [
+        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
+        { label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { label: 'Tab 3', icon: 'favorite' },
+        { label: 'Tab 4', icon: 'face' },
+        { label: 'Tab 5', icon: 'settings' },
+        { label: 'Tab 6', icon: 'search' },
+        { label: 'Tab 7', icon: 'done' },
+        { label: 'Tab 8', icon: 'visibility' },
+        { label: 'Tab 9', icon: 'lock' },
+        { label: 'Tab 10', icon: 'language' },
+      ],
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
