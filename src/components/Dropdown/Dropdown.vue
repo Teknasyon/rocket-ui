@@ -102,7 +102,7 @@ const onSelect = (value: string) => {
 };
 const iconName = computed(() => {
   if (props.icon) return props.icon;
-  return state.visible ? 'ChevronUpIcon' : 'ChevronDownIcon';
+  return state.visible ? 'expand_less' : 'expand_more';
 });
 </script>
 <template>
