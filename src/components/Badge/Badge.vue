@@ -34,15 +34,15 @@ const classes = computed(() => {
   return {
     badge: true,
     badge__content: props.content,
-    [`badge__content--${props.size}`]: props.size,
+    [`badge--overlap-${props.placement}`]: props.overlap,
     [`badge--${props.placement}`]: props.placement,
+    [`badge--over-${props.placement}`]: props.over,
+    [`badge__content--${props.size}`]: props.size,
     [`badge--${props.bgColor}`]: props.bgColor,
     [`badge--${props.size}`]: props.size,
-    'badge--overlap': props.overlap,
+    'badge--bordered': props.bordered,
     'badge--square': props.square,
     'badge--hover': props.hover,
-    'badge--bordered': props.bordered,
-    'badge--over': props.over,
   };
 });
 const styles = computed(() => {
@@ -53,9 +53,9 @@ const styles = computed(() => {
 });
 const iconSize = computed(() => {
   return {
-    small: '10px',
-    medium: '12px',
-    large: '14px',
+    small: '16',
+    medium: '20',
+    large: '24',
   }[props.size];
 });
 const onClick = () => emit('click');
