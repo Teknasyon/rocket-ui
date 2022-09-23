@@ -13,6 +13,8 @@ export interface BadgeProps {
   hover?: boolean;
   icon?: string;
   content?: string | number;
+  bordered?: boolean;
+  over?: boolean;
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   placement: 'right',
@@ -24,6 +26,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   hover: false,
   icon: '',
   content: '',
+  bordered: false,
+  over: false,
 });
 const emit = defineEmits(['click']);
 const classes = computed(() => {
@@ -37,6 +41,8 @@ const classes = computed(() => {
     'badge--overlap': props.overlap,
     'badge--square': props.square,
     'badge--hover': props.hover,
+    'badge--bordered': props.bordered,
+    'badge--over': props.over,
   };
 });
 const styles = computed(() => {
@@ -55,8 +61,13 @@ const iconSize = computed(() => {
 const onClick = () => emit('click');
 </script>
 <template>
-  <div class="wrapper group">
-    <div v-if="!props.icon" :style="styles" :class="classes" @click="onClick">
+  <div class="badge-wrapper group">
+    <div
+      v-if="!props.icon && props.content"
+      :style="styles"
+      :class="classes"
+      @click="onClick"
+    >
       {{ props.content }}
     </div>
     <Icon
