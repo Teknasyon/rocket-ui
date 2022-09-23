@@ -57,7 +57,7 @@
 }
 
 .chip__icon {
-  @apply ml-1 hover:opacity-80 transition-opacity duration-200;
+  @apply ml-1 hover:opacity-80 transition-opacity duration-200 cursor-pointer;
 }
 
 .chip--reverse > .chip__icon {
