@@ -1,0 +1,46 @@
+@tailwind components;
+
+.tab-item {
+  @apply transition-transform duration-300 min-w-fit border-0 border-solid w-full p-2 bg-transparent flex justify-center items-center text-gray-500 text-sm font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-inherit disabled:opacity-50;
+}
+
+.tab-item--default .tab-item__icon,
+.tab-item--pill .tab-item__icon {
+  @apply mr-2;
+}
+
+.tab-item--pill {
+  @apply rounded-full mr-2 bg-teal-100 text-gray-500;
+}
+
+.tab-item--icon-pill {
+  @apply rounded-full bg-teal-100 mr-2 p-0 text-gray-500;
+}
+
+.tab-item--active {
+  @apply text-teal-500 border-b-2;
+}
+
+.tab-item--default,
+.tab-item--icon-only,
+.tab-item--text-only {
+  @apply border-teal-500 hover:bg-teal-50;
+}
+
+.tab-item--pill,
+.tab-item--icon-pill {
+  @apply border-0;
+}
+
+.tab-item--active.tab-item--pill,
+.tab-item--active.tab-item--icon-pill {
+  @apply bg-teal-500 text-white;
+}
+
+.tab-item__badge {
+  @apply flex items-center justify-center;
+}
+
+.tab-item--text-only {
+  @apply block w-full;
+}

@@ -1,0 +1,200 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import TabItem from './TabItem.vue';
+
+export const defaultArgs = {
+  id: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'tab-item-1',
+  },
+  tab: {
+    control: {
+      type: 'object',
+    },
+    defaultValue: {
+      id: 'tab-1',
+      label: 'Tab 1',
+      icon: 'home',
+      iconKind: 'filled',
+      badge: '1',
+    },
+  },
+  variant: {
+    control: {
+      type: 'select',
+      options: [
+        'default',
+        'pill',
+        'underline',
+        'icon-only',
+        'icon-pill',
+        'text-only',
+      ],
+    },
+    defaultValue: 'default',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+  },
+  color: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  bgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  activeColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  activeBgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  align: {
+    control: {
+      type: 'select',
+      options: ['left', 'center', 'right'],
+    },
+    defaultValue: 'center',
+  },
+  activeTab: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+  onClick: {
+    action: 'click',
+  },
+};
+
+<Meta
+  title="Components/TabItem"
+  component={TabItem}
+  argTypes={{ ...defaultArgs }}
+/>
+
+export const Default = (args) => ({
+  components: { TabItem },
+  setup() {
+    return { args };
+  },
+  template: `
+    <TabItem v-bind="args">
+      <template #tab={activeTab}>
+        <h1>Tab {{activeTab + 1}}</h1>
+        <p>Active tab {{activeTab}}</p>
+      </template>
+    </TabItem>
+  `,
+});
+
+# Default
+
+<Canvas>
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'default' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Icon Only
+
+<Canvas>
+  <Story
+    name="Icon Only"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'icon-only',
+      tab: {
+        id: 'tab-item-2',
+        label: 'Tab 1',
+        icon: 'home',
+        iconKind: 'filled',
+      },
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Pill
+
+<Canvas>
+  <Story
+    name="Pill"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'pill',
+      tab: {
+        id: 'tab-item-3',
+        label: 'Tab 1',
+        icon: 'home',
+        iconKind: 'filled',
+      },
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Icon Pill
+
+<Canvas>
+  <Story
+    name="Icon Pill"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'icon-pill',
+      tab: {
+        id: 'tab-item-4',
+        label: 'Tab 1',
+        icon: 'home',
+        iconKind: 'filled',
+      },
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+# Text Only
+
+<Canvas>
+  <Story
+    name="Text Only"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'text-only',
+      tab: {
+        id: 'tab-item-5',
+        label: 'Tab 1',
+        icon: 'home',
+        iconKind: 'filled',
+      },
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
