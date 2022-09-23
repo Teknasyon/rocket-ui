@@ -1,7 +1,7 @@
 @tailwind components;
 
 .badge-wrapper {
-  @apply transition duration-500 ease-in-out font-sans relative max-w-max p-2;
+  @apply relative flex items-center justify-center transition duration-500 ease-in-out font-sans max-w-max p-2;
 }
 
 .badge {
@@ -9,23 +9,19 @@
 }
 
 .badge--right {
-  @apply top-0 right-0;
+  @apply -top-1 -right-1;
 }
 
 .badge--left {
-  @apply top-0 left-0;
+  @apply -top-1 -left-1;
 }
 
 .badge--bottom {
-  @apply right-0 bottom-0;
+  @apply -right-1 -bottom-1;
 }
 
 .badge--bordered {
   @apply border border-white border-solid;
-}
-
-.badge--overlap {
-  @apply top-1 right-1;
 }
 
 .badge--square {
@@ -56,6 +52,26 @@
   @apply text-[1rem]; /* 16px it's for without line height*/
 }
 
-.badge--over {
+.badge--over-right {
   @apply -top-2 -right-2;
+}
+
+.badge--over-left {
+  @apply -top-2 -left-2;
+}
+
+.badge--over-bottom {
+  @apply -right-2 -bottom-2;
+}
+
+.badge--overlap-right {
+  @apply top-0 right-0;
+}
+
+.badge--overlap-left {
+  @apply top-0 left-0;
+}
+
+.badge--overlap-bottom {
+  @apply right-0 bottom-0;
 }

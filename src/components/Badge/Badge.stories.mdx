@@ -2,6 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Badge from './Badge.vue';
 import Icon from '../Icon/Icon.vue';
+import Button from '../Button/Button.vue';
 
 export const defaultArgs = {
   placement: {
@@ -66,6 +67,18 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
+  over: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  inline: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   onClick: {
     action: 'click',
   },
@@ -85,6 +98,17 @@ export const Default = (args) => ({
   template: `
     <Badge v-bind="args">
       <Icon name="alarm_on" size="24" />
+    </Badge>
+  `,
+});
+export const ButtonTemplate = (args) => ({
+  components: { Badge, Button },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Badge v-bind="args">
+      <Button icon="alarm_on" variant="primary">Hello World</Button>
     </Badge>
   `,
 });
@@ -125,10 +149,10 @@ export const Default = (args) => ({
   </Story>
   <Story
     name="With Content"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...ButtonTemplate.argTypes }}
     args={{ content: '1' }}
   >
-    {Default.bind({})}
+    {ButtonTemplate.bind({})}
   </Story>
 </Canvas>
 
