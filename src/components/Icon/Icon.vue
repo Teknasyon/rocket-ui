@@ -2,14 +2,14 @@
 import 'material-icons/iconfont/material-icons.css';
 import { computed } from 'vue';
 
-export interface Props {
+export interface IProps {
   name: string;
-  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
+  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone' | string;
   size?: string | number;
   color?: string;
   fontWeight?: 'light' | 'regular' | 'medium' | 'bold';
 }
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<IProps>(), {
   name: 'face',
   kind: 'outlined',
   size: 24,
