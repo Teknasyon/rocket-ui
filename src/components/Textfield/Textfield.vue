@@ -62,6 +62,11 @@ const iconName = computed(() => {
   if (hasErrorMsg.value) return props.icon || 'error';
   return props.icon;
 });
+const iconSize = computed(() => {
+  if (props.size === 'small') return 16;
+  if (props.size === 'large') return 24;
+  return 20;
+});
 const onChange = () => {
   emit('change', {
     value: state.value,
@@ -124,8 +129,8 @@ const onClick = () => {
         />
         <Icon
           class="textfield__icon"
-          size="24"
           kind="filled"
+          :size="iconSize"
           :name="`${iconName}`"
           :color="props.iconColor"
           :class="{ 'textfield__icon--error': hasErrorMsg }"
