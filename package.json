@@ -28,7 +28,10 @@
     "chromatic": "npx chromatic --project-token=deb8b1f53842"
   },
   "dependencies": {
+    "@storybook/addons": "^6.5.12",
+    "@storybook/theming": "^6.5.12",
     "floating-vue": "^2.0.0-beta.19",
+    "lodash.kebabcase": "^4.1.1",
     "material-icons": "^1.11.11",
     "vue": "^3.2.37"
   },

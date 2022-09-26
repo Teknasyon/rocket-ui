@@ -1,7 +1,7 @@
 @tailwind components;
 
 .alert {
-  @apply w-full font-sans relative p-4 rounded text-sm flex justify-between transition-transform duration-1000;
+  @apply w-full font-sans relative p-4 rounded text-sm flex justify-between transition-transform duration-1000 box-border;
 }
 
 .alert--small {

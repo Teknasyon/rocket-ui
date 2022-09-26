@@ -2,6 +2,14 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Alert from './Alert.vue';
 
+export const Default = (args) => ({
+  components: { Alert },
+  setup() {
+    return { args };
+  },
+  template: `<Alert v-bind="args" />`,
+});
+
 export const defaultArgs = {
   type: {
     control: {
@@ -59,18 +67,19 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
 />
 
-export const Default = (args) => ({
-  components: { Alert },
-  setup() {
-    return { args };
-  },
-  template: '<Alert v-bind="args" />',
-});
+# Alert
 
-<Canvas>
+<Canvas withSource="open">
   <Story name="Success" argTypes={{ ...Default.argTypes }} args={{}}>
     {Default.bind({})}
   </Story>
+</Canvas>
+
+<ArgsTable story="Success" />
+
+## Stories
+
+<Canvas withSource="open">
   <Story
     name="Error"
     argTypes={{ ...Default.argTypes }}
@@ -78,6 +87,9 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+<Canvas withSource="open">
   <Story
     name="Info"
     argTypes={{ ...Default.argTypes }}
@@ -87,6 +99,9 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+<Canvas withSource="open">
   <Story
     name="Warning"
     argTypes={{ ...Default.argTypes }}
@@ -98,4 +113,3 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-<ArgsTable story="Success" />
