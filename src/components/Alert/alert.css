@@ -41,7 +41,7 @@
 }
 
 .close {
-  @apply grid place-items-end content-center;
+  @apply grid place-items-end content-center ml-5;
 }
 
 .close__button {

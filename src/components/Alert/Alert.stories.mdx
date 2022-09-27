@@ -10,6 +10,18 @@ export const Default = (args) => ({
   template: `<Alert v-bind="args" />`,
 });
 
+export const DefaultWithSlots = (args) => ({
+  components: { Alert },
+  setup() {
+    return { args };
+  },
+  template: `<Alert v-bind="args">
+    <template #close>
+      <button>Close</button>
+    </template>
+  </Alert>`,
+});
+
 export const defaultArgs = {
   type: {
     control: {
@@ -58,6 +70,7 @@ export const defaultArgs = {
   },
   onClick: {
     action: 'click',
+    exclude: true,
   },
 };
 
@@ -65,19 +78,39 @@ export const defaultArgs = {
   title="Components/Alert"
   component={Alert}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
 
 # Alert
 
+Alert is a component that displays a message to the user. It can be used to display information, warning, error, or success messages.
+
+It has a `close` slot that can be used to add a **custom close button**. The button emits a **click** event when the close button is clicked.
+
+> The visibility should be controlled by the parent component.
+
 <Canvas withSource="open">
-  <Story name="Success" argTypes={{ ...Default.argTypes }} args={{}}>
+  <Story
+    name="Success"
+    argTypes={{ ...Default.argTypes }}
+    args={{ type: 'success' }}
+  >
     {Default.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable story="Success" />
+### Try out
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Success" exclude={/^(click|close|on.*)$/} />
+
+---
 
 ## Stories
+
+### Error
 
 <Canvas withSource="open">
   <Story
@@ -88,6 +121,8 @@ export const defaultArgs = {
     {Default.bind({})}
   </Story>
 </Canvas>
+
+### Information
 
 <Canvas withSource="open">
   <Story
@@ -101,6 +136,8 @@ export const defaultArgs = {
   </Story>
 </Canvas>
 
+### Warning
+
 <Canvas withSource="open">
   <Story
     name="Warning"
@@ -113,3 +150,18 @@ export const defaultArgs = {
   </Story>
 </Canvas>
 
+## Customizable Slots
+
+### `#close`
+
+<Canvas withSource="open">
+  <Story
+    name="Custom Close Button"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'info',
+    }}
+  >
+    {DefaultWithSlots.bind({})}
+  </Story>
+</Canvas>
