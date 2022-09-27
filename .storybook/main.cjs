@@ -3,8 +3,8 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-docs',
+    './source-panel/manager.js',
   ],
   framework: '@storybook/vue3',
   core: {

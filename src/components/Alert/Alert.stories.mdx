@@ -1,8 +1,9 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions'
 
 import Alert from './Alert.vue';
 
-export const Default = (args, ctx) => ({
+export const Default = (args) => ({
   components: { Alert },
   setup() {
     return { args };
@@ -13,11 +14,11 @@ export const Default = (args, ctx) => ({
 export const DefaultWithSlots = (args) => ({
   components: { Alert },
   setup() {
-    return { args };
+    return { args, onClick: action('onClick') };
   },
   template: `<Alert v-bind="args">
     <template #close>
-      <button>Close</button>
+      <button @click="onClick">Close</button>
     </template>
   </Alert>`,
 });
@@ -69,8 +70,7 @@ export const defaultArgs = {
     defaultValue: 'Close',
   },
   onClick: {
-    action: 'click',
-    exclude: true,
+    action: action('click'),
   },
 };
 
@@ -101,12 +101,10 @@ It has a `close` slot that can be used to add a **custom close button**. The but
   </Story>
 </Canvas>
 
-### Try out
+### Playground
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Success" exclude={/^(click|close|on.*)$/} />
-
----
 
 ## Stories
 

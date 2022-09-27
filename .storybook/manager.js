@@ -3,4 +3,6 @@ import Theme from './Theme';
 
 addons.setConfig({
   theme: Theme,
+  panelPosition: 'right',
 });
+

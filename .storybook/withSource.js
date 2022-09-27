@@ -1,8 +1,8 @@
 import kebabCase from "lodash.kebabcase"
 import { addons, makeDecorator } from '@storybook/addons'
+import * as prettier from 'prettier/standalone'
+import * as prettierHtml from 'prettier/parser-html'
 
-export const prettier = await import('prettier/standalone')
-export const prettierHtml = await import('prettier/parser-html')
 import { h, onMounted } from 'vue'
 import dedent from 'ts-dedent'
 
@@ -40,7 +40,7 @@ export function templateSourceCode(
   )
 }
 
-export const transformSource = (src, ctx) => {
+export const transformSource = (src, ctx, prettify = true) => {
   const args = {
     ...ctx.initialArgs,
     ...ctx.args,
@@ -48,6 +48,9 @@ export const transformSource = (src, ctx) => {
   const match = /\b("')?template\1:\s*`([^`]+)`/.exec(src);
   if (match) {
     const code = templateSourceCode(match[2], args, ctx.argTypes);
+    if (!prettify) {
+      return code;
+    }
     return dedent(prettier.format(code, {
       parser: "vue",
       plugins: [prettierHtml],

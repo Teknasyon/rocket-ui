@@ -1,8 +1,9 @@
-import dedent from "ts-dedent";
-import { templateSourceCode, withSource, prettier, prettierHtml, transformSource } from "./withSource"
+import { withSource, transformSource } from "./withSource"
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: {
+    argTypesRegex: "^on[A-Z].*"
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
