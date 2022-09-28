@@ -2,64 +2,51 @@
 
 .chip {
   @apply font-sans inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
-}
 
-.chip--primary {
-  @apply text-teal-600 bg-teal-100;
-}
-
-.chip--secondary {
-  @apply text-gray-600 bg-gray-100;
-}
-
-.chip--success {
-  @apply text-green-600 bg-green-100;
-}
-
-.chip--danger {
-  @apply text-red-600 bg-red-100;
-}
-
-.chip--warning {
-  @apply text-yellow-600 bg-yellow-100;
-}
-
-.chip--info {
-  @apply text-blue-600 bg-blue-100;
-}
-
-.chip--light {
-  @apply text-slate-600 bg-slate-100;
-}
-
-.chip--dark {
-  @apply text-white bg-black;
-}
-
-.chip--small {
-  @apply text-xs px-1 py-0.5;
-}
-
-.chip--large {
-  @apply text-base px-3 py-1.5;
-}
-
-.chip--square {
-  @apply rounded-none;
-}
-
-.chip--reverse {
-  @apply flex-row-reverse;
-}
-
-.chip--disabled {
-  @apply opacity-50 cursor-not-allowed;
+  &--primary {
+    @apply text-teal-600 bg-teal-100;
+  }
+  &--secondary {
+    @apply text-gray-600 bg-gray-100;
+  }
+  &--success {
+    @apply text-green-600 bg-green-100;
+  }
+  &--danger {
+    @apply text-red-600 bg-red-100;
+  }
+  &--warning {
+    @apply text-yellow-600 bg-yellow-100;
+  }
+  &--info {
+    @apply text-blue-600 bg-blue-100;
+  }
+  &--light {
+    @apply text-slate-600 bg-slate-100;
+  }
+  &--dark {
+    @apply text-white bg-black;
+  }
+  &--small {
+    @apply text-xs px-1 py-0.5;
+  }
+  &--large {
+    @apply text-base px-3 py-1.5;
+  }
+  &--square {
+    @apply rounded-none;
+  }
+  &--reverse {
+    @apply flex-row-reverse;
+  }
+  &--disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  &--reverse > .chip__icon {
+    @apply mr-1 ml-0;
+  }
 }
 
 .chip__icon {
   @apply ml-1 hover:opacity-80 transition-opacity duration-200 cursor-pointer;
-}
-
-.chip--reverse > .chip__icon {
-  @apply mr-1 ml-0;
 }

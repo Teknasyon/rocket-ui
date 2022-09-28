@@ -1,7 +1,7 @@
 @tailwind components;
 
 .button {
-  @apply min-w-max min-h-max flex items-center justify-center border-none rounded-lg text-sm text-white px-6 py-4 cursor-auto;
+  @apply flex items-center justify-center border-none rounded-lg text-sm text-white px-6 py-4 cursor-auto;
 }
 .button--primary {
   @apply bg-teal-400 hover:bg-teal-500 active:bg-teal-600 disabled:bg-gray-300;
@@ -9,7 +9,7 @@
 .button--secondary {
   @apply bg-slate-300;
 }
-.button--icon {
+.button--icon-only {
   @apply p-2 m-0 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
 }
 .button--text {
@@ -36,7 +36,7 @@
 .icon {
   @apply mr-2;
 }
-.button--icon > .button__icon {
+.button--icon-only > .button__icon {
   @apply m-0;
 }
 .button--reverse {

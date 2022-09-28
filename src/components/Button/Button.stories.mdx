@@ -6,7 +6,7 @@ export const defaultArgs = {
   variant: {
     control: {
       type: 'select',
-      options: ['primary', 'secondary', 'icon', 'text', 'outline'],
+      options: ['primary', 'secondary', 'icon-only', 'text', 'outline'],
     },
     defaultValue: 'primary',
   },
@@ -135,10 +135,10 @@ export const Default = ({ slot1, slot2, ...rest }) => {
 
 <Canvas>
   <Story
-    name="Icon"
+    name="Icon Only"
     argTypes={{ ...Default.argTypes }}
     args={{
-      variant: 'icon',
+      variant: 'icon-only',
       icon: 'add_circle',
     }}
   >

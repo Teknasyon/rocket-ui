@@ -67,16 +67,6 @@ const iconSize = computed(() => {
   if (props.size === 'large') return 24;
   return 20;
 });
-const onChange = () => {
-  emit('change', {
-    value: state.value,
-  });
-};
-const onInput = () => {
-  emit('input', {
-    value: state.value,
-  });
-};
 const onFocus = () => {
   emit('focus', {
     value: state.value,
@@ -106,7 +96,7 @@ const onClick = () => {
       }"
     >
       <label
-        :for="props.id || 'textfield'"
+        :for="props.id"
         :class="{
           textfield__label: true,
           [`textfield__label--${props.size}`]: props.size,
@@ -114,30 +104,31 @@ const onClick = () => {
       >
         {{ props.label }}
       </label>
-      <div :class="classes">
-        <input
-          ref="inputRef"
-          v-model="state.value"
-          type="text"
-          :id="props.id || 'textfield'"
-          :disabled="props.disabled"
-          :placeholder="props.placeholder"
-          @change="onChange"
-          @input="onInput"
-          @focus="onFocus"
-          @blur="onBlur"
-        />
-        <Icon
-          class="textfield__icon"
-          kind="filled"
-          :size="iconSize"
-          :name="`${iconName}`"
-          :color="props.iconColor"
-          :class="{ 'textfield__icon--error': hasErrorMsg }"
-          @click="onClick"
-        />
+      <div class="input-wrapper">
+        <div :class="classes">
+          <input
+            v-bind="$attrs"
+            ref="inputRef"
+            v-model="state.value"
+            type="text"
+            :id="props.id"
+            :disabled="props.disabled"
+            :placeholder="props.placeholder"
+            @focus="onFocus"
+            @blur="onBlur"
+          />
+          <Icon
+            class="textfield__icon"
+            kind="filled"
+            :size="iconSize"
+            :name="`${iconName}`"
+            :color="props.iconColor"
+            :class="{ 'textfield__icon--error': hasErrorMsg }"
+            @click="onClick"
+          />
+        </div>
+        <div class="textfield__error">{{ props.errorMsg }}</div>
       </div>
     </div>
-    <div class="textfield__error">{{ props.errorMsg }}</div>
   </fieldset>
 </template>
