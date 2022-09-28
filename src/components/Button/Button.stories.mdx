@@ -100,7 +100,29 @@ export const Default = ({ slot1, slot2, ...rest }) => {
   };
 };
 
-# Primary
+# Button
+
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      variant: 'primary',
+      icon: 'add_circle',
+      slot1: '<span>Primary</span>',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Primary
 
 <Canvas>
   <Story
@@ -116,7 +138,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
   </Story>
 </Canvas>
 
-# Secondary
+### Secondary
 
 <Canvas>
   <Story
@@ -131,7 +153,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
   </Story>
 </Canvas>
 
-# Icon
+### Icon
 
 <Canvas>
   <Story
@@ -146,7 +168,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
   </Story>
 </Canvas>
 
-# Text
+### Text
 
 <Canvas>
   <Story
@@ -161,7 +183,7 @@ export const Default = ({ slot1, slot2, ...rest }) => {
   </Story>
 </Canvas>
 
-# Outline
+### Outline
 
 <Canvas>
   <Story
@@ -175,17 +197,3 @@ export const Default = ({ slot1, slot2, ...rest }) => {
     {Default.bind({})}
   </Story>
 </Canvas>
-
-# Reference
-
-<ArgsTable />
-
-# Usage
-
-```html
-Default template
-```
-
-```js
-Default template
-```

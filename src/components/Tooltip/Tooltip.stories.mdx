@@ -167,6 +167,30 @@ export const Default = ({ slot, ...args }) => {
   };
 };
 
+# Tooltip
+
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      slot: '<Icon name="info" size="24" />',
+      content: 'Icon tooltip content prop mdx',
+      placement: 'bottom',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Icon
+
 <Canvas>
   <Story
     name="Icon"
@@ -179,6 +203,11 @@ export const Default = ({ slot, ...args }) => {
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Text
+
+<Canvas>
   <Story
     name="Text"
     argTypes={{ ...Default.argTypes }}
@@ -190,6 +219,11 @@ export const Default = ({ slot, ...args }) => {
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Button
+
+<Canvas>
   <Story
     name="Button"
     argTypes={{ ...Default.argTypes }}
@@ -202,7 +236,3 @@ export const Default = ({ slot, ...args }) => {
     {Default.bind({})}
   </Story>
 </Canvas>
-
-# Reference
-
-<ArgsTable />

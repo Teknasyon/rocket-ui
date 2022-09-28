@@ -69,7 +69,30 @@ export const Default = (args) => {
   };
 };
 
-# Default
+# Checkbox
+
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      id: 'checkbox-1',
+      label: 'Deneme',
+      right: false,
+      indeterminate: true,
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Default
 
 <Canvas>
   <Story
@@ -85,7 +108,3 @@ export const Default = (args) => {
     {Default.bind({})}
   </Story>
 </Canvas>
-
-# Reference
-
-<ArgsTable />

@@ -79,9 +79,28 @@ export const Default = (args) => ({
 # Chips
 
 <Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Primary
+
+<Canvas>
   <Story name="Primary" argTypes={{ ...Default.argTypes }} args={{}}>
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Secondary
+
+<Canvas>
   <Story
     name="Secondary"
     argTypes={{ ...Default.argTypes }}
@@ -89,6 +108,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Success
+
+<Canvas>
   <Story
     name="Success"
     argTypes={{ ...Default.argTypes }}
@@ -96,6 +120,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Danger
+
+<Canvas>
   <Story
     name="Danger"
     argTypes={{ ...Default.argTypes }}
@@ -103,6 +132,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Warning
+
+<Canvas>
   <Story
     name="Warning"
     argTypes={{ ...Default.argTypes }}
@@ -110,6 +144,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Info
+
+<Canvas>
   <Story
     name="Info"
     argTypes={{ ...Default.argTypes }}
@@ -117,6 +156,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Light
+
+<Canvas>
   <Story
     name="Light"
     argTypes={{ ...Default.argTypes }}
@@ -124,6 +168,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Dark
+
+<Canvas>
   <Story
     name="Dark"
     argTypes={{ ...Default.argTypes }}
@@ -132,5 +181,3 @@ export const Default = (args) => ({
     {Default.bind({})}
   </Story>
 </Canvas>
-
-<ArgsTable story="Primary" />
