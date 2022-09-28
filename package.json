@@ -28,7 +28,10 @@
     "chromatic": "npx chromatic --project-token=deb8b1f53842"
   },
   "dependencies": {
+    "@storybook/addons": "^6.5.12",
+    "@storybook/theming": "^6.5.12",
     "floating-vue": "^2.0.0-beta.19",
+    "lodash.kebabcase": "^4.1.1",
     "material-icons": "^1.11.11",
     "vue": "^3.2.37"
   },
@@ -38,7 +41,6 @@
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-docs": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-interactions": "^6.5.10",
     "@storybook/addon-links": "^6.5.10",
     "@storybook/builder-vite": "^0.2.2",
     "@storybook/testing-library": "^0.0.13",
@@ -67,6 +69,7 @@
     "postcss-nested": "^5.0.6",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
+    "ts-dedent": "^2.2.0",
     "typescript": "~4.7.4",
     "vite": "^3.0.8",
     "vitest": "^0.22.1",

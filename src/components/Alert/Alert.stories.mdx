@@ -1,6 +1,27 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions'
 
 import Alert from './Alert.vue';
+
+export const Default = (args) => ({
+  components: { Alert },
+  setup() {
+    return { args };
+  },
+  template: `<Alert v-bind="args" />`,
+});
+
+export const DefaultWithSlots = (args) => ({
+  components: { Alert },
+  setup() {
+    return { args, onClick: action('onClick') };
+  },
+  template: `<Alert v-bind="args">
+    <template #close>
+      <button @click="onClick">Close</button>
+    </template>
+  </Alert>`,
+});
 
 export const defaultArgs = {
   type: {
@@ -49,7 +70,7 @@ export const defaultArgs = {
     defaultValue: 'Close',
   },
   onClick: {
-    action: 'click',
+    action: action('click'),
   },
 };
 
@@ -57,20 +78,39 @@ export const defaultArgs = {
   title="Components/Alert"
   component={Alert}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
 
-export const Default = (args) => ({
-  components: { Alert },
-  setup() {
-    return { args };
-  },
-  template: '<Alert v-bind="args" />',
-});
+# Alert
 
-<Canvas>
-  <Story name="Success" argTypes={{ ...Default.argTypes }} args={{}}>
+Alert is a component that displays a message to the user. It can be used to display information, warning, error, or success messages.
+
+It has a `close` slot that can be used to add a **custom close button**. The button emits a **click** event when the close button is clicked.
+
+> The visibility should be controlled by the parent component.
+
+<Canvas withSource="open">
+  <Story
+    name="Success"
+    argTypes={{ ...Default.argTypes }}
+    args={{ type: 'success' }}
+  >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Playground
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Success" exclude={/^(click|close|on.*)$/} />
+
+## Stories
+
+### Error
+
+<Canvas withSource="open">
   <Story
     name="Error"
     argTypes={{ ...Default.argTypes }}
@@ -78,6 +118,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Information
+
+<Canvas withSource="open">
   <Story
     name="Info"
     argTypes={{ ...Default.argTypes }}
@@ -87,6 +132,11 @@ export const Default = (args) => ({
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Warning
+
+<Canvas withSource="open">
   <Story
     name="Warning"
     argTypes={{ ...Default.argTypes }}
@@ -98,4 +148,18 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-<ArgsTable story="Success" />
+## Customizable Slots
+
+### `#close`
+
+<Canvas withSource="open">
+  <Story
+    name="Custom Close Button"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'info',
+    }}
+  >
+    {DefaultWithSlots.bind({})}
+  </Story>
+</Canvas>
