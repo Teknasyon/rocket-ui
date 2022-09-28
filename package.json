@@ -25,7 +25,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "chromatic": "npx chromatic --project-token=deb8b1f53842"
+    "chromatic": "npx chromatic --project-token=deb8b1f53842",
+    "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
   "dependencies": {
     "@storybook/addons": "^6.5.12",
@@ -77,7 +78,10 @@
     "vue-tsc": "^0.39.5"
   },
   "lint-staged": {
-    "*.vue": "eslint --fix"
+    "*.{vue,js,ts,mdx}": [
+      "eslint --fix",
+      "npm run prettier"
+    ]
   },
   "readme": "ERROR: No README data found!",
   "_id": "design-system-vue@0.0.3"
