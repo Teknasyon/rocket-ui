@@ -25,7 +25,6 @@ module.exports = {
         semi: true,
         bracketSpacing: true,
         arrowParens: 'always',
-        jsxBracketSameLine: false,
         vueIndentScriptAndStyle: false,
       },
     ],
