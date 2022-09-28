@@ -28,7 +28,7 @@ export function templateSourceCode(
       case "string":
         return `${key}="${val}"`
       default:
-        return `:${key}="${val}"`
+        return `:${key}='${(JSON.stringify(val, null, 2))}'`
     }
   }
 
