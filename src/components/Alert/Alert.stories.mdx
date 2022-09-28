@@ -1,5 +1,5 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions';
 
 import Alert from './Alert.vue';
 
@@ -56,6 +56,13 @@ export const defaultArgs = {
       options: ['small', 'medium', 'large'],
     },
     defaultValue: 'medium',
+    table: {
+      defaultValue: {
+        summary: 'medium',
+        detail: 'small | medium | large ',
+      },
+    },
+    description: 'Size of alert',
   },
   closable: {
     control: {
@@ -93,7 +100,7 @@ It has a `close` slot that can be used to add a **custom close button**. The but
 
 <Canvas withSource="open">
   <Story
-    name="Success"
+    name="Overview"
     argTypes={{ ...Default.argTypes }}
     args={{ type: 'success' }}
   >
@@ -102,11 +109,24 @@ It has a `close` slot that can be used to add a **custom close button**. The but
 </Canvas>
 
 ### Playground
+
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Success" exclude={/^(click|close|on.*)$/} />
+<ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
 
 ## Stories
+
+## Success
+
+<Canvas withSource="open">
+  <Story
+    name="Success"
+    argTypes={{ ...Default.argTypes }}
+    args={{ type: 'success' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
 
 ### Error
 
@@ -124,7 +144,7 @@ It has a `close` slot that can be used to add a **custom close button**. The but
 
 <Canvas withSource="open">
   <Story
-    name="Info"
+    name="Information"
     argTypes={{ ...Default.argTypes }}
     args={{
       type: 'info',
