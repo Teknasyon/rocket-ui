@@ -54,9 +54,28 @@ export const Default = (args) => {
   };
 };
 
-# All the sizes
+# Switch
 
-<hr />
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      value: false,
+      size: 'small',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Small
 
 <Canvas>
   <Story
@@ -69,6 +88,11 @@ export const Default = (args) => {
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Medium
+
+<Canvas>
   <Story
     name="Medium"
     argTypes={{ ...Default.argTypes }}
@@ -79,6 +103,11 @@ export const Default = (args) => {
   >
     {Default.bind({})}
   </Story>
+</Canvas>
+
+### Large
+
+<Canvas>
   <Story
     name="Large"
     argTypes={{ ...Default.argTypes }}
@@ -90,51 +119,3 @@ export const Default = (args) => {
     {Default.bind({})}
   </Story>
 </Canvas>
-
-# Reference
-
-<hr />
-
-<ArgsTable props={Default.argTypes} />
-
-# Notes
-
-<hr />
-<p>
-  This component is a wrapper around the <code>input</code> element.
-</p>
-<p>
-  The <code>value</code> prop is passed to the <code>input</code> element.
-</p>
-<p>
-  The <code>disabled</code> prop is passed to the <code>input</code> element.
-</p>
-<p>
-  The <code>size</code> prop is passed to the <code>input</code> element.
-</p>
-
-# Installation
-
-<hr />
-
-<p>Install the component with:</p>
-
-```js
-import { Switch } from '@/components/Switch';
-```
-
-# Examples
-
-<hr />
-
-<h6>Basic using</h6>
-
-```html
-<Switch :value="false" />
-```
-
-<h6>Advance using</h6>
-
-```html
-<Switch :value="false" size="large" :disabled="false" />
-```

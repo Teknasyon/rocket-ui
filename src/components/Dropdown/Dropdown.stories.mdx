@@ -241,11 +241,25 @@ export const WithIcon = (args) => {
   };
 };
 
+# Dropdown
+
+<Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}} />
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Default
+
 <Canvas>
   <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}} />
 </Canvas>
 
-<ArgsTable story="Default" />
+### With Icon
 
 <Canvas>
   <Story
@@ -254,5 +268,3 @@ export const WithIcon = (args) => {
     args={{ content: '', autoSize: false }}
   />
 </Canvas>
-
-<ArgsTable story="With Icon" />

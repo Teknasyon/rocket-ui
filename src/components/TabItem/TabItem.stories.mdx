@@ -105,7 +105,25 @@ export const Default = (args) => ({
   `,
 });
 
-# Default
+# TabItem
+
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{ variant: 'default' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Default
 
 <Canvas>
   <Story
@@ -117,7 +135,7 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-# Icon Only
+### Icon Only
 
 <Canvas>
   <Story
@@ -137,7 +155,7 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-# Pill
+### Pill
 
 <Canvas>
   <Story
@@ -157,7 +175,7 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-# Icon Pill
+### Icon Pill
 
 <Canvas>
   <Story
@@ -177,7 +195,7 @@ export const Default = (args) => ({
   </Story>
 </Canvas>
 
-# Text Only
+### Text Only
 
 <Canvas>
   <Story
@@ -196,5 +214,3 @@ export const Default = (args) => ({
     {Default.bind({})}
   </Story>
 </Canvas>
-
-<ArgsTable story="Default" />

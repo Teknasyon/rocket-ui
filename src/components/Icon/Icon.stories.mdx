@@ -53,7 +53,7 @@ export const Default = (args) => {
 
 <Canvas>
   <Story
-    name="Default"
+    name="Overview"
     argTypes={{ ...Default.argTypes }}
     args={{
       name: 'face',
@@ -63,8 +63,26 @@ export const Default = (args) => {
   </Story>
 </Canvas>
 
+### Playground
+
+<ArgsTable story="Overview" />
+
 # Reference
 
 ##### You can use any icon from Material Design Icons: [Material Icons](https://fonts.google.com/icons?icon.set=Material+Icons)
 
-<ArgsTable story="Default" />
+## Stories
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      name: 'face',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>

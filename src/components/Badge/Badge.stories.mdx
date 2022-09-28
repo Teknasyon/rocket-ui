@@ -115,6 +115,26 @@ export const ButtonTemplate = (args) => ({
 
 # Badges
 
+## Overview
+
+<Canvas>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'right' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Right
+
 <Canvas>
   <Story
     name="Right"
@@ -123,30 +143,11 @@ export const ButtonTemplate = (args) => ({
   >
     {Default.bind({})}
   </Story>
-  <Story
-    name="Left"
-    argTypes={{ ...Default.argTypes }}
-    args={{ placement: 'left' }}
-  >
-    {Default.bind({})}
-  </Story>
-  <Story
-    name="Bottom"
-    argTypes={{ ...Default.argTypes }}
-    args={{ placement: 'bottom' }}
-  >
-    {Default.bind({})}
-  </Story>
-  <Story name="Hover" argTypes={{ ...Default.argTypes }} args={{ hover: true }}>
-    {Default.bind({})}
-  </Story>
-  <Story
-    name="With Icon"
-    argTypes={{ ...Default.argTypes }}
-    args={{ icon: 'cancel' }}
-  >
-    {Default.bind({})}
-  </Story>
+</Canvas>
+
+### With Content
+
+<Canvas>
   <Story
     name="With Content"
     argTypes={{ ...ButtonTemplate.argTypes }}
@@ -156,4 +157,46 @@ export const ButtonTemplate = (args) => ({
   </Story>
 </Canvas>
 
-<ArgsTable story="Right" />
+### With Icon
+
+<Canvas>
+  <Story
+    name="With Icon"
+    argTypes={{ ...Default.argTypes }}
+    args={{ icon: 'cancel' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Hover
+
+<Canvas>
+  <Story name="Hover" argTypes={{ ...Default.argTypes }} args={{ hover: true }}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Bottom
+
+<Canvas>
+  <Story
+    name="Bottom"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'bottom' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Left
+
+<Canvas>
+  <Story
+    name="Left"
+    argTypes={{ ...Default.argTypes }}
+    args={{ placement: 'left' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
