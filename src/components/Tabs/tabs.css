@@ -10,6 +10,10 @@
 
 .tabs {
   @apply flex w-full border-0 border-b border-gray-200 border-solid;
+
+  &--scrollable {
+    @apply overflow-x-auto;
+  }
 }
 
 .tab-wrapper {
@@ -18,8 +22,4 @@
 
 .tab {
   @apply w-full p-2 bg-transparent border-none flex justify-center items-center text-gray-500 text-sm font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-inherit  disabled:opacity-50;
-}
-
-.tabs--scrollable {
-  @apply overflow-x-auto;
 }

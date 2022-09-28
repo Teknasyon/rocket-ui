@@ -5,55 +5,52 @@ fieldset {
 }
 
 .switch {
-  @apply relative inline-block w-16 h-9;
+  @apply relative inline-block w-16 h-9 box-border;
 }
 
 .switch--small {
   @apply w-12 h-6;
+
+  & > .slider::before {
+    @apply w-4 h-4;
+  }
+  & > .switch__input:checked + .slider:before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+  }
 }
 
 .switch--large {
   @apply w-20 h-11;
+
+  & > .slider::before {
+    @apply w-9 h-9;
+  }
+  & > .switch__input:checked + .slider:before {
+    -webkit-transform: translateX(34px);
+    -ms-transform: translateX(34px);
+    transform: translateX(34px);
+  }
 }
 
 .switch__input {
   @apply absolute left-1/2 -translate-x-1/2 w-full h-full appearance-none rounded-md;
+  &:checked + .slider {
+    @apply bg-teal-400;
+  }
+  &:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
 }
 
 .slider {
-  @apply absolute top-0 left-0 right-0 bottom-0 bg-gray-300 transition duration-200 ease-in-out rounded-full;
-}
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-gray-300 rounded-full;
 
-.switch__input:checked + .slider {
-  @apply bg-teal-400;
-}
-
-.slider::before {
-  content: '';
-  @apply absolute h-7 w-7 left-1 bottom-1 bg-white transition duration-200 ease-in-out rounded-full;
-}
-
-.switch--small > .slider::before {
-  @apply w-4 h-4;
-}
-.switch--large > .slider::before {
-  @apply w-9 h-9;
-}
-
-.switch--small > .switch__input:checked + .slider:before {
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
-  transform: translateX(24px);
-}
-
-.switch__input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.switch--large > .switch__input:checked + .slider:before {
-  -webkit-transform: translateX(34px);
-  -ms-transform: translateX(34px);
-  transform: translateX(34px);
+  &::before {
+    content: '';
+    @apply absolute h-7 w-7 left-1 bottom-1 bg-white transition-all duration-200 ease-in-out rounded-full;
+  }
 }

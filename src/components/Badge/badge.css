@@ -6,72 +6,58 @@
 
 .badge {
   @apply min-h-[12px] min-w-[12px] absolute z-50 rounded-full p-[2px];
-}
 
-.badge--right {
-  @apply -top-1 -right-1;
-}
-
-.badge--left {
-  @apply -top-1 -left-1;
-}
-
-.badge--bottom {
-  @apply -right-1 -bottom-1;
-}
-
-.badge--bordered {
-  @apply border border-white border-solid;
-}
-
-.badge--square {
-  @apply rounded-none;
-}
-
-.badge--hover {
-  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  &--right {
+    @apply -top-1 -right-1;
+  }
+  &--left {
+    @apply -top-1 -left-1;
+  }
+  &--bottom {
+    @apply -right-1 -bottom-1;
+  }
+  &--bordered {
+    @apply border border-white border-solid;
+  }
+  &--square {
+    @apply rounded-none;
+  }
+  &--hover {
+    @apply opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+  &--small {
+    @apply h-2 w-2;
+  }
+  &--large {
+    @apply h-4 w-4;
+  }
+  &--over-right {
+    @apply -top-2 -right-2;
+  }
+  &--over-left {
+    @apply -top-2 -left-2;
+  }
+  &--over-bottom {
+    @apply -right-2 -bottom-2;
+  }
+  &--overlap-right {
+    @apply top-0 right-0;
+  }
+  &--overlap-left {
+    @apply top-0 left-0;
+  }
+  &--overlap-bottom {
+    @apply right-0 bottom-0;
+  }
 }
 
 .badge__content {
   @apply grid place-items-center leading-none text-xs text-white font-bold;
-}
 
-.badge--small {
-  @apply h-2 w-2;
-}
-
-.badge__content--small {
-  @apply text-[8px]; /* 8px it's for without line height*/
-}
-
-.badge--large {
-  @apply h-4 w-4;
-}
-
-.badge__content--large {
-  @apply text-[1rem]; /* 16px it's for without line height*/
-}
-
-.badge--over-right {
-  @apply -top-2 -right-2;
-}
-
-.badge--over-left {
-  @apply -top-2 -left-2;
-}
-
-.badge--over-bottom {
-  @apply -right-2 -bottom-2;
-}
-
-.badge--overlap-right {
-  @apply top-0 right-0;
-}
-
-.badge--overlap-left {
-  @apply top-0 left-0;
-}
-
-.badge--overlap-bottom {
-  @apply right-0 bottom-0;
+  &--small {
+    @apply text-[8px]; /* 8px it's for without line height*/
+  }
+  &--large {
+    @apply text-[1rem]; /* 16px it's for without line height*/
+  }
 }

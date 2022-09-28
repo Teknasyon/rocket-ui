@@ -6,7 +6,7 @@ import Icon from '../Icon/Icon.vue';
 export type ButtonType =
   | 'primary'
   | 'secondary'
-  | 'icon'
+  | 'icon-only'
   | 'text'
   | 'outline'
   | 'link'
@@ -69,6 +69,6 @@ const onClick = () => {
       :class="[iconRight ? 'button__icon--right' : 'button__icon--left']"
     />
     <slot name="custom-icon" />
-    <slot v-if="props.variant !== 'icon'" />
+    <slot v-if="props.variant !== 'icon-only'" />
   </button>
 </template>

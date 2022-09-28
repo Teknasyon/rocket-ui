@@ -17,9 +17,10 @@
 }
 .list__item--selected {
   @apply bg-red-100;
-}
-.list__item--selected:hover {
-  @apply bg-gray-100;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
 }
 .item-multiple {
   @apply p-2 w-auto;
