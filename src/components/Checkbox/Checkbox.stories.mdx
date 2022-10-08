@@ -1,6 +1,15 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-
 import Checkbox from './Checkbox.vue';
+
+export const Default = (args) => {
+  return {
+    components: { Checkbox },
+    setup() {
+      return { args };
+    },
+    template: `<Checkbox v-bind="args" />`,
+  };
+};
 
 export const defaultArgs = {
   id: {
@@ -57,29 +66,31 @@ export const defaultArgs = {
   title="Components/Checkbox"
   component={Checkbox}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
-
-export const Default = (args) => {
-  return {
-    components: { Checkbox },
-    setup() {
-      return { args };
-    },
-    template: `<Checkbox v-bind="args" />`,
-  };
-};
 
 # Checkbox
 
-<Canvas>
+Checkbox is a component that allows the user to select one or more options from a set. It can be used to select multiple options in a form.
+
+It can also be used as a single option selector, if you want to present the user with only one option to choose from.
+
+The user can select or deselect the option by clicking on the checkbox.
+
+The user can also select or deselect the option by clicking on the label next to the checkbox.
+
+`*`The user can also select or deselect the option by using the keyboard. The user can use the spacebar to select or deselect the option.
+
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
     args={{
       id: 'checkbox-1',
-      label: 'Deneme',
+      label: 'Checkbox label',
       right: false,
-      indeterminate: true,
     }}
   >
     {Default.bind({})}
@@ -88,23 +99,26 @@ export const Default = (args) => {
 
 ### Playground
 
+> Changes you make in the controls will be reflected in the example above.
+
 <ArgsTable story="Overview" />
 
 ## Stories
 
 ### Default
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Default"
     argTypes={{ ...Default.argTypes }}
     args={{
       id: 'checkbox-1',
-      label: 'Deneme',
+      label: 'Checkbox label',
       right: false,
-      indeterminate: true,
     }}
   >
     {Default.bind({})}
   </Story>
 </Canvas>
+
+###### `*` is mean Not yet implemented

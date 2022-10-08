@@ -2,6 +2,18 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Textfield from './Textfield.vue';
 
+export const Default = (args) => {
+  return {
+    components: { Textfield },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<Textfield v-bind="args" />`,
+  };
+};
+
 export const defaultArgs = {
   id: {
     control: {
@@ -118,23 +130,22 @@ export const defaultArgs = {
   title="Components/Textfield"
   component={Textfield}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
-
-export const Default = (args) => {
-  return {
-    components: { Textfield },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: `<Textfield v-bind="args" />`,
-  };
-};
 
 # Textfield
 
-<Canvas>
+Textfield is a component that allows the user to enter text.
+
+It can be used as a single line or multi-line input. It can also be used as a password input.
+
+It can be used with a label, placeholder, icon, error message, and loading state.
+
+### Overview
+
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
@@ -153,13 +164,15 @@ export const Default = (args) => {
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(change|input|focus|blur|click|on.*)/} />
 
 ## Stories
 
 ### Default
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Default"
     argTypes={{ ...Default.argTypes }}

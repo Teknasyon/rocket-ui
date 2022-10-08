@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   bordered: false,
   over: false,
 });
-const emit = defineEmits(['click']);
+defineEmits(['click']);
 const classes = computed(() => {
   return {
     badge: true,
@@ -58,7 +58,6 @@ const iconSize = computed(() => {
     large: '24',
   }[props.size];
 });
-const onClick = () => emit('click');
 </script>
 <template>
   <div class="badge-wrapper group">
@@ -66,7 +65,7 @@ const onClick = () => emit('click');
       v-if="!props.icon && props.content"
       :style="styles"
       :class="classes"
-      @click="onClick"
+      @click="$emit('click')"
     >
       {{ props.content }}
     </div>
@@ -75,7 +74,7 @@ const onClick = () => emit('click');
       :class="classes"
       :color="props.color"
       :size="iconSize"
-      @click="onClick"
+      @click="$emit('click')"
     />
     <slot />
   </div>

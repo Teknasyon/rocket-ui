@@ -2,6 +2,21 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import TabItem from './TabItem.vue';
 
+export const Default = (args) => ({
+  components: { TabItem },
+  setup() {
+    return { args };
+  },
+  template: `
+    <TabItem v-bind="args">
+      <template #tab={activeTab}>
+        <h1>Tab {{activeTab + 1}}</h1>
+        <p>Active tab {{activeTab}}</p>
+      </template>
+    </TabItem>
+  `,
+});
+
 export const defaultArgs = {
   id: {
     control: {
@@ -90,24 +105,13 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
 />
 
-export const Default = (args) => ({
-  components: { TabItem },
-  setup() {
-    return { args };
-  },
-  template: `
-    <TabItem v-bind="args">
-      <template #tab={activeTab}>
-        <h1>Tab {{activeTab + 1}}</h1>
-        <p>Active tab {{activeTab}}</p>
-      </template>
-    </TabItem>
-  `,
-});
-
 # TabItem
 
-<Canvas>
+TabItem is a component that renders a tab item. It is not meant to be used on its own.
+
+### Overview
+
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
@@ -119,13 +123,15 @@ export const Default = (args) => ({
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|icon|on.*)$/} />
 
 ## Stories
 
 ### Default
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Default"
     argTypes={{ ...Default.argTypes }}
@@ -137,7 +143,7 @@ export const Default = (args) => ({
 
 ### Icon Only
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Icon Only"
     argTypes={{ ...Default.argTypes }}
@@ -157,7 +163,7 @@ export const Default = (args) => ({
 
 ### Pill
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Pill"
     argTypes={{ ...Default.argTypes }}
@@ -177,7 +183,7 @@ export const Default = (args) => ({
 
 ### Icon Pill
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Icon Pill"
     argTypes={{ ...Default.argTypes }}
@@ -197,7 +203,7 @@ export const Default = (args) => ({
 
 ### Text Only
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Text Only"
     argTypes={{ ...Default.argTypes }}

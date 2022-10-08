@@ -50,13 +50,20 @@ export const Default = (args) => {
         args,
       };
     },
-    template: '<Switch v-bind="args" />',
+    template: `<Switch v-bind="args" />`,
   };
 };
 
 # Switch
 
-<Canvas>
+Switch is a component that allows users to toggle between two states.
+It is used to turn something on or off. It is commonly used to activate or deactivate a setting.
+It is also used to turn a feature on or off. It is used to enable or disable a feature.
+It is used to turn a feature on or off. It is used to enable or disable a feature.
+
+### Overview
+
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
@@ -71,13 +78,15 @@ export const Default = (args) => {
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(on|change|onChange.*)$/} />
 
 ## Stories
 
 ### Small
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Small"
     argTypes={{ ...Default.argTypes }}
@@ -92,7 +101,7 @@ export const Default = (args) => {
 
 ### Medium
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Medium"
     argTypes={{ ...Default.argTypes }}
@@ -107,7 +116,7 @@ export const Default = (args) => {
 
 ### Large
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Large"
     argTypes={{ ...Default.argTypes }}

@@ -29,8 +29,6 @@
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
   "dependencies": {
-    "@storybook/addons": "^6.5.12",
-    "@storybook/theming": "^6.5.12",
     "floating-vue": "^2.0.0-beta.19",
     "lodash.kebabcase": "^4.1.1",
     "material-icons": "^1.11.11",
@@ -41,6 +39,8 @@
     "@rushstack/eslint-patch": "^1.1.4",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-docs": "^6.5.10",
+    "@storybook/addons": "^6.5.12",
+    "@storybook/theming": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-links": "^6.5.10",
     "@storybook/builder-vite": "^0.2.2",

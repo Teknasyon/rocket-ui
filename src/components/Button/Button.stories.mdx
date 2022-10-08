@@ -1,6 +1,45 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 
 import Button from './Button.vue';
+import Icon from '../Icon/Icon.vue';
+
+export const WithContentSlot = ({ content, ...rest }) => {
+  const args = rest;
+  return {
+    components: { Button },
+    setup() {
+      return {
+        args,
+        content,
+      };
+    },
+    template: `
+    <Button v-bind="args">
+      <template v-slot:default>
+        <span>{{ content }}</span>
+      </template>
+    </Button>`,
+  };
+};
+
+export const WithCustomIconSlot = ({ icon, ...rest }) => {
+  const args = rest;
+  return {
+    components: { Button, Icon },
+    setup() {
+      return {
+        args,
+        icon,
+      };
+    },
+    template: `
+    <Button v-bind="args">
+      <template v-slot:custom-icon>
+        <Icon name="fingerprint"/>
+      </template>
+    </Button>`,
+  };
+};
 
 export const defaultArgs = {
   variant: {
@@ -9,6 +48,13 @@ export const defaultArgs = {
       options: ['primary', 'secondary', 'icon-only', 'text', 'outline'],
     },
     defaultValue: 'primary',
+    table: {
+      defaultValue: {
+        summary: 'primary',
+        detail: 'primary | secondary | icon-only | text | outline',
+      },
+    },
+    description: 'Variants of button',
   },
   loading: {
     control: {
@@ -28,6 +74,13 @@ export const defaultArgs = {
       options: ['small', 'medium', 'large'],
     },
     defaultValue: 'medium',
+    table: {
+      defaultValue: {
+        summary: 'medium',
+        detail: 'small | medium | large ',
+      },
+    },
+    description: 'Sizes of button',
   },
   icon: {
     control: {
@@ -40,6 +93,14 @@ export const defaultArgs = {
       type: 'select',
       options: ['button', 'submit', 'reset'],
     },
+    defaultValue: 'button',
+    table: {
+      defaultValue: {
+        summary: 'filled',
+        detail: 'button | submit | reset',
+      },
+    },
+    description: 'Types of input element',
   },
   backgroundColor: {
     control: {
@@ -53,15 +114,31 @@ export const defaultArgs = {
   },
   iconSize: {
     control: {
-      type: 'text',
+      type: 'select',
+      options: ['small', 'medium', 'large'],
     },
+    defaultValue: 'medium',
+    table: {
+      defaultValue: {
+        summary: 'medium',
+        detail: 'small | medium | large ',
+      },
+    },
+    description: 'Sizes of icon',
   },
   iconKind: {
     control: {
-      type: 'radio',
-      options: ['solid', 'outline'],
+      type: 'select',
+      options: ['filled', 'outlined', 'rounded', 'sharp', 'two-tone'],
     },
-    defaultValue: 'solid',
+    defaultValue: 'filled',
+    table: {
+      defaultValue: {
+        summary: 'filled',
+        detail: 'filled | outlined | rounded | sharp | two-tone',
+      },
+    },
+    description: 'Types of icon',
   },
   iconRight: {
     control: {
@@ -81,119 +158,143 @@ export const defaultArgs = {
   title="Components/Button"
   component={Button}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
-
-export const Default = ({ slot1, slot2, ...rest }) => {
-  const args = rest;
-  return {
-    components: { Button },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: `<Button v-bind="args">
-      <template v-slot:default>
-        ${slot1}
-      </template>
-    </Button>`,
-  };
-};
 
 # Button
 
-<Canvas>
+Button is a clickable element that is used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+
+It has a default style and can be customized with different variants, sizes, and colors.
+
+Also, it has a `custom-icon` for custom icons and already has a `content` slot for custom content.
+
+### Overview
+
+<Canvas withSource="open">
   <Story
     name="Overview"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'primary',
-      icon: 'add_circle',
-      slot1: '<span>Primary</span>',
+      content: 'Button',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
   </Story>
 </Canvas>
 
 ### Playground
 
-<ArgsTable story="Overview" />
+<ArgsTable
+  story="Overview"
+  exclude={/^(click|content|default|custom-icon|on.*)$/}
+/>
 
-## Stories
+## Variants
 
 ### Primary
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Primary"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'primary',
       icon: 'add_circle',
-      slot1: '<span>Primary</span>',
+      content: 'Primary',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
   </Story>
 </Canvas>
 
 ### Secondary
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Secondary"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'secondary',
-      slot1: '<span>Secondary</span>',
+      content: 'Secondary',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
   </Story>
 </Canvas>
 
 ### Icon
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Icon Only"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'icon-only',
       icon: 'add_circle',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
   </Story>
 </Canvas>
 
 ### Text
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Text"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'text',
-      slot1: '<span>Text</span>',
+      content: 'Text',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
   </Story>
 </Canvas>
 
 ### Outline
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Outline"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'outline',
-      slot1: '<span>Outline</span>',
+      content: 'Outline',
     }}
   >
-    {Default.bind({})}
+    {WithContentSlot.bind({})}
+  </Story>
+</Canvas>
+
+### `#Custom Icon Slot`
+
+<Canvas withSource="open">
+  <Story
+    name="Custom Icon"
+    argTypes={{ ...WithCustomIconSlot.argTypes }}
+    args={{
+      variant: 'primary',
+    }}
+  >
+    {WithCustomIconSlot.bind({})}
+  </Story>
+</Canvas>
+
+### Unstyled
+
+#### \* Not yet implemented
+
+<Canvas withSource="open">
+  <Story
+    name="Unstyled"
+    argTypes={{ ...WithCustomIconSlot.argTypes }}
+    args={{}}
+  >
+    {WithCustomIconSlot.bind({})}
   </Story>
 </Canvas>

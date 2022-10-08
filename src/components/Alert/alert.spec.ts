@@ -15,7 +15,7 @@ describe('Alert', () => {
       },
     });
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.classes()).toContain('alert');
     expect(wrapper.find('.texts__title').text()).toBe('Alert Title');
     expect(wrapper.find('.texts__description').text()).toBe(
       'Alert Description'

@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
-
 import Alert from './Alert.vue';
+import Icon from '../Icon/Icon.vue';
 
 export const Default = (args) => ({
   components: { Alert },
@@ -12,13 +12,14 @@ export const Default = (args) => ({
 });
 
 export const DefaultWithSlots = (args) => ({
-  components: { Alert },
+  components: { Alert, Icon },
   setup() {
-    return { args, onClick: action('onClick') };
+    return { args, onClick: action('close') };
   },
-  template: `<Alert v-bind="args">
+  template: `
+  <Alert v-bind="args">
     <template #close>
-      <button @click="onClick">Close</button>
+      <Icon name="close" @click="onClick" />
     </template>
   </Alert>`,
 });
@@ -62,7 +63,7 @@ export const defaultArgs = {
         detail: 'small | medium | large ',
       },
     },
-    description: 'Size of alert',
+    description: 'Sizes of alert',
   },
   closable: {
     control: {
@@ -77,7 +78,7 @@ export const defaultArgs = {
     defaultValue: 'Close',
   },
   onClick: {
-    action: action('click'),
+    action: 'click',
   },
 };
 
@@ -98,6 +99,8 @@ It has a `close` slot that can be used to add a **custom close button**. The but
 
 > The visibility should be controlled by the parent component.
 
+### Overview
+
 <Canvas withSource="open">
   <Story
     name="Overview"
@@ -116,7 +119,7 @@ It has a `close` slot that can be used to add a **custom close button**. The but
 
 ## Stories
 
-## Success
+### Success
 
 <Canvas withSource="open">
   <Story

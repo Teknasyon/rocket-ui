@@ -18,11 +18,12 @@ describe('Button', () => {
     expect(wrapper.attributes('type')).toBe('button');
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('.button').attributes('type')).toBe('button');
-    describe('when clicked', () => {
-      it('emits an event', () => {
-        wrapper.trigger('click');
-        expect(wrapper.emitted().click).toBeTruthy();
-      }).timeout(0);
-    });
+  });
+});
+describe('when clicked', () => {
+  it('emits an event', () => {
+    const wrapper = mount(Button);
+    wrapper.trigger('click');
+    expect(wrapper.emitted().click).toBeTruthy();
   });
 });

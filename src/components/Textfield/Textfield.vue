@@ -2,6 +2,7 @@
 import { computed, reactive, ref } from 'vue';
 import './textfield.css';
 import Icon from '../Icon/Icon.vue';
+import { vFocus } from '../../directives';
 export interface Props {
   id: string;
   value?: string;
@@ -107,6 +108,7 @@ const onClick = () => {
       <div class="input-wrapper">
         <div :class="classes">
           <input
+            v-focus="{ color: 'white', text: 'hello!' }"
             v-bind="$attrs"
             ref="inputRef"
             v-model="state.value"

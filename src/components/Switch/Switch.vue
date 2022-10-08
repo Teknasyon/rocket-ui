@@ -32,6 +32,7 @@ const onChange = () => {
   <fieldset>
     <label :for="props.id || 'switch'" :class="classes">
       <input
+        v-bind="$attrs"
         :id="props.id || 'switch'"
         type="checkbox"
         :disabled="props.disabled"

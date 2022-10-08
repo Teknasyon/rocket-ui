@@ -1,8 +1,35 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-
 import Badge from './Badge.vue';
 import Icon from '../Icon/Icon.vue';
 import Button from '../Button/Button.vue';
+
+export const Default = (args) => ({
+  components: { Badge, Icon },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Badge v-bind="args">
+      <template v-slot:default>
+        <Icon name="add" size="24" />
+      </template>
+    </Badge>
+    `,
+});
+
+export const ButtonTemplate = (args) => ({
+  components: { Badge, Button },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Badge v-bind="args">
+      <template v-slot:default>
+        <Button icon="add" variant="primary">Hello World</Button>
+      </template>
+    </Badge>
+    `,
+});
 
 export const defaultArgs = {
   placement: {
@@ -73,12 +100,6 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  inline: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   onClick: {
     action: 'click',
   },
@@ -88,36 +109,20 @@ export const defaultArgs = {
   title="Components/Badge"
   component={Badge}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
 
-export const Default = (args) => ({
-  components: { Badge, Icon },
-  setup() {
-    return { args };
-  },
-  template: `
-    <Badge v-bind="args">
-      <Icon name="alarm_on" size="24" />
-    </Badge>
-  `,
-});
-export const ButtonTemplate = (args) => ({
-  components: { Badge, Button },
-  setup() {
-    return { args };
-  },
-  template: `
-    <Badge v-bind="args">
-      <Button icon="alarm_on" variant="primary">Hello World</Button>
-    </Badge>
-  `,
-});
+# Badge
 
-# Badges
+Badge is a small component that can be used to display a notification count or status.
 
-## Overview
+It has a `default` slot that can be used to display any content.
 
-<Canvas>
+### Overview
+
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
@@ -129,13 +134,19 @@ export const ButtonTemplate = (args) => ({
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
+
+## Usage
+
+###### \* Not yet implemented
 
 ## Stories
 
 ### Right
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Right"
     argTypes={{ ...Default.argTypes }}
@@ -147,7 +158,7 @@ export const ButtonTemplate = (args) => ({
 
 ### With Content
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Content"
     argTypes={{ ...ButtonTemplate.argTypes }}
@@ -159,7 +170,7 @@ export const ButtonTemplate = (args) => ({
 
 ### With Icon
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Icon"
     argTypes={{ ...Default.argTypes }}
@@ -171,7 +182,7 @@ export const ButtonTemplate = (args) => ({
 
 ### Hover
 
-<Canvas>
+<Canvas withSource="open">
   <Story name="Hover" argTypes={{ ...Default.argTypes }} args={{ hover: true }}>
     {Default.bind({})}
   </Story>
@@ -179,7 +190,7 @@ export const ButtonTemplate = (args) => ({
 
 ### Bottom
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Bottom"
     argTypes={{ ...Default.argTypes }}
@@ -191,7 +202,7 @@ export const ButtonTemplate = (args) => ({
 
 ### Left
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Left"
     argTypes={{ ...Default.argTypes }}

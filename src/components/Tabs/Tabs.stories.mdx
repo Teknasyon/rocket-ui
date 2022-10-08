@@ -98,6 +98,12 @@ export const Default = (args) => ({
 
 # Tabs
 
+Tabs are used to organize and navigate between groups of content that are related and at the same level of hierarchy.
+They allow content to be displayed in separate views while giving the user a way to navigate between these views.
+The tabs are placed horizontally at the top of the content.
+
+### Overview
+
 <Canvas>
   <Story
     name="Overview"
@@ -110,7 +116,9 @@ export const Default = (args) => ({
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|tab|on.*)/} />
 
 ## Stories
 

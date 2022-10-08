@@ -1,6 +1,26 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import Dropdown from './Dropdown.vue';
 
+export const Default = (args) => {
+  return {
+    components: { Dropdown },
+    setup() {
+      return { args };
+    },
+    template: `<Dropdown v-bind="args" />`,
+  };
+};
+
+export const WithIcon = (args) => {
+  return {
+    components: { Dropdown },
+    setup() {
+      return { args };
+    },
+    template: `<Dropdown v-bind="args" />`,
+  };
+};
+
 export const Placements = [
   'auto',
   'auto-start',
@@ -219,29 +239,19 @@ export const defaultArgs = {
   title="Components/Dropdown"
   component={Dropdown}
   argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
 />
 
-export const Default = (args) => {
-  return {
-    components: { Dropdown },
-    setup() {
-      return { args };
-    },
-    template: `<Dropdown v-bind="args" />`,
-  };
-};
-
-export const WithIcon = (args) => {
-  return {
-    components: { Dropdown },
-    setup() {
-      return { args };
-    },
-    template: `<Dropdown v-bind="args" />`,
-  };
-};
-
 # Dropdown
+
+Dropdown is a component that allows you to select one or more options from a list.
+It can also be used as an input field with a dropdown list.
+
+It is based on [Popper.js](https://popper.js.org/).
+
+### Overview
 
 <Canvas>
   <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}} />
@@ -249,7 +259,14 @@ export const WithIcon = (args) => {
 
 ### Playground
 
-<ArgsTable story="Overview" />
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable
+  story="Overview"
+  exclude={
+    /^(click|show|hide|dispose|resize|select|cancel|submit|default|on.*)$/
+  }
+/>
 
 ## Stories
 

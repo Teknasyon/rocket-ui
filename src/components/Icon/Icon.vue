@@ -4,17 +4,17 @@ import { computed } from 'vue';
 
 export interface IProps {
   name: string;
-  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone' | string;
+  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
   size?: string | number;
   color?: string;
-  fontWeight?: 'light' | 'regular' | 'medium' | 'bold';
+  fontWeight?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
   name: 'face',
   kind: 'outlined',
   size: 24,
   color: '',
-  fontWeight: () => 'regular',
+  fontWeight: () => 'light',
 });
 
 const styles = computed(() => {

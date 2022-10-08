@@ -2,7 +2,6 @@
 import './button.css';
 import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
-
 export type ButtonType =
   | 'primary'
   | 'secondary'
@@ -30,14 +29,13 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   icon: '',
   iconColor: '',
-  iconSize: '',
+  iconSize: '24',
   iconKind: '',
   iconRight: false,
   size: 'medium',
   type: 'button',
   backgroundColor: '',
 });
-const emit = defineEmits(['click']);
 const classes = computed(() => ({
   button: true,
   [`button--${props.variant}`]: true,
@@ -45,12 +43,10 @@ const classes = computed(() => ({
   [`button--${props.size || 'medium'}`]: true,
   'button--reverse': props.iconRight,
 }));
+defineEmits(['click']);
 const style = computed(() => ({
   backgroundColor: props.backgroundColor,
 }));
-const onClick = () => {
-  emit('click');
-};
 </script>
 <template>
   <button
@@ -58,17 +54,19 @@ const onClick = () => {
     :class="classes"
     :style="style"
     :disabled="disabled || loading"
-    @click="onClick"
+    @click="$emit('click')"
   >
+    <slot name="custom-icon" />
+
     <Icon
+      v-if="!$slots['custom-icon'] && icon"
       :name="icon"
-      :size="iconSize || '24'"
+      :size="iconSize"
       :color="iconColor"
       kind="filled"
       class="button__icon"
       :class="[iconRight ? 'button__icon--right' : 'button__icon--left']"
     />
-    <slot name="custom-icon" />
     <slot v-if="props.variant !== 'icon-only'" />
   </button>
 </template>
