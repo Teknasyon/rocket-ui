@@ -1,8 +1,8 @@
-import { withSource, transformSource } from "./withSource"
+import { withSource, transformSource } from './withSource';
 
 export const parameters = {
   actions: {
-    argTypesRegex: "^on[A-Z].*"
+    argTypesRegex: '^on[A-Z].*',
   },
   controls: {
     matchers: {
@@ -10,13 +10,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  viewMode: "docs",
-  layout: "centered",
+  viewMode: 'docs',
+  // layout: 'centered', we must do this in MDX files
   docs: {
     transformSource,
-  }
-}
+  },
+};
 
-export const decorators = [
-  withSource
-]
+export const decorators = [withSource];
