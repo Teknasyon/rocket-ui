@@ -25,7 +25,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "chromatic": "npx chromatic --project-token=deb8b1f53842",
+    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
   "dependencies": {
