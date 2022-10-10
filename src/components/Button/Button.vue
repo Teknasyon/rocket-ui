@@ -50,6 +50,7 @@ const style = computed(() => ({
 </script>
 <template>
   <button
+    v-bind="$attrs"
     :type="type || 'button'"
     :class="classes"
     :style="style"

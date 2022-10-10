@@ -51,10 +51,11 @@ const onChange = () => {
     <label :for="props.id || 'checkbox'">
       {{ props.label }}
       <input
-        :id="props.id || 'checkbox'"
+        v-bind="$attrs"
         type="checkbox"
         v-model="state.checked"
         :indeterminate.prop="props.indeterminate"
+        :id="props.id || 'checkbox'"
         @change="onChange"
       />
       <div v-if="!icon?.length" class="checkbox checkbox--empty" />
