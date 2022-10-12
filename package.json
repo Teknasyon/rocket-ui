@@ -84,5 +84,8 @@
     ]
   },
   "readme": "ERROR: No README data found!",
-  "_id": "design-system-vue@0.0.3"
+  "_id": "design-system-vue@0.0.3",
+  "publishConfig": {
+   "@gokh4nozturk:registry": "https://npm.pkg.github.com"
+ }
 }
