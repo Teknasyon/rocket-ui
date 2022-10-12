@@ -12,8 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm test
+      - run: yarn test
 
   publish-gpr:
     needs: build
@@ -27,7 +26,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm publish
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
