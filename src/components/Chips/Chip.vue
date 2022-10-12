@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   icon: '',
   square: false,
 });
-const emit = defineEmits(['click']);
+const emit = defineEmits(['clickChip', 'clickIcon']);
 const classes = computed(() => {
   return {
     chip: true,
@@ -46,21 +46,25 @@ const iconSize = computed<string>(() => {
   if (props.size === 'large') return '20';
   return '16';
 });
-const handleClick = () => {
+const clickIcon = () => {
   if (props.disabled) return;
-  emit('click');
+  emit('clickIcon');
+};
+const clickChip = () => {
+  if (props.disabled) return;
+  emit('clickChip');
 };
 </script>
 <template>
   <div :class="classes">
-    <span class="chip__text">{{ props.label }}</span>
+    <span class="chip__text" @click="clickChip">{{ props.label }}</span>
     <Icon
       v-if="props.icon"
       :name="props.icon"
       :size="iconSize"
       :aria-disabled="props.disabled"
       class="chip__icon"
-      @click="handleClick"
+      @click="clickIcon"
     />
   </div>
 </template>

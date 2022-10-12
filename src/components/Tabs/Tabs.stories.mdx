@@ -1,6 +1,21 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-
+import { action } from '@storybook/addon-actions';
 import Tabs from './Tabs.vue';
+
+export const Default = (args) => ({
+  components: { Tabs },
+  setup() {
+    return { args, click: action('click') };
+  },
+  template: `
+    <Tabs v-bind="args" @click="click">
+      <template #tab={activeTab}>
+        <h1>Tab {{activeTab + 1}}</h1>
+        <p>Active tab {{activeTab}}</p>
+      </template>
+    </Tabs>
+  `,
+});
 
 export const defaultArgs = {
   tabs: {
@@ -74,27 +89,9 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  onClick: {
-    action: 'click',
-  },
 };
 
 <Meta title="Components/Tabs" component={Tabs} argTypes={{ ...defaultArgs }} />
-
-export const Default = (args) => ({
-  components: { Tabs },
-  setup() {
-    return { args };
-  },
-  template: `
-    <Tabs v-bind="args">
-      <template #tab={activeTab}>
-        <h1>Tab {{activeTab + 1}}</h1>
-        <p>Active tab {{activeTab}}</p>
-      </template>
-    </Tabs>
-  `,
-});
 
 # Tabs
 

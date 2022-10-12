@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   row: false,
 });
-const emit = defineEmits(['change', 'input', 'focus', 'blur', 'click']);
+const emit = defineEmits(['input', 'focus', 'blur', 'clickIcon']);
 const state = reactive({
   value: props.value || '',
 });
@@ -78,12 +78,19 @@ const onBlur = () => {
     value: state.value,
   });
 };
-const onClick = () => {
+const clickIcon = () => {
   if (hasClear.value) {
     state.value = '';
     inputRef.value.focus();
   }
-  emit('click', {
+  emit('clickIcon', {
+    value: state.value,
+  });
+};
+const onInput = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  state.value = target.value;
+  emit('input', {
     value: state.value,
   });
 };
@@ -118,6 +125,7 @@ const onClick = () => {
             :placeholder="props.placeholder"
             @focus="onFocus"
             @blur="onBlur"
+            @input="onInput"
           />
           <Icon
             class="textfield__icon"
@@ -126,7 +134,7 @@ const onClick = () => {
             :name="`${iconName}`"
             :color="props.iconColor"
             :class="{ 'textfield__icon--error': hasErrorMsg }"
-            @click="onClick"
+            @click="clickIcon"
           />
         </div>
         <div class="textfield__error">{{ props.errorMsg }}</div>
