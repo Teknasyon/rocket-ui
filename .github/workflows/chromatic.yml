@@ -3,7 +3,7 @@ name: 'Chromatic'
 on:
   push:
     branches: ['master']
-    paths: ['src/**/*.{js,mdx,ts,vue,css}']
+    paths: ['**.stories.mdx', '**.vue', '**.js', '**.ts', '**.css']
 
 jobs:
   chromatic-deployment:
