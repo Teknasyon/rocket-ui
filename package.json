@@ -13,6 +13,10 @@
       "require": "./dist/design-system-vue.umd.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gokh4nozturk/design-system-vue.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -86,6 +90,6 @@
   "readme": "ERROR: No README data found!",
   "_id": "design-system-vue@0.0.3",
   "publishConfig": {
-   "@gokh4nozturk:registry": "https://npm.pkg.github.com"
- }
+    "@gokh4nozturk:registry": "https://npm.pkg.github.com"
+  }
 }
