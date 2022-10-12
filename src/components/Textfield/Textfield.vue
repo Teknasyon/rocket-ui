@@ -81,7 +81,7 @@ const onBlur = () => {
 const onClick = () => {
   if (hasClear.value) {
     state.value = '';
-    // inputRef.value.focus();
+    inputRef.value.focus();
   }
   emit('click', {
     value: state.value,
