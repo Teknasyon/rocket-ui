@@ -21,7 +21,7 @@ input[type='text'] {
 }
 
 .textfield {
-  @apply w-full flex items-center h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-[2px] py-[2px];
+  @apply box-border w-full flex items-center h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-[2px] py-[2px];
 
   &--loading {
     @apply animate-pulse;
