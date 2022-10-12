@@ -6,9 +6,9 @@ import Icon from '../Icon/Icon.vue';
 export const Default = (args) => ({
   components: { Alert },
   setup() {
-    return { args };
+    return { args, click: action('click') };
   },
-  template: `<Alert v-bind="args" />`,
+  template: `<Alert v-bind="args" @click="click"/>`,
 });
 
 export const DefaultWithSlots = (args) => ({
@@ -76,9 +76,6 @@ export const defaultArgs = {
       type: 'text',
     },
     defaultValue: 'Close',
-  },
-  onClick: {
-    action: 'click',
   },
 };
 

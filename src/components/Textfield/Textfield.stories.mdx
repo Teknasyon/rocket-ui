@@ -1,5 +1,5 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-
+import { action } from '@storybook/addon-actions';
 import Textfield from './Textfield.vue';
 
 export const Default = (args) => {
@@ -8,9 +8,20 @@ export const Default = (args) => {
     setup() {
       return {
         args,
+        input: action('input'),
+        focus: action('focus'),
+        blur: action('blur'),
+        clickIcon: action('clickIcon'),
       };
     },
-    template: `<Textfield v-bind="args" />`,
+    template: `
+    <Textfield 
+      v-bind="args" 
+      @input="input" 
+      @focus="focus" 
+      @blur="blur" 
+      @clickIcon="clickIcon"
+    />`,
   };
 };
 
@@ -93,36 +104,6 @@ export const defaultArgs = {
       type: 'boolean',
     },
     defaultValue: false,
-  },
-  onChange: {
-    control: {
-      type: 'action',
-    },
-    action: 'change',
-  },
-  onInput: {
-    control: {
-      type: 'action',
-    },
-    action: 'input',
-  },
-  onFocus: {
-    control: {
-      type: 'action',
-    },
-    action: 'focus',
-  },
-  onBlur: {
-    control: {
-      type: 'action',
-    },
-    action: 'blur',
-  },
-  onClick: {
-    control: {
-      type: 'action',
-    },
-    action: 'click',
   },
 };
 

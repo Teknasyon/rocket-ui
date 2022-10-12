@@ -1,13 +1,14 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
 import Checkbox from './Checkbox.vue';
 
 export const Default = (args) => {
   return {
     components: { Checkbox },
     setup() {
-      return { args };
+      return { args, change: action('change') };
     },
-    template: `<Checkbox v-bind="args" />`,
+    template: `<Checkbox v-bind="args" @change="change"/>`,
   };
 };
 
@@ -53,12 +54,6 @@ export const defaultArgs = {
       type: 'boolean',
     },
     defaultValue: false,
-  },
-  onChange: {
-    control: {
-      type: 'action',
-    },
-    action: 'change',
   },
 };
 

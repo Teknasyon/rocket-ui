@@ -1,6 +1,19 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-
+import { action } from '@storybook/addon-actions';
 import Switch from './Switch.vue';
+
+export const Default = (args) => {
+  return {
+    components: { Switch },
+    setup() {
+      return {
+        args,
+        change: action('change'),
+      };
+    },
+    template: `<Switch v-bind="args" @change="change"/>`,
+  };
+};
 
 export const defaultArgs = {
   id: {
@@ -28,12 +41,6 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  onChange: {
-    control: {
-      type: 'action',
-    },
-    action: 'change',
-  },
 };
 
 <Meta
@@ -45,18 +52,6 @@ export const defaultArgs = {
     layout: 'centered',
   }}
 />
-
-export const Default = (args) => {
-  return {
-    components: { Switch },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: `<Switch v-bind="args" />`,
-  };
-};
 
 # Switch
 
