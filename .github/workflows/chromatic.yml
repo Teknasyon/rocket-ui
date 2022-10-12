@@ -4,7 +4,6 @@ on:
   push:
     branches: ['master']
     paths: ['**.stories.mdx', '**.vue', '**.js', '**.ts', '**.css']
-
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
