@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import './badge.css';
-import { defineProps, defineEmits, computed } from 'vue';
+import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
 
 export interface BadgeProps {
