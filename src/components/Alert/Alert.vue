@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import './alert.css';
-import { defineProps, computed, defineEmits } from 'vue';
+import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
 import Button from '../Button/Button.vue';
 
