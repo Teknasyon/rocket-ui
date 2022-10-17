@@ -20,16 +20,16 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
+    "build:only": "vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",
-    "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook:build": "build-storybook",
+    "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN",
     "prepare": "husky install",
-    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
   "dependencies": {

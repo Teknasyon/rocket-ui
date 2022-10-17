@@ -13,6 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
+storybook-static
 
 /cypress/videos/
 /cypress/screenshots/
@@ -28,6 +29,7 @@ coverage
 *.sln
 *.sw?
 
+# Environment variables
 .env
 .env.local
 .env.development
