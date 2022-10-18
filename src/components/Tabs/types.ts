@@ -3,5 +3,4 @@ export type Tab = {
   icon?: string;
   disabled?: boolean;
   iconKind?: string;
-  badge?: string;
 };

@@ -4,7 +4,7 @@ import { computed } from 'vue';
 
 export interface IProps {
   name: string;
-  kind?: 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
+  kind?: string | 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
   size?: string | number;
   color?: string;
   fontWeight?: string;

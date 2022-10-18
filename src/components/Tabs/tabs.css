@@ -14,12 +14,8 @@
   &--scrollable {
     @apply overflow-x-auto;
   }
-}
 
-.tab-wrapper {
-  @apply flex flex-col w-full;
-}
-
-.tab {
-  @apply w-full p-2 bg-transparent border-none flex justify-center items-center text-gray-500 text-sm font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-inherit  disabled:opacity-50;
+  &--pill {
+    @apply pb-1;
+  }
 }
