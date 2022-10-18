@@ -83,8 +83,8 @@
   },
   "lint-staged": {
     "*.{vue,js,ts,mdx}": [
-      "eslint --fix",
-      "npm run prettier"
+      "yarn lint",
+      "yarn prettier"
     ]
   },
   "readme": "ERROR: No README data found!",
