@@ -33,17 +33,15 @@ export const defaultArgs = {
   variant: {
     control: {
       type: 'select',
-      options: [
-        'default',
-        'pill',
-        'underline',
-        'icon',
-        'icon-pill',
-        'icon-underline',
-        'icon-only',
-      ],
+      options: ['default', 'icon-only', 'text-only'],
     },
     defaultValue: 'default',
+  },
+  pill: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   size: {
     control: {
@@ -71,6 +69,12 @@ export const defaultArgs = {
     defaultValue: '',
   },
   activeBgColor: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  borderColor: {
     control: {
       type: 'color',
     },
@@ -143,58 +147,6 @@ The tabs are placed horizontally at the top of the content.
         { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
         { label: 'Tab 2', icon: 'add_circle', disabled: true },
         { label: 'Tab 3', icon: 'favorite', badge: 1 },
-        { label: 'Tab 4', icon: 'face' },
-        { label: 'Tab 5', icon: 'settings' },
-        { label: 'Tab 6', icon: 'search' },
-        { label: 'Tab 7', icon: 'done' },
-        { label: 'Tab 8', icon: 'visibility' },
-        { label: 'Tab 9', icon: 'lock' },
-        { label: 'Tab 10', icon: 'language' },
-      ],
-    }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Pill
-
-<Canvas>
-  <Story
-    name="Pill"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'pill',
-      tabs: [
-        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
-        { label: 'Tab 2', icon: 'add_circle', disabled: true },
-        { label: 'Tab 3', icon: 'favorite' },
-        { label: 'Tab 4', icon: 'face' },
-        { label: 'Tab 5', icon: 'settings' },
-        { label: 'Tab 6', icon: 'search' },
-        { label: 'Tab 7', icon: 'done' },
-        { label: 'Tab 8', icon: 'visibility' },
-        { label: 'Tab 9', icon: 'lock' },
-        { label: 'Tab 10', icon: 'language' },
-      ],
-    }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Icon Pill
-
-<Canvas>
-  <Story
-    name="Icon Pill"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'icon-pill',
-      tabs: [
-        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
-        { label: 'Tab 2', icon: 'add_circle', disabled: true },
-        { label: 'Tab 3', icon: 'favorite' },
         { label: 'Tab 4', icon: 'face' },
         { label: 'Tab 5', icon: 'settings' },
         { label: 'Tab 6', icon: 'search' },
