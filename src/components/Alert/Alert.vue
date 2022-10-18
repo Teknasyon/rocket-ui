@@ -37,7 +37,6 @@ const icon = computed(() => {
     info: 'info',
   }[props.type];
 });
-
 const iconSize = computed(() => {
   return {
     small: 24,
@@ -45,7 +44,6 @@ const iconSize = computed(() => {
     large: 40,
   }[props.size];
 });
-
 const onClick = () => {
   emit('click');
 };
