@@ -7,6 +7,7 @@
   ],
   "main": "./dist/design-system-vue.umd.cjs",
   "module": "./dist/design-system-vue.js",
+  "types": "./dist/design-system-vue.d.ts",
   "exports": {
     ".": {
       "import": "./dist/design-system-vue.js",
@@ -70,6 +71,7 @@
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.16",
+    "postcss-import": "^15.0.0",
     "postcss-nested": "^5.0.6",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.2.0",
