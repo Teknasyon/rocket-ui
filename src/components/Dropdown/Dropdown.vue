@@ -26,19 +26,12 @@ export interface Props {
     | 'left-end';
   content?: string;
   strategy?: 'fixed' | 'absolute';
-  triggers?: ['hover' | 'click' | 'focus' | 'touch'];
   delay?: number;
-  shown?: boolean;
   distance?: number;
   skidding?: number;
-  arrowPadding?: number;
-  container?: string;
   autoHide?: boolean;
   disabled?: boolean;
-  positioningDisabled?: boolean;
-  autoSize?: boolean | 'min' | 'max';
-  flip?: boolean;
-  shift?: boolean;
+  autoSize?: boolean;
   handleResize?: boolean;
   options: Option[];
   selected: string[];
@@ -52,13 +45,12 @@ const props = withDefaults(defineProps<Props>(), {
   placement: 'auto',
   content: '',
   strategy: 'absolute',
-  triggers: () => ['click'],
   delay: 0,
   shown: false,
   distance: 10,
   skidding: 0,
   arrowPadding: 0,
-  container: '.v-popper',
+  container: '.dropdown__trigger',
   autoHide: true,
   disabled: false,
   positioningDisabled: false,
@@ -76,13 +68,12 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits([
   'show',
   'hide',
-  'dispose',
   'resize',
   'select',
   'cancel',
   'submit',
 ]);
-const state = reactive({ msg: '', visible: false });
+const state = reactive({ visible: false });
 const onShow = () => {
   state.visible = true;
   emit('show');
@@ -91,13 +82,13 @@ const onHide = () => {
   state.visible = false;
   emit('hide');
 };
-const onDispose = () => {
-  emit('dispose');
-};
 const onResize = () => {
   emit('resize');
 };
 const onSelect = (value: string) => {
+  if (!props.multiple) {
+    state.visible = false;
+  }
   emit('select', { value });
 };
 const iconName = computed(() => {
@@ -106,41 +97,53 @@ const iconName = computed(() => {
 });
 </script>
 <template>
-  <div style="display: flex">
-    <Dropdown
-      v-bind="props"
-      v-model:shown="state.visible"
-      @show="onShow"
-      @hide="onHide"
-      @dispose="onDispose"
-      @resize="onResize"
+  <Dropdown
+    theme="dropdown"
+    :popper-class="props.popperClass"
+    :placement="props.placement"
+    :content="props.content"
+    :strategy="props.strategy"
+    :delay="props.delay"
+    :distance="props.distance"
+    :skidding="props.skidding"
+    :container="props.container"
+    :auto-hide="props.autoHide"
+    :disabled="props.disabled"
+    :auto-size="props.autoSize"
+    :flip="props.flip"
+    :shift="props.shift"
+    :handle-resize="props.handleResize"
+    v-model:shown="state.visible"
+    @show="onShow"
+    @hide="onHide"
+    @resize="onResize"
+  >
+    <Button
+      v-if="!$slots.default"
+      class="dropdown__trigger"
+      :disabled="props.disabled"
+      :variant="props.content?.length > 0 ? 'secondary' : 'icon-only'"
+      :icon="iconName"
+      iconRight
     >
-      <Button
-        v-if="!$slots.default"
-        iconRight
-        :variant="props.content?.length > 0 ? 'secondary' : 'icon'"
-        iconKind="mini"
-        :icon="iconName"
-      >
-        {{ props.content }}
-      </Button>
-      <slot v-else />
-      <template #popper>
-        <List
-          v-if="!$slots['content']"
-          :options="props.options"
-          :selected="props.selected"
-          :multiple="props.multiple"
-          :searchable="props.searchable"
-          :actions="props.actions"
-          @select="onSelect"
-          @cancel="emit('cancel')"
-          @submit="emit('submit')"
-        />
-        <slot v-else name="content" />
-      </template>
-    </Dropdown>
-  </div>
+      {{ props.content }}
+    </Button>
+    <slot v-else />
+    <template #popper="{ hide }">
+      <List
+        v-if="!$slots['content']"
+        :options="props.options"
+        :selected="props.selected"
+        :multiple="props.multiple"
+        :searchable="props.searchable"
+        :actions="props.actions"
+        @select="onSelect"
+        @cancel="emit('cancel', { hide })"
+        @submit="emit('submit')"
+      />
+      <slot v-else name="content" />
+    </template>
+  </Dropdown>
 </template>
 <style scoped>
 ::v-deep .v-popper__arrow-container {

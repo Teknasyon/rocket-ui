@@ -1,25 +1,29 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
 import Dropdown from './Dropdown.vue';
 
-export const Default = (args) => {
-  return {
-    components: { Dropdown },
-    setup() {
-      return { args };
-    },
-    template: `<Dropdown v-bind="args" />`,
-  };
-};
+export const Default = (args) => ({
+  components: { Dropdown },
+  setup() {
+    return { args };
+  },
+  template: `
+      <div style="display: flex;">
+        <Dropdown style="margin-right: 5px;" v-bind="args" />
+        <Dropdown style="margin-right: 5px;" v-bind="args" />
+        <Dropdown v-bind="args" content="" autoSize="false" />
+      </div>
+    `,
+});
 
-export const WithIcon = (args) => {
-  return {
-    components: { Dropdown },
-    setup() {
-      return { args };
-    },
-    template: `<Dropdown v-bind="args" />`,
-  };
-};
+export const WithIcon = (args) => ({
+  components: { Dropdown },
+  setup() {
+    return { args };
+  },
+  template: `<Dropdown v-bind="args" />`,
+});
 
 export const Placements = [
   'auto',
@@ -38,7 +42,6 @@ export const Placements = [
   'left-start',
   'left-end',
 ];
-export const Triggers = ['click', 'hover'];
 
 export const defaultArgs = {
   placement: {
@@ -46,14 +49,7 @@ export const defaultArgs = {
       type: 'select',
       options: Placements,
     },
-    defaultValue: 'top',
-  },
-  triggers: {
-    control: {
-      type: 'inline-check',
-      options: Triggers,
-    },
-    defaultValue: [Triggers[0]],
+    defaultValue: 'auto',
   },
   autoHide: { control: { type: 'boolean' }, defaultValue: true },
   distance: { control: { type: 'number' }, defaultValue: 10 },
@@ -253,8 +249,10 @@ It is based on [Popper.js](https://popper.js.org/).
 
 ### Overview
 
-<Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}} />
+<Canvas withSource="open">
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
 </Canvas>
 
 ### Playground
@@ -272,16 +270,20 @@ It is based on [Popper.js](https://popper.js.org/).
 
 ### Default
 
-<Canvas>
-  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}} />
+<Canvas withSource="open">
+  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
 </Canvas>
 
 ### With Icon
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Icon"
     argTypes={{ ...WithIcon.argTypes }}
     args={{ content: '', autoSize: false }}
-  />
+  >
+    {WithIcon.bind({})}
+  </Story>
 </Canvas>

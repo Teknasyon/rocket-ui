@@ -1,33 +1,43 @@
+@tailwind base;
 @tailwind components;
 
-.list {
-  @apply font-sans min-h-max min-w-max divide-x-0 divide-y divide-gray-200 divide-solid;
-}
-.list__header {
-  @apply font-bold text-xl text-center p-4;
-}
-.list__body {
-  @apply flex flex-col pl-4;
-}
-.list__items {
-  @apply overflow-y-auto h-24 py-2;
-}
-.list__item {
-  @apply cursor-auto w-auto rounded-sm;
-}
-.list__item--selected {
-  @apply bg-red-100;
-
-  &:hover {
-    @apply bg-gray-100;
+.dropdown {
+  &__trigger {
+    @apply w-full;
   }
 }
+
+.list {
+  @apply min-h-max min-w-max divide-x-0 divide-y divide-gray-200 divide-solid;
+
+  &__header {
+    @apply font-bold text-xl text-center p-4;
+  }
+  &__body {
+    @apply flex flex-col pl-4;
+  }
+  &__items {
+    @apply overflow-y-auto h-24 py-2;
+  }
+  &__item {
+    @apply cursor-auto w-auto rounded-sm;
+
+    &--selected {
+      @apply bg-red-100;
+
+      &:hover {
+        @apply bg-gray-100;
+      }
+    }
+  }
+  &__footer {
+    @apply grid grid-cols-2 gap-2 p-4;
+  }
+}
+
 .item-multiple {
   @apply p-2 w-auto;
 }
 .item-single {
   @apply cursor-default py-2 m-0 hover:bg-gray-100;
-}
-.list__footer {
-  @apply grid grid-cols-2 gap-2 p-4;
 }
