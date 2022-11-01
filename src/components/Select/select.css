@@ -8,7 +8,10 @@
   @apply flex bg-white border border-gray-300 rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
   &--active {
-    @apply border border-[#4C5BE1] ring-1;
+    @apply border border-[#4C5BE1] ring-2;
+  }
+  &:focus {
+    @apply outline-[#4C5BE1];
   }
 
   &__prepend-icon {
@@ -59,11 +62,15 @@
     }
 
     &__label {
-      @apply text-gray-900 ml-2;
+      @apply ml-2;
+
+      &--active {
+        /* @apply text-[#4C5BE1]; */
+      }
     }
 
     &__prepend-icon {
-      @apply inset-y-0 right-0 flex items-center pointer-events-none text-gray-900;
+      @apply text-gray-900 inset-y-0 right-0 flex items-center pointer-events-none;
 
       &--active {
         /* @apply text-[#4C5BE1]; */
@@ -71,10 +78,10 @@
     }
 
     &__append-icon {
-      @apply transition-colors duration-1000 ease-in-out text-gray-900;
+      @apply transition-colors duration-1000 ease-in-out;
 
       &--active {
-        @apply text-[#4C5BE1];
+        /* @apply text-[#4C5BE1]; */
       }
     }
   }

@@ -61,9 +61,10 @@ const selectOption = (e: MouseEvent, option: Option) => {
   }
 };
 const filteredOptions = computed(() => {
-  return props.options.filter((option) => {
+  const result = props.options.filter((option) => {
     return option.label.toLowerCase().includes(search.value.toLowerCase());
   });
+  return result;
 });
 const searchClick = (e: MouseEvent) => {
   e.stopPropagation();
@@ -71,10 +72,6 @@ const searchClick = (e: MouseEvent) => {
 const appendIconName = computed(() => {
   if (props.appendIcon) return props.appendIcon;
   return 'expand_less';
-});
-const prependIconName = computed(() => {
-  if (props.prependIcon) return props.prependIcon;
-  return props.multiple ? 'check_box_outline_blank' : 'radio_button_unchecked';
 });
 </script>
 <template>
@@ -87,7 +84,7 @@ const prependIconName = computed(() => {
         }"
       >
         <slot name="prepend-icon" />
-        <Icon v-if="!$slots['prepend-icon']" name="search" />
+        <Icon v-if="!$slots['prepend-icon']" :name="props.prependIcon" />
       </div>
       <div v-if="taggable">
         <p
@@ -148,7 +145,15 @@ const prependIconName = computed(() => {
                 option.label === selected,
             }"
           />
-          <p class="select-options__option__label">{{ option.label }}</p>
+          <p
+            :class="{
+              'select-options__option__label': true,
+              'select-options__option__label--active':
+                option.label === selected,
+            }"
+          >
+            {{ option.label }}
+          </p>
         </div>
         <Icon
           v-if="option.label === selected"
