@@ -1,0 +1,99 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import Select from './Select.vue';
+
+export const Default = (args) => ({
+  components: { Select },
+  setup() {
+    return { args };
+  },
+  template: `
+    <Select v-bind="args" />
+  `,
+});
+
+export const defaultArgs = {
+  options: {
+    control: {
+      type: 'object',
+      required: true,
+    },
+    defaultValue: [
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+    ],
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Select an option',
+  },
+  taggable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  searchable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  multiple: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  clearable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  loading: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  prependIcon: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  appendIcon: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+};
+
+<Meta
+  title="Components/Select"
+  component={Select}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Select
+
+<Canvas withSource="open">
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
