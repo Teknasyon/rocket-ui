@@ -6,10 +6,10 @@ import Select from './Select.vue';
 export const Default = (args) => ({
   components: { Select },
   setup() {
-    return { args };
+    return { args, update: action('update:modelValue') };
   },
   template: `
-    <Select v-bind="args" />
+    <Select v-bind="args" @update:modelValue="update" />
   `,
 });
 
@@ -21,12 +21,12 @@ export const defaultArgs = {
     },
     defaultValue: [
       { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
+      { value: '2', label: '2' },
+      { value: '3', label: '3' },
       { value: '4', label: 'Option 4' },
       { value: '5', label: 'Option 5' },
       { value: '6', label: 'Option 6' },
-      { value: '7', label: 'Option 7' },
+      { value: '7', label: '7' },
       { value: '8', label: 'Option 8' },
       { value: '9', label: 'Option 9' },
       { value: '10', label: 'Option 10' },
@@ -39,12 +39,6 @@ export const defaultArgs = {
     defaultValue: 'Select an option',
   },
   taggable: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  searchable: {
     control: {
       type: 'boolean',
     },
@@ -100,7 +94,50 @@ export const defaultArgs = {
 # Select
 
 <Canvas withSource="open">
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      appendIcon: 'expand_less',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  story="Overview"
+  exclude={/^(click|prepend-icon|append-icon|option-prepend|update.*|on.*)$/}
+/>
+
+### Multiple
+
+<Canvas withSource="open">
+  <Story
+    name="Multiple"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      multiple: true,
+      placeholder: 'Select multiple options',
+      appendIcon: 'expand_less',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Taggable
+
+<Canvas withSource="open">
+  <Story
+    name="Taggable"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      taggable: true,
+      placeholder: 'Search or create a tag',
+      appendIcon: 'expand_less',
+    }}
+  >
     {Default.bind({})}
   </Story>
 </Canvas>
