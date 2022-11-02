@@ -46,25 +46,27 @@ const iconSize = computed<string>(() => {
   if (props.size === 'large') return '20';
   return '16';
 });
-const clickIcon = () => {
+const clickIcon = (e: MouseEvent) => {
   if (props.disabled) return;
-  emit('clickIcon');
+  emit('clickIcon', e);
 };
-const clickChip = () => {
+const clickChip = (e: MouseEvent) => {
   if (props.disabled) return;
-  emit('clickChip');
+  emit('clickChip', e);
 };
 </script>
 <template>
   <div :class="classes">
-    <span class="chip__text" @click="clickChip">{{ props.label }}</span>
+    <span class="chip__text" @click.stop="clickChip($event)">{{
+      props.label
+    }}</span>
     <Icon
       v-if="props.icon"
       :name="props.icon"
       :size="iconSize"
       :aria-disabled="props.disabled"
       class="chip__icon"
-      @click="clickIcon"
+      @click.stop="clickIcon($event)"
     />
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, defineEmits, watch } from 'vue';
+import Chip from '../Chips/Chip.vue';
 import Icon from '../Icon/Icon.vue';
 import './select.css';
 export interface Option {
@@ -10,34 +11,40 @@ export interface SelectProps {
   options: Option[];
   placeholder?: string;
   taggable?: boolean;
-  searchable?: boolean;
   multiple?: boolean;
+  clearable?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
   prependIcon?: string;
   appendIcon?: string;
 }
 const props = withDefaults(defineProps<SelectProps>(), {
-  options: () => [
-    { value: '1', label: 'Option 1' },
-    { value: '2', label: 'Option 2' },
-    { value: '3', label: 'Option 3' },
-    { value: '4', label: 'Option 4' },
-    { value: '5', label: 'Option 5' },
-    { value: '6', label: 'Option 6' },
-  ],
-  placeholder: '请选择',
+  options: () => [],
+  placeholder: '',
   taggable: false,
-  searchable: false,
   multiple: false,
+  clearable: false,
+  disabled: false,
+  loading: false,
   prependIcon: '',
   appendIcon: 'expand_less',
 });
 const selected = ref('');
 const selectedMultiple = reactive<Option[]>([]);
 const active = ref(false);
-const search = ref('');
+const inputModel = ref('');
+const emit = defineEmits(['update:modelValue']);
 
+/**
+ * @description - HTML elements references
+ */
 const select = ref<HTMLElement | null>(null);
 const input = ref<HTMLInputElement | null>(null);
+/**
+ * @description - Handles the appearance of the select list
+ * @param e Click event
+ * @returns void
+ */
 const setActive = (e: MouseEvent) => {
   e.stopPropagation();
   active.value = !active.value;
@@ -46,32 +53,77 @@ const setActive = (e: MouseEvent) => {
     select.value?.focus();
     input.value?.focus();
     document.addEventListener('click', setActive);
-  } else {
-    select.value?.classList.remove('select--active');
-    select.value?.blur();
-    input.value?.blur();
-    document.removeEventListener('click', setActive);
+    return;
   }
+  select.value?.classList.remove('select--active');
+  select.value?.blur();
+  input.value?.blur();
+  document.removeEventListener('click', setActive);
 };
+/**
+ * @description - Selects an option
+ * @param e Click event
+ * @param option Selected option
+ * @returns void
+ */
 const selectOption = (e: MouseEvent, option: Option) => {
-  selected.value = option.label;
-  if (props.multiple) {
+  if (props.multiple || props.taggable) {
     e.stopPropagation();
-    selectedMultiple.push(option);
+    if (!selectedMultiple.includes(option)) {
+      selectedMultiple.push(option);
+    } else {
+      selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
+    }
+    inputModel.value = '';
+    input.value?.focus();
+    return;
+  } else {
+    emit('update:modelValue', option.value);
+    selected.value = option.label;
+    inputModel.value = option.label;
   }
 };
-const filteredOptions = computed(() => {
+/**
+ * @description - Removes an option from the selected options
+ * @param option Option to remove
+ * @returns void
+ */
+const removeOption = (e: MouseEvent | KeyboardEvent, option: Option) => {
+  const index = selectedMultiple.findIndex((opt) => opt.value === option.value);
+  selectedMultiple.splice(index, 1);
+};
+/**
+ * @description - Handles the not existing options
+ * @returns void
+ */
+const createTag = (e: KeyboardEvent) => {
+  if (!props.taggable) return;
+  e.stopPropagation();
+  const value = inputModel.value;
+  if (value === '') return;
+  const option = props.options.find((opt) => opt.label === value);
+  if (!option) {
+    selectedMultiple.push({ value, label: value });
+    inputModel.value = '';
+    input.value?.focus();
+  }
+};
+/**
+ * @description - Search for options
+ * @returns {Option[]} - Returns an array of options
+ */
+const searchedOptions = computed(() => {
   const result = props.options.filter((option) => {
-    return option.label.toLowerCase().includes(search.value.toLowerCase());
+    return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
   });
   return result;
 });
-const searchClick = (e: MouseEvent) => {
-  e.stopPropagation();
-};
-const appendIconName = computed(() => {
-  if (props.appendIcon) return props.appendIcon;
-  return 'expand_less';
+/**
+ * @description - Watch the selected multiple options
+ * @returns void
+ */
+watch(selectedMultiple, (value) => {
+  emit('update:modelValue', value);
 });
 </script>
 <template>
@@ -86,23 +138,34 @@ const appendIconName = computed(() => {
         <slot name="prepend-icon" />
         <Icon v-if="!$slots['prepend-icon']" :name="props.prependIcon" />
       </div>
-      <div v-if="taggable">
-        <p
-          style="background-color: red; margin: 2px"
+      <div v-if="props.taggable" class="select__tags">
+        <Chip
           v-for="(option, index) in selectedMultiple"
           :key="index"
-        >
-          {{ option.label }}
+          :label="option.label"
+          variant="primary"
+          icon="cancel"
+          style="margin: 2px"
+          @click-icon="removeOption($event, option)"
+        />
+      </div>
+      <div v-if="props.multiple" class="select__single-line">
+        <p v-for="(option, index) in selectedMultiple" :key="index">
+          {{ option.label + ',' }}
         </p>
       </div>
       <input
+        v-bind="$attrs"
+        id="select"
         ref="input"
         type="text"
+        v-model="inputModel"
         class="select__input"
-        id="select"
         :placeholder="props.placeholder"
-        v-model="selected"
-        :readonly="!props.taggable"
+        @keydown.enter="createTag($event)"
+        @keydown.backspace="
+          removeOption($event, selectedMultiple[selectedMultiple.length - 1])
+        "
       />
       <div
         :class="{
@@ -111,26 +174,17 @@ const appendIconName = computed(() => {
         }"
       >
         <slot name="append-icon" />
-        <Icon v-if="!$slots['append-icon']" :name="appendIconName" />
+        <Icon v-if="!$slots['append-icon']" :name="props.appendIcon" />
       </div>
     </div>
     <div :class="{ 'select-options': true, 'select-options--active': active }">
-      <input
-        v-if="props.searchable"
-        v-model="search"
-        class="select-options__search-input"
-        type="search"
-        id="search"
-        placeholder="Search"
-        @click="searchClick"
-      />
-
       <div
         :class="{
           'select-options__option': true,
-          'select-options__option--active': option.label === selected,
+          'select-options__option--active':
+            option.label === selected || selectedMultiple?.includes(option),
         }"
-        v-for="option in filteredOptions"
+        v-for="option in searchedOptions"
         :key="option.value"
         @click="selectOption($event, option)"
       >
@@ -142,26 +196,26 @@ const appendIconName = computed(() => {
             :class="{
               'select-options__option__prepend-icon': true,
               'select-options__option__prepend-icon--active':
-                option.label === selected,
+                option.label === selected || selectedMultiple?.includes(option),
             }"
           />
           <p
             :class="{
               'select-options__option__label': true,
               'select-options__option__label--active':
-                option.label === selected,
+                option.label === selected || selectedMultiple?.includes(option),
             }"
           >
             {{ option.label }}
           </p>
         </div>
         <Icon
-          v-if="option.label === selected"
+          v-if="option.label === selected || selectedMultiple?.includes(option)"
           name="check"
           :class="{
             'select-options__option__append-icon': true,
             'select-options__option__append-icon--active':
-              option.label === selected,
+              option.label === selected || selectedMultiple?.includes(option),
           }"
         />
       </div>
