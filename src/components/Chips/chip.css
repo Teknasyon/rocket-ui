@@ -1,7 +1,7 @@
 @tailwind components;
 
 .chip {
-  @apply font-sans inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
+  @apply inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
 
   &--primary {
     @apply text-teal-600 bg-teal-100;

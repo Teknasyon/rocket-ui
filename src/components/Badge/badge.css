@@ -1,7 +1,7 @@
 @tailwind components;
 
 .badge-wrapper {
-  @apply relative flex items-center justify-center transition duration-500 ease-in-out font-sans max-w-max p-2;
+  @apply relative flex items-center justify-center transition duration-500 ease-in-out max-w-max p-2;
 }
 
 .badge {
