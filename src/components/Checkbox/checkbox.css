@@ -1,7 +1,7 @@
 @tailwind components;
 
 fieldset {
-  @apply font-sans border-none m-0 p-0;
+  @apply border-none m-0 p-0;
 }
 
 label {

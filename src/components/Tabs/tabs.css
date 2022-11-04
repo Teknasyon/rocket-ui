@@ -1,9 +1,5 @@
 @tailwind components;
 
-* {
-  @apply font-sans;
-}
-
 .tabs-wrapper {
   @apply w-full grid place-items-center;
 }
