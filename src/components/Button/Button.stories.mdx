@@ -47,13 +47,13 @@ export const defaultArgs = {
   variant: {
     control: {
       type: 'select',
-      options: ['primary', 'secondary', 'icon-only', 'text', 'outline'],
+      options: ['primary', 'secondary', 'text', 'outline'],
     },
     defaultValue: 'primary',
     table: {
       defaultValue: {
         summary: 'primary',
-        detail: 'primary | secondary | icon-only | text | outline',
+        detail: 'primary | secondary | text | outline',
       },
     },
     description: 'Variants of button',
@@ -84,7 +84,13 @@ export const defaultArgs = {
     },
     description: 'Sizes of button',
   },
-  icon: {
+  prependIcon: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  appendIcon: {
     control: {
       type: 'text',
     },
@@ -108,45 +114,6 @@ export const defaultArgs = {
     control: {
       type: 'color',
     },
-  },
-  iconColor: {
-    control: {
-      type: 'color',
-    },
-  },
-  iconSize: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-    table: {
-      defaultValue: {
-        summary: 'medium',
-        detail: 'small | medium | large ',
-      },
-    },
-    description: 'Sizes of icon',
-  },
-  iconKind: {
-    control: {
-      type: 'select',
-      options: ['filled', 'outlined', 'rounded', 'sharp', 'two-tone'],
-    },
-    defaultValue: 'filled',
-    table: {
-      defaultValue: {
-        summary: 'filled',
-        detail: 'filled | outlined | rounded | sharp | two-tone',
-      },
-    },
-    description: 'Types of icon',
-  },
-  iconRight: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
   },
 };
 
@@ -199,7 +166,6 @@ Also, it has a `custom-icon` for custom icons and already has a `content` slot f
     argTypes={{ ...WithContentSlot.argTypes }}
     args={{
       variant: 'primary',
-      icon: 'add_circle',
       content: 'Primary',
     }}
   >
@@ -222,15 +188,15 @@ Also, it has a `custom-icon` for custom icons and already has a `content` slot f
   </Story>
 </Canvas>
 
-### Icon
+### Outline
 
 <Canvas withSource="open">
   <Story
-    name="Icon Only"
+    name="Outline"
     argTypes={{ ...WithContentSlot.argTypes }}
     args={{
-      variant: 'icon-only',
-      icon: 'add_circle',
+      variant: 'outline',
+      content: 'Outline',
     }}
   >
     {WithContentSlot.bind({})}
@@ -246,21 +212,6 @@ Also, it has a `custom-icon` for custom icons and already has a `content` slot f
     args={{
       variant: 'text',
       content: 'Text',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
-</Canvas>
-
-### Outline
-
-<Canvas withSource="open">
-  <Story
-    name="Outline"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'outline',
-      content: 'Outline',
     }}
   >
     {WithContentSlot.bind({})}

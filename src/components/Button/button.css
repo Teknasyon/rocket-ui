@@ -1,50 +1,102 @@
-@tailwind components;
+@import '../../index.css';
 
 .button {
-  @apply flex items-center justify-center border-none rounded-lg text-sm text-white px-6 py-4 cursor-auto;
+  @apply flex items-center justify-center border-solid border rounded text-white font-medium cursor-auto;
+
+  &:focus {
+    @apply ring-[4px];
+  }
+
+  &--large {
+    @apply text-base px-6 py-4;
+  }
+  &--medium {
+    @apply text-sm px-6 py-3;
+  }
+  &--small {
+    @apply text-xs px-4 py-2;
+  }
+  &--loading {
+    @apply animate-pulse;
+    & > .icon {
+      @apply animate-bounce;
+    }
+  }
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+  &--only-icon,
+  &--large {
+    @apply p-[1.125rem];
+  }
+  &--only-icon,
+  &--medium {
+    @apply p-[1rem];
+  }
+  &--only-icon,
+  &--small {
+    @apply p-[0.75rem];
+  }
+
+  &__prepend-icon {
+    @apply mr-2;
+    &--only {
+      @apply mr-0;
+    }
+  }
+  &__append-icon {
+    @apply ml-2;
+  }
 }
 .button--primary {
-  @apply bg-teal-400 hover:bg-teal-500 active:bg-teal-600 disabled:bg-gray-300;
+  @apply bg-[var(--primary-500)] border-[var(--primary-500)];
+
+  &:hover {
+    @apply bg-[var(--primary-700)] border-[var(--primary-700)];
+  }
+  &:focus {
+    @apply ring-[var(--primary-100)] bg-white border-[var(--primary-500)] text-[var(--primary-500)];
+  }
+  &:disabled {
+    @apply bg-[var(--primary-200)] border-[var(--primary-200)] text-[var(--primary-300)] cursor-not-allowed;
+  }
 }
 .button--secondary {
-  @apply bg-slate-300;
-}
-.button--icon-only {
-  @apply p-2 m-0 bg-transparent border border-solid border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500 active:bg-gray-100 active:text-gray-500 disabled:bg-gray-300 disabled:text-white;
-}
-.button--text {
-  @apply text-gray-900 bg-transparent p-0;
+  @apply bg-[var(--primary-100)] border-[var(--primary-100)] text-[var(--primary-500)];
+
+  &:hover {
+    @apply bg-[var(--primary-200)] border-[var(--primary-200)];
+  }
+  &:focus {
+    @apply ring-[var(--primary-100)] bg-white border-[var(--primary-500)] text-[var(--primary-500)];
+  }
+  &:disabled {
+    @apply bg-[var(--primary-200)] border-[var(--primary-200)] text-[var(--primary-300)] cursor-not-allowed;
+  }
 }
 .button--outline {
-  @apply bg-transparent border border-solid border-gray-100 text-gray-400;
+  @apply bg-transparent border-[var(--neutral-200)] text-[var(--neutral-900)];
+
+  &:hover {
+    @apply bg-[var(--neutral-100)] border-[var(--neutral-200)];
+  }
+  &:focus {
+    @apply ring-[var(--neutral-100)] bg-white border-[var(--neutral-200)] text-[var(--neutral-900)];
+  }
+  &:disabled {
+    @apply bg-white border-[var(--neutral-200)] text-[var(--neutral-300)] cursor-not-allowed;
+  }
 }
-.button--loading {
-  @apply animate-pulse;
-}
-.button--loading > .icon {
-  @apply animate-bounce;
-}
-.button--large {
-  @apply font-semibold text-lg w-full;
-}
-.button--medium {
-  @apply font-medium;
-}
-.button--small {
-  @apply font-normal text-sm px-4 py-2;
-}
-.icon {
-  @apply mr-2;
-}
-.button--icon-only > .button__icon {
-  @apply m-0;
-}
-.button--reverse {
-  @apply flex-row-reverse;
-}
-.button__icon--right {
-  @apply ml-1;
-}
-.button__icon--left {
-  @apply mr-1;
+.button--text {
+  @apply text-[var(--neutral-900)] bg-transparent border-none;
+
+  &:hover {
+    @apply bg-[var(--neutral-100)] border-none;
+  }
+  &:focus {
+    @apply ring-[var(--neutral-100)] bg-white border-[var(--neutral-200)] text-[var(--neutral-900)];
+  }
+  &:disabled {
+    @apply bg-white border-none text-[var(--neutral-300)] cursor-not-allowed;
+  }
 }

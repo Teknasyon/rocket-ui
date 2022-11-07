@@ -5,21 +5,19 @@ import Icon from '../Icon/Icon.vue';
 export type ButtonType =
   | 'primary'
   | 'secondary'
-  | 'icon-only'
   | 'text'
   | 'outline'
   | 'link'
   | 'danger';
+export type ButtonSize = 'small' | 'medium' | 'large';
 export interface Props {
   variant: ButtonType;
   loading?: boolean;
   disabled?: boolean;
-  icon?: string;
-  iconColor?: string;
-  iconSize?: string;
-  iconKind?: string;
-  iconRight?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  prependIcon?: string;
+  appendIcon?: string;
+  onlyIcon?: boolean;
+  size?: ButtonSize;
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
 }
@@ -27,11 +25,9 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   loading: false,
   disabled: false,
-  icon: '',
-  iconColor: '',
-  iconSize: '24',
-  iconKind: '',
-  iconRight: false,
+  prependIcon: '',
+  appendIcon: '',
+  onlyIcon: false,
   size: 'medium',
   type: 'button',
   backgroundColor: '',
@@ -41,12 +37,23 @@ const classes = computed(() => ({
   [`button--${props.variant}`]: true,
   [`button--loading`]: props.loading,
   [`button--${props.size || 'medium'}`]: true,
-  'button--reverse': props.iconRight,
+  [`button--only-icon`]: props.onlyIcon,
 }));
 defineEmits(['click']);
-const style = computed(() => ({
-  backgroundColor: props.backgroundColor,
-}));
+const iconSize = computed(() => {
+  const sizes = {
+    small: 16,
+    medium: 20,
+    large: 24,
+  };
+  return sizes[props.size || 'medium'];
+});
+const style = computed(() => {
+  const { backgroundColor } = props;
+  return {
+    backgroundColor,
+  };
+});
 </script>
 <template>
   <button
@@ -60,14 +67,20 @@ const style = computed(() => ({
     <slot name="custom-icon" />
 
     <Icon
-      v-if="!$slots['custom-icon'] && icon"
-      :name="icon"
+      v-if="!$slots['custom-icon']"
+      :name="props.prependIcon"
       :size="iconSize"
-      :color="iconColor"
-      kind="filled"
-      class="button__icon"
-      :class="[iconRight ? 'button__icon--right' : 'button__icon--left']"
+      :class="{
+        'button__prepend-icon': true,
+        'button__prepend-icon--only': props.onlyIcon,
+      }"
     />
-    <slot v-if="props.variant !== 'icon-only'" />
+    <slot v-if="!props.onlyIcon" />
+    <Icon
+      v-if="!$slots['custom-icon'] && !props.onlyIcon"
+      :name="props.appendIcon"
+      :size="iconSize"
+      class="button__append-icon"
+    />
   </button>
 </template>
