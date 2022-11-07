@@ -11,7 +11,7 @@ export interface IProps {
 }
 const props = withDefaults(defineProps<IProps>(), {
   name: 'face',
-  kind: 'outlined',
+  kind: 'round',
   size: 24,
   color: '',
   fontWeight: () => 'light',
