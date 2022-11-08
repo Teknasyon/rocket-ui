@@ -41,6 +41,9 @@
   &--small&--only-icon {
     @apply px-4 py-2;
   }
+  &--block {
+    @apply w-full;
+  }
 
   &__prepend-icon {
     @apply mr-2;
