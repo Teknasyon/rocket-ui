@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Albert', ...defaultTheme.fontFamily.sans],
+        sans: ['Albert Sans', ...defaultTheme.fontFamily.sans],
         serif: ['Roboto', ...defaultTheme.fontFamily.serif],
       },
       colors: {

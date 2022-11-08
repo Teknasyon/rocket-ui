@@ -96,6 +96,12 @@ export const defaultArgs = {
     },
     defaultValue: '',
   },
+  onlyIcon: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   type: {
     control: {
       type: 'select',
@@ -123,6 +129,7 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
   parameters={{
     viewMode: 'docs',
+    layout: 'centered',
   }}
 />
 
