@@ -41,12 +41,7 @@ const classes = computed(() => ({
 }));
 defineEmits(['click']);
 const iconSize = computed(() => {
-  const sizes = {
-    small: 16,
-    medium: 20,
-    large: 24,
-  };
-  return sizes[props.size || 'medium'];
+  return props.size === 'large' ? 20 : 16;
 });
 const style = computed(() => {
   const { backgroundColor } = props;
