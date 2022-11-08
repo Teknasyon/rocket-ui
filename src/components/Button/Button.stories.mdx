@@ -102,6 +102,18 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
+  height: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  block: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   type: {
     control: {
       type: 'select',
@@ -129,7 +141,6 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
   parameters={{
     viewMode: 'docs',
-    layout: 'centered',
   }}
 />
 
@@ -143,7 +154,7 @@ Also, it has a `custom-icon` for custom icons and already has a `content` slot f
 
 ### Overview
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Overview"
     argTypes={{ ...WithContentSlot.argTypes }}

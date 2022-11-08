@@ -18,6 +18,8 @@ export interface Props {
   appendIcon?: string;
   onlyIcon?: boolean;
   size?: ButtonSize;
+  height?: string;
+  block?: boolean;
   type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
 }
@@ -29,6 +31,8 @@ const props = withDefaults(defineProps<Props>(), {
   appendIcon: '',
   onlyIcon: false,
   size: 'medium',
+  height: '',
+  block: false,
   type: 'button',
   backgroundColor: '',
 });
@@ -38,15 +42,17 @@ const classes = computed(() => ({
   [`button--loading`]: props.loading,
   [`button--${props.size || 'medium'}`]: true,
   [`button--only-icon`]: props.onlyIcon,
+  [`button--block`]: props.block,
 }));
 defineEmits(['click']);
 const iconSize = computed(() => {
   return props.size === 'large' ? 20 : 16;
 });
 const style = computed(() => {
-  const { backgroundColor } = props;
+  const { backgroundColor, height } = props;
   return {
     backgroundColor,
+    height: height ? `${height}px` : '',
   };
 });
 </script>
