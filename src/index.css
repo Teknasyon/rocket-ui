@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400;500;600;700;800&family=Roboto:wght@100&display=swap');
 
 :root {
+  /**
+  * @tokens Colors
+  * @presenter Color
+  */
   --primary-100: #edeffc;
   --primary-200: #e4e6fb;
   --primary-300: #a3abf0;
@@ -46,6 +50,10 @@
   --error-700: #9d1006;
   --error-800: #7b0900;
   --error-900: #590600;
+  /**
+  * @tokens Box Shadows
+  * @presenter Shadow
+  */
   --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   --box-shadow-hover: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   --box-shadow-active: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -54,6 +62,10 @@
   --box-shadow-pressed-active: 0 0 10px 0 rgba(0, 0, 0, 0.6);
   --box-shadow-pressed-focus: 0 0 10px 0 rgba(0, 0, 0, 0.7);
   --box-shadow-pressed-hover: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+  /**
+  * @tokens Spaces
+  * @presenter Spacing
+  */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -74,8 +86,15 @@
   --space-18: 4.5rem;
   --space-19: 4.75rem;
   --space-20: 5rem;
+  /**
+  * @tokens Gaps
+  */
   --column-gap: 1rem;
   --row-gap: 1rem;
+  /**
+  * @tokens Border Radiuses
+  * @presenter BorderRadius
+  */
   --border-radius: 0.25rem;
   --border-radius-1: 0.25rem;
   --border-radius-2: 0.5rem;
@@ -83,6 +102,9 @@
   --border-radius-4: 1rem;
   --border-radius-5: 1.25rem;
   --border-radius-6: 99999px;
+  /**
+  * @tokens Others
+  */
   --column-1: 1;
   --column-2: 2;
   --column-3: 3;
@@ -90,6 +112,9 @@
   --column-5: 5;
   --column-6: 6;
   --column-7: 7;
+  /**
+  * @tokens-end
+  */
 }
 
 @tailwind base;
