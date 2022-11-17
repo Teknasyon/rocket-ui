@@ -1,3 +1,4 @@
+const { viteFinalFactory } = require('storybook-design-token/dist/preset');
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -5,6 +6,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-docs',
     './source-panel/manager.js',
+    'storybook-design-token',
   ],
   framework: '@storybook/vue3',
   core: {
@@ -13,4 +15,5 @@ module.exports = {
   features: {
     storyStoreV7: true,
   },
+  viteFinal: viteFinalFactory(),
 };
