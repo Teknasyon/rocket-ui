@@ -10,7 +10,7 @@ export interface IProps {
   fontWeight?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
-  name: 'face',
+  name: '',
   kind: 'round',
   size: 24,
   color: '',
