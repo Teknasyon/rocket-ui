@@ -32,6 +32,13 @@ export const defaultArgs = {
     },
     defaultValue: 'textfield',
   },
+  type: {
+    control: {
+      type: 'select',
+      options: ['text', 'password', 'email', 'number', 'tel', 'url'],
+    },
+    defaultValue: 'text',
+  },
   label: {
     control: {
       type: 'text',
@@ -56,17 +63,23 @@ export const defaultArgs = {
     },
     defaultValue: '',
   },
-  icon: {
+  hint: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is a hint text to help user.',
+  },
+  prependIcon: {
     control: {
       type: 'text',
     },
     defaultValue: '',
   },
-  iconLeft: {
+  appendIcon: {
     control: {
-      type: 'boolean',
+      type: 'text',
     },
-    defaultValue: false,
+    defaultValue: '',
   },
   iconColor: {
     control: {
@@ -87,19 +100,6 @@ export const defaultArgs = {
     defaultValue: false,
   },
   clearable: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-  },
-  row: {
     control: {
       type: 'boolean',
     },
@@ -134,9 +134,6 @@ It can be used with a label, placeholder, icon, error message, and loading state
       id: 'textfield-id',
       label: 'Textfield label',
       placeholder: 'Textfield placeholder',
-      iconLeft: false,
-      value: '',
-      errorMsg: '',
     }}
   >
     {Default.bind({})}
@@ -151,19 +148,120 @@ It can be used with a label, placeholder, icon, error message, and loading state
 
 ## Stories
 
-### Default
+### Text
 
 <Canvas withSource="open">
   <Story
-    name="Default"
+    name="Text"
     argTypes={{ ...Default.argTypes }}
     args={{
+      type: 'text',
       id: 'textfield-id',
       label: 'Textfield label',
       placeholder: 'Textfield placeholder',
-      iconLeft: false,
-      value: '',
-      errorMsg: '',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Mail
+
+<Canvas withSource="open">
+  <Story
+    name="Mail"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'email',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Password
+
+<Canvas withSource="open">
+  <Story
+    name="Password"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'password',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Url
+
+<Canvas withSource="open">
+  <Story
+    name="Url"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'url',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Tel
+
+<Canvas withSource="open">
+  <Story
+    name="Tel"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'tel',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Number
+
+<Canvas withSource="open">
+  <Story
+    name="Number"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'number',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### With Error
+
+<Canvas withSource="open">
+  <Story
+    name="With Error"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'text',
+      id: 'textfield-id',
+      label: 'Textfield label',
+      placeholder: 'Textfield placeholder',
+      errorMsg: 'This is an error message',
     }}
   >
     {Default.bind({})}

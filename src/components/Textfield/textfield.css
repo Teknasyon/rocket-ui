@@ -1,4 +1,4 @@
-@tailwind components;
+@import '../../index.css';
 
 fieldset {
   @apply border-none m-0 p-0;
@@ -6,87 +6,76 @@ fieldset {
 
 .textfield__wrapper {
   @apply flex flex-col items-start justify-start;
-
-  &--row {
-    @apply flex-row;
-  }
 }
 
 .input-wrapper {
   @apply flex flex-col items-start justify-start w-full;
 }
 
-input[type='text'] {
-  @apply w-full border-none h-full bg-transparent focus:outline-none text-base mx-[14px] my-[6px];
+input {
+  @apply w-full border-none h-full bg-transparent focus:outline-none text-base m-0 p-0;
+
+  &::placeholder {
+    @apply text-[var(--neutral-500)];
+  }
 }
 
 .textfield {
-  @apply box-border w-full flex items-center h-8 text-base border border-solid border-gray-100 text-gray-900 bg-gray-100  rounded-lg px-[2px] py-[2px];
+  @apply gap-2 box-border w-full flex items-center text-base border border-solid border-[var(--neutral-200)] text-[var(--neutral-500)] bg-[var(--neutral-100)]  rounded-lg px-4 py-3.5;
 
+  &__label {
+    @apply text-[var(--neutral-900)] text-sm p-0 mb-2;
+  }
+  &__prepend-icon {
+    &--error {
+      @apply text-red-500;
+    }
+    &--loading {
+      @apply animate-spin-reverse;
+    }
+  }
+  &__append-icon {
+    &--error {
+      @apply animate-bounce text-red-500;
+    }
+  }
+  &__error {
+    @apply text-red-500 font-light text-xs tracking-wide mt-1;
+  }
+  &__hint {
+    @apply text-[var(--neutral-500)] font-light text-xs tracking-wide mt-1;
+  }
+
+  &--focus {
+    @apply ring-[4px] ring-[var(--primary-100)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
+  }
+  &--filled {
+    @apply bg-[var(--neutral-100)] text-[var(--neutral-900)];
+  }
   &--loading {
-    @apply animate-pulse;
+    /* @apply animate-pulse; */
   }
-  &--reverse {
-    @apply flex flex-row-reverse gap-1;
-  }
-  &--large {
-    @apply h-10 text-lg;
-    & > input[type='text'] {
-      @apply text-lg;
+  &--disabled {
+    @apply border-[var(--neutral-200)] text-[var(--neutral-300)] bg-[neutral-100] cursor-not-allowed;
+
+    & > input {
+      @apply cursor-not-allowed;
+
+      &::placeholder {
+        @apply text-[var(--neutral-300)];
+      }
     }
   }
-  &--small {
-    @apply h-6 text-sm;
-    & > input[type='text'] {
-      @apply text-sm;
+  &--error {
+    @apply border-red-500 ring-red-50;
+    input {
+      @apply text-red-500;
+      &:focus {
+        @apply text-[var(--neutral-900)];
+      }
     }
   }
-
-  &--error,
-  &--error > input[type='text'] {
-    @apply border-red-500 text-red-500 bg-red-100 hover:border-red-500;
+  &--clearable > &__append-icon {
+    @apply cursor-pointer;
   }
-
-  &:hover {
-    @apply border border-solid border-gray-300;
-  }
-  &:focus {
-    @apply outline-none border border-solid border-teal-400;
-  }
-  &::placeholder {
-    @apply text-gray-400;
-  }
-}
-
-.textfield--disabled {
-  @apply opacity-50 cursor-not-allowed;
-  &:hover {
-    @apply border border-solid border-gray-100;
-  }
-  & > input[type='text'] {
-    @apply cursor-not-allowed;
-  }
-}
-
-.textfield__label {
-  @apply text-gray-500 text-sm p-0 mb-3;
-
-  &--large {
-    @apply text-base;
-  }
-  &--small {
-    @apply text-xs;
-  }
-}
-
-.textfield__error {
-  @apply text-red-500 font-light text-xs tracking-wide mt-1;
-}
-
-.textfield__icon--error {
-  @apply animate-bounce text-red-500;
-}
-
-.textfield--clearable > .textfield__icon {
-  @apply cursor-pointer;
 }

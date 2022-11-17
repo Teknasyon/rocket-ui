@@ -2,51 +2,78 @@
 import { computed, reactive, ref } from 'vue';
 import './textfield.css';
 import Icon from '../Icon/Icon.vue';
-import { vFocus } from '../../directives';
+import Label from '../Label/Label.vue';
+// import { vFocus } from '../../directives';
 export interface Props {
   id: string;
+  type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
   value?: string;
   label?: string;
   placeholder?: string;
   errorMsg?: string;
-  icon?: string;
+  hint?: string;
+  prependIcon?: string;
+  appendIcon?: string;
   iconColor?: string;
-  iconLeft?: boolean;
   disabled?: boolean;
   loading?: boolean;
   clearable?: boolean;
-  size?: 'small' | 'medium' | 'large';
-  row?: boolean;
 }
 const inputRef = ref<HTMLInputElement>();
 const props = withDefaults(defineProps<Props>(), {
   id: '',
+  type: 'text',
   value: '',
   label: '',
   placeholder: '',
   errorMsg: '',
-  icon: '',
+  hint: '',
+  prependIcon: '',
+  appendIcon: '',
   iconColor: '',
-  iconLeft: false,
   disabled: false,
   loading: false,
   clearable: false,
-  size: 'medium',
-  row: false,
 });
 const emit = defineEmits(['input', 'focus', 'blur', 'clickIcon']);
 const state = reactive({
   value: props.value || '',
 });
+const typeOfInputRef = ref(props.type);
+const prependIconsOfType = {
+  password: 'lock_outline',
+  email: 'mail_outline',
+  tel: 'phone',
+  url: 'link',
+  number: '123',
+  text: '',
+};
+const isFocused = ref(false);
+const isFilled = computed(() => !!state.value);
 const classes = computed(() => {
+  const { disabled, loading, clearable, errorMsg } = props;
   return {
     textfield: true,
-    'textfield--error': props.errorMsg?.length,
-    'textfield--reverse': props.iconLeft,
-    'textfield--loading': props.loading,
-    'textfield--disabled': props.disabled,
-    'textfield--clearable': props.clearable,
-    [`textfield--${props.size}`]: props.size,
+    'textfield--error': errorMsg?.length,
+    'textfield--loading': loading,
+    'textfield--disabled': disabled,
+    'textfield--clearable': clearable,
+    'textfield--focus': isFocused.value,
+    'textfield--filled': isFilled.value,
+  };
+});
+const prependIconClasses = computed(() => {
+  return {
+    'textfield__prepend-icon': true,
+    'textfield__prepend-icon--loading': props.loading,
+    'textfield__prepend-icon--error': hasErrorMsg.value && isFilled.value,
+  };
+});
+const appendIconClasses = computed(() => {
+  return {
+    'textfield__append-icon': true,
+    'textfield__append-icon--clear': hasClear.value,
+    'textfield__append-icon--error': hasErrorMsg.value,
   };
 });
 const hasValue = computed(() => {
@@ -58,35 +85,66 @@ const hasErrorMsg = computed(() => {
 const hasClear = computed(() => {
   return props.clearable && hasValue.value;
 });
-const iconName = computed(() => {
-  if (hasClear.value) return props.icon || 'clear';
-  if (hasErrorMsg.value) return props.icon || 'error';
-  return props.icon;
+const prependIconName = computed(() => {
+  const { prependIcon, type } = props;
+  if (prependIcon) return prependIcon;
+  return prependIconsOfType[type];
 });
-const iconSize = computed(() => {
-  if (props.size === 'small') return 16;
-  if (props.size === 'large') return 24;
-  return 20;
+const appendIconName = computed(() => {
+  const { appendIcon, type } = props;
+  if (hasErrorMsg.value) return 'error_outline';
+  if (hasClear.value && ['text', 'email'].includes(type)) return 'clear';
+  if (type === 'password' && typeOfInputRef.value === 'password')
+    return 'visibility';
+  if (type === 'password' && typeOfInputRef.value === 'text')
+    return 'visibility_off';
+  return appendIcon;
 });
+/**
+ * @description - focus event handler
+ */
 const onFocus = () => {
+  isFocused.value = true;
   emit('focus', {
     value: state.value,
   });
 };
+/**
+ * @description - blur event handler
+ */
 const onBlur = () => {
+  isFocused.value = false;
   emit('blur', {
     value: state.value,
   });
 };
+/**
+ * @description - Emit click event with value of append icon
+ * @returns {void}
+ */
 const clickIcon = () => {
   if (hasClear.value) {
     state.value = '';
-    inputRef.value.focus();
+    inputRef.value?.focus();
   }
   emit('clickIcon', {
     value: state.value,
   });
+  setPassType();
 };
+/**
+ * @description - Set type of input to password or text
+ * @returns {void}
+ */
+const setPassType = () => {
+  typeOfInputRef.value =
+    typeOfInputRef.value === 'password' ? 'text' : 'password';
+};
+/**
+ * @description - Emit input event with value of input
+ * @param {Event} event - Event object
+ * @returns {void}
+ */
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   state.value = target.value;
@@ -100,26 +158,29 @@ const onInput = (e: Event) => {
     <div
       :class="{
         textfield__wrapper: true,
-        'textfield__wrapper--row': props.row,
       }"
     >
-      <label
+      <Label
+        :id="props.id"
         :for="props.id"
+        :text="props.label"
         :class="{
           textfield__label: true,
-          [`textfield__label--${props.size}`]: props.size,
         }"
-      >
-        {{ props.label }}
-      </label>
+      />
       <div class="input-wrapper">
         <div :class="classes">
+          <Icon
+            v-if="prependIconName"
+            :size="16"
+            :name="prependIconName"
+            :class="prependIconClasses"
+          />
           <input
-            v-focus="{ color: 'white', text: 'hello!' }"
             v-bind="$attrs"
             ref="inputRef"
             v-model="state.value"
-            type="text"
+            :type="typeOfInputRef"
             :id="props.id"
             :disabled="props.disabled"
             :placeholder="props.placeholder"
@@ -128,16 +189,18 @@ const onInput = (e: Event) => {
             @input="onInput"
           />
           <Icon
-            class="textfield__icon"
-            kind="filled"
-            :size="iconSize"
-            :name="`${iconName}`"
+            v-if="appendIconName"
+            :size="16"
+            :class="appendIconClasses"
+            :name="`${appendIconName}`"
             :color="props.iconColor"
-            :class="{ 'textfield__icon--error': hasErrorMsg }"
             @click="clickIcon"
           />
         </div>
         <div class="textfield__error">{{ props.errorMsg }}</div>
+        <div class="textfield__hint" v-if="!props.errorMsg">
+          {{ props.hint }}
+        </div>
       </div>
     </div>
   </fieldset>
