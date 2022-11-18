@@ -1,85 +1,60 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
-import Dropdown from './Dropdown.vue';
+import Select from './Dropdown.vue';
 
 export const Default = (args) => ({
-  components: { Dropdown },
+  components: { Select },
   setup() {
-    return { args };
+    return { args, update: action('update:modelValue') };
   },
   template: `
-      <div style="display: flex;">
-        <Dropdown style="margin-right: 5px;" v-bind="args" />
-        <Dropdown style="margin-right: 5px;" v-bind="args" />
-        <Dropdown v-bind="args" content="" autoSize="false" />
-      </div>
-    `,
+    <Select v-bind="args" @update:modelValue="update" />
+  `,
 });
-
-export const WithIcon = (args) => ({
-  components: { Dropdown },
-  setup() {
-    return { args };
-  },
-  template: `<Dropdown v-bind="args" />`,
-});
-
-export const Placements = [
-  'auto',
-  'auto-start',
-  'auto-end',
-  'top',
-  'top-start',
-  'top-end',
-  'right',
-  'right-start',
-  'right-end',
-  'bottom',
-  'bottom-start',
-  'bottom-end',
-  'left',
-  'left-start',
-  'left-end',
-];
 
 export const defaultArgs = {
-  placement: {
+  options: {
     control: {
-      type: 'select',
-      options: Placements,
+      type: 'object',
+      required: true,
     },
-    defaultValue: 'auto',
+    defaultValue: [
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: '2' },
+      { value: '3', label: '3' },
+      { value: '4', label: 'Option 4' },
+      { value: '5', label: 'Option 5' },
+      { value: '6', label: 'Option 6' },
+      { value: '7', label: '7' },
+      { value: '8', label: 'Option 8' },
+      { value: '9', label: 'Option 9' },
+      { value: '10', label: 'Option 10' },
+    ],
   },
-  autoHide: { control: { type: 'boolean' }, defaultValue: true },
-  distance: { control: { type: 'number' }, defaultValue: 10 },
-  skidding: { control: { type: 'number' }, defaultValue: 0 },
-  container: { control: { type: 'text' }, defaultValue: '.v-popper' },
-  strategy: {
-    control: {
-      type: 'radio',
-      options: ['absolute', 'fixed'],
-    },
-    defaultValue: 'absolute',
-  },
-  popperClass: {
-    control: { type: 'text' },
-    defaultValue: '',
-  },
-  shown: { control: { type: 'boolean' }, defaultValue: false },
-  content: {
-    description: 'The content of the dropdown',
-    table: { category: 'For Input', defaultValue: { summary: 'null' } },
+  placeholder: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Tooltip content',
+    defaultValue: 'Select an option',
   },
-  delay: {
+  taggable: {
     control: {
-      type: 'number',
+      type: 'boolean',
     },
-    defaultValue: 0,
+    defaultValue: false,
+  },
+  multiple: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  clearable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   disabled: {
     control: {
@@ -87,203 +62,82 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  flip: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-  shift: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-  autoSize: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-  positioningDisabled: {
+  loading: {
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
-  handleResize: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  arrowPadding: {
-    control: {
-      type: 'number',
-    },
-    defaultValue: 0,
-  },
-  options: {
-    table: { category: 'For List' },
-    control: {
-      type: 'array',
-    },
-    defaultValue: [
-      {
-        label: 'Option 1',
-        value: 'option1',
-      },
-      {
-        label: 'Option 2',
-        value: 'option2',
-      },
-      {
-        label: 'Option 3',
-        value: 'option3',
-      },
-      {
-        label: 'Option 4',
-        value: 'option4',
-      },
-      {
-        label: 'Option 5',
-        value: 'option5',
-      },
-    ],
-  },
-  selected: {
-    table: { category: 'For List' },
-    control: {
-      type: 'array',
-    },
-    defaultValue: ['option5'],
-  },
-  multiple: {
-    table: { category: 'For List' },
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  searchable: {
-    table: { category: 'For List' },
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-    description: '<span>Searchable dropdown</span>',
-  },
-  actions: {
-    table: { category: 'For List' },
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  icon: {
-    table: { category: 'For Input' },
+  prependIcon: {
     control: {
       type: 'text',
     },
     defaultValue: '',
   },
-  onShow: {
+  appendIcon: {
     control: {
-      type: 'action',
+      type: 'text',
     },
-    action: 'show',
-  },
-  onHide: {
-    control: {
-      type: 'action',
-    },
-    action: 'hide',
-  },
-  onDispose: {
-    control: {
-      type: 'action',
-    },
-    action: 'dispose',
-  },
-  onResize: {
-    control: {
-      type: 'action',
-    },
-    action: 'resize',
-  },
-  onSelect: {
-    control: {
-      type: 'action',
-    },
-    action: 'select',
-  },
-  onCancel: {
-    control: {
-      type: 'action',
-    },
-    action: 'cancel',
-  },
-  onSubmit: {
-    control: {
-      type: 'action',
-    },
-    action: 'submit',
+    defaultValue: '',
   },
 };
 
 <Meta
   title="Components/Dropdown"
-  component={Dropdown}
+  component={Select}
   argTypes={{ ...defaultArgs }}
   parameters={{
     viewMode: 'docs',
   }}
 />
 
-# Dropdown
-
-Dropdown is a component that allows you to select one or more options from a list.
-It can also be used as an input field with a dropdown list.
-
-It is based on [Popper.js](https://popper.js.org/).
-
-### Overview
-
-<Canvas withSource="open">
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Playground
-
-> Changes you make in the controls will be reflected in the example above.
-
-<ArgsTable
-  story="Overview"
-  exclude={
-    /^(click|show|hide|dispose|resize|select|cancel|submit|default|on.*)$/
-  }
-/>
-
-## Stories
-
-### Default
-
-<Canvas withSource="open">
-  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### With Icon
+# Select
 
 <Canvas withSource="open">
   <Story
-    name="With Icon"
-    argTypes={{ ...WithIcon.argTypes }}
-    args={{ content: '', autoSize: false }}
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      appendIcon: 'expand_less',
+    }}
   >
-    {WithIcon.bind({})}
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  story="Overview"
+  exclude={/^(click|prepend-icon|append-icon|option-prepend|update.*|on.*)$/}
+/>
+
+### Multiple
+
+<Canvas withSource="open">
+  <Story
+    name="Multiple"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      multiple: true,
+      placeholder: 'Select multiple options',
+      appendIcon: 'expand_less',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Taggable
+
+<Canvas withSource="open">
+  <Story
+    name="Taggable"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      taggable: true,
+      placeholder: 'Search or create a tag',
+      appendIcon: 'expand_less',
+    }}
+  >
+    {Default.bind({})}
   </Story>
 </Canvas>

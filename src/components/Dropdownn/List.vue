@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-import './dropdown.css';
+import './dropdownn.css';
 import Button from '../Button/Button.vue';
 import Textfield from '../Textfield/Textfield.vue';
 import Checkbox from '../Checkbox/Checkbox.vue';
-import type { Option } from './dropdown';
+import type { Option } from './dropdownn';
 
 export interface Props {
   popperClass?: string;

@@ -1,155 +1,233 @@
 <script setup lang="ts">
-import List from './List.vue';
-import { Dropdown } from 'floating-vue';
-import { reactive, computed } from 'vue';
-import 'floating-vue/dist/style.css';
-import Button from '../Button/Button.vue';
-import type { Option } from './dropdown';
-
-export interface Props {
-  popperClass?: string;
-  placement?:
-    | 'auto'
-    | 'auto-start'
-    | 'auto-end'
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end';
-  content?: string;
-  strategy?: 'fixed' | 'absolute';
-  delay?: number;
-  distance?: number;
-  skidding?: number;
-  autoHide?: boolean;
-  disabled?: boolean;
-  autoSize?: boolean;
-  handleResize?: boolean;
-  options: Option[];
-  selected: string[];
-  multiple?: boolean;
-  searchable?: boolean;
-  actions?: boolean;
-  icon?: string;
+import { computed, reactive, ref, defineEmits, watch } from 'vue';
+import Chip from '../Chips/Chip.vue';
+import Icon from '../Icon/Icon.vue';
+import './dropdown.css';
+export interface Option {
+  value: string | number;
+  label: string;
 }
-const props = withDefaults(defineProps<Props>(), {
-  popperClass: '',
-  placement: 'auto',
-  content: '',
-  strategy: 'absolute',
-  delay: 0,
-  shown: false,
-  distance: 10,
-  skidding: 0,
-  arrowPadding: 0,
-  container: '.dropdown__trigger',
-  autoHide: true,
-  disabled: false,
-  positioningDisabled: false,
-  autoSize: false,
-  flip: false,
-  shift: false,
-  handleResize: true,
+export interface SelectProps {
+  options: Option[];
+  placeholder?: string;
+  taggable?: boolean;
+  multiple?: boolean;
+  clearable?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  prependIcon?: string;
+  appendIcon?: string;
+}
+const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
-  selected: () => [],
+  placeholder: '',
+  taggable: false,
   multiple: false,
-  searchable: true,
-  actions: true,
-  icon: '',
+  clearable: false,
+  disabled: false,
+  loading: false,
+  prependIcon: '',
+  appendIcon: 'expand_less',
 });
-const emit = defineEmits([
-  'show',
-  'hide',
-  'resize',
-  'select',
-  'cancel',
-  'submit',
-]);
-const state = reactive({ visible: false });
-const onShow = () => {
-  state.visible = true;
-  emit('show');
-};
-const onHide = () => {
-  state.visible = false;
-  emit('hide');
-};
-const onResize = () => {
-  emit('resize');
-};
-const onSelect = (value: string) => {
-  if (!props.multiple) {
-    state.visible = false;
+const selected = ref('');
+const selectedMultiple = reactive<Option[]>([]);
+const active = ref(false);
+const inputModel = ref('');
+const emit = defineEmits(['update:modelValue']);
+
+/**
+ * @description - HTML elements references
+ */
+const select = ref<HTMLElement | null>(null);
+const input = ref<HTMLInputElement | null>(null);
+/**
+ * @description - Handles the appearance of the select list
+ * @param e Click event
+ * @returns void
+ */
+const setActive = (e: MouseEvent) => {
+  if (props.disabled) return;
+  e.stopPropagation();
+  active.value = !active.value;
+  if (active.value) {
+    select.value?.classList.add('select--active');
+    select.value?.focus();
+    input.value?.focus();
+    document.addEventListener('click', setActive);
+    return;
   }
-  emit('select', { value });
+  select.value?.classList.remove('select--active');
+  select.value?.blur();
+  input.value?.blur();
+  document.removeEventListener('click', setActive);
 };
-const iconName = computed(() => {
-  if (props.icon) return props.icon;
-  return state.visible ? 'expand_less' : 'expand_more';
+/**
+ * @description - Selects an option
+ * @param e Click event
+ * @param option Selected option
+ * @returns void
+ */
+const selectOption = (e: MouseEvent, option: Option) => {
+  if (props.multiple || props.taggable) {
+    e.stopPropagation();
+    if (!selectedMultiple.includes(option)) {
+      selectedMultiple.push(option);
+    } else {
+      selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
+    }
+    inputModel.value = '';
+    input.value?.focus();
+    return;
+  } else {
+    emit('update:modelValue', option.value);
+    selected.value = option.label;
+    inputModel.value = option.label;
+  }
+};
+/**
+ * @description - Removes an option from the selected options
+ * @param option Option to remove
+ * @returns void
+ */
+const removeOption = (e: MouseEvent | KeyboardEvent, option: Option) => {
+  if (e instanceof KeyboardEvent && e.key !== 'Backspace') return;
+  if (inputModel.value !== '') return;
+  e.stopPropagation();
+  const index = selectedMultiple.findIndex((opt) => opt.value === option.value);
+  selectedMultiple.splice(index, 1);
+};
+/**
+ * @description - Handles the not existing options
+ * @returns void
+ */
+const createTag = (e: KeyboardEvent) => {
+  if (!props.taggable) return;
+  e.stopPropagation();
+  const value = inputModel.value;
+  if (value === '') return;
+  const option = props.options.find((opt) => opt.label === value);
+  if (!option) {
+    selectedMultiple.push({ value, label: value });
+    inputModel.value = '';
+    input.value?.focus();
+  }
+};
+/**
+ * @description - Search for options
+ * @returns {Option[]} - Returns an array of options
+ */
+const searchedOptions = computed(() => {
+  const result = props.options.filter((option) => {
+    return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
+  });
+  return result;
+});
+/**
+ * @description - Watch the selected multiple options
+ * @returns void
+ */
+watch(selectedMultiple, (value) => {
+  emit('update:modelValue', value);
 });
 </script>
 <template>
-  <Dropdown
-    theme="dropdown"
-    :popper-class="props.popperClass"
-    :placement="props.placement"
-    :content="props.content"
-    :strategy="props.strategy"
-    :delay="props.delay"
-    :distance="props.distance"
-    :skidding="props.skidding"
-    :container="props.container"
-    :auto-hide="props.autoHide"
-    :disabled="props.disabled"
-    :auto-size="props.autoSize"
-    :flip="props.flip"
-    :shift="props.shift"
-    :handle-resize="props.handleResize"
-    v-model:shown="state.visible"
-    @show="onShow"
-    @hide="onHide"
-    @resize="onResize"
-  >
-    <Button
-      v-if="!$slots.default"
-      class="dropdown__trigger"
-      :disabled="props.disabled"
-      :variant="props.content?.length > 0 ? 'secondary' : 'icon-only'"
-      :icon="iconName"
-      iconRight
+  <div class="select-wrapper">
+    <div
+      ref="select"
+      :class="{ select: true, 'select--disabled': props.disabled }"
+      @click="setActive"
     >
-      {{ props.content }}
-    </Button>
-    <slot v-else />
-    <template #popper="{ hide }">
-      <List
-        v-if="!$slots['content']"
-        :options="props.options"
-        :selected="props.selected"
-        :multiple="props.multiple"
-        :searchable="props.searchable"
-        :actions="props.actions"
-        @select="onSelect"
-        @cancel="emit('cancel', { hide })"
-        @submit="emit('submit')"
+      <div
+        :class="{
+          'select__prepend-icon': true,
+          'select__prepend-icon--active': active,
+        }"
+      >
+        <slot name="prepend-icon" />
+        <Icon v-if="!$slots['prepend-icon']" :name="props.prependIcon" />
+      </div>
+      <div v-if="props.taggable" class="select__tags">
+        <Chip
+          v-for="(option, index) in selectedMultiple"
+          :key="index"
+          :label="option.label"
+          variant="primary"
+          icon="cancel"
+          style="margin: 2px"
+          @click-icon="removeOption($event, option)"
+        />
+      </div>
+      <div v-if="props.multiple" class="select__single-line">
+        <p v-for="(option, index) in selectedMultiple" :key="index">
+          {{ option.label + ',' }}
+        </p>
+      </div>
+      <input
+        v-bind="$attrs"
+        id="select"
+        ref="input"
+        type="text"
+        v-model="inputModel"
+        class="select__input"
+        :placeholder="props.placeholder"
+        :disabled="props.disabled"
+        @keydown.enter="createTag($event)"
+        @keydown.backspace="
+          removeOption($event, selectedMultiple[selectedMultiple.length - 1])
+        "
       />
-      <slot v-else name="content" />
-    </template>
-  </Dropdown>
+      <div
+        :class="{
+          'select__append-icon': true,
+          'select__append-icon--active': active,
+        }"
+      >
+        <slot name="append-icon" />
+        <Icon v-if="!$slots['append-icon']" :name="props.appendIcon" />
+      </div>
+    </div>
+    <div :class="{ 'select-options': true, 'select-options--active': active }">
+      <div
+        :class="{
+          'select-options__option': true,
+          'select-options__option--active':
+            option.label === selected || selectedMultiple?.includes(option),
+        }"
+        v-for="option in searchedOptions"
+        :key="option.value"
+        @click="selectOption($event, option)"
+      >
+        <div style="display: flex; align-items: center">
+          <slot name="option-prepend" />
+          <Icon
+            v-if="!$slots['option-prepend']"
+            name="face"
+            :class="{
+              'select-options__option__prepend-icon': true,
+              'select-options__option__prepend-icon--active':
+                option.label === selected || selectedMultiple?.includes(option),
+            }"
+          />
+          <p
+            :class="{
+              'select-options__option__label': true,
+              'select-options__option__label--active':
+                option.label === selected || selectedMultiple?.includes(option),
+            }"
+          >
+            {{ option.label }}
+          </p>
+        </div>
+        <Icon
+          v-if="option.label === selected || selectedMultiple?.includes(option)"
+          name="check"
+          :class="{
+            'select-options__option__append-icon': true,
+            'select-options__option__append-icon--active':
+              option.label === selected || selectedMultiple?.includes(option),
+          }"
+        />
+      </div>
+    </div>
+  </div>
 </template>
-<style scoped>
-::v-deep .v-popper__arrow-container {
-  display: none;
-}
-::v-deep .v-popper--theme-dropdown .v-popper__inner {
-  border: none;
-}
-</style>
