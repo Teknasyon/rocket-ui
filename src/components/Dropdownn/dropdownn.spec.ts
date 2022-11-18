@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import Dropdown from './Dropdown.vue';
+import Dropdown from './Dropdownn.vue';
 
 describe('Dropdown', () => {
   it('renders properly', () => {
