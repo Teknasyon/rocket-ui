@@ -5,7 +5,7 @@
 }
 
 .select {
-  @apply flex bg-white border border-gray-300 rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
+  @apply flex items-center bg-white border border-gray-300 rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
   &--active {
     @apply border border-[#4C5BE1] ring-2;
