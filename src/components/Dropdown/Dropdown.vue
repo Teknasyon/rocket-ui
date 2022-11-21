@@ -89,7 +89,7 @@ const selectOption = (e: MouseEvent, option: Option) => {
  */
 const removeOption = (e: MouseEvent | KeyboardEvent, option: Option) => {
   if (e instanceof KeyboardEvent && e.key !== 'Backspace') return;
-  if (inputModel.value !== '' || !props.multiple || !props.taggable) return;
+  if (inputModel.value !== '') return;
   e.stopPropagation();
   const index = selectedMultiple.findIndex((opt) => opt.value === option.value);
   selectedMultiple.splice(index, 1);
