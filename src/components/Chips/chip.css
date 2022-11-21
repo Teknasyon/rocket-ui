@@ -1,31 +1,49 @@
-@tailwind components;
+@import '../../index.css';
 
 .chip {
-  @apply inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
+  @apply cursor-pointer text-white inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
 
-  &--primary {
-    @apply text-teal-600 bg-teal-100;
+  &__primary {
+    @apply bg-[var(--primary-500)];
+
+    &--ghost {
+      @apply bg-[var(--primary-100)] text-[var(--primary-500)];
+    }
   }
-  &--secondary {
-    @apply text-gray-600 bg-gray-100;
+  &__secondary {
+    @apply bg-[var(--secondary-500)];
+
+    &--ghost {
+      @apply bg-[var(--secondary-100)] text-[var(--secondary-500)];
+    }
   }
-  &--success {
-    @apply text-green-600 bg-green-100;
+  &__success {
+    @apply bg-[var(--success-500)];
+
+    &--ghost {
+      @apply bg-[var(--success-100)] text-[var(--success-500)];
+    }
   }
-  &--danger {
-    @apply text-red-600 bg-red-100;
+  &__error {
+    @apply bg-[var(--error-500)];
+
+    &--ghost {
+      @apply bg-[var(--error-100)] text-[var(--error-500)];
+    }
   }
-  &--warning {
-    @apply text-yellow-600 bg-yellow-100;
+  &__warning {
+    @apply bg-[var(--warning-500)];
+
+    &--ghost {
+      @apply bg-[var(--warning-100)] text-[var(--warning-500)];
+    }
   }
-  &--info {
-    @apply text-blue-600 bg-blue-100;
-  }
-  &--light {
-    @apply text-slate-600 bg-slate-100;
-  }
-  &--dark {
-    @apply text-white bg-black;
+  &__info {
+    @apply bg-[var(--info-500)];
+
+    &--ghost {
+      @apply bg-[var(--info-100)] text-[var(--info-500)];
+    }
   }
   &--small {
     @apply text-xs px-1 py-0.5;
@@ -42,11 +60,11 @@
   &--disabled {
     @apply opacity-50 cursor-not-allowed;
   }
-  &--reverse > .chip__icon {
-    @apply mr-1 ml-0;
-  }
-}
 
-.chip__icon {
-  @apply ml-1 hover:opacity-80 transition-opacity duration-200 cursor-pointer;
+  &__prepend-icon {
+    @apply mr-1;
+  }
+  &__append-icon {
+    @apply ml-1;
+  }
 }
