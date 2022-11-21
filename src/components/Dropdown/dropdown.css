@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.select-wrapper {
+.dropdown {
   @apply relative;
 }
 
@@ -24,9 +24,13 @@
 
   &__tags {
     @apply flex flex-wrap items-center gap-1;
+
+    &__chip {
+      @apply flex items-center gap-2 rounded-3xl text-xs text-[var(--neutral-900)] bg-[var(--neutral-100)];
+    }
   }
 
-  &__single-line {
+  &__multiple {
     @apply flex items-center gap-2;
     & > * {
       @apply flex-1 whitespace-nowrap;
