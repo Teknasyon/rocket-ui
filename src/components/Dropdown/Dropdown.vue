@@ -12,7 +12,6 @@ export interface SelectProps {
   placeholder?: string;
   taggable?: boolean;
   multiple?: boolean;
-  clearable?: boolean;
   disabled?: boolean;
   loading?: boolean;
   prependIcon?: string;
@@ -23,7 +22,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   placeholder: '',
   taggable: false,
   multiple: false,
-  clearable: false,
   disabled: false,
   loading: false,
   prependIcon: '',
@@ -91,7 +89,7 @@ const selectOption = (e: MouseEvent, option: Option) => {
  */
 const removeOption = (e: MouseEvent | KeyboardEvent, option: Option) => {
   if (e instanceof KeyboardEvent && e.key !== 'Backspace') return;
-  if (inputModel.value !== '') return;
+  if (inputModel.value !== '' || !props.multiple || !props.taggable) return;
   e.stopPropagation();
   const index = selectedMultiple.findIndex((opt) => opt.value === option.value);
   selectedMultiple.splice(index, 1);
@@ -131,7 +129,7 @@ watch(selectedMultiple, (value) => {
 });
 </script>
 <template>
-  <div class="select-wrapper">
+  <div class="dropdown">
     <div
       ref="select"
       :class="{ select: true, 'select--disabled': props.disabled }"
@@ -151,13 +149,13 @@ watch(selectedMultiple, (value) => {
           v-for="(option, index) in selectedMultiple"
           :key="index"
           :label="option.label"
+          class="select__tags__chip"
           variant="primary"
-          icon="cancel"
-          style="margin: 2px"
+          icon="close"
           @click-icon="removeOption($event, option)"
         />
       </div>
-      <div v-if="props.multiple" class="select__single-line">
+      <div v-if="props.multiple" class="select__multiple">
         <p v-for="(option, index) in selectedMultiple" :key="index">
           {{ option.label + ',' }}
         </p>
@@ -186,8 +184,8 @@ watch(selectedMultiple, (value) => {
         <Icon v-if="!$slots['append-icon']" :name="props.appendIcon" />
       </div>
     </div>
-    <div :class="{ 'select-options': true, 'select-options--active': active }">
-      <div
+    <ul :class="{ 'select-options': true, 'select-options--active': active }">
+      <li
         :class="{
           'select-options__option': true,
           'select-options__option--active':
@@ -227,7 +225,7 @@ watch(selectedMultiple, (value) => {
               option.label === selected || selectedMultiple?.includes(option),
           }"
         />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
