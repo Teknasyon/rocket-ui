@@ -21,16 +21,7 @@ export const defaultArgs = {
   variant: {
     control: {
       type: 'select',
-      options: [
-        'primary',
-        'secondary',
-        'success',
-        'danger',
-        'warning',
-        'info',
-        'light',
-        'dark',
-      ],
+      options: ['primary', 'secondary', 'success', 'error', 'warning', 'info'],
     },
     defaultValue: 'primary',
   },
@@ -47,25 +38,31 @@ export const defaultArgs = {
     },
     defaultValue: 'Chip',
   },
-  iconLeft: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   disabled: {
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
-  icon: {
+  prependIcon: {
     control: {
       type: 'text',
     },
     defaultValue: '',
   },
+  appendIcon: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'close',
+  },
   square: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  ghost: {
     control: {
       type: 'boolean',
     },
@@ -95,7 +92,13 @@ They can be used as a way to filter content.
 ### Overview
 
 <Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      prependIcon: 'face',
+    }}
+  >
     {Default.bind({})}
   </Story>
 </Canvas>
@@ -110,7 +113,7 @@ They can be used as a way to filter content.
 
 ### Primary
 
-<Canvas>
+<Canvas withSource="open">
   <Story name="Primary" argTypes={{ ...Default.argTypes }} args={{}}>
     {Default.bind({})}
   </Story>
@@ -118,7 +121,7 @@ They can be used as a way to filter content.
 
 ### Secondary
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Secondary"
     argTypes={{ ...Default.argTypes }}
@@ -130,7 +133,7 @@ They can be used as a way to filter content.
 
 ### Success
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Success"
     argTypes={{ ...Default.argTypes }}
@@ -140,13 +143,13 @@ They can be used as a way to filter content.
   </Story>
 </Canvas>
 
-### Danger
+### Error
 
-<Canvas>
+<Canvas withSource="open">
   <Story
-    name="Danger"
+    name="Error"
     argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'danger' }}
+    args={{ variant: 'error' }}
   >
     {Default.bind({})}
   </Story>
@@ -154,7 +157,7 @@ They can be used as a way to filter content.
 
 ### Warning
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Warning"
     argTypes={{ ...Default.argTypes }}
@@ -166,35 +169,11 @@ They can be used as a way to filter content.
 
 ### Info
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Info"
     argTypes={{ ...Default.argTypes }}
     args={{ variant: 'info' }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Light
-
-<Canvas>
-  <Story
-    name="Light"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'light' }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Dark
-
-<Canvas>
-  <Story
-    name="Dark"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'dark' }}
   >
     {Default.bind({})}
   </Story>

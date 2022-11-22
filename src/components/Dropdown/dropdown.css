@@ -1,43 +1,98 @@
-@tailwind base;
-@tailwind components;
+@import '../../index.css';
 
 .dropdown {
-  &__trigger {
-    @apply w-full;
-  }
+  @apply relative;
 }
 
-.list {
-  @apply min-h-max min-w-max divide-x-0 divide-y divide-gray-200 divide-solid;
+.select {
+  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
-  &__header {
-    @apply font-bold text-xl text-center p-4;
+  &--active {
+    @apply border border-[var(--primary-500)] ring-2;
   }
-  &__body {
-    @apply flex flex-col pl-4;
+  &--disabled {
+    @apply bg-[var(--neutral-100)] text-[var(--neutral-200)] border-[var(--neutral-200)] cursor-not-allowed;
   }
-  &__items {
-    @apply overflow-y-auto h-24 py-2;
-  }
-  &__item {
-    @apply cursor-auto w-auto rounded-sm;
 
-    &--selected {
-      @apply bg-red-100;
+  &__prepend-icon {
+    @apply inset-y-0 right-0 flex items-center pointer-events-none;
 
-      &:hover {
-        @apply bg-gray-100;
+    &--active {
+      /* @apply text-[var(--primary-500)]; */
+    }
+  }
+
+  &__tags {
+    @apply flex flex-wrap items-center gap-1;
+
+    &__chip {
+      @apply flex items-center gap-2 rounded-3xl text-xs text-[var(--neutral-900)] bg-[var(--neutral-100)];
+
+      & > .chip__text {
+        @apply whitespace-nowrap;
       }
     }
   }
-  &__footer {
-    @apply grid grid-cols-2 gap-2 p-4;
+
+  &__multiple {
+    @apply flex items-center gap-2;
+    & > * {
+      @apply flex-1 whitespace-nowrap;
+    }
+  }
+
+  &__input {
+    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] px-2 block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm;
+  }
+
+  &__append-icon {
+    @apply inset-y-0 right-0 flex items-center pointer-events-none;
+
+    &--active {
+      @apply transform rotate-180 transition-all duration-200 ease-in-out text-[var(--primary-500)];
+    }
   }
 }
 
-.item-multiple {
-  @apply p-2 w-auto;
-}
-.item-single {
-  @apply cursor-default py-2 m-0 hover:bg-gray-100;
+.select-options {
+  @apply hidden py-3 px-2 left-0 absolute z-10 w-full mt-1 bg-white border border-[var(--neutral-200)] rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm;
+
+  &--active {
+    @apply block;
+  }
+
+  &__option {
+    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in flex justify-between items-center w-full border border-transparent rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
+
+    &:hover {
+      @apply bg-[var(--primary-50)] text-[var(--primary-500)];
+    }
+    &--active {
+      @apply bg-[var(--primary-100)] text-[var(--primary-500)];
+    }
+
+    &__label {
+      @apply ml-2;
+
+      &--active {
+        /* @apply text-[var(--primary-500)]; */
+      }
+    }
+
+    &__prepend-icon {
+      @apply text-[var(--neutral-900)] inset-y-0 right-0 flex items-center pointer-events-none;
+
+      &--active {
+        /* @apply text-[var(--primary-500)]; */
+      }
+    }
+
+    &__append-icon {
+      @apply transition-colors duration-1000 ease-in-out;
+
+      &--active {
+        /* @apply text-[var(--primary-500)]; */
+      }
+    }
+  }
 }

@@ -4,47 +4,40 @@ import Icon from '../Icon/Icon.vue';
 import './chip.css';
 
 export interface Props {
-  variant:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+  variant: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
   size?: 'small' | 'medium' | 'large';
   label?: string | number;
-  iconLeft?: boolean;
   disabled?: boolean;
-  icon?: string;
+  prependIcon?: string;
+  appendIcon?: string;
   square?: boolean;
+  ghost?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'medium',
   label: 'label',
-  iconLeft: false,
   disabled: false,
-  icon: '',
+  prependIcon: '',
+  appendIcon: '',
   square: false,
+  ghost: false,
 });
 const emit = defineEmits(['clickChip', 'clickIcon']);
 const classes = computed(() => {
   return {
     chip: true,
-    'chip--iconLeft': props.iconLeft,
     'chip--disabled': props.disabled,
-    [`chip--${props.variant}`]: props.variant,
+    [`chip__${props.variant}`]: props.variant,
     [`chip--${props.size}`]: props.size,
     'chip--square': props.square,
-    'chip--reverse': props.iconLeft,
+    [`chip__${props.variant}--ghost`]: props.ghost,
   };
 });
 const iconSize = computed<string>(() => {
-  if (props.size === 'small') return '14';
-  if (props.size === 'large') return '20';
-  return '16';
+  if (props.size === 'small') return '10';
+  if (props.size === 'large') return '16';
+  return '12';
 });
 const clickIcon = (e: MouseEvent) => {
   if (props.disabled) return;
@@ -57,15 +50,23 @@ const clickChip = (e: MouseEvent) => {
 </script>
 <template>
   <div :class="classes">
+    <Icon
+      v-if="props.prependIcon"
+      :name="props.prependIcon"
+      :size="iconSize"
+      :aria-disabled="props.disabled"
+      class="chip__prepend-icon"
+      @click.stop="clickIcon($event)"
+    />
     <span class="chip__text" @click.stop="clickChip($event)">{{
       props.label
     }}</span>
     <Icon
-      v-if="props.icon"
-      :name="props.icon"
+      v-if="props.appendIcon"
+      :name="props.appendIcon"
       :size="iconSize"
       :aria-disabled="props.disabled"
-      class="chip__icon"
+      class="chip__append-icon"
       @click.stop="clickIcon($event)"
     />
   </div>

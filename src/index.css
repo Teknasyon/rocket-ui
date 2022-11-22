@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400;500;600;700;800&family=Roboto:wght@100&display=swap');
 
 :root {
-  --primary-100: #edeffc;
+  /**
+  * @tokens Colors
+  * @presenter Color
+  */
+  --primary-50: #f2f4ff;
+  --primary-100: #f2f3fd;
   --primary-200: #e4e6fb;
   --primary-300: #a3abf0;
   --primary-400: #6f7de5;
@@ -10,6 +15,15 @@
   --primary-700: #3944a9;
   --primary-800: #2e3a7e;
   --primary-900: #2e3787;
+  --secondary-100: #fdfae7;
+  --secondary-200: #f9eeb5;
+  --secondary-300: #ffec8a;
+  --secondary-400: #ffdf3b;
+  --secondary-500: #ebc80f;
+  --secondary-600: #e0bc00;
+  --secondary-700: #998100;
+  --secondary-800: #705e00;
+  --secondary-900: #483c00;
   --neutral-100: #f6f7f9;
   --neutral-200: #e7eaee;
   --neutral-300: #c3c9d5;
@@ -19,6 +33,46 @@
   --neutral-700: #3c4353;
   --neutral-800: #242a38;
   --neutral-900: #151b26;
+  --success-100: #e8fff7;
+  --success-200: #bfffe8;
+  --success-300: #97ffda;
+  --success-400: #1bf5a7;
+  --success-500: #05cc85;
+  --success-600: #0cbc7d;
+  --success-700: #068e03;
+  --success-800: #007a4f;
+  --success-900: #005235;
+  --info-100: #e8f4ff;
+  --info-200: #b6dcff;
+  --info-300: #83c3ff;
+  --info-400: #50abff;
+  --info-500: #0c70ce;
+  --info-600: #0059ac;
+  --info-700: #00488a;
+  --info-800: #003668;
+  --info-900: #002446;
+  --warning-100: #fdfae7;
+  --warning-200: #f9eeb5;
+  --warning-300: #ffec8a;
+  --warning-400: #ffdf3b;
+  --warning-500: #ebc80f;
+  --warning-600: #e0bc00;
+  --warning-700: #998100;
+  --warning-800: #705e00;
+  --warning-900: #483c00;
+  --error-100: #ffeceb;
+  --error-200: #ffd0cc;
+  --error-300: #ff9891;
+  --error-400: #ff4537;
+  --error-500: #e13023;
+  --error-600: #bf1e12;
+  --error-700: #9d1006;
+  --error-800: #7b0900;
+  --error-900: #590600;
+  /**
+  * @tokens Box Shadows
+  * @presenter Shadow
+  */
   --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   --box-shadow-hover: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   --box-shadow-active: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -27,6 +81,10 @@
   --box-shadow-pressed-active: 0 0 10px 0 rgba(0, 0, 0, 0.6);
   --box-shadow-pressed-focus: 0 0 10px 0 rgba(0, 0, 0, 0.7);
   --box-shadow-pressed-hover: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+  /**
+  * @tokens Spaces
+  * @presenter Spacing
+  */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -47,8 +105,15 @@
   --space-18: 4.5rem;
   --space-19: 4.75rem;
   --space-20: 5rem;
+  /**
+  * @tokens Gaps
+  */
   --column-gap: 1rem;
   --row-gap: 1rem;
+  /**
+  * @tokens Border Radiuses
+  * @presenter BorderRadius
+  */
   --border-radius: 0.25rem;
   --border-radius-1: 0.25rem;
   --border-radius-2: 0.5rem;
@@ -56,6 +121,9 @@
   --border-radius-4: 1rem;
   --border-radius-5: 1.25rem;
   --border-radius-6: 99999px;
+  /**
+  * @tokens Others
+  */
   --column-1: 1;
   --column-2: 2;
   --column-3: 3;
@@ -63,8 +131,20 @@
   --column-5: 5;
   --column-6: 6;
   --column-7: 7;
+  /**
+  * @tokens-end
+  */
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.animate-spin-reverse {
+  animation: spin 1s linear infinite;
+}

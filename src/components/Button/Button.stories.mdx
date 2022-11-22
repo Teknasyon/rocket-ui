@@ -96,6 +96,24 @@ export const defaultArgs = {
     },
     defaultValue: '',
   },
+  onlyIcon: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  height: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  block: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   type: {
     control: {
       type: 'select',
@@ -136,7 +154,7 @@ Also, it has a `custom-icon` for custom icons and already has a `content` slot f
 
 ### Overview
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Overview"
     argTypes={{ ...WithContentSlot.argTypes }}
