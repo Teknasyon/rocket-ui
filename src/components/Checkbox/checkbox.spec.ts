@@ -10,7 +10,6 @@ describe('Checkbox', () => {
         id: 'checkbox-id',
         label: 'Checkbox label',
         disabled: false,
-        required: false,
       },
     });
     expect(wrapper.exists()).toBe(true);
@@ -24,6 +23,38 @@ describe('Checkbox', () => {
     );
     expect(wrapper.find('input').element.getAttribute('type')).toBe('checkbox');
     expect(wrapper.find('input').element.getAttribute('disabled')).toBe(null);
-    expect(wrapper.find('input').element.getAttribute('required')).toBe(null);
+    expect(
+      wrapper
+        .find('.checkbox')
+        .trigger('click')
+        .then(() => {
+          expect(wrapper.find('.checkbox').classes()).toContain(
+            'checkbox--checked'
+          );
+        })
+    );
+  });
+  it('indeterminate', () => {
+    const wrapper = mount(Checkbox, {
+      props: {
+        id: 'checkbox-id',
+        label: 'Checkbox label',
+        disabled: false,
+        indeterminate: true,
+      },
+    });
+    expect(wrapper.find('.checkbox').classes()).toContain(
+      'checkbox--indeterminate'
+    );
+    expect(
+      wrapper
+        .find('.checkbox')
+        .trigger('click')
+        .then(() => {
+          expect(wrapper.find('.checkbox').classes()).toContain(
+            'checkbox--checked'
+          );
+        })
+    );
   });
 });

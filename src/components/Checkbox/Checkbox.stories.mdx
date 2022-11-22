@@ -29,13 +29,7 @@ export const defaultArgs = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Checkbox',
-  },
-  right: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
+    defaultValue: 'Checkbox Label',
   },
   indeterminate: {
     control: {
@@ -49,11 +43,11 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  required: {
+  hint: {
     control: {
-      type: 'boolean',
+      type: 'text',
     },
-    defaultValue: false,
+    defaultValue: 'Save my login details for next time.',
   },
 };
 
@@ -78,14 +72,13 @@ The user can also select or deselect the option by clicking on the label next to
 
 `*`The user can also select or deselect the option by using the keyboard. The user can use the spacebar to select or deselect the option.
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
     args={{
       id: 'checkbox-1',
       label: 'Checkbox label',
-      right: false,
     }}
   >
     {Default.bind({})}
@@ -100,20 +93,34 @@ The user can also select or deselect the option by clicking on the label next to
 
 ## Stories
 
-### Default
+### Checked
 
 <Canvas withSource="open">
   <Story
-    name="Default"
+    name="Checked"
     argTypes={{ ...Default.argTypes }}
     args={{
       id: 'checkbox-1',
       label: 'Checkbox label',
-      right: false,
+      checked: true,
     }}
   >
     {Default.bind({})}
   </Story>
 </Canvas>
 
-###### `*` is mean Not yet implemented
+### Indeterminate
+
+<Canvas withSource="open">
+  <Story
+    name="Indeterminate"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      id: 'checkbox-1',
+      label: 'Checkbox label',
+      indeterminate: true,
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
