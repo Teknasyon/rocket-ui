@@ -3,7 +3,7 @@ import './label.css';
 export interface LabelProps {
   id: string;
   for: string;
-  text: string;
+  text: string | number;
 }
 const props = withDefaults(defineProps<LabelProps>(), {
   id: '',
@@ -12,5 +12,5 @@ const props = withDefaults(defineProps<LabelProps>(), {
 });
 </script>
 <template>
-  <label :for="props.for">{{ text }}</label>
+  <label :id="props.id" :for="props.for">{{ props.text }}</label>
 </template>
