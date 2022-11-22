@@ -151,7 +151,7 @@ watch(selectedMultiple, (value) => {
           :label="option.label"
           class="select__tags__chip"
           variant="primary"
-          icon="close"
+          appendIcon="close"
           @click-icon="removeOption($event, option)"
         />
       </div>
