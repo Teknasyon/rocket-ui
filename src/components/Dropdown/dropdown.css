@@ -27,6 +27,10 @@
 
     &__chip {
       @apply flex items-center gap-2 rounded-3xl text-xs text-[var(--neutral-900)] bg-[var(--neutral-100)];
+
+      & > .chip__text {
+        @apply whitespace-nowrap;
+      }
     }
   }
 
