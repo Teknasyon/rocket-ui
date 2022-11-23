@@ -63,6 +63,9 @@
     @apply absolute left-1/2 -translate-x-1/2 w-full h-full appearance-none rounded-md;
     &:checked + .slider {
       @apply bg-[var(--primary-500)];
+      &:hover {
+        @apply bg-[var(--primary-700)];
+      }
     }
   }
 }
