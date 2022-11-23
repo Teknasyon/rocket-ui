@@ -6,16 +6,20 @@ export interface Props {
   value: boolean;
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
+  label?: string;
+  hint?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
   value: false,
   size: 'medium',
   disabled: false,
+  label: '',
+  hint: '',
 });
 const emit = defineEmits(['change']);
 const state = reactive({
-  value: props.value || false,
+  value: props.value,
 });
 const classes = computed(() => {
   return {
@@ -25,22 +29,37 @@ const classes = computed(() => {
   };
 });
 const onChange = () => {
+  if (props.disabled) return;
   emit('change', { value: state.value });
+};
+const toggle = () => {
+  if (props.disabled) return;
+  state.value = !state.value;
 };
 </script>
 <template>
-  <fieldset>
-    <label :for="props.id || 'switch'" :class="classes">
+  <div class="switch-container">
+    <div :class="classes" @click="toggle">
       <input
+        :id="props.id"
         v-bind="$attrs"
-        :id="props.id || 'switch'"
         type="checkbox"
-        :disabled="props.disabled"
         v-model="state.value"
         class="switch__input"
         @change="onChange"
       />
       <span class="slider round" />
-    </label>
-  </fieldset>
+    </div>
+    <div
+      :class="{
+        'switch-texts': true,
+        [`switch-texts--${props.size}`]: true,
+      }"
+    >
+      <label :id="props.id" :for="props.id" class="switch-texts__label">
+        {{ props.label }}
+      </label>
+      <p class="switch-texts__hint">{{ props.hint }}</p>
+    </div>
+  </div>
 </template>

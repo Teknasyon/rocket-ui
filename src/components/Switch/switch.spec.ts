@@ -19,5 +19,13 @@ describe('Switch', () => {
     expect(wrapper.find('input').element.getAttribute('id')).toBe('switch-id');
     expect(wrapper.find('input').element.getAttribute('type')).toBe('checkbox');
     expect(wrapper.find('input').element.getAttribute('disabled')).toBe(null);
+    expect(
+      wrapper
+        .find('.switch')
+        .trigger('click')
+        .then(() => {
+          expect(wrapper.find('input').element.checked).toBe(true);
+        })
+    );
   });
 });
