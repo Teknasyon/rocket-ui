@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .switch-container {
-  @apply flex items-center justify-center gap-3;
+  @apply flex items-center justify-start gap-3;
 }
 
 .slider {
