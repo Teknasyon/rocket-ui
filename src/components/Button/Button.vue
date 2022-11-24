@@ -20,7 +20,6 @@ export interface Props {
   size?: ButtonSize;
   height?: string;
   block?: boolean;
-  type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -33,7 +32,6 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   height: '',
   block: false,
-  type: 'button',
   backgroundColor: '',
 });
 const classes = computed(() => ({
@@ -59,7 +57,6 @@ const style = computed(() => {
 <template>
   <button
     v-bind="$attrs"
-    :type="type || 'button'"
     :class="classes"
     :style="style"
     :disabled="disabled || loading"
