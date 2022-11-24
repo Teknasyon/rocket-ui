@@ -1,7 +1,7 @@
-@tailwind components;
+@import '../../index.css';
 
 .alert {
-  @apply w-full relative p-4 rounded text-sm flex justify-between transition-transform duration-1000 box-border;
+  @apply inline-flex px-4 py-3 rounded-lg text-sm transition-transform duration-1000 box-border;
   &--small {
     @apply p-2 text-xs;
   }
@@ -10,58 +10,54 @@
   }
 }
 
-.alert-success {
-  @apply bg-green-100 text-green-500;
-
-  & .close__button {
-    @apply text-white bg-green-500 hover:bg-green-500;
+.alert--success {
+  @apply bg-[var(--success-100)];
+  .icon {
+    @apply text-[var(--success-500)];
   }
 }
 
-.alert-error {
-  @apply bg-red-100 text-red-500;
-
-  & .close__button {
-    @apply text-white bg-red-500 hover:bg-red-500;
+.alert--error {
+  @apply bg-[var(--error-100)];
+  .icon {
+    @apply text-[var(--error-500)];
   }
 }
 
-.alert-warning {
-  @apply bg-yellow-100 text-yellow-500;
-
-  & .close__button {
-    @apply text-white bg-yellow-500 hover:bg-yellow-500;
+.alert--warning {
+  @apply bg-[var(--warning-100)];
+  .icon {
+    @apply text-[var(--warning-500)];
   }
 }
 
-.alert-info {
-  @apply bg-blue-100 text-blue-500;
-
-  & .close__button {
-    @apply text-white bg-blue-500 hover:bg-blue-500;
+.alert--info {
+  @apply bg-[var(--info-100)];
+  .icon {
+    @apply text-[var(--info-500)];
   }
 }
 
 .icon {
-  @apply grid place-items-start content-center;
+  @apply grid place-items-start;
 }
 
 .texts {
-  @apply w-full grid place-items-start content-center;
+  @apply w-full grid place-items-start justify-items-start px-4 min-w-[21rem] max-w-sm;
 
   &__title {
-    @apply font-bold;
+    @apply font-medium;
   }
 
   & &__description {
-    @apply text-gray-600;
+    @apply text-[var(--neutral-500)];
   }
 }
 
 .close {
-  @apply grid place-items-end content-center ml-5;
+  @apply grid place-items-start cursor-pointer;
 
   &__button {
-    @apply text-gray-600;
+    @apply text-[var(--neutral-900)];
   }
 }

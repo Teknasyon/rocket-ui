@@ -22,5 +22,13 @@ describe('Alert', () => {
     );
     expect(wrapper.find('.close').text()).toBe('Close2');
     expect(wrapper.find('.alert').classes()).toContain('alert--small');
+    expect(
+      wrapper
+        .find('.alert')
+        .trigger('click')
+        .then(() => {
+          expect(wrapper.emitted('close')).toBeTruthy();
+        })
+    );
   });
 });
