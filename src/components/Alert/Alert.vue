@@ -36,9 +36,9 @@ const icon = computed(() => {
 });
 const iconSize = computed(() => {
   return {
-    small: 16,
-    medium: 20,
-    large: 24,
+    small: 12,
+    medium: 16,
+    large: 20,
   }[props.size];
 });
 const close = () => {
