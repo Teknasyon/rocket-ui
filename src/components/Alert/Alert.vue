@@ -2,7 +2,6 @@
 import './alert.css';
 import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
-import Button from '../Button/Button.vue';
 
 export interface Props {
   type: 'success' | 'error' | 'warning' | 'info';
@@ -10,22 +9,20 @@ export interface Props {
   description?: string;
   size?: 'small' | 'medium' | 'large';
   closable?: boolean;
-  closeText?: string;
 }
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['close']);
 const props = withDefaults(defineProps<Props>(), {
   type: 'info',
   title: '',
   description: '',
   size: 'medium',
   closable: true,
-  closeText: 'Close',
 });
 const classes = computed(() => {
   return {
     alert: true,
-    [`alert-${props.type}`]: true,
+    [`alert--${props.type}`]: true,
     [`alert--${props.size}`]: true,
   };
 });
@@ -39,34 +36,32 @@ const icon = computed(() => {
 });
 const iconSize = computed(() => {
   return {
-    small: 24,
-    medium: 32,
-    large: 40,
+    small: 16,
+    medium: 20,
+    large: 24,
   }[props.size];
 });
-const onClick = () => {
-  emit('click');
+const close = () => {
+  emit('close');
 };
 </script>
 <template>
   <div :class="classes">
     <div class="icon">
-      <Icon :name="icon" :size="iconSize" kind="round" />
+      <Icon :name="icon" :size="iconSize" />
     </div>
     <div class="texts">
-      <div class="texts__title">{{ props.title }}</div>
-      <div class="texts__description">{{ props.description }}</div>
+      <p class="texts__title">{{ props.title }}</p>
+      <p class="texts__description">{{ props.description }}</p>
     </div>
     <div v-if="props.closable" class="close">
-      <Button
+      <Icon
         v-if="!$slots['close']"
         class="close__button"
-        variant="primary"
-        :size="props.size"
-        @click="onClick"
-      >
-        {{ props.closeText }}
-      </Button>
+        name="close"
+        size="16"
+        @click="close"
+      />
       <slot name="close" v-else />
     </div>
   </div>
