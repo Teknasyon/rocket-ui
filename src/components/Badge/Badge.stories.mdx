@@ -40,25 +40,6 @@ export const defaultArgs = {
     },
     defaultValue: 'right',
   },
-  bgColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '#2dd4bf',
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-  },
-  square: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   overlap: {
     control: {
       type: 'boolean',
@@ -71,31 +52,13 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
-  icon: {
+  content: {
     control: {
       type: 'text',
     },
     defaultValue: '',
   },
-  color: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '#000',
-  },
-  content: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: ' ',
-  },
-  bordered: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  over: {
+  outside: {
     control: {
       type: 'boolean',
     },
@@ -109,7 +72,6 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
   parameters={{
     viewMode: 'docs',
-    layout: 'centered',
   }}
 />
 
@@ -161,21 +123,9 @@ It has a `default` slot that can be used to display any content.
   <Story
     name="With Content"
     argTypes={{ ...ButtonTemplate.argTypes }}
-    args={{ content: '1' }}
+    args={{ content: '32' }}
   >
     {ButtonTemplate.bind({})}
-  </Story>
-</Canvas>
-
-### With Icon
-
-<Canvas withSource="open">
-  <Story
-    name="With Icon"
-    argTypes={{ ...Default.argTypes }}
-    args={{ icon: 'cancel' }}
-  >
-    {Default.bind({})}
   </Story>
 </Canvas>
 
