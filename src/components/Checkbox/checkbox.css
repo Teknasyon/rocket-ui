@@ -27,6 +27,18 @@
       @apply text-white border-[var(--primary-700)] bg-[var(--primary-700)];
     }
   }
+  &--error {
+    @apply border-[var(--error-500)] bg-[var(--error-100)] text-white;
+    &:hover {
+      @apply border-[var(--error-700)];
+    }
+  }
+  &--error&--checked {
+    @apply bg-[var(--error-500)];
+    &:hover {
+      @apply bg-[var(--error-700)];
+    }
+  }
   &[data-disabled='true'] {
     @apply bg-[var(--neutral-100)] border-[var(--neutral-200)] text-[var(--neutral-200)] cursor-not-allowed;
   }
@@ -44,5 +56,8 @@
   }
   &__hint {
     @apply text-[var(--neutral-500)] text-xs;
+  }
+  &__error {
+    @apply text-[var(--error-500)] text-xs;
   }
 }

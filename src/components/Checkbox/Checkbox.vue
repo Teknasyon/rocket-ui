@@ -9,6 +9,7 @@ export interface Props {
   disabled?: boolean;
   checked?: boolean;
   hint?: string;
+  errorMsg?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -17,6 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   checked: false,
   hint: '',
+  errorMsg: '',
 });
 const emit = defineEmits(['change']);
 const state = reactive({
@@ -40,6 +42,7 @@ const classes = computed(() => {
     'checkbox--checked': state.checked,
     'checkbox--disabled': props.disabled,
     'checkbox--indeterminate': state.indeterminate,
+    'checkbox--error': !!props.errorMsg,
   };
 });
 const onChange = () => {
@@ -94,7 +97,10 @@ const handleCheckbox = (icon: string) => {
       >
         {{ props.label }}
       </label>
-      <span class="checkbox-texts__hint">
+      <span v-if="!!props.errorMsg" class="checkbox-texts__error">
+        {{ props.errorMsg }}
+      </span>
+      <span v-else class="checkbox-texts__hint">
         {{ props.hint }}
       </span>
     </div>

@@ -49,6 +49,12 @@ export const defaultArgs = {
     },
     defaultValue: 'Save my login details for next time.',
   },
+  errorMsg: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
 };
 
 <Meta
@@ -119,6 +125,22 @@ The user can also select or deselect the option by clicking on the label next to
       id: 'checkbox-1',
       label: 'Checkbox label',
       indeterminate: true,
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### With Error
+
+<Canvas withSource="open">
+  <Story
+    name="With Error"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      id: 'checkbox-1',
+      label: 'Checkbox label',
+      errorMsg: 'This field is required',
     }}
   >
     {Default.bind({})}
