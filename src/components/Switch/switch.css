@@ -87,4 +87,7 @@
   &__hint {
     @apply text-[var(--neutral-500)] font-normal p-0 m-0;
   }
+  &__error {
+    @apply text-[var(--error-500)] font-normal p-0 m-0;
+  }
 }
