@@ -12,7 +12,7 @@ export const Default = (args) => ({
   template: `
     <Badge v-bind="args" @click="click">
       <template v-slot:default>
-        <Icon name="add" size="24" />
+        <Icon name="email" size="24" />
       </template>
     </Badge>
     `,
@@ -33,6 +33,12 @@ export const ButtonTemplate = (args) => ({
 });
 
 export const defaultArgs = {
+  variant: {
+    control: {
+      type: 'select',
+      options: ['primary', 'success', 'error', 'warning', 'neutral'],
+    },
+  },
   placement: {
     control: {
       type: 'select',
@@ -56,7 +62,7 @@ export const defaultArgs = {
     control: {
       type: 'text',
     },
-    defaultValue: '',
+    defaultValue: '3',
   },
   outside: {
     control: {
@@ -83,7 +89,7 @@ It has a `default` slot that can be used to display any content.
 
 ### Overview
 
-<Canvas withSource="open">
+<Canvas>
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}

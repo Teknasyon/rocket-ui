@@ -3,6 +3,7 @@ import './badge.css';
 import { computed } from 'vue';
 
 export interface BadgeProps {
+  variant?: 'primary' | 'success' | 'warning' | 'error' | 'neutral';
   placement?: 'right' | 'bottom' | 'left';
   overlap?: boolean;
   hover?: boolean;
@@ -10,6 +11,7 @@ export interface BadgeProps {
   outside?: boolean;
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
+  variant: 'primary',
   placement: 'right',
   overlap: false,
   hover: false,
@@ -26,6 +28,7 @@ const classes = computed(() => {
     [`badge--outside-${props.placement}`]: props.outside,
     'badge--hover': props.hover,
     'badge--no-content': !props.content,
+    [`badge--${props.variant}`]: props.variant,
   };
 });
 </script>
