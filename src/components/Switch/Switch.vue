@@ -8,6 +8,7 @@ export interface Props {
   disabled?: boolean;
   label?: string;
   hint?: string;
+  errorMsg?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -16,6 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   label: '',
   hint: '',
+  errorMsg: '',
 });
 const emit = defineEmits(['change']);
 const state = reactive({
@@ -26,6 +28,7 @@ const classes = computed(() => {
     switch: true,
     'switch--disabled': props.disabled,
     [`switch--${props.size}`]: props.size,
+    'switch--error': !!props.errorMsg,
   };
 });
 const onChange = () => {
@@ -59,7 +62,10 @@ const toggle = () => {
       <label :id="props.id" :for="props.id" class="switch-texts__label">
         {{ props.label }}
       </label>
-      <p class="switch-texts__hint">{{ props.hint }}</p>
+      <p v-if="!!props.errorMsg" class="switch-texts__error">
+        {{ props.errorMsg }}
+      </p>
+      <p v-else class="switch-texts__hint">{{ props.hint }}</p>
     </div>
   </div>
 </template>
