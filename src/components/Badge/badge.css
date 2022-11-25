@@ -41,6 +41,22 @@
     @apply w-2 h-2 py-1;
   }
 
+  &--primary {
+    @apply bg-[var(--primary-500)];
+  }
+  &--success {
+    @apply bg-[var(--success-500)];
+  }
+  &--warning {
+    @apply bg-[var(--warning-500)];
+  }
+  &--error {
+    @apply bg-[var(--error-500)];
+  }
+  &--neutral {
+    @apply bg-[var(--neutral-500)];
+  }
+
   &__content {
     @apply grid place-items-center leading-[14px] text-[10px] text-white font-bold;
   }
