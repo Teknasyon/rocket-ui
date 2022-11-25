@@ -59,6 +59,15 @@
     }
   }
 
+  &--error {
+    & > .switch__input:checked + .slider {
+      @apply bg-[var(--error-500)];
+      &:hover {
+        @apply bg-[var(--error-700)];
+      }
+    }
+  }
+
   &__input {
     @apply absolute left-1/2 -translate-x-1/2 w-full h-full appearance-none rounded-md;
     &:checked + .slider {
