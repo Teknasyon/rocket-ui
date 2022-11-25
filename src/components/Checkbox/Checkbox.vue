@@ -97,12 +97,12 @@ const handleCheckbox = (icon: string) => {
       >
         {{ props.label }}
       </label>
-      <span v-if="!!props.errorMsg" class="checkbox-texts__error">
+      <p v-if="!!props.errorMsg" class="checkbox-texts__error">
         {{ props.errorMsg }}
-      </span>
-      <span v-else class="checkbox-texts__hint">
+      </p>
+      <p v-else class="checkbox-texts__hint">
         {{ props.hint }}
-      </span>
+      </p>
     </div>
   </div>
 </template>
