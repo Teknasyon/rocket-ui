@@ -28,7 +28,7 @@ const classes = computed(() => {
     switch: true,
     'switch--disabled': props.disabled,
     [`switch--${props.size}`]: props.size,
-    'switch--error': !!props.errorMsg,
+    'switch--error': props.errorMsg,
   };
 });
 const onChange = () => {
@@ -62,7 +62,7 @@ const toggle = () => {
       <label :id="props.id" :for="props.id" class="switch-texts__label">
         {{ props.label }}
       </label>
-      <p v-if="!!props.errorMsg" class="switch-texts__error">
+      <p v-if="props.errorMsg" class="switch-texts__error">
         {{ props.errorMsg }}
       </p>
       <p v-else class="switch-texts__hint">{{ props.hint }}</p>

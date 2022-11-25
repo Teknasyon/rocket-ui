@@ -70,8 +70,6 @@ export const defaultArgs = {
 
 Switch is a component that allows users to toggle between two states.
 It is used to turn something on or off. It is commonly used to activate or deactivate a setting.
-It is also used to turn a feature on or off. It is used to enable or disable a feature.
-It is used to turn a feature on or off. It is used to enable or disable a feature.
 
 ### Overview
 
@@ -135,6 +133,22 @@ It is used to turn a feature on or off. It is used to enable or disable a featur
     args={{
       value: false,
       size: 'large',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### With Error
+
+<Canvas withSource="open">
+  <Story
+    name="With Error"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      value: false,
+      size: 'medium',
+      errorMsg: 'This is an error message',
     }}
   >
     {Default.bind({})}
