@@ -5,10 +5,10 @@ import Tabs from './Tabs.vue';
 export const Default = (args) => ({
   components: { Tabs },
   setup() {
-    return { args, click: action('click') };
+    return { args, click: action('select') };
   },
   template: `
-    <Tabs v-bind="args" @click="click">
+    <Tabs v-bind="args" @select="click">
       <template #tab={activeTab}>
         <h1>Tab {{activeTab + 1}}</h1>
         <p>Active tab {{activeTab}}</p>
@@ -23,69 +23,12 @@ export const defaultArgs = {
       type: 'object',
     },
     defaultValue: [
-      { label: 'Tab 1', icon: 'home', iconKind: 'filled', badge: '10' },
-      { label: 'Tab 2', icon: 'add_circle', disabled: true },
-      { label: 'Tab 3', icon: 'favorite' },
-      { label: 'Tab 4', icon: 'face' },
-      { label: 'Tab 5', icon: 'settings' },
+      { id: 0, label: 'Tab 1', icon: 'home' },
+      { id: 1, label: 'Tab 2', icon: 'add_circle', disabled: true },
+      { id: 2, label: 'Tab 3', icon: 'favorite' },
+      { id: 3, label: 'Tab 4', icon: 'face' },
+      { id: 4, label: 'Tab 5', icon: 'settings' },
     ],
-  },
-  variant: {
-    control: {
-      type: 'select',
-      options: ['default', 'icon-only', 'text-only'],
-    },
-    defaultValue: 'default',
-  },
-  pill: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-  },
-  color: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  bgColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  activeColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  activeBgColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  borderColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  align: {
-    control: {
-      type: 'select',
-      options: ['left', 'center', 'right'],
-    },
-    defaultValue: 'center',
   },
   scrollable: {
     control: {
@@ -106,11 +49,7 @@ The tabs are placed horizontally at the top of the content.
 ### Overview
 
 <Canvas>
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'default' }}
-  >
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
     {Default.bind({})}
   </Story>
 </Canvas>
@@ -126,11 +65,7 @@ The tabs are placed horizontally at the top of the content.
 ### Default
 
 <Canvas>
-  <Story
-    name="Default"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'default' }}
-  >
+  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
     {Default.bind({})}
   </Story>
 </Canvas>
@@ -142,18 +77,17 @@ The tabs are placed horizontally at the top of the content.
     name="Icon Only"
     argTypes={{ ...Default.argTypes }}
     args={{
-      variant: 'icon-only',
       tabs: [
-        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
-        { label: 'Tab 2', icon: 'add_circle', disabled: true },
-        { label: 'Tab 3', icon: 'favorite', badge: 1 },
-        { label: 'Tab 4', icon: 'face' },
-        { label: 'Tab 5', icon: 'settings' },
-        { label: 'Tab 6', icon: 'search' },
-        { label: 'Tab 7', icon: 'done' },
-        { label: 'Tab 8', icon: 'visibility' },
-        { label: 'Tab 9', icon: 'lock' },
-        { label: 'Tab 10', icon: 'language' },
+        { id: 0, label: 'Tab 1', icon: 'home' },
+        { id: 1, label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { id: 2, label: 'Tab 3', icon: 'favorite' },
+        { id: 3, label: 'Tab 4', icon: 'face' },
+        { id: 4, label: 'Tab 5', icon: 'settings' },
+        { id: 5, label: 'Tab 6', icon: 'search' },
+        { id: 6, label: 'Tab 7', icon: 'done' },
+        { id: 7, label: 'Tab 8', icon: 'visibility' },
+        { id: 8, label: 'Tab 9', icon: 'lock' },
+        { id: 9, label: 'Tab 10', icon: 'language' },
       ],
     }}
   >
@@ -168,18 +102,17 @@ The tabs are placed horizontally at the top of the content.
     name="Text Only"
     argTypes={{ ...Default.argTypes }}
     args={{
-      variant: 'text-only',
       tabs: [
-        { label: 'Tab 1', icon: 'home', iconKind: 'filled' },
-        { label: 'Tab 2', icon: 'add_circle', disabled: true },
-        { label: 'Tab 3', icon: 'favorite' },
-        { label: 'Tab 4', icon: 'face' },
-        { label: 'Tab 5', icon: 'settings' },
-        { label: 'Tab 6', icon: 'search' },
-        { label: 'Tab 7', icon: 'done' },
-        { label: 'Tab 8', icon: 'visibility' },
-        { label: 'Tab 9', icon: 'lock' },
-        { label: 'Tab 10', icon: 'language' },
+        { id: 0, label: 'Tab 1', icon: 'home' },
+        { id: 1, label: 'Tab 2', icon: 'add_circle', disabled: true },
+        { id: 2, label: 'Tab 3', icon: 'favorite' },
+        { id: 3, label: 'Tab 4', icon: 'face' },
+        { id: 4, label: 'Tab 5', icon: 'settings' },
+        { id: 5, label: 'Tab 6', icon: 'search' },
+        { id: 6, label: 'Tab 7', icon: 'done' },
+        { id: 7, label: 'Tab 8', icon: 'visibility' },
+        { id: 8, label: 'Tab 9', icon: 'lock' },
+        { id: 9, label: 'Tab 10', icon: 'language' },
       ],
     }}
   >
