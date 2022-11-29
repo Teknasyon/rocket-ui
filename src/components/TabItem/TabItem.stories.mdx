@@ -5,15 +5,10 @@ import TabItem from './TabItem.vue';
 export const Default = (args) => ({
   components: { TabItem },
   setup() {
-    return { args, click: action('click') };
+    return { args, click: action('select') };
   },
   template: `
-    <TabItem v-bind="args" @click="click">
-      <template #tab={activeTab}>
-        <h1>Tab {{activeTab + 1}}</h1>
-        <p>Active tab {{activeTab}}</p>
-      </template>
-    </TabItem>
+    <TabItem v-bind="args" @select="click"/>
   `,
 });
 
@@ -22,70 +17,38 @@ export const defaultArgs = {
     control: {
       type: 'text',
     },
-    defaultValue: 'tab-item-1',
+    defaultValue: 'tab-1',
   },
-  tab: {
+  label: {
     control: {
-      type: 'object',
+      type: 'text',
     },
-    defaultValue: {
-      id: 'tab-1',
-      label: 'Tab 1',
-      icon: 'home',
-      iconKind: 'filled',
-      badge: '1',
+    defaultValue: 'Tab 1',
+  },
+  icon: {
+    control: {
+      type: 'text',
     },
+    defaultValue: 'home',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   variant: {
     control: {
       type: 'select',
-      options: ['default', 'pill', 'icon-only', 'icon-pill', 'text-only'],
+      options: ['default', 'icon-only', 'text-only'],
     },
     defaultValue: 'default',
   },
-  size: {
+  active: {
     control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
+      type: 'boolean',
     },
-    defaultValue: 'medium',
-  },
-  color: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  bgColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  activeColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  activeBgColor: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  align: {
-    control: {
-      type: 'select',
-      options: ['left', 'center', 'right'],
-    },
-    defaultValue: 'center',
-  },
-  activeTab: {
-    control: {
-      type: 'number',
-    },
-    defaultValue: 0,
+    defaultValue: false,
   },
 };
 
@@ -119,7 +82,7 @@ TabItem is a component that renders a tab item. It is not meant to be used on it
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(click|icon|on.*)$/} />
+<ArgsTable story="Overview" exclude={/^(select|icon|on.*)$/} />
 
 ## Stories
 
@@ -143,52 +106,6 @@ TabItem is a component that renders a tab item. It is not meant to be used on it
     argTypes={{ ...Default.argTypes }}
     args={{
       variant: 'icon-only',
-      tab: {
-        id: 'tab-item-2',
-        label: 'Tab 1',
-        icon: 'home',
-        iconKind: 'filled',
-      },
-    }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Pill
-
-<Canvas withSource="open">
-  <Story
-    name="Pill"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'pill',
-      tab: {
-        id: 'tab-item-3',
-        label: 'Tab 1',
-        icon: 'home',
-        iconKind: 'filled',
-      },
-    }}
-  >
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Icon Pill
-
-<Canvas withSource="open">
-  <Story
-    name="Icon Pill"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'icon-pill',
-      tab: {
-        id: 'tab-item-4',
-        label: 'Tab 1',
-        icon: 'home',
-        iconKind: 'filled',
-      },
     }}
   >
     {Default.bind({})}
@@ -203,12 +120,6 @@ TabItem is a component that renders a tab item. It is not meant to be used on it
     argTypes={{ ...Default.argTypes }}
     args={{
       variant: 'text-only',
-      tab: {
-        id: 'tab-item-5',
-        label: 'Tab 1',
-        icon: 'home',
-        iconKind: 'filled',
-      },
     }}
   >
     {Default.bind({})}

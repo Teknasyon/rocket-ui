@@ -8,7 +8,7 @@ export const Default = (args) => ({
   setup() {
     return { args, click: action('close') };
   },
-  template: `<Alert v-bind="args" @click="click"/>`,
+  template: `<Alert v-bind="args" @close="click"/>`,
 });
 
 export const DefaultWithSlots = (args) => ({
