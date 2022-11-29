@@ -25,10 +25,9 @@ const emit = defineEmits(['select']);
  * @description - Returns the class for the tab item
  */
 const classes = computed(() => {
-  const { variant, active } = props;
   return {
     'tab-item': true,
-    [`tab-item--${variant}`]: true,
+    [`tab-item--${props.variant}`]: true,
   };
 });
 
