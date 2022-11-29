@@ -5,7 +5,7 @@
 }
 
 .tabs {
-  @apply flex w-full border-0 border-b border-gray-200 border-solid;
+  @apply flex w-full;
 
   &--scrollable {
     @apply overflow-x-auto;
@@ -13,5 +13,9 @@
 
   &--pill {
     @apply pb-1;
+  }
+
+  & > * {
+    @apply transition-all duration-300 ease-in-out;
   }
 }

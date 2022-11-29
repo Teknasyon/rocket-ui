@@ -8,24 +8,21 @@ describe('Tabs', () => {
   it('renders properly', () => {
     const wrapper = mount(Tabs, {
       props: {
-        tabs: [{ label: 'Tab 1', icon: 'face' }],
+        tabs: [{ id: 0, label: 'Tab 1', icon: 'face' }],
+        scrollable: true,
       },
-      scrollable: true,
-      pill: true,
     });
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('.tabs-wrapper').exists()).toBe(true);
+    expect(wrapper.find('.tab-item').element.innerHTML.includes('Tab 1'));
+    expect(wrapper.find('.tab-item').element.innerHTML.includes('face'));
     expect(
       wrapper
-        .find('.tabs-wrapper')
         .find('.tab-item')
-        .element.innerHTML.includes('Tab 1')
-    );
-    expect(
-      wrapper
-        .find('.tabs-wrapper')
-        .find('.tab-item')
-        .element.innerHTML.includes('face')
+        .trigger('click')
+        .then(() => {
+          expect(wrapper.emitted('select')).toBeTruthy();
+        })
     );
   });
 });
