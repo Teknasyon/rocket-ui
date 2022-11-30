@@ -34,7 +34,6 @@
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
   "dependencies": {
-    "floating-vue": "^2.0.0-beta.19",
     "lodash.kebabcase": "^4.1.1",
     "material-icons": "^1.11.11",
     "vue": "^3.2.37"
