@@ -1,0 +1,30 @@
+@import '../../index.css';
+
+.tooltip {
+  @apply z-50 bg-none m-0 p-0 top-0 left-0 absolute w-max hidden;
+
+  &__content {
+    @apply font-normal p-3 rounded-lg text-xs w-80;
+    &--dark {
+      @apply text-white bg-[var(--neutral-900)];
+    }
+    &--light {
+      @apply text-[var(--neutral-900)] bg-white;
+    }
+  }
+
+  &__arrow {
+    @apply absolute w-4 h-4 rotate-45 -z-50;
+
+    &--dark {
+      @apply bg-[var(--neutral-900)];
+    }
+    &--light {
+      @apply bg-white;
+    }
+  }
+
+  &--light {
+    @apply shadow-2xl rounded-lg;
+  }
+}
