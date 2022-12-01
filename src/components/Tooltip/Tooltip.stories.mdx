@@ -1,0 +1,171 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import Tooltip from './Tooltip.vue';
+import Button from '../Button/Button.vue';
+import Icon from '../Icon/Icon.vue';
+
+export const Default = (args) => {
+  return {
+    components: { Tooltip, Button },
+    setup() {
+      return {
+        args,
+        click: action('click'),
+        mouseenter: action('mouseenter'),
+        mouseleave: action('mouseleave'),
+        focus: action('focus'),
+        blur: action('blur'),
+        buttonClick: action('button click'),
+      };
+    },
+    template: `
+    <Tooltip
+      v-bind="args"
+      @click="click"
+      @mouseenter="mouseenter"
+      @mouseleave="mouseleave"
+      @focus="focus"
+      @blur="blur"
+    >
+      <template #trigger>
+        <Button @click="buttonClick">Hover me</Button>
+      </template>
+    </Tooltip>
+    `,
+  };
+};
+
+export const WithContentSlot = (args) => {
+  return {
+    components: { Tooltip, Icon },
+    setup() {
+      return {
+        args,
+        click: action('click'),
+        mouseenter: action('mouseenter'),
+        mouseleave: action('mouseleave'),
+        focus: action('focus'),
+        blur: action('blur'),
+      };
+    },
+    template: `
+    <Tooltip
+      @click="click"
+      @mouseenter="mouseenter"
+      @mouseleave="mouseleave"
+      @focus="focus"
+      @blur="blur"
+    >
+      <template #trigger>
+        <Icon name="face"/>
+      </template>
+      <template #content>
+        <span style="background: #000; color: #fff;">This is a tooltip</span>
+      </template>
+    </Tooltip>
+    `,
+  };
+};
+
+export const defaultArgs = {
+  placement: {
+    control: {
+      type: 'select',
+      options: [
+        'top',
+        'right',
+        'bottom',
+        'left',
+        'top-start',
+        'top-end',
+        'right-start',
+        'right-end',
+        'bottom-start',
+        'bottom-end',
+        'left-start',
+        'left-end',
+      ],
+    },
+    defaultValue: 'top',
+  },
+  text: {
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Tooltips are used to describe or identify an element. In most scenarios, tooltips help the user understand the meaning, function or alt-text of an element.',
+  },
+  dark: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  light: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  triggers: {
+    control: {
+      type: 'select',
+      options: ['hover', 'click', 'focus'],
+    },
+    defaultValue: 'hover',
+  },
+  autoHide: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  delay: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 3000,
+  },
+};
+
+<Meta
+  title="Components/Tooltip"
+  component={Tooltip}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+    layout: 'centered',
+  }}
+/>
+
+# Tooltip
+
+Tooltip is a component that displays a tooltip when hovering over the element.
+
+### Overview
+
+<Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(trigger|content|click|on.*)/} />
+
+## Stories
+
+### With Content Slot
+
+<Canvas>
+  <Story
+    name="With Content Slot"
+    argTypes={{ ...WithContentSlot.argTypes }}
+    args={{ text: '', trigger: 'hover' }}
+  >
+    {WithContentSlot.bind({})}
+  </Story>
+</Canvas>
