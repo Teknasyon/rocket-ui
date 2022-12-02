@@ -10,25 +10,18 @@ export const Default = (args) => {
     setup() {
       return {
         args,
-        click: action('click'),
-        mouseenter: action('mouseenter'),
-        mouseleave: action('mouseleave'),
-        focus: action('focus'),
-        blur: action('blur'),
-        buttonClick: action('button click'),
+        show: action('show'),
+        hide: action('hide'),
       };
     },
     template: `
     <Tooltip
       v-bind="args"
-      @click="click"
-      @mouseenter="mouseenter"
-      @mouseleave="mouseleave"
-      @focus="focus"
-      @blur="blur"
+      @show="show"
+      @hide="hide"
     >
       <template #trigger>
-        <Button @click="buttonClick">Hover me</Button>
+        <Button variant="primary">Hover me</Button>
       </template>
     </Tooltip>
     `,
@@ -41,26 +34,21 @@ export const WithContentSlot = (args) => {
     setup() {
       return {
         args,
-        click: action('click'),
-        mouseenter: action('mouseenter'),
-        mouseleave: action('mouseleave'),
-        focus: action('focus'),
-        blur: action('blur'),
+        show: action('show'),
+        hide: action('hide'),
       };
     },
     template: `
     <Tooltip
-      @click="click"
-      @mouseenter="mouseenter"
-      @mouseleave="mouseleave"
-      @focus="focus"
-      @blur="blur"
+      v-bind="args"
+      @show="show"
+      @hide="hide"
     >
       <template #trigger>
-        <Icon name="face"/>
+        <Icon name="info" />
       </template>
       <template #content>
-        <span style="background: #000; color: #fff;">This is a tooltip</span>
+        <span style="background: red; color: #fff; padding: 8px;">This is a tooltip</span>
       </template>
     </Tooltip>
     `,
@@ -110,7 +98,7 @@ export const defaultArgs = {
   triggers: {
     control: {
       type: 'select',
-      options: ['hover', 'click', 'focus'],
+      options: ['hover', 'click', 'manual'],
     },
     defaultValue: 'hover',
   },
@@ -120,11 +108,47 @@ export const defaultArgs = {
     },
     defaultValue: true,
   },
-  delay: {
+  hideDelay: {
     control: {
       type: 'number',
     },
     defaultValue: 3000,
+  },
+  showDelay: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 0,
+  },
+  shown: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  offset: {
+    control: {
+      type: 'range',
+    },
+    defaultValue: 12,
+  },
+  padding: {
+    control: {
+      type: 'range',
+    },
+    defaultValue: 0,
+  },
+  outsideClick: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
 };
 
@@ -141,6 +165,7 @@ export const defaultArgs = {
 # Tooltip
 
 Tooltip is a component that displays a tooltip when hovering over the element.
+`manual` trigger is used to show/hide the tooltip programmatically.
 
 ### Overview
 
@@ -158,13 +183,45 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ## Stories
 
+### Default
+
+<Canvas>
+  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### With Click Trigger
+
+<Canvas>
+  <Story
+    name="With Click Trigger"
+    argTypes={{ ...Default.argTypes }}
+    args={{ triggers: 'click' }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### With Manual Trigger
+
+<Canvas>
+  <Story
+    name="With Manual Trigger"
+    argTypes={{ ...Default.argTypes }}
+    args={{ triggers: 'manual', dark: false, light: true }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
 ### With Content Slot
 
 <Canvas>
   <Story
     name="With Content Slot"
     argTypes={{ ...WithContentSlot.argTypes }}
-    args={{ text: '', trigger: 'hover' }}
+    args={{ text: '', triggers: 'hover' }}
   >
     {WithContentSlot.bind({})}
   </Story>

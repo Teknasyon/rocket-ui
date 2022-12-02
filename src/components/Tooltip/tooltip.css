@@ -1,10 +1,14 @@
 @import '../../index.css';
 
+.trigger {
+  @apply relative inline-block cursor-pointer bg-none rounded-full;
+}
 .tooltip {
   @apply z-50 bg-none m-0 p-0 top-0 left-0 absolute w-max hidden;
 
   &__content {
     @apply font-normal p-3 rounded-lg text-xs w-80;
+    animation: tooltip-show 0.2s ease-in-out forwards;
     &--dark {
       @apply text-white bg-[var(--neutral-900)];
     }
@@ -14,7 +18,8 @@
   }
 
   &__arrow {
-    @apply absolute w-4 h-4 rotate-45 -z-50;
+    @apply absolute w-4 h-4 -z-10;
+    animation: tooltip-show-arrow 0.2s ease-in-out forwards;
 
     &--dark {
       @apply bg-[var(--neutral-900)];
@@ -26,5 +31,26 @@
 
   &--light {
     @apply shadow-2xl rounded-lg;
+  }
+}
+
+@keyframes tooltip-show {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes tooltip-show-arrow {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(45deg) translateY(0);
   }
 }

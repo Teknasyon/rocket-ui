@@ -12,13 +12,15 @@ export function update(
   { value: trigger }: Ref<HTMLDivElement>,
   { value: tooltip }: Ref<HTMLDivElement>,
   { value: arrowElement }: Ref<HTMLDivElement>,
-  placement: Placements
+  placement: Placements,
+  offsetParam: number,
+  padding: number
 ) {
   computePosition(trigger, tooltip, {
     placement,
     middleware: [
-      offset(12),
-      shift({ padding: 0 }),
+      offset(offsetParam),
+      shift({ padding }),
       arrow({ element: arrowElement }),
       flip(),
       hide(),
@@ -29,7 +31,7 @@ export function update(
       top: `${y}px`,
     });
 
-    if (middlewareData.arrow) {
+    if (arrowElement && middlewareData.arrow) {
       const { x: arrowX, y: arrowY } = middlewareData.arrow;
 
       const staticSide = {
@@ -79,10 +81,10 @@ export enum Placement {
   LeftEnd = 'left-end',
 }
 
-export type Triggers = 'click' | 'hover' | 'focus';
+export type Triggers = 'click' | 'hover' | 'manual';
 
 export enum Trigger {
   Click = 'click',
   Hover = 'hover',
-  Focus = 'focus',
+  Manual = 'manual',
 }
