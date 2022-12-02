@@ -69,16 +69,18 @@ const toggleOutsideClick = (toggle: string) => {
   if (toggle === 'remove') document.removeEventListener('click', hideTooltip);
 };
 const onClick = () => {
-  if (tooltip.value.style.display === '' && props.triggers === Trigger.Click) {
-    showTooltip();
-    return;
+  if (props.disabled) return;
+  if (props.triggers === Trigger.Click) {
+    if (tooltip.value.style.display === 'block') hideTooltip();
+    else showTooltip();
   }
-  hideTooltip();
 };
 const onMouseEnter = () => {
+  if (props.disabled) return;
   if (props.triggers === Trigger.Hover) showTooltip();
 };
 const onMouseLeave = () => {
+  if (props.disabled) return;
   if (props.triggers === Trigger.Hover) hideTooltip();
 };
 const onMouseMove = () => {
@@ -97,6 +99,7 @@ const classes = computed(() => {
 
 watchEffect(
   () => {
+    if (props.disabled) return;
     if (props.shown && props.triggers === Trigger.Manual) showTooltip();
   },
   { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
@@ -110,6 +113,7 @@ const animationDuration = computed(() => {
   <div
     ref="trigger"
     class="trigger"
+    :aria-disabled="props.disabled"
     @click.stop="onClick"
     @mouseenter.stop="onMouseEnter"
     @mouseleave.stop="onMouseLeave"

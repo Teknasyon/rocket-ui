@@ -1,13 +1,13 @@
 @import '../../index.css';
 
 .trigger {
-  @apply relative inline-block cursor-pointer bg-none rounded-full;
+  @apply relative inline-block cursor-pointer bg-transparent rounded-full;
 }
 .tooltip {
-  @apply z-50 bg-none m-0 p-0 top-0 left-0 absolute w-max hidden;
+  @apply z-50 bg-transparent m-0 p-0 top-0 left-0 absolute w-max hidden;
 
   &__content {
-    @apply font-normal p-3 rounded-lg text-xs max-w-sm;
+    @apply font-normal p-4 rounded-lg text-xs max-w-xs;
     &--dark {
       @apply text-white bg-[var(--neutral-900)];
     }
