@@ -4,7 +4,7 @@ import Tooltip from './Tooltip.vue';
 import Button from '../Button/Button.vue';
 import Icon from '../Icon/Icon.vue';
 
-export const Default = (args) => {
+export const Default = ({ buttonContent, ...args }) => {
   return {
     components: { Tooltip, Button },
     setup() {
@@ -21,7 +21,7 @@ export const Default = (args) => {
       @hide="hide"
     >
       <template #trigger>
-        <Button variant="primary">Hover me</Button>
+        <Button variant="primary">${buttonContent}</Button>
       </template>
     </Tooltip>
     `,
@@ -106,7 +106,7 @@ export const defaultArgs = {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
+    defaultValue: false,
   },
   hideDelay: {
     control: {
@@ -158,7 +158,6 @@ export const defaultArgs = {
   argTypes={{ ...defaultArgs }}
   parameters={{
     viewMode: 'docs',
-    layout: 'centered',
   }}
 />
 
@@ -170,7 +169,13 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 ### Overview
 
 <Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      buttonContent: 'Hover me',
+    }}
+  >
     {Default.bind({})}
   </Story>
 </Canvas>
@@ -186,7 +191,13 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 ### Default
 
 <Canvas>
-  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      buttonContent: 'Hover me',
+    }}
+  >
     {Default.bind({})}
   </Story>
 </Canvas>
@@ -197,7 +208,12 @@ Tooltip is a component that displays a tooltip when hovering over the element.
   <Story
     name="With Click Trigger"
     argTypes={{ ...Default.argTypes }}
-    args={{ triggers: 'click' }}
+    args={{
+      triggers: 'click',
+      text: 'Clicked!',
+      buttonContent: 'Click me',
+      outsideClick: true,
+    }}
   >
     {Default.bind({})}
   </Story>
@@ -209,7 +225,13 @@ Tooltip is a component that displays a tooltip when hovering over the element.
   <Story
     name="With Manual Trigger"
     argTypes={{ ...Default.argTypes }}
-    args={{ triggers: 'manual', dark: false, light: true }}
+    args={{
+      triggers: 'manual',
+      dark: false,
+      light: true,
+      text: 'Manual!',
+      buttonContent: 'Toggle Shown',
+    }}
   >
     {Default.bind({})}
   </Story>
