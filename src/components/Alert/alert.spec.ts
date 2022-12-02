@@ -11,7 +11,6 @@ describe('Alert', () => {
         description: 'Alert Description',
         size: 'small',
         closable: true,
-        closeText: 'Close2',
       },
     });
 
@@ -20,7 +19,6 @@ describe('Alert', () => {
     expect(wrapper.find('.texts__description').text()).toBe(
       'Alert Description'
     );
-    expect(wrapper.find('.close').text()).toBe('Close2');
     expect(wrapper.find('.alert').classes()).toContain('alert--small');
     expect(
       wrapper
