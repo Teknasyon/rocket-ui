@@ -8,6 +8,7 @@
 
   &__content {
     @apply font-normal p-4 rounded-lg text-xs max-w-xs;
+    
     &--dark {
       @apply text-white bg-[var(--neutral-900)];
     }

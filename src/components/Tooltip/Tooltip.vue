@@ -83,7 +83,11 @@ const onMouseEnter = () => {
 };
 const onMouseLeave = () => {
   if (props.disabled) return;
-  if (props.triggers === Trigger.Hover) hideTooltip();
+  if (tooltip.value.style.display === '' && props.triggers === Trigger.Click) {
+    showTooltip();
+    return;
+  }
+  hideTooltip();
 };
 const onMouseMove = () => {
   const { placement, offset, padding, disabled } = props;
