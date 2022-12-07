@@ -22,6 +22,7 @@ export interface IProps {
   offset?: number;
   padding?: number;
   outsideClick?: boolean;
+  triggerContent?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<IProps>(), {
   offset: 0,
   padding: 0,
   outsideClick: false,
+  triggerContent: '',
 });
 const emit = defineEmits(['show', 'hide']);
 const trigger = ref<HTMLDivElement>(null);
@@ -69,17 +71,23 @@ const toggleOutsideClick = (toggle: string) => {
   if (toggle === 'remove') document.removeEventListener('click', hideTooltip);
 };
 const onClick = () => {
+  if (props.disabled) return;
+  if (props.triggers === Trigger.Click) {
+    if (tooltip.value.style.display === 'block') hideTooltip();
+    else showTooltip();
+  }
+};
+const onMouseEnter = () => {
+  if (props.disabled) return;
+  if (props.triggers === Trigger.Hover) showTooltip();
+};
+const onMouseLeave = () => {
+  if (props.disabled) return;
   if (tooltip.value.style.display === '' && props.triggers === Trigger.Click) {
     showTooltip();
     return;
   }
   hideTooltip();
-};
-const onMouseEnter = () => {
-  if (props.triggers === Trigger.Hover) showTooltip();
-};
-const onMouseLeave = () => {
-  if (props.triggers === Trigger.Hover) hideTooltip();
 };
 const onMouseMove = () => {
   const { placement, offset, padding, disabled } = props;
@@ -97,6 +105,7 @@ const classes = computed(() => {
 
 watchEffect(
   () => {
+    if (props.disabled) return;
     if (props.shown && props.triggers === Trigger.Manual) showTooltip();
   },
   { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
@@ -110,12 +119,14 @@ const animationDuration = computed(() => {
   <div
     ref="trigger"
     class="trigger"
+    :aria-disabled="props.disabled"
     @click.stop="onClick"
     @mouseenter.stop="onMouseEnter"
     @mouseleave.stop="onMouseLeave"
     @mousemove.stop="onMouseMove"
   >
-    <slot name="trigger" />
+    <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
+    <slot v-else name="trigger" />
   </div>
   <div ref="tooltip" id="tooltip" :class="classes" role="tooltip">
     <slot name="content" />

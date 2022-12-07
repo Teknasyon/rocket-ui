@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 import Tooltip from './Tooltip.vue';
 import Button from '../Button/Button.vue';
 import Icon from '../Icon/Icon.vue';
+import { vTooltip } from '../../directives';
 
 export const Default = ({ buttonContent, ...args }) => {
   return {
@@ -51,6 +52,26 @@ export const WithContentSlot = (args) => {
         <span style="background: red; color: #fff; padding: 8px;">This is a tooltip</span>
       </template>
     </Tooltip>
+    `,
+  };
+};
+
+export const WithDirectives = () => {
+  return {
+    components: { Button },
+    directives: { tooltip: vTooltip },
+    template: `
+    <Button 
+      v-tooltip="{
+        triggerContent: '<div>Hello World!</div>',
+        text: 'Directive tooltip',
+        autoHide: false,
+        placement: 'right',
+        offset: 30,
+        }" 
+    >
+      This hidden
+    </Button>
     `,
   };
 };
@@ -168,7 +189,7 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ### Overview
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Overview"
     argTypes={{ ...Default.argTypes }}
@@ -190,7 +211,7 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ### Default
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="Default"
     argTypes={{ ...Default.argTypes }}
@@ -204,7 +225,7 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ### With Click Trigger
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Click Trigger"
     argTypes={{ ...Default.argTypes }}
@@ -221,7 +242,7 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ### With Manual Trigger
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Manual Trigger"
     argTypes={{ ...Default.argTypes }}
@@ -239,12 +260,24 @@ Tooltip is a component that displays a tooltip when hovering over the element.
 
 ### With Content Slot
 
-<Canvas>
+<Canvas withSource="open">
   <Story
     name="With Content Slot"
     argTypes={{ ...WithContentSlot.argTypes }}
     args={{ text: '', triggers: 'hover' }}
   >
     {WithContentSlot.bind({})}
+  </Story>
+</Canvas>
+
+## With Directives
+
+<Canvas withSource="open">
+  <Story
+    name="With directives"
+    argTypes={{}}
+    parameters={{ controls: { disable: true } }}
+  >
+    {WithDirectives.bind({})}
   </Story>
 </Canvas>
