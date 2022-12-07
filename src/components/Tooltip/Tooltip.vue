@@ -22,6 +22,7 @@ export interface IProps {
   offset?: number;
   padding?: number;
   outsideClick?: boolean;
+  triggerContent?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<IProps>(), {
   offset: 0,
   padding: 0,
   outsideClick: false,
+  triggerContent: '',
 });
 const emit = defineEmits(['show', 'hide']);
 const trigger = ref<HTMLDivElement>(null);
@@ -119,7 +121,8 @@ const animationDuration = computed(() => {
     @mouseleave.stop="onMouseLeave"
     @mousemove.stop="onMouseMove"
   >
-    <slot name="trigger" />
+    <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
+    <slot v-else name="trigger" />
   </div>
   <div ref="tooltip" id="tooltip" :class="classes" role="tooltip">
     <slot name="content" />
