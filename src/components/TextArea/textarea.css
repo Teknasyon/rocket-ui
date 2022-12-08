@@ -1,0 +1,47 @@
+@import '../../index.css';
+
+.container {
+  @apply flex flex-col items-start justify-center;
+}
+
+.textarea {
+  @apply outline-none px-3 py-2 rounded-lg border border-[var(--neutral-200)] text-[var(--neutral-900)] min-h-[80px] min-w-[320px];
+
+  &:hover {
+    @apply border-[var(--primary-500)];
+  }
+
+  &:focus-visible {
+    @apply border-[var(--primary-500)] ring-[4px] ring-[var(--primary-100)];
+  }
+
+  &::placeholder {
+    @apply text-[var(--neutral-500)];
+  }
+
+  &:disabled {
+    @apply bg-[var(--neutral-100)] cursor-not-allowed text-[var(--neutral-300)];
+  }
+
+  &--error {
+    @apply border-[var(--error-500)] text-[var(--error-500)];
+    &:hover {
+      @apply border-[var(--error-500)];
+    }
+    &:focus-visible {
+      @apply text-[var(--neutral-900)] border-[var(--error-500)] ring-[4px] ring-[var(--error-100)];
+    }
+  }
+
+  &__label {
+    @apply text-[var(--neutral-900)] mb-2 text-sm;
+  }
+
+  &__hint {
+    @apply text-[var(--neutral-500)] text-sm mt-2;
+  }
+
+  &__error {
+    @apply text-[var(--error-500)] text-sm mt-2;
+  }
+}

@@ -1,0 +1,89 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import TextArea from './TextArea.vue';
+
+export const Default = (args) => ({
+  components: { TextArea },
+  setup() {
+    return { args, input: action('input') };
+  },
+  template: `
+    <TextArea
+      v-bind="args"
+      @input="input"
+    />
+  `,
+});
+
+export const defaultArgs = {
+  errorMsg: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Text Area',
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'RocketUI',
+  },
+  value: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hint: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'A form control for editing multi-line text.',
+  },
+};
+
+<Meta
+  title="Components/TextArea"
+  component={TextArea}
+  argTypes={{ ...defaultArgs }}
+/>
+
+# TextArea
+
+TextArea is a component that allows users to enter and edit text. It is a multi-line input field.
+
+### Overview
+
+<Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|tab|on.*)/} />
+
+## Stories
+
+### Default
+
+<Canvas>
+  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
