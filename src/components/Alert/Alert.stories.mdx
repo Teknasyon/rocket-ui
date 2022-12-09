@@ -91,13 +91,29 @@ export const defaultArgs = {
 
 # Alert
 
-Alert is a component that displays a message to the user. It can be used to display information, warning, error, or success messages.
+Alert is a component that displays a message to the user. It is often used to display information, warning, error, or success messages.
 
-It has a `close` slot that can be used to add a **custom close button**. The button emits a **click** event when the close button is clicked.
+- [Overview](#overview)
 
-> The visibility should be controlled by the parent component.
+- [Playground](#playground)
 
-### Overview
+- [Variants](#variants)
+
+- [Customizable Slots](#customizable-slots)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+👉 The main purpose of an Alert component is to get the attention of the user and prompt them to take an action.
+
+👉 Alert component has a `close` slot that can be used to add a **custom close button**. This button emits a **click** event when the close button is clicked.
+
+👉 The visibility of the component should be controlled by the parent component.
+
+👉 Our Alert boxes comes in three different sizes: _small_, _medium_ or _large_.
+
+👉 Default alert shows a medium sized _info variant_ with no a title or a description.
 
 <Canvas withSource="open">
   <Story
@@ -109,13 +125,15 @@ It has a `close` slot that can be used to add a **custom close button**. The but
   </Story>
 </Canvas>
 
-### Playground
+## Playground <a id="playground" />
 
-> Changes you make in the controls will be reflected in the example above.
+> Changes you make in the controls will be reflected in the example above. Try it yourself!
 
 <ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
 
-## Stories
+## Variants <a id="variants" />
+
+> Our system has 4 Alert variants: **Success**, **Error**, **Information** and **Warning**.
 
 ### Success
 
@@ -123,7 +141,12 @@ It has a `close` slot that can be used to add a **custom close button**. The but
   <Story
     name="Success"
     argTypes={{ ...Default.argTypes }}
-    args={{ type: 'success' }}
+    args={{
+      type: 'success',
+      title: 'Success',
+      description:
+        'Success Variant! This is a short but descriptive message that indicates a successful action.',
+    }}
   >
     {Default.bind({})}
   </Story>
@@ -135,7 +158,12 @@ It has a `close` slot that can be used to add a **custom close button**. The but
   <Story
     name="Error"
     argTypes={{ ...Default.argTypes }}
-    args={{ type: 'error' }}
+    args={{
+      type: 'error',
+      title: 'Error',
+      description:
+        'Error Variant! This is a short but descriptive message that indicates a negative action.',
+    }}
   >
     {Default.bind({})}
   </Story>
@@ -149,6 +177,9 @@ It has a `close` slot that can be used to add a **custom close button**. The but
     argTypes={{ ...Default.argTypes }}
     args={{
       type: 'info',
+      title: 'Info',
+      description:
+        'Info Variant! This is a short but descriptive message that indicates a neutral informative action.',
     }}
   >
     {Default.bind({})}
@@ -163,15 +194,20 @@ It has a `close` slot that can be used to add a **custom close button**. The but
     argTypes={{ ...Default.argTypes }}
     args={{
       type: 'warning',
+      title: 'Warning',
+      description:
+        'Warning Variant! This is a short but descriptive message that indicates a negative or dangerous action.',
     }}
   >
     {Default.bind({})}
   </Story>
 </Canvas>
 
-## Customizable Slots
+## Customizable Slots <a id="customizable-slots" />
 
 ### `#close`
+
+> This `close` slot can be used for creating your own custom close buttons like this one example below 👇
 
 <Canvas withSource="open">
   <Story
@@ -179,8 +215,21 @@ It has a `close` slot that can be used to add a **custom close button**. The but
     argTypes={{ ...Default.argTypes }}
     args={{
       type: 'info',
+      title: 'With a custom button',
+      description:
+        'This alert box looks very similar to our default examples but it contains a custom close button in it!',
     }}
   >
     {DefaultWithSlots.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 Don't confuse an _Alert Box_ with a _Toast_, a _Notification Bar_ or a _Snackbar_. You can use it for system-level alert messages or general updates.
+
+💡 Use it only to attract the attention of the user. We don't want to interrupt their tasks!
+
+💡 Add only _one_ call to action in an _Alert Box_.
+
+💡 Keep your descriptions _short_ and _clear_.
