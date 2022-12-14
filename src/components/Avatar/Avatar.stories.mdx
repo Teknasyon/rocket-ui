@@ -1,0 +1,137 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+import Avatar from './Avatar.vue';
+
+export const Default = (args) => ({
+  components: { Avatar },
+  setup() {
+    return { args, click: action('close') };
+  },
+  template: `<Avatar v-bind="args" @close="click"/>`,
+});
+
+export const defaultArgs = {
+  type: {
+    control: {
+      type: 'select',
+      options: ['image', 'text'],
+    },
+    defaultValue: 'image',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    },
+    defaultValue: 'md',
+  },
+  src: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  alt: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Avatar',
+  },
+  online: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  text: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+};
+
+<Meta
+  title="Components/Avatar"
+  component={Avatar}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Avatar
+
+Avatar is a component that displays a user's profile picture.
+
+> **Note:** This component is still in development and may change in the future.
+
+### Overview
+
+<Canvas withSource="open">
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(.*)$/} />
+
+## Stories
+
+### Image
+
+<Canvas withSource="open">
+  <Story
+    name="Image"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'image',
+      src: 'https://avatars.githubusercontent.com/u/12534660?v=4',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Text
+
+<Canvas withSource="open">
+  <Story
+    name="Text"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      type: 'text',
+      text: 'Avatar Text',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Anonymous
+
+<Canvas withSource="open">
+  <Story name="Anonymous" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Online
+
+<Canvas withSource="open">
+  <Story
+    name="Online"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      online: true,
+      src: 'https://avatars.githubusercontent.com/u/12534660?v=4',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>

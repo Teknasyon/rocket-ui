@@ -1,0 +1,82 @@
+@import '../../index.css';
+
+.avatar {
+  @apply relative grid place-items-center rounded-full overflow-hidden bg-[var(--primary-100)];
+
+  &__wrapper {
+    @apply relative max-w-min;
+  }
+
+  &--xs {
+    @apply w-6 h-6;
+  }
+  &--sm {
+    @apply w-8 h-8;
+  }
+  &--md {
+    @apply w-10 h-10;
+  }
+  &--lg {
+    @apply w-12 h-12;
+  }
+  &--xl {
+    @apply w-14 h-14;
+  }
+  &--2xl {
+    @apply w-16 h-16;
+  }
+
+  &__text {
+    @apply text-[var(--primary-500)] font-semibold;
+
+    &--xs {
+      @apply text-xs;
+    }
+    &--sm {
+      @apply text-sm;
+    }
+    &--md {
+      @apply text-base;
+    }
+    &--lg {
+      @apply text-xl;
+    }
+    &--xl {
+      @apply text-2xl;
+    }
+    &--2xl {
+      @apply text-2xl;
+    }
+  }
+
+  &__image {
+    @apply inset-0 object-cover;
+
+    &--anonymous {
+      @apply w-[40%] h-[40%];
+    }
+  }
+
+  &__online {
+    @apply absolute rounded-full bg-green-500 border-white;
+
+    &--xs {
+      @apply w-1.5 h-1.5 right-[1px] bottom-[1px] border;
+    }
+    &--sm {
+      @apply w-2 h-2 right-[1px] bottom-[1px] border;
+    }
+    &--md {
+      @apply w-2 h-2 right-0.5 bottom-0.5 border-[1.25px];
+    }
+    &--lg {
+      @apply w-3 h-3 right-[1.5px] bottom-[1.5px] border-[1.5px];
+    }
+    &--xl {
+      @apply w-3.5 h-3.5 right-0.5 bottom-0.5 border-2;
+    }
+    &--2xl {
+      @apply w-4 h-4 right-0.5 bottom-0.5 border-2;
+    }
+  }
+}
