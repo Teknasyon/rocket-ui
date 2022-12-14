@@ -1,10 +1,10 @@
 @import '../../index.css';
 
 .button {
-  @apply flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-auto;
+  @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-auto;
 
   &:focus {
-    @apply ring-[4px] border-solid border;
+    @apply ring-2 ring-offset-2;
   }
 
   &:disabled {
@@ -18,7 +18,7 @@
     @apply h-12 text-sm px-6 py-3;
   }
   &--small {
-    @apply h-11 text-xs px-4 py-2;
+    @apply h-9 text-xs px-4 py-2;
   }
   &--loading {
     @apply animate-pulse;
@@ -62,10 +62,10 @@
     @apply bg-[var(--primary-700)];
   }
   &:focus {
-    @apply ring-[var(--primary-100)] bg-white border-[var(--primary-500)] text-[var(--primary-500)];
+    @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
   }
   &:disabled {
-    @apply bg-[var(--primary-200)] text-[var(--primary-300)] cursor-not-allowed;
+    @apply bg-[var(--primary-200)] text-[var(--primary-300)];
   }
 }
 .button--secondary {
@@ -75,23 +75,23 @@
     @apply bg-[var(--primary-200)];
   }
   &:focus {
-    @apply ring-[var(--primary-100)] bg-white border-[var(--primary-500)] text-[var(--primary-500)];
+    @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
   }
   &:disabled {
-    @apply bg-[var(--primary-200)] text-[var(--primary-300)] cursor-not-allowed;
+    @apply bg-[var(--primary-200)] text-[var(--primary-300)];
   }
 }
 .button--outline {
   @apply bg-transparent ring-1 ring-[var(--neutral-200)] text-[var(--neutral-900)];
 
   &:hover {
-    @apply bg-[var(--neutral-100)] border-[var(--neutral-200)];
+    @apply bg-[var(--neutral-100)];
   }
   &:focus {
-    @apply ring-[var(--neutral-100)] bg-white border-[var(--neutral-200)] text-[var(--neutral-900)];
+    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
   }
   &:disabled {
-    @apply bg-white border-[var(--neutral-200)] text-[var(--neutral-300)] cursor-not-allowed;
+    @apply bg-white text-[var(--neutral-300)];
   }
 }
 .button--text {
@@ -101,9 +101,23 @@
     @apply bg-[var(--neutral-100)];
   }
   &:focus {
-    @apply ring-[var(--neutral-100)] bg-white border-[var(--neutral-200)] text-[var(--neutral-900)];
+    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
   }
   &:disabled {
-    @apply bg-white  text-[var(--neutral-300)] cursor-not-allowed;
+    @apply bg-white  text-[var(--neutral-300)];
+  }
+}
+
+.button--ghost {
+  @apply bg-transparent text-[var(--primary-100)];
+
+  &:hover {
+    @apply bg-[var(--neutral-100)] text-[var(--primary-500)];
+  }
+  &:focus {
+    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+  }
+  &:disabled {
+    @apply bg-white text-[var(--neutral-300)];
   }
 }

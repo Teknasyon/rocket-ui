@@ -7,6 +7,7 @@ export type ButtonType =
   | 'secondary'
   | 'text'
   | 'outline'
+  | 'ghost'
   | 'link'
   | 'danger';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -60,7 +61,7 @@ const style = computed(() => {
     :class="classes"
     :style="style"
     :disabled="disabled || loading"
-    @click="$emit('click')"
+    @click.stop="$emit('click')"
   >
     <slot name="custom-icon" />
 
