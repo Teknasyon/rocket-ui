@@ -1,0 +1,47 @@
+@import '../../index.css';
+
+.snackbar {
+  @apply absolute bottom-20 w-min grid items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
+  grid-template-columns: 1fr auto auto;
+
+  &__text {
+    @apply text-sm text-white w-[14rem];
+  }
+  &__action {
+  }
+  &__close {
+    @apply ml-2 cursor-pointer grid place-items-center text-white;
+  }
+
+  &--closed {
+    @apply opacity-0 transition-all duration-300 ease-in-out;
+  }
+
+  &--right {
+    @apply right-6 left-auto;
+    animation: snackbar-right 0.3s ease-in-out forwards;
+  }
+
+  &--left {
+    @apply left-0 right-auto;
+    animation: snackbar-left 0.3s ease-in-out forwards;
+  }
+}
+
+@keyframes snackbar-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes snackbar-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
