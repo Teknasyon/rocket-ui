@@ -83,11 +83,31 @@ export const defaultArgs = {
 
 # Badge
 
-Badge is a small component that can be used to display a notification count or status.
+A badge is a small, customizable component that is often used to display a notification, count, or status.
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Variants](#variants)
+
+- [Tips](#tips)
 
 It has a `default` slot that can be used to display any content.
 
-### Overview
+### Overview <a id="overview" />
+
+A badge is a small visual element that is used to communicate a value or a status. It is typically used to show the number of items in a list, the status of a process, or a notification. Badges are often used in conjunction with buttons, icons, or other elements to provide additional information to the user.
+
+Badges should be used when it is important to quickly and clearly communicate a value or a status to the user. They are often used to show the number of unread items in a list, the status of a process, or to indicate that an element has been updated.
+
+Badges can be used in a variety of different contexts, but they are most commonly used in web and mobile applications. Some examples of where badges might be used include:
+
+- In a messaging app to indicate the number of unread messages
+- In a social media app to show the number of likes or comments on a post
+- In a task management app to indicate the number of tasks that are overdue or incomplete
 
 <Canvas>
   <Story
@@ -99,17 +119,27 @@ It has a `default` slot that can be used to display any content.
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
 
-## Usage
+## Usage <a id="usage" />
 
-###### \* Not yet implemented
+- The **placement** prop is used to specify the position of the badge relative to its parent element. It can be set to _right_, _bottom_ or _left_.
 
-## Stories
+- The **variant** prop is used to specify the color and styling of the badge. In the example above, it is set to primary, which will apply the default primary color and style to the badge. It can be set to _primary_, _success_, _error_, _warning_, or _neutral_.
+
+- The **overlap** prop is used to specify the overlapping status of the badge. In the example above, it is set to _false_, which will apply the default position of the badge.
+
+- The **hover** prop is a boolean value that specifies whether the badge should be visible only on hover. If it is set to true, the badge will only be visible when the user hovers over its parent element.
+
+- The **content** prop is used to specify the text or number that should be displayed inside the badge. In this example, it is set to 3.
+
+- Finally, the **outside** prop is a boolean value that specifies whether the badge should be displayed outside of its parent element, rather than inside it. In this example, it is set to false, so the badge will be displayed inside its parent element.
+
+## Variants <a id="variants" />
 
 ### Right
 
@@ -166,3 +196,15 @@ It has a `default` slot that can be used to display any content.
     {Default.bind({})}
   </Story>
 </Canvas>
+
+## Tips
+
+💡 Keep the badge small and simple. The badge should be small enough to not distract from the rest of the interface, but large enough to be easily readable.
+
+💡 Use a clear and concise label. The label on the badge should be short and to the point, and should accurately convey the information that it is intended to communicate.
+
+💡 Use color to convey meaning. Different colors can be used to indicate different types of information, such as red for error messages and green for success messages.
+
+💡 Position the badge carefully. The badge should be positioned in a way that is easily visible and does not obstruct other elements in the interface.
+
+💡 Use badges sparingly. Overuse of badges can make the interface cluttered and difficult to read, so use them only when necessary to communicate important information to the user.
