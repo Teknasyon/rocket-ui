@@ -97,6 +97,8 @@ Alert is a component that displays a message to the user. It is often used to di
 
 - [Playground](#playground)
 
+- [Usage](#usage)
+
 - [Variants](#variants)
 
 - [Customizable Slots](#customizable-slots)
@@ -105,15 +107,11 @@ Alert is a component that displays a message to the user. It is often used to di
 
 ## Overview <a id="overview" />
 
-👉 The main purpose of an Alert component is to get the attention of the user and prompt them to take an action.
+An Alert component is a user interface (UI) element that is used to display important information to the user. It can be used to provide feedback, success or error messages, or to simply draw the user's attention to something. Alert components are typically used in situations where the user needs to be notified of something immediately, or where the information being displayed is important and requires the user's attention.
 
-👉 Alert component has a `close` slot that can be used to add a **custom close button**. This button emits a **click** event when the close button is clicked.
+For example, an Alert component could be used to display a success message after the user has completed a form or submitted some data, to display an error message if there is a problem with the user's input, to display a warning if the user is about to perform an action that could have unintended consequences, or just to pass important information to the user.
 
-👉 The visibility of the component should be controlled by the parent component.
-
-👉 Our Alert boxes comes in three different sizes: _small_, _medium_ or _large_.
-
-👉 Default alert shows a medium sized _info variant_ with no a title or a description.
+In general, Alert components should be used sparingly, as overusing them can make your UI cluttered and difficult to read. It's important to use Alert components only when necessary, and to provide clear and concise messages that help the user understand what is happening.
 
 <Canvas withSource="open">
   <Story
@@ -130,6 +128,29 @@ Alert is a component that displays a message to the user. It is often used to di
 > Changes you make in the controls will be reflected in the example above. Try it yourself!
 
 <ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
+
+## Usage <a id="usage" />
+
+### With props
+
+**_Type_** prop determines the variant of the Alert component. The following values are accepted:
+
+- **success**: Indicates that a successful action has occurred.
+- **error**: Indicates that an error has occurred.
+- **warning**: Indicates that the user should be cautious about something.
+- **info**: Provides additional information to the user.
+
+**_Title_** prop specifies the title of the Alert component. It should be short and concise, and should clearly convey the purpose of the Alert.
+
+**_Description_** prop provides a longer description of the Alert component. It can be used to provide more detailed information or instructions to the user.
+
+**_Size_ **prop determines the size of the Alert component. The following values are accepted:
+
+- **small**: Renders a small Alert component.
+- **medium**: Renders a medium-sized Alert component.
+- **large**: Renders a large Alert component.
+
+If **_closable_** prop is set to true, the Alert component will include a close button that the user can use to dismiss the Alert.
 
 ## Variants <a id="variants" />
 
@@ -226,10 +247,12 @@ Alert is a component that displays a message to the user. It is often used to di
 
 ### Tips <a id="tips" />
 
-💡 Don't confuse an _Alert Box_ with a _Toast_, a _Notification Bar_ or a _Snackbar_. You can use it for system-level alert messages or general updates.
+💡 Use the title prop to provide a clear and concise message to the user.
 
-💡 Use it only to attract the attention of the user. We don't want to interrupt their tasks!
+💡 Use the description prop to provide more detailed information or instructions, if necessary.
 
-💡 Add only _one_ call to action in an _Alert Box_.
+💡 Choose the appropriate variant (success, error, warning, or info) for the Alert component based on the content it is displaying.
 
-💡 Keep your descriptions _short_ and _clear_.
+💡 Keep the Alert component small and concise. If you need to provide a lot of information, consider using a separate component or modal instead of trying to cram everything into the Alert.
+
+💡 If the Alert component is closable, make sure to provide clear instructions on how to dismiss it (e.g. "Click the 'X' to close this Alert").
