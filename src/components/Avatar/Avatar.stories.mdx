@@ -63,11 +63,21 @@ export const defaultArgs = {
 
 # Avatar
 
-Avatar is a component that displays a user's profile picture.
+An avatar is a visual representation of a user or an entity.
 
-> **Note:** This component is still in development and may change in the future.
+- [Overview](#overview)
 
-### Overview
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Tips](#tips)
+
+### Overview <a id="overview" />
+
+Avatar is typically used to identify a user or entity within a user interface, and can be displayed in various forms such as an image, text, or initials.
+
+To use an Avatar component, you can pass the necessary props to configure it to display the avatar in the desired way. For example, you can specify the type of avatar to display (e.g. image or text), the size of the avatar, and any additional props such as the source of the image or the text to display.
 
 <Canvas withSource="open">
   <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
@@ -75,11 +85,11 @@ Avatar is a component that displays a user's profile picture.
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(.*)$/} />
+<ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
 
 ## Stories
 
@@ -135,3 +145,26 @@ Avatar is a component that displays a user's profile picture.
     {Default.bind({})}
   </Story>
 </Canvas>
+
+## Usage <a id="usage" />
+
+### With props
+
+- **type** _(union)_: The type of avatar to display. Can be either "image" or "text".
+- **src** _(string)_: The source of the image to display. This prop is only used when type is set to "image".
+- **alt** _(string)_: The alt text for the image. This prop is only used when type is set to "image".
+- **size** _(string)_: The size of the avatar. Can be one of "xs", "sm", "md", "lg", "xl", or "2xl".
+- **online** _(boolean)_: Whether to show a green circle indicator to signify that the user is online.
+- **text** _(string)_: The text to display when type is set to "text".
+
+### Tips <a id="tips" />
+
+💡 Use appropriate sizes for different contexts: The size of the avatar should be appropriate for the context in which it is being used. For example, a small avatar might be suitable for a list of users, while a larger avatar might be more suitable for a profile page.
+
+💡 Use initials for text avatars: If you are using a text avatar, it is a good idea to use the user's initials rather than their full name. This can help to keep the avatar compact and easy to read.
+
+💡 Use images sparingly: If you are using an image avatar, be mindful of the number of images you are loading on the page. If you are displaying a large number of avatars, it may be more efficient to use text avatars instead.
+
+💡 Use alternative text for accessibility: When using an image avatar, make sure to include alt text to provide a textual representation of the image for screen readers and other assistive technologies.
+
+💡 Consider the context of use: Think about the context in which the avatar will be used and design it accordingly. For example, if the avatar is being used in a chat application, you might want to include an online status indicator.
