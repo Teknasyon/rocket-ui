@@ -68,10 +68,19 @@ export const defaultArgs = {
 
 # Switch
 
-Switch is a component that allows users to toggle between two states.
-It is used to turn something on or off. It is commonly used to activate or deactivate a setting.
+- [Overview](#overview)
 
-### Overview
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+### Overview <a id="overview" />
+
+The Switch component is a simple toggle that allows the user to switch between two states: on and off. It is designed to be used as a controlled component, meaning that the value prop must be provided and will determine the current state of the switch.
 
 <Canvas withSource="open">
   <Story
@@ -86,13 +95,43 @@ It is used to turn something on or off. It is commonly used to activate or deact
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Overview" exclude={/^(on|change|onChange.*)$/} />
 
-## Stories
+## Usage <a id="usage" />
+
+### value (required, boolean)
+
+The _value_ prop determines the current state of the switch. When the value prop is true, the switch will be in the "on" state, and when it is false, the switch will be in the "off" state.
+
+### size (optional, string)
+
+The _size_ prop setermines the size of the switch. Accepts the values small, medium (default), and large.
+
+### id (optional, string)
+
+The _id_ prop sets the HTML id attribute on the switch element. This can be useful for connecting the switch to a label element using the for attribute.
+
+### disabled (optional, boolean)
+
+If the _disabled_ prop is true, the switch will be disabled and the user will not be able to toggle it.
+
+### label (optional, string)
+
+The _label_ prop sets the label text for the switch. This can be used to provide additional context or instructions for the switch.
+
+### hint (optional, string)
+
+The _hint_ prop sets a hint text for the switch. This can be used to provide additional information about the switch, such as its purpose or how it is used.
+
+### errorMsg (optional, string)
+
+The _errorMsg_ prop sets an error message for the switch. This can be used to display an error message when the switch is in an invalid state or when it has been used in an incorrect way.
+
+## Stories <a id="stories" />
 
 ### Small
 
@@ -154,3 +193,19 @@ It is used to turn something on or off. It is commonly used to activate or deact
     {Default.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 Use the label prop to provide context or instructions for the switch. This can help the user understand what the switch is for and how to use it.
+
+💡 Use the hint prop to provide additional information about the switch. This can be helpful if the switch is being used for a less common or more complex feature.
+
+💡 Use the errorMsg prop to display an error message when the switch is in an invalid state or when it has been used in an incorrect way. This can help the user understand why the switch is not working as expected.
+
+💡 Use the size prop to adjust the size of the switch to fit the layout and design of your application.
+
+💡 Use the disabled prop to disable the switch when it is not needed or when it should not be used.
+
+💡 Use the onChange prop to update the state of the switch and control its behavior. This is especially important when using the Switch component as a controlled component.
+
+💡 Consider using the Switch component as a controlled component, which means that the value prop must be provided and will determine the current state of the switch. This can help ensure that the state of the switch is always in sync with the rest of your application.
