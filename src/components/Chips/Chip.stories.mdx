@@ -56,12 +56,6 @@ export const defaultArgs = {
     },
     defaultValue: 'close',
   },
-  square: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   ghost: {
     control: {
       type: 'boolean',
@@ -82,14 +76,29 @@ export const defaultArgs = {
 
 # Chips
 
-Chip components are used to display small blocks of information.
-They are used to represent small entities in a compact way.
+A Chip component is a small, compact element that is used to represent a complex piece of information, an attribute, or a status in a small space. Chips are often used in lists, grids, and other data-heavy layouts to help users easily identify and understand important information.
 
-They can be used to display information such as tags, contacts, or even files.
-They can be used in forms, tables, or as standalone elements.
-They can be used as a way to filter content.
+- [Overview](#overview)
 
-### Overview
+- [Playground](#playground)
+
+- [Props](#props)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+### Overview <a id="overview" />
+
+Chips are typically displayed as small, rectangular elements with a small amount of text or an icon inside. They may have a border, a background color, and/or a drop shadow to visually distinguish them from the rest of the layout.
+They can be interactable, meaning that users can click or tap on them to trigger an action. For example, a Chip might open a detailed view of the information it represents, delete itself from a list, or mark itself as selected.
+
+Chips can come in various types, depending on the information or status they represent. Some common types of Chips include:
+
+- _Information Chips_ contain a text or an icon that represents a piece of information, such as a label, a category, or a metadata.
+- _Action Chips_ contain a text or an icon that represents an action that can be performed, such as a button or a link.
+- _Filter Chips_ contain a text or an icon that represents a filter or a selection criteria, such as a tag or a category.
+- _Selection Chips_ contain a text or an icon that represents a selected item or a status, such as a checkmark or a badge.
 
 <Canvas>
   <Story
@@ -103,13 +112,33 @@ They can be used as a way to filter content.
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Overview" exclude={/^(click|on.*)$/} />
 
-## Stories
+## Props <a id="props" />
+
+**PrependIcon**: This prop allows you to specify an icon to be displayed at the beginning (or "prepend") of the Chip. This can help to visually distinguish the Chip or to add additional context or meaning.
+
+**Variant**: This prop allows you to specify the appearance of the Chip. Possible values for this prop might include "primary", "secondary", "success", "error", "warning" or "info". The variant determines the visual styles of the Chip.
+
+**Size**: This prop allows you to specify the size of the Chip. Possible values for this prop might include "small", "medium", or "large". The size determines the height and width of the Chip.
+
+**Label**: This prop allows you to specify the text label of the Chip. This is the main content of the Chip and should be concise and informative.
+
+**Disabled**: This prop allows you to specify whether the Chip is disabled or not. A disabled Chip cannot be interacted with and may have a different appearance to indicate this.
+
+**AppendIcon**: This prop allows you to specify an icon to be displayed at the end (or "append") of the Chip. This can be used for actions such as deleting the Chip or opening a detailed view.
+
+**Ghost**: This prop allows you to specify whether the Chip should have a transparent background. A ghost Chip appears "hollow" and may be used for overlaid or partially transparent layouts.
+
+**ClickChip**: This action is triggered when the user clicks or taps on the Chip. The action might open a detailed view, delete the Chip, or mark it as selected.
+
+**ClickIcon**: This action is triggered when the user clicks or taps on the icon (either the prependIcon or the appendIcon). The action might open a menu, perform an action, or reveal additional information.
+
+## Stories <a id="stories" />
 
 ### Primary
 
@@ -178,3 +207,15 @@ They can be used as a way to filter content.
     {Default.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 _Use Chips for specific, atomic pieces of information_: Chips are best used to represent specific, atomic pieces of information or actions, such as labels, categories, metadata, or buttons. Avoid using Chips for long or complex pieces of text, as they are designed to be compact and concise.
+
+💡 _Use clear, descriptive labels_: Make sure that the labels on your Chips are clear and descriptive, as they are the main content of the Chips and the primary means of communicating information to users. Avoid using abbreviations or jargon unless they are widely understood by your target audience.
+
+💡 _Use appropriate types and variants_: Choose the appropriate type and variant of Chip for the information or action it represents.
+
+💡 _Use appropriate sizes_: Choose the appropriate size of Chip for the context in which it will be used. Small Chips are best for dense layouts with many Chips, while medium or large Chips are better for more spacious layouts or for emphasis.
+
+💡 _Make Chips accessible_: Make sure that your Chips are accessible to all users, including those using assistive technologies. This means that Chips should have clear, descriptive text labels, and that the actions they trigger should be clearly announced to screen reader users. Chips should also be keyboard-navigable, meaning that users should be able to focus on them and trigger their actions using the keyboard.
