@@ -51,7 +51,17 @@ export const defaultArgs = {
 
 # Label
 
-### Overview
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Tips](#tips)
+
+### Overview <a id="overview" />
+
+The Label component is a UI element that is used to display a label for a form element or other component. It is typically used in conjunction with form elements such as input fields, checkboxes, and radio buttons, as well as other components like sliders and switches. The Label component can be used to provide a clear and concise description of the associated form element or component, helping users understand its purpose and how to use it.
 
 <Canvas withSource="open">
   <Story
@@ -66,6 +76,30 @@ export const defaultArgs = {
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 <ArgsTable story="Overview" />
+
+## Usage <a id="usage" />
+
+### id (required)
+
+The id prop is a unique identifier for the label element. It should be set to the same value as the id prop of the form element or component that the label is associated with.
+
+### for (required)
+
+The for prop is used to associate the label with a form element or component. It should be set to the same value as the id prop of the form element or component that the label is associated with.
+
+### text (required)
+
+The text prop is the text that will be displayed within the label element. It can be a string or a number.
+
+### Tips <a id="tips" />
+
+💡 Use clear and concise text for the text prop: Make sure that the text within the label accurately and clearly describes the associated form element or component. Avoid using jargon or technical terms that may be unfamiliar to some users.
+
+💡 Use the for and id props correctly: The for prop should be set to the id of the form element or component that the label is associated with, and the id prop should be a unique identifier for the label element. This ensures that the label is properly associated with the correct form element or component, and helps screen readers and other assistive technologies correctly interpret the label.
+
+💡 Consider using aria-label or aria-labelledby: If the label text is not visually displayed (e.g. because it is hidden using CSS), you may need to use the aria-label or aria-labelledby attributes to provide an accessible label for screen readers and other assistive technologies.
+
+💡 Use label elements for all form elements: It is important to use label elements for all form elements, even if the form element is already described by surrounding text. This ensures that the form element is properly labeled and easier to use for all users, including those using assistive technologies.
