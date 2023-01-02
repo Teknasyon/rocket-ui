@@ -1,27 +1,14 @@
 {
   "name": "design-system-vue",
-  "version": "0.0.26",
+  "version": "0.0.29",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/design-system-vue.umd.cjs",
-  "module": "./dist/design-system-vue.js",
-  "types": "./dist/design-system-vue.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/design-system-vue.js",
-      "require": "./dist/design-system-vue.umd.cjs"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gokh4nozturk/design-system-vue.git"
-  },
+  "main": "dist/design-system-vue.umd.cjs",
+  "module": "dist/design-system-vue.js",
+  "types": "dist/design-system-vue.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
-    "build:only": "vite build",
+    "build-only": "vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -88,10 +75,5 @@
       "yarn lint",
       "yarn prettier"
     ]
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "design-system-vue@0.0.3",
-  "publishConfig": {
-    "@gokh4nozturk:registry": "https://npm.pkg.github.com"
   }
 }
