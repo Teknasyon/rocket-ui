@@ -162,43 +162,43 @@ const onInput = (e: Event) => {
     >
       <Label
         :id="props.id"
-        :for="props.id"
-        :text="props.label"
         :class="{
           textfield__label: true,
         }"
+        :for="props.id"
+        :text="props.label"
       />
       <div class="input-wrapper">
         <div :class="classes">
           <Icon
             v-if="prependIconName"
-            :size="16"
-            :name="prependIconName"
             :class="prependIconClasses"
+            :name="prependIconName"
+            :size="16"
           />
           <input
             v-bind="$attrs"
+            :id="props.id"
             ref="inputRef"
             v-model="state.value"
-            :type="typeOfInputRef"
-            :id="props.id"
             :disabled="props.disabled"
             :placeholder="props.placeholder"
-            @focus="onFocus"
+            :type="typeOfInputRef"
             @blur="onBlur"
+            @focus="onFocus"
             @input="onInput"
           />
           <Icon
             v-if="appendIconName"
-            :size="16"
             :class="appendIconClasses"
-            :name="`${appendIconName}`"
             :color="props.iconColor"
+            :name="`${appendIconName}`"
+            :size="16"
             @click="clickIcon"
           />
         </div>
         <div class="textfield__error">{{ props.errorMsg }}</div>
-        <div class="textfield__hint" v-if="!props.errorMsg">
+        <div v-if="!props.errorMsg" class="textfield__hint">
           {{ props.hint }}
         </div>
       </div>

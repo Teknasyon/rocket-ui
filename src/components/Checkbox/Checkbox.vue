@@ -73,12 +73,12 @@ const handleCheckbox = (icon: string) => {
   <div class="checkbox-wrapper">
     <div class="checkbox-container">
       <input
-        hidden
-        type="checkbox"
-        v-model="state.checked"
         :id="props.id"
+        v-model="state.checked"
         :disabled="props.disabled"
+        hidden
         :indeterminate="state.indeterminate"
+        type="checkbox"
         @change="onChange"
       />
       <div
@@ -86,14 +86,14 @@ const handleCheckbox = (icon: string) => {
         :data-disabled="props.disabled"
         @click="handleCheckbox(icon)"
       >
-        <Icon size="16" :name="icon" />
+        <Icon :name="icon" size="16" />
       </div>
     </div>
     <div class="checkbox-texts">
       <label
         class="checkbox-texts__label"
-        :for="props.id"
         :data-disabled="props.disabled"
+        :for="props.id"
       >
         {{ props.label }}
       </label>

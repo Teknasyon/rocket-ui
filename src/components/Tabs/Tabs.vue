@@ -32,17 +32,17 @@ const onSelect = (index: number) => {
     <div :class="tabsClasses">
       <TabItem
         v-for="(tab, index) in props.tabs"
-        :key="index"
         :id="tab.id"
-        :label="tab.label"
-        :icon="tab.icon"
-        :disabled="tab.disabled"
+        :key="index"
         :active="index === activeTab"
+        :disabled="tab.disabled"
+        :icon="tab.icon"
+        :label="tab.label"
         @select="onSelect"
       />
     </div>
   </div>
   <div class="tab-content">
-    <slot name="tab" :activeTab="activeTab" />
+    <slot :activeTab="activeTab" name="tab" />
   </div>
 </template>

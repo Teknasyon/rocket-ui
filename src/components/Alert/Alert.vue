@@ -62,7 +62,7 @@ const close = () => {
         size="16"
         @click="close"
       />
-      <slot name="close" v-else />
+      <slot v-else name="close" />
     </div>
   </div>
 </template>

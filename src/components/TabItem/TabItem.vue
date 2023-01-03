@@ -42,17 +42,17 @@ function onClick(id: number | string) {
 </script>
 <template>
   <button
-    :class="classes"
-    :disabled="props.disabled"
     :aria-disabled="props.disabled"
     :aria-selected="props.active"
+    :class="classes"
+    :disabled="props.disabled"
     @click="onClick(props.id)"
   >
     <slot name="icon" />
     <Icon
       v-if="!$slots['icon'] && variant !== TabItemVariants.TEXT_ONLY"
-      :name="props.icon"
       class="tab-item__icon"
+      :name="props.icon"
       size="16"
     />
     <span v-if="variant !== TabItemVariants.ICON_ONLY" class="tab-item__label">

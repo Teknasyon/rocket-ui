@@ -59,27 +59,27 @@ const style = computed(() => {
   <button
     v-bind="$attrs"
     :class="classes"
-    :style="style"
     :disabled="disabled || loading"
+    :style="style"
     @click.stop="$emit('click')"
   >
     <slot name="custom-icon" />
 
     <Icon
       v-if="!$slots['custom-icon']"
-      :name="props.prependIcon"
-      :size="iconSize"
       :class="{
         'button__prepend-icon': true,
         'button__prepend-icon--only': props.onlyIcon,
       }"
+      :name="props.prependIcon"
+      :size="iconSize"
     />
     <slot v-if="!props.onlyIcon" />
     <Icon
       v-if="!$slots['custom-icon'] && !props.onlyIcon"
+      class="button__append-icon"
       :name="props.appendIcon"
       :size="iconSize"
-      class="button__append-icon"
     />
   </button>
 </template>
