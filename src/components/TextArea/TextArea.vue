@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Label from '../Label/Label.vue';
 import './textarea.css';
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, reactive } from 'vue';
 export interface IProps {
   id: string;
   errorMsg?: string;
@@ -20,6 +20,10 @@ const props = withDefaults(defineProps<IProps>(), {
   value: '',
   label: '',
   hint: 'This is a hint',
+});
+
+const state = reactive({
+  value: props.value || '',
 });
 
 const emit = defineEmits(['input']);
@@ -41,6 +45,7 @@ function onInput(e: Event) {
     <textarea
       v-bind="$attrs"
       :id="props.id"
+      v-model="state.value"
       class="textarea"
       :class="{
         'textarea--error': props.errorMsg,
@@ -48,7 +53,6 @@ function onInput(e: Event) {
       }"
       :disabled="props.disabled"
       :placeholder="props.placeholder"
-      :value="props.value"
       @input="onInput"
     />
     <p v-if="props.errorMsg" class="textarea__error">
