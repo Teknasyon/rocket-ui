@@ -35,7 +35,13 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   clearable: false,
 });
-const emit = defineEmits(['input', 'focus', 'blur', 'clickIcon']);
+const emit = defineEmits([
+  'input',
+  'focus',
+  'blur',
+  'click:icon',
+  'click:clear',
+]);
 const state = reactive({
   value: props.value || '',
 });
@@ -126,8 +132,12 @@ const clickIcon = () => {
   if (hasClear.value) {
     state.value = '';
     inputRef.value?.focus();
+    emit('click:clear', {
+      value: state.value,
+    });
+    return;
   }
-  emit('clickIcon', {
+  emit('click:icon', {
     value: state.value,
   });
   setPassType();

@@ -11,7 +11,8 @@ export const Default = (args) => {
         input: action('input'),
         focus: action('focus'),
         blur: action('blur'),
-        clickIcon: action('clickIcon'),
+        clickIcon: action('click:icon'),
+        clickClear: action('click:clear'),
       };
     },
     template: `
@@ -20,7 +21,8 @@ export const Default = (args) => {
       @input="input" 
       @focus="focus" 
       @blur="blur" 
-      @clickIcon="clickIcon"
+      @click:icon="clickIcon"
+      @click:clear="clickClear"
     />`,
   };
 };
