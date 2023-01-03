@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Button from '../Button/Button.vue';
 import Icon from '../Icon/Icon.vue';
 import './snackbar.css';
@@ -19,26 +19,36 @@ const props = withDefaults(defineProps<IProps>(), {
   showAction: false,
   showClose: false,
   left: false,
-  show: true,
+  show: false,
   timeout: 0,
 });
-const shown = ref(props.show);
-const emit = defineEmits(['actionClick', 'close']);
+const shown = ref(false);
+const emit = defineEmits(['click:action', 'click:close']);
 const onClickAction = () => {
-  emit('actionClick');
+  emit('click:action');
 };
 const onClose = () => {
   shown.value = false;
-  emit('close', { show: shown.value });
+  emit('click:close');
 };
 onMounted(() => {
   if (props.timeout) {
     setTimeout(() => {
       shown.value = false;
-      emit('close', { show: shown.value });
+      emit('click:close');
     }, props.timeout);
   }
 });
+/**
+ * @description Watch for changes in the show prop
+ */
+watch(
+  () => props.show,
+  (show) => {
+    shown.value = show;
+  },
+  { immediate: true }
+);
 </script>
 <template>
   <div
@@ -48,7 +58,8 @@ onMounted(() => {
       [props.left ? 'snackbar--left' : 'snackbar--right']: true,
     }"
   >
-    <div class="snackbar__text">{{ props.text }}</div>
+    <slot name="content" />
+    <div v-if="!$slots['content']" class="snackbar__text">{{ props.text }}</div>
     <div v-if="props.showAction" class="snackbar__action">
       <slot name="action" />
       <Button
@@ -56,8 +67,8 @@ onMounted(() => {
         size="small"
         variant="ghost"
         @click="onClickAction"
-        >{{ props.actionText }}</Button
-      >
+        >{{ props.actionText }}
+      </Button>
     </div>
     <div v-if="props.showClose" class="snackbar__close">
       <slot name="close" />
