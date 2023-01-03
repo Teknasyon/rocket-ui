@@ -6,14 +6,18 @@ import Snackbar from './Snackbar.vue';
 export const Default = (args) => ({
   components: { Snackbar },
   setup() {
-    return { args, onAction: action('actionClick'), onClose: action('close') };
+    return {
+      args,
+      onAction: action('click:action'),
+      onClose: action('click:close'),
+    };
   },
   template: `
     <div style="position:relative; min-height: 30vh; width: 100%;">
       <Snackbar 
         v-bind="args" 
-        @actionClick="onAction" 
-        @close="onClose" 
+        @click:action="onAction" 
+        @click:close="onClose" 
       />
     </div>
   `,
@@ -54,7 +58,7 @@ export const defaultArgs = {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
+    defaultValue: false,
   },
   timeout: {
     control: {
@@ -109,7 +113,7 @@ It is important to use the Snackbar component sparingly, as it can be disruptive
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(action.*|close.*|on.*)$/} />
+<ArgsTable story="Overview" exclude={/^(click.*|action|content|close|on.*)$/} />
 
 ## Usage <a id="usage" />
 
