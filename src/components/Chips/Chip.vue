@@ -21,8 +21,8 @@ const props = withDefaults(defineProps<Props>(), {
   appendIcon: '',
   ghost: false,
 });
-const emit = defineEmits(['clickChip', 'clickIcon']);
-const classes = computed(() => {
+const emit = defineEmits(['click:chip', 'click:close']);
+const classes = computed<object>(() => {
   return {
     chip: true,
     'chip--disabled': props.disabled,
@@ -36,35 +36,34 @@ const iconSize = computed<string>(() => {
   if (props.size === 'large') return '16';
   return '12';
 });
-const clickIcon = (e: MouseEvent) => {
-  if (props.disabled) return;
-  emit('clickIcon', e);
-};
 const clickChip = (e: MouseEvent) => {
   if (props.disabled) return;
-  emit('clickChip', e);
+  emit('click:chip', e);
+};
+const clickClose = (e: MouseEvent) => {
+  if (props.disabled) return;
+  emit('click:close', e);
 };
 </script>
 <template>
   <div :class="classes">
-    <Icon
-      v-if="props.prependIcon"
-      :aria-disabled="props.disabled"
-      class="chip__prepend-icon"
-      :name="props.prependIcon"
-      :size="iconSize"
-      @click.stop="clickIcon($event)"
-    />
-    <span class="chip__text" @click.stop="clickChip($event)">{{
-      props.label
-    }}</span>
+    <div class="chip__content" @click.stop="clickChip($event)">
+      <Icon
+        v-if="props.prependIcon"
+        :aria-disabled="props.disabled"
+        class="chip__prepend-icon"
+        :name="props.prependIcon"
+        :size="iconSize"
+      />
+      <span>{{ props.label }}</span>
+    </div>
     <Icon
       v-if="props.appendIcon"
       :aria-disabled="props.disabled"
       class="chip__append-icon"
       :name="props.appendIcon"
       :size="iconSize"
-      @click.stop="clickIcon($event)"
+      @click.stop="clickClose($event)"
     />
   </div>
 </template>

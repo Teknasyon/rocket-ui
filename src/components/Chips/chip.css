@@ -51,9 +51,6 @@
   &--large {
     @apply text-base px-3 py-1.5;
   }
-  /* &--square {
-    @apply rounded-none; tekrar kontrol edilecek
-  } */
   &--reverse {
     @apply flex-row-reverse;
   }
@@ -66,5 +63,8 @@
   }
   &__append-icon {
     @apply ml-1;
+  }
+  &__content {
+    @apply whitespace-nowrap flex items-center;
   }
 }
