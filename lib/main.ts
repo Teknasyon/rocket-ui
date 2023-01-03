@@ -28,7 +28,7 @@ import Snackbar from '../src/components/Snackbar/Snackbar.vue';
 import Switch from '../src/components/Switch/Switch.vue';
 import TabItem from '../src/components/TabItem/TabItem.vue';
 import Tabs from '../src/components/Tabs/Tabs.vue';
-import Textarea from '../src/components/Textarea/Textarea.vue';
+import TextArea from '../src/components/TextArea/TextArea.vue';
 import Textfield from '../src/components/Textfield/Textfield.vue';
 import Tooltip from '../src/components/Tooltip/Tooltip.vue';
 
@@ -46,7 +46,7 @@ export {
   Switch,
   TabItem,
   Tabs,
-  Textarea,
+  TextArea,
   Textfield,
   Tooltip,
 };
