@@ -148,10 +148,10 @@ watch(selectedMultiple, (value) => {
         <Chip
           v-for="(option, index) in selectedMultiple"
           :key="index"
-          :label="option.label"
-          class="select__tags__chip"
-          variant="primary"
           appendIcon="close"
+          class="select__tags__chip"
+          :label="option.label"
+          variant="primary"
           @click-icon="removeOption($event, option)"
         />
       </div>
@@ -164,15 +164,15 @@ watch(selectedMultiple, (value) => {
         v-bind="$attrs"
         id="select"
         ref="input"
-        type="text"
         v-model="inputModel"
         class="select__input"
-        :placeholder="props.placeholder"
         :disabled="props.disabled"
-        @keydown.enter="createTag($event)"
+        :placeholder="props.placeholder"
+        type="text"
         @keydown.backspace="
           removeOption($event, selectedMultiple[selectedMultiple.length - 1])
         "
+        @keydown.enter="createTag($event)"
       />
       <div
         :class="{
@@ -186,25 +186,25 @@ watch(selectedMultiple, (value) => {
     </div>
     <ul :class="{ 'select-options': true, 'select-options--active': active }">
       <li
+        v-for="option in searchedOptions"
+        :key="option.value"
         :class="{
           'select-options__option': true,
           'select-options__option--active':
             option.label === selected || selectedMultiple?.includes(option),
         }"
-        v-for="option in searchedOptions"
-        :key="option.value"
         @click="selectOption($event, option)"
       >
         <div style="display: flex; align-items: center">
           <slot name="option-prepend" />
           <Icon
             v-if="!$slots['option-prepend']"
-            name="face"
             :class="{
               'select-options__option__prepend-icon': true,
               'select-options__option__prepend-icon--active':
                 option.label === selected || selectedMultiple?.includes(option),
             }"
+            name="face"
           />
           <p
             :class="{
@@ -218,12 +218,12 @@ watch(selectedMultiple, (value) => {
         </div>
         <Icon
           v-if="option.label === selected || selectedMultiple?.includes(option)"
-          name="check"
           :class="{
             'select-options__option__append-icon': true,
             'select-options__option__append-icon--active':
               option.label === selected || selectedMultiple?.includes(option),
           }"
+          name="check"
         />
       </li>
     </ul>

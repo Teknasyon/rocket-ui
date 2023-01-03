@@ -53,8 +53,8 @@ onMounted(() => {
       <slot name="action" />
       <Button
         v-if="!$slots['action']"
-        variant="ghost"
         size="small"
+        variant="ghost"
         @click="onClickAction"
         >{{ props.actionText }}</Button
       >

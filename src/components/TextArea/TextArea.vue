@@ -33,10 +33,10 @@ function onInput(e: Event) {
   <div class="container">
     <Label
       v-if="props.label"
-      :text="props.label"
       id="textarea"
-      for="textarea"
       class="textarea__label"
+      for="textarea"
+      :text="props.label"
     />
     <textarea
       v-bind="$attrs"

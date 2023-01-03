@@ -118,8 +118,8 @@ const animationDuration = computed(() => {
 <template>
   <div
     ref="trigger"
-    class="trigger"
     :aria-disabled="props.disabled"
+    class="trigger"
     @click.stop="onClick"
     @mouseenter.stop="onMouseEnter"
     @mouseleave.stop="onMouseLeave"
@@ -128,7 +128,7 @@ const animationDuration = computed(() => {
     <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
     <slot v-else name="trigger" />
   </div>
-  <div ref="tooltip" id="tooltip" :class="classes" role="tooltip">
+  <div id="tooltip" ref="tooltip" :class="classes" role="tooltip">
     <slot name="content" />
     <div
       v-if="!$slots['content']"
@@ -142,8 +142,8 @@ const animationDuration = computed(() => {
     </div>
     <div
       v-if="!$slots['content']"
-      ref="arrowElement"
       id="arrow"
+      ref="arrowElement"
       :class="{
         tooltip__arrow: true,
         'tooltip__arrow--dark': props.dark,

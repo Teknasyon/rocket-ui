@@ -52,10 +52,10 @@ const clickChip = (e: MouseEvent) => {
   <div :class="classes">
     <Icon
       v-if="props.prependIcon"
-      :name="props.prependIcon"
-      :size="iconSize"
       :aria-disabled="props.disabled"
       class="chip__prepend-icon"
+      :name="props.prependIcon"
+      :size="iconSize"
       @click.stop="clickIcon($event)"
     />
     <span class="chip__text" @click.stop="clickChip($event)">{{
@@ -63,10 +63,10 @@ const clickChip = (e: MouseEvent) => {
     }}</span>
     <Icon
       v-if="props.appendIcon"
-      :name="props.appendIcon"
-      :size="iconSize"
       :aria-disabled="props.disabled"
       class="chip__append-icon"
+      :name="props.appendIcon"
+      :size="iconSize"
       @click.stop="clickIcon($event)"
     />
   </div>

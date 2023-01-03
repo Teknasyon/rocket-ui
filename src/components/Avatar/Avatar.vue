@@ -49,13 +49,13 @@ const shortTextWithFirstCharacters = (text: string) => {
       </p>
       <img
         v-else
+        :alt="props.alt"
         :class="{
           avatar__image: true,
           [`avatar__image--${props.size}`]: true,
           'avatar__image--anonymous': isAnon,
         }"
         :src="imgSrc"
-        :alt="props.alt"
       />
     </div>
     <span

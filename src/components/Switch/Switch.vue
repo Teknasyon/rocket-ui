@@ -46,9 +46,9 @@ const toggle = () => {
       <input
         :id="props.id"
         v-bind="$attrs"
-        type="checkbox"
         v-model="state.value"
         class="switch__input"
+        type="checkbox"
         @change="onChange"
       />
       <span class="slider round" />
@@ -59,7 +59,7 @@ const toggle = () => {
         [`switch-texts--${props.size}`]: true,
       }"
     >
-      <label :id="props.id" :for="props.id" class="switch-texts__label">
+      <label :id="props.id" class="switch-texts__label" :for="props.id">
         {{ props.label }}
       </label>
       <p v-if="props.errorMsg" class="switch-texts__error">
