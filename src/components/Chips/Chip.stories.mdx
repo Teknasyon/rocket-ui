@@ -8,12 +8,12 @@ export const Default = (args) => ({
   setup() {
     return {
       args,
-      clickChip: action('clickChip'),
-      clickIcon: action('clickIcon'),
+      clickChip: action('click:chip'),
+      clickClose: action('click:close'),
     };
   },
   template: `
-    <Chip v-bind="args" @clickChip="clickChip" @clickIcon="clickIcon"/>
+    <Chip v-bind="args" @click:chip="clickChip" @click:close="clickClose"/>
   `,
 });
 
@@ -116,7 +116,7 @@ Chips can come in various types, depending on the information or status they rep
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(click|on.*)$/} />
+<ArgsTable story="Overview" exclude={/^(click.*|on.*)$/} />
 
 ## Props <a id="props" />
 
@@ -134,9 +134,9 @@ Chips can come in various types, depending on the information or status they rep
 
 **Ghost**: This prop allows you to specify whether the Chip should have a transparent background. A ghost Chip appears "hollow" and may be used for overlaid or partially transparent layouts.
 
-**ClickChip**: This action is triggered when the user clicks or taps on the Chip. The action might open a detailed view, delete the Chip, or mark it as selected.
+**click:chip**: This action is triggered when the user clicks or taps on the Chip. The action might open a detailed view, or mark it as selected.
 
-**ClickIcon**: This action is triggered when the user clicks or taps on the icon (either the prependIcon or the appendIcon). The action might open a menu, perform an action, or reveal additional information.
+**click:close**: This action is triggered when the user clicks or taps on the close icon of the Chip. The action might delete the Chip.
 
 ## Stories <a id="stories" />
 
