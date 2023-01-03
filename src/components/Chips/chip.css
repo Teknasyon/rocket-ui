@@ -51,9 +51,9 @@
   &--large {
     @apply text-base px-3 py-1.5;
   }
-  &--square {
-    @apply rounded-none;
-  }
+  /* &--square {
+    @apply rounded-none; tekrar kontrol edilecek
+  } */
   &--reverse {
     @apply flex-row-reverse;
   }
