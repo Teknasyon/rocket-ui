@@ -58,8 +58,7 @@ watch(
       [props.left ? 'snackbar--left' : 'snackbar--right']: true,
     }"
   >
-    <slot name="content" />
-    <div v-if="!$slots['content']" class="snackbar__text">{{ props.text }}</div>
+    <div class="snackbar__text">{{ props.text }}</div>
     <div v-if="props.showAction" class="snackbar__action">
       <slot name="action" />
       <Button
