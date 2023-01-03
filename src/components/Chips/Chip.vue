@@ -10,7 +10,6 @@ export interface Props {
   disabled?: boolean;
   prependIcon?: string;
   appendIcon?: string;
-  square?: boolean;
   ghost?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -20,7 +19,6 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   prependIcon: '',
   appendIcon: '',
-  square: false,
   ghost: false,
 });
 const emit = defineEmits(['clickChip', 'clickIcon']);
@@ -30,7 +28,6 @@ const classes = computed(() => {
     'chip--disabled': props.disabled,
     [`chip__${props.variant}`]: props.variant,
     [`chip--${props.size}`]: props.size,
-    'chip--square': props.square,
     [`chip__${props.variant}--ghost`]: props.ghost,
   };
 });
