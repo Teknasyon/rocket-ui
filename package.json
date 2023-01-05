@@ -1,10 +1,13 @@
 {
   "name": "design-system-vue",
-  "version": "0.0.31",
+  "version": "0.0.34",
   "type": "module",
   "main": "dist/design-system-vue.umd.cjs",
   "module": "dist/design-system-vue.js",
   "types": "dist/design-system-vue.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
