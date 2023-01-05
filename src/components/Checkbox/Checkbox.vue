@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import './checkbox.css';
 import Icon from '../Icon/Icon.vue';
 export interface Props {
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(['change']);
 const state = reactive({
-  checked: props.checked,
+  checked: false,
   indeterminate: props.indeterminate,
 });
 const icons = {
@@ -68,11 +68,18 @@ const handleCheckbox = (icon: string) => {
     return;
   }
 };
+watch(
+  () => props.checked,
+  (value) => {
+    state.checked = value;
+  }
+);
 </script>
 <template>
   <div class="checkbox-wrapper">
     <div class="checkbox-container">
       <input
+        v-bind="$attrs"
         :id="props.id"
         v-model="state.checked"
         :disabled="props.disabled"
