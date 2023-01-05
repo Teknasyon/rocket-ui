@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import './switch.css';
 export interface Props {
   id?: string;
@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(['change']);
 const state = reactive({
-  value: props.value,
+  value: false,
 });
 const classes = computed(() => {
   return {
@@ -35,14 +35,16 @@ const onChange = () => {
   if (props.disabled) return;
   emit('change', { value: state.value });
 };
-const toggle = () => {
-  if (props.disabled) return;
-  state.value = !state.value;
-};
+watch(
+  () => props.value,
+  (value) => {
+    state.value = value;
+  }
+);
 </script>
 <template>
   <div class="switch-container">
-    <div :class="classes" @click="toggle">
+    <div :class="classes">
       <input
         :id="props.id"
         v-bind="$attrs"
