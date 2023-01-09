@@ -160,6 +160,7 @@ watch(
   <div class="checkbox-wrapper">
     <div class="checkbox-container">
       <input
+        v-bind="$attrs"
         :id="props.id"
         :checked="state.checked"
         class="checkbox-container__input"
