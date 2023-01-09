@@ -6,6 +6,10 @@
 
 .checkbox-container {
   @apply flex;
+
+  &__input {
+    @apply absolute opacity-0 z-20 cursor-pointer h-5 w-5;
+  }
 }
 
 .checkbox {

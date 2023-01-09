@@ -8,7 +8,8 @@ export const Default = (args) => {
     setup() {
       return { args, change: action('change') };
     },
-    template: `<Checkbox v-bind="args" @change="change"/>`,
+    template:
+      '<Checkbox v-bind="args" v-model="x" @update:modelValue="change"/>',
   };
 };
 
@@ -19,7 +20,7 @@ export const defaultArgs = {
     },
     defaultValue: 'checkbox',
   },
-  checked: {
+  modelValue: {
     control: {
       type: 'boolean',
     },
@@ -103,7 +104,7 @@ A checkbox component typically consists of a label that describes the associated
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" />
+<ArgsTable story="Overview" exclude={/^(update.*)$/} />
 
 ## Usage <a id="usage" />
 
