@@ -184,10 +184,29 @@ export const defaultArgs = {
 
 # Tooltip
 
-Tooltip is a component that displays a tooltip when hovering over the element.
-`manual` trigger is used to show/hide the tooltip programmatically.
+A tooltip is a small pop-up window that appears when the user hovers over an element. It can be used to provide additional information or context about the element.
 
-### Overview
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+The tooltip component allows developers to easily add tooltips to their applications.
+
+It supports various **placement** options such as top, right, bottom, and left, as well as more specific placements like top-start, top-end, right-start, right-end, bottom-start, bottom-end, left-start, and left-end. The **text** prop allows developers to specify the text that will be displayed in the tooltip.
+
+The **light** and **dark** props can be used to change the color scheme of the tooltip.
+
+The **autoHide** prop allows the tooltip to automatically hide after a specified delay, while the **hideDelay** and showDelay props can be used to control the delay before the tooltip is hidden or shown.
+
+The **shown** prop can be used to manually control the visibility of the tooltip, while the **disabled** prop can be used to disable the tooltip entirely.
+
+The **offset** and **padding** props can be used to adjust the position of the tooltip, and the **outsideClick** prop allows developers to specify whether the tooltip should be hidden when the user clicks outside of it.
 
 <Canvas withSource="open">
   <Story
@@ -201,13 +220,13 @@ Tooltip is a component that displays a tooltip when hovering over the element.
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Overview" exclude={/^(trigger|content|click|on.*)/} />
 
-## Stories
+## Stories <a id="stories" />
 
 ### Default
 
@@ -281,3 +300,21 @@ Tooltip is a component that displays a tooltip when hovering over the element.
     {WithDirectives.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 Keep the text short and to the point: Tooltips are meant to provide additional information or context, so it's important to keep the text short and to the point. Avoid using long sentences or paragraphs of text, as it can make the tooltip difficult to read and may cause the user to lose interest.
+
+💡 Use clear and consistent placement: The placement of the tooltip can greatly affect its effectiveness. Use clear and consistent placement across your application to make it easy for the user to understand where the tooltip will appear.
+
+💡 Consider the timing: The delay before the tooltip appears and disappears can greatly affect the user's experience. Experiment with different values for the showDelay and hideDelay props to find the right balance between making the tooltip appear quickly enough to be useful but not so quickly that it becomes distracting.
+
+💡 Use the light and dark props to match the theme: Use the light and dark props to match the tooltip color scheme with the overall theme of your application. This will make the tooltip feel like a natural part of the interface.
+
+💡 Use the offset prop to adjust the position: The offset prop allows you to adjust the position of the tooltip relative to the trigger element. Use it to fine-tune the placement of the tooltip and make it feel more natural.
+
+💡 Use the padding prop to add space around the tooltip: The padding prop can be used to add space around the tooltip text, which can make it easier to read.
+
+💡 Use the outsideClick prop to hide the tooltip when the user clicks outside of it: This can improve the user experience by preventing the tooltip from staying visible when the user is no longer interacting with the trigger element.
+
+💡 Test the tooltip with real users: Always test the tooltip with real users to see how it works in practice and to gather feedback on how it can be improved.
