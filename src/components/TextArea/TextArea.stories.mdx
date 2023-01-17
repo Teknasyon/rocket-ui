@@ -62,9 +62,21 @@ export const defaultArgs = {
 
 # TextArea
 
-TextArea is a component that allows users to enter and edit text. It is a multi-line input field.
+The TextArea component is a UI element that allows users to input and edit multiple lines of text.
 
-### Overview
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+This component provides a text area for user input and includes several optional props for customization such as error message, disabled state, placeholder text, default value, label, and hint.
 
 <Canvas>
   <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
@@ -72,13 +84,47 @@ TextArea is a component that allows users to enter and edit text. It is a multi-
   </Story>
 </Canvas>
 
-### Playground
+### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
 <ArgsTable story="Overview" exclude={/^(click|tab|on.*)/} />
 
-## Stories
+## Usage <a id="usage" />
+
+To use the TextArea component, you must include the 'id' prop as it is required. The other props such as 'errorMsg', 'disabled', 'placeholder', 'value', 'label', and 'hint' are optional and can be used to further customize the component as needed.
+
+The TextArea component can be used with the following props:
+
+### id (required)
+
+The **id** prop is a unique identifier for the TextArea component.
+
+### errorMsg (optional)
+
+The **errorMsg** prop is the error message to display when input is invalid.
+
+### disabled (optional)
+
+The **disabled** props is a boolean value that sets the component to a disabled state.
+
+### placeholder (optional)
+
+The **placeholder** prop is the placeholder text to display when the text area is empty.
+
+### value (optional)
+
+The **value** props is the default value for the text area.
+
+### label (optional)
+
+The **label** prop is the text to display as a label for the text area.
+
+### hint (optional)
+
+The **hint** prop is for additional information or context for the text area.
+
+## Stories <a id="stories" />
 
 ### Default
 
@@ -87,3 +133,25 @@ TextArea is a component that allows users to enter and edit text. It is a multi-
     {Default.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 Always include the 'id' prop: The 'id' prop is required for the TextArea component to function properly. Make sure to always include it and ensure that it is unique for each instance of the component.
+
+💡 Use the 'label' prop for accessibility: The 'label' prop is used to provide a text description of the TextArea component for accessibility purposes. This is especially important for users who rely on screen readers to navigate your application.
+
+💡 Use the 'placeholder' prop for guidance: The 'placeholder' prop allows you to provide users with an example or a hint of the kind of input you expect. This can be especially helpful for users who may not be sure what to type in the TextArea.
+
+💡 Use the 'value' prop to set a default value: The 'value' prop allows you to set a default value for the TextArea component. This can be useful if you want to pre-populate the TextArea with a value or if you want to show the last input a user made.
+
+💡 Use the 'errorMsg' prop for error handling: The 'errorMsg' prop allows you to display an error message when the input is invalid. This can be useful for providing feedback to the user when they make a mistake.
+
+💡 Use the 'disabled' prop to disable the textarea: The 'disabled' prop allows you to disable the textarea. This can be useful when you want to prevent users from making changes or inputting text.
+
+💡 Use the 'hint' prop for additional context: The 'hint' prop allows you to provide additional context or information about the TextArea component. This can be useful for providing more detailed instructions or information to the user.
+
+💡 Limit the number of characters that can be entered, to avoid overflowing the layout or taking too much space in the database.
+
+💡 Make sure the text area is adaptable to different screen sizes, to improve the user experience on different devices
+
+💡 Use validation to make sure the input is acceptable, and give clear feedback to the user when the input is invalid.
