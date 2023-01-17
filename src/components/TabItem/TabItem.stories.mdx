@@ -64,9 +64,21 @@ export const defaultArgs = {
 
 # TabItem
 
-TabItem is a component that renders a tab item. It is not meant to be used on its own.
+The TabItem component is a child component of the Tabs component. It is used to create a single tab within a set of tabs.
 
-### Overview
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+The TabItem component is responsible for displaying the content associated with a specific tab. It accepts a variety of props, including variant, id, label, disabled, and active, which can be used to customize the appearance and behavior of the tab.
 
 <Canvas withSource="open">
   <Story
@@ -84,7 +96,33 @@ TabItem is a component that renders a tab item. It is not meant to be used on it
 
 <ArgsTable story="Overview" exclude={/^(select|icon|on.*)$/} />
 
-## Stories
+## Usage <a id="usage" />
+
+To use the TabItem component, it is first necessary to wrap it within a Tabs component. The TabItem component should then be passed a unique id prop, which is used to identify the tab and its associated content.
+
+The TabItem component can be used with the following props:
+
+### variant (optional)
+
+The **variant** props allows to change the style of the tab item.
+
+### id (required)
+
+The **id** props is a unique identifier for the tab.
+
+### label (optional)
+
+The **label** props is the text to be displayed on the tab.
+
+### disabled (optional)
+
+The **disabled** props indicates whether the tab should be disabled or not.
+
+### active (optional)
+
+The **active** props indicated whether the tab should be set as active or not.
+
+## Stories <a id="stories" />
 
 ### Default
 
@@ -125,3 +163,19 @@ TabItem is a component that renders a tab item. It is not meant to be used on it
     {Default.bind({})}
   </Story>
 </Canvas>
+
+### Tips <a id="tips" />
+
+💡 Make sure to provide a unique id prop for each TabItem, as this is used to identify the tab and its associated content.
+
+💡 Use the label prop to clearly label each tab, making it easy for users to understand the purpose of each tab.
+
+💡 Use the active prop to set the default active tab when the component is first rendered.
+
+💡 Use the disabled prop to disable tabs that are not currently in use or that the user should not have access to.
+
+💡 The variant prop can be used to change the visual style of the tab.
+
+💡 Use the onClick event to handle when the user clicks on a tab, if you want to perform some action in this event.
+
+💡 Using the TabItem component within Tabs component will give you a better accessibility, by providing the necessary ARIA roles and attributes.
