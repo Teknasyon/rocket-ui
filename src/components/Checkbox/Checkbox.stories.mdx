@@ -8,8 +8,7 @@ export const Default = (args) => {
     setup() {
       return { args, change: action('change') };
     },
-    template:
-      '<Checkbox v-bind="args" v-model="x" @update:modelValue="change"/>',
+    template: '<Checkbox v-bind="args" @update:modelValue="change"/>',
   };
 };
 

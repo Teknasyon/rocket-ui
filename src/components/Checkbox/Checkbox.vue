@@ -26,10 +26,10 @@ export interface Props {
    * @type InputHTMLAttributes['checked']
    * @default false
    * @example
-   * <Checkbox modelValue="true" />
+   * <Checkbox :modelValue="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#checked
    */
-  modelValue: InputHTMLAttributes['checked'];
+  modelValue?: InputHTMLAttributes['checked'];
 
   /**
    * label of the checkbox
@@ -39,7 +39,7 @@ export interface Props {
    * <Checkbox label="Checkbox" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  label: LabelHTMLAttributes['for'];
+  label?: LabelHTMLAttributes['for'];
 
   /**
    * Input indeterminate state
@@ -99,7 +99,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const state = reactive<StateTypes>({
   checked: false,
-  indeterminate: props.indeterminate,
+  indeterminate: false,
 });
 
 const icons = {
@@ -160,7 +160,6 @@ watch(
   <div class="checkbox-wrapper">
     <div class="checkbox-container">
       <input
-        v-bind="$attrs"
         :id="props.id"
         :checked="state.checked"
         class="checkbox-container__input"
