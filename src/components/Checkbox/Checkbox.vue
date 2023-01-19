@@ -143,6 +143,8 @@ watch(
     }
   },
   {
+    // need immediate to set the state on first render for storybook
+    // TODO: find a better way to do this
     immediate: true,
   }
 );
@@ -152,6 +154,8 @@ watch(
     state.checked = value;
   },
   {
+    // need immediate to set the state on first render for storybook
+    // TODO: find a better way to do this
     immediate: true,
   }
 );
