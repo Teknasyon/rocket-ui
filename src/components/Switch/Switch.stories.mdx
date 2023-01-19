@@ -8,10 +8,10 @@ export const Default = (args) => {
     setup() {
       return {
         args,
-        change: action('change'),
+        change: action('update:modelValue'),
       };
     },
-    template: `<Switch v-bind="args" @change="change"/>`,
+    template: `<Switch v-bind="args" @update:modelValue="change"/>`,
   };
 };
 
@@ -22,7 +22,7 @@ export const defaultArgs = {
     },
     defaultValue: 'switch',
   },
-  value: {
+  modelValue: {
     control: {
       type: 'boolean',
     },
@@ -87,7 +87,7 @@ The Switch component is a simple toggle that allows the user to switch between t
     name="Overview"
     argTypes={{ ...Default.argTypes }}
     args={{
-      value: false,
+      modelValue: false,
       size: 'small',
     }}
   >
@@ -103,9 +103,9 @@ The Switch component is a simple toggle that allows the user to switch between t
 
 ## Usage <a id="usage" />
 
-### value (required, boolean)
+### modelValue (required, boolean)
 
-The _value_ prop determines the current state of the switch. When the value prop is true, the switch will be in the "on" state, and when it is false, the switch will be in the "off" state.
+The _modelValue_ prop determines the current state of the switch. When the modelValue prop is true, the switch will be in the "on" state, and when it is false, the switch will be in the "off" state.
 
 ### size (optional, string)
 
@@ -140,7 +140,7 @@ The _errorMsg_ prop sets an error message for the switch. This can be used to di
     name="Small"
     argTypes={{ ...Default.argTypes }}
     args={{
-      value: false,
+      modelValue: false,
       size: 'small',
     }}
   >
@@ -155,7 +155,7 @@ The _errorMsg_ prop sets an error message for the switch. This can be used to di
     name="Medium"
     argTypes={{ ...Default.argTypes }}
     args={{
-      value: false,
+      modelValue: false,
       size: 'medium',
     }}
   >
@@ -170,7 +170,7 @@ The _errorMsg_ prop sets an error message for the switch. This can be used to di
     name="Large"
     argTypes={{ ...Default.argTypes }}
     args={{
-      value: false,
+      modelValue: false,
       size: 'large',
     }}
   >
@@ -185,7 +185,7 @@ The _errorMsg_ prop sets an error message for the switch. This can be used to di
     name="With Error"
     argTypes={{ ...Default.argTypes }}
     args={{
-      value: false,
+      modelValue: false,
       size: 'medium',
       errorMsg: 'This is an error message',
     }}

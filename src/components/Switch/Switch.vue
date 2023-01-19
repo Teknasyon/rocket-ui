@@ -1,27 +1,95 @@
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue';
+import {
+  computed,
+  reactive,
+  watch,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
+} from 'vue';
 import './switch.css';
 export interface Props {
-  id?: string;
-  value: boolean;
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  label?: string;
+  /**
+   * id of the checkbox
+   * @type HTMLAttributes['id']
+   * @default ''
+   * @example
+   * <Checkbox id="checkbox" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+   */
+  id: HTMLAttributes['id'];
+
+  /**
+   * Input checked state
+   * @type InputHTMLAttributes['checked']
+   * @default false
+   * @example
+   * <Checkbox modelValue="true" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#checked
+   */
+  modelValue?: InputHTMLAttributes['checked'];
+
+  /**
+   * Input disabled state
+   * @type InputHTMLAttributes['disabled']
+   * @default false
+   * @example
+   * <Checkbox disabled="true" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#disabled
+   */
+  disabled?: InputHTMLAttributes['disabled'];
+
+  /**
+   * label of the checkbox
+   * @type LabelHTMLAttributes['label']
+   * @default ''
+   * @example
+   * <Checkbox label="Checkbox" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
+   */
+  label?: LabelHTMLAttributes['for'];
+
+  /**
+   * Hint text
+   * @type string
+   * @default ''
+   * @example
+   * <Checkbox hint="This is a hint" />
+   */
   hint?: string;
+
+  /**
+   * Error message
+   * @type string
+   * @default ''
+   * @example
+   * <Checkbox errorMsg="This is an error" />
+   */
   errorMsg?: string;
+
+  /**
+   * Size of the checkbox
+   * @type 'small' | 'medium' | 'large'
+   * @default 'medium'
+   * @example
+   * <Checkbox size="small" />
+   */
+  size?: 'small' | 'medium' | 'large';
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
-  value: false,
+  modelValue: false,
   size: 'medium',
   disabled: false,
   label: '',
   hint: '',
   errorMsg: '',
 });
-const emit = defineEmits(['change']);
-const state = reactive({
-  value: false,
+const emit = defineEmits(['update:modelValue']);
+const state = reactive<{
+  checked: InputHTMLAttributes['checked'];
+}>({
+  checked: false,
 });
 const classes = computed(() => {
   return {
@@ -31,14 +99,21 @@ const classes = computed(() => {
     'switch--error': props.errorMsg,
   };
 });
-const onChange = () => {
+const onChange = (e: unknown) => {
   if (props.disabled) return;
-  emit('change', { value: state.value });
+  // @ts-expect-error: Unreachable code error
+  state.checked = e.target.checked;
+  emit('update:modelValue', state.checked);
 };
 watch(
-  () => props.value,
+  () => props.modelValue,
   (value) => {
-    state.value = value;
+    state.checked = value;
+  },
+  {
+    // need immediate to set the state on first render for storybook
+    // TODO: find a better way to do this
+    immediate: true,
   }
 );
 </script>
@@ -47,8 +122,7 @@ watch(
     <div :class="classes">
       <input
         :id="props.id"
-        v-bind="$attrs"
-        v-model="state.value"
+        :checked="state.checked"
         class="switch__input"
         type="checkbox"
         @change="onChange"
