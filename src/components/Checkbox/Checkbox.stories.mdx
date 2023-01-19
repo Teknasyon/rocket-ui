@@ -111,7 +111,7 @@ A checkbox component typically consists of a label that describes the associated
 - Use the **label** prop to clearly communicate the purpose of the checkbox to the user. This prop is required.
 - Use the **indeterminate** prop to represent a state that is partially checked, such as when some but not all options in a group are selected.
 - Use the **disabled** prop to prevent the user from interacting with the checkbox when it is not relevant or applicable.
-- Use the **checked** prop to control the checked state of the checkbox. This can be useful when you want to implement conditional logic or when you want to bind the checkbox to a data model.
+- Use the **modelValue** prop to control the checked state of the checkbox. This can be useful when you want to implement conditional logic or when you want to bind the checkbox to a data model.
 - Use the **hint** prop to provide additional information or context to the user. This can be used to clarify the purpose of the checkbox or to provide guidance on how to use it.
 - Use the **errorMsg** prop to indicate that the checkbox is required or has an error. This can be used to highlight issues to the user and help them fix them.
 - Use the **change** prop to handle the checkbox's checked state changes. This function will be passed the new checked state as an argument, which you can use to update your application state or perform other actions.
@@ -127,7 +127,7 @@ A checkbox component typically consists of a label that describes the associated
     args={{
       id: 'checkbox-1',
       label: 'Checkbox label',
-      checked: true,
+      modelValue: true,
     }}
   >
     {Default.bind({})}
