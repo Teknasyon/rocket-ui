@@ -1,6 +1,6 @@
 {
   "name": "design-system-vue",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "type": "module",
   "main": "dist/design-system-vue.umd.cjs",
   "module": "dist/design-system-vue.js",
