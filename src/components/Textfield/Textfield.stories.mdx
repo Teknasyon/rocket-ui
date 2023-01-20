@@ -8,7 +8,7 @@ export const Default = (args) => {
     setup() {
       return {
         args,
-        input: action('input'),
+        input: action('update:modelValue'),
         focus: action('focus'),
         blur: action('blur'),
         clickIcon: action('click:icon'),
@@ -18,7 +18,7 @@ export const Default = (args) => {
     template: `
     <Textfield 
       v-bind="args" 
-      @input="input" 
+      @update:modelValue="input" 
       @focus="focus" 
       @blur="blur" 
       @click:icon="clickIcon"
@@ -53,7 +53,7 @@ export const defaultArgs = {
     },
     defaultValue: 'Placeholder',
   },
-  value: {
+  modelValue: {
     control: {
       type: 'text',
     },
@@ -316,9 +316,9 @@ The **placeholder** prop is for text to be displayed as a placeholder in the inp
 
 The **type** is the type of input field, such as "text" or "number".
 
-## value (optional)
+## modelValue (optional)
 
-The **value** prop is the current value of the input field.
+The **modelValue** prop is the current value of the input field.
 
 ## errorMsg (optional)
 

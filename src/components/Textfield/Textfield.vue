@@ -1,29 +1,146 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import {
+  computed,
+  reactive,
+  ref,
+  watch,
+  type CSSProperties,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
+} from 'vue';
 import './textfield.css';
 import Icon from '../Icon/Icon.vue';
 import Label from '../Label/Label.vue';
 // import { vFocus } from '../../directives';
 export interface Props {
-  id: string;
+  /**
+   * id of the textfield
+   * @type HTMLAttributes['id']
+   * @default ''
+   * @example
+   * <Textfield id="textfield" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+   */
+  id: HTMLAttributes['id'];
+  /**
+   * Input type
+   * @type 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
+   * @default 'text'
+   * @example
+   * <Textfield type="password" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
+   */
   type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
-  value?: string;
-  label?: string;
-  placeholder?: string;
+
+  /**
+   * Input value
+   * @type InputHTMLAttributes['value'];
+   * @default ''
+   * @example
+   * <Textfield modelValue="Hello" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value
+   */
+  modelValue?: InputHTMLAttributes['value'];
+
+  /**
+   * label of the textfield
+   * @type LabelHTMLAttributes['label']
+   * @default ''
+   * @example
+   * <Textfield label="Textfield" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
+   */
+  label?: LabelHTMLAttributes['for'];
+
+  /**
+   * Placeholder text
+   * @type InputHTMLAttributes['placeholder'];
+   * @default ''
+   * @example
+   * <Textfield placeholder="Placeholder" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
+   */
+  placeholder?: InputHTMLAttributes['placeholder'];
+
+  /**
+   * Error message
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield errorMsg="This is an error" />
+   */
   errorMsg?: string;
+
+  /**
+   * Hint text
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield hint="This is a hint" />
+   */
   hint?: string;
+
+  /**
+   * Icon to prepend
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield prependIcon="lock_outline" />
+   */
   prependIcon?: string;
+
+  /**
+   * Icon to append
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield appendIcon="lock_outline" />
+   */
   appendIcon?: string;
-  iconColor?: string;
-  disabled?: boolean;
+
+  /**
+   * Color of the icon
+   * @type CSSProperties['color']
+   * @default ''
+   * @example
+   * <Textfield iconColor="red" />
+   */
+  iconColor?: CSSProperties['color'];
+
+  /**
+   * Input disabled state
+   * @type InputHTMLAttributes['disabled']
+   * @default false
+   * @example
+   * <Textfield disabled="true" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled
+   */
+  disabled?: InputHTMLAttributes['disabled'];
+
+  /**
+   * Input loading state
+   * @type boolean
+   * @default false
+   * @example
+   * <Textfield loading="true" />
+   */
   loading?: boolean;
+
+  /**
+   * Input clearable state
+   * @type boolean
+   * @default false
+   * @example
+   * <Textfield clearable="true" />
+   */
   clearable?: boolean;
 }
 const inputRef = ref<HTMLInputElement>();
 const props = withDefaults(defineProps<Props>(), {
   id: '',
   type: 'text',
-  value: '',
+  modelValue: '',
   label: '',
   placeholder: '',
   errorMsg: '',
@@ -36,14 +153,14 @@ const props = withDefaults(defineProps<Props>(), {
   clearable: false,
 });
 const emit = defineEmits([
-  'input',
+  'update:modelValue',
   'focus',
   'blur',
   'click:icon',
   'click:clear',
 ]);
 const state = reactive({
-  value: props.value || '',
+  value: '',
 });
 const typeOfInputRef = ref(props.type);
 const prependIconsOfType = {
@@ -158,10 +275,18 @@ const setPassType = () => {
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   state.value = target.value;
-  emit('input', {
-    value: state.value,
-  });
+  emit('update:modelValue', state.value);
 };
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    state.value = value;
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 <template>
   <fieldset>
@@ -187,13 +312,12 @@ const onInput = (e: Event) => {
             :size="16"
           />
           <input
-            v-bind="$attrs"
             :id="props.id"
             ref="inputRef"
-            v-model="state.value"
             :disabled="props.disabled"
             :placeholder="props.placeholder"
             :type="typeOfInputRef"
+            :value="state.value"
             @blur="onBlur"
             @focus="onFocus"
             @input="onInput"
