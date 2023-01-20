@@ -1,15 +1,83 @@
 <script setup lang="ts">
 import Label from '../Label/Label.vue';
 import './textarea.css';
-import { defineProps, defineEmits, reactive } from 'vue';
+import {
+  defineProps,
+  defineEmits,
+  reactive,
+  watch,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
+} from 'vue';
 export interface IProps {
-  id: string;
-  errorMsg?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  value?: string;
-  label?: string;
+  /**
+   * id of the textarea
+   * @type HTMLAttributes['id']
+   * @default ''
+   * @example
+   * <TextArea id="textarea" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+   */
+  id: HTMLAttributes['id'];
+
+  /**
+   * Input value
+   * @type InputHTMLAttributes['value'];
+   * @default ''
+   * @example
+   * <TextArea modelValue="Hello" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value
+   */
+  modelValue?: InputHTMLAttributes['value'];
+
+  /**
+   * label of the textarea
+   * @type LabelHTMLAttributes['label']
+   * @default ''
+   * @example
+   * <TextArea label="TextArea" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
+   */
+  label?: LabelHTMLAttributes['for'];
+
+  /**
+   * Placeholder text
+   * @type InputHTMLAttributes['placeholder'];
+   * @default ''
+   * @example
+   * <TextArea placeholder="Placeholder" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
+   */
+  placeholder?: InputHTMLAttributes['placeholder'];
+
+  /**
+   * Disabled state
+   * @type InputHTMLAttributes['disabled'];
+   * @default false
+   * @example
+   * <TextArea disabled />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled
+   */
+  disabled?: InputHTMLAttributes['disabled'];
+
+  /**
+   * Hint text
+   * @type string
+   * @default 'This is a hint'
+   * @example
+   * <TextArea hint="This is a hint" />
+   */
   hint?: string;
+
+  /**
+   * Error message
+   * @type string
+   * @default ''
+   * @example
+   * <TextArea errorMsg="This is an error" />
+   */
+  errorMsg?: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -17,20 +85,30 @@ const props = withDefaults(defineProps<IProps>(), {
   errorMsg: '',
   disabled: false,
   placeholder: '',
-  value: '',
+  modelValue: '',
   label: '',
   hint: 'This is a hint',
 });
 
 const state = reactive({
-  value: props.value || '',
+  value: '',
 });
 
-const emit = defineEmits(['input']);
+const emit = defineEmits(['update:modelValue']);
 
 function onInput(e: Event) {
-  emit('input', (e.target as HTMLInputElement).value);
+  emit('update:modelValue', (e.target as HTMLInputElement).value);
 }
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    state.value = value;
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <template>
@@ -43,9 +121,7 @@ function onInput(e: Event) {
       :text="props.label"
     />
     <textarea
-      v-bind="$attrs"
       :id="props.id"
-      v-model="state.value"
       class="textarea"
       :class="{
         'textarea--error': props.errorMsg,
@@ -53,6 +129,7 @@ function onInput(e: Event) {
       }"
       :disabled="props.disabled"
       :placeholder="props.placeholder"
+      :value="state.value"
       @input="onInput"
     />
     <p v-if="props.errorMsg" class="textarea__error">
