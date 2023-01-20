@@ -275,7 +275,6 @@ const setPassType = () => {
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   state.value = target.value;
-  emit('update:modelValue', state.value);
 };
 
 watch(
@@ -285,6 +284,12 @@ watch(
   },
   {
     immediate: true,
+  }
+);
+watch(
+  () => state.value,
+  (value) => {
+    emit('update:modelValue', value);
   }
 );
 </script>
