@@ -8,14 +8,98 @@ export interface Option {
   label: string;
 }
 export interface SelectProps {
-  options: Option[];
+  /**
+   * Placeholder Dropdown
+   * @type InputHTMLAttributes['placeholder'];
+   * @default ''
+   * @example
+   * <Dropdown placeholder="Placeholder" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
+   */
   placeholder?: string;
+
+  /**
+   * Options of the Dropdown
+   * @type Option[]
+   * @default []
+   * @example
+   * <Dropdown
+   *  :options="[
+   *   {
+   *    value: '1',
+   *    label: 'Option 1',
+   *   },
+   *   {
+   *    value: '2',
+   *    label: '2',
+   *   },
+   *  ]"
+   * />
+   */
+  options: Option[];
+
+  /**
+   * Allow to create new options
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown taggable />
+   */
   taggable?: boolean;
+
+  /**
+   * Allow to select multiple options
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown multiple />
+   */
   multiple?: boolean;
+
+  /**
+   * Disable the Dropdown
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown disabled />
+   */
   disabled?: boolean;
+
+  /**
+   * Loading state of the Dropdown
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown loading />
+   */
   loading?: boolean;
+
+  /**
+   * Icon to prepend
+   * @type string
+   * @default ''
+   * @example
+   * <Dropdown prependIcon="search" />
+   */
   prependIcon?: string;
+
+  /**
+   * Icon to append
+   * @type string
+   * @default 'expand_less'
+   * @example
+   * <Dropdown appendIcon="expand_more" />
+   */
   appendIcon?: string;
+
+  /**
+   * Value of the Dropdown
+   * @type string | number | Option | Option[]
+   * @default ''
+   * @example
+   * <Dropdown v-model="model" />
+   */
+  modelValue?: string | number | Option | Option[];
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -26,6 +110,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   loading: false,
   prependIcon: '',
   appendIcon: 'expand_less',
+  modelValue: '',
 });
 const selected = ref('');
 const selectedMultiple = reactive<Option[]>([]);
@@ -161,7 +246,6 @@ watch(selectedMultiple, (value) => {
         </p>
       </div>
       <input
-        v-bind="$attrs"
         id="select"
         ref="input"
         v-model="inputModel"

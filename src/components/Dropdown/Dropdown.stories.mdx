@@ -80,6 +80,12 @@ export const defaultArgs = {
     },
     defaultValue: '',
   },
+  modelValue: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
 };
 
 <Meta
@@ -140,6 +146,10 @@ The **disabled** prop disables the component and prevent the user from interacti
 ### loading (optional)
 
 The **loading** prop allows you to indicate that the component is in a loading state and the user should wait for the options to appear.
+
+### modelValue (optional)
+
+The **modelValue** prop allows you to define the value of the selected option.
 
 Overall, this Dropdown component offers a wide range of customization options that allow for greater flexibility and a better user experience. It can be used in a variety of contexts and can be tailored to suit the specific needs of the application.
 
