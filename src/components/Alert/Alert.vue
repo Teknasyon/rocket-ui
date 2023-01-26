@@ -4,10 +4,49 @@ import { computed } from 'vue';
 import Icon from '../Icon/Icon.vue';
 
 export interface Props {
+  /**
+   * Type of the Alert
+   * @type 'success' | 'error' | 'warning' | 'info'
+   * @default 'info'
+   * @example
+   * <Alert type="success" />
+   */
   type: 'success' | 'error' | 'warning' | 'info';
+
+  /**
+   * Title of the Alert
+   * @type string
+   * @default ''
+   * @example
+   * <Alert title="Title" />
+   */
   title?: string;
+
+  /**
+   * Description of the Alert
+   * @type string
+   * @default ''
+   * @example
+   * <Alert description="Description" />
+   */
   description?: string;
+
+  /**
+   * Size of the Alert
+   * @type 'small' | 'medium' | 'large'
+   * @default 'medium'
+   * @example
+   * <Alert size="small" />
+   */
   size?: 'small' | 'medium' | 'large';
+
+  /**
+   * Allow to close the Alert
+   * @type boolean
+   * @default true
+   * @example
+   * <Alert closable />
+   */
   closable?: boolean;
 }
 

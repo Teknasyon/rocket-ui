@@ -1,26 +1,65 @@
 <script setup lang="ts">
 import 'material-icons/iconfont/material-icons.css';
-import { computed } from 'vue';
+import { computed, type CSSProperties } from 'vue';
 
 export interface IProps {
+  /**
+   * Name of the icon
+   * @type string
+   * @default ''
+   * @example
+   * <Icon name="icon" />
+   */
   name: string;
+
+  /**
+   * Kind of the icon
+   * @type 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone'
+   * @default 'round'
+   * @example
+   * <Icon kind="filled" />
+   */
   kind?: string | 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone';
-  size?: string | number;
-  color?: string;
-  fontWeight?: string;
+
+  /**
+   * Font size of the icon
+   * @type number
+   * @default 24
+   * @example
+   * <Icon fontSize="24" />
+   */
+  fontSize?: CSSProperties['fontSize'];
+
+  /**
+   * Color of the icon
+   * @type string
+   * @default ''
+   * @example
+   * <Icon color="red" />
+   */
+  color?: CSSProperties['color'];
+
+  /**
+   * Font weight of the icon
+   * @type string
+   * @default 'normal'
+   * @example
+   * <Icon fontWeight="bold" />
+   */
+  fontWeight?: CSSProperties['fontWeight'];
 }
 const props = withDefaults(defineProps<IProps>(), {
   name: '',
   kind: 'round',
-  size: 24,
+  fontSize: 24,
   color: '',
-  fontWeight: () => 'light',
+  fontWeight: 'normal',
 });
 
 const styles = computed(() => {
   return {
-    fontSize: `${props.size}px`,
-    fontWeight: `${props.fontWeight}`,
+    fontSize: `${props.fontSize}px`,
+    fontWeight: props.fontWeight,
     color: props.color,
     display: 'inline-flex',
     alignItems: 'center',

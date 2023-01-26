@@ -4,12 +4,67 @@ import Icon from '../Icon/Icon.vue';
 import './chip.css';
 
 export interface Props {
+  /**
+   * Variant of the Chip
+   * @type 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
+   * @default 'primary'
+   * @example
+   * <Chip variant="primary" />
+   */
   variant: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
+
+  /**
+   * Size of the Chip
+   * @type 'small' | 'medium' | 'large'
+   * @default 'medium'
+   * @example
+   * <Chip size="small" />
+   */
   size?: 'small' | 'medium' | 'large';
+
+  /**
+   * Label of the Chip
+   * @type string | number
+   * @default 'label'
+   * @example
+   * <Chip label="Label" />
+   */
   label?: string | number;
+
+  /**
+   * Disabled state of the Chip
+   * @type boolean
+   * @default false
+   * @example
+   * <Chip disabled />
+   */
   disabled?: boolean;
+
+  /**
+   * Prepend icon of the Chip
+   * @type string
+   * @default ''
+   * @example
+   * <Chip prependIcon="icon" />
+   */
   prependIcon?: string;
+
+  /**
+   * Append icon of the Chip
+   * @type string
+   * @default ''
+   * @example
+   * <Chip appendIcon="icon" />
+   */
   appendIcon?: string;
+
+  /**
+   * Ghost state of the Chip
+   * @type boolean
+   * @default false
+   * @example
+   * <Chip ghost />
+   */
   ghost?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
