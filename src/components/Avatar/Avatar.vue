@@ -3,11 +3,58 @@ import { computed, defineProps } from 'vue';
 import './avatar.css';
 import blank from '../../assets/blank-avatar.svg';
 export interface IProps {
+  /**
+   * Type of the Avatar
+   * @type 'image' | 'text'
+   * @default 'image'
+   * @example
+   * <Avatar type="text" />
+   */
   type?: 'image' | 'text';
+
+  /**
+   * Source of the Avatar
+   * @type string
+   * @default ''
+   * @example
+   * <Avatar src="https://source.unsplash.com/random" />
+   */
   src?: string;
+
+  /**
+   * Alt of the Avatar
+   * @type string
+   * @default 'Avatar'
+   * @example
+   * <Avatar alt="Avatar" />
+   */
   alt?: string;
-  size?: string;
+
+  /**
+   * Size of the Avatar
+   * @type 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+   * @default '2xl'
+   * @example
+   * <Avatar size="xs" />
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+  /**
+   * Show online status
+   * @type boolean
+   * @default false
+   * @example
+   * <Avatar online />
+   */
   online?: boolean;
+
+  /**
+   * Text to show when type is text
+   * @type string
+   * @default ''
+   * @example
+   * <Avatar type="text" text="John Doe" />
+   */
   text?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {

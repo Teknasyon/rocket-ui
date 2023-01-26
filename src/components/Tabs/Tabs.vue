@@ -5,7 +5,22 @@ import type { Tab } from './types';
 import TabItem from '../TabItem/TabItem.vue';
 
 export interface IProps {
+  /**
+   * Tabs of the tabs
+   * @type Tab[]
+   * @default []
+   * @example
+   * <Tabs :tabs="[]" />
+   */
   tabs: Tab[];
+
+  /**
+   * Scrollable state of the tabs
+   * @type boolean
+   * @default false
+   * @example
+   * <Tabs scrollable />
+   */
   scrollable?: boolean;
 }
 

@@ -5,12 +5,67 @@ import Icon from '../Icon/Icon.vue';
 import './snackbar.css';
 
 export interface IProps {
+  /**
+   * Text of the snackbar
+   * @type string
+   * @default ''
+   * @example
+   * <Snackbar text="Snackbar" />
+   */
   text: string;
+
+  /**
+   * Action text of the snackbar
+   * @type string
+   * @default ''
+   * @example
+   * <Snackbar actionText="Action" />
+   */
   actionText?: string;
+
+  /**
+   * Show action of the snackbar
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar showAction />
+   */
   showAction?: boolean;
+
+  /**
+   * Show close of the snackbar
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar showClose />
+   */
   showClose?: boolean;
+
+  /**
+   * Left of the snackbar
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar left />
+   */
   left?: boolean;
+
+  /**
+   * Show of the snackbar
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar show />
+   */
   show?: boolean;
+
+  /**
+   * Timeout of the snackbar
+   * @type number
+   * @default 0
+   * @example
+   * <Snackbar timeout="1000" />
+   */
   timeout?: number;
 }
 const props = withDefaults(defineProps<IProps>(), {

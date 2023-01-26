@@ -1,15 +1,62 @@
 <script setup lang="ts">
 import Icon from '../Icon/Icon.vue';
-import { computed } from 'vue';
+import { computed, type HTMLAttributes, type ButtonHTMLAttributes } from 'vue';
 import './tab-item.css';
 import { TabItemVariants, type TabItemVariant } from './common';
 export interface IProps {
+  /**
+   * Id of the tab item
+   * @type string | number
+   * @default ''
+   * @example
+   * <TabItem id="1" />
+   */
   id: string | number;
+
+  /**
+   * Variant of the tab item
+   * @type TabItemVariant
+   * @default TabItemVariants.DEFAULT
+   * @example
+   * <TabItem variant="default" />
+   */
   variant?: TabItemVariant;
+
+  /**
+   * Label of the tab item
+   * @type string
+   * @default ''
+   * @example
+   * <TabItem label="Label" />
+   */
   label?: string;
+
+  /**
+   * Icon of the tab item
+   * @type string
+   * @default ''
+   * @example
+   * <TabItem icon="icon" />
+   */
   icon?: string;
-  disabled?: boolean;
-  active?: boolean;
+
+  /**
+   * Disabled state of the tab item
+   * @type ButtonHTMLAttributes['disabled']
+   * @default false
+   * @example
+   * <TabItem disabled />
+   */
+  disabled?: ButtonHTMLAttributes['disabled'];
+
+  /**
+   * Active state of the tab item
+   * @type HTMLAttributes['aria-selected']
+   * @default false
+   * @example
+   * <TabItem active />
+   */
+  active?: HTMLAttributes['aria-selected'];
 }
 const props = withDefaults(defineProps<IProps>(), {
   label: '',
