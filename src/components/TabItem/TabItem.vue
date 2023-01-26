@@ -57,6 +57,15 @@ export interface IProps {
    * <TabItem active />
    */
   active?: HTMLAttributes['aria-selected'];
+
+  /**
+   * Model value of the tab item
+   * @type string | number
+   * @default ''
+   * @example
+   * <TabItem v-model="model" />
+   */
+  modelValue?: string | number;
 }
 const props = withDefaults(defineProps<IProps>(), {
   label: '',
@@ -64,9 +73,10 @@ const props = withDefaults(defineProps<IProps>(), {
   icon: '',
   disabled: false,
   active: false,
+  modelValue: '',
 });
 
-const emit = defineEmits(['select']);
+const emit = defineEmits(['update:modelValue']);
 /**
  * Computed
  * @description - Returns the class for the tab item
@@ -84,7 +94,7 @@ const classes = computed(() => {
  * @returns {void}
  */
 function onClick(id: number | string) {
-  emit('select', id);
+  emit('update:modelValue', id);
 }
 </script>
 <template>
