@@ -171,6 +171,12 @@ export const defaultArgs = {
     },
     defaultValue: false,
   },
+  resizable: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 <Meta
@@ -207,6 +213,8 @@ The **autoHide** prop allows the tooltip to automatically hide after a specified
 The **shown** prop can be used to manually control the visibility of the tooltip, while the **disabled** prop can be used to disable the tooltip entirely.
 
 The **offset** and **padding** props can be used to adjust the position of the tooltip, and the **outsideClick** prop allows developers to specify whether the tooltip should be hidden when the user clicks outside of it.
+
+The **resizable** prop can be used to specify whether the tooltip should be resizable.
 
 <Canvas withSource="open">
   <Story
