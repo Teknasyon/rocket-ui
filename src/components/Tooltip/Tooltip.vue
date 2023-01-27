@@ -7,7 +7,7 @@ import {
   update,
   Trigger,
 } from './common';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watch, watchEffect } from 'vue';
 export interface IProps {
   /**
    * Placement of the tooltip
@@ -105,15 +105,17 @@ export interface IProps {
    * @default 0
    * @example
    * <Tooltip offset={0} />
+   * @link https://floating-ui.com/docs/tutorial#offset-middleware
    */
   offset?: number;
 
   /**
    * Padding of the tooltip
    * @type number
-   * @default 0
+   * @default 2
    * @example
    * <Tooltip padding={0} />
+   * @link https://floating-ui.com/docs/tutorial#shift-middleware
    */
   padding?: number;
 
@@ -134,6 +136,16 @@ export interface IProps {
    * <Tooltip triggerContent="Trigger" />
    */
   triggerContent?: string;
+
+  /**
+   * Resizable of the tooltip
+   * @type boolean
+   * @default true
+   * @example
+   * <Tooltip resizable />
+   * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
+   */
+  resizable?: boolean;
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -147,9 +159,10 @@ const props = withDefaults(defineProps<IProps>(), {
   shown: false,
   disabled: false,
   offset: 0,
-  padding: 0,
+  padding: 2,
   outsideClick: false,
   triggerContent: '',
+  resizable: true,
 });
 const emit = defineEmits(['show', 'hide']);
 const trigger = ref<HTMLDivElement>(null);
@@ -217,6 +230,17 @@ const classes = computed(() => {
     'tooltip--light': props.light,
   };
 });
+
+/**
+ * Listen the resize event of window
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
+ */
+window.onresize = () => {
+  const { placement, offset, padding, disabled } = props;
+  if (disabled) return;
+  if (props.resizable)
+    update(trigger, tooltip, arrowElement, placement, offset, padding);
+};
 
 watchEffect(
   () => {

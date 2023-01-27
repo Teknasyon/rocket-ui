@@ -16,6 +16,7 @@ export function update(
   offsetParam: number,
   padding: number
 ) {
+  if (!trigger || !tooltip) return;
   computePosition(trigger, tooltip, {
     placement,
     middleware: [
