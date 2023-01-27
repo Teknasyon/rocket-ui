@@ -9,19 +9,130 @@ import {
 } from './common';
 import { computed, ref, watchEffect } from 'vue';
 export interface IProps {
+  /**
+   * Placement of the tooltip
+   * @type Placements
+   * @default Placement.Top
+   * @example
+   * <Tooltip placement="top" />
+   */
   placement?: Placements;
+
+  /**
+   * Text of the tooltip content
+   * @type string
+   * @default ''
+   * @example
+   * <Tooltip text="Tooltip" />
+   */
   text?: string;
+
+  /**
+   * Dark theme of the tooltip
+   * @type boolean
+   * @default true
+   * @example
+   * <Tooltip dark />
+   */
   dark?: boolean;
+
+  /**
+   * Light theme of the tooltip
+   * @type boolean
+   * @default false
+   * @example
+   * <Tooltip light />
+   */
   light?: boolean;
+
+  /**
+   * Triggers of the tooltip
+   * @type Triggers
+   * @default Trigger.Hover
+   * @example
+   * <Tooltip triggers="hover" />
+   */
   triggers?: Triggers;
+
+  /**
+   * Auto hide of the tooltip
+   * @type boolean
+   * @default true
+   * @example
+   * <Tooltip autoHide />
+   */
   autoHide?: boolean;
+
+  /**
+   * Hide delay of the tooltip
+   * @type number
+   * @default 3000
+   * @example
+   * <Tooltip hideDelay={3000} />
+   */
   hideDelay?: number;
+
+  /**
+   * Show delay of the tooltip
+   * @type number
+   * @default 0
+   * @example
+   * <Tooltip showDelay={0} />
+   */
   showDelay?: number;
+
+  /**
+   * Shown state of the tooltip
+   * @type boolean
+   * @default false
+   * @example
+   * <Tooltip shown />
+   */
   shown?: boolean;
+
+  /**
+   * Disabled state of the tooltip
+   * @type boolean
+   * @default false
+   * @example
+   * <Tooltip disabled />
+   */
   disabled?: boolean;
+
+  /**
+   * Offset of the tooltip
+   * @type number
+   * @default 0
+   * @example
+   * <Tooltip offset={0} />
+   */
   offset?: number;
+
+  /**
+   * Padding of the tooltip
+   * @type number
+   * @default 0
+   * @example
+   * <Tooltip padding={0} />
+   */
   padding?: number;
+
+  /**
+   * Outside click of the tooltip
+   * @type boolean
+   * @default false
+   * @example
+   * <Tooltip outsideClick />
+   */
   outsideClick?: boolean;
+
+  /**
+   * Trigger content of the tooltip
+   * @type string
+   * @default ''
+   * @example
+   * <Tooltip triggerContent="Trigger" />
+   */
   triggerContent?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
@@ -83,11 +194,15 @@ const onMouseEnter = () => {
 };
 const onMouseLeave = () => {
   if (props.disabled) return;
-  if (tooltip.value.style.display === '' && props.triggers === Trigger.Click) {
+  if (tooltip.value.style.display === '' && props.triggers === Trigger.Hover) {
     showTooltip();
     return;
+  } else if (
+    tooltip.value.style.display !== '' &&
+    props.triggers === Trigger.Hover
+  ) {
+    hideTooltip();
   }
-  hideTooltip();
 };
 const onMouseMove = () => {
   const { placement, offset, padding, disabled } = props;
@@ -125,8 +240,9 @@ const animationDuration = computed(() => {
     @mouseleave.stop="onMouseLeave"
     @mousemove.stop="onMouseMove"
   >
+    <slot name="trigger" />
+
     <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
-    <slot v-else name="trigger" />
   </div>
   <div id="tooltip" ref="tooltip" :class="classes" role="tooltip">
     <slot name="content" />
