@@ -1,0 +1,106 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+// import { action } from '@storybook/addon-actions';
+import Box from './Box.vue';
+
+export const Default = (args) => ({
+  components: { Box },
+  setup() {
+    return { args };
+  },
+  template: `<Box v-bind="args">
+  hello world
+  </Box>`,
+});
+
+export const defaultArgs = {
+  is: {
+    control: {
+      type: 'select',
+      options: ['div', 'span', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    },
+    defaultValue: 'div',
+  },
+  display: {
+    control: {
+      type: 'select',
+      options: [
+        'block',
+        'inline-block',
+        'inline',
+        'flex',
+        'inline-flex',
+        'grid',
+        'inline-grid',
+        'table',
+        'inline-table',
+        'contents',
+        'list-item',
+        'none',
+      ],
+    },
+    defaultValue: 'block',
+  },
+  width: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+  height: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+  minWidth: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+  minHeight: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+  maxWidth: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+  maxHeight: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'auto',
+  },
+};
+
+<Meta
+  title="Layout/Box"
+  component={Box}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Box
+
+Box is the most abstract component on top of which all other Rocket UI components are built. By default, it renders a `div` element
+
+> A simple box Components
+
+<Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
