@@ -1,0 +1,111 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import Grid from './Grid.vue';
+
+export const Default = (args) => ({
+  components: { Grid },
+  setup() {
+    return { args };
+  },
+  template: `<Grid v-bind="args">
+  hello world
+  </Grid>`,
+});
+
+export const defaultArgs = {
+  templateColumns: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'repeat(3, 1fr)',
+  },
+  gap: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '20px',
+  },
+  rowGap: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '20px',
+  },
+  columnGap: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '20px',
+  },
+  autoFlow: {
+    control: {
+      type: 'select',
+      options: ['row', 'column', 'dense', 'row dense', 'column dense'],
+    },
+    defaultValue: 'row',
+  },
+  autoRows: {
+    control: {
+      type: 'select',
+      options: ['auto', 'min-content', 'max-content', '1rem'],
+    },
+    defaultValue: 'auto',
+  },
+  autoColumns: {
+    control: {
+      type: 'select',
+      options: ['auto', 'min-content', 'max-content', '1rem'],
+    },
+    defaultValue: 'auto',
+  },
+  templateRows: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'repeat(3, 1fr)',
+  },
+  templateAreas: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'none',
+  },
+  column: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '1 / 2',
+  },
+  row: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '1 / 2',
+  },
+};
+
+<Meta
+  title="Layout/Grid"
+  component={Grid}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Grid
+
+Grid is a simple box component that can be used to create layouts.
+
+> A simple box Components
+
+<Canvas>
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
