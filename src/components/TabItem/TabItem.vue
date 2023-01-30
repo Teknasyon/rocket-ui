@@ -77,10 +77,7 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 
 const emit = defineEmits(['update:modelValue']);
-/**
- * Computed
- * @description - Returns the class for the tab item
- */
+
 const classes = computed(() => {
   return {
     'tab-item': true,

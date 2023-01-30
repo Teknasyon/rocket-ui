@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<IProps>(), {
   tabs: () => [],
   scrollable: false,
 });
+const activeTab = ref(0);
 
 const tabsClasses = computed(() => {
   return {
@@ -35,12 +36,6 @@ const tabsClasses = computed(() => {
     'tabs--scrollable': props.scrollable,
   };
 });
-const activeTab = ref(0);
-const emit = defineEmits(['select']);
-const onSelect = (index: number) => {
-  activeTab.value = index;
-  emit('select', index);
-};
 </script>
 <template>
   <div class="tabs-wrapper">
@@ -49,11 +44,11 @@ const onSelect = (index: number) => {
         v-for="(tab, index) in props.tabs"
         :id="tab.id"
         :key="index"
+        v-model="activeTab"
         :active="index === activeTab"
         :disabled="tab.disabled"
         :icon="tab.icon"
         :label="tab.label"
-        @select="onSelect"
       />
     </div>
   </div>
