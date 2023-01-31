@@ -10,7 +10,7 @@ describe('TextArea', () => {
       props: {
         id: 'textarea-id',
         placeholder: 'textarea placeholder',
-        value: 'textarea value',
+        modelValue: 'textarea value',
         label: 'textarea label',
         hint: 'textarea hint',
       },
