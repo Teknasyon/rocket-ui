@@ -1,0 +1,53 @@
+@import '../../index.css';
+
+.accordion {
+  @apply rounded-lg px-4 py-3 border-[var(--neutral-200)] border mb-6;
+
+  &:hover:not(.accordion--disabled) {
+    @apply border-[var(--primary-500)];
+  }
+
+  &--disabled {
+    @apply cursor-not-allowed bg-[var(--neutral-100)];
+  }
+
+  &--disabled &__header {
+    @apply cursor-not-allowed;
+
+    & .accordion__title {
+      @apply text-[var(--neutral-500)];
+    }
+
+    & .accordion__icon {
+      @apply text-[var(--neutral-500)];
+    }
+  }
+
+  &__header {
+    @apply flex items-center justify-between cursor-pointer;
+  }
+
+  &__title {
+    @apply text-[var(--neutral-900)] font-medium;
+  }
+
+  &__icon {
+    @apply text-[var(--neutral-900)] grid items-center;
+  }
+
+  &__content {
+    @apply max-h-0 overflow-hidden text-[var(--neutral-500)] font-normal text-sm transition-all ease-in-out;
+  }
+
+  &--expanded {
+    @apply border-[var(--primary-500)] ring-2 ring-[var(--primary-200)];
+  }
+
+  &--expanded &__content {
+    @apply max-h-[600px] mt-3;
+  }
+
+  &--expanded &__icon {
+    @apply text-[var(--primary-500)];
+  }
+}

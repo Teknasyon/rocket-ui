@@ -1,0 +1,121 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import Accordion from './Accordion.vue';
+
+export const Default = (args) => ({
+  components: { Accordion },
+  setup() {
+    return { args, update: action('update:modelValue') };
+  },
+  template: `<Accordion v-bind="args" @update:modelValue="update"/>`,
+});
+
+export const defaultArgs = {
+  accordions: {
+    control: {
+      type: 'array',
+    },
+    defaultValue: [
+      {
+        title: 'Accordion 1',
+        content: 'Accordion 1 content',
+      },
+    ],
+  },
+  modelValue: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
+<Meta
+  title="Components/Accordion"
+  component={Accordion}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Alert
+
+Alert is a component that displays a message to the user. It is often used to display information, warning, error, or success messages.
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Stories](#stories)
+
+- [Customizable Slots](#customizable-slots)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+<Canvas withSource="open">
+  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+## Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above. Try it yourself!
+
+<ArgsTable story="Overview" exclude={/^(default|update.*)$/} />
+
+## Usage <a id="usage" />
+
+### With props
+
+## Stories <a id="stories" />
+
+### Single Collapse
+
+<Canvas withSource="open">
+  <Story name="Single Collapse" argTypes={{ ...Default.argTypes }} args={{}}>
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Accordion
+
+<Canvas withSource="open">
+  <Story
+    name="Accordion"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      accordions: [
+        {
+          title: 'Accordion 1',
+          content: 'Accordion 1 content',
+          isExpanded: true,
+        },
+        {
+          title: 'Accordion 2',
+          content: 'Accordion 2 content',
+        },
+        {
+          title: 'Accordion 3',
+          content: 'Accordion 3 content',
+        },
+        {
+          title: 'Accordion 4',
+          content: 'Accordion 4 content',
+          isDisabled: true,
+        },
+      ],
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+## Customizable Slots <a id="customizable-slots" />
+
+### Tips <a id="tips" />
