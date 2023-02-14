@@ -97,7 +97,7 @@ Alert is a component that displays a message to the user. It is often used to di
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Variants](#variants)
 
@@ -129,28 +129,36 @@ In general, Alert components should be used sparingly, as overusing them can mak
 
 <ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-### With props
+### type (required)
 
-**_Type_** prop determines the variant of the Alert component. The following values are accepted:
+The **type** prop determines the variant of the Alert component. The following values are accepted:
 
 - **success**: Indicates that a successful action has occurred.
 - **error**: Indicates that an error has occurred.
 - **warning**: Indicates that the user should be cautious about something.
 - **info**: Provides additional information to the user.
 
-**_Title_** prop specifies the title of the Alert component. It should be short and concise, and should clearly convey the purpose of the Alert.
+### title (optional)
 
-**_Description_** prop provides a longer description of the Alert component. It can be used to provide more detailed information or instructions to the user.
+The **title** prop specifies the title of the Alert component. It should be short and concise, and should clearly convey the purpose of the Alert.
 
-**_Size_ **prop determines the size of the Alert component. The following values are accepted:
+## description (optional)
+
+The **description** prop provides a longer description of the Alert component. It can be used to provide more detailed information or instructions to the user.
+
+### size (optional)
+
+The **size** prop determines the size of the Alert component. The following values are accepted:
 
 - **small**: Renders a small Alert component.
 - **medium**: Renders a medium-sized Alert component.
 - **large**: Renders a large Alert component.
 
-If **_closable_** prop is set to true, the Alert component will include a close button that the user can use to dismiss the Alert.
+### closable (optional)
+
+If **closable** prop is set to true, the Alert component will include a close button that the user can use to dismiss the Alert.
 
 ## Variants <a id="variants" />
 
@@ -251,8 +259,8 @@ If **_closable_** prop is set to true, the Alert component will include a close 
 
 💡 Use the description prop to provide more detailed information or instructions, if necessary.
 
-💡 Choose the appropriate variant (success, error, warning, or info) for the Alert component based on the content it is displaying.
+💡 Choose the appropriate variant (success, error, warning, or info) for the Alert based on the content it is displaying.
 
-💡 Keep the Alert component small and concise. If you need to provide a lot of information, consider using a separate component or modal instead of trying to cram everything into the Alert.
+💡 Keep the Alert small and concise. If you need to provide a lot of information, consider using a separate component or modal instead of trying to cram everything into the Alert.
 
-💡 If the Alert component is closable, make sure to provide clear instructions on how to dismiss it (e.g. "Click the 'X' to close this Alert").
+💡 If the Alert is closable, make sure to provide clear instructions on how to dismiss it (e.g. "Click the 'X' to close this Alert").

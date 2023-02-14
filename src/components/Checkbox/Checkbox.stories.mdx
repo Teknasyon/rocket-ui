@@ -74,7 +74,7 @@ A checkbox is a simple UI element that allows the user to select one or more opt
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Variants](#variants)
 
@@ -82,9 +82,7 @@ A checkbox is a simple UI element that allows the user to select one or more opt
 
 ## Overview <a id="overview" />
 
-A checkbox is typically represented by a small square box that can be checked (marked) or unchecked (unmarked). When a checkbox is checked, it indicates that the associated option has been selected by the user. When it is unchecked, it indicates that the option has not been selected.
-
-A checkbox component typically consists of a label that describes the associated option, and a checkbox input element that allows the user to select or deselect the option. The component may also include additional elements such as a description or further explanation of the option.
+A checkbox is typically represented by a small square box that can be checked (marked) or unchecked (unmarked). Checkbox component typically consists of a label that describes the associated option, and a checkbox input element that allows the user to select or deselect the option. The component may also include additional elements such as a description or further explanation of the option.
 
 <Canvas>
   <Story
@@ -105,16 +103,39 @@ A checkbox component typically consists of a label that describes the associated
 
 <ArgsTable story="Overview" exclude={/^(update.*)$/} />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-- Use the **id** prop as a unique identifier for the checkbox element. This prop is required.
-- Use the **label** prop to clearly communicate the purpose of the checkbox to the user. This prop is required.
-- Use the **indeterminate** prop to represent a state that is partially checked, such as when some but not all options in a group are selected.
-- Use the **disabled** prop to prevent the user from interacting with the checkbox when it is not relevant or applicable.
-- Use the **modelValue** prop to control the checked state of the checkbox. This can be useful when you want to implement conditional logic or when you want to bind the checkbox to a data model.
-- Use the **hint** prop to provide additional information or context to the user. This can be used to clarify the purpose of the checkbox or to provide guidance on how to use it.
-- Use the **errorMsg** prop to indicate that the checkbox is required or has an error. This can be used to highlight issues to the user and help them fix them.
-- Use the **change** prop to handle the checkbox's checked state changes. This function will be passed the new checked state as an argument, which you can use to update your application state or perform other actions.
+### id (required)
+
+The **id** prop is a unique identifier for the checkbox element. This prop is required.
+
+### label (optional)
+
+The **label** prop is used to clearly communicate the purpose of the checkbox to the user.
+
+### indeterminate (optional)
+
+The **indeterminate** prop is used to represent a state that is partially checked, such as when some but not all options in a group are selected.
+
+### disabled (optional)
+
+The **disabled** prop is used to prevent the user from interacting with the checkbox when it is not relevant or applicable.
+
+### modelValue (optional)
+
+The **modelValue** prop is used to control the checked state of the checkbox. This can be useful when you want to implement conditional logic or when you want to bind the checkbox to a data model.
+
+### hint (optional)
+
+The **hint** prop is used to provide additional information or context to the user. This can be used to clarify the purpose of the checkbox or to provide guidance on how to use it.
+
+### errorMsg (optional)
+
+The **errorMsg** prop is used to indicate that the checkbox is required or has an error. This can be used to highlight issues to the user and help them fix them.
+
+### change (optional)
+
+The **change** prop is used to handle the checkbox's checked state changes. This function will be passed the new checked state as an argument, which you can use to update your application state or perform other actions.
 
 ## Variants <a id="variants" />
 
@@ -168,14 +189,14 @@ A checkbox component typically consists of a label that describes the associated
 
 ## Tips <a id="tips" />
 
-💡 Use clear and concise labels: Make sure that the _label_ for the checkbox accurately and clearly describes the option that it represents. Avoid using jargon or ambiguous terms that may be confusing to the user.
+💡 Use clear and concise labels. Make sure that the _label_ for the checkbox accurately and clearly describes the option that it represents. Avoid using jargon or ambiguous terms that may be confusing to the user.
 
-💡 Use _indeterminate_ state appropriately: The indeterminate state of a checkbox is useful for representing a partially checked state, such as when a group of checkboxes represents a set of related options and some of the options are only partially applicable. Use this state sparingly and only when it makes sense in the context of your application.
+💡 Use _indeterminate_ state appropriately. Use this state sparingly and only when it makes sense in the context of your application.
 
-💡 Use _disabled_ state appropriately: The disabled state of a checkbox is useful for indicating that an option is not currently available or relevant. Avoid using this state excessively, as it can make the user feel like they are being restricted or prevented from interacting with the checkbox.
+💡 Use _disabled_ state appropriately. Avoid using this state excessively, as it can make the user feel like they are being restricted or prevented from interacting with the checkbox.
 
-💡 Use the _checked_ prop to control the checked state: The checked prop can be used to programmatically control the checked state of the checkbox. This can be useful in scenarios where you want to pre-populate a form with default values, or where you want to update the checked state based on user actions or other conditions.
+💡 Use the _checked_ prop to control the checked state. This can be useful in scenarios where you want to pre-populate a form with default values, or where you want to update the checked state based on user actions or other conditions.
 
-💡 Use the _hint_ prop to provide additional context: The hint prop can be used to provide additional information or context to the user about the checkbox and the associated option. Use this prop sparingly and only when it is necessary to fully explain the purpose or implications of the checkbox.
+💡 Use the _hint_ prop to provide additional context. Use this prop sparingly and only when it is necessary to fully explain the purpose or implications of the checkbox.
 
-💡 Use the _errorMsg_ prop to indicate errors: The errorMsg prop can be used to indicate that the checkbox is required or has an error. Use this prop to help the user understand that there is a problem with the form and encourage them to correct any errors before submitting.
+💡 Use the _errorMsg_ prop to indicate errors. Use this prop to help the user understand that there is a problem with the form and encourage them to correct any errors before submitting.

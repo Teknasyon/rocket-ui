@@ -138,7 +138,7 @@ Button is a clickable element that is used to trigger an action or event, such a
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Variants](#variants)
 
@@ -146,9 +146,7 @@ Button is a clickable element that is used to trigger an action or event, such a
 
 ### Overview <a id="overview" />
 
-A button is a user interface element that allows a user to interact with a website or application. It is typically represented by a text or an icon that represents the action that will be performed when the user clicks on it.
-
-A button component is a reusable piece of code that can be used in any part of a website or application. It provides a convenient way to add a button to a user interface without having to write the code for the button each time it is needed.
+A button component is a reusable piece of code that can be used in any part of a website or application. It is typically represented by a text or an icon that represents the action that will be performed when the user clicks on it.
 
 <Canvas>
   <Story
@@ -170,36 +168,50 @@ A button component is a reusable piece of code that can be used in any part of a
   exclude={/^(click|content|default|custom-icon|on.*)$/}
 />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-### Props
+### variant (required)
 
-The button component supports the following props:
+The **variant** prop allows you to specify the appearance of the button. The possible values for this prop are primary, secondary, text, and outline.
 
-- The **variant** prop allows you to specify the appearance of the button. The possible values for this prop are: primary, secondary, text, and outline.
+### loading (optional)
 
-- The **loading** prop allows you to specify whether the button is in a loading state. When the button is in a loading state, it will display a loading indicator (e.g. a spinning spinner) instead of the button text.
-  To set the button to a loading state, you can pass in the value true to the loading prop.
+The **loading** prop allows you to specify whether the button is in a loading state. When the button is in a loading state, it will display a loading indicator (e.g. a spinning spinner) instead of the button text.
+To set the button to a loading state, you can pass in the value true to the loading prop.
 
-- The **disabled** prop allows you to specify whether the button is disabled. A disabled button is not interactive and cannot be clicked on.
-  To disable a button, you can pass in the value true to the disabled prop.
+### disabled (optional)
 
-- The **prependIcon** prop allows you to specify an icon that will be placed before the button text. This can be used to add visual context to the button.
-  To add an icon to the button, you can pass in the name of the icon as a string to the prependIcon prop.
+The **disabled** prop allows you to specify whether the button is disabled. A disabled button is not interactive and cannot be clicked on.
+To disable a button, you can pass in the value true to the disabled prop.
 
-- The **appendIcon** prop is similar to the prependIcon prop, but it allows you to specify an icon that will be placed after the button text.
-  To add an icon to the button, you can pass in the name of the icon as a string to the appendIcon prop.
+### prependIcon (optional)
 
-- The **size** prop allows you to specify the size of the button. The possible values for this prop are: small, medium, and large.
+The **prependIcon** prop allows you to specify an icon that will be placed before the button text. This can be used to add visual context to the button.
+To add an icon to the button, you can pass in the name of the icon as a string to the prependIcon prop.
 
-- The **height** prop allows you to specify the height of the button. This can be useful if you want to create buttons with different heights, or if you want to match the height of the button to the height of other elements on the page.
-  To specify the height of the button, you can pass in a numeric value (in pixels) to the height prop.
+### appendIcon (optional)
 
-- The **block** prop allows you to specify whether the button should be displayed as a block element. When a button is a block element, it will take up the full width of its container.
-  To make a button a block element, you can pass in the value true to the block prop.
+The **appendIcon** prop is similar to the prependIcon prop, but it allows you to specify an icon that will be placed after the button text.
+To add an icon to the button, you can pass in the name of the icon as a string to the appendIcon prop.
 
-- The **backgroundColor** prop allows you to specify the background color of the button. This can be useful if you want to create buttons with different background colors, or if you want to match the background color of the button to the color scheme of your website or application.
-  To specify the background color of the button, you can pass in a valid CSS color value to the backgroundColor prop.
+### size (optional)
+
+The **size** prop allows you to specify the size of the button. The possible values for this prop are: small, medium, and large.
+
+### height (optional)
+
+The **height** prop allows you to specify the height of the button. This can be useful if you want to create buttons with different heights, or if you want to match the height of the button to the height of other elements on the page.
+To specify the height of the button, you can pass in a numeric value (in pixels) to the height prop.
+
+### block (optional)
+
+The **block** prop allows you to specify whether the button should be displayed as a block element. When a button is a block element, it will take up the full width of its container.
+To make a button a block element, you can pass in the value true to the block prop.
+
+### backgroundColor (optional)
+
+The **backgroundColor** prop allows you to specify the background color of the button. This can be useful if you want to create buttons with different background colors, or if you want to match the background color of the button to the color scheme of your website or application.
+To specify the background color of the button, you can pass in a valid CSS color value to the backgroundColor prop.
 
 ## Variants <a id="variants" />
 
@@ -292,8 +304,6 @@ The button component supports the following props:
 </Canvas>
 
 ### Tips <a id="tips" />
-
-_Here are some tips for using the button component effectively:_
 
 💡 Use the variant prop to create buttons with different appearances, such as primary, secondary, text, and outline.
 

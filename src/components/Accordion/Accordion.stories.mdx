@@ -47,7 +47,7 @@ The Accordion component is a UI element that allows the user to show and hide co
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Stories](#stories)
 
@@ -57,7 +57,7 @@ The Accordion component is a UI element that allows the user to show and hide co
 
 ## Overview <a id="overview" />
 
-The Accordion component provides a compact way of displaying large amounts of information in a small space. It is particularly useful for displaying hierarchical data, where each panel represents a different level of information. The Accordion Component is also a good way to present frequently asked questions (FAQs) as it makes it easy for users to find the information they are looking for.
+The Accordion component provides a compact way of displaying large amounts of information in a small space. It is particularly useful for displaying hierarchical data, where each panel represents a different level of information. The Accordion component is also a good way to present frequently asked questions (FAQs) as it makes it easy for users to find the information they are looking for.
 
 <Canvas withSource="open">
   <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
@@ -71,17 +71,15 @@ The Accordion component provides a compact way of displaying large amounts of in
 
 <ArgsTable story="Overview" exclude={/^(default|update.*)$/} />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-### With props
+### accordions (required)
 
-**accordions (array)**
+The **accordions** prop is an array that holds the data for each panel in the accordion component. Each panel is an object with properties such as header and body.
 
-The accordions prop is an array that holds the data for each panel in the accordion component. Each panel is an object with properties such as header and body.
+### modelValue (optional)
 
-** modelValue (Boolean)**
-
-The modelValue prop is a boolean that determines whether the accordion component is in an expanded or collapsed state. A value of true indicates that the accordion component is expanded, and a value of false indicates that it is collapsed.
+The **modelValue** prop is a boolean that determines whether the accordion component is in an expanded or collapsed state. A value of true indicates that the accordion component is expanded, and a value of false indicates that it is collapsed.
 
 ## Stories <a id="stories" />
 
@@ -132,10 +130,10 @@ The modelValue prop is a boolean that determines whether the accordion component
 
 💡 Use clear and concise headings for each panel's header to help users quickly understand the content within each panel.
 
-💡 Consider using icons or graphics within the header to make the Accordion Component more visually appealing.
+💡 Consider using icons or graphics within the header to make the accordion more visually appealing.
 
-💡 Make sure that the Accordion Component is accessible to users who may be using assistive technologies, such as screen readers.
+💡 Make sure that the accordion is accessible to users who may be using assistive technologies, such as screen readers.
 
-💡 Use the modelValue prop wisely to control the default state of the Accordion Component. For example, you might want to set the modelValue prop to true for the panel that contains the most important information.
+💡 Use the modelValue prop wisely to control the default state of the accordion. For example, you might want to set the modelValue prop to true for the panel that contains the most important information.
 
-💡 Try to limit the amount of content within each panel to ensure that the Accordion Component remains compact and easy to use.
+💡 Try to limit the amount of content within each panel to ensure that the accordion remains compact and easy to use.

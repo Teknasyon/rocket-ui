@@ -70,7 +70,7 @@ The TabItem component is a child component of the Tabs component. It is used to 
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Stories](#stories)
 
@@ -79,6 +79,8 @@ The TabItem component is a child component of the Tabs component. It is used to 
 ## Overview <a id="overview" />
 
 The TabItem component is responsible for displaying the content associated with a specific tab. It accepts a variety of props, including variant, id, label, disabled, and active, which can be used to customize the appearance and behavior of the tab.
+
+💡 To use the TabItem component, it is first necessary to wrap it within a Tabs component. The TabItem component should then be passed a unique id prop, which is used to identify the tab and its associated content.
 
 <Canvas withSource="open">
   <Story
@@ -96,11 +98,7 @@ The TabItem component is responsible for displaying the content associated with 
 
 <ArgsTable story="Overview" exclude={/^(select|icon|on.*)$/} />
 
-## Usage <a id="usage" />
-
-To use the TabItem component, it is first necessary to wrap it within a Tabs component. The TabItem component should then be passed a unique id prop, which is used to identify the tab and its associated content.
-
-The TabItem component can be used with the following props:
+## Usage with props <a id="usage" />
 
 ### variant (optional)
 
