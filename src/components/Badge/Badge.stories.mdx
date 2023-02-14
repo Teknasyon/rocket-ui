@@ -89,13 +89,11 @@ A badge is a small, customizable component that is often used to display a notif
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Variants](#variants)
 
 - [Tips](#tips)
-
-It has a `default` slot that can be used to display any content.
 
 ### Overview <a id="overview" />
 
@@ -108,6 +106,8 @@ Badges can be used in a variety of different contexts, but they are most commonl
 - In a messaging app to indicate the number of unread messages
 - In a social media app to show the number of likes or comments on a post
 - In a task management app to indicate the number of tasks that are overdue or incomplete
+
+Our badge component has a `default` slot that can be used to display any content.
 
 <Canvas>
   <Story
@@ -125,19 +125,31 @@ Badges can be used in a variety of different contexts, but they are most commonl
 
 <ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-- The **placement** prop is used to specify the position of the badge relative to its parent element. It can be set to _right_, _bottom_ or _left_.
+### placement (optional)
 
-- The **variant** prop is used to specify the color and styling of the badge. In the example above, it is set to primary, which will apply the default primary color and style to the badge. It can be set to _primary_, _success_, _error_, _warning_, or _neutral_.
+The **placement** prop is used to specify the position of the badge relative to its parent element. It can be set to _right_, _bottom_ or _left_.
 
-- The **overlap** prop is used to specify the overlapping status of the badge. In the example above, it is set to _false_, which will apply the default position of the badge.
+### variant (optional)
 
-- The **hover** prop is a boolean value that specifies whether the badge should be visible only on hover. If it is set to true, the badge will only be visible when the user hovers over its parent element.
+The **variant** prop is used to specify the color and styling of the badge. In the example above, it is set to primary, which will apply the default primary color and style to the badge. It can be set to _primary_, _success_, _error_, _warning_, or _neutral_.
 
-- The **content** prop is used to specify the text or number that should be displayed inside the badge. In this example, it is set to 3.
+### overlap (optional)
 
-- Finally, the **outside** prop is a boolean value that specifies whether the badge should be displayed outside of its parent element, rather than inside it. In this example, it is set to false, so the badge will be displayed inside its parent element.
+The **overlap** prop is used to specify the overlapping status of the badge. In the example above, it is set to _false_, which will apply the default position of the badge.
+
+### hover (optional)
+
+The **hover** prop is a boolean value that specifies whether the badge should be visible only on hover. If it is set to true, the badge will only be visible when the user hovers over its parent element.
+
+### content (optional)
+
+The **content** prop is used to specify the text or number that should be displayed inside the badge. In this example, it is set to 3.
+
+### outside (optional)
+
+Finally, the **outside** prop is a boolean value that specifies whether the badge should be displayed outside of its parent element, rather than inside it. In this example, it is set to false, so the badge will be displayed inside its parent element.
 
 ## Variants <a id="variants" />
 

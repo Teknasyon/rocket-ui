@@ -63,13 +63,13 @@ export const defaultArgs = {
 
 # Avatar
 
-An avatar is a visual representation of a user or an entity.
+Avatar component displays a visual representation of a user or an entity.
 
 - [Overview](#overview)
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Tips](#tips)
 
@@ -89,7 +89,7 @@ To use an Avatar component, you can pass the necessary props to configure it to 
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(click|close|on.*)$/} />
+<ArgsTable story="Overview" exclude={/^(click|close.*)$/} />
 
 ## Stories
 
@@ -146,16 +146,31 @@ To use an Avatar component, you can pass the necessary props to configure it to 
   </Story>
 </Canvas>
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-### With props
+### type (optional)
 
-- **type** _(union)_: The type of avatar to display. Can be either "image" or "text".
-- **src** _(string)_: The source of the image to display. This prop is only used when type is set to "image".
-- **alt** _(string)_: The alt text for the image. This prop is only used when type is set to "image".
-- **size** _(string)_: The size of the avatar. Can be one of "xs", "sm", "md", "lg", "xl", or "2xl".
-- **online** _(boolean)_: Whether to show a green circle indicator to signify that the user is online.
-- **text** _(string)_: The text to display when type is set to "text".
+The **type** props is for the type of avatar to display. Can be either "image" or "text".
+
+### src (optional)
+
+The **src** props is for the source of the image to display. This prop is only used when type is set to "image".
+
+### alt (optional)
+
+The **alt** props is for the alt text for the image. This prop is only used when type is set to "image".
+
+### size (optional)
+
+The **size** props is for the size of the avatar. Can be one of "xs", "sm", "md", "lg", "xl", or "2xl".
+
+### online (optional)
+
+The **online** props is for whether to show a green circle indicator to signify that the user is online.
+
+### text (optional)
+
+The **text** props is for the text to display when type is set to "text".
 
 ### Tips <a id="tips" />
 

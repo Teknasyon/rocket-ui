@@ -72,7 +72,7 @@ export const defaultArgs = {
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Stories](#stories)
 
@@ -101,35 +101,35 @@ The Switch component is a simple toggle that allows the user to switch between t
 
 <ArgsTable story="Overview" exclude={/^(on|change|onChange.*)$/} />
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-### modelValue (required, boolean)
+### modelValue (required)
 
-The _modelValue_ prop determines the current state of the switch. When the modelValue prop is true, the switch will be in the "on" state, and when it is false, the switch will be in the "off" state.
+The **modelValue** prop determines the current state of the switch. When the modelValue prop is true, the switch will be in the "on" state, and when it is false, the switch will be in the "off" state.
 
-### size (optional, string)
+### size (optional)
 
-The _size_ prop setermines the size of the switch. Accepts the values small, medium (default), and large.
+The **size** prop setermines the size of the switch. Accepts the values small, medium (default), and large.
 
-### id (optional, string)
+### id (optional)
 
-The _id_ prop sets the HTML id attribute on the switch element. This can be useful for connecting the switch to a label element using the for attribute.
+The **id** prop sets the HTML id attribute on the switch element. This can be useful for connecting the switch to a label element using the for attribute.
 
-### disabled (optional, boolean)
+### disabled (optional)
 
-If the _disabled_ prop is true, the switch will be disabled and the user will not be able to toggle it.
+If the **disabled** prop is true, the switch will be disabled and the user will not be able to toggle it.
 
-### label (optional, string)
+### label (optional)
 
-The _label_ prop sets the label text for the switch. This can be used to provide additional context or instructions for the switch.
+The **label** prop sets the label text for the switch. This can be used to provide additional context or instructions for the switch.
 
-### hint (optional, string)
+### hint (optional)
 
-The _hint_ prop sets a hint text for the switch. This can be used to provide additional information about the switch, such as its purpose or how it is used.
+The **hint** prop sets a hint text for the switch. This can be used to provide additional information about the switch, such as its purpose or how it is used.
 
-### errorMsg (optional, string)
+### errorMsg (optional)
 
-The _errorMsg_ prop sets an error message for the switch. This can be used to display an error message when the switch is in an invalid state or when it has been used in an incorrect way.
+The **errorMsg** prop sets an error message for the switch. This can be used to display an error message when the switch is in an invalid state or when it has been used in an incorrect way.
 
 ## Stories <a id="stories" />
 

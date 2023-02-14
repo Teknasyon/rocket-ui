@@ -126,7 +126,7 @@ The Textfield component is a versatile input field that can be used for various 
 
 - [Playground](#playground)
 
-- [Usage](#usage)
+- [Usage with props](#usage)
 
 - [Stories](#stories)
 
@@ -135,26 +135,6 @@ The Textfield component is a versatile input field that can be used for various 
 ## Overview <a id="overview" />
 
 The Textfield component allows for the input of text, numbers, and other types of data. It includes various options for customization, such as label, placeholder, and icon. It also includes options for error handling, hinting, and disabling or loading the field.
-
-A Textfield component typically includes the following parts:
-
-_Label:_ A label is text that describes the purpose of the input field. It should be placed near the input field so that users can easily understand what they are supposed to enter.
-
-_Placeholder:_ A placeholder is text that is displayed in the input field when it is empty. It can be used to provide additional context or instructions for the input field.
-
-_Input field:_ The input field is where the user enters their data. It can be of different types like text, password, number, email, etc.
-
-_Error message:_ Error messages are displayed when the user enters invalid data. They should be clear and concise, and should indicate how to fix the problem.
-
-_Hint:_ Hints are additional text that can be displayed to provide more context or instructions for the input field.
-
-_Icon:_ Icons can be used to make the Textfield component more visually appealing and to provide additional information or context.
-
-_Disabled:_ A disabled input field cannot be edited by the user.
-
-_Loading:_ A loading input field indicates that the input field is temporarily unavailable or in the process of loading data.
-
-_Clearable:_ A clearable input field is an input field that can be cleared by the user.
 
 <Canvas withSource="open">
   <Story
@@ -298,74 +278,72 @@ _Clearable:_ A clearable input field is an input field that can be cleared by th
   </Story>
 </Canvas>
 
-## Usage <a id="usage" />
+## Usage with props <a id="usage" />
 
-## id (required)
+### id (required)
 
 The **id** prop is a unique identifier for the input field.
 
-## label (optional)
+### label (optional)
 
 The **label** prop is for text to be displayed as a label for the input field.
 
-## placeholder (optional)
+### placeholder (optional)
 
 The **placeholder** prop is for text to be displayed as a placeholder in the input field.
 
-## type (required)
+### type (required)
 
 The **type** is the type of input field, such as "text" or "number".
 
-## modelValue (optional)
+### modelValue (optional)
 
 The **modelValue** prop is the current value of the input field.
 
-## errorMsg (optional)
+### errorMsg (optional)
 
 The **errorMsg** props is for the error message to be displayed if there is an error with the input.
 
-## hint (optional)
+### hint (optional)
 
 The **hint** prop is the additional text to provide context or instructions for the input field.
 
-## prependIcon (optional)
+### prependIcon (optional)
 
 The **prependIcon** prop is an icon to be displayed before the input field.
 
-## iconColor (optional)
+### iconColor (optional)
 
 The **iconColor** prop gives the color of the icon.
 
-## disabled (optional)
+### disabled (optional)
 
 The **disabled** prop indicates whether the input field is disabled or not.
 
-## loading (optional)
+### loading (optional)
 
 The **loading** prop indicates whether the input field is in a loading state or not.
 
-## clearable (optional)
+### clearable (optional)
 
-### Tips <a id="tips" />
+he **clearable** prop indicates whether the input field can be cleared or not.
 
-💡 The **clearable** prop indicates whether the input field can be cleared or not.
+## Tips <a id="tips" />
 
-💡 Use a clear and concise label: The label should clearly describe what the input field is for, and should be positioned in a way that is easy for users to understand.
+💡 The label should clearly describe what the input field is for, and should be positioned in a way that is easy for users to understand.
 
-💡 Use placeholders wisely: Placeholders can be used to provide additional context or instructions for the input field, but should not be used as a substitute for a clear label.
+💡 Placeholders can be used to provide additional context or instructions for the input field, but should not be used as a substitute for a clear label.
 
-💡 Choose the appropriate input type: The type of input field should match the type of data that will be entered. For example, use a number input field for numeric data, and a password input field for sensitive information.
+💡 The type of input field should match the type of data that will be entered. For example, use a number input field for numeric data, and a password input field for sensitive information.
 
-💡 Provide clear error messages: Error messages should clearly indicate what the problem is and how to fix it.
+💡 Error messages should clearly indicate what the problem is and how to fix it.
 
-💡 Use icons to enhance usability: Icons can be used to make the Textfield component more visually appealing and to provide additional information or context.
+💡 Icons can be used to make the Textfield component more visually appealing and to provide additional information or context.
 
-💡 Consider accessibility: Textfield component should be accessible to users with disabilities, including keyboard navigation, and providing appropriate ARIA attributes.
+💡 Textfield component should be accessible to users with disabilities, including keyboard navigation, and providing appropriate ARIA attributes.
 
-💡 Providing clear and helpful hints: Hints can be used to provide additional context or instructions for the input field.
+💡 Hints can be used to provide additional context or instructions for the input field.
 
-💡 Use clearable option: This will help users to clear their input easily.
+💡 This will help users to clear their input easily.
 
-💡 Consider loading and disabled state: Use these states to indicate that the input field is temporarily unavailable or in the process of loading data.
-
-💡 Test the Textfield component with different types of users: Test the Textfield component with users of different ages, backgrounds, and abilities to ensure that it is easy to use and understand.
+💡 Use these states to indicate that the input field is temporarily unavailable or in the process of loading data.
