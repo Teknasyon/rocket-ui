@@ -7,7 +7,8 @@ import {
   update,
   Trigger,
 } from './common';
-import { computed, ref, watch, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
+
 export interface IProps {
   /**
    * Placement of the tooltip
@@ -168,6 +169,7 @@ const emit = defineEmits(['show', 'hide']);
 const trigger = ref<HTMLDivElement>(null);
 const tooltip = ref<HTMLDivElement>(null);
 const arrowElement = ref<HTMLDivElement>(null);
+
 function showTooltip() {
   const { placement, offset, padding, disabled } = props;
   if (disabled) return;
@@ -177,11 +179,13 @@ function showTooltip() {
   handleAutoHide();
   if (props.outsideClick) toggleOutsideClick('add');
 }
+
 function hideTooltip() {
   tooltip.value.style.display = '';
   emit('hide');
   if (props.outsideClick) toggleOutsideClick('remove');
 }
+
 const handleAutoHide = () => {
   if (props.autoHide) {
     setTimeout(() => {
@@ -189,22 +193,26 @@ const handleAutoHide = () => {
     }, props.hideDelay);
   }
 };
+
 const toggleOutsideClick = (toggle: string) => {
   if (toggle === 'add') document.addEventListener('click', hideTooltip);
 
   if (toggle === 'remove') document.removeEventListener('click', hideTooltip);
 };
+
 const onClick = () => {
   if (props.disabled) return;
-  if (props.triggers === Trigger.Click) {
+  if (props.triggers == Trigger.Click) {
     if (tooltip.value.style.display === 'block') hideTooltip();
     else showTooltip();
   }
 };
+
 const onMouseEnter = () => {
   if (props.disabled) return;
   if (props.triggers === Trigger.Hover) showTooltip();
 };
+
 const onMouseLeave = () => {
   if (props.disabled) return;
   if (tooltip.value.style.display === '' && props.triggers === Trigger.Hover) {
@@ -217,12 +225,14 @@ const onMouseLeave = () => {
     hideTooltip();
   }
 };
+
 const onMouseMove = () => {
   const { placement, offset, padding, disabled } = props;
   if (disabled) return;
   if (props.triggers === Trigger.Hover)
     update(trigger, tooltip, arrowElement, placement, offset, padding);
 };
+
 const classes = computed(() => {
   return {
     tooltip: true,
@@ -249,6 +259,7 @@ watchEffect(
   },
   { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
 );
+
 const animationDuration = computed(() => {
   return `${props.showDelay}ms`;
 });

@@ -56,6 +56,30 @@ export const WithContentSlot = (args) => {
   };
 };
 
+export const ToggleTemplate = (args) => {
+  return {
+    components: { Tooltip },
+    setup() {
+      return {
+        args,
+        show: action('show'),
+        hide: action('hide'),
+      };
+    },
+    template: `
+    <Tooltip
+      v-bind="args"
+      @show="show"
+      @hide="hide"
+    >
+      <template #trigger>
+        <span>Toggle tooltip</span>
+      </template>
+    </Tooltip>
+    `,
+  };
+};
+
 export const WithDirectives = () => {
   return {
     components: { Button },
@@ -245,15 +269,14 @@ The tooltip component allows developers to easily add tooltips to their applicat
 <Canvas withSource="open">
   <Story
     name="With Click Trigger"
-    argTypes={{ ...Default.argTypes }}
+    argTypes={{ ...ToggleTemplate.argTypes }}
     args={{
       triggers: 'click',
       text: 'Clicked!',
-      buttonContent: 'Click me',
       outsideClick: true,
     }}
   >
-    {Default.bind({})}
+    {ToggleTemplate.bind({})}
   </Story>
 </Canvas>
 
