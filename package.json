@@ -19,7 +19,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --disable-telemetry",
+    "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN",
     "prepare": "husky install",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
   },
