@@ -1,6 +1,7 @@
 {
   "name": "@rocketui/vue",
   "version": "0.0.4",
+  "description": "A set of customizable UI components for Vue 3, built with TypeScript",
   "type": "module",
   "main": "dist/rocket-ui-vue.umd.cjs",
   "module": "dist/rocket-ui-vue.js",
