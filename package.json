@@ -19,7 +19,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "start-storybook -p 6006",
-    "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook --docs",
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --disable-telemetry",
     "prepare": "husky install",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
