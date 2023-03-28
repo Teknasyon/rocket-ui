@@ -85,7 +85,23 @@ yarn lint
 
 ## Contribution
 
-Clone the repo and run `yarn install` to install dependencies. Then run `yarn dev` to start the dev server.
+Contribution
+We welcome contributions of any kind including documentation, bug reports, bug fixes, feature requests, feature implementations, and pull requests. If you're interested in contributing to this project, please follow these guidelines:
+
+- Fork this repository to your own GitHub account and then clone it to your local device.
+- Install the dependencies by running `yarn install`.
+- Run `yarn dev` to start the dev server and see your changes in real-time as you edit the source files.
+- Create a new branch for your changes, e.g. `git checkout -b my-feature`.
+- Make your changes and commit them with a descriptive message.
+- Push your changes to your forked repository, e.g. `git push -u origin my-feature`.
+- Create a pull request from your forked repository to this repository, and describe the changes you've made and why they should be merged.
+- Before submitting a pull request, please make sure that your changes pass the following checks:
+
+The unit tests pass by running `yarn test:unit`.
+The code passes the ESLint check by running `yarn lint`.
+The code builds without errors by running `yarn build`.
+
+We aim to respond to all pull requests and issues within 48 hours. Thank you for your interest in contributing to Rocket UI Vue!
 
 ## License
 
