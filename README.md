@@ -1,4 +1,5 @@
-# Rocket UI Vue
+![Logo](./resources/rocket-ui-logo-light.svg#gh-light-mode-only)
+![Logo](./resources/rocket-ui-logo-dark.svg#gh-dark-mode-only)
 
 ## Installation
 
