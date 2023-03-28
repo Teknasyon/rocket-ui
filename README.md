@@ -1,4 +1,4 @@
-# Design System
+# Rocket UI Vue
 
 ## Recommended IDE Setup
 
