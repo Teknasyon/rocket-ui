@@ -17,11 +17,11 @@ module.exports = {
   },
   viteFinal: viteFinalFactory(),
   webpackFinal: async (config) => {
-    config.output.publicPath = '/docs/';
+    config.output.publicPath = '/rocket-ui/';
     return config;
   },
   managerWebpack: async (config) => {
-    config.output.publicPath = '/docs/';
+    config.output.publicPath = '/rocket-ui/';
     return config;
   },
 };
