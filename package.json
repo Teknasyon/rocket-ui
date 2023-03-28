@@ -2,9 +2,9 @@
   "name": "@rocketui/vue",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/design-system-vue.umd.cjs",
-  "module": "dist/design-system-vue.js",
-  "types": "dist/design-system-vue.d.ts",
+  "main": "dist/rocket-ui-vue.umd.cjs",
+  "module": "dist/rocket-ui-vue.js",
+  "types": "dist/rocket-ui-vue.d.ts",
   "files": [
     "dist"
   ],

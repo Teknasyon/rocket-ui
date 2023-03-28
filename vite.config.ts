@@ -23,9 +23,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
-      name: 'design-system-vue',
+      name: 'rocket-ui-vue',
       // the proper extensions will be added
-      fileName: 'design-system-vue',
+      fileName: 'rocket-ui-vue',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

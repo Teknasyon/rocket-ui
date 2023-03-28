@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
 import './avatar.css';
+// @ts-ignore
 import blank from '../../assets/blank-avatar.svg';
+
 export interface IProps {
   /**
    * Type of the Avatar

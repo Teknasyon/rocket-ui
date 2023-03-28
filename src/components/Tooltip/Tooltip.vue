@@ -166,8 +166,12 @@ const props = withDefaults(defineProps<IProps>(), {
   resizable: true,
 });
 const emit = defineEmits(['show', 'hide']);
+
+// @ts-ignore
 const trigger = ref<HTMLDivElement>(null);
+// @ts-ignore
 const tooltip = ref<HTMLDivElement>(null);
+// @ts-ignore
 const arrowElement = ref<HTMLDivElement>(null);
 
 function showTooltip() {
