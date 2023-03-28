@@ -16,4 +16,12 @@ module.exports = {
     storyStoreV7: true,
   },
   viteFinal: viteFinalFactory(),
+  webpackFinal: async (config) => {
+    config.output.publicPath = '/docs/';
+    return config;
+  },
+  managerWebpack: async (config) => {
+    config.output.publicPath = '/docs/';
+    return config;
+  },
 };
