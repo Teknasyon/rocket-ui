@@ -85,7 +85,6 @@ yarn lint
 
 ## Contribution
 
-Contribution
 We welcome contributions of any kind including documentation, bug reports, bug fixes, feature requests, feature implementations, and pull requests. If you're interested in contributing to this project, please follow these guidelines:
 
 - Fork this repository to your own GitHub account and then clone it to your local device.
