@@ -76,7 +76,7 @@
     "vue-tsc": "^0.39.5"
   },
   "lint-staged": {
-    "*.{vue,js,ts,mdx}": [
+    "src/*.{vue,js,ts,mdx}": [
       "yarn lint",
       "yarn prettier"
     ]
