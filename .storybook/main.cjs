@@ -16,12 +16,4 @@ module.exports = {
     storyStoreV7: true,
   },
   viteFinal: viteFinalFactory(),
-  webpackFinal: async (config) => {
-    config.output.publicPath = '/rocket-ui/';
-    return config;
-  },
-  managerWebpack: async (config) => {
-    config.output.publicPath = '/rocket-ui/';
-    return config;
-  },
 };
