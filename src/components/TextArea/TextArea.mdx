@@ -1,64 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import TextArea from './TextArea.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as TextAreaStories from './TextArea.stories';
 
-export const Default = (args) => ({
-  components: { TextArea },
-  setup() {
-    return { args, input: action('input') };
-  },
-  template: `
-    <TextArea
-      v-bind="args"
-      @input="input"
-    />
-  `,
-});
-
-export const defaultArgs = {
-  errorMsg: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Text Area',
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'RocketUI',
-  },
-  modelValue: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  hint: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'A form control for editing multi-line text.',
-  },
-};
-
-<Meta
-  title="Components/TextArea"
-  component={TextArea}
-  argTypes={{ ...defaultArgs }}
-/>
+<Meta of={TextAreaStories} />
 
 # TextArea
 
@@ -79,16 +22,14 @@ The TextArea component is a UI element that allows users to input and edit multi
 This component provides a text area for user input and includes several optional props for customization such as error message, disabled state, placeholder text, default value, label, and hint.
 
 <Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
+  <Story of={TextAreaStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(click|tab|on.*)/} />
+<Controls of={TextAreaStories.Overview} exclude={/^(click|tab|on.*)/} />
 
 ## Usage <a id="usage" />
 
@@ -125,9 +66,7 @@ The **hint** prop is for additional information or context for the text area.
 ### Default
 
 <Canvas>
-  <Story name="Default" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
+  <Story of={TextAreaStories.Defaultt} />
 </Canvas>
 
 ### Tips <a id="tips" />

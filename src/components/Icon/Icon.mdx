@@ -1,68 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as IconStories from './Icon.stories';
 
-import Icon from './Icon.vue';
-
-export const Default = (args) => {
-  return {
-    components: { Icon },
-    setup() {
-      return { args };
-    },
-    template: `<Icon v-bind="args" />`,
-  };
-};
-
-export const defaultArgs = {
-  name: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'face',
-  },
-  size: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '24',
-  },
-  color: {
-    control: {
-      type: 'color',
-    },
-    defaultValue: '',
-  },
-  kind: {
-    control: {
-      type: 'radio',
-      options: ['filled', 'round', 'outlined', 'sharp', 'two-tone'],
-    },
-    defaultValue: 'round',
-    table: {
-      defaultValue: {
-        summary: 'filled',
-        detail: 'filled | round | outlined | sharp | two-tone',
-      },
-    },
-    description: 'Kinds of icon',
-  },
-  fontWeight: {
-    control: {
-      type: 'radio',
-      options: ['light', 'bold'],
-    },
-    defaultValue: 'light',
-  },
-};
-
-<Meta
-  title="Components/Icon"
-  component={Icon}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-    layout: 'centered',
-  }}
-/>
+<Meta of={IconStories} />
 
 # Icon
 
@@ -84,25 +23,17 @@ The Icon component is a graphical element that is used to visually represent an 
 
 The Icon component is a versatile and useful tool for adding visual emphasis and clarity to an application's user interface. It is important to use icons consistently and thoughtfully in order to create a cohesive and intuitive user experience.
 
-To access a comprehensive list of icons available in our design system, please refer to the icon list page by clicking [the following link](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Rounded).
+To access a comprehensive list of icons available in our design system, please refer to the icon list page by clicking [the following link](https://fonts.google.com/icons?icon.set=Material+Icons\&icon.style=Rounded).
 
-<Canvas withSource="open">
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      name: 'face',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={IconStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" />
+<Controls of={IconStories.Overview} />
 
 ## Usage with props <a id="usage" />
 
@@ -143,16 +74,8 @@ If the font-weight prop is not provided, the default value is light.
 
 ### Default
 
-<Canvas withSource="open">
-  <Story
-    name="Default"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      name: 'face',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={IconStories.DefaultIcon} />
 </Canvas>
 
 ### Tips <a id="tips" />

@@ -1,0 +1,20 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as GridStories from './Grid.stories';
+
+<Meta of={GridStories} />
+
+# Grid
+
+Grid is a simple box component that can be used to create layouts.
+
+> A simple box Components
+
+<Canvas>
+  <Story of={GridStories.Overview} />
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={GridStories.Overview} exclude={/^(click|default|on.*)$/} />

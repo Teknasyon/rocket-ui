@@ -1,53 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import Label from './Label.vue';
-import Textfield from '../Textfield/Textfield.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as LabelStories from './Label.stories';
 
-export const Default = (args) => {
-  return {
-    components: { Label, Textfield },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: `
-    <Label 
-      v-bind="args" 
-    />
-    <Textfield id="label-for" />
-    `,
-  };
-};
-
-export const defaultArgs = {
-  id: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'label',
-  },
-  for: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'input',
-  },
-  text: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Label',
-  },
-};
-
-<Meta
-  title="Components/Label"
-  component={Label}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-  }}
-/>
+<Meta of={LabelStories} />
 
 # Label
 
@@ -63,22 +17,13 @@ export const defaultArgs = {
 
 The Label component is a UI element that is used to display a label for a form element or other component. It is typically used in conjunction with form elements such as input fields, checkboxes, and radio buttons, as well as other components like sliders and switches. The Label component can be used to provide a clear and concise description of the associated form element or component, helping users understand its purpose and how to use it.
 
-<Canvas withSource="open">
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      id: 'label-id',
-      for: 'label-for',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={LabelStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
-<ArgsTable story="Overview" />
+<Controls of={LabelStories.Overview} />
 
 ## Usage with props <a id="usage" />
 

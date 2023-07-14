@@ -1,8 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import Flex from './Flex.vue';
 import Box from '../Box/Box.vue';
 
-export const Default = (args) => ({
+const Default = (args) => ({
   components: { Flex, Box },
   setup() {
     return { args };
@@ -14,7 +13,7 @@ export const Default = (args) => ({
     </Flex>`,
 });
 
-export const defaultArgs = {
+const defaultArgs = {
   align: {
     control: {
       type: 'select',
@@ -103,29 +102,26 @@ export const defaultArgs = {
   },
 };
 
-<Meta
-  title="Layout/Flex"
-  component={Flex}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
+export default {
+  title: 'Layout/Flex',
+  component: Flex,
+
+  argTypes: {
+    ...defaultArgs,
+  },
+
+  parameters: {
     viewMode: 'docs',
-  }}
-/>
+  },
+};
 
-# Flex
+export const Overview = {
+  render: Default.bind({}),
+  name: 'Overview',
 
-Flex is Box with display set to flex and comes with helpful style shorthand. It renders a `div` element.
+  argTypes: {
+    ...Default.argTypes,
+  },
 
-### Overview
-
-<Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Playground
-
-> Changes you make in the controls will be reflected in the example above.
-
-<ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
+  args: {},
+};

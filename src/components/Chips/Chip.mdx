@@ -1,78 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as ChipStories from './Chip.stories';
 
-import Chip from './Chip.vue';
-
-export const Default = (args) => ({
-  components: { Chip },
-  setup() {
-    return {
-      args,
-      clickChip: action('click:chip'),
-      clickClose: action('click:close'),
-    };
-  },
-  template: `
-    <Chip v-bind="args" @click:chip="clickChip" @click:close="clickClose"/>
-  `,
-});
-
-export const defaultArgs = {
-  variant: {
-    control: {
-      type: 'select',
-      options: ['primary', 'secondary', 'success', 'error', 'warning', 'info'],
-    },
-    defaultValue: 'primary',
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Chip',
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  prependIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  appendIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'close',
-  },
-  ghost: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-};
-
-<Meta
-  title="Components/Chips"
-  component={Chip}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-    layout: 'centered',
-  }}
-/>
+<Meta of={ChipStories} />
 
 # Chip
 
@@ -94,22 +23,14 @@ Chips are typically displayed as small, rectangular elements with a small amount
 They can be interactable, meaning that users can click or tap on them to trigger an action. For example, a Chip might open a detailed view of the information it represents, delete itself from a list, or mark itself as selected. Chips can come in various types, depending on the information or status they represent.
 
 <Canvas>
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      prependIcon: 'face',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+  <Story of={ChipStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(click.*|on.*)$/} />
+<Controls of={ChipStories.Overview} exclude={/^(click.*|on.*)$/} />
 
 ## Usage with props <a id="usage" />
 
@@ -145,70 +66,38 @@ The **ghost** prop allows you to specify whether the Chip should have a transpar
 
 ### Primary
 
-<Canvas withSource="open">
-  <Story name="Primary" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Primary} />
 </Canvas>
 
 ### Secondary
 
-<Canvas withSource="open">
-  <Story
-    name="Secondary"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'secondary' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Secondary} />
 </Canvas>
 
 ### Success
 
-<Canvas withSource="open">
-  <Story
-    name="Success"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'success' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Success} />
 </Canvas>
 
 ### Error
 
-<Canvas withSource="open">
-  <Story
-    name="Error"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'error' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Error} />
 </Canvas>
 
 ### Warning
 
-<Canvas withSource="open">
-  <Story
-    name="Warning"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'warning' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Warning} />
 </Canvas>
 
 ### Info
 
-<Canvas withSource="open">
-  <Story
-    name="Info"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'info' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ChipStories.Info} />
 </Canvas>
 
 ### Tips <a id="tips" />
