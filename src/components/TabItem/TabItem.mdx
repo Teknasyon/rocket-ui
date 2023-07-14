@@ -1,66 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import TabItem from './TabItem.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as TabItemStories from './TabItem.stories';
 
-export const Default = (args) => ({
-  components: { TabItem },
-  setup() {
-    return { args, click: action('select') };
-  },
-  template: `
-    <TabItem v-bind="args" @select="click"/>
-  `,
-});
-
-export const defaultArgs = {
-  id: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'tab-1',
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Tab 1',
-  },
-  icon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'home',
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  variant: {
-    control: {
-      type: 'select',
-      options: ['default', 'icon-only', 'text-only'],
-    },
-    defaultValue: 'default',
-  },
-  active: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-};
-
-<Meta
-  title="Components/TabItem"
-  component={TabItem}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-    layout: 'centered',
-  }}
-/>
+<Meta of={TabItemStories} />
 
 # TabItem
 
@@ -82,21 +23,15 @@ The TabItem component is responsible for displaying the content associated with 
 
 💡 To use the TabItem component, it is first necessary to wrap it within a Tabs component. The TabItem component should then be passed a unique id prop, which is used to identify the tab and its associated content.
 
-<Canvas withSource="open">
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'default' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={TabItemStories.Overview} />
 </Canvas>
 
 ### Playground
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(select|icon|on.*)$/} />
+<Controls of={TabItemStories.Overview} exclude={/^(select|icon|on.*)$/} />
 
 ## Usage with props <a id="usage" />
 
@@ -124,42 +59,20 @@ The **active** props indicated whether the tab should be set as active or not.
 
 ### Default
 
-<Canvas withSource="open">
-  <Story
-    name="Default"
-    argTypes={{ ...Default.argTypes }}
-    args={{ variant: 'default' }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={TabItemStories.Defaultt} />
 </Canvas>
 
 ### Icon Only
 
-<Canvas withSource="open">
-  <Story
-    name="Icon Only"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'icon-only',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={TabItemStories.IconOnly} />
 </Canvas>
 
 ### Text Only
 
-<Canvas withSource="open">
-  <Story
-    name="Text Only"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      variant: 'text-only',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={TabItemStories.TextOnly} />
 </Canvas>
 
 ### Tips <a id="tips" />

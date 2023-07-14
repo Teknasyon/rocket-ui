@@ -1,0 +1,149 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as TextfieldStories from './Textfield.stories';
+
+<Meta of={TextfieldStories} />
+
+# Textfield
+
+The Textfield component is a versatile input field that can be used for various types of data entry in a web application.
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage with props](#usage)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+The Textfield component allows for the input of text, numbers, and other types of data. It includes various options for customization, such as label, placeholder, and icon. It also includes options for error handling, hinting, and disabling or loading the field.
+
+<Canvas>
+  <Story of={TextfieldStories.Overview} />
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls
+  of={TextfieldStories.Overview}
+  exclude={/^(change|input|focus|blur|click|on.*)/}
+/>
+
+## Stories
+
+### Text
+
+<Canvas>
+  <Story of={TextfieldStories.Text} />
+</Canvas>
+
+### Mail
+
+<Canvas>
+  <Story of={TextfieldStories.Mail} />
+</Canvas>
+
+### Password
+
+<Canvas>
+  <Story of={TextfieldStories.Password} />
+</Canvas>
+
+### Url
+
+<Canvas>
+  <Story of={TextfieldStories.Url} />
+</Canvas>
+
+### Tel
+
+<Canvas>
+  <Story of={TextfieldStories.Tel} />
+</Canvas>
+
+### Number
+
+<Canvas>
+  <Story of={TextfieldStories.Number} />
+</Canvas>
+
+### With Error
+
+<Canvas>
+  <Story of={TextfieldStories.WithError} />
+</Canvas>
+
+## Usage with props <a id="usage" />
+
+### id (required)
+
+The **id** prop is a unique identifier for the input field.
+
+### label (optional)
+
+The **label** prop is for text to be displayed as a label for the input field.
+
+### placeholder (optional)
+
+The **placeholder** prop is for text to be displayed as a placeholder in the input field.
+
+### type (required)
+
+The **type** is the type of input field, such as "text" or "number".
+
+### modelValue (optional)
+
+The **modelValue** prop is the current value of the input field.
+
+### errorMsg (optional)
+
+The **errorMsg** props is for the error message to be displayed if there is an error with the input.
+
+### hint (optional)
+
+The **hint** prop is the additional text to provide context or instructions for the input field.
+
+### prependIcon (optional)
+
+The **prependIcon** prop is an icon to be displayed before the input field.
+
+### iconColor (optional)
+
+The **iconColor** prop gives the color of the icon.
+
+### disabled (optional)
+
+The **disabled** prop indicates whether the input field is disabled or not.
+
+### loading (optional)
+
+The **loading** prop indicates whether the input field is in a loading state or not.
+
+### clearable (optional)
+
+The **clearable** prop indicates whether the input field can be cleared or not.
+
+## Tips <a id="tips" />
+
+💡 The label should clearly describe what the input field is for, and should be positioned in a way that is easy for users to understand.
+
+💡 Placeholders can be used to provide additional context or instructions for the input field, but should not be used as a substitute for a clear label.
+
+💡 The type of input field should match the type of data that will be entered. For example, use a number input field for numeric data, and a password input field for sensitive information.
+
+💡 Error messages should clearly indicate what the problem is and how to fix it.
+
+💡 Icons can be used to make the Textfield component more visually appealing and to provide additional information or context.
+
+💡 Textfield component should be accessible to users with disabilities, including keyboard navigation, and providing appropriate ARIA attributes.
+
+💡 Hints can be used to provide additional context or instructions for the input field.
+
+💡 This will help users to clear their input easily.
+
+💡 Use these states to indicate that the input field is temporarily unavailable or in the process of loading data.

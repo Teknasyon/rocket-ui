@@ -1,0 +1,72 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as TabsStories from './Tabs.stories';
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+Tabs are a user interface component that allows users to navigate through different sections of content. They are commonly used to organize and structure content in a clear and intuitive way.
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage](#usage)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+Tabs are typically composed of a series of tab buttons, each of which corresponds to a different section of content. When a user clicks on one of the tab buttons, the corresponding content is displayed. Tabs can be designed in a variety of styles and configurations, but they all serve the same basic purpose: to help users navigate through different sections of content.
+
+<Canvas>
+  <Story of={TabsStories.Overview} />
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={TabsStories.Overview} exclude={/^(click|tab|on.*)/} />
+
+## Usage <a id="usage" />
+
+To implement a Tabs component, you will need to define the tab buttons and their corresponding content sections. You can choose to include a scrollable prop which allows the user to scroll through the tabs if there are too many to fit on the screen. Additionally, you can choose to display the tabs with icon and text as a default, with icon only or text only.
+
+## Stories <a id="stories" />
+
+### Default
+
+<Canvas>
+  <Story of={TabsStories.Defaultt} />
+</Canvas>
+
+### Icon Only
+
+<Canvas>
+  <Story of={TabsStories.IconOnly} />
+</Canvas>
+
+### Text Only
+
+<Canvas>
+  <Story of={TabsStories.TextOnly} />
+</Canvas>
+
+### Tips <a id="tips" />
+
+💡 Too many tabs can make the interface confusing and overwhelming for users. Try to keep the number of tabs to a maximum of 5-7, and use sub-navigation or dropdown menus to organize additional content.
+
+💡 The labels on the tab buttons should be short, descriptive, and easy to understand. Avoid using technical jargon or complex language.
+
+💡 Icons can be a great way to add visual interest and make it easier for users to quickly identify different tabs. However, make sure that the icons are meaningful and add context to the tab's label.
+
+💡 All tabs should have a consistent design to make it clear that they are related to each other. This includes the color, shape, size, and font of the tabs.
+
+💡 Use horizontal tabs for primary navigation and vertical tabs for secondary navigation or when space is limited. Use bottom tabs for mobile navigation.
+
+💡 Make it clear which tab is currently selected by using a different color, bold text, or an underline.
+
+💡 Make sure that tabs are accessible to keyboard users and screen readers. This means providing clear labels, proper focus management, and ARIA attributes.

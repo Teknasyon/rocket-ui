@@ -1,43 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import Accordion from './Accordion.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as AccordionStories from './Accordion.stories';
 
-export const Default = (args) => ({
-  components: { Accordion },
-  setup() {
-    return { args, update: action('update:modelValue') };
-  },
-  template: `<Accordion v-bind="args" @update:modelValue="update"/>`,
-});
-
-export const defaultArgs = {
-  accordions: {
-    control: {
-      type: 'array',
-    },
-    defaultValue: [
-      {
-        title: 'Accordion 1',
-        content: 'Accordion 1 content',
-      },
-    ],
-  },
-  modelValue: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-};
-
-<Meta
-  title="Components/Accordion"
-  component={Accordion}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-  }}
-/>
+<Meta of={AccordionStories} />
 
 # Accordion
 
@@ -59,17 +23,15 @@ The Accordion component is a UI element that allows the user to show and hide co
 
 The Accordion component provides a compact way of displaying large amounts of information in a small space. It is particularly useful for displaying hierarchical data, where each panel represents a different level of information. The Accordion component is also a good way to present frequently asked questions (FAQs) as it makes it easy for users to find the information they are looking for.
 
-<Canvas withSource="open">
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={AccordionStories.Overview} />
 </Canvas>
 
 ## Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above. Try it yourself!
 
-<ArgsTable story="Overview" exclude={/^(default|update.*)$/} />
+<Controls of={AccordionStories.Overview} exclude={/^(default|update.*)$/} />
 
 ## Usage with props <a id="usage" />
 
@@ -85,43 +47,14 @@ The **modelValue** prop is a boolean that determines whether the accordion compo
 
 ### Single Collapse
 
-<Canvas withSource="open">
-  <Story name="Single Collapse" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={AccordionStories.SingleCollapse} />
 </Canvas>
 
 ### Accordion
 
-<Canvas withSource="open">
-  <Story
-    name="Accordion"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      accordions: [
-        {
-          title: 'Accordion 1',
-          content: 'Accordion 1 content',
-          isExpanded: true,
-        },
-        {
-          title: 'Accordion 2',
-          content: 'Accordion 2 content',
-        },
-        {
-          title: 'Accordion 3',
-          content: 'Accordion 3 content',
-        },
-        {
-          title: 'Accordion 4',
-          content: 'Accordion 4 content',
-          isDisabled: true,
-        },
-      ],
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={AccordionStories.Accordion1} />
 </Canvas>
 
 ## Customizable Slots <a id="customizable-slots" />

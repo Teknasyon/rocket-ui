@@ -1,0 +1,20 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as FlexStories from './Flex.stories';
+
+<Meta of={FlexStories} />
+
+# Flex
+
+Flex is Box with display set to flex and comes with helpful style shorthand. It renders a `div` element.
+
+### Overview
+
+<Canvas>
+  <Story of={FlexStories.Overview} />
+</Canvas>
+
+### Playground
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={FlexStories.Overview} exclude={/^(click|default|on.*)$/} />

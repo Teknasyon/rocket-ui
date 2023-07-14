@@ -1,101 +1,8 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
 
-import Select from './Dropdown.vue';
+import * as DropdownStories from './Dropdown.stories';
 
-export const Default = (args) => ({
-  components: { Select },
-  setup() {
-    return { args, update: action('update:modelValue') };
-  },
-  template: `
-    <Select v-bind="args" @update:modelValue="update" />
-  `,
-});
-
-export const defaultArgs = {
-  options: {
-    control: {
-      type: 'object',
-      required: true,
-    },
-    defaultValue: [
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: '2' },
-      { value: '3', label: '3' },
-      { value: '4', label: 'Option 4' },
-      { value: '5', label: 'Option 5' },
-      { value: '6', label: 'Option 6' },
-      { value: '7', label: '7' },
-      { value: '8', label: 'Option 8' },
-      { value: '9', label: 'Option 9' },
-      { value: '10', label: 'Option 10' },
-    ],
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Select an option',
-  },
-  taggable: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  multiple: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  clearable: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  loading: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  prependIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  appendIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  modelValue: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-};
-
-<Meta
-  title="Components/Dropdown"
-  component={Select}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-  }}
-/>
+<Meta of={DropdownStories} />
 
 # Dropdown
 
@@ -118,22 +25,14 @@ It offers a wide range of customization options that allow for greater flexibili
 
 ## Playground <a id="playground" />
 
-<Canvas withSource="open">
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      appendIcon: 'expand_less',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={DropdownStories.Overview} />
 </Canvas>
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable
-  story="Overview"
+<Controls
+  of={DropdownStories.Overview}
   exclude={/^(click|prepend-icon|append-icon|option-prepend|update.*|on.*)$/}
 />
 
@@ -175,34 +74,14 @@ The **modelValue** prop allows you to define the value of the selected option.
 
 ### Multiple
 
-<Canvas withSource="open">
-  <Story
-    name="Multiple"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      multiple: true,
-      placeholder: 'Select multiple options',
-      appendIcon: 'expand_less',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={DropdownStories.Multiple} />
 </Canvas>
 
 ### Taggable
 
-<Canvas withSource="open">
-  <Story
-    name="Taggable"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      taggable: true,
-      placeholder: 'Search or create a tag',
-      appendIcon: 'expand_less',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={DropdownStories.Taggable} />
 </Canvas>
 
 ### Tips <a id="tips" />
