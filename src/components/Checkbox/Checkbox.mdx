@@ -1,70 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import Checkbox from './Checkbox.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as CheckboxStories from './Checkbox.stories';
 
-export const Default = (args) => {
-  return {
-    components: { Checkbox },
-    setup() {
-      return { args, change: action('change') };
-    },
-    template: '<Checkbox v-bind="args" @update:modelValue="change"/>',
-  };
-};
-
-export const defaultArgs = {
-  id: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'checkbox',
-  },
-  modelValue: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Checkbox Label',
-  },
-  indeterminate: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  hint: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Save my login details for next time.',
-  },
-  errorMsg: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-};
-
-<Meta
-  title="Components/Checkbox"
-  component={Checkbox}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-  }}
-/>
+<Meta of={CheckboxStories} />
 
 # Checkbox
 
@@ -85,23 +22,14 @@ A checkbox is a simple UI element that allows the user to select one or more opt
 A checkbox is typically represented by a small square box that can be checked (marked) or unchecked (unmarked). Checkbox component typically consists of a label that describes the associated option, and a checkbox input element that allows the user to select or deselect the option. The component may also include additional elements such as a description or further explanation of the option.
 
 <Canvas>
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      id: 'checkbox-1',
-      label: 'Checkbox label',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+  <Story of={CheckboxStories.Overview} />
 </Canvas>
 
 ## Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(update.*)$/} />
+<Controls of={CheckboxStories.Overview} exclude={/^(update.*)$/} />
 
 ## Usage with props <a id="usage" />
 
@@ -141,50 +69,20 @@ The **change** prop is used to handle the checkbox's checked state changes. This
 
 ### Checked
 
-<Canvas withSource="open">
-  <Story
-    name="Checked"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      id: 'checkbox-1',
-      label: 'Checkbox label',
-      modelValue: true,
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={CheckboxStories.Checked} />
 </Canvas>
 
 ### Indeterminate
 
-<Canvas withSource="open">
-  <Story
-    name="Indeterminate"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      id: 'checkbox-1',
-      label: 'Checkbox label',
-      indeterminate: true,
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={CheckboxStories.Indeterminate} />
 </Canvas>
 
 ### With Error
 
-<Canvas withSource="open">
-  <Story
-    name="With Error"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      id: 'checkbox-1',
-      label: 'Checkbox label',
-      errorMsg: 'This field is required',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={CheckboxStories.WithError} />
 </Canvas>
 
 ## Tips <a id="tips" />

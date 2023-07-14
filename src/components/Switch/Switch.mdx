@@ -1,70 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import Switch from './Switch.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as SwitchStories from './Switch.stories';
 
-export const Default = (args) => {
-  return {
-    components: { Switch },
-    setup() {
-      return {
-        args,
-        change: action('update:modelValue'),
-      };
-    },
-    template: `<Switch v-bind="args" @update:modelValue="change"/>`,
-  };
-};
-
-export const defaultArgs = {
-  id: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'switch',
-  },
-  modelValue: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Switch',
-  },
-  hint: {
-    control: {
-      type: 'text',
-    },
-    defaultValue:
-      'A control used to switch between two states: often on or off.',
-  },
-};
-
-<Meta
-  title="Components/Switch"
-  component={Switch}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-    layout: 'centered',
-  }}
-/>
+<Meta of={SwitchStories} />
 
 # Switch
 
@@ -82,24 +19,15 @@ export const defaultArgs = {
 
 The Switch component is a simple toggle that allows the user to switch between two states: on and off. It is designed to be used as a controlled component, meaning that the value prop must be provided and will determine the current state of the switch.
 
-<Canvas withSource="open">
-  <Story
-    name="Overview"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      modelValue: false,
-      size: 'small',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={SwitchStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
 > Changes you make in the controls will be reflected in the example above.
 
-<ArgsTable story="Overview" exclude={/^(on|change|onChange.*)$/} />
+<Controls of={SwitchStories.Overview} exclude={/^(on|change|onChange.*)$/} />
 
 ## Usage with props <a id="usage" />
 
@@ -135,63 +63,26 @@ The **errorMsg** prop sets an error message for the switch. This can be used to 
 
 ### Small
 
-<Canvas withSource="open">
-  <Story
-    name="Small"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      modelValue: false,
-      size: 'small',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={SwitchStories.Small} />
 </Canvas>
 
 ### Medium
 
-<Canvas withSource="open">
-  <Story
-    name="Medium"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      modelValue: false,
-      size: 'medium',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={SwitchStories.Medium} />
 </Canvas>
 
 ### Large
 
-<Canvas withSource="open">
-  <Story
-    name="Large"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      modelValue: false,
-      size: 'large',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={SwitchStories.Large} />
 </Canvas>
 
 ### With Error
 
-<Canvas withSource="open">
-  <Story
-    name="With Error"
-    argTypes={{ ...Default.argTypes }}
-    args={{
-      modelValue: false,
-      size: 'medium',
-      errorMsg: 'This is an error message',
-    }}
-  >
-    {Default.bind({})}
-  </Story>
+<Canvas>
+  <Story of={SwitchStories.WithError} />
 </Canvas>
 
 ### Tips <a id="tips" />

@@ -1,0 +1,20 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as BoxStories from './Box.stories';
+
+<Meta of={BoxStories} />
+
+# Box
+
+Box is the most abstract component on top of which all other Rocket UI components are built. By default, it renders a `div` element
+
+> A simple box Components
+
+<Canvas>
+  <Story of={BoxStories.Overview} />
+</Canvas>
+
+### Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={BoxStories.Overview} exclude={/^(click|default|on.*)$/} />

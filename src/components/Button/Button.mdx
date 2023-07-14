@@ -1,134 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { action } from '@storybook/addon-actions';
-import Button from './Button.vue';
-import Icon from '../Icon/Icon.vue';
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
 
-export const WithContentSlot = ({ content, ...rest }) => {
-  const args = rest;
-  return {
-    components: { Button },
-    setup() {
-      return {
-        args,
-        content,
-        click: action('click'),
-      };
-    },
-    template: `
-    <Button v-bind="args" @click="click">
-      <template v-slot:default>
-        <span>{{ content }}</span>
-      </template>
-    </Button>`,
-  };
-};
-
-export const WithCustomIconSlot = ({ icon, ...rest }) => {
-  const args = rest;
-  return {
-    components: { Button, Icon },
-    setup() {
-      return {
-        args,
-        icon,
-        click: action('click'),
-      };
-    },
-    template: `
-    <Button v-bind="args" @click="click">
-      <template v-slot:custom-icon>
-        <Icon name="fingerprint"/>
-      </template>
-    </Button>`,
-  };
-};
-
-export const defaultArgs = {
-  variant: {
-    control: {
-      type: 'select',
-      options: ['primary', 'secondary', 'text', 'outline'],
-    },
-    defaultValue: 'primary',
-    table: {
-      defaultValue: {
-        summary: 'primary',
-        detail: 'primary | secondary | text | outline',
-      },
-    },
-    description: 'Variants of button',
-  },
-  loading: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
-    defaultValue: 'medium',
-    table: {
-      defaultValue: {
-        summary: 'medium',
-        detail: 'small | medium | large ',
-      },
-    },
-    description: 'Sizes of button',
-  },
-  prependIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  appendIcon: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  onlyIcon: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  height: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
-  block: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  backgroundColor: {
-    control: {
-      type: 'color',
-    },
-  },
-};
-
-<Meta
-  title="Components/Button"
-  component={Button}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
-    viewMode: 'docs',
-  }}
-/>
+<Meta of={ButtonStories} />
 
 # Button
 
@@ -149,22 +22,13 @@ Button is a clickable element that is used to trigger an action or event, such a
 A button component is a reusable piece of code that can be used in any part of a website or application. It is typically represented by a text or an icon that represents the action that will be performed when the user clicks on it.
 
 <Canvas>
-  <Story
-    name="Overview"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'primary',
-      content: 'Button',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
+  <Story of={ButtonStories.Overview} />
 </Canvas>
 
 ### Playground <a id="playground" />
 
-<ArgsTable
-  story="Overview"
+<Controls
+  of={ButtonStories.Overview}
   exclude={/^(click|content|default|custom-icon|on.*)$/}
 />
 
@@ -217,90 +81,40 @@ To specify the background color of the button, you can pass in a valid CSS color
 
 ### Primary
 
-<Canvas withSource="open">
-  <Story
-    name="Primary"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'primary',
-      content: 'Primary',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.Primary} />
 </Canvas>
 
 ### Secondary
 
-<Canvas withSource="open">
-  <Story
-    name="Secondary"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'secondary',
-      content: 'Secondary',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.Secondary} />
 </Canvas>
 
 ### Outline
 
-<Canvas withSource="open">
-  <Story
-    name="Outline"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'outline',
-      content: 'Outline',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.Outline} />
 </Canvas>
 
 ### Text
 
-<Canvas withSource="open">
-  <Story
-    name="Text"
-    argTypes={{ ...WithContentSlot.argTypes }}
-    args={{
-      variant: 'text',
-      content: 'Text',
-    }}
-  >
-    {WithContentSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.Text} />
 </Canvas>
 
 ### `#Custom Icon Slot`
 
-<Canvas withSource="open">
-  <Story
-    name="Custom Icon"
-    argTypes={{ ...WithCustomIconSlot.argTypes }}
-    args={{
-      variant: 'primary',
-    }}
-  >
-    {WithCustomIconSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.CustomIcon} />
 </Canvas>
 
 ### Unstyled
 
 #### \* Not yet implemented in the library
 
-<Canvas withSource="open">
-  <Story
-    name="Unstyled"
-    argTypes={{ ...WithCustomIconSlot.argTypes }}
-    args={{}}
-  >
-    {WithCustomIconSlot.bind({})}
-  </Story>
+<Canvas>
+  <Story of={ButtonStories.Unstyled} />
 </Canvas>
 
 ### Tips <a id="tips" />

@@ -1,8 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 // import { action } from '@storybook/addon-actions';
 import Box from './Box.vue';
 
-export const Default = (args) => ({
+const Default = (args) => ({
   components: { Box },
   setup() {
     return { args };
@@ -12,7 +11,7 @@ export const Default = (args) => ({
   </Box>`,
 });
 
-export const defaultArgs = {
+const defaultArgs = {
   is: {
     control: {
       type: 'select',
@@ -78,29 +77,26 @@ export const defaultArgs = {
   },
 };
 
-<Meta
-  title="Layout/Box"
-  component={Box}
-  argTypes={{ ...defaultArgs }}
-  parameters={{
+export default {
+  title: 'Layout/Box',
+  component: Box,
+
+  argTypes: {
+    ...defaultArgs,
+  },
+
+  parameters: {
     viewMode: 'docs',
-  }}
-/>
+  },
+};
 
-# Box
+export const Overview = {
+  render: Default.bind({}),
+  name: 'Overview',
 
-Box is the most abstract component on top of which all other Rocket UI components are built. By default, it renders a `div` element
+  argTypes: {
+    ...Default.argTypes,
+  },
 
-> A simple box Components
-
-<Canvas>
-  <Story name="Overview" argTypes={{ ...Default.argTypes }} args={{}}>
-    {Default.bind({})}
-  </Story>
-</Canvas>
-
-### Playground <a id="playground" />
-
-> Changes you make in the controls will be reflected in the example above.
-
-<ArgsTable story="Overview" exclude={/^(click|default|on.*)$/} />
+  args: {},
+};

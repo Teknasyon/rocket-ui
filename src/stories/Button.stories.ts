@@ -5,7 +5,7 @@ import Button from '../components/Button/Button.vue';
 import Icon from '../components/Icon/Icon.vue';
 
 //👇 Imports a specific story from ListItem stories
-import { DefaultIcon } from '../components/Icon/Icon.stories';
+import { Defaultt } from '../components/Icon/Icon.stories';
 
 const DefaultArgs = {
   variant: {
@@ -162,6 +162,6 @@ export const OneItem: Story = {
     template: '<Button v-bind="args"><Icon v-bind="args"/></Button>',
   }),
   args: {
-    ...DefaultIcon.args,
+    ...Defaultt.args,
   },
 };
