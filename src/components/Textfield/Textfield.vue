@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import {
   computed,
-  reactive,
   ref,
-  watch,
   type CSSProperties,
   type HTMLAttributes,
   type InputHTMLAttributes,
@@ -12,7 +10,6 @@ import {
 import './textfield.css';
 import Icon from '../Icon/Icon.vue';
 import Label from '../Label/Label.vue';
-// import { vFocus } from '../../directives';
 export interface Props {
   /**
    * id of the textfield
@@ -159,9 +156,6 @@ const emit = defineEmits([
   'click:icon',
   'click:clear',
 ]);
-const state = reactive({
-  value: '',
-});
 const typeOfInputRef = ref(props.type);
 const prependIconsOfType = {
   password: 'lock_outline',
@@ -172,7 +166,7 @@ const prependIconsOfType = {
   text: '',
 };
 const isFocused = ref(false);
-const isFilled = computed(() => !!state.value);
+const isFilled = computed(() => !!props.modelValue);
 const classes = computed(() => {
   const { disabled, loading, clearable, errorMsg } = props;
   return {
@@ -200,7 +194,7 @@ const appendIconClasses = computed(() => {
   };
 });
 const hasValue = computed(() => {
-  return state.value.length > 0;
+  return props.modelValue.length > 0;
 });
 const hasErrorMsg = computed(() => {
   return props.errorMsg?.length;
@@ -229,7 +223,7 @@ const appendIconName = computed(() => {
 const onFocus = () => {
   isFocused.value = true;
   emit('focus', {
-    value: state.value,
+    value: props.modelValue,
   });
 };
 /**
@@ -238,7 +232,7 @@ const onFocus = () => {
 const onBlur = () => {
   isFocused.value = false;
   emit('blur', {
-    value: state.value,
+    value: props.modelValue,
   });
 };
 /**
@@ -246,16 +240,16 @@ const onBlur = () => {
  * @returns {void}
  */
 const clickIcon = () => {
-  if (hasClear.value) {
-    state.value = '';
+  if (hasClear.value && props.type !== 'password') {
+    emit('update:modelValue', '');
     inputRef.value?.focus();
     emit('click:clear', {
-      value: state.value,
+      value: props.modelValue,
     });
     return;
   }
   emit('click:icon', {
-    value: state.value,
+    value: props.modelValue,
   });
   setPassType();
 };
@@ -274,24 +268,8 @@ const setPassType = () => {
  */
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  state.value = target.value;
+  emit('update:modelValue', target.value);
 };
-
-watch(
-  () => props.modelValue,
-  (value) => {
-    state.value = value;
-  },
-  {
-    immediate: true,
-  }
-);
-watch(
-  () => state.value,
-  (value) => {
-    emit('update:modelValue', value);
-  }
-);
 </script>
 <template>
   <fieldset>
@@ -322,7 +300,7 @@ watch(
             :disabled="props.disabled"
             :placeholder="props.placeholder"
             :type="typeOfInputRef"
-            :value="state.value"
+            :value="props.modelValue"
             @blur="onBlur"
             @focus="onFocus"
             @input="onInput"
