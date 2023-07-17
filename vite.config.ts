@@ -10,9 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: ['src/**/*.{ts,tsx,vue}'],
-      exclude: ['playground', 'node_modules', 'dist'],
-      outputDir: 'dist/types',
+      outDir: 'dist/types',
     }),
   ],
   resolve: {
