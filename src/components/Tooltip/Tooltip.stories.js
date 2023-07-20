@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
-import Tooltip from './Tooltip.vue';
-import Button from '../Button/Button.vue';
-import Icon from '../Icon/Icon.vue';
+import Tooltip from './RTooltip.vue';
+import Button from '../Button/RButton.vue';
+import Icon from '../Icon/RIcon.vue';
 import { vTooltip } from '../../directives';
 
 const Default = ({ buttonContent, ...args }) => {

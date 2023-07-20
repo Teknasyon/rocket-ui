@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
 
-import TextArea from './TextArea.vue';
+import TextArea from './RTextArea.vue';
 
 describe('TextArea', () => {
   it('renders properly', () => {

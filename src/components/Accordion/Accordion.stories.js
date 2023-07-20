@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import Accordion from './Accordion.vue';
+import Accordion from './RAccordion.vue';
 
 const Default = (args) => ({
   components: { Accordion },

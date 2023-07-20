@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import TextArea from './TextArea.vue';
+import TextArea from './RTextArea.vue';
 
 const Default = (args) => ({
   components: { TextArea },

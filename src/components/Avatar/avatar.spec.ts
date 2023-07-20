@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import Avatar from './Avatar.vue';
+import Avatar from './RAvatar.vue';
 
 describe('Avatar', () => {
   it('should render correctly for image version', () => {

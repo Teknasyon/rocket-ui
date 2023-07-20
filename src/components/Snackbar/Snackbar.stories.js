@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import Snackbar from './Snackbar.vue';
+import Snackbar from './RSnackbar.vue';
 
 const Default = (args) => ({
   components: { Snackbar },

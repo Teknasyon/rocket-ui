@@ -1,4 +1,4 @@
-import Grid from './Grid.vue';
+import Grid from './RGrid.vue';
 
 const Default = (args) => ({
   components: { Grid },

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import Checkbox from './Checkbox.vue';
+import Checkbox from './RCheckbox.vue';
 
 const Default = (args) => {
   return {

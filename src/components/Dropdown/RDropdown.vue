@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, defineEmits, watch } from 'vue';
-import Chip from '../Chips/Chip.vue';
-import Icon from '../Icon/Icon.vue';
+import Chip from '../Chips/RChip.vue';
+import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
 export interface Option {
   value: string | number;

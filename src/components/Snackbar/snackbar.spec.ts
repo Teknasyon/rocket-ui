@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import Snackbar from './Snackbar.vue';
+import Snackbar from './RSnackbar.vue';
 
 describe('Snackbar', () => {
   it('renders properly', () => {

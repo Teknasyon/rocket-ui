@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import Textfield from './Textfield.vue';
+import Textfield from './RTextfield.vue';
 
 const Default = (args) => {
   return {

@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import Chip from './Chip.vue';
+import Chip from './RChip.vue';
 
 const Default = (args) => ({
   components: { Chip },

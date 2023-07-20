@@ -1,4 +1,4 @@
-import Tabs from './Tabs.vue';
+import Tabs from './RTabs.vue';
 
 const Default = (args) => ({
   components: { Tabs },

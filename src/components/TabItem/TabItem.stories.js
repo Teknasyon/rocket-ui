@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import TabItem from './TabItem.vue';
+import TabItem from './RTabItem.vue';
 
 const Default = (args) => ({
   components: { TabItem },

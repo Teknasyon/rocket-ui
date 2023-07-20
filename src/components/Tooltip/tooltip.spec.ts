@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
 
-import Tooltip from './Tooltip.vue';
+import Tooltip from './RTooltip.vue';
 import { Trigger } from './common';
 
 describe('Tooltip', () => {

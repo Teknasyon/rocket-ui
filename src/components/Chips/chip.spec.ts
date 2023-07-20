@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
 
-import Chip from './Chip.vue';
+import Chip from './RChip.vue';
 
 describe('Chip', () => {
   it('renders properly', () => {
