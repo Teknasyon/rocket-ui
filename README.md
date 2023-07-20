@@ -4,7 +4,7 @@
 ## Installation
 
 ```sh
-yarn add @rocket-ui/vue
+yarn add @rocketui/vue
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // Import the Styles
-import '@rocket-ui/vue/dist/style.css'
+import '@rocketui/vue/dist/style.css'
 
 createApp(App).mount('#app')
 ```
@@ -25,7 +25,7 @@ Then you can use the components in your `App.vue` file:
 
 ```vue
 <script setup>
-import { Button } from '@rocket-ui/vue'
+import { Button } from '@rocketui/vue'
 </script>
 
 <template>
