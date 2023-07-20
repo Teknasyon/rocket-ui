@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import Alert from './Alert.vue';
-import Icon from '../Icon/Icon.vue';
+import Alert from './RAlert.vue';
+import Icon from '../Icon/RIcon.vue';
 
 const Default = (args) => ({
   components: { Alert },

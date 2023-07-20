@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import Accordion from './Accordion.vue';
+import Accordion from './RAccordion.vue';
 
 describe('Accordion', () => {
   it('should render correctly', () => {

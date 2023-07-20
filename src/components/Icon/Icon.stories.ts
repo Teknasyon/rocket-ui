@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { action } from '@storybook/addon-actions';
 
-import Icon from './Icon.vue';
+import Icon from './RIcon.vue';
 
 const DefaultArgs = {
   name: {

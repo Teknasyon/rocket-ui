@@ -15,38 +15,38 @@ import '../src/components/Textarea/textarea.css';
 import '../src/components/Textfield/textfield.css';
 import '../src/components/Tooltip/tooltip.css';
 
-import Alert from '../src/components/Alert/Alert.vue';
-import Avatar from '../src/components/Avatar/Avatar.vue';
-import Badge from '../src/components/Badge/Badge.vue';
-import Button from '../src/components/Button/Button.vue';
-import Checkbox from '../src/components/Checkbox/Checkbox.vue';
-import Chip from '../src/components/Chips/Chip.vue';
-import Dropdown from '../src/components/Dropdown/Dropdown.vue';
-import Icon from '../src/components/Icon/Icon.vue';
-import Label from '../src/components/Label/Label.vue';
-import Snackbar from '../src/components/Snackbar/Snackbar.vue';
-import Switch from '../src/components/Switch/Switch.vue';
-import TabItem from '../src/components/TabItem/TabItem.vue';
-import Tabs from '../src/components/Tabs/Tabs.vue';
-import TextArea from '../src/components/TextArea/TextArea.vue';
-import Textfield from '../src/components/Textfield/Textfield.vue';
-import Tooltip from '../src/components/Tooltip/Tooltip.vue';
+import RAlert from '../src/components/Alert/RAlert.vue';
+import RAvatar from '../src/components/Avatar/RAvatar.vue';
+import RBadge from '../src/components/Badge/RBadge.vue';
+import RButton from '../src/components/Button/RButton.vue';
+import RCheckbox from '../src/components/Checkbox/RCheckbox.vue';
+import RChip from '../src/components/Chips/RChip.vue';
+import RDropdown from '../src/components/Dropdown/RDropdown.vue';
+import RIcon from '../src/components/Icon/RIcon.vue';
+import RLabel from '../src/components/Label/RLabel.vue';
+import RSnackbar from '../src/components/Snackbar/RSnackbar.vue';
+import RSwitch from '../src/components/Switch/RSwitch.vue';
+import RTabItem from '../src/components/TabItem/RTabItem.vue';
+import RTabs from '../src/components/Tabs/RTabs.vue';
+import RTextArea from '../src/components/TextArea/RTextArea.vue';
+import RTextfield from '../src/components/Textfield/RTextfield.vue';
+import RTooltip from '../src/components/Tooltip/RTooltip.vue';
 
 export {
-  Alert,
-  Avatar,
-  Badge,
-  Checkbox,
-  Chip,
-  Button,
-  Dropdown,
-  Icon,
-  Label,
-  Snackbar,
-  Switch,
-  TabItem,
-  Tabs,
-  TextArea,
-  Textfield,
-  Tooltip,
+  RAlert,
+  RAvatar,
+  RBadge,
+  RButton,
+  RCheckbox,
+  RChip,
+  RDropdown,
+  RIcon,
+  RLabel,
+  RSnackbar,
+  RSwitch,
+  RTabItem,
+  RTabs,
+  RTextArea,
+  RTextfield,
+  RTooltip,
 };

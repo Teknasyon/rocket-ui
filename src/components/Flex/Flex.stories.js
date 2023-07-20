@@ -1,5 +1,5 @@
-import Flex from './Flex.vue';
-import Box from '../Box/Box.vue';
+import Flex from './RFlex.vue';
+import Box from '../Box/RBox.vue';
 
 const Default = (args) => ({
   components: { Flex, Box },

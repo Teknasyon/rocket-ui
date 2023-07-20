@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import Badge from './Badge.vue';
+import Badge from './RBadge.vue';
 
 describe('Badge', () => {
   it('renders properly', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import Switch from './Switch.vue';
+import Switch from './RSwitch.vue';
 
 describe('Switch', () => {
   it('renders properly', () => {

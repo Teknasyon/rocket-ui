@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Label from '../Label/Label.vue';
+import Label from '../Label/RLabel.vue';
 import './textarea.css';
 import {
   defineProps,

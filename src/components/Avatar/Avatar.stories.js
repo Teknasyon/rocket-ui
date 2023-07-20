@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import Avatar from './Avatar.vue';
+import Avatar from './RAvatar.vue';
 
 const Default = (args) => ({
   components: { Avatar },

@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import './tabs.css';
 import type { Tab } from './types';
-import TabItem from '../TabItem/TabItem.vue';
+import TabItem from '../TabItem/RTabItem.vue';
 
 export interface IProps {
   /**

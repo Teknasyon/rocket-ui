@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icon from '../Icon/Icon.vue';
+import Icon from '../Icon/RIcon.vue';
 import { computed, type HTMLAttributes, type ButtonHTMLAttributes } from 'vue';
 import './tab-item.css';
 import { TabItemVariants, type TabItemVariant } from './common';

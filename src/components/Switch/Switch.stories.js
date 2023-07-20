@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import Switch from './Switch.vue';
+import Switch from './RSwitch.vue';
 
 const Default = (args) => {
   return {

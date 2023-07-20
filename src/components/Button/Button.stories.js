@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import Button from './Button.vue';
-import Icon from '../Icon/Icon.vue';
+import Button from './RButton.vue';
+import Icon from '../Icon/RIcon.vue';
 
 const WithContentSlot = ({ content, ...rest }) => {
   const args = rest;

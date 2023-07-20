@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
-import Badge from './Badge.vue';
-import Icon from '../Icon/Icon.vue';
-import Button from '../Button/Button.vue';
+import Badge from './RBadge.vue';
+import Icon from '../Icon/RIcon.vue';
+import Button from '../Button/RButton.vue';
 
 const Default = (args) => ({
   components: { Badge, Icon },

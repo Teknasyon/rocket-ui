@@ -10,8 +10,8 @@ import {
   type LabelHTMLAttributes,
 } from 'vue';
 import './textfield.css';
-import Icon from '../Icon/Icon.vue';
-import Label from '../Label/Label.vue';
+import Icon from '../Icon/RIcon.vue';
+import Label from '../Label/RLabel.vue';
 // import { vFocus } from '../../directives';
 export interface Props {
   /**

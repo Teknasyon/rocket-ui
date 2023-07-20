@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import './button.css';
 import { computed, type CSSProperties } from 'vue';
-import Icon from '../Icon/Icon.vue';
+import Icon from '../Icon/RIcon.vue';
 export type ButtonType =
   | 'primary'
   | 'secondary'

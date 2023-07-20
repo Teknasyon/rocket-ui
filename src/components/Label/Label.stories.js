@@ -1,5 +1,5 @@
 import Label from './Label.vue';
-import Textfield from '../Textfield/Textfield.vue';
+import Textfield from '../Textfield/RTextfield.vue';
 
 const Default = (args) => {
   return {

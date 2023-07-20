@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import Textfield from './Textfield.vue';
+import Textfield from './RTextfield.vue';
 
 describe('Textfield', () => {
   it('renders properly', () => {

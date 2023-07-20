@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import './alert.css';
 import { computed } from 'vue';
-import Icon from '../Icon/Icon.vue';
+import Icon from '../Icon/RIcon.vue';
 
 export interface Props {
   /**

@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import Select from './Dropdown.vue';
+import Select from './RDropdown.vue';
 
 const Default = (args) => ({
   components: { Select },

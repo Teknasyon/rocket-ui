@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import Icon from '../Icon/Icon.vue';
+import Icon from '../Icon/RIcon.vue';
 import './accordion.css';
 
 export type Accordion = {

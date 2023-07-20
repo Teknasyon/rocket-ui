@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
-import Button from '../Button/Button.vue';
-import Icon from '../Icon/Icon.vue';
+import Button from '../Button/RButton.vue';
+import Icon from '../Icon/RIcon.vue';
 import './snackbar.css';
 
 export interface IProps {

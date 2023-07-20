@@ -9,7 +9,7 @@ import {
   type LabelHTMLAttributes,
 } from 'vue';
 
-import Icon from '../Icon/Icon.vue';
+import Icon from '../Icon/RIcon.vue';
 export interface Props {
   /**
    * id of the checkbox

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import Alert from './Alert.vue';
+import Alert from './RAlert.vue';
 
 describe('Alert', () => {
   it('should render correctly', () => {

@@ -1,5 +1,5 @@
 // import { action } from '@storybook/addon-actions';
-import Box from './Box.vue';
+import Box from './RBox.vue';
 
 const Default = (args) => ({
   components: { Box },

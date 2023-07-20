@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
 
-import TabItem from './TabItem.vue';
+import TabItem from './RTabItem.vue';
 
 describe('TabItem', () => {
   it('renders properly', () => {
