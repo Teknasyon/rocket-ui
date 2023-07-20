@@ -1,4 +1,4 @@
-import Label from './Label.vue';
+import Label from './RLabel.vue';
 import Textfield from '../Textfield/RTextfield.vue';
 
 const Default = (args) => {
