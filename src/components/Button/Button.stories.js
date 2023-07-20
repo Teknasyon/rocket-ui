@@ -226,3 +226,31 @@ export const Unstyled = {
 
   args: {},
 };
+
+export const Danger = {
+  render: WithContentSlot.bind({}),
+  name: 'Danger',
+
+  argTypes: {
+    ...WithContentSlot.argTypes,
+  },
+
+  args: {
+    variant: 'danger',
+    content: 'Danger',
+  },
+};
+
+export const Link = {
+  render: WithContentSlot.bind({}),
+  name: 'Link',
+
+  argTypes: {
+    ...WithContentSlot.argTypes,
+  },
+
+  args: {
+    variant: 'link',
+    content: 'Link',
+  },
+};
