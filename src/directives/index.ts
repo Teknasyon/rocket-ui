@@ -1,5 +1,5 @@
 import { type App, createApp, h, ref, type DirectiveBinding } from 'vue';
-import Tooltip from '../components/Tooltip/Tooltip.vue';
+import Tooltip from '../components/Tooltip/RTooltip.vue';
 
 export const vTooltip = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
