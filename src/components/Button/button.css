@@ -1,10 +1,10 @@
 @import '../../index.css';
 
 .button {
-  @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-auto;
+  @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-pointer;
 
-  &:focus {
-    @apply ring-2 ring-offset-2;
+  &:active {
+    animation: manipulation 15s ease-in;
   }
 
   &:disabled {
@@ -61,7 +61,7 @@
   &:hover {
     @apply bg-[var(--primary-700)];
   }
-  &:focus {
+  &:active {
     @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
   }
   &:disabled {
@@ -74,7 +74,7 @@
   &:hover {
     @apply bg-[var(--primary-200)];
   }
-  &:focus {
+  &:active {
     @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
   }
   &:disabled {
@@ -87,7 +87,7 @@
   &:hover {
     @apply bg-[var(--neutral-100)];
   }
-  &:focus {
+  &:active {
     @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
   }
   &:disabled {
@@ -100,21 +100,46 @@
   &:hover {
     @apply bg-[var(--neutral-100)];
   }
-  &:focus {
+  &:active {
     @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
   }
   &:disabled {
     @apply bg-white  text-[var(--neutral-300)];
   }
 }
-
 .button--ghost {
   @apply bg-transparent text-[var(--primary-100)];
 
   &:hover {
     @apply bg-[var(--neutral-100)] text-[var(--primary-500)];
   }
-  &:focus {
+  &:active {
+    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+  }
+  &:disabled {
+    @apply bg-white text-[var(--neutral-300)];
+  }
+}
+.button--danger {
+  @apply bg-[var(--error-500)];
+
+  &:hover {
+    @apply bg-[var(--error-700)];
+  }
+  &:active {
+    @apply ring-[var(--error-100)] bg-white text-[var(--error-500)];
+  }
+  &:disabled {
+    @apply bg-[var(--error-200)] text-[var(--error-300)];
+  }
+}
+.button--link {
+  @apply bg-transparent text-[var(--primary-500)];
+
+  &:hover {
+    @apply bg-[var(--neutral-100)] text-[var(--primary-500)];
+  }
+  &:active {
     @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
   }
   &:disabled {

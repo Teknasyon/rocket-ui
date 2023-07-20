@@ -148,3 +148,12 @@
 .animate-spin-reverse {
   animation: spin 1s linear infinite;
 }
+
+@keyframes ring {
+  0% {
+    @apply ring-2 ring-offset-0;
+  }
+  100% {
+    @apply ring-2 ring-offset-0;
+  }
+}
