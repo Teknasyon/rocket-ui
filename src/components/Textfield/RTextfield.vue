@@ -277,6 +277,10 @@ const onInput = (e: Event) => {
   state.value = target.value;
 };
 
+const focusInput = () => {
+  inputRef.value?.focus();
+};
+
 watch(
   () => props.modelValue,
   (value) => {
@@ -307,6 +311,7 @@ watch(
         }"
         :for="props.id"
         :text="props.label"
+        @click="focusInput"
       />
       <div class="input-wrapper">
         <div :class="classes">
@@ -317,8 +322,8 @@ watch(
             :size="16"
           />
           <input
-            :id="props.id"
             ref="inputRef"
+            :id="props.id"
             :disabled="props.disabled"
             :placeholder="props.placeholder"
             :type="typeOfInputRef"

@@ -22,7 +22,8 @@
     "storybook:build": "storybook build",
     "storybook:chromatic": "npx chromatic --project-token=252d66c17a90 --disable-telemetry",
     "prepare": "husky install",
-    "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}"
+    "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}",
+    "ci": "run-s lint type-check test:unit test:coverage build-only"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.0.7",
