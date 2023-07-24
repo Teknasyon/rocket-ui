@@ -60,7 +60,8 @@ export interface IProps {
   show?: boolean;
 
   /**
-   * Timeout of the snackbar
+   * Timeout of the snackbar. <br />
+   * If timeout is 0, the snackbar will not close automatically
    * @type number
    * @default 0
    * @example
@@ -78,19 +79,19 @@ const props = withDefaults(defineProps<IProps>(), {
   timeout: 0,
 });
 const shown = ref(false);
-const emit = defineEmits(['click:action', 'click:close']);
+const emit = defineEmits(['action', 'close']);
 const onClickAction = () => {
-  emit('click:action');
+  emit('action');
 };
 const onClose = () => {
   shown.value = false;
-  emit('click:close');
+  emit('close');
 };
 onMounted(() => {
   if (props.timeout) {
     setTimeout(() => {
       shown.value = false;
-      emit('click:close');
+      emit('close');
     }, props.timeout);
   }
 });

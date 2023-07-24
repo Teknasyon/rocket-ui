@@ -31,7 +31,10 @@ The TabItem component is responsible for displaying the content associated with 
 
 > Changes you make in the controls will be reflected in the example above.
 
-<Controls of={TabItemStories.Overview} exclude={/^(select|icon|on.*)$/} />
+<Controls
+  of={TabItemStories.Overview}
+  exclude={/^(select|custom-icon|update.*)$/}
+/>
 
 ## Usage with props <a id="usage" />
 
@@ -60,7 +63,7 @@ The **active** props indicated whether the tab should be set as active or not.
 ### Default
 
 <Canvas>
-  <Story of={TabItemStories.Defaultt} />
+  <Story of={TabItemStories.Default} />
 </Canvas>
 
 ### Icon Only

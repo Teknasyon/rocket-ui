@@ -23,6 +23,10 @@
     @apply bg-[var(--neutral-100)] cursor-not-allowed text-[var(--neutral-300)];
   }
 
+  &:disabled:hover {
+    @apply border-[var(--neutral-200)];
+  }
+
   &--error {
     @apply border-[var(--error-500)] text-[var(--error-500)];
     &:hover {
