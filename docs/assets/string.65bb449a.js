@@ -1,2 +1,0 @@
-import{h as n,i as e,_ as i}from"./iframe.4cbf6e81.js";var o=n,a=e;o("Map",function(r){return function(){return r(this,arguments.length?arguments[0]:void 0)}},a);var s=i;s({target:"Number",stat:!0},{isNaN:function(t){return t!=t}});var u=function(t){if(!t)return"";if(typeof t=="string")return t;throw new Error("Description: expected string, got: ".concat(JSON.stringify(t)))};export{u as s};
-//# sourceMappingURL=string.65bb449a.js.map

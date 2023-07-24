@@ -102,13 +102,14 @@ function onClick(id: number | string) {
     :disabled="props.disabled"
     @click="onClick(props.id)"
   >
-    <slot name="icon" />
     <Icon
       v-if="!$slots['icon'] && variant !== TabItemVariants.TEXT_ONLY"
       class="tab-item__icon"
       :name="props.icon"
       size="16"
     />
+    <slot v-else name="custom-icon" />
+
     <span v-if="variant !== TabItemVariants.ICON_ONLY" class="tab-item__label">
       {{ props.label }}
     </span>
