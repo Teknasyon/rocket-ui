@@ -4,6 +4,7 @@
   @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-pointer;
 
   &:active {
+    @apply ring-2 ring-inset;
     animation: manipulation 15s ease-in;
   }
 
