@@ -24,6 +24,7 @@ const DefaultArgs = {
   prependIcon: 'face',
   appendIcon: '',
   modelValue: '',
+  searchable: false,
 };
 const DropdownStory = {
   title: 'Components/Dropdown',
