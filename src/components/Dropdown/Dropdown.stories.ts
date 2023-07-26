@@ -19,7 +19,6 @@ const DefaultArgs = {
   placeholder: 'Select an option',
   taggable: false,
   multiple: false,
-  clearable: false,
   disabled: false,
   loading: false,
   prependIcon: 'face',

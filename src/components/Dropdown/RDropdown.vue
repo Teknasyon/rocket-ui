@@ -7,6 +7,7 @@ export interface Option {
   value: string | number;
   label: string;
   prependIcon?: string;
+  disabled?: boolean;
 }
 export interface SelectProps {
   /**
@@ -113,7 +114,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   appendIcon: 'expand_less',
   modelValue: '',
 });
-const selected = ref('');
+const selected = ref<string | number>('');
 const selectedMultiple = reactive<Option[]>([]);
 const active = ref(false);
 const inputModel = ref('');
@@ -122,7 +123,7 @@ const emit = defineEmits(['update:modelValue']);
 /**
  * @description - HTML elements references
  */
-const select = ref<HTMLElement | null>(null);
+const dropdown = ref<HTMLElement | null>(null);
 const input = ref<HTMLInputElement | null>(null);
 /**
  * @description - Handles the appearance of the select list
@@ -134,14 +135,14 @@ const setActive = (e: MouseEvent) => {
   e.stopPropagation();
   active.value = !active.value;
   if (active.value) {
-    select.value?.classList.add('dropdown--active');
-    select.value?.focus();
+    dropdown.value?.classList.add('dropdown--active');
+    dropdown.value?.focus();
     input.value?.focus();
     document.addEventListener('click', setActive);
     return;
   }
-  select.value?.classList.remove('dropdown--active');
-  select.value?.blur();
+  dropdown.value?.classList.remove('dropdown--active');
+  dropdown.value?.blur();
   input.value?.blur();
   document.removeEventListener('click', setActive);
 };
@@ -162,11 +163,20 @@ const selectOption = (e: MouseEvent, option: Option) => {
     inputModel.value = '';
     input.value?.focus();
     return;
-  } else {
-    emit('update:modelValue', option.value);
-    selected.value = option.label;
-    inputModel.value = option.label;
   }
+
+  selectOneOption(e, option);
+};
+/**
+ * @description - Selects one option
+ * @param option Selected option
+ * @returns void
+ */
+const selectOneOption = (e: MouseEvent, option: Option) => {
+  inputModel.value = option.label;
+  selected.value = option.value;
+  setActive(e);
+  emit('update:modelValue', option);
 };
 /**
  * @description - Removes an option from the selected options
@@ -217,7 +227,7 @@ watch(selectedMultiple, (value) => {
 <template>
   <div class="dropdown-wrapper">
     <div
-      ref="select"
+      ref="dropdown"
       :class="{
         dropdown: true,
         'dropdown--disabled': props.disabled,
@@ -238,11 +248,11 @@ watch(selectedMultiple, (value) => {
         <Chip
           v-for="(option, index) in selectedMultiple"
           :key="index"
+          :label="option.label"
           appendIcon="close"
           class="dropdown__tags__chip"
-          :label="option.label"
           variant="primary"
-          @click-icon="removeOption($event, option)"
+          @click:close="removeOption($event, option)"
         />
       </div>
       <div v-if="props.multiple" class="dropdown__multiple">
@@ -285,8 +295,9 @@ watch(selectedMultiple, (value) => {
         :class="{
           'dropdown-options__option': true,
           'dropdown-options__option--active':
-            option.label === selected || selectedMultiple?.includes(option),
+            option.value === selected || selectedMultiple?.includes(option),
         }"
+        :aria-disabled="option.disabled"
         @click="selectOption($event, option)"
       >
         <div style="display: flex; align-items: center">
@@ -296,7 +307,7 @@ watch(selectedMultiple, (value) => {
             :class="{
               'dropdown-options__option__prepend-icon': true,
               'dropdown-options__option__prepend-icon--active':
-                option.label === selected || selectedMultiple?.includes(option),
+                option.value === selected || selectedMultiple?.includes(option),
             }"
             :name="option.prependIcon"
           />
@@ -304,18 +315,18 @@ watch(selectedMultiple, (value) => {
             :class="{
               'dropdown-options__option__label': true,
               'dropdown-options__option__label--active':
-                option.label === selected || selectedMultiple?.includes(option),
+                option.value === selected || selectedMultiple?.includes(option),
             }"
           >
             {{ option.label }}
           </p>
         </div>
         <Icon
-          v-if="option.label === selected || selectedMultiple?.includes(option)"
+          v-if="option.value === selected || selectedMultiple?.includes(option)"
           :class="{
             'dropdown-options__option__append-icon': true,
             'dropdown-options__option__append-icon--active':
-              option.label === selected || selectedMultiple?.includes(option),
+              option.value === selected || selectedMultiple?.includes(option),
           }"
           name="check"
         />
