@@ -1,4 +1,5 @@
 import '../src/index.css';
+import '../src/components/Accordion/accordion.css';
 import '../src/components/Alert/alert.css';
 import '../src/components/Avatar/avatar.css';
 import '../src/components/Badge/badge.css';
@@ -15,6 +16,7 @@ import '../src/components/Textarea/textarea.css';
 import '../src/components/Textfield/textfield.css';
 import '../src/components/Tooltip/tooltip.css';
 
+import RAccordion from '../src/components/Accordion/RAccordion.vue';
 import RAlert from '../src/components/Alert/RAlert.vue';
 import RAvatar from '../src/components/Avatar/RAvatar.vue';
 import RBadge from '../src/components/Badge/RBadge.vue';
@@ -33,6 +35,7 @@ import RTextfield from '../src/components/Textfield/RTextfield.vue';
 import RTooltip from '../src/components/Tooltip/RTooltip.vue';
 
 export {
+  RAccordion,
   RAlert,
   RAvatar,
   RBadge,
