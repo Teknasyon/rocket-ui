@@ -52,6 +52,10 @@
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
     }
+
+    &[readonly] {
+      @apply cursor-pointer;
+    }
   }
 
   &__append-icon {
@@ -71,10 +75,10 @@
   }
 
   &__option {
-    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in flex justify-between items-center w-full border border-transparent rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
+    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in flex justify-between items-center w-full border border-transparent rounded-md py-3 px-4 text-left cursor-pointer sm:text-sm;
 
     &:hover {
-      @apply bg-[var(--primary-50)] text-[var(--primary-500)];
+      @apply bg-[var(--neutral-100)];
     }
     &--active {
       @apply bg-[var(--primary-100)] text-[var(--primary-500)];
