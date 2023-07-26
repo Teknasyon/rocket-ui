@@ -22,7 +22,7 @@ const DefaultArgs = {
   clearable: false,
   disabled: false,
   loading: false,
-  prependIcon: '',
+  prependIcon: 'face',
   appendIcon: '',
   modelValue: '',
 };
@@ -64,6 +64,20 @@ export const Taggable: Story = {
   args: {
     taggable: true,
     placeholder: 'Search or create a tag',
+    appendIcon: 'expand_less',
+  },
+};
+
+export const Search: Story = {
+  args: {
+    options: [
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+      { value: '4', label: 'Option 4' },
+    ],
+    placeholder: 'Search',
+    prependIcon: 'search',
     appendIcon: 'expand_less',
   },
 };

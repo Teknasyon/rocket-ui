@@ -6,6 +6,7 @@ import './dropdown.css';
 export interface Option {
   value: string | number;
   label: string;
+  prependIcon?: string;
 }
 export interface SelectProps {
   /**
@@ -133,13 +134,13 @@ const setActive = (e: MouseEvent) => {
   e.stopPropagation();
   active.value = !active.value;
   if (active.value) {
-    select.value?.classList.add('select--active');
+    select.value?.classList.add('dropdown--active');
     select.value?.focus();
     input.value?.focus();
     document.addEventListener('click', setActive);
     return;
   }
-  select.value?.classList.remove('select--active');
+  select.value?.classList.remove('dropdown--active');
   select.value?.blur();
   input.value?.blur();
   document.removeEventListener('click', setActive);
@@ -214,33 +215,33 @@ watch(selectedMultiple, (value) => {
 });
 </script>
 <template>
-  <div class="dropdown">
+  <div class="dropdown-wrapper">
     <div
       ref="select"
-      :class="{ select: true, 'select--disabled': props.disabled }"
+      :class="{ dropdown: true, 'dropdown--disabled': props.disabled }"
       @click="setActive"
     >
       <div
         :class="{
-          'select__prepend-icon': true,
-          'select__prepend-icon--active': active,
+          'dropdown__prepend-icon': true,
+          'dropdown__prepend-icon--active': active,
         }"
       >
-        <slot name="prepend-icon" />
-        <Icon v-if="!$slots['prepend-icon']" :name="props.prependIcon" />
+        <slot v-if="!props.prependIcon" name="prepend-icon" />
+        <Icon v-else :name="props.prependIcon" />
       </div>
-      <div v-if="props.taggable" class="select__tags">
+      <div v-if="props.taggable" class="dropdown__tags">
         <Chip
           v-for="(option, index) in selectedMultiple"
           :key="index"
           appendIcon="close"
-          class="select__tags__chip"
+          class="dropdown__tags__chip"
           :label="option.label"
           variant="primary"
           @click-icon="removeOption($event, option)"
         />
       </div>
-      <div v-if="props.multiple" class="select__multiple">
+      <div v-if="props.multiple" class="dropdown__multiple">
         <p v-for="(option, index) in selectedMultiple" :key="index">
           {{ option.label + ',' }}
         </p>
@@ -249,7 +250,7 @@ watch(selectedMultiple, (value) => {
         id="select"
         ref="input"
         v-model="inputModel"
-        class="select__input"
+        class="dropdown__input"
         :disabled="props.disabled"
         :placeholder="props.placeholder"
         type="text"
@@ -260,40 +261,42 @@ watch(selectedMultiple, (value) => {
       />
       <div
         :class="{
-          'select__append-icon': true,
-          'select__append-icon--active': active,
+          'dropdown__append-icon': true,
+          'dropdown__append-icon--active': active,
         }"
       >
-        <slot name="append-icon" />
-        <Icon v-if="!$slots['append-icon']" :name="props.appendIcon" />
+        <slot v-if="!props.appendIcon" name="append-icon" />
+        <Icon v-else :name="props.appendIcon" />
       </div>
     </div>
-    <ul :class="{ 'select-options': true, 'select-options--active': active }">
+    <ul
+      :class="{ 'dropdown-options': true, 'dropdown-options--active': active }"
+    >
       <li
         v-for="option in searchedOptions"
         :key="option.value"
         :class="{
-          'select-options__option': true,
-          'select-options__option--active':
+          'dropdown-options__option': true,
+          'dropdown-options__option--active':
             option.label === selected || selectedMultiple?.includes(option),
         }"
         @click="selectOption($event, option)"
       >
         <div style="display: flex; align-items: center">
-          <slot name="option-prepend" />
+          <slot v-if="!option.prependIcon" name="option-prepend" />
           <Icon
-            v-if="!$slots['option-prepend']"
+            v-else
             :class="{
-              'select-options__option__prepend-icon': true,
-              'select-options__option__prepend-icon--active':
+              'dropdown-options__option__prepend-icon': true,
+              'dropdown-options__option__prepend-icon--active':
                 option.label === selected || selectedMultiple?.includes(option),
             }"
-            name="face"
+            :name="option.prependIcon"
           />
           <p
             :class="{
-              'select-options__option__label': true,
-              'select-options__option__label--active':
+              'dropdown-options__option__label': true,
+              'dropdown-options__option__label--active':
                 option.label === selected || selectedMultiple?.includes(option),
             }"
           >
@@ -303,8 +306,8 @@ watch(selectedMultiple, (value) => {
         <Icon
           v-if="option.label === selected || selectedMultiple?.includes(option)"
           :class="{
-            'select-options__option__append-icon': true,
-            'select-options__option__append-icon--active':
+            'dropdown-options__option__append-icon': true,
+            'dropdown-options__option__append-icon--active':
               option.label === selected || selectedMultiple?.includes(option),
           }"
           name="check"

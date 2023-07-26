@@ -1,17 +1,17 @@
 @import '../../index.css';
 
-.dropdown {
+.dropdown-wrapper {
   @apply relative;
 }
 
-.select {
+.dropdown {
   @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
   &--active {
     @apply border border-[var(--primary-500)] ring-2;
   }
   &--disabled {
-    @apply bg-[var(--neutral-100)] text-[var(--neutral-200)] border-[var(--neutral-200)] cursor-not-allowed;
+    @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
   }
 
   &__prepend-icon {
@@ -42,7 +42,7 @@
   }
 
   &__input {
-    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] px-2 block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm;
+    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] px-2 block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm disabled:bg-[var(--neutral-100)] disabled:text-[var(--neutral-300)] disabled:placeholder:text-[var(--neutral-300)];
   }
 
   &__append-icon {
@@ -54,7 +54,7 @@
   }
 }
 
-.select-options {
+.dropdown-options {
   @apply hidden py-3 px-2 left-0 absolute z-10 w-full mt-1 bg-white border border-[var(--neutral-200)] rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm;
 
   &--active {
