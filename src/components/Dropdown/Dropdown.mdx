@@ -14,6 +14,8 @@ A Dropdown component is a UI element that allows users to select from a list of 
 
 - [Usage with props](#usage)
 
+- [Slots](#slots)
+
 - [Stories](#stories)
 
 - [Tips](#tips)
@@ -46,6 +48,18 @@ The **appendIcon** and "prependIcon" props allow for the inclusion of icons or o
 
 The **options** prop allows you to define the list of choices that the user can select from, which can be represented as text or other visual elements.
 
+#### options: label (required)
+
+The **label** prop allows you to define the text that will be displayed in the dropdown button.
+
+#### options: value (required)
+
+The **value** prop allows you to define the value of the selected option.
+
+#### options: prependIcon (optional)
+
+The **prependIcon** prop allows for the inclusion of icons or other visual elements at the beginning of the option, providing a clear indication of its purpose and functionality.
+
 ### placeholder (optional)
 
 The **placeholder** prop allows you to define the default text displayed in the dropdown button before a user makes a selection.
@@ -69,6 +83,20 @@ The **loading** prop allows you to indicate that the component is in a loading s
 ### modelValue (optional)
 
 The **modelValue** prop allows you to define the value of the selected option.
+
+## Slots <a id="slots" />
+
+### option-prepend (optional)
+
+The **option-prepend** slot allows you to define the content that will be displayed before the option label.
+
+### option-append (optional)
+
+The **option-append** slot allows you to define the content that will be displayed after the option label.
+
+### prependIcon (optional)
+
+The **prependIcon** slot allows you to define the content that will be displayed before the dropdown button label.
 
 ## Stories <a id="stories" />
 
