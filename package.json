@@ -19,8 +19,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "storybook:chromatic": "npx chromatic --project-token=252d66c17a90 --disable-telemetry",
+    "storybook:build": "storybook build",
+    "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
     "prepare": "husky install",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}",
     "ci": "run-s lint type-check test:unit test:coverage build-only"
@@ -54,6 +54,7 @@
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.20.0",
+    "dotenv": "^16.3.1",
     "eslint": "^8.39.0",
     "eslint-plugin-mdx": "^2.0.2",
     "eslint-plugin-storybook": "^0.6.13",
