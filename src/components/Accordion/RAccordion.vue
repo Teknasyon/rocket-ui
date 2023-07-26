@@ -6,35 +6,42 @@ import './accordion.css';
 export type Accordion = {
   title: string;
   content: string;
-  isExpanded?: boolean;
-  isDisabled?: boolean;
+  open?: boolean;
+  disabled?: boolean;
 };
 
 export interface AccordionProps {
+  /**
+   * Accordion list
+   * @default []
+   * @type Accordion[]
+   * @example
+   * ```html
+   * <r-accordion :accordions="[
+   *  { title: 'Accordion 1', content: 'Content 1' },
+   *  ]" />
+   * ```
+   */
   accordions: Accordion[];
-  modelValue?: boolean;
 }
 
 const props = defineProps<AccordionProps>();
-
-const emit = defineEmits(['update:modelValue']);
 
 const accordions = reactive(
   props.accordions.map(({ title, content }, index) => ({
     title,
     content,
-    isExpanded: props.accordions[index].isExpanded || false,
-    isDisabled: props.accordions[index].isDisabled || false,
+    open: props.accordions[index].open || false,
+    disabled: props.accordions[index].disabled || false,
   }))
 );
 
 function handleAccordion(selectedIndex: number) {
-  if (accordions[selectedIndex].isDisabled) return;
+  if (accordions[selectedIndex].disabled) return;
   accordions.forEach((_, index) => {
-    accordions[index].isExpanded =
-      index === selectedIndex ? !accordions[index].isExpanded : false;
+    accordions[index].open =
+      index === selectedIndex ? !accordions[index].open : false;
   });
-  emit('update:modelValue', accordions[selectedIndex].isExpanded);
 }
 </script>
 <template>
@@ -43,21 +50,20 @@ function handleAccordion(selectedIndex: number) {
     :key="index"
     :class="{
       accordion: true,
-      'accordion--expanded': accordion.isExpanded,
-      'accordion--disabled': accordion.isDisabled,
+      'accordion--opened': accordion.open,
+      'accordion--disabled': accordion.disabled,
     }"
   >
     <div class="accordion__header" @click="handleAccordion(index)">
       <div class="accordion__title">{{ accordion.title }}</div>
       <div class="accordion__icon">
-        <Icon :name="accordion.isExpanded ? 'expand_less' : 'expand_more'" />
+        <Icon :name="accordion.open ? 'expand_less' : 'expand_more'" />
       </div>
     </div>
     <div class="accordion__content">
-      <slot />
-      <template v-if="!$slots['default']">
+      <span>
         {{ accordion.content }}
-      </template>
+      </span>
     </div>
   </div>
 </template>
