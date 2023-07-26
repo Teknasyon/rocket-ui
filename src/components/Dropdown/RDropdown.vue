@@ -102,6 +102,15 @@ export interface SelectProps {
    * <Dropdown v-model="model" />
    */
   modelValue?: string | number | Option | Option[];
+
+  /**
+   * Allow to search for options
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown searchable />
+   */
+  searchable?: boolean;
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -113,6 +122,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   prependIcon: '',
   appendIcon: 'expand_less',
   modelValue: '',
+  searchable: false,
 });
 const selected = ref<string | number>('');
 const selectedMultiple = reactive<Option[]>([]);
@@ -137,8 +147,9 @@ const setActive = (e: MouseEvent) => {
   if (active.value) {
     dropdown.value?.classList.add('dropdown--active');
     dropdown.value?.focus();
-    input.value?.focus();
+    if (props.searchable) input.value?.focus();
     document.addEventListener('click', setActive);
+
     return;
   }
   dropdown.value?.classList.remove('dropdown--active');
@@ -161,7 +172,7 @@ const selectOption = (e: MouseEvent, option: Option) => {
       selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
     }
     inputModel.value = '';
-    input.value?.focus();
+    if (props.searchable) input.value?.focus();
     return;
   }
 
@@ -173,6 +184,11 @@ const selectOption = (e: MouseEvent, option: Option) => {
  * @returns void
  */
 const selectOneOption = (e: MouseEvent, option: Option) => {
+  if (selected.value === option.value) {
+    selected.value = '';
+    inputModel.value = '';
+    return;
+  }
   inputModel.value = option.label;
   selected.value = option.value;
   setActive(e);
@@ -211,6 +227,7 @@ const createTag = (e: KeyboardEvent) => {
  * @returns {Option[]} - Returns an array of options
  */
 const searchedOptions = computed(() => {
+  if (!props.searchable) return props.options;
   const result = props.options.filter((option) => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
   });
@@ -263,6 +280,7 @@ watch(selectedMultiple, (value) => {
       <input
         id="select"
         ref="input"
+        type="text"
         v-model="inputModel"
         :class="{
           dropdown__input: true,
@@ -270,7 +288,7 @@ watch(selectedMultiple, (value) => {
         }"
         :disabled="props.disabled"
         :placeholder="props.placeholder"
-        type="text"
+        :readonly="!props.searchable"
         @keydown.backspace="
           removeOption($event, selectedMultiple[selectedMultiple.length - 1])
         "
