@@ -1,8 +1,7 @@
 name: 'Chromatic'
 
 on:
-  push:
-    branches: ['master']
+  push
 
 jobs:
   chromatic-deployment:
