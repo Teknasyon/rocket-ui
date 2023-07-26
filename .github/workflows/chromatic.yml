@@ -3,7 +3,6 @@ name: 'Chromatic'
 on:
   push:
     branches: ['master']
-    paths: ['**.stories.mdx', '**.vue', '**.js', '**.ts', '**.css']
 
 jobs:
   chromatic-deployment:
@@ -19,6 +18,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
           exitZeroOnChanges: true
-          build-script-name: storybook:build
+          buildScriptName: storybook:build
         env:
           CHROMATIC_RETRIES: 5
