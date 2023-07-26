@@ -10,8 +10,13 @@
   &--active {
     @apply border border-[var(--primary-500)] ring-2;
   }
+
   &--disabled {
     @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
+  }
+
+  &--loading {
+    @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
   }
 
   &__prepend-icon {
@@ -43,6 +48,10 @@
 
   &__input {
     @apply text-[var(--neutral-900)] caret-[var(--primary-500)] px-2 block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm disabled:bg-[var(--neutral-100)] disabled:text-[var(--neutral-300)] disabled:placeholder:text-[var(--neutral-300)];
+
+    &--loading {
+      @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
+    }
   }
 
   &__append-icon {

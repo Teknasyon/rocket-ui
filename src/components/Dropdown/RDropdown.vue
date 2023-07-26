@@ -218,7 +218,11 @@ watch(selectedMultiple, (value) => {
   <div class="dropdown-wrapper">
     <div
       ref="select"
-      :class="{ dropdown: true, 'dropdown--disabled': props.disabled }"
+      :class="{
+        dropdown: true,
+        'dropdown--disabled': props.disabled,
+        'dropdown--loading': props.loading,
+      }"
       @click="setActive"
     >
       <div
@@ -250,7 +254,10 @@ watch(selectedMultiple, (value) => {
         id="select"
         ref="input"
         v-model="inputModel"
-        class="dropdown__input"
+        :class="{
+          dropdown__input: true,
+          'dropdown__input--loading': props.loading,
+        }"
         :disabled="props.disabled"
         :placeholder="props.placeholder"
         type="text"
