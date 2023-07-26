@@ -36,18 +36,18 @@
   }
 
   &__content {
-    @apply max-h-0 overflow-hidden text-[var(--neutral-500)] font-normal text-sm transition-all ease-in-out;
+    @apply max-h-0 overflow-y-auto text-[var(--neutral-500)] font-normal text-sm transition-all duration-500 ease-in-out;
   }
 
-  &--expanded {
+  &--opened {
     @apply border-[var(--primary-500)] ring-2 ring-[var(--primary-200)];
   }
 
-  &--expanded &__content {
+  &--opened &__content {
     @apply max-h-[600px] mt-3;
   }
 
-  &--expanded &__icon {
+  &--opened &__icon {
     @apply text-[var(--primary-500)];
   }
 }
