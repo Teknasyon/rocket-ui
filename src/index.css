@@ -131,6 +131,21 @@
   --column-5: 5;
   --column-6: 6;
   --column-7: 7;
+
+  /**
+  * @tokens-modal-variables
+  * @presenter ModalVariables
+  */
+  --modal-background: rgba(0, 0, 0, 0.5);
+  --modal-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  --modal-height: 448px;
+  --modal-width: 400px;
+  --modal-border-radius: var(--border-radius-4);
+  --modal-padding: var(--space-7);
+  --modal-icon-size: var(--space-12);
+  --modal-icon-padding: var(--space-3);
+  --modal-icon-bg: var(--primary-100);
+  --modal-icon-color: var(--primary-500);
   /**
   * @tokens-end
   */

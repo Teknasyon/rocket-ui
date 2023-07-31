@@ -1,0 +1,152 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+Modal is a component that renders a modal dialog. It is used to display content in a layer above the app.
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage with props](#usage)
+
+- [Slots](#slots)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+<Canvas>
+  <Story of={ModalStories.Overview} />
+</Canvas>
+
+## Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={ModalStories.Overview} exclude={/^(on.*)$/} />
+
+## Usage with props <a id="usage" />
+
+### open (required)
+
+The `open` prop is used to control the visibility of the modal. It is a boolean value that defaults to `false`.
+
+### block (optional)
+
+The `block` prop is used to control the block behavior of the modal. It is a boolean value that defaults to `true`.
+
+### title (optional)
+
+The `title` prop is used to set the title of the modal. It is a string value that defaults to `null`.
+
+### description (optional)
+
+The `description` prop is used to set the description of the modal. It is a string value that defaults to `null`.
+
+### closeText (optional)
+
+The `closeText` prop is used to set the text of the close button. It is a string value that defaults to `Close`.
+
+### submitText (optional)
+
+The `submitText` prop is used to set the text of the submit button. It is a string value that defaults to `Submit`.
+
+### hideClose (optional)
+
+The `hideClose` prop is used to hide the close button. It is a boolean value that defaults to `false`.
+
+### icon (optional)
+
+The `icon` prop is used to set the icon of the modal. It is a string value that defaults to `null`.
+
+### form (optional)
+
+The `form` prop is used to handle the form states of the modal. It is an object value that defaults to `null`.
+
+### fields (optional)
+
+The `fields` prop is used to create the form fields of the modal. It is an array value that defaults to `null`.
+
+### field:label (optional)
+
+The `field:label` prop is used to set the label of the field. It is a string value that defaults to `null`.
+
+### field:name (optional)
+
+The `field:name` prop is used to set the name of the field. It is a string value that defaults to `null`.
+
+### field:placeholder (optional)
+
+The `field:placeholder` prop is used to set the placeholder of the field. It is a string value that defaults to `null`.
+
+### field:rules (optional)
+
+The `field:rules` prop is used to set the rules of the field. It is an array value that defaults to `null`.
+
+### field:type (optional)
+
+The `field:type` prop is used to set the type of the field. It is a string value that defaults to `null`.
+
+### click:outside (optional)
+
+The `click:outside` event is used to handle the click outside the modal.
+
+### close (optional)
+
+The `close` event is used to handle the click on the close button.
+
+### submit (optional)
+
+The `submit` event is used to handle the click on the submit button.
+
+## Slots <a id="slots" />
+
+### default (optional)
+
+The `default` slot is used to render the body of the modal.
+
+### footer (optional)
+
+The `footer` slot is used to render the footer/actions of the modal.
+
+## Stories <a id="stories" />
+
+<Canvas>
+  <Story of={ModalStories.Overview} />
+</Canvas>
+
+<Canvas>
+  <Story of={ModalStories.WithForm} />
+</Canvas>
+
+<Canvas>
+  <Story of={ModalStories.OnlyForm} />
+</Canvas>
+## Tips <a id="tips" />
+
+- Use the `open` prop to control the visibility of the modal.
+
+- Use the `block` prop to control the block behavior of the modal.
+
+- Use the `title` prop to set the title of the modal.
+
+- Use the `description` prop to set the description of the modal.
+
+- Use the `closeText` prop to set the text of the close button.
+
+- Use the `submitText` prop to set the text of the submit button.
+
+- Use the `hideClose` prop to hide the close button.
+
+- Use the `icon` prop to set the icon of the modal.
+
+- Use the `form` prop to handle the form states of the modal.
+
+- Use the `fields` prop to create the form fields of the modal.
