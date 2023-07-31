@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import './modal.css';
 import Button from '../Button/RButton.vue';
 import Icon from '../Icon/RIcon.vue';
