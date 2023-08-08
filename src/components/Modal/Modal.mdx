@@ -34,9 +34,9 @@ Modal is a component that renders a modal dialog. It is used to display content 
 
 ## Usage with props <a id="usage" />
 
-### open (required)
+### modelValue (required)
 
-The `open` prop is used to control the visibility of the modal. It is a boolean value that defaults to `false`.
+The `modelValue` prop is used to control the visibility of the modal. It is a boolean value that defaults to `false`.
 
 ### block (optional)
 
@@ -53,10 +53,6 @@ The `description` prop is used to set the description of the modal. It is a stri
 ### icon (optional)
 
 The `icon` prop is used to set the icon of the modal. It is a string value that defaults to `null`.
-
-### click:outside (optional)
-
-The `click:outside` event is used to handle the click outside the modal.
 
 ## Slots <a id="slots" />
 
@@ -84,7 +80,7 @@ The `actions` slot is used to render the actions of the modal.
 
 ## Tips <a id="tips" />
 
-- Use the `open` prop to control the visibility of the modal.
+- Use the `modelValue` prop to control the visibility of the modal.
 
 - Use the `block` prop to control the block behavior of the modal.
 
