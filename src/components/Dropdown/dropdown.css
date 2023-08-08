@@ -8,7 +8,7 @@
   @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
   &--active {
-    @apply border border-[var(--primary-500)] ring-2;
+    @apply border border-[var(--primary-500)] ring-inset ring-2;
   }
 
   &--disabled {

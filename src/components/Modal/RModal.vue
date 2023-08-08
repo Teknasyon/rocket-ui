@@ -1,31 +1,19 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import './modal.css';
-import Button from '../Button/RButton.vue';
 import Icon from '../Icon/RIcon.vue';
-import RTextfield, {
-  type Props as TextfieldProps,
-} from '../Textfield/RTextfield.vue';
-
-export interface Field {
-  name: string;
-  label: string;
-  type: TextfieldProps['type'];
-  placeholder?: string;
-  rules?: string;
-}
 
 export interface ModalProps {
   /**
-   * Open the modal
+   * modelValue the modal
    * @type boolean
    * @default false
    * @example
-   * <Modal :open="true" />
+   * <Modal :modelValue="true" />
    */
-  open: boolean;
+  modelValue: boolean;
   /**
-   * Block state of the Modal
+   * Modal width is 100%
    * @type boolean
    * @default false
    * @example
@@ -49,30 +37,6 @@ export interface ModalProps {
    */
   description?: string;
   /**
-   * Close text of the Modal
-   * @type string
-   * @default 'Close'
-   * @example
-   * <Modal closeText="Close" />
-   */
-  closeText?: string;
-  /**
-   * Submit text of the Modal
-   * @type string
-   * @default 'Submit'
-   * @example
-   * <Modal submitText="Submit" />
-   */
-  submitText?: string;
-  /**
-   * Hide close button of the Modal
-   * @type boolean
-   * @default false
-   * @example
-   * <Modal hideClose />
-   */
-  hideClose?: boolean;
-  /**
    * Icon of the Modal
    * @type string
    * @default ''
@@ -80,47 +44,38 @@ export interface ModalProps {
    * <Modal icon="mail" />
    */
   icon?: string;
-  /**
-   *
-   */
-  form?: {
-    [key: string]: string;
-  };
-  fields?: Field[];
-  /**
-   * Click outside the modal
-   * @type Event
-   * @example
-   * <Modal @click:outside="handleClickOutside" />
-   */
-  'click:outside'?: Event;
-  /**
-   * Submit the modal
-   * @type Event
-   * @example
-   * <Modal @submit="handleSubmit" />
-   */
-  submit?: Event;
 }
 const props = withDefaults(defineProps<ModalProps>(), {
-  open: false,
+  modelValue: false,
   block: false,
   title: '',
   description: '',
   closeText: 'Close',
   submitText: 'Submit',
 });
+const emits = defineEmits(['update:modelValue']);
 const classes = computed(() => {
   return {
     dialog: true,
     'dialog--block': props.block,
   };
 });
+const handleOutside = (event: Event) => {
+  if (event.target === event.currentTarget) {
+    emits('update:modelValue', false);
+  }
+};
 </script>
 <template>
-  <div class="modal" v-show="open" @click.stop="$emit('click:outside')">
-    <div role="dialog" aria-modal="true" :class="classes" :open="props.open">
+  <div class="modal" v-show="modelValue" @click.stop="handleOutside">
+    <div
+      role="dialog"
+      aria-modal="true"
+      :class="classes"
+      :open="props.modelValue"
+    >
       <div class="dialog__header">
+        <slot name="header" />
         <div class="icon" v-if="props.icon">
           <Icon :name="props.icon" kind="outlined" />
         </div>
@@ -133,26 +88,9 @@ const classes = computed(() => {
       </div>
       <div class="dialog__body">
         <slot />
-        <form v-if="props.form">
-          <div v-for="field in props.fields" :key="field.name">
-            <RTextfield
-              v-model="props.form[field.name]"
-              :label="field.label"
-              :type="field.type"
-              :name="field.name"
-              :placeholder="field.placeholder"
-              :rules="field.rules"
-            />
-          </div>
-        </form>
       </div>
-      <div class="dialog__footer">
-        <slot name="footer" />
-
-        <Button variant="secondary" block>{{ props.closeText }}</Button>
-        <Button variant="primary" block @click="$emit('submit', props.form)">{{
-          props.submitText
-        }}</Button>
+      <div class="dialog__actions">
+        <slot name="actions" />
       </div>
     </div>
   </div>
