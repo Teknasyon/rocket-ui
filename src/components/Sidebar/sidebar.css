@@ -1,0 +1,18 @@
+@import '../../index.css';
+
+.sidebar {
+  @apply flex flex-col items-center w-[var(--sidebar-collapsed-width)] h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r
+  transition-all ease-in duration-300;
+
+  &--open {
+    @apply w-[var(--sidebar-width)] items-start;
+  }
+
+  .nav {
+    @apply flex flex-col flex-1 space-y-6;
+  }
+
+  .actions {
+    @apply flex flex-col space-y-6;
+  }
+}
