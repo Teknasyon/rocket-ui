@@ -9,6 +9,7 @@ import '../src/components/Chips/chip.css';
 import '../src/components/Dropdown/dropdown.css';
 import '../src/components/Label/label.css';
 import '../src/components/Modal/modal.css';
+import '../src/components/Sidebar/sidebar.css';
 import '../src/components/Snackbar/snackbar.css';
 import '../src/components/Switch/switch.css';
 import '../src/components/TabItem/tab-item.css';
@@ -28,6 +29,7 @@ import RDropdown from '../src/components/Dropdown/RDropdown.vue';
 import RIcon from '../src/components/Icon/RIcon.vue';
 import RLabel from '../src/components/Label/RLabel.vue';
 import RModal from '../src/components/Modal/RModal.vue';
+import RSidebar from '../src/components/Sidebar/RSidebar.vue';
 import RSnackbar from '../src/components/Snackbar/RSnackbar.vue';
 import RSwitch from '../src/components/Switch/RSwitch.vue';
 import RTabItem from '../src/components/TabItem/RTabItem.vue';
@@ -48,6 +50,7 @@ export {
   RIcon,
   RLabel,
   RModal,
+  RSidebar,
   RSnackbar,
   RSwitch,
   RTabItem,

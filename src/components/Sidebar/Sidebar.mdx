@@ -1,0 +1,31 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as SidebarStories from './Sidebar.stories';
+
+<Meta of={SidebarStories} />
+
+# Sidebar
+
+- [Overview](#overview)
+
+- [Playground](#playground)
+
+- [Usage with props](#usage)
+
+- [Slots](#slots)
+
+- [Stories](#stories)
+
+- [Tips](#tips)
+
+## Overview <a id="overview" />
+
+<Canvas>
+  <Story of={SidebarStories.Collapsed} />
+</Canvas>
+
+## Playground <a id="playground" />
+
+> Changes you make in the controls will be reflected in the example above.
+
+<Controls of={SidebarStories.Collapsed} />

@@ -148,6 +148,15 @@
   --modal-icon-color: var(--primary-500);
   --modal-animation: crossFadeAndGrowUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s
     both;
+
+  /**
+  * @tokens-sidebar-variables
+  * @presenter SidebarVariables
+  */
+  --sidebar-width: 256px;
+  --sidebar-collapsed-width: 80px;
+  --sidebar-background: white;
+  --sidebar-padding: var(--space-5) var(--space-4);
   /**
   * @tokens-end
   */
