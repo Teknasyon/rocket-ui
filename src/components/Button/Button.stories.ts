@@ -32,7 +32,7 @@ const WithCustomIconSlot = {
     template: `
     <Button v-bind="args">
       <template v-slot:custom-icon>
-        <Icon name="fingerprint"/>
+        <Icon name="mdiFingerprint"/>
       </template>
     </Button>`,
   }),

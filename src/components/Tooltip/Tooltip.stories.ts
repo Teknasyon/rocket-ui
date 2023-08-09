@@ -101,7 +101,7 @@ const WithContentSlotStory = {
       @hide="hide"
     >
       <template #trigger>
-        <Icon name="info" />
+        <Icon name="mdiInformation" />
       </template>
       <template #content>
         <span style="background: red; color: #fff; padding: 8px;">This is a tooltip</span>

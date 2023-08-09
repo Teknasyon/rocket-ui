@@ -103,9 +103,9 @@ const state = reactive<StateTypes>({
 });
 
 const icons = {
-  checked: 'check',
+  checked: 'mdiCheck',
   unchecked: '',
-  indeterminate: 'remove',
+  indeterminate: 'mdiMinus',
 };
 
 const icon = computed(() => {
@@ -173,7 +173,7 @@ watch(
         @change="onChange"
       />
       <div :class="classes" :data-disabled="props.disabled">
-        <Icon :name="icon" size="16" />
+        <Icon :name="icon" :size="24" />
       </div>
     </div>
     <div class="checkbox-texts">

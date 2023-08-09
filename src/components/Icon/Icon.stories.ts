@@ -3,25 +3,9 @@ import { action } from '@storybook/addon-actions';
 
 import Icon from './RIcon.vue';
 
-const DefaultArgs = {
-  name: 'face',
-  size: '24',
-  color: '',
-  kind: 'filled',
-  fontWeight: 'light',
-};
+const DefaultArgs = {};
 
-const DefaultArgTypes = {
-  kind: {
-    type: 'radio',
-    options: ['filled', 'round', 'outlined', 'sharp', 'two-tone'],
-    defaultValue: 'round',
-  },
-  fontWeight: {
-    type: 'radio',
-    options: ['light', 'bold'],
-  },
-};
+const DefaultArgTypes = {};
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const IconStory = {
@@ -44,12 +28,6 @@ type Story = StoryObj<typeof IconStory>;
 
 export const Overview: Story = {
   args: {
-    name: 'face',
-  },
-};
-
-export const DefaultIcon: Story = {
-  args: {
-    name: 'home',
+    name: 'mdiFaceMan',
   },
 };

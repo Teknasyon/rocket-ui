@@ -109,7 +109,7 @@ export const CustomCloseButton = {
       v-bind="args"
     >
       <template #close>
-        <Icon name="close" />
+        <Icon name="mdiClose" />
       </template>
     </Alert>
     `,

@@ -120,7 +120,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   disabled: false,
   loading: false,
   prependIcon: '',
-  appendIcon: 'expand_less',
+  appendIcon: 'mdiChevronUp',
   modelValue: '',
   searchable: false,
 });
@@ -346,7 +346,7 @@ watch(selectedMultiple, (value) => {
             'dropdown-options__option__append-icon--active':
               option.value === selected || selectedMultiple?.includes(option),
           }"
-          name="check"
+          name="mdiCheck"
         />
       </li>
     </ul>

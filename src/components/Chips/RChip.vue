@@ -86,10 +86,12 @@ const classes = computed<object>(() => {
     [`chip__${props.variant}--ghost`]: props.ghost,
   };
 });
-const iconSize = computed<string>(() => {
-  if (props.size === 'small') return '10';
-  if (props.size === 'large') return '16';
-  return '12';
+const iconSize = computed<number>(() => {
+  return {
+    small: 20,
+    medium: 24,
+    large: 32,
+  }[props.size || 'medium'];
 });
 const clickChip = (e: MouseEvent) => {
   if (props.disabled) return;
