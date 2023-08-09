@@ -67,17 +67,17 @@ const classes = computed(() => {
 });
 const icon = computed(() => {
   return {
-    success: 'check_circle',
-    error: 'error',
-    warning: 'warning',
-    info: 'info',
+    success: 'mdiCheckCircle',
+    error: 'mdiAlertCircle',
+    warning: 'mdiAlert',
+    info: 'mdiInformation',
   }[props.type];
 });
 const iconSize = computed(() => {
   return {
-    small: 12,
-    medium: 16,
-    large: 20,
+    small: 20,
+    medium: 24,
+    large: 28,
   }[props.size];
 });
 const close = () => {

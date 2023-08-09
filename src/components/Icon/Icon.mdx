@@ -13,8 +13,6 @@ The Icon component is used to display a graphical icon in your application.
 
 - [Usage with props](#usage)
 
-- [Stories](#stories)
-
 - [Tips](#tips)
 
 ## Overview <a id="overview" />
@@ -23,7 +21,7 @@ The Icon component is a graphical element that is used to visually represent an 
 
 The Icon component is a versatile and useful tool for adding visual emphasis and clarity to an application's user interface. It is important to use icons consistently and thoughtfully in order to create a cohesive and intuitive user experience.
 
-To access a comprehensive list of icons available in our design system, please refer to the icon list page by clicking [the following link](https://fonts.google.com/icons?icon.set=Material+Icons\&icon.style=Rounded).
+To access a comprehensive list of icons available in our design system, please refer to the icon list page by clicking [the following link](https://pictogrammers.com/library/mdi/).
 
 <Canvas>
   <Story of={IconStories.Overview} />
@@ -39,44 +37,23 @@ To access a comprehensive list of icons available in our design system, please r
 
 ### name (required)
 
-The name prop is a string that specifies the name of the icon you want to display. The list of available icons and their names can be found in the design system's icon library.
-
-### kind (optional)
-
-The kind prop specifies the style of the icon. It can be one of the following values:
-
-- **filled**: the icon is filled with a solid color
-- **round**: the icon is rounded and filled with a solid color
-- **outlined**: the icon is outlined and not filled with a color
-- **sharp**: the icon is not rounded and filled with a solid color
-- **two-toned**: the icon is filled with two colors, typically a primary color and a secondary color
-
-If the kind prop is not provided, the default value is round.
+The **name** prop is a string that specifies the name of the icon you want to display. The list of available icons and their names can be found in the design system's icon library.
 
 ### size (optional)
 
-The size prop is a number that specifies the size of the icon in pixels. If the size prop is not provided, the default size is 24 pixels.
+The **size** prop is a number that specifies the size of the icon.
 
-### color (optional)
+### viewBox (optional)
 
-The color prop is a string that specifies the color of the icon. It can be any valid CSS color value, such as a hex code, a RGB value, or a color name. If the color prop is not provided, the default color is black.
+The **viewBox** prop is a string that specifies the viewBox of the icon.
 
-### font-weight (optional)
+### flip (optional)
 
-The font-weight prop specifies the weight of the icon's font. It can be one of the following values:
+The **flip** prop is a string that specifies the flip of the icon.
 
-- **light**: the font weight is lighter than the default font weight
-- **bold**: the font weight is bolder than the default font weight
+### rotate (optional)
 
-If the font-weight prop is not provided, the default value is light.
-
-## Stories <a id="stories" />
-
-### Default
-
-<Canvas>
-  <Story of={IconStories.DefaultIcon} />
-</Canvas>
+The **rotate** prop is a number that specifies the rotation of the icon.
 
 ### Tips <a id="tips" />
 

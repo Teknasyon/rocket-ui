@@ -106,7 +106,6 @@ function onClick(id: number | string) {
       v-if="!$slots['icon'] && variant !== TabItemVariants.TEXT_ONLY"
       class="tab-item__icon"
       :name="props.icon"
-      size="16"
     />
     <slot v-else name="custom-icon" />
 

@@ -18,7 +18,6 @@ const DefaultArgs = {
   hint: 'This is a hint text to help user.',
   prependIcon: '',
   appendIcon: '',
-  iconColor: '',
   loading: false,
   disabled: false,
   clearable: false,

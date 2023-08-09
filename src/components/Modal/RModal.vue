@@ -41,7 +41,7 @@ export interface ModalProps {
    * @type string
    * @default ''
    * @example
-   * <Modal icon="mail" />
+   * <Modal icon="mdiMail" />
    */
   icon?: string;
 }
@@ -50,8 +50,6 @@ const props = withDefaults(defineProps<ModalProps>(), {
   block: false,
   title: '',
   description: '',
-  closeText: 'Close',
-  submitText: 'Submit',
 });
 const emits = defineEmits(['update:modelValue']);
 const classes = computed(() => {
@@ -77,7 +75,7 @@ const handleOutside = (event: Event) => {
       <div class="dialog__header">
         <slot name="header" />
         <div class="icon" v-if="props.icon">
-          <Icon :name="props.icon" kind="outlined" />
+          <Icon :name="props.icon" />
         </div>
         <div class="title" v-if="props.title">
           {{ props.title }}

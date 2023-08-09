@@ -23,10 +23,14 @@
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
     "prepare": "husky install",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}",
-    "ci": "run-s lint type-check test:unit test:coverage build-only"
+    "ci": "run-s lint type-check test:unit test:coverage build-only",
+    "build:types": "vite-plugin-dts",
+    "build:icons": "node src/scripts/buildIcons.js"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.0.7",
+    "@mdi/svg": "^7.2.96",
+    "@mdi/util": "^0.3.2",
     "lodash.kebabcase": "^4.1.1",
     "material-icons": "^1.11.11",
     "vue": "^3.2.37"

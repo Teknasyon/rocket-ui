@@ -35,7 +35,7 @@ const BadgeStory = {
     template: `
     <Badge v-bind="args" >
       <template v-slot:default>
-        <Icon name="email" size="24" />
+        <Icon name="mdiEmail" size="24" />
       </template>
     </Badge>
     `,

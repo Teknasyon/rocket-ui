@@ -100,15 +100,6 @@ export interface Props {
   appendIcon?: string;
 
   /**
-   * Color of the icon
-   * @type CSSProperties['color']
-   * @default ''
-   * @example
-   * <Textfield iconColor="red" />
-   */
-  iconColor?: CSSProperties['color'];
-
-  /**
    * Input disabled state
    * @type InputHTMLAttributes['disabled']
    * @default false
@@ -215,12 +206,12 @@ const prependIconName = computed(() => {
 });
 const appendIconName = computed(() => {
   const { appendIcon, type } = props;
-  if (hasErrorMsg.value) return 'error_outline';
-  if (hasClear.value && ['text', 'email'].includes(type)) return 'clear';
+  if (hasErrorMsg.value) return 'mdiAlertCircleOutline';
+  if (hasClear.value && ['text', 'email'].includes(type)) return 'mdiClose';
   if (type === 'password' && typeOfInputRef.value === 'password')
-    return 'visibility';
+    return 'mdiEyeOutline';
   if (type === 'password' && typeOfInputRef.value === 'text')
-    return 'visibility_off';
+    return 'mdiEyeOffOutline';
   return appendIcon;
 });
 /**
@@ -335,7 +326,6 @@ watch(
           <Icon
             v-if="appendIconName"
             :class="appendIconClasses"
-            :color="props.iconColor"
             :name="`${appendIconName}`"
             :size="16"
             @click="clickIcon"

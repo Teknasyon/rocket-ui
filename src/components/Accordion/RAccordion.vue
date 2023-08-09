@@ -57,7 +57,7 @@ function handleAccordion(selectedIndex: number) {
     <div class="accordion__header" @click="handleAccordion(index)">
       <div class="accordion__title">{{ accordion.title }}</div>
       <div class="accordion__icon">
-        <Icon :name="accordion.open ? 'expand_less' : 'expand_more'" />
+        <Icon :name="accordion.open ? 'mdiChevronDown' : 'mdiChevronUp'" />
       </div>
     </div>
     <div class="accordion__content">

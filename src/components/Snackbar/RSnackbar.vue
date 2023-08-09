@@ -129,8 +129,8 @@ watch(
       <slot name="close" />
       <Icon
         v-if="!$slots['close']"
-        name="close"
-        size="14"
+        name="mdiClose"
+        :size="20"
         @click.stop="onClose"
       />
     </div>
