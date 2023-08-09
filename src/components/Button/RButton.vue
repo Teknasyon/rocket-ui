@@ -150,7 +150,7 @@ const style = computed(() => {
     <slot name="custom-icon" />
 
     <Icon
-      v-if="!$slots['custom-icon']"
+      v-if="!$slots['custom-icon'] && props.prependIcon"
       :class="{
         'button__prepend-icon': true,
         'button__prepend-icon--only': props.onlyIcon,
@@ -160,7 +160,7 @@ const style = computed(() => {
     />
     <slot v-if="!props.onlyIcon" />
     <Icon
-      v-if="!$slots['custom-icon'] && !props.onlyIcon"
+      v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon"
       class="button__append-icon"
       :name="props.appendIcon"
       :size="iconSize"
