@@ -25,11 +25,11 @@ Then you can use the components in your `App.vue` file:
 
 ```vue
 <script setup>
-import { Button } from '@rocketui/vue'
+import { RButton } from '@rocketui/vue'
 </script>
 
 <template>
-  <Button>Rocket UI Button</Button>
+  <RButton>Rocket UI Button</RButton>
 </template>
 ```
 
