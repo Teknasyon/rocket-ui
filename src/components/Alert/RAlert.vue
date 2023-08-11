@@ -48,6 +48,15 @@ export interface Props {
    * <Alert closable />
    */
   closable?: boolean;
+
+  /**
+   * Block appearance of the Alert
+   * @type boolean
+   * @default false
+   * @example
+   * <Alert block />
+   */
+  block?: boolean;
 }
 
 const emit = defineEmits(['close']);
@@ -57,14 +66,17 @@ const props = withDefaults(defineProps<Props>(), {
   description: '',
   size: 'medium',
   closable: true,
+  block: false,
 });
 const classes = computed(() => {
   return {
     alert: true,
     [`alert--${props.type}`]: true,
     [`alert--${props.size}`]: true,
+    'alert--block': props.block,
   };
 });
+
 const icon = computed(() => {
   return {
     success: 'mdiCheckCircle',
@@ -73,6 +85,7 @@ const icon = computed(() => {
     info: 'mdiInformation',
   }[props.type];
 });
+
 const iconSize = computed(() => {
   return {
     small: 20,
@@ -80,6 +93,7 @@ const iconSize = computed(() => {
     large: 28,
   }[props.size];
 });
+
 const close = () => {
   emit('close');
 };

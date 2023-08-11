@@ -10,6 +10,7 @@ const DefaultArgs = {
   size: 'medium',
   closable: true,
   closeText: 'Close',
+  block: false,
 };
 
 const DefaultArgTypes = {
@@ -28,6 +29,9 @@ const DefaultArgTypes = {
     options: ['small', 'medium', 'large'],
   },
   closable: {
+    type: 'boolean',
+  },
+  block: {
     type: 'boolean',
   },
   closeText: {

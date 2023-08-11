@@ -21,7 +21,7 @@ input {
 }
 
 .textfield {
-  @apply gap-2 box-border w-full flex items-center text-base border border-solid border-[var(--neutral-200)] text-[var(--neutral-500)] bg-[var(--neutral-100)]  rounded-lg px-4 py-3.5;
+  @apply gap-2 box-border w-full flex items-center text-base border border-solid border-[var(--neutral-200)] text-[var(--neutral-500)] bg-[var(--textfield-bg)]  rounded-lg px-4 py-3.5;
 
   &__label {
     @apply text-[var(--neutral-900)] text-sm p-0 mb-2;

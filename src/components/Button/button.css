@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .button {
-  @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded text-white font-medium cursor-pointer;
+  @apply antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded-[var(--btn-radius)] text-white font-medium cursor-pointer;
 
   &:active {
     @apply ring-2 ring-inset;

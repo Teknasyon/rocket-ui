@@ -11,6 +11,7 @@ const DefaultArgs = {
 };
 
 const TextAreaStory = {
+  title: 'Form/TextArea',
   component: TextArea,
   setup(args: typeof TextArea) {
     return { args };

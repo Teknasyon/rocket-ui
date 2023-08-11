@@ -306,11 +306,12 @@ watch(
       />
       <div class="input-wrapper">
         <div :class="classes">
+          <slot name="prepend" />
           <Icon
-            v-if="prependIconName"
+            v-if="prependIconName && !$slots['prepend']"
             :class="prependIconClasses"
             :name="prependIconName"
-            :size="16"
+            :size="20"
           />
           <input
             ref="inputRef"
@@ -323,11 +324,12 @@ watch(
             @focus="onFocus"
             @input="onInput"
           />
+          <slot name="append" />
           <Icon
-            v-if="appendIconName"
+            v-if="appendIconName && !$slots['append']"
             :class="appendIconClasses"
             :name="`${appendIconName}`"
-            :size="16"
+            :size="20"
             @click="clickIcon"
           />
         </div>

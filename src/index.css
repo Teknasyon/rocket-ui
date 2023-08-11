@@ -69,6 +69,7 @@
   --error-700: #9d1006;
   --error-800: #7b0900;
   --error-900: #590600;
+  --white: #ffffff;
   /**
   * @tokens Box Shadows
   * @presenter Shadow
@@ -157,6 +158,16 @@
   --sidebar-collapsed-width: 80px;
   --sidebar-background: white;
   --sidebar-padding: var(--space-5) var(--space-4);
+  /**
+  * @tokens-textfield-variables
+  * @presenter TextfieldVariables
+  */
+  --textfield-bg: var(--white);
+  /**
+  * @tokens-button-variables
+  * @presenter ButtonVariables
+  */
+  --btn-radius: var(--border-radius-2);
   /**
   * @tokens-end
   */

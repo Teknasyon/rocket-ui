@@ -8,6 +8,13 @@
   &--large {
     @apply p-6 text-lg;
   }
+  &--block {
+    @apply w-full;
+
+    .texts {
+      @apply max-w-full;
+    }
+  }
 }
 
 .alert--success {
