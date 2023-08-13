@@ -32,7 +32,6 @@
     "prepare": "husky install",
     "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}",
     "ci": "run-s lint type-check test:unit test:coverage build-only",
-    "build:types": "vite-plugin-dts",
     "build:icons": "node src/scripts/buildIcons.js"
   },
   "dependencies": {
