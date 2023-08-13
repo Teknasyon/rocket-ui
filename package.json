@@ -9,6 +9,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teknasyon/rocket-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/Teknasyon/rocket-ui/issues"
+  },
+  "homepage": "https://teknasyon.github.io/rocket-ui/",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
