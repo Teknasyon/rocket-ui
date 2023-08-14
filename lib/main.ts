@@ -1,4 +1,5 @@
 import '../src/index.css';
+import '../src/components/Typography/typography.css';
 import '../src/components/Accordion/accordion.css';
 import '../src/components/Alert/alert.css';
 import '../src/components/Avatar/avatar.css';
