@@ -168,6 +168,12 @@
   * @presenter ButtonVariables
   */
   --btn-radius: var(--border-radius-2);
+
+  /**
+  * @tokens-font-variables
+  * @presenter FontVariables
+  */
+  --font-size: 16px;
   /**
   * @tokens-end
   */
