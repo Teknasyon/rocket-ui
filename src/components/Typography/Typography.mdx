@@ -1,0 +1,106 @@
+import { Meta } from '@storybook/blocks';
+import './typography.css';
+
+<Meta
+  title="Typography"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+export const Thing = ({
+  fontSize,
+  lineHeight,
+  fontWeight = '400',
+  as = 'p',
+  text,
+}) => {
+  return (
+    <component
+      is={{ as }}
+      style={{ fontSize, lineHeight, fontWeight }}
+      dangerouslySetInnerHTML={{ __html: text }}
+    />
+  );
+};
+
+# Typography
+
+## Heading
+
+<Thing as={'h1'} text={'Heading 1'} fontSize={'72px'} lineHeight={'91.2px'} />
+
+```html
+.text-h1
+```
+
+<Thing as={'h2'} text={'Heading 2'} fontSize={'48px'} lineHeight={'60.8px'} />
+
+```html
+.text-h2;
+```
+
+<Thing as={'h3'} text={'Heading 3'} fontSize={'36px'} lineHeight={'45.6px'} />
+
+```html
+.text-h3
+```
+
+<Thing as={'h4'} text={'Heading 4'} fontSize={'24px'} lineHeight={'30.4px'} />
+
+```html
+.text-h4
+```
+
+<Thing as={'h5'} text={'Heading 5'} fontSize={'18px'} lineHeight={'22.4px'} />
+
+```html
+.text-h5
+```
+
+## Paragraph
+
+<Thing text={'Title'} fontSize={'24px'} lineHeight={'32px'} />
+
+```html
+.text-title
+```
+
+<Thing text={'Subtitle Large'} fontSize={'20px'} lineHeight={'28px'} />
+
+```html
+.text-sub-title-1
+```
+
+<Thing text={'Subtitle Small'} fontSize={'18px'} lineHeight={'26px'} />
+
+```html
+.text-sub-title-2
+```
+
+<Thing text={'Body Large'} fontSize={'16px'} lineHeight={'24px'} />
+
+```html
+.text-body
+```
+
+<Thing text={'Body Medium'} fontSize={'14px'} lineHeight={'20px'} />
+
+```html
+.text-body-1
+```
+
+<Thing text={'Body Small'} fontSize={'12px'} lineHeight={'16px'} />
+
+```html
+.text-body-2
+```
+
+<Thing text={'Caption'} fontSize={'10px'} lineHeight={'14px'} />
+
+```html
+.text-caption
+```
