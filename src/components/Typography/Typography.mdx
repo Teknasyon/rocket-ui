@@ -19,11 +19,14 @@ export const Thing = ({
   text,
 }) => {
   return (
-    <component
-      is={{ as }}
-      style={{ fontSize, lineHeight, fontWeight }}
-      dangerouslySetInnerHTML={{ __html: text }}
-    />
+    <div>
+      <component is={as} style={{ fontSize, lineHeight, fontWeight }}>
+        {text}
+      </component>
+      <p
+        style={{ fontSize: '12px' }}
+      >{`Font size: ${fontSize} | Line height: ${lineHeight} | Font Weight: ${fontWeight}`}</p>
+    </div>
   );
 };
 
