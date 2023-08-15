@@ -67,6 +67,7 @@ const styles = computed(() => {
 </script>
 <template>
   <svg
+    class="r-icon"
     :width="props.size"
     :height="props.size"
     :viewBox="props.viewBox"
@@ -76,10 +77,7 @@ const styles = computed(() => {
   </svg>
 </template>
 <style>
-svg {
+.r-icon {
   transform: rotate(var(--r, 0deg)) scale(var(--sx, 1), var(--sy, 1));
-}
-path {
-  fill: currentColor;
 }
 </style>
