@@ -6,6 +6,7 @@ export interface BreadcrumbItem {
   title: string;
   to: string;
   icon?: string;
+  onlyIcon?: boolean;
 }
 
 const props = withDefaults(
@@ -26,7 +27,9 @@ const props = withDefaults(
         <slot name="item-icon">
           <RIcon v-if="item.icon" :name="item.icon" />
         </slot>
-        <span>{{ item.title }}</span>
+        <span v-if="!item.onlyIcon" class="r-breadcrumb__title">{{
+          item.title
+        }}</span>
       </router-link>
       <slot name="custom-seperator">
         <RIcon

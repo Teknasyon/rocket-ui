@@ -18,4 +18,8 @@
   &__separator {
     @apply flex items-center mx-2 text-[var(--breadcrumb-text-color)];
   }
+
+  &__title {
+    @apply hover:underline;
+  }
 }
