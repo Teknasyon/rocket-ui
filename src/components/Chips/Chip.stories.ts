@@ -22,7 +22,7 @@ const DefaultArgTypes = {
 const DefaultArgs = {
   label: 'Chip',
   prependIcon: '',
-  appendIcon: 'close',
+  appendIcon: 'mdiClose',
   ghost: false,
   size: 'medium',
   variant: 'primary',
@@ -50,7 +50,7 @@ type Story = StoryObj<typeof ChipStory>;
 
 export const Overview: Story = {
   args: {
-    prependIcon: 'face',
+    prependIcon: 'mdiFaceMan',
   },
 };
 

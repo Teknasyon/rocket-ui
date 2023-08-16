@@ -21,8 +21,8 @@ const DefaultArgs = {
   multiple: false,
   disabled: false,
   loading: false,
-  prependIcon: 'face',
-  appendIcon: '',
+  prependIcon: 'mdiFaceMan',
+  appendIcon: 'mdiChevronDown',
   modelValue: '',
   searchable: false,
 };
@@ -48,7 +48,7 @@ type Story = StoryObj<typeof DropdownStory>;
 
 export const Overview: Story = {
   args: {
-    appendIcon: 'expand_less',
+    appendIcon: 'mdiChevronDown',
   },
 };
 
@@ -56,7 +56,7 @@ export const Multiple: Story = {
   args: {
     multiple: true,
     placeholder: 'Select multiple options',
-    appendIcon: 'expand_less',
+    appendIcon: 'mdiChevronDown',
   },
 };
 
@@ -64,7 +64,7 @@ export const Taggable: Story = {
   args: {
     taggable: true,
     placeholder: 'Search or create a tag',
-    appendIcon: 'expand_less',
+    appendIcon: 'mdiChevronDown',
   },
 };
 
@@ -77,7 +77,8 @@ export const Search: Story = {
       { value: '4', label: 'Option 4' },
     ],
     placeholder: 'Search',
-    prependIcon: 'search',
-    appendIcon: 'expand_less',
+    prependIcon: 'mdiMagnify',
+    appendIcon: 'mdiChevronDown',
+    searchable: true,
   },
 };
