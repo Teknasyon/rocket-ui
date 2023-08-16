@@ -108,6 +108,8 @@ const close = () => {
       <p class="texts__description">{{ props.description }}</p>
     </div>
     <div v-if="props.closable" class="close">
+      <slot name="custom-close" />
+
       <Icon
         v-if="!$slots['close']"
         class="close__button"
@@ -115,7 +117,6 @@ const close = () => {
         size="16"
         @click="close"
       />
-      <slot v-else name="close" />
     </div>
   </div>
 </template>

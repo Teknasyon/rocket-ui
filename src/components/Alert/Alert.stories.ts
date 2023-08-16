@@ -112,7 +112,7 @@ export const CustomCloseButton = {
     <Alert
       v-bind="args"
     >
-      <template #close>
+      <template #custom-close>
         <Icon name="mdiClose" />
       </template>
     </Alert>
