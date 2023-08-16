@@ -18,6 +18,7 @@ import '../src/components/Tabs/tabs.css';
 import '../src/components/Textarea/textarea.css';
 import '../src/components/Textfield/textfield.css';
 import '../src/components/Tooltip/tooltip.css';
+import '../src/components/Breadcrumb/breadcrumb.css';
 
 import RAccordion from '../src/components/Accordion/RAccordion.vue';
 import RAlert from '../src/components/Alert/RAlert.vue';
@@ -38,6 +39,7 @@ import RTabs from '../src/components/Tabs/RTabs.vue';
 import RTextArea from '../src/components/TextArea/RTextArea.vue';
 import RTextfield from '../src/components/Textfield/RTextfield.vue';
 import RTooltip from '../src/components/Tooltip/RTooltip.vue';
+import RBreadcrumb from '../src/components/Breadcrumb/RBreadcrumb.vue';
 
 export {
   RAccordion,
@@ -59,4 +61,5 @@ export {
   RTextArea,
   RTextfield,
   RTooltip,
+  RBreadcrumb,
 };
