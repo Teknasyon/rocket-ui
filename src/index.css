@@ -175,6 +175,14 @@
   * @presenter FontVariables
   */
   --font-size: 16px;
+
+  /**
+  * @tokens-breadcrumb-variables
+  * @presenter Breadcrumb Variables
+  */
+  --breadcrumb-text-color: var(--neutral-500);
+  --breadcrumb-text-color-active: var(--primary-500);
+  --breadcrumb-text-color-hover: var(--primary-500);
   /**
   * @tokens-end
   */

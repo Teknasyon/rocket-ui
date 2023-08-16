@@ -1,0 +1,21 @@
+@import '../../index.css';
+
+.r-breadcrumb {
+  @apply flex items-center;
+
+  &__item {
+    @apply flex items-center cursor-pointer;
+  }
+
+  &__link {
+    @apply flex text-[var(--breadcrumb-text-color)] hover:text-[var(--breadcrumb-text-color-hover)] gap-2 items-center;
+
+    &:last-child {
+      @apply !text-[var(--breadcrumb-text-color-active)];
+    }
+  }
+
+  &__separator {
+    @apply flex items-center mx-2 text-[var(--breadcrumb-text-color)];
+  }
+}
