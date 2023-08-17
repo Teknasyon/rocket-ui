@@ -5,21 +5,25 @@
 
   &__item {
     @apply flex items-center cursor-pointer;
+
+    &:last-child {
+      @apply cursor-default;
+    }
   }
 
   &__link {
-    @apply flex text-[var(--breadcrumb-text-color)] hover:text-[var(--breadcrumb-text-color-hover)] gap-2 items-center;
+    @apply flex text-2xl text-[var(--breadcrumb-text-color)] hover:text-[var(--breadcrumb-text-color-hover)] gap-2 items-center;
 
     &:last-child {
-      @apply !text-[var(--breadcrumb-text-color-active)];
+      @apply font-bold !text-[var(--breadcrumb-text-color-active)];
+    }
+
+    &:not(:last-child) {
+      @apply hover:underline font-medium;
     }
   }
 
   &__separator {
     @apply flex items-center mx-2 text-[var(--breadcrumb-text-color)];
-  }
-
-  &__title {
-    @apply hover:underline;
   }
 }

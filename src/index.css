@@ -181,8 +181,8 @@
   * @presenter Breadcrumb Variables
   */
   --breadcrumb-text-color: var(--neutral-500);
-  --breadcrumb-text-color-active: var(--primary-500);
-  --breadcrumb-text-color-hover: var(--primary-500);
+  --breadcrumb-text-color-active: var(--neutral-900);
+  --breadcrumb-text-color-hover: var(--neutral-900);
   /**
   * @tokens-end
   */
