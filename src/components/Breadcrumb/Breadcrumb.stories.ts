@@ -62,3 +62,54 @@ export const WithItemIcon: Story = {
     seperator: 'mdiSlashForward',
   },
 };
+
+export const WithItemOnlyIcon: Story = {
+  args: {
+    items: [
+      {
+        title: 'Ads Accounts',
+        to: '/ads-accounts',
+        icon: 'mdiAdvertisements',
+        onlyIcon: true,
+      },
+      {
+        title: 'Ad Account Detail',
+        to: '/ads-accounts/123',
+        icon: 'mdiAccount',
+        onlyIcon: true,
+      },
+      {
+        title: 'Transaction History',
+        to: '/ads-accounts/123/transaction-history',
+        icon: 'mdiAccountFilter',
+        onlyIcon: true,
+      },
+    ],
+    seperator: 'mdiChevronRight',
+  },
+};
+
+export const LastItemWithIcon: Story = {
+  args: {
+    items: [
+      {
+        title: 'Ads Accounts',
+        to: '/ads-accounts',
+        icon: 'mdiAdvertisements',
+        onlyIcon: true,
+      },
+      {
+        title: 'Ad Account Detail',
+        to: '/ads-accounts/123',
+        icon: 'mdiAccount',
+        onlyIcon: true,
+      },
+      {
+        title: 'Transaction History',
+        to: '/ads-accounts/123/transaction-history',
+        icon: 'mdiAccountFilter',
+      },
+    ],
+    seperator: 'mdiSlashForward',
+  },
+};
