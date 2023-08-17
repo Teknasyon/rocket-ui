@@ -7,7 +7,7 @@
     @apply flex items-center cursor-pointer;
 
     &:last-child {
-      @apply cursor-default;
+      @apply pointer-events-none;
     }
   }
 
