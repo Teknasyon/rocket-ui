@@ -101,13 +101,13 @@ export interface Props {
 
   /**
    * Input disabled state
-   * @type InputHTMLAttributes['disabled']
+   * @type InputHTMLAttributes['disabled'] | boolean
    * @default false
    * @example
    * <Textfield disabled="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled
    */
-  disabled?: InputHTMLAttributes['disabled'];
+  disabled?: boolean;
 
   /**
    * Input loading state
@@ -126,6 +126,26 @@ export interface Props {
    * <Textfield clearable="true" />
    */
   clearable?: boolean;
+
+  /**
+   * Input number min value
+   * @type InputHTMLAttributes['min']
+   * @default ''
+   * @example
+   * <Textfield min="0" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
+   */
+  min?: InputHTMLAttributes['min'];
+
+  /**
+   * Input number max value
+   * @type InputHTMLAttributes['max']
+   * @default ''
+   * @example
+   * <Textfield max="10" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
+   */
+  max?: InputHTMLAttributes['max'];
 }
 const inputRef = ref<HTMLInputElement>();
 const props = withDefaults(defineProps<Props>(), {
@@ -147,6 +167,7 @@ const emit = defineEmits([
   'update:modelValue',
   'focus',
   'blur',
+  'input',
   'click:icon',
   'click:clear',
 ]);
@@ -220,7 +241,7 @@ const appendIconName = computed(() => {
 const onFocus = () => {
   isFocused.value = true;
   emit('focus', {
-    value: state.value,
+    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   });
 };
 /**
@@ -229,7 +250,7 @@ const onFocus = () => {
 const onBlur = () => {
   isFocused.value = false;
   emit('blur', {
-    value: state.value,
+    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   });
 };
 /**
@@ -241,12 +262,12 @@ const clickIcon = () => {
     state.value = '';
     inputRef.value?.focus();
     emit('click:clear', {
-      value: state.value,
+      value: typeOfInputRef.value === 'number' ? +state.value : state.value,
     });
     return;
   }
   emit('click:icon', {
-    value: state.value,
+    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   });
   setPassType();
 };
@@ -266,6 +287,10 @@ const setPassType = () => {
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   state.value = target.value;
+
+  emit('input', {
+    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
+  });
 };
 
 const focusInput = () => {
@@ -284,7 +309,10 @@ watch(
 watch(
   () => state.value,
   (value) => {
-    emit('update:modelValue', value);
+    emit(
+      'update:modelValue',
+      typeOfInputRef.value === 'number' ? +value : value
+    );
   }
 );
 </script>
@@ -308,7 +336,7 @@ watch(
         <div :class="classes">
           <slot name="prepend" />
           <Icon
-            v-if="prependIconName && !$slots['prepend']"
+            v-if="false"
             :class="prependIconClasses"
             :name="prependIconName"
             :size="20"
@@ -320,6 +348,8 @@ watch(
             :placeholder="props.placeholder"
             :type="typeOfInputRef"
             :value="state.value"
+            :min="props.min"
+            :max="props.max"
             @blur="onBlur"
             @focus="onFocus"
             @input="onInput"
