@@ -1,0 +1,26 @@
+@import '../../index.css';
+
+.r-pagination {
+  @apply flex items-center justify-between gap-2;
+
+  &__page-info {
+    @apply flex items-center gap-2;
+  }
+
+  &__paginator {
+    @apply flex items-center gap-2;
+
+    &__input {
+      input {
+        @apply text-center;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          opacity: 0;
+          pointer-events: none;
+          background: transparent;
+          display: none;
+        }
+      }
+    }
+  }
+}
