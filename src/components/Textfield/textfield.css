@@ -50,13 +50,13 @@ input {
     @apply ring-[4px] ring-[var(--primary-100)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
   }
   &--filled {
-    @apply bg-[var(--neutral-100)] text-[var(--neutral-900)];
+    @apply bg-[var(--textfield-bg)] text-[var(--neutral-900)];
   }
   &--loading {
     /* @apply animate-pulse; */
   }
   &--disabled {
-    @apply border-[var(--neutral-200)] text-[var(--neutral-300)] bg-[neutral-100] cursor-not-allowed;
+    @apply border-[var(--neutral-200)] text-[var(--neutral-300)] bg-[var(--textfield-bg-disabled)] cursor-not-allowed;
 
     & > input {
       @apply cursor-not-allowed;

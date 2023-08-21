@@ -164,6 +164,7 @@
   * @presenter TextfieldVariables
   */
   --textfield-bg: var(--white);
+  --textfield-bg-disabled: var(--neutral-100);
   /**
   * @tokens-button-variables
   * @presenter ButtonVariables
