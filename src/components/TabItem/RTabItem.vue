@@ -84,6 +84,15 @@ export interface IProps {
    * <TabItem block />
    */
   block?: boolean;
+
+  /**
+   * Color of the tab item
+   * @type string
+   * @default ''
+   * @example
+   * <TabItem color="" />
+   */
+  color?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
   label: '',
@@ -104,6 +113,12 @@ const classes = computed(() => {
     [`tab-item--${props.variant}`]: true,
     'tab-item--tile': props.tile,
     'tab-item--block': props.block,
+  };
+});
+
+const style = computed(() => {
+  return {
+    color: props.color,
   };
 });
 
@@ -129,6 +144,7 @@ function handleIconClick(): void {
     :aria-disabled="props.disabled"
     :aria-selected="props.modelValue === props.id"
     :class="classes"
+    :style="style"
     :disabled="props.disabled"
     @click.stop="handleTab(props.id)"
   >
