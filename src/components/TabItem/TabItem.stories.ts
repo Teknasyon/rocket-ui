@@ -11,7 +11,8 @@ const DefaultArgTypes = {
 const DefaultArgs = {
   id: 'tab-1',
   label: 'Tab 1',
-  icon: 'mdiHome',
+  prependIcon: 'mdiHome',
+  appendIcon: '',
   disabled: false,
   variant: 'default',
   tile: false,
@@ -32,6 +33,7 @@ const TabItemStory = {
   argTypes: {
     ...DefaultArgTypes,
     'onUpdate:modelValue': { action: 'update:modelValue' },
+    'onClick:icon': { action: 'onClick:icon' },
   },
 } as Meta<typeof TabItem>;
 
@@ -84,5 +86,12 @@ export const Block: Story = {
 export const Active: Story = {
   args: {
     modelValue: 'tab-1',
+  },
+};
+
+export const TwoIcons: Story = {
+  args: {
+    prependIcon: 'mdiHome',
+    appendIcon: 'mdiPlusCircle',
   },
 };

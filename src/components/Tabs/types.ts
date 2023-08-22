@@ -4,7 +4,8 @@ export type Tab = {
   id: string | number;
   variant?: TabItemVariant;
   label?: string;
-  icon?: string;
+  prependIcon?: string;
+  appendIcon?: string;
   disabled?: boolean;
   active?: boolean;
 };

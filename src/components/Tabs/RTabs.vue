@@ -65,6 +65,10 @@ watch(
     emits('update:modelValue', activeTab.value);
   }
 );
+
+const handleIconClick = () => {
+  alert('Icon clicked');
+};
 </script>
 <template>
   <div :class="tabsClasses">
@@ -76,11 +80,13 @@ watch(
         v-model="activeTab"
         :active="index === activeTab"
         :disabled="tab.disabled"
-        :icon="tab.icon"
+        :prependIcon="tab.prependIcon"
+        :appendIcon="tab.appendIcon"
         :label="tab.label"
         :variant="tab.variant"
         :tile="tile"
         :block="block"
+        @click:icon="handleIconClick"
       />
     </slot>
   </div>
