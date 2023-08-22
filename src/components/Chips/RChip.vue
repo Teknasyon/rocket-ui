@@ -14,15 +14,6 @@ export interface Props {
   variant: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
 
   /**
-   * Size of the Chip
-   * @type 'small' | 'medium' | 'large'
-   * @default 'medium'
-   * @example
-   * <Chip size="small" />
-   */
-  size?: 'small' | 'medium' | 'large';
-
-  /**
    * Label of the Chip
    * @type string | number
    * @default 'label'
@@ -66,15 +57,24 @@ export interface Props {
    * <Chip ghost />
    */
   ghost?: boolean;
+
+  /**
+   * Closable state of the Chip
+   * @type boolean
+   * @default false
+   * @example
+   * <Chip closable />
+   */
+  closable?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
-  size: 'medium',
   label: 'label',
   disabled: false,
   prependIcon: '',
   appendIcon: '',
   ghost: false,
+  closable: false,
 });
 const emit = defineEmits(['click:chip', 'click:close']);
 const classes = computed<object>(() => {
@@ -82,45 +82,44 @@ const classes = computed<object>(() => {
     chip: true,
     'chip--disabled': props.disabled,
     [`chip__${props.variant}`]: props.variant,
-    [`chip--${props.size}`]: props.size,
     [`chip__${props.variant}--ghost`]: props.ghost,
   };
 });
-const iconSize = computed<number>(() => {
-  return {
-    small: 20,
-    medium: 24,
-    large: 32,
-  }[props.size || 'medium'];
-});
+
 const clickChip = (e: MouseEvent) => {
+  if (props.closable) e.stopPropagation();
   if (props.disabled) return;
   emit('click:chip', e);
 };
 const clickClose = (e: MouseEvent) => {
-  if (props.disabled) return;
+  if (props.disabled || !props.closable) return;
+  e.stopPropagation();
   emit('click:close', e);
 };
 </script>
 <template>
   <div :class="classes">
-    <div class="chip__content" @click.stop="clickChip($event)">
-      <Icon
-        v-if="props.prependIcon"
-        :aria-disabled="props.disabled"
-        class="chip__prepend-icon"
-        :name="props.prependIcon"
-        :size="iconSize"
-      />
-      <span>{{ props.label }}</span>
+    <div class="chip__content" @click="clickChip($event)">
+      <slot name="prepend">
+        <Icon
+          v-if="props.prependIcon"
+          class="chip__content__prepend-icon"
+          :aria-disabled="props.disabled"
+          :name="props.prependIcon"
+          :size="12"
+        />
+      </slot>
+      <span class="chip__content__label">{{ props.label }}</span>
     </div>
-    <Icon
-      v-if="props.appendIcon"
-      :aria-disabled="props.disabled"
-      class="chip__append-icon"
-      :name="props.appendIcon"
-      :size="iconSize"
-      @click.stop="clickClose($event)"
-    />
+    <slot name="append">
+      <Icon
+        v-if="props.appendIcon"
+        class="chip__content__append-icon"
+        :aria-disabled="props.disabled"
+        :name="props.appendIcon"
+        :size="12"
+        @click="clickClose($event)"
+      />
+    </slot>
   </div>
 </template>
