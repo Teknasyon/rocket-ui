@@ -3,13 +3,15 @@ import Tabs from './RTabs.vue';
 
 const DefaultArgs = {
   tabs: [
-    { id: 0, label: 'Tab 1', icon: 'home' },
-    { id: 1, label: 'Tab 2', icon: 'add_circle', disabled: true },
-    { id: 2, label: 'Tab 3', icon: 'favorite' },
-    { id: 3, label: 'Tab 4', icon: 'face' },
-    { id: 4, label: 'Tab 5', icon: 'settings' },
+    { id: 0, label: 'Tab 1', icon: 'mdiHome' },
+    { id: 1, label: 'Tab 2', icon: 'mdiPlusCircle', disabled: true },
+    { id: 2, label: 'Tab 3', icon: 'mdiHeart' },
+    { id: 3, label: 'Tab 4', icon: 'mdiFaceMan' },
+    { id: 4, label: 'Tab 5', icon: 'mdiCog' },
   ],
   scrollable: false,
+  block: false,
+  activeTab: 0,
 };
 
 const TabsStory = {
@@ -26,8 +28,10 @@ const TabsStory = {
       </template>
     </Tabs>
   `,
-  args: DefaultArgs,
-  argTypes: {},
+  args: { ...DefaultArgs },
+  argTypes: {
+    'onUpdate:tab': { action: 'onUpdate:tab' },
+  },
 } as Meta<typeof Tabs>;
 
 export default TabsStory;
@@ -44,53 +48,63 @@ export const IconOnly: Story = {
       {
         id: 0,
         label: 'Tab 1',
-        icon: 'home',
+        icon: 'mdiHome',
+        variant: 'icon',
       },
       {
         id: 1,
         label: 'Tab 2',
-        icon: 'add_circle',
+        icon: 'mdiPlusCircle',
         disabled: true,
+        variant: 'icon',
       },
       {
         id: 2,
         label: 'Tab 3',
-        icon: 'favorite',
+        icon: 'mdiHeart',
+        variant: 'icon',
       },
       {
         id: 3,
         label: 'Tab 4',
-        icon: 'face',
+        icon: 'mdiFaceMan',
+        variant: 'icon',
       },
       {
         id: 4,
         label: 'Tab 5',
-        icon: 'settings',
+        icon: 'mdiCog',
+        variant: 'icon',
       },
       {
         id: 5,
         label: 'Tab 6',
-        icon: 'search',
+        icon: 'mdiMagnify',
+        variant: 'icon',
       },
       {
         id: 6,
         label: 'Tab 7',
-        icon: 'done',
+        icon: 'mdiAccount',
+        variant: 'icon',
       },
       {
         id: 7,
         label: 'Tab 8',
-        icon: 'visibility',
+        icon: 'mdiAccountGroup',
+        variant: 'icon',
       },
       {
         id: 8,
         label: 'Tab 9',
-        icon: 'lock',
+        icon: 'mdiAccountMultiple',
+        variant: 'icon',
       },
       {
         id: 9,
         label: 'Tab 10',
-        icon: 'language',
+        icon: 'mdiAccountMultiplePlus',
+        variant: 'icon',
       },
     ],
   },
@@ -102,53 +116,63 @@ export const TextOnly: Story = {
       {
         id: 0,
         label: 'Tab 1',
-        icon: 'home',
+        icon: 'mdiHome',
+        variant: 'text',
       },
       {
         id: 1,
         label: 'Tab 2',
-        icon: 'add_circle',
+        icon: 'mdiPlusCircle',
         disabled: true,
+        variant: 'text',
       },
       {
         id: 2,
         label: 'Tab 3',
-        icon: 'favorite',
+        icon: 'mdiHeart',
+        variant: 'text',
       },
       {
         id: 3,
         label: 'Tab 4',
-        icon: 'face',
+        icon: 'mdiFaceMan',
+        variant: 'text',
       },
       {
         id: 4,
         label: 'Tab 5',
-        icon: 'settings',
+        icon: 'mdiCog',
+        variant: 'text',
       },
       {
         id: 5,
         label: 'Tab 6',
-        icon: 'search',
+        icon: 'mdiMagnify',
+        variant: 'text',
       },
       {
         id: 6,
         label: 'Tab 7',
-        icon: 'done',
+        icon: 'mdiAccount',
+        variant: 'text',
       },
       {
         id: 7,
         label: 'Tab 8',
-        icon: 'visibility',
+        icon: 'mdiAccountGroup',
+        variant: 'text',
       },
       {
         id: 8,
         label: 'Tab 9',
-        icon: 'lock',
+        icon: 'mdiAccountMultiple',
+        variant: 'text',
       },
       {
         id: 9,
         label: 'Tab 10',
-        icon: 'language',
+        icon: 'mdiAccountMultiplePlus',
+        variant: 'text',
       },
     ],
   },

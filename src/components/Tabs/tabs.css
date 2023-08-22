@@ -1,21 +1,13 @@
 @tailwind components;
 
-.tabs-wrapper {
-  @apply w-full grid place-items-center;
-}
-
 .tabs {
-  @apply flex w-full;
+  @apply flex w-32 transition-all;
 
   &--scrollable {
     @apply overflow-x-auto;
   }
 
-  &--pill {
-    @apply pb-1;
-  }
-
-  & > * {
-    @apply transition-all duration-300 ease-in-out;
+  &--block {
+    @apply w-full;
   }
 }
