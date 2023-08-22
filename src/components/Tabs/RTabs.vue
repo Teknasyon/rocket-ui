@@ -66,16 +66,18 @@ watch(
 </script>
 <template>
   <div :class="tabsClasses">
-    <TabItem
-      v-for="(tab, index) in props.tabs"
-      :id="tab.id"
-      :key="index"
-      v-model="activeTab"
-      :active="index === activeTab"
-      :disabled="tab.disabled"
-      :icon="tab.icon"
-      :label="tab.label"
-      :variant="tab.variant"
-    />
+    <slot>
+      <TabItem
+        v-for="(tab, index) in props.tabs"
+        :id="tab.id"
+        :key="index"
+        v-model="activeTab"
+        :active="index === activeTab"
+        :disabled="tab.disabled"
+        :icon="tab.icon"
+        :label="tab.label"
+        :variant="tab.variant"
+      />
+    </slot>
   </div>
 </template>
