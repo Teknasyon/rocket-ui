@@ -102,6 +102,15 @@ export interface Props {
    * <Button backgroundColor="red" />
    */
   backgroundColor?: CSSProperties['backgroundColor'];
+
+  /**
+   * Color of the Button
+   * @type string
+   * @default ''
+   * @example
+   * <Button color="red" />
+   */
+  color?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
@@ -132,10 +141,11 @@ const iconSize = computed(() => {
   }[props.size || 'medium'];
 });
 const style = computed(() => {
-  const { backgroundColor, height } = props;
+  const { backgroundColor, height, color } = props;
   return {
     backgroundColor,
     height: height ? `${height}px` : '',
+    color,
   };
 });
 </script>

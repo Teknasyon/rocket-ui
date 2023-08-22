@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .button {
-  @apply w-fit antialiased flex items-center justify-center transition-all duration-150 ease-in-out rounded-[var(--btn-radius)] text-white font-medium cursor-pointer;
+  @apply w-fit antialiased flex items-center justify-center transition-all rounded-[var(--btn-radius)] text-white font-medium cursor-pointer;
 
   &:active {
     @apply ring-2 ring-inset;
@@ -96,16 +96,13 @@
   }
 }
 .button--text {
-  @apply text-[var(--neutral-900)] bg-transparent;
+  @apply text-[var(--neutral-900)] bg-transparent h-auto rounded-none p-0;
 
-  &:hover {
-    @apply bg-[var(--neutral-100)];
-  }
   &:active {
-    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+    @apply ring-0 ring-inherit;
   }
   &:disabled {
-    @apply bg-white  text-[var(--neutral-300)];
+    @apply bg-white text-[var(--neutral-300)];
   }
 }
 .button--ghost {
