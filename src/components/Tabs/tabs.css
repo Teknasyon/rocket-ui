@@ -1,10 +1,10 @@
 @tailwind components;
 
 .tabs {
-  @apply flex w-32 transition-all;
+  @apply w-fit flex transition-all;
 
-  &--scrollable {
-    @apply overflow-x-auto;
+  &--tile {
+    @apply bg-slate-100 rounded-md p-1;
   }
 
   &--block {

@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .tab-item {
-  @apply transition-all gap-2 min-w-fit w-full py-3 px-6 bg-transparent flex justify-center items-center text-gray-500 text-sm font-medium cursor-pointer;
+  @apply transition-all gap-2 min-w-fit py-3 px-6 bg-transparent flex justify-center items-center text-gray-500 text-sm font-medium cursor-pointer;
 
   &:disabled {
     @apply cursor-not-allowed bg-inherit opacity-50;
@@ -13,5 +13,17 @@
 
   &--text-only {
     @apply block;
+  }
+
+  &--tile {
+    @apply border-none py-2.5 px-7  text-[var(--neutral-900)];
+
+    &[aria-selected='true'] {
+      @apply bg-white rounded-md shadow-sm text-[var(--neutral-900)];
+    }
+  }
+
+  &--block {
+    @apply w-full;
   }
 }

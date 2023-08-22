@@ -9,9 +9,9 @@ const DefaultArgs = {
     { id: 3, label: 'Tab 4', icon: 'mdiFaceMan' },
     { id: 4, label: 'Tab 5', icon: 'mdiCog' },
   ],
-  scrollable: false,
   block: false,
   activeTab: 0,
+  tile: false,
 };
 
 const TabsStory = {
@@ -42,7 +42,7 @@ export const Overview: Story = {};
 
 export const Default: Story = {};
 
-export const IconOnly: Story = {
+export const Icon: Story = {
   args: {
     tabs: [
       {
@@ -110,7 +110,7 @@ export const IconOnly: Story = {
   },
 };
 
-export const TextOnly: Story = {
+export const Text: Story = {
   args: {
     tabs: [
       {
@@ -175,5 +175,17 @@ export const TextOnly: Story = {
         variant: 'text',
       },
     ],
+  },
+};
+
+export const Tile: Story = {
+  args: {
+    tile: true,
+    tabs: [
+      { id: 1, label: 'Section', icon: 'mdiHeart' },
+      { id: 2, label: 'Section', icon: 'mdiFaceMan' },
+      { id: 3, label: 'Section', icon: 'mdiCog' },
+    ],
+    modelValue: 2,
   },
 };

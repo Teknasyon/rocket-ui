@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Icon from '../Icon/RIcon.vue';
-import { computed, type HTMLAttributes, type ButtonHTMLAttributes } from 'vue';
+import { computed, type ButtonHTMLAttributes } from 'vue';
 import './tab-item.css';
 import { TabItemVariants, type TabItemVariant } from './common';
 export interface IProps {
@@ -47,7 +47,7 @@ export interface IProps {
    * @example
    * <TabItem disabled />
    */
-  disabled?: ButtonHTMLAttributes['disabled'];
+  disabled?: boolean;
 
   /**
    * Model value of the tab item
@@ -57,6 +57,24 @@ export interface IProps {
    * <TabItem v-model="model" />
    */
   modelValue?: string | number;
+
+  /**
+   * Tile state of the tab item
+   * @type boolean
+   * @default false
+   * @example
+   * <TabItem tile />
+   */
+  tile?: boolean;
+
+  /**
+   * Block state of the tab item
+   * @type boolean
+   * @default false
+   * @example
+   * <TabItem block />
+   */
+  block?: boolean;
 }
 const props = withDefaults(defineProps<IProps>(), {
   label: '',
@@ -64,6 +82,8 @@ const props = withDefaults(defineProps<IProps>(), {
   icon: '',
   disabled: false,
   modelValue: '',
+  tile: false,
+  block: false,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -72,6 +92,8 @@ const classes = computed(() => {
   return {
     'tab-item': true,
     [`tab-item--${props.variant}`]: true,
+    'tab-item--tile': props.tile,
+    'tab-item--block': props.block,
   };
 });
 

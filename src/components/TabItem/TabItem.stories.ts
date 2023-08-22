@@ -4,17 +4,19 @@ import TabItem from './RTabItem.vue';
 const DefaultArgTypes = {
   variant: {
     type: 'select',
-    options: ['default', 'icon-only', 'text-only'],
+    options: ['default', 'icon', 'text'],
   },
 };
 
 const DefaultArgs = {
   id: 'tab-1',
   label: 'Tab 1',
-  icon: 'home',
+  icon: 'mdiHome',
   disabled: false,
   variant: 'default',
-  active: false,
+  tile: false,
+  block: false,
+  modelValue: '',
 };
 
 const TabItemStory = {
@@ -49,14 +51,38 @@ export const Default: Story = {
   },
 };
 
-export const IconOnly: Story = {
+export const Icon: Story = {
   args: {
-    variant: 'icon-only',
+    variant: 'icon',
   },
 };
 
-export const TextOnly: Story = {
+export const Text: Story = {
   args: {
-    variant: 'text-only',
+    variant: 'text',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
+export const Tile: Story = {
+  args: {
+    tile: true,
+  },
+};
+
+export const Block: Story = {
+  args: {
+    block: true,
+  },
+};
+
+export const Active: Story = {
+  args: {
+    modelValue: 'tab-1',
   },
 };
