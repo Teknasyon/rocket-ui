@@ -103,6 +103,7 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   tile: false,
   block: false,
+  color: '',
 });
 
 const emit = defineEmits(['update:modelValue', 'click:icon']);
