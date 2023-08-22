@@ -176,11 +176,11 @@ const state = reactive({
 });
 const typeOfInputRef = ref(props.type);
 const prependIconsOfType = {
-  password: 'lock_outline',
-  email: 'mail_outline',
-  tel: 'phone',
-  url: 'link',
-  number: '123',
+  password: 'mdiLock',
+  email: 'mdiEmailOutline',
+  tel: 'mdiPhone',
+  url: 'mdiLink',
+  number: 'mdiNumeric',
   text: '',
 };
 const isFocused = ref(false);
@@ -336,7 +336,7 @@ watch(
         <div :class="classes">
           <slot name="prepend" />
           <Icon
-            v-if="false"
+            v-if="prependIconName && !$slots['prepend']"
             :class="prependIconClasses"
             :name="prependIconName"
             :size="20"
