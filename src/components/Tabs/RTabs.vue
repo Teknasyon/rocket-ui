@@ -12,7 +12,7 @@ export interface IProps {
    * @example
    * <Tabs :tabs="[]" />
    */
-  tabs: Tab[];
+  tabs?: Tab[];
 
   /**
    * Block state of the tabs
