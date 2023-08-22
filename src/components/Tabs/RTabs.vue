@@ -15,15 +15,6 @@ export interface IProps {
   tabs: Tab[];
 
   /**
-   * Scrollable state of the tabs
-   * @type boolean
-   * @default false
-   * @example
-   * <Tabs scrollable />
-   */
-  scrollable?: boolean;
-
-  /**
    * Block state of the tabs
    * @type boolean
    * @default false
@@ -40,11 +31,22 @@ export interface IProps {
    * <Tabs v-model="activeTab" />
    */
   modelValue?: number | string;
+
+  /**
+   * Tile state of the tabs
+   * @type boolean
+   * @default false
+   * @example
+   * <Tabs tile />
+   */
+  tile?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   tabs: () => [],
-  scrollable: false,
+  block: false,
+  modelValue: '',
+  tile: false,
 });
 const emits = defineEmits(['update:modelValue']);
 const activeTab = ref(props.modelValue || props.tabs[0].id);
@@ -52,8 +54,8 @@ const activeTab = ref(props.modelValue || props.tabs[0].id);
 const tabsClasses = computed(() => {
   return {
     tabs: true,
-    'tabs--scrollable': props.scrollable,
     'tabs--block': props.block,
+    'tabs--tile': props.tile,
   };
 });
 
@@ -77,6 +79,8 @@ watch(
         :icon="tab.icon"
         :label="tab.label"
         :variant="tab.variant"
+        :tile="tile"
+        :block="block"
       />
     </slot>
   </div>
