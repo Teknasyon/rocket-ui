@@ -40,7 +40,7 @@ const SwitchStory = {
 
 export default SwitchStory;
 
-type Story = StoryObj<typeof Switch>;
+type Story = StoryObj<typeof SwitchStory>;
 
 export const Overview: Story = {
   args: {

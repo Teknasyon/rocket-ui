@@ -54,7 +54,7 @@ const AlertStory = {
 
 export default AlertStory;
 
-type Story = StoryObj<typeof Alert>;
+type Story = StoryObj<typeof AlertStory>;
 
 export const Overview: Story = {
   args: {

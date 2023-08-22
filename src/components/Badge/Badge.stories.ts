@@ -46,7 +46,7 @@ const BadgeStory = {
 
 export default BadgeStory;
 
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof BadgeStory>;
 
 export const Overview: Story = {
   args: {

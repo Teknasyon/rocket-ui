@@ -47,7 +47,7 @@ const BoxStory = {
 
 export default BoxStory;
 
-type Story = StoryObj<typeof Box>;
+type Story = StoryObj<typeof BoxStory>;
 
 export const Overview: Story = {
   args: {

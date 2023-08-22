@@ -33,7 +33,7 @@ const CheckboxStory = {
 
 export default CheckboxStory;
 
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof CheckboxStory>;
 
 export const Overview: Story = {
   args: {

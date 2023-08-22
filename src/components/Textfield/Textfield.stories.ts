@@ -46,7 +46,7 @@ const TextfieldStory = {
 
 export default TextfieldStory;
 
-type Story = StoryObj<typeof Textfield>;
+type Story = StoryObj<typeof TextfieldStory>;
 
 export const Overview: Story = {
   args: {

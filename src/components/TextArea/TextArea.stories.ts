@@ -25,7 +25,7 @@ const TextAreaStory = {
 
 export default TextAreaStory;
 
-type Story = StoryObj<typeof TextArea>;
+type Story = StoryObj<typeof TextAreaStory>;
 
 export const Overview: Story = {};
 

@@ -35,7 +35,7 @@ const TabItemStory = {
 
 export default TabItemStory;
 
-type Story = StoryObj<typeof TabItem>;
+type Story = StoryObj<typeof TabItemStory>;
 
 export const Overview: Story = {
   args: {

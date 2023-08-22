@@ -32,7 +32,7 @@ const TabsStory = {
 
 export default TabsStory;
 
-type Story = StoryObj<typeof Tabs>;
+type Story = StoryObj<typeof TabsStory>;
 
 export const Overview: Story = {};
 

@@ -84,7 +84,7 @@ const TooltipStory = {
 
 export default TooltipStory;
 
-type Story = StoryObj<typeof Tooltip>;
+type Story = StoryObj<typeof TooltipStory>;
 
 const WithContentSlotStory = {
   render: (args: any) => ({
