@@ -237,27 +237,36 @@ const appendIconName = computed(() => {
 });
 /**
  * @description - focus event handler
+ * @param {FocusEvent} e - FocusEvent object
+ * @returns {void}
  */
-const onFocus = () => {
+const onFocus = (e: FocusEvent) => {
   isFocused.value = true;
-  emit('focus', {
-    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
-  });
+  emit('focus', e);
 };
 /**
  * @description - blur event handler
+ * @param {FocusEvent} e - FocusEvent object
+ * @returns {void}
  */
-const onBlur = () => {
+const onBlur = (e: FocusEvent) => {
   isFocused.value = false;
-  emit('blur', {
-    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
-  });
+  emit('blur', e);
+};
+/**
+ * @description - Emit input event with value of input
+ * @param {InputEvent} e - InputEvent object
+ * @returns {void}
+ */
+const onInput = (e: InputEvent): void => {
+  state.value = (e.target as HTMLInputElement).value;
+  emit('input', e);
 };
 /**
  * @description - Emit click event with value of append icon
  * @returns {void}
  */
-const clickIcon = () => {
+const clickIcon = (): void => {
   if (hasClear.value) {
     state.value = '';
     inputRef.value?.focus();
@@ -275,22 +284,9 @@ const clickIcon = () => {
  * @description - Set type of input to password or text
  * @returns {void}
  */
-const setPassType = () => {
+const setPassType = (): void => {
   typeOfInputRef.value =
     typeOfInputRef.value === 'password' ? 'text' : 'password';
-};
-/**
- * @description - Emit input event with value of input
- * @param {Event} event - Event object
- * @returns {void}
- */
-const onInput = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  state.value = target.value;
-
-  emit('input', {
-    value: typeOfInputRef.value === 'number' ? +state.value : state.value,
-  });
 };
 
 const focusInput = () => {
