@@ -50,15 +50,6 @@ export interface IProps {
   disabled?: ButtonHTMLAttributes['disabled'];
 
   /**
-   * Active state of the tab item
-   * @type HTMLAttributes['aria-selected']
-   * @default false
-   * @example
-   * <TabItem active />
-   */
-  active?: HTMLAttributes['aria-selected'];
-
-  /**
    * Model value of the tab item
    * @type string | number
    * @default ''
@@ -72,7 +63,6 @@ const props = withDefaults(defineProps<IProps>(), {
   variant: TabItemVariants.DEFAULT,
   icon: '',
   disabled: false,
-  active: false,
   modelValue: '',
 });
 
@@ -90,26 +80,28 @@ const classes = computed(() => {
  * @param {id} id - The id of the tab
  * @returns {void}
  */
-function onClick(id: number | string) {
+function onClick(id: number | string): void {
   emit('update:modelValue', id);
 }
 </script>
 <template>
   <button
     :aria-disabled="props.disabled"
-    :aria-selected="props.active"
+    :aria-selected="props.modelValue === props.id"
     :class="classes"
     :disabled="props.disabled"
     @click="onClick(props.id)"
   >
-    <Icon
-      v-if="!$slots['icon'] && variant !== TabItemVariants.TEXT_ONLY"
-      class="tab-item__icon"
-      :name="props.icon"
-    />
-    <slot v-else name="custom-icon" />
+    <slot name="custom-icon">
+      <Icon
+        v-if="props.variant !== TabItemVariants.TEXT"
+        class="tab-item__icon"
+        :name="props.icon"
+        :size="16"
+      />
+    </slot>
 
-    <span v-if="variant !== TabItemVariants.ICON_ONLY" class="tab-item__label">
+    <span v-if="props.variant !== TabItemVariants.ICON" class="tab-item__label">
       {{ props.label }}
     </span>
   </button>

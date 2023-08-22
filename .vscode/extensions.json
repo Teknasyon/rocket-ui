@@ -4,6 +4,8 @@
     "Vue.vscode-typescript-vue-plugin",
     "streetsidesoftware.code-spell-checker",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "lukas-tr.materialdesignicons-intellisense",
+    "bradlc.vscode-tailwindcss"
   ]
 }
