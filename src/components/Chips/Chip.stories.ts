@@ -1,15 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import Chip from './RChip.vue';
+import Icon from '../Icon/RIcon.vue';
 
 const DefaultArgTypes = {
   variant: {
     type: 'select',
     options: ['primary', 'secondary', 'success', 'error', 'warning', 'info'],
-  },
-  size: {
-    type: 'select',
-    options: ['small', 'medium', 'large'],
   },
   'onClick:chip': {
     action: 'click:chip',
@@ -24,9 +21,9 @@ const DefaultArgs = {
   prependIcon: '',
   appendIcon: 'mdiClose',
   ghost: false,
-  size: 'medium',
   variant: 'primary',
   disabled: false,
+  closable: true,
 };
 
 const ChipStory = {
@@ -84,4 +81,42 @@ export const Info: Story = {
   args: {
     variant: 'info',
   },
+};
+
+export const Ghost: Story = {
+  args: {
+    ghost: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
+export const Closable: Story = {
+  args: {
+    closable: true,
+  },
+};
+
+export const Slots = {
+  render: (args: any) => ({
+    components: { Chip, Icon },
+    setup() {
+      return { args };
+    },
+    template: `
+    <Chip v-bind="args">
+      <template v-slot:prepend>
+        <Icon name="mdiCircle" size="16" />
+      </template>
+      <template v-slot:append>
+        <Icon name="mdiClose" size="20" />
+      </template>
+    </Chip>
+    `,
+  }),
+  args: {},
 };
