@@ -6,29 +6,37 @@ import { ref } from 'vue';
 
 export interface PaginationProps {
   page: number;
-  totalPages: number;
+  perPage: number;
+  totalItems: number;
   pageText?: string;
   ofText?: string;
   slash?: boolean;
   prevIcon?: string;
   nextIcon?: string;
+  modelValue?: number;
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   page: 1,
-  totalPages: 20,
+  perPage: 10,
+  totalItems: 100,
   pageText: 'Page',
   ofText: 'of',
   slash: false,
   prevIcon: 'mdiChevronLeft',
   nextIcon: 'mdiChevronRight',
+  modelValue: 1,
 });
 
-const emits = defineEmits(['update:page']);
+const emits = defineEmits(['update:page', 'update:modelValue']);
+
+const totalPages = ref(Math.ceil(props.totalItems / props.perPage));
 
 const changePage = (page: number) => {
-  if (page < 1 || page > props.totalPages) return;
+  props.modelValue = page;
+  if (page < 1 || page > totalPages.value) return;
   emits('update:page', page);
+  emits('update:modelValue', props.modelValue);
 };
 </script>
 
