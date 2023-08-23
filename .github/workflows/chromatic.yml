@@ -1,7 +1,7 @@
 name: 'Chromatic'
 
 on:
-  push
+  workflow_call
 
 jobs:
   chromatic-deployment:
