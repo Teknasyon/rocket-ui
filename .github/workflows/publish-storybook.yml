@@ -1,8 +1,7 @@
 name: Publish Storybook
 
 on:
-  push:
-    branches: ['master']
+  workflow_call
 
 permissions:
   contents: read
