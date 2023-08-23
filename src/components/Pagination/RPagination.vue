@@ -36,7 +36,7 @@ const changePage = (page: number) => {
   props.modelValue = page;
   if (page < 1 || page > totalPages.value) return;
   emits('update:page', page);
-  emits('update:modelValue', props.modelValue);
+  emits('update:modelValue', page);
 };
 </script>
 
