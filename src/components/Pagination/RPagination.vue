@@ -58,6 +58,7 @@ const changePage = (page: number) => {
         class="r-pagination__paginator__input"
         type="number"
         min="1"
+        prependIcon="none"
         :max="totalPages"
         @input="changePage($event?.value)"
       />

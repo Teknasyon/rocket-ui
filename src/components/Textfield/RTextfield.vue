@@ -4,7 +4,6 @@ import {
   reactive,
   ref,
   watch,
-  type CSSProperties,
   type HTMLAttributes,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
@@ -86,7 +85,7 @@ export interface Props {
    * @type string
    * @default ''
    * @example
-   * <Textfield prependIcon="lock_outline" />
+   * <Textfield prependIcon="mdiLock" />
    */
   prependIcon?: string;
 
@@ -95,7 +94,7 @@ export interface Props {
    * @type string
    * @default ''
    * @example
-   * <Textfield appendIcon="lock_outline" />
+   * <Textfield appendIcon="mdiEyeOffOutline" />
    */
   appendIcon?: string;
 
@@ -222,11 +221,13 @@ const hasClear = computed(() => {
 });
 const prependIconName = computed(() => {
   const { prependIcon, type } = props;
+  if (prependIcon === 'none') return '';
   if (prependIcon) return prependIcon;
   return prependIconsOfType[type];
 });
 const appendIconName = computed(() => {
   const { appendIcon, type } = props;
+  if (appendIcon === 'none') return '';
   if (hasErrorMsg.value) return 'mdiAlertCircleOutline';
   if (hasClear.value && ['text', 'email'].includes(type)) return 'mdiClose';
   if (type === 'password' && typeOfInputRef.value === 'password')
