@@ -1,7 +1,6 @@
 name: Publish Storybook
 
-on:
-  workflow_call
+on: workflow_dispatch
 
 permissions:
   contents: read
