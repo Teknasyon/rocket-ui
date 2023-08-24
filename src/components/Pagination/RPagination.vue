@@ -13,7 +13,6 @@ export interface PaginationProps {
   slash?: boolean;
   prevIcon?: string;
   nextIcon?: string;
-  modelValue?: number;
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -25,18 +24,15 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   slash: false,
   prevIcon: 'mdiChevronLeft',
   nextIcon: 'mdiChevronRight',
-  modelValue: 1,
 });
 
-const emits = defineEmits(['update:page', 'update:modelValue']);
+const emits = defineEmits(['update:page']);
 
 const totalPages = ref(Math.ceil(props.totalItems / props.perPage));
 
 const changePage = (page: number) => {
-  props.modelValue = page;
   if (page < 1 || page > totalPages.value) return;
   emits('update:page', page);
-  emits('update:modelValue', page);
 };
 </script>
 
