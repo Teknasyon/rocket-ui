@@ -135,6 +135,7 @@ const emit = defineEmits(['update:modelValue']);
  */
 const dropdown = ref<HTMLElement | null>(null);
 const input = ref<HTMLInputElement | null>(null);
+const wrapper = ref<HTMLElement | null>(null);
 /**
  * @description - Handles the appearance of the select list
  * @param e Click event
@@ -146,7 +147,7 @@ const setActive = (e: MouseEvent) => {
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('dropdown--active');
-    document.addEventListener('click', setActive);
+    wrapper.value?.parentElement?.addEventListener('click', setActive);
     dropdown.value?.focus();
     if (props.searchable) input.value?.focus();
 
@@ -155,7 +156,7 @@ const setActive = (e: MouseEvent) => {
   dropdown.value?.classList.remove('dropdown--active');
   dropdown.value?.blur();
   input.value?.blur();
-  document.removeEventListener('click', setActive);
+  wrapper.value?.parentElement?.addEventListener('click', setActive);
 };
 /**
  * @description - Selects an option
@@ -242,7 +243,7 @@ watch(selectedMultiple, (value) => {
 });
 </script>
 <template>
-  <div class="dropdown-wrapper">
+  <div class="dropdown-wrapper" ref="wrapper">
     <div
       ref="dropdown"
       :class="{
