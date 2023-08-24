@@ -62,6 +62,15 @@ export interface ModalProps {
    * <Modal height="500px" />
    */
   height?: string;
+
+  /**
+   * Close the modal when clicking outside
+   * @type boolean
+   * @default false
+   * @example
+   * <Modal :modelValue="true" :outsideClick="true" />
+   */
+  outsideClick?: boolean;
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -83,6 +92,7 @@ const styles = computed(() => {
   };
 });
 const handleOutside = (event: Event) => {
+  if (!props.outsideClick) return;
   if (event.target === event.currentTarget) {
     emits('update:modelValue', false);
   }
