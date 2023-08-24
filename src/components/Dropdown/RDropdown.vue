@@ -120,7 +120,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   disabled: false,
   loading: false,
   prependIcon: '',
-  appendIcon: 'mdiChevronUp',
+  appendIcon: 'mdiChevronDown',
   modelValue: '',
   searchable: false,
 });
@@ -146,9 +146,9 @@ const setActive = (e: MouseEvent) => {
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('dropdown--active');
+    document.addEventListener('click', setActive);
     dropdown.value?.focus();
     if (props.searchable) input.value?.focus();
-    document.addEventListener('click', setActive);
 
     return;
   }
@@ -253,13 +253,15 @@ watch(selectedMultiple, (value) => {
       @click="setActive"
     >
       <div
+        v-if="props.prependIcon || $slots['prepend']"
         :class="{
           'dropdown__prepend-icon': true,
           'dropdown__prepend-icon--active': active,
         }"
       >
-        <slot v-if="!props.prependIcon" name="prepend-icon" />
-        <Icon v-else :name="props.prependIcon" />
+        <slot name="prepend">
+          <Icon v-if="props.prependIcon" :name="props.prependIcon" />
+        </slot>
       </div>
       <div v-if="props.taggable" class="dropdown__tags">
         <Chip
@@ -295,13 +297,15 @@ watch(selectedMultiple, (value) => {
         @keydown.enter="createTag($event)"
       />
       <div
+        v-if="props.appendIcon || $slots['append']"
         :class="{
           'dropdown__append-icon': true,
           'dropdown__append-icon--active': active,
         }"
       >
-        <slot v-if="!props.appendIcon" name="append-icon" />
-        <Icon v-else :name="props.appendIcon" />
+        <slot name="append">
+          <Icon v-if="props.appendIcon" :name="props.appendIcon" />
+        </slot>
       </div>
     </div>
     <ul

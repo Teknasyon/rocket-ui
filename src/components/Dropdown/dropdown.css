@@ -20,7 +20,7 @@
   }
 
   &__prepend-icon {
-    @apply inset-y-0 right-0 flex items-center pointer-events-none;
+    @apply inset-y-0 right-0 flex items-center pointer-events-none pr-2;
 
     &--active {
       /* @apply text-[var(--primary-500)]; */
@@ -47,7 +47,7 @@
   }
 
   &__input {
-    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] px-2 block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm disabled:bg-[var(--neutral-100)] disabled:text-[var(--neutral-300)] disabled:placeholder:text-[var(--neutral-300)];
+    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm disabled:bg-[var(--neutral-100)] disabled:text-[var(--neutral-300)] disabled:placeholder:text-[var(--neutral-300)];
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
