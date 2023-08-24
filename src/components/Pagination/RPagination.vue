@@ -2,7 +2,7 @@
 import './pagination.css';
 import RButton from '../Button/RButton.vue';
 import RTextfield from '../Textfield/RTextfield.vue';
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 export interface PaginationProps {
   page: number;
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 
 const emits = defineEmits(['update:page']);
 
-const totalPages = ref(Math.ceil(props.totalItems / props.perPage));
+const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage));
 
 const changePage = (page: number) => {
   if (page < 1 || page > totalPages.value) return;
@@ -64,7 +64,7 @@ const changePage = (page: number) => {
         min="1"
         prependIcon="none"
         :max="totalPages"
-        @input="changePage($event?.value)"
+        @blur="changePage($event?.target?.value)"
       />
       <RButton
         class="r-pagination__paginator__next"
