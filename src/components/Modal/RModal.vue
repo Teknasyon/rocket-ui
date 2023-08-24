@@ -44,6 +44,24 @@ export interface ModalProps {
    * <Modal icon="mdiMail" />
    */
   icon?: string;
+
+  /**
+   * Width of the Modal
+   * @type string
+   * @default ''
+   * @example
+   * <Modal width="500px" />
+   */
+  width?: string;
+
+  /**
+   * Height of the Modal
+   * @type string
+   * @default ''
+   * @example
+   * <Modal height="500px" />
+   */
+  height?: string;
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -58,6 +76,12 @@ const classes = computed(() => {
     'dialog--block': props.block,
   };
 });
+const styles = computed(() => {
+  return {
+    width: props.width,
+    height: props.height,
+  };
+});
 const handleOutside = (event: Event) => {
   if (event.target === event.currentTarget) {
     emits('update:modelValue', false);
@@ -67,6 +91,7 @@ const handleOutside = (event: Event) => {
 <template>
   <div class="modal" v-show="modelValue" @click.stop="handleOutside">
     <div
+      :style="styles"
       role="dialog"
       aria-modal="true"
       :class="classes"
