@@ -279,7 +279,7 @@ const clickIcon = (): void => {
   emit('click:icon', {
     value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   });
-  setPassType();
+  if (typeOfInputRef.value === 'password') setPassType();
 };
 /**
  * @description - Set type of input to password or text
@@ -360,8 +360,10 @@ watch(
             @click="clickIcon"
           />
         </div>
-        <div class="textfield__error">{{ props.errorMsg }}</div>
-        <div v-if="!props.errorMsg" class="textfield__hint">
+        <div v-if="props.errorMsg" class="textfield__error">
+          {{ props.errorMsg }}
+        </div>
+        <div v-if="!props.errorMsg && props.hint" class="textfield__hint">
           {{ props.hint }}
         </div>
       </div>
