@@ -20,7 +20,16 @@ export interface Props {
    * @example
    * <Alert title="Title" />
    */
-  title?: string;
+  title: string;
+
+  /**
+   * Variant of the Alert
+   * @type 'solid' | 'outline' | 'ghost'
+   * @default 'ghost'
+   * @example
+   * <Alert variant="ghost" />
+   */
+  variant?: 'solid' | 'outline' | 'ghost';
 
   /**
    * Description of the Alert
@@ -30,15 +39,6 @@ export interface Props {
    * <Alert description="Description" />
    */
   description?: string;
-
-  /**
-   * Size of the Alert
-   * @type 'small' | 'medium' | 'large'
-   * @default 'medium'
-   * @example
-   * <Alert size="small" />
-   */
-  size?: 'small' | 'medium' | 'large';
 
   /**
    * Allow to close the Alert
@@ -63,17 +63,17 @@ const emit = defineEmits(['close']);
 const props = withDefaults(defineProps<Props>(), {
   type: 'info',
   title: '',
+  variant: 'ghost',
   description: '',
-  size: 'medium',
   closable: true,
   block: false,
 });
 const classes = computed(() => {
   return {
-    alert: true,
-    [`alert--${props.type}`]: true,
-    [`alert--${props.size}`]: true,
-    'alert--block': props.block,
+    ' r-alert': true,
+    [`r-alert--${props.variant}`]: true,
+    'r-alert--block': props.block,
+    [`r-alert--${props.variant}--${props.type}`]: true,
   };
 });
 
@@ -86,30 +86,33 @@ const icon = computed(() => {
   }[props.type];
 });
 
-const iconSize = computed(() => {
-  return {
-    small: 20,
-    medium: 24,
-    large: 28,
-  }[props.size];
-});
-
 const close = () => {
   emit('close');
 };
 </script>
 <template>
   <div :class="classes">
-    <div class="icon">
-      <Icon :name="icon" :size="iconSize" />
+    <div class="r-alert__icon">
+      <slot name="alert-icon">
+        <Icon :name="icon" :size="24" />
+      </slot>
     </div>
-    <div class="texts">
-      <p class="texts__title">{{ props.title }}</p>
-      <p class="texts__description">{{ props.description }}</p>
+    <div class="r-alert__content">
+      <slot name="content">
+        <p class="r-alert__content__title">{{ props.title }}</p>
+        <p v-if="props.description" class="r-alert__content__description">
+          {{ props.description }}
+        </p>
+      </slot>
     </div>
-    <div v-if="props.closable" class="close">
+    <div v-if="props.closable" class="r-alert__close">
       <slot name="custom-close">
-        <Icon class="close__button" name="mdiClose" :size="16" @click="close" />
+        <Icon
+          class="r-alert__close__button"
+          name="mdiClose"
+          :size="16"
+          @click="close"
+        />
       </slot>
     </div>
   </div>

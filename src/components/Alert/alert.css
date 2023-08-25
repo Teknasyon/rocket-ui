@@ -1,70 +1,136 @@
 @import '../../index.css';
 
-.alert {
+.r-alert {
   @apply inline-flex px-4 py-3 rounded-lg text-sm transition-transform duration-1000 box-border;
-  &--small {
-    @apply p-2 text-xs;
-  }
-  &--large {
-    @apply p-6 text-lg;
-  }
+
   &--block {
     @apply w-full;
 
-    .texts {
+    .r-alert__content {
       @apply max-w-full;
     }
   }
-}
+  &--solid {
+    @apply text-[var(--white)];
 
-.alert--success {
-  @apply bg-[var(--success-100)];
-  .icon {
-    @apply text-[var(--success-500)];
-  }
-}
+    .r-alert__content {
+      @apply text-[var(--white)];
 
-.alert--error {
-  @apply bg-[var(--error-100)];
-  .icon {
-    @apply text-[var(--error-500)];
-  }
-}
+      .r-alert__content__description {
+        @apply text-[var(--white)];
+      }
+    }
 
-.alert--warning {
-  @apply bg-[var(--warning-100)];
-  .icon {
-    @apply text-[var(--warning-500)];
-  }
-}
+    .r-alert__close {
+      @apply text-[var(--white)];
+    }
 
-.alert--info {
-  @apply bg-[var(--info-100)];
-  .icon {
-    @apply text-[var(--info-500)];
-  }
-}
+    &--success {
+      @apply bg-[var(--success-500)];
+    }
 
-.icon {
-  @apply grid place-items-start;
-}
+    &--error {
+      @apply bg-[var(--error-500)];
+    }
 
-.texts {
-  @apply w-full grid place-items-start justify-items-start px-4 min-w-[21rem] max-w-sm;
+    &--warning {
+      @apply bg-[var(--warning-500)];
+    }
 
-  &__title {
-    @apply font-medium;
+    &--info {
+      @apply bg-[var(--info-500)];
+    }
   }
 
-  & &__description {
-    @apply text-[var(--neutral-500)];
+  &--outline {
+    @apply bg-transparent border border-solid;
+
+    &--success {
+      @apply border-[var(--success-500)] text-[var(--success-500)];
+
+      .r-alert__content__description {
+        @apply text-[var(--success-500)];
+      }
+    }
+
+    &--error {
+      @apply border-[var(--error-500)] text-[var(--error-500)];
+
+      .r-alert__content__description {
+        @apply text-[var(--error-500)];
+      }
+    }
+
+    &--warning {
+      @apply border-[var(--warning-500)] text-[var(--warning-500)];
+
+      .r-alert__content__description {
+        @apply text-[var(--warning-500)];
+      }
+    }
+
+    &--info {
+      @apply border-[var(--info-500)] text-[var(--info-500)];
+
+      .r-alert__content__description {
+        @apply text-[var(--info-500)];
+      }
+    }
   }
-}
 
-.close {
-  @apply grid place-items-start cursor-pointer;
+  &--ghost {
+    @apply border-none text-[var(--neutral-900)];
 
-  &__button {
-    @apply text-[var(--neutral-900)];
+    &--success {
+      @apply bg-[var(--success-100)];
+
+      .r-alert__icon {
+        @apply text-[var(--success-500)];
+      }
+    }
+
+    &--error {
+      @apply bg-[var(--error-100)];
+
+      .r-alert__icon {
+        @apply text-[var(--error-500)];
+      }
+    }
+
+    &--warning {
+      @apply bg-[var(--warning-100)];
+
+      .r-alert__icon {
+        @apply text-[var(--warning-500)];
+      }
+    }
+
+    &--info {
+      @apply bg-[var(--info-100)];
+
+      .r-alert__icon {
+        @apply text-[var(--info-500)];
+      }
+    }
+  }
+
+  &__icon {
+    @apply grid place-items-start;
+  }
+
+  &__content {
+    @apply w-full grid place-items-start justify-items-start px-4 min-w-[21rem] max-w-sm;
+
+    &__title {
+      @apply font-medium;
+    }
+
+    &__description {
+      @apply text-[var(--neutral-600)];
+    }
+  }
+
+  &__close {
+    @apply grid place-items-start cursor-pointer text-[var(--neutral-900)];
   }
 }

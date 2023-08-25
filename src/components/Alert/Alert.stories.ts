@@ -5,9 +5,8 @@ import Icon from '../Icon/RIcon.vue';
 const DefaultArgs = {
   type: 'success',
   title: 'Alert Title',
-  description:
-    'A type of alert which appears in a layer above other content, visually similar to a mobile or desktop push notification.',
-  size: 'medium',
+  variant: 'ghost',
+  description: '',
   closable: true,
   closeText: 'Close',
   block: false,
@@ -18,24 +17,9 @@ const DefaultArgTypes = {
     type: 'select',
     options: ['success', 'info', 'warning', 'error'],
   },
-  title: {
-    type: 'text',
-  },
-  description: {
-    type: 'text',
-  },
-  size: {
+  variant: {
     type: 'select',
-    options: ['small', 'medium', 'large'],
-  },
-  closable: {
-    type: 'boolean',
-  },
-  block: {
-    type: 'boolean',
-  },
-  closeText: {
-    type: 'text',
+    options: ['outline', 'solid', 'ghost'],
   },
   onClose: {
     action: 'close',
@@ -98,6 +82,13 @@ export const Warning: Story = {
     title: 'Warning',
     description:
       'Warning Variant! This is a short but descriptive message that indicates a negative or dangerous action.',
+  },
+};
+
+export const OnlyTitle: Story = {
+  args: {
+    type: 'success',
+    title: 'Only Title',
   },
 };
 
