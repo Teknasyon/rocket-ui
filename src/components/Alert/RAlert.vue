@@ -108,15 +108,9 @@ const close = () => {
       <p class="texts__description">{{ props.description }}</p>
     </div>
     <div v-if="props.closable" class="close">
-      <slot name="custom-close" />
-
-      <Icon
-        v-if="!$slots['close']"
-        class="close__button"
-        name="close"
-        size="16"
-        @click="close"
-      />
+      <slot name="custom-close">
+        <Icon class="close__button" name="mdiClose" :size="16" @click="close" />
+      </slot>
     </div>
   </div>
 </template>
