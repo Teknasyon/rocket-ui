@@ -11,7 +11,7 @@ export default create({
 
   base: 'light',
   brandTitle: 'Rocket UI Vue',
-  brandUrl: '/?path=/story/getting-started--page',
+  brandUrl: '/?path=/docs/getting-started--documentation',
   brandTarget: '_self',
   // brandImage: require('./logo.svg'),
 });
