@@ -184,6 +184,12 @@
   --breadcrumb-text-color: var(--neutral-500);
   --breadcrumb-text-color-active: var(--neutral-900);
   --breadcrumb-text-color-hover: var(--neutral-900);
+
+  /**
+  * @tokens-accordion-variables
+  * @presenter Accordion Variables
+  */
+  --accordion-content-max-height: 600px;
   /**
   * @tokens-end
   */

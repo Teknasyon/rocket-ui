@@ -49,21 +49,25 @@ function handleAccordion(selectedIndex: number) {
     v-for="(accordion, index) in accordions"
     :key="index"
     :class="{
-      accordion: true,
-      'accordion--opened': accordion.open,
-      'accordion--disabled': accordion.disabled,
+      'r-accordion': true,
+      'r-accordion--disabled': accordion.disabled,
     }"
+    :data-state="accordion.open ? 'opened' : 'closed'"
   >
-    <div class="accordion__header" @click="handleAccordion(index)">
-      <div class="accordion__title">{{ accordion.title }}</div>
-      <div class="accordion__icon">
-        <Icon :name="accordion.open ? 'mdiChevronDown' : 'mdiChevronUp'" />
+    <div class="r-accordion__header" @click="handleAccordion(index)">
+      <slot name="title">
+        <div class="r-accordion__title">{{ accordion.title }}</div>
+      </slot>
+      <div class="r-accordion__icon">
+        <Icon name="mdiChevronUp" />
       </div>
     </div>
-    <div class="accordion__content">
-      <span>
-        {{ accordion.content }}
-      </span>
+    <div class="r-accordion__content">
+      <slot name="content">
+        <span>
+          {{ accordion.content }}
+        </span>
+      </slot>
     </div>
   </div>
 </template>
