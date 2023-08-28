@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import './pagination.css';
-import RButton from '../Button/RButton.vue';
-import RTextfield from '../Textfield/RTextfield.vue';
 import { computed } from 'vue';
+import './pagination.css';
 
 export interface PaginationProps {
   page: number;
@@ -11,8 +9,6 @@ export interface PaginationProps {
   pageText?: string;
   ofText?: string;
   slash?: boolean;
-  prevIcon?: string;
-  nextIcon?: string;
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -22,8 +18,6 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   pageText: 'Page',
   ofText: 'of',
   slash: false,
-  prevIcon: 'mdiChevronLeft',
-  nextIcon: 'mdiChevronRight',
 });
 
 const emits = defineEmits(['update:page']);
@@ -49,31 +43,61 @@ const changePage = (page: number) => {
       </span>
     </div>
     <div class="r-pagination__paginator">
-      <RButton
+      <button
         class="r-pagination__paginator__prev"
-        variant="outline"
-        only-icon
-        :prepend-icon="prevIcon"
         :disabled="props.page === 1"
-        @click="changePage(props.page - 1)"
-      />
-      <RTextfield
-        v-model="props.page"
+        @click="changePage(+props.page - 1)"
+      >
+        <slot name="prev">
+          <svg
+            :class="{ 'stroke-gray-400': props.page === 1 }"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#323232"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M15 6l-6 6l6 6" />
+          </svg>
+        </slot>
+      </button>
+      <input
         class="r-pagination__paginator__input"
         type="number"
         min="1"
-        prependIcon="none"
         :max="totalPages"
-        @blur="changePage($event?.target?.value)"
+        :value="props.page"
+        @blur="changePage(+$event?.target?.value)"
       />
-      <RButton
+      <button
         class="r-pagination__paginator__next"
-        variant="outline"
-        only-icon
-        :prepend-icon="nextIcon"
         :disabled="props.page === totalPages"
-        @click="changePage(props.page + 1)"
-      />
+        @click="changePage(+props.page + 1)"
+      >
+        <slot name="next">
+          <svg
+            :class="{ 'stroke-gray-400': props.page === totalPages }"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#323232"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </slot>
+      </button>
+      <div class="r-pagination__paginator__total">/ {{ totalPages }}</div>
     </div>
   </div>
 </template>
