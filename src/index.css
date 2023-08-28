@@ -190,6 +190,18 @@
   * @presenter Accordion Variables
   */
   --accordion-content-max-height: 600px;
+
+  /**
+  * @tokens-pagination-variables
+  * @presenter Pagination Variables
+  */
+  --pagination-border-radius: var(--border-radius-2);
+  --pagination-border-color: var(--neutral-200);
+  --pagination-border-width: 1px;
+  --pagination-border-style: solid;
+  --pagination-bg: var(--white);
+  --pagination-btn-padding: var(0.625rem);
+  --pagination-input-padding: var(0.375rem);
   /**
   * @tokens-end
   */

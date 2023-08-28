@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-pagination {
-  @apply flex items-center justify-between gap-2;
+  @apply flex items-center justify-between;
 
   &__page-info {
     @apply flex items-center gap-2;
@@ -10,16 +10,37 @@
   &__paginator {
     @apply flex items-center gap-2;
 
+    &__prev,
+    &__next {
+      @apply flex items-center justify-center bg-[var(--pagination-bg-color)]
+      cursor-pointer p-[var(--pagination-btn-padding)] rounded-[var(--pagination-border-radius)];
+      border: var(--pagination-border-width) var(--pagination-border-style)
+        var(--pagination-border-color);
+
+      &:hover {
+        @apply text-gray-300;
+      }
+
+      &:disabled {
+        @apply cursor-not-allowed;
+      }
+    }
+
     &__input {
-      input {
-        @apply text-center;
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-          opacity: 0;
-          pointer-events: none;
-          background: transparent;
-          display: none;
-        }
+      @apply text-center rounded-[var(--pagination-border-radius)] p-[var(--pagination-input-padding)] bg-[var(--pagination-bg-color)];
+      border: var(--pagination-border-width) var(--pagination-border-style)
+        var(--pagination-border-color);
+
+      &:focus {
+        @apply outline-none ring-2 ring-[var(--primary-500)] ring-inset;
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        opacity: 0;
+        pointer-events: none;
+        background: transparent;
+        display: none;
       }
     }
   }
