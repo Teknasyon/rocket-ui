@@ -75,7 +75,9 @@
   }
 
   &__option {
-    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in flex justify-between items-center w-full border border-transparent rounded-md py-3 px-4 text-left cursor-pointer sm:text-sm;
+    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in 
+    flex justify-between items-center w-full border border-transparent 
+    rounded-md py-3 px-4 text-left cursor-pointer sm:text-sm min-h-[50px];
 
     &:hover {
       @apply bg-[var(--neutral-100)];
@@ -101,7 +103,7 @@
     }
 
     &__append-icon {
-      @apply transition-colors duration-1000 ease-in-out;
+      @apply transition-colors duration-100 ease-in-out;
 
       &--active {
         /* @apply text-[var(--primary-500)]; */

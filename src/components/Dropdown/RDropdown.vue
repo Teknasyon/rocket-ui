@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref, defineEmits, watch } from 'vue';
+import { computed, reactive, ref, defineEmits, watch, onMounted } from 'vue';
 import Chip from '../Chips/RChip.vue';
 import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
@@ -124,6 +124,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: '',
   searchable: false,
 });
+
 const selected = ref<string | number>('');
 const selectedMultiple = reactive<Option[]>([]);
 const active = ref(false);
@@ -167,7 +168,7 @@ const setActive = (e: MouseEvent) => {
 const selectOption = (e: MouseEvent, option: Option) => {
   if (props.multiple || props.taggable) {
     e.stopPropagation();
-    if (!selectedMultiple.includes(option)) {
+    if (!selectedMultiple.find((opt) => opt.value === option.value)) {
       selectedMultiple.push(option);
     } else {
       selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
@@ -223,6 +224,12 @@ const createTag = (e: KeyboardEvent) => {
     input.value?.focus();
   }
 };
+const isSelected = (option: Option) => {
+  if (props.multiple) {
+    return selectedMultiple.find((opt) => opt.value === option.value);
+  }
+  return selected.value === option.value;
+};
 /**
  * @description - Search for options
  * @returns {Option[]} - Returns an array of options
@@ -233,6 +240,17 @@ const searchedOptions = computed(() => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
   });
   return result;
+});
+
+onMounted(() => {
+  if (props.modelValue) {
+    if (props.multiple) {
+      selectedMultiple.push(props.modelValue as Option);
+    } else {
+      selected.value = (props.modelValue as Option).value;
+      inputModel.value = (props.modelValue as Option).label;
+    }
+  }
 });
 /**
  * @description - Watch the selected multiple options
@@ -317,8 +335,7 @@ watch(selectedMultiple, (value) => {
         :key="option.value"
         :class="{
           'dropdown-options__option': true,
-          'dropdown-options__option--active':
-            option.value === selected || selectedMultiple?.includes(option),
+          'dropdown-options__option--active': isSelected(option),
         }"
         :aria-disabled="option.disabled"
         @click="selectOption($event, option)"
@@ -330,26 +347,24 @@ watch(selectedMultiple, (value) => {
             :class="{
               'dropdown-options__option__prepend-icon': true,
               'dropdown-options__option__prepend-icon--active':
-                option.value === selected || selectedMultiple?.includes(option),
+                isSelected(option),
             }"
             :name="option.prependIcon"
           />
           <p
             :class="{
               'dropdown-options__option__label': true,
-              'dropdown-options__option__label--active':
-                option.value === selected || selectedMultiple?.includes(option),
+              'dropdown-options__option__label--active': isSelected(option),
             }"
           >
             {{ option.label }}
           </p>
         </div>
         <Icon
-          v-if="option.value === selected || selectedMultiple?.includes(option)"
+          v-if="isSelected(option)"
           :class="{
             'dropdown-options__option__append-icon': true,
-            'dropdown-options__option__append-icon--active':
-              option.value === selected || selectedMultiple?.includes(option),
+            'dropdown-options__option__append-icon--active': isSelected(option),
           }"
           name="mdiCheck"
         />
