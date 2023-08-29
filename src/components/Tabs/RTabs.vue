@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import './tabs.css';
 import type { Tab } from './types';
 import TabItem from '../TabItem/RTabItem.vue';
+import { emit } from 'process';
 
 export interface IProps {
   /**
@@ -48,7 +49,7 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   tile: false,
 });
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue', 'click:icon']);
 const activeTab = ref(props.modelValue || props.tabs[0].id);
 
 const tabsClasses = computed(() => {
@@ -67,7 +68,7 @@ watch(
 );
 
 const handleIconClick = () => {
-  alert('Icon clicked');
+  emits('click:icon');
 };
 </script>
 <template>
