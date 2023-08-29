@@ -11,16 +11,6 @@ export interface Option {
 }
 export interface SelectProps {
   /**
-   * Placeholder Dropdown
-   * @type InputHTMLAttributes['placeholder'];
-   * @default ''
-   * @example
-   * <Dropdown placeholder="Placeholder" />
-   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
-   */
-  placeholder?: string;
-
-  /**
    * Options of the Dropdown
    * @type Option[]
    * @default []
@@ -39,6 +29,25 @@ export interface SelectProps {
    * />
    */
   options: Option[];
+
+  /**
+   * Value of the Dropdown
+   * @type string | number | Option | Option[]
+   * @default ''
+   * @example
+   * <Dropdown v-model="model" />
+   */
+  modelValue: string | number | Option | Option[];
+
+  /**
+   * Placeholder Dropdown
+   * @type InputHTMLAttributes['placeholder'];
+   * @default ''
+   * @example
+   * <Dropdown placeholder="Placeholder" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
+   */
+  placeholder?: string;
 
   /**
    * Allow to create new options
@@ -95,15 +104,6 @@ export interface SelectProps {
   appendIcon?: string;
 
   /**
-   * Value of the Dropdown
-   * @type string | number | Option | Option[]
-   * @default ''
-   * @example
-   * <Dropdown v-model="model" />
-   */
-  modelValue?: string | number | Option | Option[];
-
-  /**
    * Allow to search for options
    * @type boolean
    * @default false
@@ -111,9 +111,12 @@ export interface SelectProps {
    * <Dropdown searchable />
    */
   searchable?: boolean;
+  parentElement?: string;
+  id?: string;
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
+  modelValue: '',
   placeholder: '',
   taggable: false,
   multiple: false,
@@ -121,8 +124,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   loading: false,
   prependIcon: '',
   appendIcon: 'mdiChevronDown',
-  modelValue: '',
   searchable: false,
+  id: 'test',
 });
 
 const selected = ref<string | number>('');
@@ -139,7 +142,7 @@ const input = ref<HTMLInputElement | null>(null);
 const wrapper = ref<HTMLElement | null>(null);
 /**
  * @description - Handles the appearance of the select list
- * @param e Click event
+ * @param e MouseEvent
  * @returns void
  */
 const setActive = (e: MouseEvent) => {
@@ -148,7 +151,11 @@ const setActive = (e: MouseEvent) => {
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('dropdown--active');
-    wrapper.value?.parentElement?.addEventListener('click', setActive);
+    wrapper.value?.parentElement?.parentElement?.addEventListener(
+      'click',
+      setActive
+    );
+
     dropdown.value?.focus();
     if (props.searchable) input.value?.focus();
 
@@ -157,7 +164,10 @@ const setActive = (e: MouseEvent) => {
   dropdown.value?.classList.remove('dropdown--active');
   dropdown.value?.blur();
   input.value?.blur();
-  wrapper.value?.parentElement?.addEventListener('click', setActive);
+  wrapper.value?.parentElement?.parentElement?.removeEventListener(
+    'click',
+    setActive
+  );
 };
 /**
  * @description - Selects an option
@@ -299,7 +309,7 @@ watch(selectedMultiple, (value) => {
         </p>
       </div>
       <input
-        id="select"
+        :id="props.id"
         ref="input"
         type="text"
         v-model="inputModel"
