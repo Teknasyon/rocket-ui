@@ -1,0 +1,13 @@
+@import '../../index.css';
+
+.r-progressbar {
+  @apply bg-[var(--neutral-200)] rounded-md w-full;
+
+  &__bar {
+    @apply bg-red-500 rounded-md h-2 transition-all duration-300 ease-in-out;
+
+    &--indeterminate {
+      @apply animate-pulse;
+    }
+  }
+}
