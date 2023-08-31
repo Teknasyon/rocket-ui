@@ -18,7 +18,7 @@
   },
   "homepage": "https://teknasyon.github.io/rocket-ui/",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host --port 4173",
     "build": "run-p type-check build-only",
     "build-only": "vite build",
     "preview": "vite preview --port 4173",
