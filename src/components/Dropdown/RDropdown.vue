@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref, defineEmits, watch, onMounted } from 'vue';
+import { onClickOutside } from '@vueuse/core';
 import Chip from '../Chips/RChip.vue';
 import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
@@ -151,24 +152,25 @@ const setActive = (e: MouseEvent) => {
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('dropdown--active');
-    wrapper.value?.parentElement?.parentElement?.addEventListener(
-      'click',
-      setActive
-    );
-
     dropdown.value?.focus();
     if (props.searchable) input.value?.focus();
 
     return;
   }
+  removeActive();
+};
+
+/**
+ * @description - Removes the active state
+ * @returns void
+ */
+const removeActive = () => {
+  active.value = false;
   dropdown.value?.classList.remove('dropdown--active');
   dropdown.value?.blur();
   input.value?.blur();
-  wrapper.value?.parentElement?.parentElement?.removeEventListener(
-    'click',
-    setActive
-  );
 };
+
 /**
  * @description - Selects an option
  * @param e Click event
@@ -269,6 +271,12 @@ onMounted(() => {
 watch(selectedMultiple, (value) => {
   emit('update:modelValue', value);
 });
+
+/**
+ * @description - Watch the outside click
+ * @returns void
+ */
+onClickOutside(wrapper, removeActive);
 </script>
 <template>
   <div class="dropdown-wrapper" ref="wrapper">
