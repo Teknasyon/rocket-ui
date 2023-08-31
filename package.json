@@ -38,6 +38,7 @@
     "@floating-ui/dom": "^1.0.7",
     "@mdi/svg": "^7.2.96",
     "@mdi/util": "^0.3.2",
+    "@vueuse/core": "^10.4.1",
     "lodash.kebabcase": "^4.1.1",
     "vue": "^3.2.37"
   },
