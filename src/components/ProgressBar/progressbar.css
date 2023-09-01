@@ -1,13 +1,24 @@
 @import '../../index.css';
 
 .r-progressbar {
-  @apply bg-[var(--neutral-200)] rounded-md w-full;
+  @apply appearance-none border-none rounded-full overflow-hidden w-full;
 
-  &__bar {
-    @apply bg-red-500 rounded-md h-2 transition-all duration-300 ease-in-out;
+  &[value]::-webkit-progress-value {
+    background-color: var(--primary-500);
+    transition: inline-size 0.25s ease-out;
+  }
 
-    &--indeterminate {
-      @apply animate-pulse;
-    }
+  &[value]::-moz-progress-bar {
+    background-color: var(--primary-500);
+    transition: inline-size 0.25s ease-out;
+  }
+
+  &[value]::-ms-fill {
+    background-color: var(--primary-500);
+    transition: inline-size 0.25s ease-out;
+  }
+
+  &[value]::-webkit-progress-bar {
+    background-color: var(--primary-200);
   }
 }

@@ -3,26 +3,19 @@ import './progressbar.css';
 export interface ProgressBarProps {
   value: number;
   height?: number;
-  indeterminate?: boolean;
 }
 const props = withDefaults(defineProps<ProgressBarProps>(), {
-  value: 40,
-  height: 20,
-  indeterminate: false,
+  value: 0,
+  height: 8,
 });
 </script>
 <template>
-  <div class="r-progressbar">
-    <div
-      :class="{
-        'r-progressbar__bar': true,
-        'r-progressbar__bar--indeterminate': props.indeterminate,
-      }"
-      :style="{ width: `${props.value}%`, height: props.height }"
-    >
-      <slot>
-        <span class="r-progressbar__text">{{ props.value }}%</span>
-      </slot>
-    </div>
-  </div>
+  <progress
+    class="r-progressbar"
+    role="progressbar"
+    :aria-valuemax="100"
+    :max="100"
+    :value="props.value"
+    :style="{ height: props.height + 'px' }"
+  />
 </template>
