@@ -2,11 +2,64 @@
 import { ref, computed, provide, withDefaults } from 'vue';
 
 export interface ItemGroupProps {
+  /**
+   * The value of the selected items
+   * @default []
+   * @model
+   * @type number[]
+   * @example
+   * <RItemGroup v-model="selectedItems" />
+   */
   modelValue: number[];
+
+  /**
+   * The class to apply to the selected items
+   * @default ''
+   * @type string
+   * @example
+   * <RItemGroup selectedClass="bg-blue-500 text-white" />
+   */
   selectedClass: string;
+
+  /**
+   * Whether the item group is disabled
+   * @default false
+   * @type boolean
+   * @example
+   * <RItemGroup :disabled="true" />
+   */
   disabled?: boolean;
+
+  /**
+   * Whether the item group is mandatory
+   * @default false
+   * @type boolean
+   * @example
+   * ```js
+   * const selected = ref<number[]>([1]);
+   * ```
+   * ```html
+   * <RItemGroup :mandatory="true" v-model="selected" />
+   * ```
+   */
   mandatory?: boolean;
+
+  /**
+   * The maximum number of items that can be selected
+   * @default 0
+   * @type number
+   * @example
+   * <RItemGroup :max="5" />
+   */
   max?: number;
+
+  /**
+   * The tag to use for the item group
+   * @default div
+   * @type string
+   * @example
+   * <RItemGroup as="ul" />
+   */
   as?: string;
 }
 
