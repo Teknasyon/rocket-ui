@@ -2,8 +2,31 @@
 import { inject, withDefaults } from 'vue';
 
 export interface ItemProps {
+  /**
+   * The value of the item
+   * @default null
+   * @type any
+   * @example
+   * <RItem :value="1" />
+   */
   value: any;
+
+  /**
+   * Whether the item is disabled
+   * @default false
+   * @type boolean
+   * @example
+   * <RItem :disabled="true" />
+   */
   disabled?: boolean;
+
+  /**
+   * The class to apply to the selected item
+   * @default ''
+   * @type string
+   * @example
+   * <RItem selectedClass="bg-blue-500 text-white" />
+   */
   selectedClass?: string;
 }
 
