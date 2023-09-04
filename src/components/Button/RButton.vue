@@ -19,7 +19,7 @@ export interface Props {
    * @example
    * <Button variant="primary" />
    */
-  variant: ButtonType;
+  variant?: ButtonType;
 
   /**
    * Loading state of the Button
