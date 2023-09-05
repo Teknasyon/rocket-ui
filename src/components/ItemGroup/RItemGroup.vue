@@ -19,7 +19,7 @@ export interface ItemGroupProps {
    * @example
    * <RItemGroup selectedClass="bg-blue-500 text-white" />
    */
-  selectedClass: string;
+  selectedClass?: string;
 
   /**
    * Whether the item group is disabled
@@ -61,6 +61,15 @@ export interface ItemGroupProps {
    * <RItemGroup as="ul" />
    */
   as?: string;
+
+  /**
+   * Whether the item group allows multiple selections
+   * @default false
+   * @type boolean
+   * @example
+   * <RItemGroup :multiple="true" />
+   */
+  multiple?: boolean;
 }
 
 const RItemGroupSymbol = 'rocket-ui:r-item-group';
@@ -80,6 +89,9 @@ const tag = ref<string>(props.as ?? 'div');
 
 const selectedItems = ref<number[]>(props.modelValue ?? []);
 
+const selectedClass = computed(() => props.selectedClass);
+provide(`${RItemGroupSymbol}:selectedClass`, selectedClass.value);
+
 const isSelected = (id: number) => {
   return selectedItems.value.includes(id);
 };
@@ -87,12 +99,16 @@ provide(`${RItemGroupSymbol}:isSelected`, isSelected);
 
 const select = (id: number, value: boolean) => {
   if (props.disabled) return;
-  if (props.mandatory && selectedItems.value.length === 1 && !value) return;
-  if (props.max && selectedItems.value.length >= props.max) return;
-  if (value) {
-    selectedItems.value = [...selectedItems.value, id];
+  if (props.mandatory && selectedItems.value.length === 1 && value) return;
+  if (props.max && selectedItems.value.length === props.max && value) return;
+  if (props.multiple) {
+    if (value) {
+      selectedItems.value.push(id);
+    } else {
+      selectedItems.value = selectedItems.value.filter((item) => item !== id);
+    }
   } else {
-    selectedItems.value = selectedItems.value.filter((i) => i !== id);
+    selectedItems.value = value ? [id] : [];
   }
 
   emits('update:modelValue', selectedItems.value);

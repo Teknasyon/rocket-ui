@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, withDefaults } from 'vue';
+import { computed, inject, withDefaults } from 'vue';
 
 export interface ItemProps {
   /**
@@ -41,14 +41,22 @@ const props = withDefaults(defineProps<ItemProps>(), {
 const isSelected = inject(`${RItemGroupSymbol}:isSelected`) as (
   id: number
 ) => boolean;
+
+const classes = inject(`${RItemGroupSymbol}:selectedClass`, '') as string;
+const selectedClass = computed(() => {
+  return isSelected(props.value) && [classes, props.selectedClass];
+});
+
 const select = inject(`${RItemGroupSymbol}:select`) as (
   id: number,
   value: boolean
 ) => void;
+
 const handleToggle = () => {
   if (props.disabled) return;
   select(props.value as number, !isSelected(props.value as number));
 };
+
 const handleSelect = () => {
   if (props.disabled) return;
   select(props.value as number, true);
@@ -58,7 +66,7 @@ const handleSelect = () => {
   <slot
     :isSelected="isSelected(props.value as number)"
     :value="props.value"
-    :selectedClass="props.selectedClass"
+    :selectedClass="selectedClass"
     :disabled="props.disabled"
     :select="handleSelect"
     :toggle="handleToggle"
