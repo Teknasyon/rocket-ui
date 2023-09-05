@@ -44,6 +44,8 @@ import RTooltip from '../src/components/Tooltip/RTooltip.vue';
 import RBreadcrumb from '../src/components/Breadcrumb/RBreadcrumb.vue';
 import RPagination from '../src/components/Pagination/RPagination.vue';
 import RProgressbar from '../src/components/Progressbar/RProgressbar.vue';
+import RItemGroup from '../src/components/ItemGroup/RItemGroup.vue';
+import RItem from '../src/components/ItemGroup/RItem.vue';
 
 export {
   RAccordion,
@@ -68,4 +70,6 @@ export {
   RBreadcrumb,
   RPagination,
   RProgressbar,
+  RItemGroup,
+  RItem,
 };
