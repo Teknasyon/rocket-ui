@@ -1,47 +1,99 @@
 @import '../../index.css';
 
-.snackbar {
-  @apply absolute bottom-20 w-min grid items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
-  grid-template-columns: 1fr auto auto;
+.r-snackbar {
+  @apply text-white gap-3 opacity-0 absolute w-[412px] grid items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
+  grid-template-columns: auto 1fr auto;
+
+  &--success {
+    @apply bg-[var(--success-500)];
+  }
+
+  &--error {
+    @apply bg-[var(--error-500)];
+  }
+
+  &--warning {
+    @apply bg-[var(--warning-500)];
+  }
+
+  &--info {
+    @apply bg-[var(--info-500)];
+  }
 
   &__text {
-    @apply text-sm text-white w-[14rem];
-  }
-  &__action {
+    @apply text-sm pr-16;
   }
   &__close {
-    @apply ml-2 cursor-pointer grid place-items-center text-white;
+    @apply cursor-pointer grid place-items-center;
   }
 
-  &--closed {
-    @apply opacity-0 transition-all duration-300 ease-in-out;
-  }
-
-  &--right {
+  &__right {
     @apply right-6 left-auto;
-    animation: snackbar-right 0.3s ease-in-out forwards;
   }
 
-  &--left {
+  &__left {
     @apply left-0 right-auto;
-    animation: snackbar-left 0.3s ease-in-out forwards;
+  }
+
+  &__top {
+    @apply top-20 bottom-auto;
+  }
+
+  &__bottom {
+    @apply bottom-20 top-auto;
+  }
+
+  &--shown {
+    @apply opacity-100 transition-all duration-300 ease-in-out;
+    animation: slide-right-to-right 0.3s ease-in-out forwards;
+  }
+
+  &--hidden {
+    @apply transition-all duration-300 ease-in-out;
+    animation: slide-left-from-right 0.3s ease-in-out forwards;
+  }
+
+  &--shown:not(.r-snackbar__right) {
+    animation: slide-right-from-left 0.1s ease-in-out forwards;
+  }
+
+  &--hidden:not(.r-snackbar__right) {
+    animation: slide-left-to-left 0.2s ease-in-out forwards;
   }
 }
 
-@keyframes snackbar-left {
+@keyframes slide-left-from-right {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
 }
 
-@keyframes snackbar-right {
+@keyframes slide-right-to-right {
   0% {
     transform: translateX(100%);
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes slide-right-from-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+@keyframes slide-left-to-left {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

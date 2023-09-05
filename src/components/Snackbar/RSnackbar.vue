@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, type Ref } from 'vue';
 import Button from '../Button/RButton.vue';
 import Icon from '../Icon/RIcon.vue';
 import './snackbar.css';
 
 export interface IProps {
+  /**
+   * Show of the snackbar
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar show />
+   */
+  modelValue: boolean;
   /**
    * Text of the snackbar
    * @type string
@@ -15,49 +23,22 @@ export interface IProps {
   text: string;
 
   /**
-   * Action text of the snackbar
-   * @type string
-   * @default ''
-   * @example
-   * <Snackbar actionText="Action" />
-   */
-  actionText?: string;
-
-  /**
-   * Show action of the snackbar
-   * @type boolean
-   * @default false
-   * @example
-   * <Snackbar showAction />
-   */
-  showAction?: boolean;
-
-  /**
    * Show close of the snackbar
    * @type boolean
    * @default false
    * @example
-   * <Snackbar showClose />
+   * <Snackbar closable />
    */
-  showClose?: boolean;
+  closable?: boolean;
 
   /**
-   * Left of the snackbar
+   * Set the snackbar slide from left otherwise slide from right
    * @type boolean
    * @default false
    * @example
    * <Snackbar left />
    */
   left?: boolean;
-
-  /**
-   * Show of the snackbar
-   * @type boolean
-   * @default false
-   * @example
-   * <Snackbar show />
-   */
-  show?: boolean;
 
   /**
    * Timeout of the snackbar. <br />
@@ -68,71 +49,89 @@ export interface IProps {
    * <Snackbar timeout="1000" />
    */
   timeout?: number;
+
+  /**
+   * Variant of the snackbar
+   * @type 'success' | 'error' | 'warning' | 'info'
+   * @default 'info'
+   * @example
+   * <Snackbar variant="success" />
+   */
+  variant?: 'success' | 'error' | 'warning' | 'info';
+
+  /**
+   * Set the snackbar slide on top otherwise slide on bottom
+   * @type boolean
+   * @default false
+   * @example
+   * <Snackbar top />
+   */
+  top?: boolean;
 }
 const props = withDefaults(defineProps<IProps>(), {
   text: '',
-  actionText: '',
-  showAction: false,
-  showClose: false,
+  closable: false,
   left: false,
-  show: false,
+  modelValue: false,
   timeout: 0,
 });
-const shown = ref(false);
-const emit = defineEmits(['action', 'close']);
-const onClickAction = () => {
-  emit('action');
-};
-const onClose = () => {
-  shown.value = false;
-  emit('close');
-};
-onMounted(() => {
-  if (props.timeout) {
-    setTimeout(() => {
-      shown.value = false;
-      emit('close');
-    }, props.timeout);
-  }
-});
-/**
- * @description Watch for changes in the show prop
- */
+
+const emit = defineEmits(['action', 'update:modelValue']);
+
 watch(
-  () => props.show,
-  (show) => {
-    shown.value = show;
+  () => props.modelValue,
+  () => {
+    if (props.timeout > 0 && props.modelValue) {
+      setTimeout(() => {
+        props.modelValue = false;
+        emit('update:modelValue', false);
+      }, props.timeout);
+    }
   },
-  { immediate: true }
+  {
+    immediate: true,
+  }
 );
+
+const classes = computed(() => {
+  return {
+    'r-snackbar': true,
+    [`r-snackbar--${props.variant}`]: true,
+    [props.left ? 'r-snackbar__left' : 'r-snackbar__right']: true,
+    [props.modelValue ? 'r-snackbar--shown' : 'r-snackbar--hidden']: true,
+    [props.top ? 'r-snackbar__top' : 'r-snackbar__bottom']: true,
+  };
+});
+
+const variantIcons = {
+  success: 'mdiCheckCircle',
+  error: 'mdiAlertCircle',
+  warning: 'mdiAlert',
+  info: 'mdiInformation',
+}[props.variant || 'info'];
 </script>
 <template>
-  <div
-    :class="{
-      snackbar: true,
-      'snackbar--closed': !shown,
-      [props.left ? 'snackbar--left' : 'snackbar--right']: true,
-    }"
-  >
-    <div class="snackbar__text">{{ props.text }}</div>
-    <div v-if="props.showAction" class="snackbar__action">
-      <slot name="action" />
-      <Button
-        v-if="!$slots['action']"
-        size="small"
-        variant="ghost"
-        @click="onClickAction"
-        >{{ props.actionText }}
-      </Button>
-    </div>
-    <div v-if="props.showClose" class="snackbar__close">
-      <slot name="close" />
+  <div :class="classes">
+    <slot>
       <Icon
-        v-if="!$slots['close']"
-        name="mdiClose"
-        :size="20"
-        @click.stop="onClose"
+        v-if="props.variant"
+        :name="variantIcons"
+        class="r-snackbar__icon"
       />
+    </slot>
+
+    <div class="r-snackbar__text">{{ props.text }}</div>
+
+    <slot name="action"> </slot>
+
+    <div v-if="props.closable" class="r-snackbar__close">
+      <slot name="close">
+        <Icon
+          name="mdiClose"
+          :size="16"
+          @click.stop="$emit('update:modelValue', false)"
+        />
+      </slot>
     </div>
   </div>
 </template>
