@@ -83,7 +83,6 @@ watch(
   () => {
     if (props.timeout > 0 && props.modelValue) {
       setTimeout(() => {
-        props.modelValue = false;
         emit('update:modelValue', false);
       }, props.timeout);
     }
