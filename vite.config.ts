@@ -1,5 +1,3 @@
-import { fileURLToPath, URL } from 'node:url';
-
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
@@ -10,35 +8,31 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      outDir: 'dist/types',
+      copyDtsFiles: true,
+      outDir: ['dist', 'types'],
+      // include: ['src/index.ts'],
+      exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts'],
+      staticImport: true,
+      rollupTypes: true,
+      // insertTypesEntry: true,
+      compilerOptions: {
+        declarationMap: true,
+      },
     }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': resolve(__dirname, 'src/'),
     },
   },
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
       name: 'rocket-ui-vue',
-      // the proper extensions will be added
       fileName: 'rocket-ui-vue',
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ['vue'],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: 'Vue',
-        },
-      },
     },
-  },
-  test: {
-    collectCoverage: true,
   },
 });

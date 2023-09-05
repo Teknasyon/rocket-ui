@@ -1,6 +1,6 @@
 {
   "name": "@rocketui/vue",
-  "version": "0.0.46",
+  "version": "0.0.50",
   "description": "A set of customizable UI components for Vue 3, built with TypeScript",
   "type": "module",
   "main": "dist/rocket-ui-vue.umd.cjs",
@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "vite --host --port 4173",
     "build": "run-p type-check build-only",
-    "build-only": "vite build",
+    "build-only": "rm -rf dist types storybook-static && vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",

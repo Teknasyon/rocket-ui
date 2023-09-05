@@ -1,21 +1,24 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
-    }
-  ],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "vite/client", "node", "jsdom"],
+    "composite": true,
+    "lib": ["esnext", "dom"],
+    "importHelpers": true,
+    "outDir": "dist",
+    "strict": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src"]
+    }
   }
 }

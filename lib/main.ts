@@ -22,54 +22,27 @@ import '../src/components/Breadcrumb/breadcrumb.css';
 import '../src/components/Pagination/pagination.css';
 import '../src/components/Progressbar/progressbar.css';
 
-import RAccordion from '../src/components/Accordion/RAccordion.vue';
-import RAlert from '../src/components/Alert/RAlert.vue';
-import RAvatar from '../src/components/Avatar/RAvatar.vue';
-import RBadge from '../src/components/Badge/RBadge.vue';
-import RButton from '../src/components/Button/RButton.vue';
-import RCheckbox from '../src/components/Checkbox/RCheckbox.vue';
-import RChip from '../src/components/Chips/RChip.vue';
-import RDropdown from '../src/components/Dropdown/RDropdown.vue';
-import RIcon from '../src/components/Icon/RIcon.vue';
-import RLabel from '../src/components/Label/RLabel.vue';
-import RModal from '../src/components/Modal/RModal.vue';
-import RSidebar from '../src/components/Sidebar/RSidebar.vue';
-import RSnackbar from '../src/components/Snackbar/RSnackbar.vue';
-import RSwitch from '../src/components/Switch/RSwitch.vue';
-import RTabItem from '../src/components/TabItem/RTabItem.vue';
-import RTabs from '../src/components/Tabs/RTabs.vue';
-import RTextArea from '../src/components/TextArea/RTextArea.vue';
-import RTextfield from '../src/components/Textfield/RTextfield.vue';
-import RTooltip from '../src/components/Tooltip/RTooltip.vue';
-import RBreadcrumb from '../src/components/Breadcrumb/RBreadcrumb.vue';
-import RPagination from '../src/components/Pagination/RPagination.vue';
-import RProgressbar from '../src/components/Progressbar/RProgressbar.vue';
-import RItemGroup from '../src/components/ItemGroup/RItemGroup.vue';
-import RItem from '../src/components/ItemGroup/RItem.vue';
-
-export {
-  RAccordion,
-  RAlert,
-  RAvatar,
-  RBadge,
-  RButton,
-  RCheckbox,
-  RChip,
-  RDropdown,
-  RIcon,
-  RLabel,
-  RModal,
-  RSidebar,
-  RSnackbar,
-  RSwitch,
-  RTabItem,
-  RTabs,
-  RTextArea,
-  RTextfield,
-  RTooltip,
-  RBreadcrumb,
-  RPagination,
-  RProgressbar,
-  RItemGroup,
-  RItem,
-};
+export { default as RAccordion } from '../src/components/Accordion/RAccordion.vue';
+export { default as RAlert } from '../src/components/Alert/RAlert.vue';
+export { default as RAvatar } from '../src/components/Avatar/RAvatar.vue';
+export { default as RBadge } from '../src/components/Badge/RBadge.vue';
+export { default as RButton } from '../src/components/Button/RButton.vue';
+export { default as RCheckbox } from '../src/components/Checkbox/RCheckbox.vue';
+export { default as RChip } from '../src/components/Chips/RChip.vue';
+export { default as RDropdown } from '../src/components/Dropdown/RDropdown.vue';
+export { default as RIcon } from '../src/components/Icon/RIcon.vue';
+export { default as RLabel } from '../src/components/Label/RLabel.vue';
+export { default as RModal } from '../src/components/Modal/RModal.vue';
+export { default as RSidebar } from '../src/components/Sidebar/RSidebar.vue';
+export { default as RSnackbar } from '../src/components/Snackbar/RSnackbar.vue';
+export { default as RSwitch } from '../src/components/Switch/RSwitch.vue';
+export { default as RTabItem } from '../src/components/TabItem/RTabItem.vue';
+export { default as RTabs } from '../src/components/Tabs/RTabs.vue';
+export { default as RTextArea } from '../src/components/TextArea/RTextArea.vue';
+export { default as RTextfield } from '../src/components/Textfield/RTextfield.vue';
+export { default as RTooltip } from '../src/components/Tooltip/RTooltip.vue';
+export { default as RBreadcrumb } from '../src/components/Breadcrumb/RBreadcrumb.vue';
+export { default as RPagination } from '../src/components/Pagination/RPagination.vue';
+export { default as RProgressbar } from '../src/components/Progressbar/RProgressbar.vue';
+export { default as RItemGroup } from '../src/components/ItemGroup/RItemGroup.vue';
+export { default as RItem } from '../src/components/ItemGroup/RItem.vue';
