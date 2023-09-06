@@ -321,6 +321,7 @@ watch(
       }"
     >
       <Label
+        v-if="props.label"
         :id="props.id"
         :class="{
           textfield__label: true,
@@ -339,14 +340,14 @@ watch(
             :size="20"
           />
           <input
-            ref="inputRef"
             :id="props.id"
+            ref="inputRef"
             :disabled="props.disabled"
+            :max="props.max"
+            :min="props.min"
             :placeholder="props.placeholder"
             :type="typeOfInputRef"
             :value="state.value"
-            :min="props.min"
-            :max="props.max"
             @blur="onBlur"
             @focus="onFocus"
             @input="onInput"
