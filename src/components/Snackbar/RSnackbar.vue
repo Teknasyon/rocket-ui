@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch, type Ref } from 'vue';
-import Button from '../Button/RButton.vue';
+import { computed, watch } from 'vue';
 import Icon from '../Icon/RIcon.vue';
 import './snackbar.css';
 
@@ -114,8 +113,8 @@ const variantIcons = {
     <slot>
       <Icon
         v-if="props.variant"
-        :name="variantIcons"
         class="r-snackbar__icon"
+        :name="variantIcons"
       />
     </slot>
 

@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-snackbar {
-  @apply text-white gap-3 opacity-0 absolute w-[412px] grid items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
+  @apply text-white gap-3 opacity-0 hidden absolute w-[412px] items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
   grid-template-columns: auto 1fr auto;
 
   &--success {
@@ -44,7 +44,7 @@
   }
 
   &--shown {
-    @apply opacity-100 transition-all duration-300 ease-in-out;
+    @apply grid opacity-100 transition-all duration-300 ease-in-out;
     animation: slide-right-to-right 0.3s ease-in-out forwards;
   }
 
