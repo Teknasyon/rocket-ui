@@ -1,6 +1,6 @@
 {
   "name": "@rocketui/vue",
-  "version": "0.0.50",
+  "version": "0.0.53",
   "description": "A set of customizable UI components for Vue 3, built with TypeScript",
   "type": "module",
   "main": "dist/rocket-ui-vue.umd.cjs",
@@ -9,6 +9,33 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/rocket-ui-vue.js",
+      "require": "./dist/rocket-ui-vue.umd.cjs",
+      "default": "./dist/rocket-ui-vue.umd.cjs"
+    },
+    "./dist/rocket-ui-vue.js": {
+      "import": "./dist/rocket-ui-vue.js",
+      "require": "./dist/rocket-ui-vue.umd.cjs",
+      "default": "./dist/rocket-ui-vue.umd.cjs"
+    },
+    "./dist/rocket-ui-vue.umd.cjs": {
+      "import": "./dist/rocket-ui-vue.js",
+      "require": "./dist/rocket-ui-vue.umd.cjs",
+      "default": "./dist/rocket-ui-vue.umd.cjs"
+    },
+    "./dist/rocket-ui-vue.d.ts": {
+      "import": "./dist/rocket-ui-vue.d.ts",
+      "require": "./dist/rocket-ui-vue.d.ts",
+      "default": "./dist/rocket-ui-vue.d.ts"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css",
+      "default": "./dist/style.css"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Teknasyon/rocket-ui"
