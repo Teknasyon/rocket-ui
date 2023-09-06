@@ -37,7 +37,7 @@ const changePage = (page: number) => {
       <span class="r-pagination__page-info__current-page">
         {{ props.page }}
       </span>
-      {{ slash ? '/' : props.ofText }}
+      <span>{{ slash ? '/' : props.ofText }}</span>
       <span class="r-pagination__page-info__total-pages">
         {{ totalPages }}
       </span>
@@ -51,26 +51,26 @@ const changePage = (page: number) => {
         <slot name="prev">
           <svg
             :class="{ 'stroke-gray-400': props.page === 1 }"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#323232"
             fill="none"
+            height="16"
+            stroke="#323232"
             stroke-linecap="round"
             stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M0 0h24v24H0z" fill="none" stroke="none" />
             <path d="M15 6l-6 6l6 6" />
           </svg>
         </slot>
       </button>
       <input
         class="r-pagination__paginator__input"
-        type="number"
-        min="1"
         :max="totalPages"
+        min="1"
+        type="number"
         :value="props.page"
         @blur="changePage(+$event?.target?.value)"
       />
@@ -82,17 +82,17 @@ const changePage = (page: number) => {
         <slot name="next">
           <svg
             :class="{ 'stroke-gray-400': props.page === totalPages }"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#323232"
             fill="none"
+            height="16"
+            stroke="#323232"
             stroke-linecap="round"
             stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M0 0h24v24H0z" fill="none" stroke="none" />
             <path d="M9 6l6 6l-6 6" />
           </svg>
         </slot>
