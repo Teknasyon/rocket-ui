@@ -1,9 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: rocket-ui
-  annotations:
-    github.com/project-slug: Teknasyon/rocket-ui
-spec:
-  type: other
-  lifecycle: unknown
