@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type CSSProperties, type HTMLAttributes } from 'vue';
 import '../../index.css';
-export interface IProps extends HTMLAttributes {
+export interface IProps {
   /**
    * The HTML tag to use for the root element.
    * @type HTMLAttributes['is']
