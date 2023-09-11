@@ -6,19 +6,30 @@ import dts from 'vite-plugin-dts';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
     dts({
       copyDtsFiles: true,
-      outDir: ['dist', 'types'],
+      outDir: [
+        'dist',
+        'types',
+        // 'types/inner'
+      ],
       // include: ['src/index.ts'],
       exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts'],
       staticImport: true,
-      rollupTypes: true,
+      rollupTypes: false,
       // insertTypesEntry: true,
       compilerOptions: {
         declarationMap: true,
       },
+      rollupConfig: {
+        docModel: {
+          enabled: true,
+          apiJsonFilePath:
+            '<projectFolder>/docs/<unscopedPackageName>.api.json',
+        },
+      },
     }),
+    vue(),
   ],
   resolve: {
     alias: {
