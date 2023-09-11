@@ -20,7 +20,6 @@ import '../src/components/Textfield/textfield.css';
 import '../src/components/Tooltip/tooltip.css';
 import '../src/components/Breadcrumb/breadcrumb.css';
 import '../src/components/Pagination/pagination.css';
-import '../src/components/Progressbar/progressbar.css';
 
 export { default as RAccordion } from '../src/components/Accordion/RAccordion.vue';
 export { default as RAlert } from '../src/components/Alert/RAlert.vue';
@@ -43,6 +42,5 @@ export { default as RTextfield } from '../src/components/Textfield/RTextfield.vu
 export { default as RTooltip } from '../src/components/Tooltip/RTooltip.vue';
 export { default as RBreadcrumb } from '../src/components/Breadcrumb/RBreadcrumb.vue';
 export { default as RPagination } from '../src/components/Pagination/RPagination.vue';
-export { default as RProgressbar } from '../src/components/Progressbar/RProgressbar.vue';
 export { default as RItemGroup } from '../src/components/ItemGroup/RItemGroup.vue';
 export { default as RItem } from '../src/components/ItemGroup/RItem.vue';
