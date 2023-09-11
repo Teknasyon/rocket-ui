@@ -52,7 +52,8 @@
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore src/scripts src/assets",
+    "lint": "eslint . --ignore-path .gitignore",
+    "lint:fix": "eslint . --fix --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
@@ -62,14 +63,14 @@
     "build:icons": "node src/scripts/buildIcons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.0.7",
+    "@floating-ui/dom": "^1.0.7"
+  },
+  "devDependencies": {
     "@mdi/svg": "^7.2.96",
     "@mdi/util": "^0.3.2",
     "@vueuse/core": "^10.4.1",
     "lodash.kebabcase": "^4.1.1",
-    "vue": "^3.2.37"
-  },
-  "devDependencies": {
+    "vue": "^3.2.37",
     "@babel/core": "^7.18.10",
     "@rushstack/eslint-patch": "^1.1.4",
     "@storybook/addon-actions": "^7.3.2",
