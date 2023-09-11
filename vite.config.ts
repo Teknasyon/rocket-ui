@@ -15,19 +15,11 @@ export default defineConfig({
       ],
       // include: ['src/index.ts'],
       exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts'],
-      staticImport: true,
-      rollupTypes: false,
       // insertTypesEntry: true,
       compilerOptions: {
         declarationMap: true,
       },
-      rollupConfig: {
-        docModel: {
-          enabled: true,
-          apiJsonFilePath:
-            '<projectFolder>/docs/<unscopedPackageName>.api.json',
-        },
-      },
+      cleanVueFileName: true,
     }),
     vue(),
   ],
