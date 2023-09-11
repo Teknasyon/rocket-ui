@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-// @ts-ignore
 import Pagination from './RPagination.vue';
 
 const PaginationStory = {

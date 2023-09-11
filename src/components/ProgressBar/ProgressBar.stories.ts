@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-// @ts-ignore
 import Progressbar from './RProgressbar.vue';
 
 const ProgressbarStory = {
@@ -10,7 +9,6 @@ const ProgressbarStory = {
     args,
   }),
   template: `<Progressbar v-bind="args" />`,
-  tags: ['autodocs'],
   args: {
     value: 50,
     height: 8,
@@ -25,6 +23,7 @@ const ProgressbarStory = {
       },
     },
   },
+  tags: ['autodocs'],
 } as Meta<typeof Progressbar>;
 
 export default ProgressbarStory;

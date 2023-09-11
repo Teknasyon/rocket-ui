@@ -43,6 +43,6 @@ export { default as RTextfield } from '../src/components/Textfield/RTextfield.vu
 export { default as RTooltip } from '../src/components/Tooltip/RTooltip.vue';
 export { default as RBreadcrumb } from '../src/components/Breadcrumb/RBreadcrumb.vue';
 export { default as RPagination } from '../src/components/Pagination/RPagination.vue';
-export { default as RProgressbar } from '../src/components/Progressbar/RProgressbar.vue';
+export { default as RProgressbar } from '../src/components/Progressbar/RProgressbar.vue'
 export { default as RItemGroup } from '../src/components/ItemGroup/RItemGroup.vue';
 export { default as RItem } from '../src/components/ItemGroup/RItem.vue';

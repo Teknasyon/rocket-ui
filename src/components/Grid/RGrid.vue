@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from 'vue';
 import '../../index.css';
-export interface IProps extends CSSProperties {
+export interface IProps {
   /**
    * Shorthand prop for `gridTemplateColumns`
    * @type CSSProperties["gridTemplateColumns"]
