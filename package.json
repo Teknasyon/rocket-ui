@@ -52,7 +52,7 @@
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore src/scripts src/assets",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
