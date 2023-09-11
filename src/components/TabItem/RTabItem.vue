@@ -145,8 +145,8 @@ function handleIconClick(): void {
     :aria-disabled="props.disabled"
     :aria-selected="props.modelValue === props.id"
     :class="classes"
-    :style="style"
     :disabled="props.disabled"
+    :style="style"
     @click.stop="handleTab(props.id)"
   >
     <slot name="prepend">

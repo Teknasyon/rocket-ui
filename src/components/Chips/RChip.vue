@@ -103,8 +103,8 @@ const clickClose = (e: MouseEvent) => {
       <slot name="prepend">
         <Icon
           v-if="props.prependIcon"
-          class="chip__content__prepend-icon"
           :aria-disabled="props.disabled"
+          class="chip__content__prepend-icon"
           :name="props.prependIcon"
           :size="12"
         />
@@ -114,8 +114,8 @@ const clickClose = (e: MouseEvent) => {
     <slot name="append">
       <Icon
         v-if="props.appendIcon"
-        class="chip__content__append-icon"
         :aria-disabled="props.disabled"
+        class="chip__content__append-icon"
         :name="props.appendIcon"
         :size="12"
         @click="clickClose($event)"

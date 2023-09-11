@@ -64,11 +64,11 @@ const handleSelect = () => {
 </script>
 <template>
   <slot
-    :isSelected="isSelected(props.value as number)"
-    :value="props.value"
-    :selectedClass="selectedClass"
     :disabled="props.disabled"
+    :isSelected="isSelected(props.value as number)"
     :select="handleSelect"
+    :selectedClass="selectedClass"
     :toggle="handleToggle"
+    :value="props.value"
   />
 </template>

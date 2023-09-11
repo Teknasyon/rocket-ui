@@ -40,9 +40,9 @@ const props = withDefaults(defineProps<IProps>(), {
 <template>
   <svg
     class="r-icon"
-    :width="props.size"
     :height="props.size"
     :viewBox="props.viewBox"
+    :width="props.size"
   >
     <path :d="icons[props.name]" />
   </svg>

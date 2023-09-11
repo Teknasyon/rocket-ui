@@ -80,13 +80,13 @@ const handleIconClick = () => {
         :key="index"
         v-model="activeTab"
         :active="index === activeTab"
-        :disabled="tab.disabled"
-        :prependIcon="tab.prependIcon"
         :appendIcon="tab.appendIcon"
-        :label="tab.label"
-        :variant="tab.variant"
-        :tile="tile"
         :block="block"
+        :disabled="tab.disabled"
+        :label="tab.label"
+        :prependIcon="tab.prependIcon"
+        :tile="tile"
+        :variant="tab.variant"
         @click:icon="handleIconClick"
       />
     </slot>

@@ -12,6 +12,12 @@ const props = withDefaults(defineProps<ProgressBarProps>(), {
 });
 </script>
 <template>
-  <progress class="r-progressbar" role="progressbar" :aria-valuemax="100" :max="100" :value="props.value"
-    :style="{ height: props.height + 'px' }" />
+  <progress
+    :aria-valuemax="100"
+    class="r-progressbar"
+    :max="100"
+    role="progressbar"
+    :style="{ height: props.height + 'px' }"
+    :value="props.value"
+  />
 </template>

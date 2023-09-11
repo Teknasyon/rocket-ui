@@ -22,8 +22,8 @@ const props = withDefaults(
 </script>
 <template>
   <div class="r-breadcrumb">
-    <div class="r-breadcrumb__item" v-for="(item, i) in props.items" :key="i">
-      <router-link :to="item.to" class="r-breadcrumb__link">
+    <div v-for="(item, i) in props.items" :key="i" class="r-breadcrumb__item">
+      <router-link class="r-breadcrumb__link" :to="item.to">
         <slot name="item-icon">
           <RIcon v-if="item.icon" :name="item.icon" />
         </slot>
@@ -34,8 +34,8 @@ const props = withDefaults(
       <slot name="custom-seperator">
         <RIcon
           v-if="i !== items.length - 1 && props.seperator"
-          :name="props.seperator"
           class="r-breadcrumb__separator"
+          :name="props.seperator"
         />
       </slot>
     </div>

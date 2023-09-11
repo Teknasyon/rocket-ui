@@ -279,7 +279,7 @@ watch(selectedMultiple, (value) => {
 onClickOutside(wrapper, removeActive);
 </script>
 <template>
-  <div class="dropdown-wrapper" ref="wrapper">
+  <div ref="wrapper" class="dropdown-wrapper">
     <div
       ref="dropdown"
       :class="{
@@ -304,9 +304,9 @@ onClickOutside(wrapper, removeActive);
         <Chip
           v-for="(option, index) in selectedMultiple"
           :key="index"
-          :label="option.label"
           appendIcon="close"
           class="dropdown__tags__chip"
+          :label="option.label"
           variant="primary"
           @click:close="removeOption($event, option)"
         />
@@ -319,7 +319,6 @@ onClickOutside(wrapper, removeActive);
       <input
         :id="props.id"
         ref="input"
-        type="text"
         v-model="inputModel"
         :class="{
           dropdown__input: true,
@@ -328,6 +327,7 @@ onClickOutside(wrapper, removeActive);
         :disabled="props.disabled"
         :placeholder="props.placeholder"
         :readonly="!props.searchable"
+        type="text"
         @keydown.backspace="
           removeOption($event, selectedMultiple[selectedMultiple.length - 1])
         "
@@ -351,11 +351,11 @@ onClickOutside(wrapper, removeActive);
       <li
         v-for="option in searchedOptions"
         :key="option.value"
+        :aria-disabled="option.disabled"
         :class="{
           'dropdown-options__option': true,
           'dropdown-options__option--active': isSelected(option),
         }"
-        :aria-disabled="option.disabled"
         @click="selectOption($event, option)"
       >
         <div style="display: flex; align-items: center">

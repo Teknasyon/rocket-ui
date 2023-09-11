@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, provide, withDefaults } from 'vue';
+import { ref, computed, provide } from 'vue';
 
 export interface ItemGroupProps {
   /**
@@ -117,6 +117,6 @@ provide(`${RItemGroupSymbol}:select`, select);
 </script>
 <template>
   <component :is="tag">
-    <slot :select="select" :isSelected="isSelected" :selected="selectedItems" />
+    <slot :isSelected="isSelected" :select="select" :selected="selectedItems" />
   </component>
 </template>

@@ -99,23 +99,23 @@ const handleOutside = (event: Event) => {
 };
 </script>
 <template>
-  <div class="modal" v-show="modelValue" @click.stop="handleOutside">
+  <div v-show="modelValue" class="modal" @click.stop="handleOutside">
     <div
-      :style="styles"
-      role="dialog"
       aria-modal="true"
       :class="classes"
       :open="props.modelValue"
+      role="dialog"
+      :style="styles"
     >
       <div class="dialog__header">
         <slot name="header" />
-        <div class="icon" v-if="props.icon">
+        <div v-if="props.icon" class="icon">
           <Icon :name="props.icon" />
         </div>
-        <div class="title" v-if="props.title">
+        <div v-if="props.title" class="title">
           {{ props.title }}
         </div>
-        <div class="description" v-if="props.description">
+        <div v-if="props.description" class="description">
           {{ props.description }}
         </div>
       </div>
