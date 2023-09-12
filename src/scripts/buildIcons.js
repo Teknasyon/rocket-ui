@@ -1,9 +1,9 @@
 import util from '@mdi/util';
 
 const meta = util.getMeta(true);
-
 // eslint-disable-next-line
 const find = /(\-\w)/g;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const convert = function ([_, matches]) {
   return matches.toUpperCase();
 };
