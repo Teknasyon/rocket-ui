@@ -1,6 +1,6 @@
 @tailwind components;
 
-.tabs {
+.r-tabs {
   @apply w-fit flex transition-all;
 
   &--tile {

@@ -113,29 +113,15 @@ watch(
 
 <template>
   <div class="container">
-    <Label
-      v-if="props.label"
-      id="textarea"
-      class="textarea__label"
-      for="textarea"
-      :text="props.label"
-    />
-    <textarea
-      :id="props.id"
-      class="textarea"
-      :class="{
-        'textarea--error': props.errorMsg,
-        'textarea--disabled': props.disabled,
-      }"
-      :disabled="props.disabled"
-      :placeholder="props.placeholder"
-      :value="state.value"
-      @input="onInput"
-    />
-    <p v-if="props.errorMsg" class="textarea__error">
+    <Label v-if="props.label" id="textarea" class="r-textarea__label" for="textarea" :text="props.label" />
+    <textarea :id="props.id" class="r-textarea" :class="{
+      'r-textarea--error': props.errorMsg,
+      'r-textarea--disabled': props.disabled,
+    }" :disabled="props.disabled" :placeholder="props.placeholder" :value="state.value" @input="onInput" />
+    <p v-if="props.errorMsg" class="r-textarea__error">
       {{ props.errorMsg }}
     </p>
-    <p v-else class="textarea__hint">
+    <p v-else class="r-textarea__hint">
       {{ props.hint }}
     </p>
   </div>

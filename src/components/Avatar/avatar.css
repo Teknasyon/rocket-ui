@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.avatar {
+.r-avatar {
   @apply relative grid place-items-center rounded-full overflow-hidden bg-[var(--primary-100)];
 
   &__wrapper {

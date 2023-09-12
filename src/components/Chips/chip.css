@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.chip {
+.r-chip {
   @apply w-fit cursor-pointer text-white inline-flex items-center px-2 py-1 text-xs font-medium leading-4 rounded-full;
 
   &__primary {

@@ -54,9 +54,9 @@ const activeTab = ref(props.modelValue || props.tabs[0].id);
 
 const tabsClasses = computed(() => {
   return {
-    tabs: true,
-    'tabs--block': props.block,
-    'tabs--tile': props.tile,
+    'r-tabs': true,
+    'r-tabs--block': props.block,
+    'r-tabs--tile': props.tile,
   };
 });
 

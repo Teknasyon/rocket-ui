@@ -110,10 +110,10 @@ const emit = defineEmits(['update:modelValue', 'click:icon']);
 
 const classes = computed(() => {
   return {
-    'tab-item': true,
-    [`tab-item--${props.variant}`]: true,
-    'tab-item--tile': props.tile,
-    'tab-item--block': props.block,
+    'r-tab-item': true,
+    [`r-tab-item--${props.variant}`]: true,
+    'r-tab-item--tile': props.tile,
+    'r-tab-item--block': props.block,
   };
 });
 
@@ -141,35 +141,20 @@ function handleIconClick(): void {
 }
 </script>
 <template>
-  <button
-    :aria-disabled="props.disabled"
-    :aria-selected="props.modelValue === props.id"
-    :class="classes"
-    :disabled="props.disabled"
-    :style="style"
-    @click.stop="handleTab(props.id)"
-  >
+  <button :aria-disabled="props.disabled" :aria-selected="props.modelValue === props.id" :class="classes"
+    :disabled="props.disabled" :style="style" @click.stop="handleTab(props.id)">
     <slot name="prepend">
-      <Icon
-        v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
-        class="tab-item__prepend-icon"
-        :name="props.prependIcon"
-        :size="16"
-      />
+      <Icon v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon" class="r-tab-item__prepend-icon"
+        :name="props.prependIcon" :size="16" />
     </slot>
 
-    <span v-if="props.variant !== TabItemVariants.ICON" class="tab-item__label">
+    <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
       {{ props.label }}
     </span>
 
     <slot name="append">
-      <Icon
-        v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon"
-        class="tab-item__append-icon"
-        :name="props.appendIcon"
-        :size="16"
-        @click.stop="handleIconClick"
-      />
+      <Icon v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon" class="r-tab-item__append-icon"
+        :name="props.appendIcon" :size="16" @click.stop="handleIconClick" />
     </slot>
   </button>
 </template>

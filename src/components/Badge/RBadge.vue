@@ -68,19 +68,19 @@ const props = withDefaults(defineProps<BadgeProps>(), {
 defineEmits(['click']);
 const classes = computed(() => {
   return {
-    badge: true,
-    badge__content: props.content,
-    [`badge--overlap-${props.placement}`]: props.overlap,
-    [`badge--${props.placement}`]: props.placement,
-    [`badge--outside-${props.placement}`]: props.outside,
-    'badge--hover': props.hover,
-    'badge--no-content': !props.content,
-    [`badge--${props.variant}`]: props.variant,
+    'r-badge': true,
+    'r-badge__content': props.content,
+    [`r-badge--overlap-${props.placement}`]: props.overlap,
+    [`r-badge--${props.placement}`]: props.placement,
+    [`r-badge--outside-${props.placement}`]: props.outside,
+    'r-badge--hover': props.hover,
+    'r-badge--no-content': !props.content,
+    [`r-badge--${props.variant}`]: props.variant,
   };
 });
 </script>
 <template>
-  <div class="badge-wrapper group">
+  <div class="r-badge-wrapper group">
     <span :class="classes" @click="$emit('click')">
       {{ props.content }}
     </span>

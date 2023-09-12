@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.button {
+.r-button {
   @apply w-fit antialiased flex items-center justify-center transition-all rounded-[var(--btn-radius)] text-white font-medium cursor-pointer;
 
   &:active {
@@ -25,10 +25,10 @@
     @apply animate-pulse;
 
     /* ---Not yet implemented---
-    & .button__prepend-icon {
+    & .r-button__prepend-icon {
       @apply animate-spin;
     }
-    & .button__append-icon {
+    & .r-button__append-icon {
       @apply animate-spin;
     } */
   }
@@ -56,7 +56,7 @@
     @apply ml-2;
   }
 }
-.button--primary {
+.r-button--primary {
   @apply bg-[var(--primary-500)];
 
   &:hover {
@@ -69,7 +69,7 @@
     @apply bg-[var(--primary-200)] text-[var(--primary-300)];
   }
 }
-.button--secondary {
+.r-button--secondary {
   @apply bg-[var(--primary-100)]  text-[var(--primary-500)];
 
   &:hover {
@@ -82,7 +82,7 @@
     @apply bg-[var(--primary-200)] text-[var(--primary-300)];
   }
 }
-.button--outline {
+.r-button--outline {
   @apply bg-transparent ring-1 ring-[var(--neutral-200)] text-[var(--neutral-900)];
 
   &:hover {
@@ -95,7 +95,7 @@
     @apply bg-white text-[var(--neutral-300)];
   }
 }
-.button--text {
+.r-button--text {
   @apply text-[var(--neutral-900)] bg-transparent h-auto rounded-none p-0;
 
   &:active {
@@ -105,7 +105,7 @@
     @apply bg-white text-[var(--neutral-300)];
   }
 }
-.button--ghost {
+.r-button--ghost {
   @apply bg-transparent text-[var(--primary-100)];
 
   &:hover {
@@ -118,7 +118,7 @@
     @apply bg-white text-[var(--neutral-300)];
   }
 }
-.button--danger {
+.r-button--danger {
   @apply bg-[var(--error-500)];
 
   &:hover {
@@ -131,7 +131,7 @@
     @apply bg-[var(--error-200)] text-[var(--error-300)];
   }
 }
-.button--link {
+.r-button--link {
   @apply bg-transparent text-[var(--primary-500)];
 
   &:hover {

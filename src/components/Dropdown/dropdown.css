@@ -68,7 +68,7 @@
 }
 
 .r-dropdown-options {
-  @apply hidden py-3 px-2 left-0 absolute z-10 w-full mt-1 bg-white border border-[var(--neutral-200)] rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm;
+  @apply hidden p-2 left-0 absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none sm:text-sm;
 
   &--active {
     @apply block;

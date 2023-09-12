@@ -125,12 +125,12 @@ const props = withDefaults(defineProps<Props>(), {
   backgroundColor: '',
 });
 const classes = computed(() => ({
-  button: true,
-  [`button--${props.variant}`]: true,
-  [`button--loading`]: props.loading,
-  [`button--${props.size || 'medium'}`]: true,
-  [`button--only-icon`]: props.onlyIcon,
-  [`button--block`]: props.block,
+  'r-button': true,
+  [`r-button--${props.variant}`]: true,
+  [`r-button--loading`]: props.loading,
+  [`r-button--${props.size || 'medium'}`]: true,
+  [`r-button--only-icon`]: props.onlyIcon,
+  [`r-button--block`]: props.block,
 }));
 defineEmits(['click']);
 const iconSize = computed(() => {
@@ -150,30 +150,15 @@ const style = computed(() => {
 });
 </script>
 <template>
-  <button
-    v-bind="$attrs"
-    :class="classes"
-    :disabled="disabled || loading"
-    :style="style"
-    @click.stop="$emit('click')"
-  >
+  <button v-bind="$attrs" :class="classes" :disabled="disabled || loading" :style="style" @click.stop="$emit('click')">
     <slot name="custom-icon" />
 
-    <Icon
-      v-if="!$slots['custom-icon'] && props.prependIcon"
-      :class="{
-        'button__prepend-icon': true,
-        'button__prepend-icon--only': props.onlyIcon,
-      }"
-      :name="props.prependIcon"
-      :size="iconSize"
-    />
+    <Icon v-if="!$slots['custom-icon'] && props.prependIcon" :class="{
+      'r-button__prepend-icon': true,
+      'r-button__prepend-icon--only': props.onlyIcon,
+    }" :name="props.prependIcon" :size="iconSize" />
     <slot v-if="!props.onlyIcon" />
-    <Icon
-      v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon"
-      class="button__append-icon"
-      :name="props.appendIcon"
-      :size="iconSize"
-    />
+    <Icon v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon" class="r-button__append-icon"
+      :name="props.appendIcon" :size="iconSize" />
   </button>
 </template>

@@ -79,10 +79,10 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['click:chip', 'click:close']);
 const classes = computed<object>(() => {
   return {
-    chip: true,
-    'chip--disabled': props.disabled,
-    [`chip__${props.variant}`]: props.variant,
-    [`chip__${props.variant}--ghost`]: props.ghost,
+    'r-chip': true,
+    'r-chip--disabled': props.disabled,
+    [`r-chip__${props.variant}`]: props.variant,
+    [`r-chip__${props.variant}--ghost`]: props.ghost,
   };
 });
 
@@ -99,27 +99,16 @@ const clickClose = (e: MouseEvent) => {
 </script>
 <template>
   <div :class="classes">
-    <div class="chip__content" @click="clickChip($event)">
+    <div class="r-chip__content" @click="clickChip($event)">
       <slot name="prepend">
-        <Icon
-          v-if="props.prependIcon"
-          :aria-disabled="props.disabled"
-          class="chip__content__prepend-icon"
-          :name="props.prependIcon"
-          :size="12"
-        />
+        <Icon v-if="props.prependIcon" :aria-disabled="props.disabled" class="r-chip__content__prepend-icon"
+          :name="props.prependIcon" :size="12" />
       </slot>
-      <span class="chip__content__label">{{ props.label }}</span>
+      <span class="r-chip__content__label">{{ props.label }}</span>
     </div>
     <slot name="append">
-      <Icon
-        v-if="props.appendIcon"
-        :aria-disabled="props.disabled"
-        class="chip__content__append-icon"
-        :name="props.appendIcon"
-        :size="12"
-        @click="clickClose($event)"
-      />
+      <Icon v-if="props.appendIcon" :aria-disabled="props.disabled" class="r-chip__content__append-icon"
+        :name="props.appendIcon" :size="12" @click="clickClose($event)" />
     </slot>
   </div>
 </template>

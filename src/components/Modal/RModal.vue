@@ -81,8 +81,8 @@ const props = withDefaults(defineProps<ModalProps>(), {
 const emits = defineEmits(['update:modelValue']);
 const classes = computed(() => {
   return {
-    dialog: true,
-    'dialog--block': props.block,
+    'r-dialog': true,
+    'r-dialog--block': props.block,
   };
 });
 const styles = computed(() => {
@@ -99,15 +99,9 @@ const handleOutside = (event: Event) => {
 };
 </script>
 <template>
-  <div v-show="modelValue" class="modal" @click.stop="handleOutside">
-    <div
-      aria-modal="true"
-      :class="classes"
-      :open="props.modelValue"
-      role="dialog"
-      :style="styles"
-    >
-      <div class="dialog__header">
+  <div v-show="modelValue" class="r-modal-overlay" @click.stop="handleOutside">
+    <div aria-modal="true" :class="classes" :open="props.modelValue" role="dialog" :style="styles">
+      <div class="r-dialog__header">
         <slot name="header" />
         <div v-if="props.icon" class="icon">
           <Icon :name="props.icon" />
@@ -119,10 +113,10 @@ const handleOutside = (event: Event) => {
           {{ props.description }}
         </div>
       </div>
-      <div class="dialog__body">
+      <div class="r-dialog__body">
         <slot />
       </div>
-      <div class="dialog__actions">
+      <div class="r-dialog__actions">
         <slot name="actions" />
       </div>
     </div>

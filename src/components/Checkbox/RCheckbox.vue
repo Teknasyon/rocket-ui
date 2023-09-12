@@ -117,11 +117,11 @@ const icon = computed(() => {
 
 const classes = computed(() => {
   return {
-    checkbox: true,
-    'checkbox--checked': state.checked,
-    'checkbox--disabled': props.disabled,
-    'checkbox--indeterminate': state.indeterminate,
-    'checkbox--error': !!props.errorMsg,
+    'r-checkbox': true,
+    'r-checkbox--checked': state.checked,
+    'r-checkbox--disabled': props.disabled,
+    'r-checkbox--indeterminate': state.indeterminate,
+    'r-checkbox--error': !!props.errorMsg,
   };
 });
 
@@ -161,33 +161,22 @@ watch(
 );
 </script>
 <template>
-  <div class="checkbox-wrapper">
-    <div class="checkbox-container">
-      <input
-        :id="props.id"
-        :checked="state.checked"
-        class="checkbox-container__input"
-        :disabled="props.disabled"
-        :indeterminate="state.indeterminate"
-        type="checkbox"
-        @change="onChange"
-      />
+  <div class="r-checkbox-wrapper">
+    <div class="r-checkbox-container">
+      <input :id="props.id" :checked="state.checked" class="r-checkbox-container__input" :disabled="props.disabled"
+        :indeterminate="state.indeterminate" type="checkbox" @change="onChange" />
       <div :class="classes" :data-disabled="props.disabled">
         <Icon :name="icon" :size="24" />
       </div>
     </div>
-    <div class="checkbox-texts">
-      <label
-        class="checkbox-texts__label"
-        :data-disabled="props.disabled"
-        :for="props.id"
-      >
+    <div class="r-checkbox-texts">
+      <label class="r-checkbox-texts__label" :data-disabled="props.disabled" :for="props.id">
         {{ props.label }}
       </label>
-      <p v-if="!!props.errorMsg" class="checkbox-texts__error">
+      <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
         {{ props.errorMsg }}
       </p>
-      <p v-else class="checkbox-texts__hint">
+      <p v-else class="r-checkbox-texts__hint">
         {{ props.hint }}
       </p>
     </div>

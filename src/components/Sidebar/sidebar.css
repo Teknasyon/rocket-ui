@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.sidebar {
+.r-sidebar {
   @apply flex flex-col items-center w-[var(--sidebar-collapsed-width)] h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r
   transition-all ease-in duration-300;
 
@@ -8,11 +8,11 @@
     @apply w-[var(--sidebar-width)] items-start;
   }
 
-  .nav {
+  &__nav {
     @apply flex flex-col flex-1 space-y-6 w-full;
   }
 
-  .actions {
+  &__actions {
     @apply flex flex-col space-y-6 w-full;
   }
 }

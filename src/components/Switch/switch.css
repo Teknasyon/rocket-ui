@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.switch-container {
+.r-switch-container {
   @apply flex items-center justify-start gap-3;
 }
 
@@ -13,7 +13,7 @@
   }
 }
 
-.switch {
+.r-switch {
   @apply relative inline-block w-16 h-9 box-border;
 
   &--small {
@@ -22,7 +22,7 @@
     & > .slider::before {
       @apply w-3 h-3;
     }
-    & > .switch__input:checked + .slider:before {
+    & > .r-switch__input:checked + .slider:before {
       -webkit-transform: translateX(16px);
       -ms-transform: translateX(16px);
       transform: translateX(16px);
@@ -33,7 +33,7 @@
     & > .slider::before {
       @apply w-4 h-4;
     }
-    & > .switch__input:checked + .slider:before {
+    & > .r-switch__input:checked + .slider:before {
       -webkit-transform: translateX(20px);
       -ms-transform: translateX(20px);
       transform: translateX(20px);
@@ -45,7 +45,7 @@
     & > .slider::before {
       @apply w-5 h-5;
     }
-    & > .switch__input:checked + .slider:before {
+    & > .r-switch__input:checked + .slider:before {
       -webkit-transform: translateX(24px);
       -ms-transform: translateX(24px);
       transform: translateX(24px);
@@ -60,7 +60,7 @@
   }
 
   &--error {
-    & > .switch__input:checked + .slider {
+    & > .r-switch__input:checked + .slider {
       @apply bg-[var(--error-500)];
       &:hover {
         @apply bg-[var(--error-700)];
@@ -79,7 +79,7 @@
   }
 }
 
-.switch-texts {
+.r-switch-texts {
   &--small {
     @apply text-xs;
   }

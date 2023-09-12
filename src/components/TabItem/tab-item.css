@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.tab-item {
+.r-tab-item {
   @apply transition-all gap-2 min-w-fit py-3 px-6 bg-transparent flex justify-center items-center text-[var(--neutral-500)] text-sm font-medium cursor-pointer;
 
   &:disabled {

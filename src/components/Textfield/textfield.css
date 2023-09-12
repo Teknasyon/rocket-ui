@@ -4,7 +4,7 @@ fieldset {
   @apply border-none m-0 p-0;
 }
 
-.textfield__wrapper {
+.r-textfield__wrapper {
   @apply flex flex-col items-start justify-start;
 }
 
@@ -20,7 +20,7 @@ input {
   }
 }
 
-.textfield {
+.r-textfield {
   @apply gap-2 box-border w-full flex items-center text-sm border border-solid border-[var(--neutral-200)] text-[var(--neutral-500)] bg-[var(--textfield-bg)]  rounded-lg px-4 py-3.5;
 
   &__label {

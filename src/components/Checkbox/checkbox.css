@@ -1,10 +1,10 @@
 @import '../../index.css';
 
-.checkbox-wrapper {
+.r-checkbox-wrapper {
   @apply flex items-start;
 }
 
-.checkbox-container {
+.r-checkbox-container {
   @apply flex;
 
   &__input {
@@ -12,7 +12,7 @@
   }
 }
 
-.checkbox {
+.r-checkbox {
   @apply transition-all duration-200 ease-in-out flex items-center justify-center text-[var(--neutral-200)] cursor-pointer h-5 w-5 border-[var(--neutral-200)] rounded border-2;
 
   &:hover {
@@ -48,7 +48,7 @@
   }
 }
 
-.checkbox-texts {
+.r-checkbox-texts {
   @apply flex flex-col ml-3.5;
 
   &__label {

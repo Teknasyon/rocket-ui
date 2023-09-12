@@ -11,16 +11,16 @@ const props = withDefaults(defineProps<RSidebarProps>(), {
 });
 
 const classes = computed(() => ({
-  sidebar: true,
-  'sidebar--open': props.modelValue,
+  'r-sidebar': true,
+  'r-sidebar--open': props.modelValue,
 }));
 </script>
 <template>
   <aside :class="classes">
-    <nav class="nav">
+    <nav class="r-sidebar__nav">
       <slot />
     </nav>
-    <div class="actions">
+    <div class="r-sidebar__actions">
       <slot name="actions" />
     </div>
   </aside>

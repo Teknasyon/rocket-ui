@@ -93,10 +93,10 @@ const state = reactive<{
 });
 const classes = computed(() => {
   return {
-    switch: true,
-    'switch--disabled': props.disabled,
-    [`switch--${props.size}`]: props.size,
-    'switch--error': props.errorMsg,
+    'r-switch': true,
+    'r-switch--disabled': props.disabled,
+    [`r-switch--${props.size}`]: props.size,
+    'r-switch--error': props.errorMsg,
   };
 });
 const onChange = (e: unknown) => {
@@ -118,30 +118,22 @@ watch(
 );
 </script>
 <template>
-  <div class="switch-container">
+  <div class="r-switch-container">
     <div :class="classes">
-      <input
-        :id="props.id"
-        :checked="state.checked"
-        class="switch__input"
-        type="checkbox"
-        @change="onChange"
-      />
+      <input :id="props.id" :checked="state.checked" class="r-switch__input" type="checkbox" @change="onChange" />
       <span class="slider round" />
     </div>
-    <div
-      :class="{
-        'switch-texts': true,
-        [`switch-texts--${props.size}`]: true,
-      }"
-    >
-      <label :id="props.id" class="switch-texts__label" :for="props.id">
+    <div :class="{
+      'r-switch-texts': true,
+      [`r-switch-texts--${props.size}`]: true,
+    }">
+      <label :id="props.id" class="r-switch-texts__label" :for="props.id">
         {{ props.label }}
       </label>
-      <p v-if="props.errorMsg" class="switch-texts__error">
+      <p v-if="props.errorMsg" class="r-switch-texts__error">
         {{ props.errorMsg }}
       </p>
-      <p v-else class="switch-texts__hint">{{ props.hint }}</p>
+      <p v-else class="r-switch-texts__hint">{{ props.hint }}</p>
     </div>
   </div>
 </template>

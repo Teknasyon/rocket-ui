@@ -69,8 +69,8 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 
 const classes = computed(() => ({
-  avatar: true,
-  [`avatar--${props.size}`]: true,
+  'r-avatar': true,
+  [`r-avatar--${props.size}`]: true,
 }));
 const isAnon = computed(() => props.type === 'image' && !props.src);
 const imgSrc = computed(() => {
@@ -88,28 +88,20 @@ const shortTextWithFirstCharacters = (text: string) => {
 };
 </script>
 <template>
-  <div class="avatar__wrapper">
+  <div class="r-avatar__wrapper">
     <div :class="classes">
-      <p
-        v-if="props.type === 'text'"
-        :class="{ avatar__text: true, [`avatar__text--${props.size}`]: true }"
-      >
+      <p v-if="props.type === 'text'" :class="{ 'r-avatar__text': true, [`r-avatar__text--${props.size}`]: true }">
         {{ shortTextWithFirstCharacters(props.text) }}
       </p>
-      <img
-        v-else
-        :alt="props.alt"
-        :class="{
-          avatar__image: true,
-          [`avatar__image--${props.size}`]: true,
-          'avatar__image--anonymous': isAnon,
-        }"
-        :src="imgSrc"
-      />
+      <img v-else :alt="props.alt" :class="{
+        'r-avatar__image': true,
+        [`r-avatar__image--${props.size}`]: true,
+        'r-avatar__image--anonymous': isAnon,
+      }" :src="imgSrc" />
     </div>
-    <span
-      v-if="props.online"
-      :class="{ avatar__online: true, [`avatar__online--${props.size}`]: true }"
-    />
+    <span v-if="props.online" :class="{
+      'r-avatar__online': true,
+      [`r-avatar__online--${props.size}`]: true,
+    }" />
   </div>
 </template>

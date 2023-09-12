@@ -159,7 +159,7 @@ const setActive = (e: MouseEvent) => {
   e.stopPropagation();
   active.value = !active.value;
   if (active.value) {
-    dropdown.value?.classList.add('dropdown--active');
+    dropdown.value?.classList.add('r-dropdown--active');
     dropdown.value?.focus();
     if (props.searchable) input.value?.focus();
 
@@ -174,7 +174,7 @@ const setActive = (e: MouseEvent) => {
  */
 const removeActive = () => {
   active.value = false;
-  dropdown.value?.classList.remove('dropdown--active');
+  dropdown.value?.classList.remove('r-dropdown--active');
   dropdown.value?.blur();
   input.value?.blur();
 };
