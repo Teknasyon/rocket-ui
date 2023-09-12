@@ -1,0 +1,5 @@
+@import '../../index.css';
+
+.r-label {
+    @apply text-[var(--neutral-900)] text-sm p-0 mb-2;
+}

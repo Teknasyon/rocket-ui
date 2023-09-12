@@ -38,5 +38,9 @@ const props = withDefaults(defineProps<LabelProps>(), {
 });
 </script>
 <template>
-  <label :id="props.id" :for="props.for">{{ props.text }}</label>
+  <label :id="props.id" class="r-label" :for="props.for">
+    <slot>
+      {{ props.text }}
+    </slot>
+  </label>
 </template>

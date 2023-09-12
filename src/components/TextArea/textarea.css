@@ -38,7 +38,6 @@
   }
 
   &__label {
-    @apply text-[var(--neutral-900)] mb-2 text-sm;
   }
 
   &__hint {

@@ -1,10 +1,10 @@
 @import '../../index.css';
 
-.dropdown-wrapper {
+.r-dropdown-wrapper {
   @apply relative;
 }
 
-.dropdown {
+.r-dropdown {
   @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
 
   &--active {
@@ -67,7 +67,7 @@
   }
 }
 
-.dropdown-options {
+.r-dropdown-options {
   @apply hidden py-3 px-2 left-0 absolute z-10 w-full mt-1 bg-white border border-[var(--neutral-200)] rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm;
 
   &--active {

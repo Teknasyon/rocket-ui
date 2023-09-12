@@ -112,7 +112,14 @@ export interface SelectProps {
    * <Dropdown searchable />
    */
   searchable?: boolean;
-  parentElement?: string;
+
+  /**
+   * Id of the Dropdown
+   * @type string
+   * @default 'test'
+   * @example
+   * <Dropdown id="test" />
+   */
   id?: string;
 }
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -127,6 +134,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   appendIcon: 'mdiChevronDown',
   searchable: false,
   id: 'test',
+  label: '',
 });
 
 const selected = ref<string | number>('');
@@ -254,6 +262,10 @@ const searchedOptions = computed(() => {
   return result;
 });
 
+const isReadOnly = computed(() => {
+  return props.multiple || props.taggable || !props.searchable;
+});
+
 onMounted(() => {
   if (props.modelValue) {
     if (props.multiple) {
@@ -279,113 +291,72 @@ watch(selectedMultiple, (value) => {
 onClickOutside(wrapper, removeActive);
 </script>
 <template>
-  <div ref="wrapper" class="dropdown-wrapper">
-    <div
-      ref="dropdown"
-      :class="{
-        dropdown: true,
-        'dropdown--disabled': props.disabled,
-        'dropdown--loading': props.loading,
-      }"
-      @click="setActive"
-    >
-      <div
-        v-if="props.prependIcon || $slots['prepend']"
-        :class="{
-          'dropdown__prepend-icon': true,
-          'dropdown__prepend-icon--active': active,
-        }"
-      >
+  <div ref="wrapper" class="r-dropdown-wrapper">
+    <div ref="dropdown" :class="{
+      'r-dropdown': true,
+      'r-dropdown--disabled': props.disabled,
+      'r-dropdown--loading': props.loading,
+    }" role="select" @click="setActive">
+      <div v-if="props.prependIcon || $slots['prepend']" :class="{
+        'r-dropdown__prepend-icon': true,
+        'r-dropdown__prepend-icon--active': active,
+      }">
         <slot name="prepend">
           <Icon v-if="props.prependIcon" :name="props.prependIcon" />
         </slot>
       </div>
-      <div v-if="props.taggable" class="dropdown__tags">
-        <Chip
-          v-for="(option, index) in selectedMultiple"
-          :key="index"
-          appendIcon="close"
-          class="dropdown__tags__chip"
-          :label="option.label"
-          variant="primary"
-          @click:close="removeOption($event, option)"
-        />
+      <div v-if="props.taggable" class="r-dropdown__tags">
+        <Chip v-for="(option, index) in selectedMultiple" :key="index" appendIcon="close" class="r-dropdown__tags__chip"
+          :label="option.label" variant="primary" @click:close="removeOption($event, option)" />
       </div>
-      <div v-if="props.multiple" class="dropdown__multiple">
+      <div v-if="props.multiple" class="r-dropdown__multiple">
         <p v-for="(option, index) in selectedMultiple" :key="index">
           {{ option.label + ',' }}
         </p>
       </div>
-      <input
-        :id="props.id"
-        ref="input"
-        v-model="inputModel"
-        :class="{
-          dropdown__input: true,
-          'dropdown__input--loading': props.loading,
-        }"
-        :disabled="props.disabled"
-        :placeholder="props.placeholder"
-        :readonly="!props.searchable"
-        type="text"
+      <input :id="props.id" ref="input" v-model="inputModel" :class="{
+        'r-dropdown__input': true,
+        'r-dropdown__input--loading': props.loading,
+      }" :disabled="props.disabled" :placeholder="props.placeholder" :readonly="isReadOnly" type="text"
         @keydown.backspace="
           removeOption($event, selectedMultiple[selectedMultiple.length - 1])
-        "
-        @keydown.enter="createTag($event)"
-      />
-      <div
-        v-if="props.appendIcon || $slots['append']"
-        :class="{
-          'dropdown__append-icon': true,
-          'dropdown__append-icon--active': active,
-        }"
-      >
+          " @keydown.enter="createTag($event)" />
+      <div v-if="props.appendIcon || $slots['append']" :class="{
+        'r-dropdown__append-icon': true,
+        'r-dropdown__append-icon--active': active,
+      }">
         <slot name="append">
           <Icon v-if="props.appendIcon" :name="props.appendIcon" />
         </slot>
       </div>
     </div>
-    <ul
-      :class="{ 'dropdown-options': true, 'dropdown-options--active': active }"
-    >
-      <li
-        v-for="option in searchedOptions"
-        :key="option.value"
-        :aria-disabled="option.disabled"
-        :class="{
-          'dropdown-options__option': true,
-          'dropdown-options__option--active': isSelected(option),
-        }"
-        @click="selectOption($event, option)"
-      >
+    <ul :class="{
+      'r-dropdown-options': true,
+      'r-dropdown-options--active': active,
+    }">
+      <li v-for="option in searchedOptions" :key="option.value" :aria-disabled="option.disabled" :class="{
+        'r-dropdown-options__option': true,
+        'r-dropdown-options__option--active': isSelected(option),
+      }" @click="selectOption($event, option)">
         <div style="display: flex; align-items: center">
           <slot v-if="!option.prependIcon" name="option-prepend" />
-          <Icon
-            v-else
-            :class="{
-              'dropdown-options__option__prepend-icon': true,
-              'dropdown-options__option__prepend-icon--active':
-                isSelected(option),
-            }"
-            :name="option.prependIcon"
-          />
-          <p
-            :class="{
-              'dropdown-options__option__label': true,
-              'dropdown-options__option__label--active': isSelected(option),
-            }"
-          >
+          <Icon v-else :class="{
+            'r-dropdown-options__option__prepend-icon': true,
+            'r-dropdown-options__option__prepend-icon--active':
+              isSelected(option),
+          }" :name="option.prependIcon" />
+          <p :class="{
+            'r-dropdown-options__option__label': true,
+            'r-dropdown-options__option__label--active': isSelected(option),
+          }">
             {{ option.label }}
           </p>
         </div>
-        <Icon
-          v-if="isSelected(option)"
-          :class="{
-            'dropdown-options__option__append-icon': true,
-            'dropdown-options__option__append-icon--active': isSelected(option),
-          }"
-          name="mdiCheck"
-        />
+        <Icon v-if="isSelected(option)" :class="{
+          'r-dropdown-options__option__append-icon': true,
+          'r-dropdown-options__option__append-icon--active':
+            isSelected(option),
+        }" name="mdiCheck" />
       </li>
     </ul>
   </div>
