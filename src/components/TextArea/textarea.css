@@ -20,7 +20,7 @@
   }
 
   &:disabled {
-    @apply bg-[var(--neutral-100)] cursor-not-allowed text-[var(--neutral-300)];
+    @apply bg-[var(--primary-50)] cursor-not-allowed text-[var(--neutral-300)];
   }
 
   &:disabled:hover {

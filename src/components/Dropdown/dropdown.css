@@ -12,7 +12,7 @@
   }
 
   &--disabled {
-    @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
+    @apply bg-[var(--primary-50)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
   }
 
   &--loading {

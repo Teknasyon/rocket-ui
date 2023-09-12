@@ -6,6 +6,7 @@
   * @presenter Color
   */
   --primary-50: #f2f4ff;
+  --primary-75: #f2f3ff;
   --primary-100: #f2f3fd;
   --primary-200: #e4e6fb;
   --primary-300: #a3abf0;
@@ -164,7 +165,7 @@
   * @presenter TextfieldVariables
   */
   --textfield-bg: var(--white);
-  --textfield-bg-disabled: var(--neutral-100);
+  --textfield-bg-disabled: var(--primary-50);
   /**
   * @tokens-button-variables
   * @presenter ButtonVariables
