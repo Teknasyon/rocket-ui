@@ -16,19 +16,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        printWidth: 80,
-        tabWidth: 2,
-        semi: true,
-        bracketSpacing: true,
-        arrowParens: 'always',
-        vueIndentScriptAndStyle: false,
-      },
-    ],
+    'prettier/prettier': 'off',
     'vue/multi-word-component-names': 0,
     'vue/no-side-effects-in-computed-properties': 2,
     'vue/order-in-components': [
