@@ -160,6 +160,7 @@
   --sidebar-collapsed-width: 80px;
   --sidebar-background: white;
   --sidebar-padding: var(--space-5) var(--space-4);
+  --sidebar-trigger-color: var(--neutral-500);
   /**
   * @tokens-textfield-variables
   * @presenter TextfieldVariables

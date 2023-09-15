@@ -20,21 +20,18 @@ const classes = computed(() => ({
 }));
 </script>
 <template>
-  <div class="flex w-fit">
-    <aside :class="[classes, props.class]" :data-open="props.modelValue">
-      <nav class="r-sidebar__nav">
-        <slot />
-      </nav>
-      <div class="r-sidebar__actions">
-        <slot name="actions" />
-      </div>
-    </aside>
-    <div v-if="props.showTrigger" class="r-sidebar__trigger" :class="[props.triggerClass]" :data-open="props.modelValue">
-      <slot name="trigger">
-        <button class="r-sidebar__trigger-button" @click="$emit('update:modelValue', !props.modelValue)">
-          >
-        </button>
-      </slot>
+  <aside :class="[classes, props.class]" :data-open="props.modelValue">
+    <nav class="r-sidebar__nav">
+      <slot />
+    </nav>
+    <div class="r-sidebar__actions">
+      <slot name="actions" />
     </div>
+  </aside>
+  <div v-if="props.showTrigger" class="r-sidebar__trigger" :class="[props.triggerClass]" :data-open="props.modelValue"
+    @click="$emit('update:modelValue', !props.modelValue)">
+    <slot name="trigger">
+      >
+    </slot>
   </div>
 </template>

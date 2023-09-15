@@ -1,26 +1,27 @@
 @import '../../index.css';
 
 .r-sidebar {
-  @apply relative min-w-fit flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r
-  transition-all ease-in-out duration-300;
+  @apply relative min-w-fit flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r;
 
   &[data-open='true'] {
-    @apply w-[var(--sidebar-width)] items-start;
+    @apply w-[var(--sidebar-width)] items-start transition-[width] ease-linear duration-300;
+
   }
   &[data-open='false'] {
-    @apply w-[var(--sidebar-collapsed-width)] items-center;
+    @apply w-[var(--sidebar-collapsed-width)] items-center transition-[width] ease-linear duration-300;
+
   }
 
   &__trigger {
-    @apply absolute top-24 z-10 flex items-center justify-center w-6 h-6 
-    text-[var(--sidebar-trigger-color)] bg-white 
-    rounded-full border transition-all ease-in-out duration-300;
+    @apply cursor-pointer absolute top-24 z-10 flex items-center justify-center w-6 h-6 
+    text-[var(--sidebar-trigger-color)] bg-white
+    rounded-full border transition-all ease-linear duration-300;
 
     &[data-open='true'] {
-      @apply left-[calc(var(--sidebar-width)+4px)] rotate-180;
+      @apply left-[var(--sidebar-width)] rotate-180;
     }
     &[data-open='false'] {
-      @apply left-[calc(var(--sidebar-collapsed-width)+4px)] rotate-0;
+      @apply left-[var(--sidebar-collapsed-width)] rotate-0;
     }
   }
 
