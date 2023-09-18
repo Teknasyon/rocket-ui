@@ -4,18 +4,17 @@
   @apply relative min-w-fit flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r;
 
   &[data-open='true'] {
-    @apply w-[var(--sidebar-width)] items-start transition-[width] ease-linear duration-300;
+    @apply w-[var(--sidebar-width)] items-start transition-[width] ease-in duration-300;
 
   }
   &[data-open='false'] {
-    @apply w-[var(--sidebar-collapsed-width)] items-center transition-[width] ease-linear duration-300;
-
+    @apply w-[var(--sidebar-collapsed-width)] items-center transition-[width] ease-out duration-300;
   }
 
   &__trigger {
     @apply cursor-pointer absolute top-24 z-10 flex items-center justify-center w-6 h-6 
     text-[var(--sidebar-trigger-color)] bg-white
-    rounded-full border transition-all ease-linear duration-300;
+    rounded-full border transition-all duration-300;
 
     &[data-open='true'] {
       @apply left-[var(--sidebar-width)] rotate-180;
