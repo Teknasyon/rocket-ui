@@ -1,6 +1,8 @@
 ![Logo](./resources/rocket-ui-logo-light.svg#gh-light-mode-only)
 ![Logo](./resources/rocket-ui-logo-dark.svg#gh-dark-mode-only)
 
+<a href="https://npmjs.com/package/@rocketui/vue"><img src="https://img.shields.io/npm/v/@rocketui/vue?style=flat&colorA=080f12&colorB=34b2ae" alt="npm version"></a>
+
 ## Installation
 
 ```sh
