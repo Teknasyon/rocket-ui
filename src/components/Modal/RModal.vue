@@ -71,6 +71,33 @@ export interface ModalProps {
    * <Modal :modelValue="true" :outsideClick="true" />
    */
   outsideClick?: boolean;
+
+  /**
+   * Class of the Modal
+   * @type string
+   * @default ''
+   * @example
+   * <Modal class="my-class" />
+   */
+  class?: string;
+
+  /**
+   * Class of the overlay
+   * @type string
+   * @default ''
+   * @example
+   * <Modal overlayClass="my-class" />
+   */
+  overlayClass?: string;
+
+  /**
+   * Style of the Modal
+   * @type string
+   * @default ''
+   * @example
+   * <Modal style="color: red" />
+   */
+  style?: string;
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -83,6 +110,7 @@ const classes = computed(() => {
   return {
     'r-dialog': true,
     'r-dialog--block': props.block,
+    [`${props.class}`]: true,
   };
 });
 const styles = computed(() => {
@@ -99,7 +127,7 @@ const handleOutside = (event: Event) => {
 };
 </script>
 <template>
-  <div v-show="modelValue" class="r-modal-overlay" @click.stop="handleOutside">
+  <div v-show="modelValue" class="r-modal-overlay" :class="overlayClass" @click.stop="handleOutside">
     <div aria-modal="true" :class="classes" :open="props.modelValue" role="dialog" :style="styles">
       <div class="r-dialog__header">
         <slot name="header" />
