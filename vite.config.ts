@@ -10,16 +10,23 @@ export default defineConfig({
       copyDtsFiles: true,
       outDir: [
         'dist',
-        'types',
+        'types'
         // 'types/inner'
       ],
       // include: ['src/index.ts'],
-      exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts'],
+      exclude: ['src/ignore'],
+      staticImport: true,
+      rollupTypes: true,
       // insertTypesEntry: true,
       compilerOptions: {
-        declarationMap: true,
+        declarationMap: true
       },
-      cleanVueFileName: true,
+      rollupConfig: {
+        docModel: {
+          enabled: true,
+          apiJsonFilePath: '<projectFolder>/rollup-docs/<unscopedPackageName>.api.json'
+        }
+      }
     }),
     vue(),
   ],
@@ -30,7 +37,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.ts'),
+      entry: resolve(__dirname, 'src/lib/main.ts'),
       name: 'rocket-ui-vue',
       fileName: 'rocket-ui-vue',
     },
