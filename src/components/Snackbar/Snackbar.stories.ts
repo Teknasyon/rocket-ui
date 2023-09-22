@@ -3,15 +3,22 @@ import Snackbar from './RSnackbar.vue';
 
 const DefaultArgs = {
   text: 'Single-line snackbar',
-  actionText: '',
-  showAction: false,
-  showClose: false,
+  closable: false,
   left: false,
   show: true,
   timeout: 0,
+  variant: 'info',
+};
+
+const DefaultArgTypes = {
+  variant: {
+    type: 'select',
+    options: ['info', 'success', 'warning', 'error', ''],
+  }
 };
 
 const SnackbarStory = {
+  title: 'Components/Snackbar',
   component: Snackbar,
   setup: (args: typeof Snackbar) => ({
     args,
@@ -25,8 +32,7 @@ const SnackbarStory = {
   `,
   args: DefaultArgs,
   argTypes: {
-    onAction: { action: 'action' },
-    onClose: { action: 'close' },
+    ...DefaultArgTypes,
   },
 } as Meta<typeof Snackbar>;
 
@@ -40,24 +46,13 @@ export const OnlyText: Story = {};
 
 export const WithAction: Story = {
   args: {
-    actionText: 'Action',
-    showAction: true,
     text: 'Single-line snackbar with action',
-  },
-};
-
-export const WithActionAndCloseButton: Story = {
-  args: {
-    actionText: 'Action',
-    showAction: true,
-    showClose: true,
-    text: 'Snackbar with action and close',
   },
 };
 
 export const WithCloseButton: Story = {
   args: {
-    showClose: true,
+    closable: true,
     text: 'Single-line snackbar with close',
   },
 };
@@ -70,17 +65,13 @@ export const LongText: Story = {
 
 export const LongTextWithAction: Story = {
   args: {
-    actionText: 'Action',
-    showAction: true,
     text: 'This is a very long snackbar message that will not fit on one line. It will wrap to multiple lines and the snackbar will grow in height.',
   },
 };
 
-export const LongTextWithActionAndCloseButton: Story = {
+export const LongTextWithCloseButton: Story = {
   args: {
-    actionText: 'Action',
-    showAction: true,
-    showClose: true,
+    closable: true,
     text: 'This is a very long snackbar message that will not fit on one line. It will wrap to multiple lines and the snackbar will grow in height.',
   },
 };
