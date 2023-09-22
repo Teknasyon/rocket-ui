@@ -101,21 +101,19 @@ const classes = computed(() => {
   };
 });
 
-const variantIcons = {
-  success: 'mdiCheckCircle',
-  error: 'mdiAlertCircle',
-  warning: 'mdiAlert',
-  info: 'mdiInformation',
-}[props.variant || 'info'];
+const variantIcons = computed(() => {
+  return {
+    success: 'mdiCheckCircle',
+    error: 'mdiAlertCircle',
+    warning: 'mdiAlert',
+    info: 'mdiInformation',
+  }[props.variant || 'info']
+});
 </script>
 <template>
   <div :class="classes">
     <slot>
-      <Icon
-        v-if="props.variant"
-        class="r-snackbar__icon"
-        :name="variantIcons"
-      />
+      <Icon v-if="props.variant" class="r-snackbar__icon" :name="variantIcons" />
     </slot>
 
     <div class="r-snackbar__text">{{ props.text }}</div>
@@ -124,11 +122,7 @@ const variantIcons = {
 
     <div v-if="props.closable" class="r-snackbar__close">
       <slot name="close">
-        <Icon
-          name="mdiClose"
-          :size="16"
-          @click.stop="$emit('update:modelValue', false)"
-        />
+        <Icon name="mdiClose" :size="16" @click.stop="$emit('update:modelValue', false)" />
       </slot>
     </div>
   </div>
