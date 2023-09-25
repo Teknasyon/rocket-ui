@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .trigger {
-  @apply relative inline-block cursor-pointer bg-transparent rounded-full;
+  @apply relative inline-block cursor-pointer bg-transparent rounded-full w-full;
 }
 .tooltip {
   @apply z-50 bg-transparent m-0 p-0 top-0 left-0 absolute w-max hidden;

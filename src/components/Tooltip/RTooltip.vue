@@ -147,6 +147,24 @@ export interface IProps {
    * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
    */
   resizable?: boolean;
+
+  /**
+   * Trigger class of the tooltip
+   * @type string
+   * @default ''
+   * @example
+   * <Tooltip triggerClass="trigger" />
+   */
+  triggerClass?: string;
+
+  /**
+   * Tooltip class of the tooltip
+   * @type string
+   * @default ''
+   * @example
+   * <Tooltip tooltipClass="tooltip" />
+   */
+  tooltipClass?: string;
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -242,6 +260,7 @@ const classes = computed(() => {
     tooltip: true,
     'tooltip--dark': props.dark,
     'tooltip--light': props.light,
+    [`${props.tooltipClass}`]: true,
   };
 });
 
@@ -270,41 +289,26 @@ const animationDuration = computed(() => {
 </script>
 
 <template>
-  <div
-    ref="trigger"
-    :aria-disabled="props.disabled"
-    class="trigger"
-    @click.stop="onClick"
-    @mouseenter.stop="onMouseEnter"
-    @mouseleave.stop="onMouseLeave"
-    @mousemove.stop="onMouseMove"
-  >
+  <div ref="trigger" :aria-disabled="props.disabled" class="trigger" :class="[triggerClass]" @click.stop="onClick"
+    @mouseenter.stop="onMouseEnter" @mouseleave.stop="onMouseLeave" @mousemove.stop="onMouseMove">
     <slot name="trigger" />
 
     <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
   </div>
   <div id="tooltip" ref="tooltip" :class="classes" role="tooltip">
     <slot name="content" />
-    <div
-      v-if="!$slots['content']"
-      :class="{
-        tooltip__content: true,
-        'tooltip__content--dark': props.dark,
-        'tooltip__content--light': props.light,
-      }"
-    >
+    <div v-if="!$slots['content']" :class="{
+      tooltip__content: true,
+      'tooltip__content--dark': props.dark,
+      'tooltip__content--light': props.light,
+    }">
       {{ props.text }}
     </div>
-    <div
-      v-if="!$slots['content']"
-      id="arrow"
-      ref="arrowElement"
-      :class="{
-        tooltip__arrow: true,
-        'tooltip__arrow--dark': props.dark,
-        'tooltip__arrow--light': props.light,
-      }"
-    />
+    <div v-if="!$slots['content']" id="arrow" ref="arrowElement" :class="{
+      tooltip__arrow: true,
+      'tooltip__arrow--dark': props.dark,
+      'tooltip__arrow--light': props.light,
+    }" />
   </div>
 </template>
 <style scoped>
@@ -314,10 +318,12 @@ const animationDuration = computed(() => {
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
+
 @keyframes tooltip-show {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
