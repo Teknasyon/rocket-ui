@@ -52,6 +52,7 @@ export function update(
   placement: Placements,
   offsetParam: number,
   padding: number,
+  duration: number = 300,
 ) {
   if (!trigger || !tooltip)
     return;
@@ -64,10 +65,15 @@ export function update(
       flip(),
       hide(),
     ],
-  }).then(({ x, y, placement, middlewareData }) => {
+  }).then(({ x, y, placement, middlewareData, strategy }) => {
+    if (!tooltip)
+      return;
     Object.assign(tooltip.style, {
       left: `${x}px`,
       top: `${y}px`,
+      animation: `tooltip-show ${duration}ms ease-in-out forwards`,
+      transformOrigin: 'center',
+      position: strategy === 'fixed' ? 'fixed' : 'absolute',
     });
 
     if (arrowElement && middlewareData.arrow) {

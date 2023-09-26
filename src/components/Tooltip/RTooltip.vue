@@ -174,7 +174,7 @@ const props = withDefaults(defineProps<IProps>(), {
   triggers: () => [Trigger.Hover],
   autoHide: true,
   hideDelay: 3000,
-  showDelay: 0,
+  showDelay: 300,
   shown: false,
   disabled: false,
   offset: 0,
@@ -195,21 +195,25 @@ const tooltip = ref<HTMLDivElement>(null);
 const arrowElement = ref<HTMLDivElement>(null);
 
 function showTooltip() {
-  const { placement, offset, padding, disabled } = props;
+  const { placement, offset, padding, disabled, showDelay } = props;
   if (disabled)
     return;
   tooltip.value.style.display = 'block';
-
+  // document.body.appendChild(tooltip.value);
   emit('show');
-  update(trigger, tooltip, arrowElement, placement, offset, padding);
+  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
   handleAutoHide();
   if (props.outsideClick)
     toggleOutsideClick('add');
 }
 
 function hideTooltip() {
+  if (props.disabled || !tooltip.value)
+    return;
   tooltip.value.style.display = '';
   emit('hide');
+  // document.removeEventListener('click', hideTooltip);
+  // document.body.removeChild(tooltip.value)
   if (props.outsideClick)
     toggleOutsideClick('remove');
 }
@@ -261,11 +265,11 @@ function onMouseLeave() {
 }
 
 function onMouseMove() {
-  const { placement, offset, padding, disabled } = props;
+  const { placement, offset, padding, disabled, showDelay } = props;
   if (disabled)
     return;
   if (props.triggers.includes(Trigger.Hover))
-    update(trigger, tooltip, arrowElement, placement, offset, padding);
+    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
 }
 
 const classes = computed(() => {
@@ -273,7 +277,6 @@ const classes = computed(() => {
     'tooltip': true,
     'tooltip--dark': props.dark,
     'tooltip--light': props.light,
-    [`${props.tooltipClass}`]: true,
   };
 });
 
@@ -282,11 +285,11 @@ const classes = computed(() => {
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
  */
 window.onresize = () => {
-  const { placement, offset, padding, disabled } = props;
+  const { placement, offset, padding, disabled, showDelay } = props;
   if (disabled)
     return;
   if (props.resizable)
-    update(trigger, tooltip, arrowElement, placement, offset, padding);
+    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
 };
 
 watchEffect(
@@ -301,8 +304,8 @@ watchEffect(
   { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
 );
 
-const animationDuration = computed(() => {
-  return `${props.showDelay}ms`;
+onMounted(() => {
+  hideTooltip();
 });
 </script>
 
@@ -332,7 +335,7 @@ const animationDuration = computed(() => {
     <div
       id="tooltip"
       ref="tooltip"
-      :class="classes"
+      :class="[classes, tooltipClass]"
       role="tooltip"
     >
       <slot name="content">
@@ -360,22 +363,3 @@ const animationDuration = computed(() => {
     </div>
   </Teleport>
 </template>
-
-<style scoped>
-.tooltip {
-  animation-name: tooltip-show;
-  animation-duration: v-bind('animationDuration');
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
-}
-
-@keyframes tooltip-show {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-</style>
