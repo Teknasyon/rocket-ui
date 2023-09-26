@@ -194,7 +194,7 @@ const arrowElement = ref<HTMLDivElement>(null);
 
 function showTooltip() {
   const { placement, offset, padding, disabled } = props;
-  if (disabled || !props.text || !props.text.length)
+  if (disabled)
     return;
   tooltip.value.style.display = 'block';
   // inject tooltip to body
@@ -341,27 +341,28 @@ onMounted(() => {
       :class="classes"
       role="tooltip"
     >
-      <slot name="content" />
-      <div
-        v-if="!$slots.content"
-        class="tooltip__content"
-        :class="{
-          'tooltip__content--dark': props.dark,
-          'tooltip__content--light': props.light,
-        }"
-      >
-        {{ props.text }}
-      </div>
-      <div
-        v-if="!$slots.content"
-        id="arrow"
-        ref="arrowElement"
-        class="tooltip__arrow"
-        :class="{
-          'tooltip__arrow--dark': props.dark,
-          'tooltip__arrow--light': props.light,
-        }"
-      />
+      <slot name="content">
+        <div
+          v-if="props.text"
+          class="tooltip__content"
+          :class="{
+            'tooltip__content--dark': props.dark,
+            'tooltip__content--light': props.light,
+          }"
+        >
+          {{ props.text }}
+        </div>
+        <div
+          v-if="props.text"
+          id="arrow"
+          ref="arrowElement"
+          class="tooltip__arrow"
+          :class="{
+            'tooltip__arrow--dark': props.dark,
+            'tooltip__arrow--light': props.light,
+          }"
+        />
+      </slot>
     </div>
   </Teleport>
 </template>
