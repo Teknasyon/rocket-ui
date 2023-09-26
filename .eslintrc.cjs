@@ -1,15 +1,10 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
   extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript/recommended',
-    '@vue/eslint-config-prettier',
-    'plugin:storybook/recommended',
-    'plugin:mdx/recommended',
+    '@antfu',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -17,6 +12,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
     'prettier/prettier': 'off',
+    'jsdoc/valid-types': 'off',
     'vue/multi-word-component-names': 0,
     'vue/no-side-effects-in-computed-properties': 2,
     'vue/order-in-components': [
@@ -63,5 +59,11 @@ module.exports = {
         alphabetical: true,
       },
     ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: 3,
+      },
+    ],
   },
-};
+}

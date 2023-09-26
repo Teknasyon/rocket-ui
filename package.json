@@ -1,14 +1,16 @@
 {
   "name": "@rocketui/vue",
+  "type": "module",
   "version": "0.0.65",
   "description": "A set of customizable UI components for Vue 3, built with TypeScript",
-  "type": "module",
-  "main": "dist/rocket-ui-vue.umd.cjs",
-  "module": "dist/rocket-ui-vue.js",
-  "types": "dist/rocket-ui-vue.d.ts",
-  "files": [
-    "dist"
-  ],
+  "homepage": "https://teknasyon.github.io/rocket-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teknasyon/rocket-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/Teknasyon/rocket-ui/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/rocket-ui-vue.js",
@@ -36,14 +38,12 @@
       "default": "./dist/style.css"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Teknasyon/rocket-ui"
-  },
-  "bugs": {
-    "url": "https://github.com/Teknasyon/rocket-ui/issues"
-  },
-  "homepage": "https://teknasyon.github.io/rocket-ui/",
+  "main": "dist/rocket-ui-vue.umd.cjs",
+  "module": "dist/rocket-ui-vue.js",
+  "types": "dist/rocket-ui-vue.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host --port 4173",
     "build": "run-p type-check build-only",
@@ -57,7 +57,6 @@
     "storybook:build": "storybook build",
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
     "prepare": "husky install",
-    "prettier": "prettier --write ./src/**/*.{vue,ts,css,mdx}",
     "ci": "run-s lint type-check test:unit test:coverage build-only",
     "build:icons": "node src/scripts/buildIcons.js"
   },
@@ -65,6 +64,7 @@
     "@floating-ui/dom": "^1.0.7"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.41.0",
     "@babel/core": "^7.18.10",
     "@mdi/svg": "^7.2.96",
     "@mdi/util": "^0.3.2",
@@ -82,8 +82,7 @@
     "@types/node": "^16.11.48",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitest/coverage-c8": "^0.22.1",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/eslint-config-typescript": "^11.0.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/test-utils": "^2.0.0",
     "@vue/tsconfig": "^0.1.3",
     "@vueuse/core": "^10.4.1",
@@ -94,6 +93,7 @@
     "eslint": "^8.39.0",
     "eslint-plugin-mdx": "^2.0.2",
     "eslint-plugin-storybook": "^0.6.13",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-plugin-vue": "^9.11.0",
     "husky": "^8.0.0",
     "jsdom": "^20.0.0",
@@ -103,7 +103,6 @@
     "postcss": "^8.4.16",
     "postcss-import": "^15.0.0",
     "postcss-nested": "^5.0.6",
-    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.3.2",
@@ -119,8 +118,7 @@
   },
   "lint-staged": {
     "src/*.{vue,js,ts,mdx}": [
-      "yarn lint",
-      "yarn prettier"
+      "eslint --fix"
     ]
   }
 }
