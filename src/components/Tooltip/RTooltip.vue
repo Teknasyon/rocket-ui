@@ -182,6 +182,8 @@ const props = withDefaults(defineProps<IProps>(), {
   outsideClick: false,
   triggerContent: '',
   resizable: true,
+  triggerClass: '',
+  tooltipClass: '',
 });
 const emit = defineEmits(['show', 'hide']);
 
@@ -210,7 +212,7 @@ function showTooltip() {
 function hideTooltip() {
   tooltip.value.style.display = '';
   // destroy tooltip on hide
-  tooltip.value.remove();
+  document.body.removeChild(tooltip.value);
   emit('hide');
   if (props.outsideClick)
     toggleOutsideClick('remove');
