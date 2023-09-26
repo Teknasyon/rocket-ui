@@ -3,8 +3,7 @@
 
 <a href="https://npmjs.com/package/@rocketui/vue"><img src="https://img.shields.io/npm/v/@rocketui/vue?style=flat&colorA=080f12&colorB=34b2ae" alt="npm version"></a>
 <a href="https://npmjs.com/package/@rocketui/vue"><img src="https://img.shields.io/bundlejs/size/@rocketui/vue?style=flat&colorA=080f12&colorB=34b2ae" alt="npm size"></a>
-<a href="https://npmjs.com/package/@rocketui/vue"><img src="https://img.shields.io/npm/dw/
-@rocketui/vue?style=flat&colorA=080f12&colorB=34b2ae" alt="npm size"></a>
+<!-- <a href="https://npmjs.com/package/@rocketui/vue"><img src="https://img.shields.io/npm/dw/@rocketui/vue?style=flat&colorA=080f12&colorB=34b2ae" alt="npm size"></a> -->
 
 ## Installation
 
