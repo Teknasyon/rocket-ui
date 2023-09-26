@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import Badge from './RBadge.vue';
 import Icon from '../Icon/RIcon.vue';
 import Button from '../Button/RButton.vue';
+import Badge from './RBadge.vue';
 
 const DefaultArgs = {
   variant: 'primary',
@@ -33,7 +33,7 @@ const BadgeStory = {
       return { args };
     },
     template: `
-    <Badge v-bind="args" >
+    <Badge v-bind="args">
       <template v-slot:default>
         <Icon name="mdiEmail" size="24" />
       </template>
@@ -42,7 +42,7 @@ const BadgeStory = {
     args: DefaultArgs,
     argTypes: DefaultArgTypes,
   }),
-} as Meta<any>;
+} as Meta<typeof Badge>;
 
 export default BadgeStory;
 
@@ -50,12 +50,14 @@ type Story = StoryObj<typeof BadgeStory>;
 
 export const Overview: Story = {
   args: {
+    ...DefaultArgs,
     placement: 'right',
   },
 };
 
 export const Right: Story = {
   args: {
+    ...DefaultArgs,
     placement: 'right',
   },
 };
@@ -82,18 +84,21 @@ export const WithContent = {
 
 export const Hover: Story = {
   args: {
+    ...DefaultArgs,
     hover: true,
   },
 };
 
 export const Bottom: Story = {
   args: {
+    ...DefaultArgs,
     placement: 'bottom',
   },
 };
 
 export const Left: Story = {
   args: {
+    ...DefaultArgs,
     placement: 'left',
   },
 };
