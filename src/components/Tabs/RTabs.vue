@@ -1,46 +1,54 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import './tabs.css';
-import type { Tab } from './types';
 import TabItem from '../TabItem/RTabItem.vue';
-import { emit } from 'process';
+import type { Tab } from './types';
 
 export interface IProps {
   /**
    * Tabs of the tabs
-   * @type Tab[]
+   * @type {Tab[]}
    * @default []
    * @example
    * <Tabs :tabs="[]" />
    */
-  tabs?: Tab[];
+  tabs?: Tab[]
 
   /**
    * Block state of the tabs
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Tabs block />
    */
-  block?: boolean;
+  block?: boolean
 
   /**
    * Active tab of the tabs
-   * @type number | string
+   * @type {number | string}
    * @default tabs[0].id
    * @example
    * <Tabs v-model="activeTab" />
    */
-  modelValue?: number | string;
+  modelValue?: number | string
 
   /**
    * Tile state of the tabs
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Tabs tile />
    */
-  tile?: boolean;
+  tile?: boolean
+
+  /**
+   * Scrollable state of the tabs
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Tabs scrollable />
+   */
+  scrollable?: boolean
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -48,6 +56,7 @@ const props = withDefaults(defineProps<IProps>(), {
   block: false,
   modelValue: '',
   tile: false,
+  scrollable: false,
 });
 const emits = defineEmits(['update:modelValue', 'click:icon']);
 const activeTab = ref(props.modelValue || props.tabs[0].id);
@@ -57,6 +66,7 @@ const tabsClasses = computed(() => {
     'r-tabs': true,
     'r-tabs--block': props.block,
     'r-tabs--tile': props.tile,
+    'r-tabs--scrollable': props.scrollable,
   };
 });
 
@@ -67,10 +77,11 @@ watch(
   }
 );
 
-const handleIconClick = () => {
+function handleIconClick() {
   emits('click:icon');
-};
+}
 </script>
+
 <template>
   <div :class="tabsClasses">
     <slot>
@@ -80,11 +91,11 @@ const handleIconClick = () => {
         :key="index"
         v-model="activeTab"
         :active="index === activeTab"
-        :appendIcon="tab.appendIcon"
+        :append-icon="tab.appendIcon"
         :block="block"
         :disabled="tab.disabled"
         :label="tab.label"
-        :prependIcon="tab.prependIcon"
+        :prepend-icon="tab.prependIcon"
         :tile="tile"
         :variant="tab.variant"
         @click:icon="handleIconClick"

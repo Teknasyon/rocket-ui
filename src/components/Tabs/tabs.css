@@ -10,4 +10,8 @@
   &--block {
     @apply w-full;
   }
+
+  &--scrollable {
+    @apply overflow-x-auto;
+  }
 }
