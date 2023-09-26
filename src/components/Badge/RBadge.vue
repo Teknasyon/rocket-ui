@@ -10,7 +10,7 @@ export interface BadgeProps {
    * @example
    * <Badge variant="primary" />
    */
-  variant?: 'primary' | 'success' | 'warning' | 'error' | 'neutral';
+  variant?: 'primary' | 'success' | 'warning' | 'error' | 'neutral'
 
   /**
    * Placement of the Badge
@@ -19,7 +19,7 @@ export interface BadgeProps {
    * @example
    * <Badge placement="right" />
    */
-  placement?: 'right' | 'bottom' | 'left';
+  placement?: 'right' | 'bottom' | 'left'
 
   /**
    * Overlap the Badge
@@ -28,7 +28,7 @@ export interface BadgeProps {
    * @example
    * <Badge overlap />
    */
-  overlap?: boolean;
+  overlap?: boolean
 
   /**
    * Show the Badge on hover
@@ -37,7 +37,7 @@ export interface BadgeProps {
    * @example
    * <Badge hover />
    */
-  hover?: boolean;
+  hover?: boolean
 
   /**
    * Content of the Badge
@@ -46,7 +46,7 @@ export interface BadgeProps {
    * @example
    * <Badge content="1" />
    */
-  content?: string | number;
+  content?: string | number
 
   /**
    * Show the Badge outside
@@ -55,7 +55,7 @@ export interface BadgeProps {
    * @example
    * <Badge outside />
    */
-  outside?: boolean;
+  outside?: boolean
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
@@ -79,6 +79,7 @@ const classes = computed(() => {
   };
 });
 </script>
+
 <template>
   <div class="r-badge-wrapper group">
     <span :class="classes" @click="$emit('click')">
