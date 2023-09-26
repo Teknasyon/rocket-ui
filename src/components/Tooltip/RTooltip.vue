@@ -199,8 +199,6 @@ function showTooltip() {
   if (disabled)
     return;
   tooltip.value.style.display = 'block';
-  // inject tooltip to body
-  document.body.appendChild(tooltip.value);
 
   emit('show');
   update(trigger, tooltip, arrowElement, placement, offset, padding);
@@ -211,8 +209,6 @@ function showTooltip() {
 
 function hideTooltip() {
   tooltip.value.style.display = '';
-  // destroy tooltip on hide
-  document.body.removeChild(tooltip.value);
   emit('hide');
   if (props.outsideClick)
     toggleOutsideClick('remove');
@@ -307,10 +303,6 @@ watchEffect(
 
 const animationDuration = computed(() => {
   return `${props.showDelay}ms`;
-});
-
-onMounted(() => {
-  hideTooltip();
 });
 </script>
 
