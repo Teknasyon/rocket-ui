@@ -10,9 +10,11 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    '@typescript-eslint/ban-ts-comment': 'off',
-    'prettier/prettier': 'off',
-    'jsdoc/valid-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 0,
+    '@typescript-eslint/semi': 0,
+    '@typescript-eslint/comma-dangle': 0,
+    'jsdoc/valid-types': 0,
+    'jsdoc/require-returns-check': 0,
     'vue/multi-word-component-names': 0,
     'vue/no-side-effects-in-computed-properties': 2,
     'vue/order-in-components': [
@@ -65,5 +67,6 @@ module.exports = {
         singleline: 3,
       },
     ],
+    'vue/custom-event-name-casing': 0,
   },
 }
