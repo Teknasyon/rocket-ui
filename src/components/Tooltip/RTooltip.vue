@@ -316,34 +316,36 @@ const animationDuration = computed(() => {
 
     <div v-if="!$slots.trigger" v-html="props.triggerContent" />
   </div>
-  <div
-    id="tooltip"
-    ref="tooltip"
-    :class="classes"
-    role="tooltip"
-  >
-    <slot name="content" />
+  <Teleport to="body">
     <div
-      v-if="!$slots.content"
-      class="tooltip__content"
-      :class="{
-        'tooltip__content--dark': props.dark,
-        'tooltip__content--light': props.light,
-      }"
+      id="tooltip"
+      ref="tooltip"
+      :class="classes"
+      role="tooltip"
     >
-      {{ props.text }}
+      <slot name="content" />
+      <div
+        v-if="!$slots.content"
+        class="tooltip__content"
+        :class="{
+          'tooltip__content--dark': props.dark,
+          'tooltip__content--light': props.light,
+        }"
+      >
+        {{ props.text }}
+      </div>
+      <div
+        v-if="!$slots.content"
+        id="arrow"
+        ref="arrowElement"
+        class="tooltip__arrow"
+        :class="{
+          'tooltip__arrow--dark': props.dark,
+          'tooltip__arrow--light': props.light,
+        }"
+      />
     </div>
-    <div
-      v-if="!$slots.content"
-      id="arrow"
-      ref="arrowElement"
-      class="tooltip__arrow"
-      :class="{
-        'tooltip__arrow--dark': props.dark,
-        'tooltip__arrow--light': props.light,
-      }"
-    />
-  </div>
+  </Teleport>
 </template>
 
 <style scoped>
