@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import './button.css';
-import { computed, type CSSProperties } from 'vue';
+import { type CSSProperties, computed } from 'vue';
 import Icon from '../Icon/RIcon.vue';
+
 export type ButtonType =
   | 'primary'
   | 'secondary'
@@ -19,7 +20,7 @@ export interface Props {
    * @example
    * <Button variant="primary" />
    */
-  variant?: ButtonType;
+  variant?: ButtonType
 
   /**
    * Loading state of the Button
@@ -28,7 +29,7 @@ export interface Props {
    * @example
    * <Button loading />
    */
-  loading?: boolean;
+  loading?: boolean
 
   /**
    * Disabled state of the Button
@@ -37,7 +38,7 @@ export interface Props {
    * @example
    * <Button disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Prepend icon of the Button
@@ -46,7 +47,7 @@ export interface Props {
    * @example
    * <Button prependIcon="icon" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * Append icon of the Button
@@ -55,7 +56,7 @@ export interface Props {
    * @example
    * <Button appendIcon="icon" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Only icon state of the Button
@@ -64,7 +65,7 @@ export interface Props {
    * @example
    * <Button onlyIcon />
    */
-  onlyIcon?: boolean;
+  onlyIcon?: boolean
 
   /**
    * Size of the Button
@@ -73,7 +74,7 @@ export interface Props {
    * @example
    * <Button size="small" />
    */
-  size?: ButtonSize;
+  size?: ButtonSize
 
   /**
    * Height of the Button
@@ -82,7 +83,7 @@ export interface Props {
    * @example
    * <Button height="40" />
    */
-  height?: string;
+  height?: string
 
   /**
    * Block state of the Button
@@ -92,7 +93,7 @@ export interface Props {
    * <Button block />
    * @link https://tailwindcss.com/docs/display#block
    */
-  block?: boolean;
+  block?: boolean
 
   /**
    * Background color of the Button
@@ -101,7 +102,7 @@ export interface Props {
    * @example
    * <Button backgroundColor="red" />
    */
-  backgroundColor?: CSSProperties['backgroundColor'];
+  backgroundColor?: CSSProperties['backgroundColor']
 
   /**
    * Color of the Button
@@ -110,7 +111,7 @@ export interface Props {
    * @example
    * <Button color="red" />
    */
-  color?: string;
+  color?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
@@ -124,15 +125,15 @@ const props = withDefaults(defineProps<Props>(), {
   block: false,
   backgroundColor: '',
 });
+defineEmits(['click']);
 const classes = computed(() => ({
   'r-button': true,
   [`r-button--${props.variant}`]: true,
-  [`r-button--loading`]: props.loading,
+  'r-button--loading': props.loading,
   [`r-button--${props.size || 'medium'}`]: true,
-  [`r-button--only-icon`]: props.onlyIcon,
-  [`r-button--block`]: props.block,
+  'r-button--only-icon': props.onlyIcon,
+  'r-button--block': props.block,
 }));
-defineEmits(['click']);
 const iconSize = computed(() => {
   return {
     small: 20,
@@ -149,16 +150,32 @@ const style = computed(() => {
   };
 });
 </script>
+
 <template>
-  <button v-bind="$attrs" :class="classes" :disabled="disabled || loading" :style="style" @click.stop="$emit('click')">
+  <button
+    v-bind="$attrs"
+    :class="classes"
+    :disabled="disabled || loading"
+    :style="style"
+    @click="$emit('click')"
+  >
     <slot name="custom-icon" />
 
-    <Icon v-if="!$slots['custom-icon'] && props.prependIcon" :class="{
-      'r-button__prepend-icon': true,
-      'r-button__prepend-icon--only': props.onlyIcon,
-    }" :name="props.prependIcon" :size="iconSize" />
+    <Icon
+      v-if="!$slots['custom-icon'] && props.prependIcon"
+      class="r-button__prepend-icon"
+      :class="{
+        'r-button__prepend-icon--only': props.onlyIcon,
+      }"
+      :name="props.prependIcon"
+      :size="iconSize"
+    />
     <slot v-if="!props.onlyIcon" />
-    <Icon v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon" class="r-button__append-icon"
-      :name="props.appendIcon" :size="iconSize" />
+    <Icon
+      v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon"
+      class="r-button__append-icon"
+      :name="props.appendIcon"
+      :size="iconSize"
+    />
   </button>
 </template>
