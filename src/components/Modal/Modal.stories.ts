@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import Modal from './RModal.vue';
 import Button from '../Button/RButton.vue';
 import Textfield from '../Textfield/RTextfield.vue';
 import Dropdown from '../Dropdown/RDropdown.vue';
+import Modal from './RModal.vue';
 
 const ModalStory = {
   title: 'Components/Modal',
@@ -31,7 +31,7 @@ type Story = StoryObj<typeof ModalStory>;
 export const Overview: Story = {};
 
 export const WithActionsSlot: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { Modal, Button },
     setup: () => ({
       args,
@@ -90,12 +90,12 @@ export const WithActionsSlot: Story = {
 };
 
 export const WithForm: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { Modal, Textfield, Button, Dropdown },
     setup: () => ({
       args,
       submit: () => {
-        alert(`Submitted!`);
+        alert('Submitted!');
       },
     }),
     template: `

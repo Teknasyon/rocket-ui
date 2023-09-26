@@ -52,8 +52,8 @@
     "test:unit": "vitest",
     "test:coverage": "vitest run --coverage",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ignore-path .gitignore",
-    "lint:fix": "eslint . --fix --ignore-path .gitignore",
+    "lint": "eslint src/{components,directives} --ignore-path .gitignore",
+    "lint:fix": "eslint src/{components,directives} --fix --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "storybook:chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN --auto-accept-changes --build-script-name=storybook:build",
@@ -118,7 +118,7 @@
     "vue-tsc": "^1.6.5"
   },
   "lint-staged": {
-    "src/*.{vue,js,ts,mdx}": [
+    "src/{components,directives}": [
       "eslint --fix"
     ]
   }

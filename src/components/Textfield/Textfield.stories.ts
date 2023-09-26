@@ -8,21 +8,6 @@ const DefaultArgTypes = {
   },
 };
 
-const DefaultArgs = {
-  id: 'textfield',
-  type: 'text',
-  label: 'Textfield',
-  placeholder: 'Placeholder',
-  modelValue: '',
-  errorMsg: '',
-  hint: 'This is a hint text to help user.',
-  prependIcon: '',
-  appendIcon: '',
-  loading: false,
-  disabled: false,
-  clearable: false,
-};
-
 const TextfieldStory = {
   title: 'Form/Textfield',
   component: Textfield,
@@ -31,12 +16,12 @@ const TextfieldStory = {
       args,
     };
   },
-  template: `<Textfield v-bind="args" />`,
+  template: '<Textfield v-bind="args" />',
   argTypes: {
     ...DefaultArgTypes,
-    onInput: { action: 'input' },
-    onFocus: { action: 'focus' },
-    onBlur: { action: 'blur' },
+    'onInput': { action: 'input' },
+    'onFocus': { action: 'focus' },
+    'onBlur': { action: 'blur' },
     'onClick:icon': { action: 'click:icon' },
     'onClick:clear': { action: 'click:clear' },
   },

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import './tooltip.css';
-import {
-  type Placements,
-  type Triggers,
-  Placement,
-  update,
-  Trigger,
-} from './common';
 import { computed, ref, watchEffect } from 'vue';
+import {
+  Placement,
+  type Placements,
+  Trigger,
+  type Triggers,
+  update,
+} from './common';
 
 export interface IProps {
   /**
@@ -17,7 +17,7 @@ export interface IProps {
    * @example
    * <Tooltip placement="top" />
    */
-  placement?: Placements;
+  placement?: Placements
 
   /**
    * Text of the tooltip content
@@ -26,7 +26,7 @@ export interface IProps {
    * @example
    * <Tooltip text="Tooltip" />
    */
-  text?: string;
+  text?: string
 
   /**
    * Dark theme of the tooltip deneme 1 2 3
@@ -35,7 +35,7 @@ export interface IProps {
    * @example
    * <Tooltip dark />
    */
-  dark?: boolean;
+  dark?: boolean
 
   /**
    * Light theme of the tooltip
@@ -44,7 +44,7 @@ export interface IProps {
    * @example
    * <Tooltip light />
    */
-  light?: boolean;
+  light?: boolean
 
   /**
    * Triggers of the tooltip
@@ -53,7 +53,7 @@ export interface IProps {
    * @example
    * <Tooltip triggers="hover" />
    */
-  triggers?: Triggers;
+  triggers?: Triggers
 
   /**
    * Auto hide of the tooltip
@@ -62,7 +62,7 @@ export interface IProps {
    * @example
    * <Tooltip autoHide />
    */
-  autoHide?: boolean;
+  autoHide?: boolean
 
   /**
    * Hide delay of the tooltip
@@ -71,7 +71,7 @@ export interface IProps {
    * @example
    * <Tooltip hideDelay={3000} />
    */
-  hideDelay?: number;
+  hideDelay?: number
 
   /**
    * Show delay of the tooltip
@@ -80,7 +80,7 @@ export interface IProps {
    * @example
    * <Tooltip showDelay={0} />
    */
-  showDelay?: number;
+  showDelay?: number
 
   /**
    * Shown state of the tooltip
@@ -89,7 +89,7 @@ export interface IProps {
    * @example
    * <Tooltip shown />
    */
-  shown?: boolean;
+  shown?: boolean
 
   /**
    * Disabled state of the tooltip
@@ -98,7 +98,7 @@ export interface IProps {
    * @example
    * <Tooltip disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Offset of the tooltip
@@ -108,7 +108,7 @@ export interface IProps {
    * <Tooltip offset={0} />
    * @link https://floating-ui.com/docs/tutorial#offset-middleware
    */
-  offset?: number;
+  offset?: number
 
   /**
    * Padding of the tooltip
@@ -118,7 +118,7 @@ export interface IProps {
    * <Tooltip padding={0} />
    * @link https://floating-ui.com/docs/tutorial#shift-middleware
    */
-  padding?: number;
+  padding?: number
 
   /**
    * Outside click of the tooltip
@@ -127,7 +127,7 @@ export interface IProps {
    * @example
    * <Tooltip outsideClick />
    */
-  outsideClick?: boolean;
+  outsideClick?: boolean
 
   /**
    * Trigger content of the tooltip
@@ -136,7 +136,7 @@ export interface IProps {
    * @example
    * <Tooltip triggerContent="Trigger" />
    */
-  triggerContent?: string;
+  triggerContent?: string
 
   /**
    * Resizable of the tooltip
@@ -146,7 +146,7 @@ export interface IProps {
    * <Tooltip resizable />
    * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
    */
-  resizable?: boolean;
+  resizable?: boolean
 
   /**
    * Trigger class of the tooltip
@@ -155,7 +155,7 @@ export interface IProps {
    * @example
    * <Tooltip triggerClass="trigger" />
    */
-  triggerClass?: string;
+  triggerClass?: string
 
   /**
    * Tooltip class of the tooltip
@@ -164,7 +164,7 @@ export interface IProps {
    * @example
    * <Tooltip tooltipClass="tooltip" />
    */
-  tooltipClass?: string;
+  tooltipClass?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -185,79 +185,89 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 const emit = defineEmits(['show', 'hide']);
 
-// @ts-ignore
+// @ts-expect-error
 const trigger = ref<HTMLDivElement>(null);
-// @ts-ignore
+// @ts-expect-error
 const tooltip = ref<HTMLDivElement>(null);
-// @ts-ignore
+// @ts-expect-error
 const arrowElement = ref<HTMLDivElement>(null);
 
 function showTooltip() {
   const { placement, offset, padding, disabled } = props;
-  if (disabled) return;
+  if (disabled)
+    return;
   tooltip.value.style.display = 'block';
   emit('show');
   update(trigger, tooltip, arrowElement, placement, offset, padding);
   handleAutoHide();
-  if (props.outsideClick) toggleOutsideClick('add');
+  if (props.outsideClick)
+    toggleOutsideClick('add');
 }
 
 function hideTooltip() {
   tooltip.value.style.display = '';
   emit('hide');
-  if (props.outsideClick) toggleOutsideClick('remove');
+  if (props.outsideClick)
+    toggleOutsideClick('remove');
 }
 
-const handleAutoHide = () => {
+function handleAutoHide() {
   if (props.autoHide) {
     setTimeout(() => {
       hideTooltip();
     }, props.hideDelay);
   }
-};
+}
 
-const toggleOutsideClick = (toggle: string) => {
-  if (toggle === 'add') document.addEventListener('click', hideTooltip);
+function toggleOutsideClick(toggle: string) {
+  if (toggle === 'add')
+    document.addEventListener('click', hideTooltip);
 
-  if (toggle === 'remove') document.removeEventListener('click', hideTooltip);
-};
+  if (toggle === 'remove')
+    document.removeEventListener('click', hideTooltip);
+}
 
-const onClick = () => {
-  if (props.disabled) return;
-  if (props.triggers == Trigger.Click) {
-    if (tooltip.value.style.display === 'block') hideTooltip();
+function onClick() {
+  if (props.disabled)
+    return;
+  if (props.triggers === Trigger.Click) {
+    if (tooltip.value.style.display === 'block')
+      hideTooltip();
     else showTooltip();
   }
-};
+}
 
-const onMouseEnter = () => {
-  if (props.disabled) return;
-  if (props.triggers === Trigger.Hover) showTooltip();
-};
-
-const onMouseLeave = () => {
-  if (props.disabled) return;
-  if (tooltip.value.style.display === '' && props.triggers === Trigger.Hover) {
-    showTooltip();
+function onMouseEnter() {
+  if (props.disabled)
     return;
-  } else if (
-    tooltip.value.style.display !== '' &&
-    props.triggers === Trigger.Hover
-  ) {
-    hideTooltip();
-  }
-};
+  if (props.triggers === Trigger.Hover)
+    showTooltip();
+}
 
-const onMouseMove = () => {
+function onMouseLeave() {
+  if (props.disabled)
+    return;
+  if (tooltip.value.style.display === '' && props.triggers === Trigger.Hover)
+    showTooltip();
+
+  else if (
+    tooltip.value.style.display !== ''
+    && props.triggers === Trigger.Hover
+  )
+    hideTooltip();
+}
+
+function onMouseMove() {
   const { placement, offset, padding, disabled } = props;
-  if (disabled) return;
+  if (disabled)
+    return;
   if (props.triggers === Trigger.Hover)
     update(trigger, tooltip, arrowElement, placement, offset, padding);
-};
+}
 
 const classes = computed(() => {
   return {
-    tooltip: true,
+    'tooltip': true,
     'tooltip--dark': props.dark,
     'tooltip--light': props.light,
     [`${props.tooltipClass}`]: true,
@@ -270,15 +280,18 @@ const classes = computed(() => {
  */
 window.onresize = () => {
   const { placement, offset, padding, disabled } = props;
-  if (disabled) return;
+  if (disabled)
+    return;
   if (props.resizable)
     update(trigger, tooltip, arrowElement, placement, offset, padding);
 };
 
 watchEffect(
   () => {
-    if (props.disabled) return;
-    if (props.shown && props.triggers === Trigger.Manual) showTooltip();
+    if (props.disabled)
+      return;
+    if (props.shown && props.triggers === Trigger.Manual)
+      showTooltip();
   },
   { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
 );
@@ -289,28 +302,50 @@ const animationDuration = computed(() => {
 </script>
 
 <template>
-  <div ref="trigger" :aria-disabled="props.disabled" class="trigger" :class="[triggerClass]" @click.stop="onClick"
-    @mouseenter.stop="onMouseEnter" @mouseleave.stop="onMouseLeave" @mousemove.stop="onMouseMove">
+  <div
+    ref="trigger"
+    :aria-disabled="props.disabled"
+    class="trigger"
+    :class="[triggerClass]"
+    @click.stop="onClick"
+    @mouseenter.stop="onMouseEnter"
+    @mouseleave.stop="onMouseLeave"
+    @mousemove.stop="onMouseMove"
+  >
     <slot name="trigger" />
 
-    <div v-if="!$slots['trigger']" v-html="props.triggerContent" />
+    <div v-if="!$slots.trigger" v-html="props.triggerContent" />
   </div>
-  <div id="tooltip" ref="tooltip" :class="classes" role="tooltip">
+  <div
+    id="tooltip"
+    ref="tooltip"
+    :class="classes"
+    role="tooltip"
+  >
     <slot name="content" />
-    <div v-if="!$slots['content']" :class="{
-      tooltip__content: true,
-      'tooltip__content--dark': props.dark,
-      'tooltip__content--light': props.light,
-    }">
+    <div
+      v-if="!$slots.content"
+      class="tooltip__content"
+      :class="{
+        'tooltip__content--dark': props.dark,
+        'tooltip__content--light': props.light,
+      }"
+    >
       {{ props.text }}
     </div>
-    <div v-if="!$slots['content']" id="arrow" ref="arrowElement" :class="{
-      tooltip__arrow: true,
-      'tooltip__arrow--dark': props.dark,
-      'tooltip__arrow--light': props.light,
-    }" />
+    <div
+      v-if="!$slots.content"
+      id="arrow"
+      ref="arrowElement"
+      class="tooltip__arrow"
+      :class="{
+        'tooltip__arrow--dark': props.dark,
+        'tooltip__arrow--light': props.light,
+      }"
+    />
   </div>
 </template>
+
 <style scoped>
 .tooltip {
   animation-name: tooltip-show;

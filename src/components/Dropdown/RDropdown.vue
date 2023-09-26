@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { computed, reactive, ref, defineEmits, watch, onMounted } from 'vue';
+import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import Chip from '../Chips/RChip.vue';
 import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
+
 export interface Option {
-  value: string | number;
-  label: string;
-  prependIcon?: string;
-  disabled?: boolean;
+  value: string | number
+  label: string
+  prependIcon?: string
+  disabled?: boolean
 }
 export interface SelectProps {
   /**
@@ -29,7 +30,7 @@ export interface SelectProps {
    *  ]"
    * />
    */
-  options: Option[];
+  options: Option[]
 
   /**
    * Value of the Dropdown
@@ -38,7 +39,7 @@ export interface SelectProps {
    * @example
    * <Dropdown v-model="model" />
    */
-  modelValue: string | number | Option | Option[];
+  modelValue: string | number | Option | Option[]
 
   /**
    * Placeholder Dropdown
@@ -48,7 +49,7 @@ export interface SelectProps {
    * <Dropdown placeholder="Placeholder" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
    */
-  placeholder?: string;
+  placeholder?: string
 
   /**
    * Allow to create new options
@@ -57,7 +58,7 @@ export interface SelectProps {
    * @example
    * <Dropdown taggable />
    */
-  taggable?: boolean;
+  taggable?: boolean
 
   /**
    * Allow to select multiple options
@@ -66,7 +67,7 @@ export interface SelectProps {
    * @example
    * <Dropdown multiple />
    */
-  multiple?: boolean;
+  multiple?: boolean
 
   /**
    * Disable the Dropdown
@@ -75,7 +76,7 @@ export interface SelectProps {
    * @example
    * <Dropdown disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Loading state of the Dropdown
@@ -84,7 +85,7 @@ export interface SelectProps {
    * @example
    * <Dropdown loading />
    */
-  loading?: boolean;
+  loading?: boolean
 
   /**
    * Icon to prepend
@@ -93,7 +94,7 @@ export interface SelectProps {
    * @example
    * <Dropdown prependIcon="search" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * Icon to append
@@ -102,7 +103,7 @@ export interface SelectProps {
    * @example
    * <Dropdown appendIcon="expand_more" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Allow to search for options
@@ -111,7 +112,7 @@ export interface SelectProps {
    * @example
    * <Dropdown searchable />
    */
-  searchable?: boolean;
+  searchable?: boolean
 
   /**
    * Id of the Dropdown
@@ -120,7 +121,7 @@ export interface SelectProps {
    * @example
    * <Dropdown id="test" />
    */
-  id?: string;
+  id?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -137,12 +138,11 @@ const props = withDefaults(defineProps<SelectProps>(), {
   label: '',
 });
 
+const emit = defineEmits(['update:modelValue']);
 const selected = ref<string | number>('');
 const selectedMultiple = reactive<Option[]>([]);
 const active = ref(false);
 const inputModel = ref('');
-const emit = defineEmits(['update:modelValue']);
-
 /**
  * @description - HTML elements references
  */
@@ -154,30 +154,32 @@ const wrapper = ref<HTMLElement | null>(null);
  * @param e MouseEvent
  * @returns void
  */
-const setActive = (e: MouseEvent) => {
-  if (props.disabled) return;
+function setActive(e: MouseEvent) {
+  if (props.disabled)
+    return;
   e.stopPropagation();
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('r-dropdown--active');
     dropdown.value?.focus();
-    if (props.searchable) input.value?.focus();
+    if (props.searchable)
+      input.value?.focus();
 
     return;
   }
   removeActive();
-};
+}
 
 /**
  * @description - Removes the active state
  * @returns void
  */
-const removeActive = () => {
+function removeActive() {
   active.value = false;
   dropdown.value?.classList.remove('r-dropdown--active');
   dropdown.value?.blur();
   input.value?.blur();
-};
+}
 
 /**
  * @description - Selects an option
@@ -185,27 +187,28 @@ const removeActive = () => {
  * @param option Selected option
  * @returns void
  */
-const selectOption = (e: MouseEvent, option: Option) => {
+function selectOption(e: MouseEvent, option: Option) {
   if (props.multiple || props.taggable) {
     e.stopPropagation();
-    if (!selectedMultiple.find((opt) => opt.value === option.value)) {
+    if (!selectedMultiple.find(opt => opt.value === option.value))
       selectedMultiple.push(option);
-    } else {
+    else
       selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
-    }
+
     inputModel.value = '';
-    if (props.searchable) input.value?.focus();
+    if (props.searchable)
+      input.value?.focus();
     return;
   }
 
   selectOneOption(e, option);
-};
+}
 /**
  * @description - Selects one option
  * @param option Selected option
  * @returns void
  */
-const selectOneOption = (e: MouseEvent, option: Option) => {
+function selectOneOption(e: MouseEvent, option: Option) {
   if (selected.value === option.value) {
     selected.value = '';
     inputModel.value = '';
@@ -215,47 +218,52 @@ const selectOneOption = (e: MouseEvent, option: Option) => {
   selected.value = option.value;
   setActive(e);
   emit('update:modelValue', option);
-};
+}
 /**
  * @description - Removes an option from the selected options
  * @param option Option to remove
  * @returns void
  */
-const removeOption = (e: MouseEvent | KeyboardEvent, option: Option) => {
-  if (e instanceof KeyboardEvent && e.key !== 'Backspace') return;
-  if (inputModel.value !== '') return;
+function removeOption(e: MouseEvent | KeyboardEvent, option: Option) {
+  if (e instanceof KeyboardEvent && e.key !== 'Backspace')
+    return;
+  if (inputModel.value !== '')
+    return;
   e.stopPropagation();
-  const index = selectedMultiple.findIndex((opt) => opt.value === option.value);
+  const index = selectedMultiple.findIndex(opt => opt.value === option.value);
   selectedMultiple.splice(index, 1);
-};
+}
 /**
  * @description - Handles the not existing options
  * @returns void
  */
-const createTag = (e: KeyboardEvent) => {
-  if (!props.taggable) return;
+function createTag(e: KeyboardEvent) {
+  if (!props.taggable)
+    return;
   e.stopPropagation();
   const value = inputModel.value;
-  if (value === '') return;
-  const option = props.options.find((opt) => opt.label === value);
+  if (value === '')
+    return;
+  const option = props.options.find(opt => opt.label === value);
   if (!option) {
     selectedMultiple.push({ value, label: value });
     inputModel.value = '';
     input.value?.focus();
   }
-};
-const isSelected = (option: Option) => {
-  if (props.multiple) {
-    return selectedMultiple.find((opt) => opt.value === option.value);
-  }
+}
+function isSelected(option: Option) {
+  if (props.multiple)
+    return selectedMultiple.find(opt => opt.value === option.value);
+
   return selected.value === option.value;
-};
+}
 /**
  * @description - Search for options
  * @returns {Option[]} - Returns an array of options
  */
 const searchedOptions = computed(() => {
-  if (!props.searchable) return props.options;
+  if (!props.searchable)
+    return props.options;
   const result = props.options.filter((option) => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
   });
@@ -270,7 +278,8 @@ onMounted(() => {
   if (props.modelValue) {
     if (props.multiple) {
       selectedMultiple.push(props.modelValue as Option);
-    } else {
+    }
+    else {
       selected.value = (props.modelValue as Option).value;
       inputModel.value = (props.modelValue as Option).label;
     }
@@ -290,73 +299,120 @@ watch(selectedMultiple, (value) => {
  */
 onClickOutside(wrapper, removeActive);
 </script>
+
 <template>
   <div ref="wrapper" class="r-dropdown-wrapper">
-    <div ref="dropdown" :class="{
-      'r-dropdown': true,
-      'r-dropdown--disabled': props.disabled,
-      'r-dropdown--loading': props.loading,
-    }" role="select" @click="setActive">
-      <div v-if="props.prependIcon || $slots['prepend']" :class="{
-        'r-dropdown__prepend-icon': true,
-        'r-dropdown__prepend-icon--active': active,
-      }">
+    <div
+      ref="dropdown"
+      class="r-dropdown"
+      :class="{
+        'r-dropdown--disabled': props.disabled,
+        'r-dropdown--loading': props.loading,
+      }"
+      role="select"
+      @click="setActive"
+    >
+      <div
+        v-if="props.prependIcon || $slots.prepend"
+        class="r-dropdown__prepend-icon"
+        :class="{
+          'r-dropdown__prepend-icon--active': active,
+        }"
+      >
         <slot name="prepend">
           <Icon v-if="props.prependIcon" :name="props.prependIcon" />
         </slot>
       </div>
       <div v-if="props.taggable" class="r-dropdown__tags">
-        <Chip v-for="(option, index) in selectedMultiple" :key="index" appendIcon="close" class="r-dropdown__tags__chip"
-          :label="option.label" variant="primary" @click:close="removeOption($event, option)" />
+        <Chip
+          v-for="(option, index) in selectedMultiple"
+          :key="index"
+          append-icon="close"
+          class="r-dropdown__tags__chip"
+          :label="option.label"
+          variant="primary"
+          @click:close="removeOption($event, option)"
+        />
       </div>
       <div v-if="props.multiple" class="r-dropdown__multiple">
         <p v-for="(option, index) in selectedMultiple" :key="index">
-          {{ option.label + ',' }}
+          {{ `${option.label},` }}
         </p>
       </div>
-      <input :id="props.id" ref="input" v-model="inputModel" :class="{
-        'r-dropdown__input': true,
-        'r-dropdown__input--loading': props.loading,
-      }" :disabled="props.disabled" :placeholder="props.placeholder" :readonly="isReadOnly" type="text"
+      <input
+        :id="props.id"
+        ref="input"
+        v-model="inputModel"
+        class="r-dropdown__input"
+        :class="{
+          'r-dropdown__input--loading': props.loading,
+        }"
+        :disabled="props.disabled"
+        :placeholder="props.placeholder"
+        :readonly="isReadOnly"
+        type="text"
         @keydown.backspace="
           removeOption($event, selectedMultiple[selectedMultiple.length - 1])
-          " @keydown.enter="createTag($event)" />
-      <div v-if="props.appendIcon || $slots['append']" :class="{
-        'r-dropdown__append-icon': true,
-        'r-dropdown__append-icon--active': active,
-      }">
+        "
+        @keydown.enter="createTag($event)"
+      >
+      <div
+        v-if="props.appendIcon || $slots.append"
+        class="r-dropdown__append-icon"
+        :class="{
+          'r-dropdown__append-icon--active': active,
+        }"
+      >
         <slot name="append">
           <Icon v-if="props.appendIcon" :name="props.appendIcon" />
         </slot>
       </div>
     </div>
-    <ul :class="{
-      'r-dropdown-options': true,
-      'r-dropdown-options--active': active,
-    }">
-      <li v-for="option in searchedOptions" :key="option.value" :aria-disabled="option.disabled" :class="{
-        'r-dropdown-options__option': true,
-        'r-dropdown-options__option--active': isSelected(option),
-      }" @click="selectOption($event, option)">
+    <ul
+      class="r-dropdown-options"
+      :class="{
+        'r-dropdown-options--active': active,
+      }"
+    >
+      <li
+        v-for="option in searchedOptions"
+        :key="option.value"
+        :aria-disabled="option.disabled"
+        class="r-dropdown-options__option"
+        :class="{
+          'r-dropdown-options__option--active': isSelected(option),
+        }"
+        @click="selectOption($event, option)"
+      >
         <div style="display: flex; align-items: center">
           <slot v-if="!option.prependIcon" name="option-prepend" />
-          <Icon v-else :class="{
-            'r-dropdown-options__option__prepend-icon': true,
-            'r-dropdown-options__option__prepend-icon--active':
-              isSelected(option),
-          }" :name="option.prependIcon" />
-          <p :class="{
-            'r-dropdown-options__option__label': true,
-            'r-dropdown-options__option__label--active': isSelected(option),
-          }">
+          <Icon
+            v-else
+            class="r-dropdown-options__option__prepend-icon"
+            :class="{
+              'r-dropdown-options__option__prepend-icon--active':
+                isSelected(option),
+            }"
+            :name="option.prependIcon"
+          />
+          <p
+            class="r-dropdown-options__option__label"
+            :class="{
+              'r-dropdown-options__option__label--active': isSelected(option),
+            }"
+          >
             {{ option.label }}
           </p>
         </div>
-        <Icon v-if="isSelected(option)" :class="{
-          'r-dropdown-options__option__append-icon': true,
-          'r-dropdown-options__option__append-icon--active':
-            isSelected(option),
-        }" name="mdiCheck" />
+        <Icon
+          v-if="isSelected(option)"
+          class="r-dropdown-options__option__append-icon"
+          :class="{
+            'r-dropdown-options__option__append-icon--active':
+              isSelected(option),
+          }"
+          name="mdiCheck"
+        />
       </li>
     </ul>
   </div>

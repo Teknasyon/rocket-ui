@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import Label from '../Label/RLabel.vue';
 import './textarea.css';
 import {
-  defineProps,
-  defineEmits,
-  reactive,
-  watch,
   type HTMLAttributes,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
+  defineEmits,
+  defineProps,
+  reactive,
+  watch,
 } from 'vue';
+import Label from '../Label/RLabel.vue';
+
 export interface IProps {
   /**
    * id of the textarea
@@ -19,7 +20,7 @@ export interface IProps {
    * <TextArea id="textarea" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
    */
-  id: HTMLAttributes['id'];
+  id: HTMLAttributes['id']
 
   /**
    * Input value
@@ -29,7 +30,7 @@ export interface IProps {
    * <TextArea modelValue="Hello" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value
    */
-  modelValue?: InputHTMLAttributes['value'];
+  modelValue?: InputHTMLAttributes['value']
 
   /**
    * label of the textarea
@@ -39,7 +40,7 @@ export interface IProps {
    * <TextArea label="TextArea" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  label?: LabelHTMLAttributes['for'];
+  label?: LabelHTMLAttributes['for']
 
   /**
    * Placeholder text
@@ -49,7 +50,7 @@ export interface IProps {
    * <TextArea placeholder="Placeholder" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
    */
-  placeholder?: InputHTMLAttributes['placeholder'];
+  placeholder?: InputHTMLAttributes['placeholder']
 
   /**
    * Disabled state
@@ -59,7 +60,7 @@ export interface IProps {
    * <TextArea disabled />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled
    */
-  disabled?: InputHTMLAttributes['disabled'];
+  disabled?: InputHTMLAttributes['disabled']
 
   /**
    * Hint text
@@ -68,7 +69,7 @@ export interface IProps {
    * @example
    * <TextArea hint="This is a hint" />
    */
-  hint?: string;
+  hint?: string
 
   /**
    * Error message
@@ -77,7 +78,7 @@ export interface IProps {
    * @example
    * <TextArea errorMsg="This is an error" />
    */
-  errorMsg?: string;
+  errorMsg?: string
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -90,11 +91,11 @@ const props = withDefaults(defineProps<IProps>(), {
   hint: 'This is a hint',
 });
 
+const emit = defineEmits(['update:modelValue']);
+
 const state = reactive({
   value: '',
 });
-
-const emit = defineEmits(['update:modelValue']);
 
 function onInput(e: Event) {
   emit('update:modelValue', (e.target as HTMLInputElement).value);
@@ -113,11 +114,25 @@ watch(
 
 <template>
   <div class="container">
-    <Label v-if="props.label" id="textarea" class="r-textarea__label" for="textarea" :text="props.label" />
-    <textarea :id="props.id" class="r-textarea" :class="{
-      'r-textarea--error': props.errorMsg,
-      'r-textarea--disabled': props.disabled,
-    }" :disabled="props.disabled" :placeholder="props.placeholder" :value="state.value" @input="onInput" />
+    <Label
+      v-if="props.label"
+      id="textarea"
+      class="r-textarea__label"
+      for="textarea"
+      :text="props.label"
+    />
+    <textarea
+      :id="props.id"
+      class="r-textarea"
+      :class="{
+        'r-textarea--error': props.errorMsg,
+        'r-textarea--disabled': props.disabled,
+      }"
+      :disabled="props.disabled"
+      :placeholder="props.placeholder"
+      :value="state.value"
+      @input="onInput"
+    />
     <p v-if="props.errorMsg" class="r-textarea__error">
       {{ props.errorMsg }}
     </p>

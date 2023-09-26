@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import {
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
   computed,
   reactive,
   ref,
   watch,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type LabelHTMLAttributes,
 } from 'vue';
 import './textfield.css';
 import Icon from '../Icon/RIcon.vue';
 import Label from '../Label/RLabel.vue';
+
 // import { vFocus } from '../../directives';
 export interface Props {
   /**
@@ -21,7 +22,7 @@ export interface Props {
    * <Textfield id="textfield" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
    */
-  id: HTMLAttributes['id'];
+  id: HTMLAttributes['id']
   /**
    * Input type
    * @type 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
@@ -30,7 +31,7 @@ export interface Props {
    * <Textfield type="password" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
    */
-  type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+  type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
 
   /**
    * Input value
@@ -40,7 +41,7 @@ export interface Props {
    * <Textfield modelValue="Hello" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value
    */
-  modelValue?: InputHTMLAttributes['value'];
+  modelValue?: InputHTMLAttributes['value']
 
   /**
    * label of the textfield
@@ -50,7 +51,7 @@ export interface Props {
    * <Textfield label="Textfield" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  label?: LabelHTMLAttributes['for'];
+  label?: LabelHTMLAttributes['for']
 
   /**
    * Placeholder text
@@ -60,7 +61,7 @@ export interface Props {
    * <Textfield placeholder="Placeholder" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
    */
-  placeholder?: InputHTMLAttributes['placeholder'];
+  placeholder?: InputHTMLAttributes['placeholder']
 
   /**
    * Error message
@@ -69,7 +70,7 @@ export interface Props {
    * @example
    * <Textfield errorMsg="This is an error" />
    */
-  errorMsg?: string;
+  errorMsg?: string
 
   /**
    * Hint text
@@ -78,7 +79,7 @@ export interface Props {
    * @example
    * <Textfield hint="This is a hint" />
    */
-  hint?: string;
+  hint?: string
 
   /**
    * Icon to prepend
@@ -87,7 +88,7 @@ export interface Props {
    * @example
    * <Textfield prependIcon="mdiLock" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * Icon to append
@@ -96,7 +97,7 @@ export interface Props {
    * @example
    * <Textfield appendIcon="mdiEyeOffOutline" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Input disabled state
@@ -106,7 +107,7 @@ export interface Props {
    * <Textfield disabled="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Input loading state
@@ -115,7 +116,7 @@ export interface Props {
    * @example
    * <Textfield loading="true" />
    */
-  loading?: boolean;
+  loading?: boolean
 
   /**
    * Input clearable state
@@ -124,7 +125,7 @@ export interface Props {
    * @example
    * <Textfield clearable="true" />
    */
-  clearable?: boolean;
+  clearable?: boolean
 
   /**
    * Input number min value
@@ -134,7 +135,7 @@ export interface Props {
    * <Textfield min="0" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
    */
-  min?: InputHTMLAttributes['min'];
+  min?: InputHTMLAttributes['min']
 
   /**
    * Input number max value
@@ -144,9 +145,8 @@ export interface Props {
    * <Textfield max="10" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
    */
-  max?: InputHTMLAttributes['max'];
+  max?: InputHTMLAttributes['max']
 }
-const inputRef = ref<HTMLInputElement>();
 const props = withDefaults(defineProps<Props>(), {
   id: '',
   type: 'text',
@@ -170,6 +170,7 @@ const emit = defineEmits([
   'click:icon',
   'click:clear',
 ]);
+const inputRef = ref<HTMLInputElement>();
 const state = reactive({
   value: '',
 });
@@ -184,6 +185,15 @@ const prependIconsOfType = {
 };
 const isFocused = ref(false);
 const isFilled = computed(() => !!state.value);
+const hasValue = computed(() => {
+  return state.value.length > 0;
+});
+const hasErrorMsg = computed(() => {
+  return props.errorMsg?.length;
+});
+const hasClear = computed(() => {
+  return props.clearable && hasValue.value;
+});
 const classes = computed(() => {
   const { disabled, loading, clearable, errorMsg } = props;
   return {
@@ -210,26 +220,23 @@ const appendIconClasses = computed(() => {
     'r-textfield__append-icon--error': hasErrorMsg.value,
   };
 });
-const hasValue = computed(() => {
-  return state.value.length > 0;
-});
-const hasErrorMsg = computed(() => {
-  return props.errorMsg?.length;
-});
-const hasClear = computed(() => {
-  return props.clearable && hasValue.value;
-});
+
 const prependIconName = computed(() => {
   const { prependIcon, type } = props;
-  if (prependIcon === 'none') return '';
-  if (prependIcon) return prependIcon;
+  if (prependIcon === 'none')
+    return '';
+  if (prependIcon)
+    return prependIcon;
   return prependIconsOfType[type];
 });
 const appendIconName = computed(() => {
   const { appendIcon, type } = props;
-  if (appendIcon === 'none') return '';
-  if (hasErrorMsg.value) return 'mdiAlertCircleOutline';
-  if (hasClear.value && ['text', 'email'].includes(type)) return 'mdiClose';
+  if (appendIcon === 'none')
+    return '';
+  if (hasErrorMsg.value)
+    return 'mdiAlertCircleOutline';
+  if (hasClear.value && ['text', 'email'].includes(type))
+    return 'mdiClose';
   if (type === 'password' && typeOfInputRef.value === 'password')
     return 'mdiEyeOutline';
   if (type === 'password' && typeOfInputRef.value === 'text')
@@ -241,33 +248,33 @@ const appendIconName = computed(() => {
  * @param {FocusEvent} e - FocusEvent object
  * @returns {void}
  */
-const onFocus = (e: FocusEvent) => {
+function onFocus(e: FocusEvent) {
   isFocused.value = true;
   emit('focus', e);
-};
+}
 /**
  * @description - blur event handler
  * @param {FocusEvent} e - FocusEvent object
  * @returns {void}
  */
-const onBlur = (e: FocusEvent) => {
+function onBlur(e: FocusEvent) {
   isFocused.value = false;
   emit('blur', e);
-};
+}
 /**
  * @description - Emit input event with value of input
  * @param {InputEvent} e - InputEvent object
  * @returns {void}
  */
-const onInput = (e: InputEvent): void => {
+function onInput(e: InputEvent): void {
   state.value = (e.target as HTMLInputElement).value;
   emit('input', e);
-};
+}
 /**
  * @description - Emit click event with value of append icon
  * @returns {void}
  */
-const clickIcon = (): void => {
+function clickIcon(): void {
   if (hasClear.value) {
     state.value = '';
     inputRef.value?.focus();
@@ -279,20 +286,21 @@ const clickIcon = (): void => {
   emit('click:icon', {
     value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   });
-  if (typeOfInputRef.value === 'password') setPassType();
-};
+  if (typeOfInputRef.value === 'password')
+    setPassType();
+}
 /**
  * @description - Set type of input to password or text
  * @returns {void}
  */
-const setPassType = (): void => {
-  typeOfInputRef.value =
-    typeOfInputRef.value === 'password' ? 'text' : 'password';
-};
+function setPassType(): void {
+  typeOfInputRef.value
+    = typeOfInputRef.value === 'password' ? 'text' : 'password';
+}
 
-const focusInput = () => {
+function focusInput() {
   inputRef.value?.focus();
-};
+}
 
 watch(
   () => props.modelValue,
@@ -313,25 +321,50 @@ watch(
   }
 );
 </script>
+
 <template>
   <fieldset>
-    <div :class="{
-      'r-textfield__wrapper': true,
-    }">
-      <Label v-if="props.label" :id="props.id" :class="{
-        'r-textfield__label': true,
-      }" :for="props.id" :text="props.label" @click="focusInput" />
+    <div
+      class="r-textfield__wrapper"
+    >
+      <Label
+        v-if="props.label"
+        :id="props.id"
+        class="r-textfield__label"
+        :for="props.id"
+        :text="props.label"
+        @click="focusInput"
+      />
       <div class="input-wrapper">
         <div :class="classes">
           <slot name="prepend" />
-          <Icon v-if="prependIconName && !$slots['prepend']" :class="prependIconClasses" :name="prependIconName"
-            :size="20" />
-          <input :id="props.id" ref="inputRef" :disabled="props.disabled" :max="props.max" :min="props.min"
-            :placeholder="props.placeholder" :type="typeOfInputRef" :value="state.value" @blur="onBlur" @focus="onFocus"
-            @input="onInput" />
+          <Icon
+            v-if="prependIconName && !$slots.prepend"
+            :class="prependIconClasses"
+            :name="prependIconName"
+            :size="20"
+          />
+          <input
+            :id="props.id"
+            ref="inputRef"
+            :disabled="props.disabled"
+            :max="props.max"
+            :min="props.min"
+            :placeholder="props.placeholder"
+            :type="typeOfInputRef"
+            :value="state.value"
+            @blur="onBlur"
+            @focus="onFocus"
+            @input="onInput"
+          >
           <slot name="append" />
-          <Icon v-if="appendIconName && !$slots['append']" :class="appendIconClasses" :name="`${appendIconName}`"
-            :size="20" @click="clickIcon" />
+          <Icon
+            v-if="appendIconName && !$slots.append"
+            :class="appendIconClasses"
+            :name="`${appendIconName}`"
+            :size="20"
+            @click="clickIcon"
+          />
         </div>
         <div v-if="props.errorMsg" class="r-textfield__error">
           {{ props.errorMsg }}
