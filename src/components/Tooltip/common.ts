@@ -6,7 +6,7 @@ import {
   offset,
   shift,
 } from '@floating-ui/dom';
-import type { Ref } from 'vue';
+import { type Ref, } from 'vue';
 
 export type Placements =
   | 'top'
@@ -51,7 +51,7 @@ export function update(
   { value: arrowElement }: Ref<HTMLDivElement>,
   placement: Placements,
   offsetParam: number,
-  padding: number
+  padding: number,
 ) {
   if (!trigger || !tooltip)
     return;
