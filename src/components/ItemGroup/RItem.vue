@@ -9,7 +9,7 @@ export interface ItemProps {
    * @example
    * <RItem :value="1" />
    */
-  value: any;
+  value: any
 
   /**
    * Whether the item is disabled
@@ -18,7 +18,7 @@ export interface ItemProps {
    * @example
    * <RItem :disabled="true" />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * The class to apply to the selected item
@@ -27,16 +27,16 @@ export interface ItemProps {
    * @example
    * <RItem selectedClass="bg-blue-500 text-white" />
    */
-  selectedClass?: string;
+  selectedClass?: string
 }
-
-const RItemGroupSymbol = 'rocket-ui:r-item-group';
 
 const props = withDefaults(defineProps<ItemProps>(), {
   disabled: false,
   selectedClass: '',
   value: null,
 });
+
+const RItemGroupSymbol = 'rocket-ui:r-item-group';
 
 const isSelected = inject(`${RItemGroupSymbol}:isSelected`) as (
   id: number
@@ -52,22 +52,25 @@ const select = inject(`${RItemGroupSymbol}:select`) as (
   value: boolean
 ) => void;
 
-const handleToggle = () => {
-  if (props.disabled) return;
+function handleToggle() {
+  if (props.disabled)
+    return;
   select(props.value as number, !isSelected(props.value as number));
-};
+}
 
-const handleSelect = () => {
-  if (props.disabled) return;
+function handleSelect() {
+  if (props.disabled)
+    return;
   select(props.value as number, true);
-};
+}
 </script>
+
 <template>
   <slot
     :disabled="props.disabled"
-    :isSelected="isSelected(props.value as number)"
+    :is-selected="isSelected(props.value as number)"
     :select="handleSelect"
-    :selectedClass="selectedClass"
+    :selected-class="selectedClass"
     :toggle="handleToggle"
     :value="props.value"
   />
