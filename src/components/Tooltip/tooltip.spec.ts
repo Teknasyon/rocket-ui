@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { mount } from '@vue/test-utils';
 
 import Tooltip from './RTooltip.vue';
-import { Trigger } from './common';
+import { Trigger } from './popper';
 
 describe('Tooltip', () => {
   it('click trigger', () => {

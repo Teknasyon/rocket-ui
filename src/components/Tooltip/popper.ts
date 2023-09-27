@@ -5,6 +5,7 @@ import {
   hide,
   offset,
   shift,
+  size,
 } from '@floating-ui/dom';
 import { type Ref, } from 'vue';
 
@@ -45,7 +46,13 @@ export enum Trigger {
   Manual = 'manual',
 }
 
-export function update(
+export enum Theme {
+  Tooltip = 'tooltip',
+  Popover = 'popover',
+  Dropdown = 'dropdown',
+};
+
+export async function update(
   { value: trigger }: Ref<HTMLDivElement>,
   { value: tooltip }: Ref<HTMLDivElement>,
   { value: arrowElement }: Ref<HTMLDivElement>,
@@ -53,6 +60,7 @@ export function update(
   offsetParam: number,
   padding: number,
   duration: number = 300,
+  theme: Theme | string,
 ) {
   if (!trigger || !tooltip)
     return;
@@ -65,15 +73,18 @@ export function update(
       flip(),
       hide(),
     ],
-  }).then(({ x, y, placement, middlewareData, strategy }) => {
+  }).then(({ x, y, placement, middlewareData, }) => {
     if (!tooltip)
       return;
+
+    const parentLeft = trigger.offsetParent?.getBoundingClientRect().left || 0;
+
     Object.assign(tooltip.style, {
-      left: `${x}px`,
+      minWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth - 2}px` : 'auto',
+      left: theme === Theme.Dropdown ? `${parentLeft}px` : `${x}px`,
       top: `${y}px`,
       animation: `tooltip-show ${duration}ms ease-in-out forwards`,
-      transformOrigin: 'center',
-      position: strategy === 'fixed' ? 'fixed' : 'absolute',
+      transformOrigin: 'start',
     });
 
     if (arrowElement && middlewareData.arrow) {

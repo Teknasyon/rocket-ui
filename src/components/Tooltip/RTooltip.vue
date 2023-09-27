@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import './tooltip.css';
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { computed, onMounted, ref, watch, watchEffect } from 'vue';
+import { s } from 'vitest/dist/types-198fd1d9';
 import {
   Placement,
   type Placements,
+  Theme,
   Trigger,
   type Triggers,
-  update,
-} from './common';
+  update
+} from './popper';
 
 export interface IProps {
   /**
@@ -165,6 +167,8 @@ export interface IProps {
    * <Tooltip tooltipClass="tooltip" />
    */
   tooltipClass?: string
+
+  type?: Theme | string
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -184,6 +188,7 @@ const props = withDefaults(defineProps<IProps>(), {
   resizable: true,
   triggerClass: '',
   tooltipClass: '',
+  type: Theme.Tooltip,
 });
 const emit = defineEmits(['show', 'hide']);
 
@@ -194,14 +199,14 @@ const tooltip = ref<HTMLDivElement>(null);
 // @ts-expect-error
 const arrowElement = ref<HTMLDivElement>(null);
 
-function showTooltip() {
-  const { placement, offset, padding, disabled, showDelay } = props;
+async function showTooltip() {
+  const { placement, offset, padding, disabled, showDelay, type } = props;
   if (disabled)
     return;
   tooltip.value.style.display = 'block';
   // document.body.appendChild(tooltip.value);
   emit('show');
-  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
+  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
   handleAutoHide();
   if (props.outsideClick)
     toggleOutsideClick('add');
@@ -265,11 +270,11 @@ function onMouseLeave() {
 }
 
 function onMouseMove() {
-  const { placement, offset, padding, disabled, showDelay } = props;
+  const { placement, offset, padding, disabled, showDelay, type } = props;
   if (disabled)
     return;
   if (props.triggers.includes(Trigger.Hover))
-    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
+    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
 }
 
 const classes = computed(() => {
@@ -285,11 +290,11 @@ const classes = computed(() => {
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
  */
 window.onresize = () => {
-  const { placement, offset, padding, disabled, showDelay } = props;
+  const { placement, offset, padding, disabled, showDelay, type } = props;
   if (disabled)
     return;
   if (props.resizable)
-    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay);
+    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
 };
 
 watchEffect(
@@ -314,11 +319,11 @@ onMounted(() => {
     ref="trigger"
     :aria-disabled="props.disabled"
     class="trigger"
-    :class="[triggerClass]"
-    @click.stop="onClick"
-    @mouseenter.stop="onMouseEnter"
-    @mouseleave.stop="onMouseLeave"
-    @mousemove.stop="onMouseMove"
+    :class="triggerClass"
+    @click="onClick"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @mousemove="onMouseMove"
   >
     <slot
       :activators="{
@@ -338,7 +343,7 @@ onMounted(() => {
       :class="[classes, tooltipClass]"
       role="tooltip"
     >
-      <slot name="content">
+      <slot :hide="hideTooltip" name="content">
         <div
           v-if="props.text"
           class="tooltip__content"
@@ -363,3 +368,4 @@ onMounted(() => {
     </div>
   </Teleport>
 </template>
+./popper
