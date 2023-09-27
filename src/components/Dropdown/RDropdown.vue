@@ -158,12 +158,12 @@ const wrapper = ref<HTMLElement>();
  * @returns void
  */
 function setActive(e: MouseEvent, activators?: any) {
+  e.stopPropagation();
   if (props.disabled)
     return;
-  e.stopPropagation();
+  active.value = !active.value;
   if (activators)
     activators();
-  active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('r-dropdown--active');
     dropdown.value?.focus();
@@ -197,7 +197,6 @@ function selectOption(e: any, option: Option, hide: any) {
   if (option.disabled)
     return
   if (props.multiple || props.taggable) {
-    e.stopPropagation();
     if (!selectedMultiple.find(opt => opt.value === option.value))
       selectedMultiple.push(option);
     else
@@ -329,7 +328,7 @@ watch(selectedMultiple, (value) => {
             'r-dropdown--loading': props.loading,
           }"
           role="select"
-          @click.stop="setActive($event, activators.click)"
+          @click="setActive($event, activators.click)"
         >
           <div
             v-if="props.prependIcon || $slots.prepend"
