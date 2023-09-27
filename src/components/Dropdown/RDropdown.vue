@@ -142,7 +142,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 });
 
 const emit = defineEmits(['update:modelValue']);
-const selected = ref<string | number>('');
+const selected = ref<Option>({ value: '', label: '' });
 const selectedMultiple = reactive<Option[]>([]);
 const active = ref(false);
 const inputModel = ref('');
@@ -222,13 +222,13 @@ function selectOption(e: any, option: Option, hide: any) {
  * @returns void
  */
 function selectOneOption(e: MouseEvent, option: Option) {
-  if (selected.value === option.value) {
-    selected.value = '';
+  if (selected.value.value === option.value) {
+    selected.value = {} as Option;
     inputModel.value = '';
     return;
   }
   inputModel.value = option.label;
-  selected.value = option.value;
+  selected.value = option;
   setActive(e);
   emit('update:modelValue', option);
 }
@@ -268,14 +268,14 @@ function isSelected(option: Option) {
   if (props.multiple)
     return selectedMultiple.find(opt => opt.value === option.value);
 
-  return selected.value === option.value;
+  return selected.value.value === option.value;
 }
 /**
  * @description - Search for options
  * @returns {Option[]} - Returns an array of options
  */
 const searchedOptions = computed(() => {
-  if (!props.searchable)
+  if (!props.searchable || selected.value.label === inputModel.value)
     return props.options;
   const result = props.options.filter((option) => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
@@ -293,7 +293,7 @@ onMounted(() => {
       selectedMultiple.push(props.modelValue as Option);
     }
     else {
-      selected.value = (props.modelValue as Option).value;
+      selected.value = (props.modelValue as Option);
       inputModel.value = (props.modelValue as Option).label;
     }
   }
