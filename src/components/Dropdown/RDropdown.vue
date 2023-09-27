@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, reactive, ref, watch, watchEffect } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue';
 import Chip from '../Chips/RChip.vue';
 import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
@@ -194,6 +193,7 @@ function removeActive() {
  * @returns void
  */
 function selectOption(e: any, option: Option, hide: any) {
+  e.stopPropagation();
   if (option.disabled)
     return
   if (props.multiple || props.taggable) {
@@ -211,8 +211,10 @@ function selectOption(e: any, option: Option, hide: any) {
 
   selectOneOption(e, option);
 
-  if (props.closeOnSelect)
+  if (props.closeOnSelect) {
     hide();
+    removeActive();
+  }
 }
 /**
  * @description - Selects one option
@@ -303,12 +305,6 @@ onMounted(() => {
 watch(selectedMultiple, (value) => {
   emit('update:modelValue', value);
 });
-
-/**
- * @description - Watch the outside click
- * @returns void
- */
-onClickOutside(wrapper, removeActive);
 </script>
 
 <template>
@@ -322,6 +318,7 @@ onClickOutside(wrapper, removeActive);
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
+      @hide="removeActive"
     >
       <template #default="{ activators }">
         <div
@@ -407,7 +404,7 @@ onClickOutside(wrapper, removeActive);
               'r-dropdown-options__option--active': isSelected(option),
               'r-dropdown-options__option--disabled': option.disabled,
             }"
-            @click="selectOption($event, option, hide)"
+            @click.prevent="selectOption($event, option, hide)"
           >
             <div style="display: flex; align-items: center">
               <slot v-if="!option.prependIcon" name="option-prepend" />

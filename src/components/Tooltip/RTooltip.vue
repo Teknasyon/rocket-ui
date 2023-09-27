@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import './tooltip.css';
 import { computed, onMounted, ref, watch, watchEffect } from 'vue';
-import { s } from 'vitest/dist/types-198fd1d9';
+import { onClickOutside } from '@vueuse/core';
 import {
   Placement,
   type Placements,
@@ -208,8 +208,6 @@ async function showTooltip() {
   emit('show');
   update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
   handleAutoHide();
-  if (props.outsideClick)
-    toggleOutsideClick('add');
 }
 
 function hideTooltip() {
@@ -219,8 +217,6 @@ function hideTooltip() {
   emit('hide');
   // document.removeEventListener('click', hideTooltip);
   // document.body.removeChild(tooltip.value)
-  if (props.outsideClick)
-    toggleOutsideClick('remove');
 }
 
 function handleAutoHide() {
@@ -229,14 +225,6 @@ function handleAutoHide() {
       hideTooltip();
     }, props.hideDelay);
   }
-}
-
-function toggleOutsideClick(toggle: string) {
-  if (toggle === 'add')
-    document.addEventListener('click', hideTooltip);
-
-  if (toggle === 'remove')
-    document.removeEventListener('click', hideTooltip);
 }
 
 function onClick() {
@@ -310,7 +298,13 @@ watchEffect(
 );
 
 onMounted(() => {
-  hideTooltip();
+  onClickOutside(trigger, () => {
+    if (props.outsideClick)
+      hideTooltip();
+  },
+  {
+    ignore: [tooltip.value],
+  });
 });
 </script>
 
