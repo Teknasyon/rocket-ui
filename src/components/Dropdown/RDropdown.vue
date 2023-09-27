@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue';
+import { computed, defineEmits, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import Chip from '../Chips/RChip.vue';
 import Icon from '../Icon/RIcon.vue';
 import './dropdown.css';
+import RTooltip from '../Tooltip/RTooltip.vue';
 
 export interface Option {
   value: string | number
@@ -122,6 +123,8 @@ export interface SelectProps {
    * <Dropdown id="test" />
    */
   id?: string
+
+  closeOnSelect?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -136,6 +139,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   searchable: false,
   id: 'test',
   label: '',
+  closeOnSelect: true,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -146,18 +150,20 @@ const inputModel = ref('');
 /**
  * @description - HTML elements references
  */
-const dropdown = ref<HTMLElement | null>(null);
-const input = ref<HTMLInputElement | null>(null);
-const wrapper = ref<HTMLElement | null>(null);
+const dropdown = ref<HTMLElement>();
+const input = ref<HTMLInputElement>();
+const wrapper = ref<HTMLElement>();
 /**
  * @description - Handles the appearance of the select list
  * @param e MouseEvent
  * @returns void
  */
-function setActive(e: MouseEvent) {
+function setActive(e: MouseEvent, activators?: any) {
   if (props.disabled)
     return;
   e.stopPropagation();
+  if (activators)
+    activators();
   active.value = !active.value;
   if (active.value) {
     dropdown.value?.classList.add('r-dropdown--active');
@@ -187,7 +193,9 @@ function removeActive() {
  * @param option Selected option
  * @returns void
  */
-function selectOption(e: MouseEvent, option: Option) {
+function selectOption(e: any, option: Option, hide: any) {
+  if (option.disabled)
+    return
   if (props.multiple || props.taggable) {
     e.stopPropagation();
     if (!selectedMultiple.find(opt => opt.value === option.value))
@@ -202,10 +210,13 @@ function selectOption(e: MouseEvent, option: Option) {
   }
 
   selectOneOption(e, option);
+
+  if (props.closeOnSelect)
+    hide();
 }
 /**
  * @description - Selects one option
- * @param option Selected option
+ * @param e option Selected option
  * @returns void
  */
 function selectOneOption(e: MouseEvent, option: Option) {
@@ -221,7 +232,7 @@ function selectOneOption(e: MouseEvent, option: Option) {
 }
 /**
  * @description - Removes an option from the selected options
- * @param option Option to remove
+ * @param e option Option to remove
  * @returns void
  */
 function removeOption(e: MouseEvent | KeyboardEvent, option: Option) {
@@ -302,118 +313,134 @@ onClickOutside(wrapper, removeActive);
 
 <template>
   <div ref="wrapper" class="r-dropdown-wrapper">
-    <div
-      ref="dropdown"
-      class="r-dropdown"
-      :class="{
-        'r-dropdown--disabled': props.disabled,
-        'r-dropdown--loading': props.loading,
-      }"
-      role="select"
-      @click="setActive"
+    <RTooltip
+      :auto-hide="false"
+      :offset="0"
+      outside-click
+      placement="bottom"
+      tooltip-class="w-max"
+      trigger-class="w-full"
+      :triggers="['click']"
+      type="dropdown"
     >
-      <div
-        v-if="props.prependIcon || $slots.prepend"
-        class="r-dropdown__prepend-icon"
-        :class="{
-          'r-dropdown__prepend-icon--active': active,
-        }"
-      >
-        <slot name="prepend">
-          <Icon v-if="props.prependIcon" :name="props.prependIcon" />
-        </slot>
-      </div>
-      <div v-if="props.taggable" class="r-dropdown__tags">
-        <Chip
-          v-for="(option, index) in selectedMultiple"
-          :key="index"
-          append-icon="close"
-          class="r-dropdown__tags__chip"
-          :label="option.label"
-          variant="primary"
-          @click:close="removeOption($event, option)"
-        />
-      </div>
-      <div v-if="props.multiple" class="r-dropdown__multiple">
-        <p v-for="(option, index) in selectedMultiple" :key="index">
-          {{ `${option.label},` }}
-        </p>
-      </div>
-      <input
-        :id="props.id"
-        ref="input"
-        v-model="inputModel"
-        class="r-dropdown__input"
-        :class="{
-          'r-dropdown__input--loading': props.loading,
-        }"
-        :disabled="props.disabled"
-        :placeholder="props.placeholder"
-        :readonly="isReadOnly"
-        type="text"
-        @keydown.backspace="
-          removeOption($event, selectedMultiple[selectedMultiple.length - 1])
-        "
-        @keydown.enter="createTag($event)"
-      >
-      <div
-        v-if="props.appendIcon || $slots.append"
-        class="r-dropdown__append-icon"
-        :class="{
-          'r-dropdown__append-icon--active': active,
-        }"
-      >
-        <slot name="append">
-          <Icon v-if="props.appendIcon" :name="props.appendIcon" />
-        </slot>
-      </div>
-    </div>
-    <ul
-      class="r-dropdown-options"
-      :class="{
-        'r-dropdown-options--active': active,
-      }"
-    >
-      <li
-        v-for="option in searchedOptions"
-        :key="option.value"
-        :aria-disabled="option.disabled"
-        class="r-dropdown-options__option"
-        :class="{
-          'r-dropdown-options__option--active': isSelected(option),
-        }"
-        @click="selectOption($event, option)"
-      >
-        <div style="display: flex; align-items: center">
-          <slot v-if="!option.prependIcon" name="option-prepend" />
-          <Icon
-            v-else
-            class="r-dropdown-options__option__prepend-icon"
+      <template #default="{ activators }">
+        <div
+          ref="dropdown"
+          class="r-dropdown"
+          :class="{
+            'r-dropdown--disabled': props.disabled,
+            'r-dropdown--loading': props.loading,
+          }"
+          role="select"
+          @click.stop="setActive($event, activators.click)"
+        >
+          <div
+            v-if="props.prependIcon || $slots.prepend"
+            class="r-dropdown__prepend-icon"
             :class="{
-              'r-dropdown-options__option__prepend-icon--active':
-                isSelected(option),
-            }"
-            :name="option.prependIcon"
-          />
-          <p
-            class="r-dropdown-options__option__label"
-            :class="{
-              'r-dropdown-options__option__label--active': isSelected(option),
+              'r-dropdown__prepend-icon--active': active,
             }"
           >
-            {{ option.label }}
-          </p>
+            <slot name="prepend">
+              <Icon v-if="props.prependIcon" :name="props.prependIcon" />
+            </slot>
+          </div>
+          <div v-if="props.taggable" class="r-dropdown__tags">
+            <Chip
+              v-for="(option, index) in selectedMultiple"
+              :key="index"
+              append-icon="close"
+              class="r-dropdown__tags__chip"
+              :label="option.label"
+              variant="primary"
+              @click:close="removeOption($event, option)"
+            />
+          </div>
+          <div v-if="props.multiple" class="r-dropdown__multiple">
+            <p v-for="(option, index) in selectedMultiple" :key="index">
+              {{ `${option.label},` }}
+            </p>
+          </div>
+          <input
+            :id="props.id"
+            ref="input"
+            v-model="inputModel"
+            class="r-dropdown__input"
+            :class="{
+              'r-dropdown__input--loading': props.loading,
+            }"
+            :disabled="props.disabled"
+            :placeholder="props.placeholder"
+            :readonly="isReadOnly"
+            type="text"
+            @keydown.backspace="
+              removeOption($event, selectedMultiple[selectedMultiple.length - 1])
+            "
+            @keydown.enter="createTag($event)"
+          >
+          <div
+            v-if="props.appendIcon || $slots.append"
+            class="r-dropdown__append-icon"
+            :class="{
+              'r-dropdown__append-icon--active': active,
+            }"
+          >
+            <slot name="append">
+              <Icon v-if="props.appendIcon" :name="props.appendIcon" />
+            </slot>
+          </div>
         </div>
-        <Icon
-          v-if="isSelected(option)"
-          class="r-dropdown-options__option__append-icon"
+      </template>
+      <template #content="{ hide }">
+        <ul
+          class="r-dropdown-options"
           :class="{
-            'r-dropdown-options__option__append-icon--active':
-              isSelected(option),
+            'r-dropdown-options--active': active,
           }"
-          name="mdiCheck"
-        />
-      </li>
-    </ul>
+        >
+          <li
+            v-for="option in searchedOptions"
+            :key="option.value"
+            :aria-disabled="option.disabled"
+            class="r-dropdown-options__option"
+            :class="{
+              'r-dropdown-options__option--active': isSelected(option),
+              'r-dropdown-options__option--disabled': option.disabled,
+            }"
+            @click="selectOption($event, option, hide)"
+          >
+            <div style="display: flex; align-items: center">
+              <slot v-if="!option.prependIcon" name="option-prepend" />
+              <Icon
+                v-else
+                class="r-dropdown-options__option__prepend-icon"
+                :class="{
+                  'r-dropdown-options__option__prepend-icon--active':
+                    isSelected(option),
+                }"
+                :name="option.prependIcon"
+              />
+              <p
+                class="r-dropdown-options__option__label"
+                :class="{
+                  'r-dropdown-options__option__label--active': isSelected(option),
+                }"
+              >
+                {{ option.label }}
+              </p>
+            </div>
+            <Icon
+              v-if="isSelected(option)"
+              class="r-dropdown-options__option__append-icon"
+              :class="{
+                'r-dropdown-options__option__append-icon--active':
+                  isSelected(option),
+              }"
+              name="mdiCheck"
+            />
+          </li>
+        </ul>
+      </template>
+    </RTooltip>
   </div>
 </template>

@@ -68,11 +68,7 @@
 }
 
 .r-dropdown-options {
-  @apply hidden p-2 left-0 absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none sm:text-sm;
-
-  &--active {
-    @apply block;
-  }
+  @apply p-2 left-0 mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none sm:text-sm;
 
   &__option {
     @apply text-[var(--neutral-900)] transition-all duration-200 ease-in 
@@ -84,6 +80,10 @@
     }
     &--active {
       @apply bg-[var(--primary-100)] text-[var(--primary-500)];
+    }
+
+    &--disabled {
+      @apply bg-[var(--primary-50)] text-[var(--neutral-300)] cursor-not-allowed;
     }
 
     &__label {
