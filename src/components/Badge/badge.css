@@ -56,8 +56,8 @@
   &--neutral {
     @apply bg-[var(--neutral-500)];
   }
-
+/* 
   &__content {
     @apply grid place-items-center leading-[14px] text-[10px] text-white font-bold;
-  }
+  } */
 }

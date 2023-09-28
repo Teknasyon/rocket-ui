@@ -5,7 +5,7 @@ import { computed } from 'vue';
 export interface BadgeProps {
   /**
    * Variant of the Badge
-   * @type 'primary' | 'success' | 'warning' | 'error' | 'neutral'
+   * @type { 'primary' | 'success' | 'warning' | 'error' | 'neutral' }
    * @default 'primary'
    * @example
    * <Badge variant="primary" />
@@ -14,7 +14,7 @@ export interface BadgeProps {
 
   /**
    * Placement of the Badge
-   * @type 'right' | 'bottom' | 'left'
+   * @type { 'right' | 'bottom' | 'left' }
    * @default 'right'
    * @example
    * <Badge placement="right" />
@@ -23,7 +23,7 @@ export interface BadgeProps {
 
   /**
    * Overlap the Badge
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Badge overlap />
@@ -32,7 +32,7 @@ export interface BadgeProps {
 
   /**
    * Show the Badge on hover
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Badge hover />
@@ -40,22 +40,22 @@ export interface BadgeProps {
   hover?: boolean
 
   /**
-   * Content of the Badge
-   * @type string | number
-   * @default ''
-   * @example
-   * <Badge content="1" />
-   */
-  content?: string | number
-
-  /**
    * Show the Badge outside
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Badge outside />
    */
   outside?: boolean
+
+  /**
+   * Show the Badge animation
+   * @type { boolean }
+   * @default false
+   * @example
+   * <Badge animation />
+   */
+  animation?: boolean
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
@@ -74,7 +74,6 @@ const classes = computed(() => {
     [`r-badge--${props.placement}`]: props.placement,
     [`r-badge--outside-${props.placement}`]: props.outside,
     'r-badge--hover': props.hover,
-    'r-badge--no-content': !props.content,
     [`r-badge--${props.variant}`]: props.variant,
   };
 });
@@ -82,9 +81,8 @@ const classes = computed(() => {
 
 <template>
   <div class="r-badge-wrapper group">
-    <span :class="classes" @click="$emit('click')">
-      {{ props.content }}
-    </span>
+    <span :class="[{ 'animate-ping': props.animation }, classes]" />
+    <span :class="classes" />
     <slot />
   </div>
 </template>
