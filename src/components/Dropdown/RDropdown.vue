@@ -286,7 +286,7 @@ const isReadOnly = computed(() => {
   return props.multiple || props.taggable || !props.searchable;
 });
 
-onMounted(() => {
+function reset() {
   if (props.modelValue) {
     if (props.multiple) {
       selectedMultiple.push(props.modelValue as Option);
@@ -296,13 +296,25 @@ onMounted(() => {
       inputModel.value = (props.modelValue as Option).label;
     }
   }
+  else {
+    selected.value = {} as Option;
+    selectedMultiple.splice(0, selectedMultiple.length);
+  }
+}
+
+onMounted(() => {
+  reset()
 });
+
 /**
  * @description - Watch the selected multiple options
  * @returns void
  */
 watch(selectedMultiple, (value) => {
   emit('update:modelValue', value);
+});
+watch(() => props.modelValue, (_value) => {
+  reset();
 });
 </script>
 
