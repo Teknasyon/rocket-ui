@@ -124,6 +124,9 @@ export interface SelectProps {
   id?: string
 
   closeOnSelect?: boolean
+
+  dropdownClass?: string
+  optionsClass?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -139,6 +142,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   id: 'test',
   label: '',
   closeOnSelect: true,
+  dropdownClass: '',
+  optionsClass: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -338,6 +343,7 @@ watch(() => props.modelValue, (_value) => {
           :class="{
             'r-dropdown--disabled': props.disabled,
             'r-dropdown--loading': props.loading,
+            [props.dropdownClass]: props.dropdownClass,
           }"
           role="select"
           @click="setActive($event, activators.click)"
@@ -404,6 +410,7 @@ watch(() => props.modelValue, (_value) => {
           class="r-dropdown-options"
           :class="{
             'r-dropdown-options--active': active,
+            [props.optionsClass]: props.optionsClass,
           }"
         >
           <li
