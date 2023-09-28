@@ -5,10 +5,10 @@
 }
 
 .r-badge {
-  @apply absolute z-50 rounded-full py-0 px-1 bg-[var(--primary-500)];
+  @apply box-content border border-white w-1.5 h-1.5 absolute z-50 rounded-full  bg-[var(--primary-500)];
 
   &--right {
-    @apply top-0 right-0;
+    @apply top-1 right-1;
   }
   &--left {
     @apply top-0 left-0;
@@ -29,16 +29,13 @@
     @apply -right-1 -bottom-1;
   }
   &--overlap-right {
-    @apply top-1 right-1;
+    @apply top-2.5 right-3;
   }
   &--overlap-left {
     @apply top-1 left-1;
   }
   &--overlap-bottom {
     @apply right-1 bottom-1;
-  }
-  &--no-content {
-    @apply w-2 h-2 py-1;
   }
 
   &--primary {
@@ -56,8 +53,19 @@
   &--neutral {
     @apply bg-[var(--neutral-500)];
   }
-/* 
-  &__content {
+
+  /* &__content {
     @apply grid place-items-center leading-[14px] text-[10px] text-white font-bold;
   } */
+}
+
+
+@keyframes ping2 {
+    75%, 100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+.animate-ping-2 {
+    animation: ping2 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }

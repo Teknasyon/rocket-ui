@@ -56,6 +56,8 @@ export interface BadgeProps {
    * <Badge animation />
    */
   animation?: boolean
+
+  class?: string
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
@@ -64,6 +66,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   hover: false,
   content: '',
   outside: false,
+  animation: false,
+  class: '',
 });
 defineEmits(['click']);
 const classes = computed(() => {
@@ -75,13 +79,14 @@ const classes = computed(() => {
     [`r-badge--outside-${props.placement}`]: props.outside,
     'r-badge--hover': props.hover,
     [`r-badge--${props.variant}`]: props.variant,
+    [props.class]: props.class,
   };
 });
 </script>
 
 <template>
   <div class="r-badge-wrapper group">
-    <span :class="[{ 'animate-ping': props.animation }, classes]" />
+    <span :class="[{ 'animate-ping-2': props.animation }, classes]" />
     <span :class="classes" />
     <slot />
   </div>
