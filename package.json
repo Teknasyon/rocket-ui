@@ -90,6 +90,7 @@
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.20.0",
+    "cssnano": "^6.0.1",
     "dotenv": "^16.3.1",
     "eslint": "^8.39.0",
     "eslint-plugin-mdx": "^2.0.2",

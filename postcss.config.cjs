@@ -3,7 +3,8 @@ module.exports = {
   plugins: {
     'postcss-import': {},
     'tailwindcss/nesting': 'postcss-nested',
-    tailwindcss: { config: './tailwind.config.cjs' },
-    autoprefixer: {},
+    'tailwindcss': { config: './tailwind.config.cjs' },
+    'autoprefixer': {},
+    'cssnano': { preset: 'default' },
   },
 };
