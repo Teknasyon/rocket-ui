@@ -13,13 +13,13 @@
   }
 
   &--large {
-    @apply h-14 text-base px-6 py-4;
+    @apply text-base p-2;
   }
   &--medium {
-    @apply h-12 text-sm px-6 py-3;
+    @apply text-sm px-4 py-2;
   }
   &--small {
-    @apply h-9 text-xs px-4 py-2;
+    @apply text-xs px-4 py-1.5;
   }
   &--loading {
     @apply animate-pulse;
@@ -34,14 +34,15 @@
   }
 
   &--large&--only-icon {
-    @apply p-[1rem];
+    @apply p-2;
   }
   &--medium&--only-icon {
-    @apply p-[0.875rem];
+    @apply p-2;
   }
   &--small&--only-icon {
-    @apply px-4 py-2;
+    @apply p-1.5;
   }
+
   &--block {
     @apply w-full;
   }
@@ -55,92 +56,300 @@
   &__append-icon {
     @apply ml-2;
   }
-}
-.r-button--primary {
-  @apply bg-[var(--primary-500)];
 
-  &:hover {
-    @apply bg-[var(--primary-700)];
-  }
-  &:active {
-    @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
-  }
-  &:disabled {
-    @apply bg-[var(--primary-200)] text-[var(--primary-300)];
-  }
-}
-.r-button--secondary {
-  @apply bg-[var(--primary-100)]  text-[var(--primary-500)];
+  &__default {
+    &--primary {
+      @apply bg-[var(--primary-500)];
 
-  &:hover {
-    @apply bg-[var(--primary-200)];
-  }
-  &:active {
-    @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
-  }
-  &:disabled {
-    @apply bg-[var(--primary-200)] text-[var(--primary-300)];
-  }
-}
-.r-button--outline {
-  @apply bg-transparent ring-1 ring-[var(--neutral-200)] text-[var(--neutral-900)];
+      &:hover {
+        @apply bg-[var(--primary-700)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--primary-200)] text-[var(--primary-300)];
+      }
+    }
 
-  &:hover {
-    @apply bg-[var(--neutral-100)];
-  }
-  &:active {
-    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
-  }
-  &:disabled {
-    @apply bg-white text-[var(--neutral-300)];
-  }
-}
-.r-button--text {
-  @apply text-[var(--neutral-900)] bg-transparent h-auto rounded-none p-0;
+    &--secondary {
+      @apply bg-[var(--primary-100)]  text-[var(--primary-500)];
 
-  &:active {
-    @apply ring-0 ring-inherit;
-  }
-  &:disabled {
-    @apply bg-white text-[var(--neutral-300)];
-  }
-}
-.r-button--ghost {
-  @apply bg-transparent text-[var(--primary-100)];
+      &:hover {
+        @apply bg-[var(--primary-200)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--primary-200)] text-[var(--primary-300)];
+      }
+    }
 
-  &:hover {
-    @apply bg-[var(--neutral-100)] text-[var(--primary-500)];
-  }
-  &:active {
-    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
-  }
-  &:disabled {
-    @apply bg-white text-[var(--neutral-300)];
-  }
-}
-.r-button--danger {
-  @apply bg-[var(--error-500)];
+    &--danger {
+      @apply bg-[var(--error-500)];
 
-  &:hover {
-    @apply bg-[var(--error-700)];
-  }
-  &:active {
-    @apply ring-[var(--error-100)] bg-white text-[var(--error-500)];
-  }
-  &:disabled {
-    @apply bg-[var(--error-200)] text-[var(--error-300)];
-  }
-}
-.r-button--link {
-  @apply bg-transparent text-[var(--primary-500)];
+      &:hover {
+        @apply bg-[var(--error-700)];
+      }
+      &:active {
+        @apply ring-[var(--error-100)] bg-white text-[var(--error-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--error-200)] text-[var(--error-300)];
+      }
+    }
 
-  &:hover {
-    @apply bg-[var(--neutral-100)] text-[var(--primary-500)];
+    &--success {
+      @apply bg-[var(--success-500)];
+
+      &:hover {
+        @apply bg-[var(--success-700)];
+      }
+      &:active {
+        @apply ring-[var(--success-100)] bg-white text-[var(--success-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--success-200)] text-[var(--success-300)];
+      }
+    }
+
+    &--warning {
+      @apply bg-[var(--warning-500)];
+
+      &:hover {
+        @apply bg-[var(--warning-700)];
+      }
+      &:active {
+        @apply ring-[var(--warning-100)] bg-white text-[var(--warning-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--warning-200)] text-[var(--warning-300)];
+      }
+    }
+
+    &--info {
+      @apply bg-[var(--info-500)];
+
+      &:hover {
+        @apply bg-[var(--info-700)];
+      }
+      &:active {
+        @apply ring-[var(--info-100)] bg-white text-[var(--info-500)];
+      }
+      &:disabled {
+        @apply bg-[var(--info-200)] text-[var(--info-300)];
+      }
+    }
   }
-  &:active {
-    @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+
+  &__text {
+    @apply text-[var(--neutral-900)];
+
+    &:hover {
+      @apply text-[var(--neutral-700)] bg-[var(--neutral-100)];
+    }
+    &:active {
+      @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+    }
+    &:disabled {
+      @apply text-[var(--neutral-500)];
+    }
+
+    &--primary {
+      @apply text-[var(--primary-500)];
+
+      &:hover {
+        @apply text-[var(--primary-700)] bg-[var(--primary-100)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply text-[var(--primary-300)];
+      }
+    }
+
+    &--secondary {
+      @apply text-[var(--secondary-500)];
+
+      &:hover {
+        @apply text-[var(--secondary-700)] bg-[var(--secondary-100)];
+      }
+      &:active {
+        @apply ring-[var(--secondary-100)] bg-white text-[var(--secondary-500)];
+      }
+      &:disabled {
+        @apply text-[var(--secondary-300)];
+      }
+    }
+
+    &--danger {
+      @apply text-[var(--error-500)];
+
+      &:hover {
+        @apply text-[var(--error-700)] bg-[var(--error-100)];
+      }
+      &:active {
+        @apply ring-[var(--error-100)] bg-white text-[var(--error-500)];
+      }
+      &:disabled {
+        @apply text-[var(--error-300)];
+      }
+    }
+
+    &--success {
+      @apply text-[var(--success-500)];
+
+      &:hover {
+        @apply text-[var(--success-700)] bg-[var(--success-100)];
+      }
+      &:active {
+        @apply ring-[var(--success-100)] bg-white text-[var(--success-500)];
+      }
+      &:disabled {
+        @apply text-[var(--success-300)];
+      }
+    }
+
+    &--warning {
+      @apply text-[var(--warning-500)];
+
+      &:hover {
+        @apply text-[var(--warning-700)] bg-[var(--warning-100)];
+      }
+      &:active {
+        @apply ring-[var(--warning-100)] bg-white text-[var(--warning-500)];
+      }
+      &:disabled {
+        @apply text-[var(--warning-300)];
+      }
+    }
+
+    &--info {
+      @apply text-[var(--info-500)];
+
+      &:hover {
+        @apply text-[var(--info-700)] bg-[var(--info-100)];
+      }
+      &:active {
+        @apply ring-[var(--info-100)] bg-white text-[var(--info-500)];
+      }
+      &:disabled {
+        @apply text-[var(--info-300)];
+      }
+    }
+
+    &--link {
+      @apply text-[var(--primary-500)];
+
+      &:hover {
+        @apply text-[var(--primary-700)] bg-[var(--primary-100)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply text-[var(--primary-300)];
+      }
+    }
   }
-  &:disabled {
-    @apply bg-white text-[var(--neutral-300)];
+
+  &__outline {
+    @apply bg-transparent ring-1 ring-[var(--neutral-200)] text-[var(--neutral-900)];
+
+    &:hover {
+      @apply bg-[var(--neutral-100)];
+    }
+    &:active {
+      @apply ring-[var(--neutral-100)] bg-white text-[var(--neutral-900)];
+    }
+    &:disabled {
+      @apply bg-white text-[var(--neutral-300)];
+    }
+
+    &--primary {
+      @apply ring-[var(--primary-500)] text-[var(--primary-500)];
+
+      &:hover {
+        @apply bg-[var(--primary-100)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-white text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--primary-300)] text-[var(--primary-300)];
+      }
+    }
+
+    &--secondary {
+      @apply ring-[var(--secondary-500)] text-[var(--secondary-500)];
+
+      &:hover {
+        @apply bg-[var(--secondary-100)];
+      }
+      &:active {
+        @apply ring-[var(--secondary-100)] bg-white text-[var(--secondary-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--secondary-300)] text-[var(--secondary-300)];
+      }
+    }
+
+    &--danger {
+      @apply ring-[var(--error-500)] text-[var(--error-500)];
+
+      &:hover {
+        @apply bg-[var(--error-100)];
+      }
+      &:active {
+        @apply ring-[var(--error-100)] bg-white text-[var(--error-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--error-300)] text-[var(--error-300)];
+      }
+    }
+
+    &--success {
+      @apply ring-[var(--success-500)] text-[var(--success-500)];
+
+      &:hover {
+        @apply bg-[var(--success-100)];
+      }
+      &:active {
+        @apply ring-[var(--success-100)] bg-white text-[var(--success-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--success-300)] text-[var(--success-300)];
+      }
+    }
+
+    &--warning {
+      @apply ring-[var(--warning-500)] text-[var(--warning-500)];
+
+      &:hover {
+        @apply bg-[var(--warning-100)];
+      }
+      &:active {
+        @apply ring-[var(--warning-100)] bg-white text-[var(--warning-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--warning-300)] text-[var(--warning-300)];
+      }
+    }
+
+    &--info {
+      @apply ring-[var(--info-500)] text-[var(--info-500)];
+
+      &:hover {
+        @apply bg-[var(--info-100)];
+      }
+      &:active {
+        @apply ring-[var(--info-100)] bg-white text-[var(--info-500)];
+      }
+      &:disabled {
+        @apply ring-[var(--info-300)] text-[var(--info-300)];
+      }
+    }
   }
 }

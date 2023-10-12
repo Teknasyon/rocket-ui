@@ -1,20 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import Button from './RButton.vue';
 import Icon from '../Icon/RIcon.vue';
+import Button from './RButton.vue';
 
 const DefaultArgTypes = {
   variant: {
     type: 'select',
-    options: ['primary', 'secondary', 'text', 'outline'],
+    options: ['default', 'text', 'outline'],
+  },
+  color: {
+    type: 'select',
+    options: ['primary', 'secondary', 'danger', 'success', 'warning', 'info'],
   },
   size: {
     type: 'select',
     options: ['small', 'medium', 'large'],
-  },
-  backgroundColor: {
-    control: {
-      type: 'color',
-    },
   },
   onClick: {
     action: 'click',
@@ -32,12 +31,16 @@ const WithCustomIconSlot = {
     template: `
     <Button v-bind="args">
       <template v-slot:custom-icon>
-        <Icon name="mdiFingerprint"/>
+        <Icon name="mdiMowerBag"/>
+        <Icon name="mdiGrass"/>
+        <Icon name="mdiHandPeace"/>
       </template>
     </Button>`,
   }),
   argTypes: DefaultArgTypes,
-  args: {},
+  args: {
+
+  },
 } as Meta<typeof Button>;
 
 const ButtonStory = {
@@ -48,10 +51,10 @@ const ButtonStory = {
       args,
     };
   },
-  template: `<Button v-bind="args"/>`,
+  template: '<Button v-bind="args"/>',
   args: {
-    variant: 'primary',
-    default: 'Button',
+    variant: 'default',
+    default: 'Button CTA',
   },
   argTypes: DefaultArgTypes,
 } as Meta<typeof Button>;
@@ -62,28 +65,24 @@ type Story = StoryObj<typeof ButtonStory>;
 
 export const Overview: Story = {
   args: {
-    variant: 'primary',
+    variant: 'default',
+    color: 'primary',
     default: 'Button',
   },
 };
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    variant: 'primary',
+    variant: 'default',
+    color: 'primary',
     default: 'Primary',
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    default: 'Secondary',
   },
 };
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
+    color: 'danger',
     default: 'Outline',
   },
 };
@@ -95,24 +94,6 @@ export const Text: Story = {
   },
 };
 
-export const Danger: Story = {
-  args: {
-    variant: 'danger',
-    default: 'Danger',
-  },
-};
-
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    default: 'Link',
-  },
-};
-
 export const CustomIcon = {
-  render: WithCustomIconSlot.render,
-};
-
-export const Unstyled = {
   render: WithCustomIconSlot.render,
 };

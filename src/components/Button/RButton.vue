@@ -1,26 +1,33 @@
 <script setup lang="ts">
 import './button.css';
-import { type CSSProperties, computed } from 'vue';
+import { computed } from 'vue';
 import Icon from '../Icon/RIcon.vue';
 
 export type ButtonType =
-  | 'primary'
-  | 'secondary'
+  | 'default'
   | 'text'
   | 'outline'
-  | 'ghost'
-  | 'link'
-  | 'danger';
-export type ButtonSize = 'small' | 'medium' | 'large';
+  ;
+export type ButtonColor = | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info';
+export type ButtonSize = | 'small' | 'medium' | 'large';
 export interface Props {
   /**
    * Variant of the Button
-   * @type 'primary' | 'secondary' | 'text' | 'outline' | 'ghost' | 'link' | 'danger'
-   * @default 'primary'
+   * @type  { 'default' | 'text' | 'outline' | 'ghost'}
+   * @default 'default'
    * @example
-   * <Button variant="primary" />
+   * <Button variant="default" />
    */
   variant?: ButtonType
+
+  /**
+   * Color of the Button
+   * @type  { 'primary' | 'secondary' | 'danger'}
+   * @default 'primary'
+   * @example
+   * <Button color="primary" />
+   */
+  color?: ButtonColor
 
   /**
    * Loading state of the Button
@@ -63,9 +70,9 @@ export interface Props {
    * @type boolean
    * @default false
    * @example
-   * <Button onlyIcon />
+   * <Button icon />
    */
-  onlyIcon?: boolean
+  icon?: boolean
 
   /**
    * Size of the Button
@@ -91,47 +98,30 @@ export interface Props {
    * @default false
    * @example
    * <Button block />
-   * @link https://tailwindcss.com/docs/display#block
    */
   block?: boolean
 
-  /**
-   * Background color of the Button
-   * @type CSSProperties['backgroundColor']
-   * @default ''
-   * @example
-   * <Button backgroundColor="red" />
-   */
-  backgroundColor?: CSSProperties['backgroundColor']
-
-  /**
-   * Color of the Button
-   * @type string
-   * @default ''
-   * @example
-   * <Button color="red" />
-   */
-  color?: string
+  to?: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
+  variant: 'default',
   loading: false,
   disabled: false,
   prependIcon: '',
   appendIcon: '',
-  onlyIcon: false,
+  icon: false,
   size: 'medium',
   height: '',
   block: false,
-  backgroundColor: '',
 });
 defineEmits(['click']);
 const classes = computed(() => ({
   'r-button': true,
-  [`r-button--${props.variant}`]: true,
+  [`r-button__${props.variant}`]: true,
+  [`r-button__${props.variant}--${props.variant === 'default' && props.color === undefined ? 'primary' : props.color}`]: true,
   'r-button--loading': props.loading,
   [`r-button--${props.size || 'medium'}`]: true,
-  'r-button--only-icon': props.onlyIcon,
+  'r-button--only-icon': props.icon,
   'r-button--block': props.block,
 }));
 const iconSize = computed(() => {
@@ -142,11 +132,8 @@ const iconSize = computed(() => {
   }[props.size || 'medium'];
 });
 const style = computed(() => {
-  const { backgroundColor, height, color } = props;
   return {
-    backgroundColor,
-    height: height ? `${height}px` : '',
-    color,
+    height: props.height ? `${props.height}px` : '',
   };
 });
 </script>
@@ -155,7 +142,7 @@ const style = computed(() => {
   <button
     v-bind="$attrs"
     :class="classes"
-    :disabled="disabled || loading"
+    :disabled="disabled"
     :style="style"
     @click="$emit('click')"
   >
@@ -165,14 +152,14 @@ const style = computed(() => {
       v-if="!$slots['custom-icon'] && props.prependIcon"
       class="r-button__prepend-icon"
       :class="{
-        'r-button__prepend-icon--only': props.onlyIcon,
+        'r-button__prepend-icon--only': props.icon,
       }"
       :name="props.prependIcon"
       :size="iconSize"
     />
-    <slot v-if="!props.onlyIcon" />
+    <slot v-if="!props.icon" />
     <Icon
-      v-if="!$slots['custom-icon'] && !props.onlyIcon && props.appendIcon"
+      v-if="!$slots['custom-icon'] && !props.icon && props.appendIcon"
       class="r-button__append-icon"
       :name="props.appendIcon"
       :size="iconSize"

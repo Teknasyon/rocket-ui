@@ -34,9 +34,13 @@ A button component is a reusable piece of code that can be used in any part of a
 
 ## Usage with props <a id="usage" />
 
-### variant (required)
+### variant (optional)
 
-The **variant** prop allows you to specify the appearance of the button. The possible values for this prop are primary, secondary, text, and outline.
+The **variant** prop allows you to specify the appearance of the button. The possible values for this prop are default, text, and outline.
+
+### color (optional)
+
+The **color** prop allows you to specify the color of the button. The possible values for this prop are: primary, secondary, success, danger, warning and info.
 
 ### loading (optional)
 
@@ -72,23 +76,12 @@ To specify the height of the button, you can pass in a numeric value (in pixels)
 The **block** prop allows you to specify whether the button should be displayed as a block element. When a button is a block element, it will take up the full width of its container.
 To make a button a block element, you can pass in the value true to the block prop.
 
-### backgroundColor (optional)
-
-The **backgroundColor** prop allows you to specify the background color of the button. This can be useful if you want to create buttons with different background colors, or if you want to match the background color of the button to the color scheme of your website or application.
-To specify the background color of the button, you can pass in a valid CSS color value to the backgroundColor prop.
-
 ## Variants <a id="variants" />
 
-### Primary
+### Default
 
 <Canvas>
-  <Story of={ButtonStories.Primary} />
-</Canvas>
-
-### Secondary
-
-<Canvas>
-  <Story of={ButtonStories.Secondary} />
+  <Story of={ButtonStories.Default} />
 </Canvas>
 
 ### Outline
@@ -103,35 +96,17 @@ To specify the background color of the button, you can pass in a valid CSS color
   <Story of={ButtonStories.Text} />
 </Canvas>
 
-### Danger
-
-<Canvas>
-  <Story of={ButtonStories.Danger} />
-</Canvas>
-
-### Link
-
-<Canvas>
-  <Story of={ButtonStories.Link} />
-</Canvas>
-
 ### `#Custom Icon Slot`
 
 <Canvas>
   <Story of={ButtonStories.CustomIcon} />
 </Canvas>
 
-### Unstyled
-
-#### \* Not yet implemented in the library
-
-<Canvas>
-  <Story of={ButtonStories.Unstyled} />
-</Canvas>
-
 ### Tips <a id="tips" />
 
-💡 Use the variant prop to create buttons with different appearances, such as primary, secondary, text, and outline.
+💡 Use the variant prop to create buttons with different appearances, such as default, text, and outline.
+
+💡 Use the color prop to create buttons with different colors, such as primary, secondary, success, danger, warning, and info.
 
 💡 Use the loading prop to show a loading indicator on the button when it is performing an action.
 
@@ -144,5 +119,3 @@ To specify the background color of the button, you can pass in a valid CSS color
 💡 Use the height prop to match the height of the button to the height of other elements on the page.
 
 💡 Use the block prop to make the button take up the full width of its container.
-
-💡 Use the backgroundColor prop to match the background color of the button to the color scheme of your website or application.
