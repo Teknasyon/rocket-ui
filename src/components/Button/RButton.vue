@@ -100,8 +100,6 @@ export interface Props {
    * <Button block />
    */
   block?: boolean
-
-  to?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
@@ -126,9 +124,9 @@ const classes = computed(() => ({
 }));
 const iconSize = computed(() => {
   return {
-    small: 20,
-    medium: 24,
-    large: 32,
+    small: 16,
+    medium: 16,
+    large: 20,
   }[props.size || 'medium'];
 });
 const style = computed(() => {
