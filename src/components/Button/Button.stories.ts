@@ -82,7 +82,6 @@ export const Default: Story = {
 export const Outline: Story = {
   args: {
     variant: 'outline',
-    color: 'danger',
     default: 'Outline',
   },
 };
