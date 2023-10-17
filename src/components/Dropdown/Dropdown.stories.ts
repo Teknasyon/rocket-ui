@@ -27,7 +27,7 @@ const DefaultArgs = {
   searchable: false,
 };
 const DropdownStory = {
-  title: 'Components/Dropdown',
+  title: 'Form/Dropdown',
   component: Dropdown,
   setup: (args: typeof Dropdown) => ({
     args,
