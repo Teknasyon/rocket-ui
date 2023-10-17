@@ -366,11 +366,13 @@ watch(
             @click="clickIcon"
           />
         </div>
-        <div v-if="props.errorMsg" class="r-textfield__error">
-          {{ props.errorMsg }}
-        </div>
-        <div v-if="!props.errorMsg && props.hint" class="r-textfield__hint">
-          {{ props.hint }}
+        <div class="r-textfield__details">
+          <p v-if="props.errorMsg" class="r-textfield__error">
+            {{ props.errorMsg }}
+          </p>
+          <p v-if="!props.errorMsg && props.hint" class="r-textfield__hint">
+            {{ props.hint }}
+          </p>
         </div>
       </div>
     </div>

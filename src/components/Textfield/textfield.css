@@ -39,10 +39,13 @@ input {
     }
   }
   &__error {
-    @apply text-red-500 font-light text-xs tracking-wide mt-1;
+    @apply text-red-500 font-light text-xs tracking-wide;
   }
   &__hint {
-    @apply text-[var(--neutral-500)] font-light text-xs tracking-wide mt-1;
+    @apply text-[var(--neutral-500)] font-light text-xs tracking-wide;
+  }
+  &__details{
+    @apply h-4 px-1 mt-1;
   }
 
   &--focus {
