@@ -14,7 +14,7 @@ export interface Option {
 export interface SelectProps {
   /**
    * Options of the Dropdown
-   * @type Option[]
+   * @type {Option[]}
    * @default []
    * @example
    * <Dropdown
@@ -34,7 +34,7 @@ export interface SelectProps {
 
   /**
    * Value of the Dropdown
-   * @type string | number | Option | Option[]
+   * @type {string | number | Option | Option[]}
    * @default ''
    * @example
    * <Dropdown v-model="model" />
@@ -43,7 +43,7 @@ export interface SelectProps {
 
   /**
    * Placeholder Dropdown
-   * @type InputHTMLAttributes['placeholder'];
+   * @type {InputHTMLAttributes['placeholder']}
    * @default ''
    * @example
    * <Dropdown placeholder="Placeholder" />
@@ -53,7 +53,7 @@ export interface SelectProps {
 
   /**
    * Allow to create new options
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Dropdown taggable />
@@ -62,7 +62,7 @@ export interface SelectProps {
 
   /**
    * Allow to select multiple options
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Dropdown multiple />
@@ -71,7 +71,7 @@ export interface SelectProps {
 
   /**
    * Disable the Dropdown
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Dropdown disabled />
@@ -80,7 +80,7 @@ export interface SelectProps {
 
   /**
    * Loading state of the Dropdown
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Dropdown loading />
@@ -89,7 +89,7 @@ export interface SelectProps {
 
   /**
    * Icon to prepend
-   * @type string
+   * @type {string}
    * @default ''
    * @example
    * <Dropdown prependIcon="search" />
@@ -98,7 +98,7 @@ export interface SelectProps {
 
   /**
    * Icon to append
-   * @type string
+   * @type {string}
    * @default 'expand_less'
    * @example
    * <Dropdown appendIcon="expand_more" />
@@ -107,7 +107,7 @@ export interface SelectProps {
 
   /**
    * Allow to search for options
-   * @type boolean
+   * @type {boolean}
    * @default false
    * @example
    * <Dropdown searchable />
@@ -116,17 +116,48 @@ export interface SelectProps {
 
   /**
    * Id of the Dropdown
-   * @type string
+   * @type {string}
    * @default 'test'
    * @example
    * <Dropdown id="test" />
    */
   id?: string
 
+  /**
+   * Close the Dropdown on select
+   * @type {boolean}
+   * @default true
+   * @example
+   * <Dropdown :closeOnSelect="false" />
+   */
   closeOnSelect?: boolean
 
+  /**
+   * Class of the Dropdown
+   * @type {string}
+   * @default ''
+   * @example
+   * <Dropdown dropdownClass="w-96" />
+   */
   dropdownClass?: string
+
+  /**
+   * Class of the options
+   * @type {string}
+   * @default ''
+   * @example
+   * <Dropdown optionsClass="w-96" />
+   */
   optionsClass?: string
+
+  /**
+   * Error message for error state
+   * @type {string}
+   * @default ''
+   * @example
+   * <Dropdown errorMsg="Error message" />
+   */
+  errorMsg?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -144,6 +175,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   closeOnSelect: true,
   dropdownClass: '',
   optionsClass: '',
+  errorMsg: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -344,6 +376,7 @@ watch(() => props.modelValue, (_value) => {
             'r-dropdown--disabled': props.disabled,
             'r-dropdown--loading': props.loading,
             [props.dropdownClass]: props.dropdownClass,
+            'r-dropdown--error': props.errorMsg,
           }"
           role="select"
           @click="setActive($event, activators.click)"
@@ -353,6 +386,7 @@ watch(() => props.modelValue, (_value) => {
             class="r-dropdown__prepend-icon"
             :class="{
               'r-dropdown__prepend-icon--active': active,
+              'r-dropdown__prepend-icon--error': props.errorMsg,
             }"
           >
             <slot name="prepend">
@@ -397,6 +431,7 @@ watch(() => props.modelValue, (_value) => {
             class="r-dropdown__append-icon"
             :class="{
               'r-dropdown__append-icon--active': active,
+              'r-dropdown__append-icon--error': props.errorMsg,
             }"
           >
             <slot name="append">
@@ -457,5 +492,8 @@ watch(() => props.modelValue, (_value) => {
         </ul>
       </template>
     </RTooltip>
+    <div class="r-dropdown-error">
+      {{ props.errorMsg }}
+    </div>
   </div>
 </template>

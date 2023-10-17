@@ -15,6 +15,10 @@
     @apply bg-[var(--primary-50)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
   }
 
+  &--error {
+    @apply border-[var(--error-500)] ring-0;
+  }
+
   &--loading {
     @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
   }
@@ -24,6 +28,10 @@
 
     &--active {
       /* @apply text-[var(--primary-500)]; */
+    }
+
+    &--error {
+      @apply text-[var(--error-500)];
     }
   }
 
@@ -47,7 +55,7 @@
   }
 
   &__input {
-    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm disabled:bg-[var(--neutral-100)] disabled:text-[var(--neutral-300)] disabled:placeholder:text-[var(--neutral-300)];
+    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] sm:text-sm;
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
@@ -56,6 +64,14 @@
     &[readonly] {
       @apply cursor-pointer;
     }
+
+    &:focus{
+      @apply border-transparent ring-0 outline-none;
+    }
+
+    &:disabled{
+      @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] placeholder:text-[var(--neutral-300)] cursor-not-allowed pointer-events-none;
+    }
   }
 
   &__append-icon {
@@ -63,6 +79,10 @@
 
     &--active {
       @apply transform rotate-180 transition-all duration-200 ease-in-out text-[var(--primary-500)];
+    }
+
+    &--error {
+      @apply text-[var(--error-500)];
     }
   }
 }
@@ -110,4 +130,8 @@
       }
     }
   }
+}
+
+.r-dropdown-error {
+  @apply h-4 text-xs px-1 pt-1 text-[var(--error-500)] transition-all;
 }
