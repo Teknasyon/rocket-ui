@@ -1,23 +1,24 @@
 <script setup lang="ts">
 import {
-  computed,
-  reactive,
-  watch,
   type HTMLAttributes,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
+  computed,
+  reactive,
+  watch,
 } from 'vue';
 import './switch.css';
+
 export interface Props {
   /**
    * id of the checkbox
-   * @type HTMLAttributes['id']
+   * @type {HTMLAttributes['id']}
    * @default ''
    * @example
    * <Checkbox id="checkbox" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
    */
-  id: HTMLAttributes['id'];
+  id: HTMLAttributes['id']
 
   /**
    * Input checked state
@@ -27,7 +28,7 @@ export interface Props {
    * <Checkbox modelValue="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#checked
    */
-  modelValue?: InputHTMLAttributes['checked'];
+  modelValue?: InputHTMLAttributes['checked']
 
   /**
    * Input disabled state
@@ -37,7 +38,7 @@ export interface Props {
    * <Checkbox disabled="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#disabled
    */
-  disabled?: InputHTMLAttributes['disabled'];
+  disabled?: InputHTMLAttributes['disabled']
 
   /**
    * label of the checkbox
@@ -47,7 +48,7 @@ export interface Props {
    * <Checkbox label="Checkbox" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  label?: LabelHTMLAttributes['for'];
+  label?: LabelHTMLAttributes['for']
 
   /**
    * Hint text
@@ -56,7 +57,7 @@ export interface Props {
    * @example
    * <Checkbox hint="This is a hint" />
    */
-  hint?: string;
+  hint?: string
 
   /**
    * Error message
@@ -65,7 +66,7 @@ export interface Props {
    * @example
    * <Checkbox errorMsg="This is an error" />
    */
-  errorMsg?: string;
+  errorMsg?: string
 
   /**
    * Size of the checkbox
@@ -74,7 +75,7 @@ export interface Props {
    * @example
    * <Checkbox size="small" />
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large'
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -87,7 +88,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(['update:modelValue']);
 const state = reactive<{
-  checked: InputHTMLAttributes['checked'];
+  checked: InputHTMLAttributes['checked']
 }>({
   checked: false,
 });
@@ -99,12 +100,13 @@ const classes = computed(() => {
     'r-switch--error': props.errorMsg,
   };
 });
-const onChange = (e: unknown) => {
-  if (props.disabled) return;
+function onChange(e: unknown) {
+  if (props.disabled)
+    return;
   // @ts-expect-error: Unreachable code error
   state.checked = e.target.checked;
   emit('update:modelValue', state.checked);
-};
+}
 watch(
   () => props.modelValue,
   (value) => {
@@ -117,23 +119,36 @@ watch(
   }
 );
 </script>
+
 <template>
   <div class="r-switch-container">
     <div :class="classes">
-      <input :id="props.id" :checked="state.checked" class="r-switch__input" type="checkbox" @change="onChange" />
+      <input
+        :id="props.id"
+        :checked="state.checked"
+        class="r-switch__input"
+        type="checkbox"
+        @change="onChange"
+      >
       <span class="slider round" />
     </div>
-    <div :class="{
-      'r-switch-texts': true,
-      [`r-switch-texts--${props.size}`]: true,
-    }">
+    <div
+      class="r-switch-texts"
+      :class="{
+        [`r-switch-texts--${props.size}`]: true,
+      }"
+    >
       <label :id="props.id" class="r-switch-texts__label" :for="props.id">
         {{ props.label }}
       </label>
-      <p v-if="props.errorMsg" class="r-switch-texts__error">
-        {{ props.errorMsg }}
-      </p>
-      <p v-else class="r-switch-texts__hint">{{ props.hint }}</p>
+      <div class="r-switch-texts__details">
+        <p v-if="props.errorMsg" class="r-switch-texts__error">
+          {{ props.errorMsg }}
+        </p>
+        <p v-else class="r-switch-texts__hint">
+          {{ props.hint }}
+        </p>
+      </div>
     </div>
   </div>
 </template>

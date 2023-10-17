@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-switch-container {
-  @apply flex items-center justify-start gap-3;
+  @apply flex items-start justify-start gap-3;
 }
 
 .slider {
@@ -94,9 +94,12 @@
     @apply font-medium text-[var(--neutral-900)] p-0 m-0;
   }
   &__hint {
-    @apply text-[var(--neutral-500)] font-normal p-0 m-0;
+    @apply text-xs text-[var(--neutral-500)] font-normal p-0 m-0;
   }
   &__error {
-    @apply text-[var(--error-500)] font-normal p-0 m-0;
+    @apply text-xs text-[var(--error-500)] font-normal p-0 m-0;
+  }
+  &__details {
+    @apply h-4 px-1 pt-1;
   }
 }
