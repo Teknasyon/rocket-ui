@@ -133,5 +133,9 @@
 }
 
 .r-dropdown-error {
-  @apply h-4 text-xs px-1 pt-1 text-[var(--error-500)] transition-all;
+  @apply text-xs text-[var(--error-500)];
+}
+
+.r-dropdown-details {
+  @apply h-4 px-1 pt-1;
 }
