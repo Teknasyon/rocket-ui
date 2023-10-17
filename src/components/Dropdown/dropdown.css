@@ -55,7 +55,7 @@
   }
 
   &__input {
-    @apply text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] sm:text-sm;
+    @apply font-medium text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] sm:text-sm;
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
