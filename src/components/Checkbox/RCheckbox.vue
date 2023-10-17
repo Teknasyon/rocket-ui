@@ -1,89 +1,90 @@
 <script setup lang="ts">
 import './checkbox.css';
 import {
-  computed,
-  reactive,
-  watch,
   type HTMLAttributes,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
+  computed,
+  reactive,
+  watch,
 } from 'vue';
 
 import Icon from '../Icon/RIcon.vue';
+
 export interface Props {
   /**
    * id of the checkbox
-   * @type HTMLAttributes['id']
+   * @type {HTMLAttributes['id']}
    * @default ''
    * @example
    * <Checkbox id="checkbox" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
    */
-  id: HTMLAttributes['id'];
+  id: HTMLAttributes['id']
 
   /**
    * Input checked state
-   * @type InputHTMLAttributes['checked']
+   * @type {InputHTMLAttributes['checked']}
    * @default false
    * @example
    * <Checkbox :modelValue="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#checked
    */
-  modelValue?: InputHTMLAttributes['checked'];
+  modelValue?: InputHTMLAttributes['checked']
 
   /**
    * label of the checkbox
-   * @type LabelHTMLAttributes['label']
+   * @type {LabelHTMLAttributes['label']}
    * @default ''
    * @example
    * <Checkbox label="Checkbox" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  label?: LabelHTMLAttributes['for'];
+  label?: LabelHTMLAttributes['for']
 
   /**
    * Input indeterminate state
-   * @type InputHTMLAttributes['indeterminate']
+   * @type {InputHTMLAttributes['indeterminate']}
    * @default false
    * @example
    * <Checkbox indeterminate="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate
    */
-  indeterminate?: InputHTMLAttributes['indeterminate'];
+  indeterminate?: InputHTMLAttributes['indeterminate']
 
   /**
    * Input disabled state
-   * @type InputHTMLAttributes['disabled']
+   * @type {InputHTMLAttributes['disabled']}
    * @default false
    * @example
    * <Checkbox disabled="true" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#disabled
    */
-  disabled?: InputHTMLAttributes['disabled'];
+  disabled?: InputHTMLAttributes['disabled']
 
   /**
    * Hint text
-   * @type string
+   * @type {string}
    * @default ''
    * @example
    * <Checkbox hint="This is a hint" />
    */
-  hint?: string;
+  hint?: string
 
   /**
    * Error message
-   * @type string
+   * @type {string}
    * @default ''
    * @example
    * <Checkbox errorMsg="This is an error" />
    */
-  errorMsg?: string;
+  errorMsg?: string
 }
 
-type StateTypes = {
-  checked: InputHTMLAttributes['checked'];
-  indeterminate: InputHTMLAttributes['indeterminate'];
-};
+interface StateTypes {
+  checked: InputHTMLAttributes['checked']
+  indeterminate: InputHTMLAttributes['indeterminate']
+}
 
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -109,9 +110,9 @@ const icons = {
 };
 
 const icon = computed(() => {
-  if (state.indeterminate) {
+  if (state.indeterminate)
     return icons.indeterminate;
-  }
+
   return state.checked ? icons.checked : icons.unchecked;
 });
 
@@ -125,13 +126,14 @@ const classes = computed(() => {
   };
 });
 
-const onChange = (e: unknown) => {
-  if (props.disabled) return;
+function onChange(e: unknown) {
+  if (props.disabled)
+    return;
   // @ts-expect-error: Unreachable code error
   state.checked = e.target.checked;
   state.indeterminate = false;
   emit('update:modelValue', state.checked);
-};
+}
 
 watch(
   () => props.indeterminate,
@@ -160,11 +162,19 @@ watch(
   }
 );
 </script>
+
 <template>
   <div class="r-checkbox-wrapper">
     <div class="r-checkbox-container">
-      <input :id="props.id" :checked="state.checked" class="r-checkbox-container__input" :disabled="props.disabled"
-        :indeterminate="state.indeterminate" type="checkbox" @change="onChange" />
+      <input
+        :id="props.id"
+        :checked="state.checked"
+        class="r-checkbox-container__input"
+        :disabled="props.disabled"
+        :indeterminate="state.indeterminate"
+        type="checkbox"
+        @change="onChange"
+      >
       <div :class="classes" :data-disabled="props.disabled">
         <Icon :name="icon" :size="24" />
       </div>
@@ -173,12 +183,14 @@ watch(
       <label class="r-checkbox-texts__label" :data-disabled="props.disabled" :for="props.id">
         {{ props.label }}
       </label>
-      <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
-        {{ props.errorMsg }}
-      </p>
-      <p v-else class="r-checkbox-texts__hint">
-        {{ props.hint }}
-      </p>
+      <div class="r-checkbox-texts__details">
+        <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
+          {{ props.errorMsg }}
+        </p>
+        <p v-else class="r-checkbox-texts__hint">
+          {{ props.hint }}
+        </p>
+      </div>
     </div>
   </div>
 </template>

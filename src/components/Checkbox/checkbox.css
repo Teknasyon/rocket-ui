@@ -64,4 +64,7 @@
   &__error {
     @apply text-[var(--error-500)] text-xs;
   }
+  &__details{
+    @apply h-4 px-1 pt-1;
+  }
 }
