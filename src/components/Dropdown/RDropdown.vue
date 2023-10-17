@@ -158,6 +158,15 @@ export interface SelectProps {
    * <Dropdown errorMsg="Error message" />
    */
   errorMsg?: string
+
+  /**
+   * Hide the hint and error message
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown hideDetails />
+   */
+  hideDetails?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -492,8 +501,10 @@ watch(() => props.modelValue, (_value) => {
         </ul>
       </template>
     </RTooltip>
-    <div class="r-dropdown-error">
-      {{ props.errorMsg }}
+    <div v-if="!$props.hideDetails" class="r-dropdown-details">
+      <div v-if="props.errorMsg" class="r-dropdown-error">
+        {{ props.errorMsg }}
+      </div>
     </div>
   </div>
 </template>

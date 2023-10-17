@@ -79,6 +79,15 @@ export interface IProps {
    * <TextArea errorMsg="This is an error" />
    */
   errorMsg?: string
+
+  /**
+   * Hide details
+   * @type {boolean}
+   * @default false
+   * @example
+   * <TextArea hideDetails />
+   */
+  hideDetails?: boolean
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -133,7 +142,7 @@ watch(
       :value="state.value"
       @input="onInput"
     />
-    <div class="r-textarea__details">
+    <div v-if="!props.hideDetails" class="r-textarea__details">
       <p v-if="props.errorMsg" class="r-textarea__error">
         {{ props.errorMsg }}
       </p>

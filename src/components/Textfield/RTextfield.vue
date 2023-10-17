@@ -146,6 +146,15 @@ export interface Props {
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
    */
   max?: InputHTMLAttributes['max']
+
+  /**
+   * Hide details state of textfield details
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Textfield hideDetails />
+   */
+  hideDetails?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -161,6 +170,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   loading: false,
   clearable: false,
+  hideDetails: false,
 });
 const emit = defineEmits([
   'update:modelValue',
@@ -366,7 +376,7 @@ watch(
             @click="clickIcon"
           />
         </div>
-        <div class="r-textfield__details">
+        <div v-if="!props.hideDetails" class="r-textfield__details">
           <p v-if="props.errorMsg" class="r-textfield__error">
             {{ props.errorMsg }}
           </p>

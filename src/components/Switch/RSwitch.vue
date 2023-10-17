@@ -76,6 +76,15 @@ export interface Props {
    * <Checkbox size="small" />
    */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * Hide the hint and error message
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Checkbox hideDetails />
+   */
+  hideDetails?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -141,7 +150,7 @@ watch(
       <label :id="props.id" class="r-switch-texts__label" :for="props.id">
         {{ props.label }}
       </label>
-      <div class="r-switch-texts__details">
+      <div v-if="!props.hideDetails" class="r-switch-texts__details">
         <p v-if="props.errorMsg" class="r-switch-texts__error">
           {{ props.errorMsg }}
         </p>

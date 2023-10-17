@@ -79,6 +79,15 @@ export interface Props {
    * <Checkbox errorMsg="This is an error" />
    */
   errorMsg?: string
+
+  /**
+   * Hide the hint and error message
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Checkbox hideDetails />
+   */
+  hideDetails?: boolean
 }
 
 interface StateTypes {
@@ -183,7 +192,7 @@ watch(
       <label class="r-checkbox-texts__label" :data-disabled="props.disabled" :for="props.id">
         {{ props.label }}
       </label>
-      <div class="r-checkbox-texts__details">
+      <div v-if="!props.hideDetails" class="r-checkbox-texts__details">
         <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
           {{ props.errorMsg }}
         </p>
