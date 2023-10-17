@@ -1,6 +1,6 @@
 @import '../../index.css';
 
-.container {
+.r-textarea-wrapper {
   @apply flex flex-col items-start justify-center;
 }
 
@@ -41,10 +41,14 @@
   }
 
   &__hint {
-    @apply text-[var(--neutral-500)] text-sm mt-2;
+    @apply text-[var(--neutral-500)] text-xs;
   }
 
   &__error {
-    @apply text-[var(--error-500)] text-sm mt-2;
+    @apply text-xs text-[var(--error-500)];
+  }
+
+  &__details {
+    @apply h-4 px-1 mt-2;
   }
 }

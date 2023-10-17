@@ -88,7 +88,7 @@ const props = withDefaults(defineProps<IProps>(), {
   placeholder: '',
   modelValue: '',
   label: '',
-  hint: 'This is a hint',
+  hint: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -113,7 +113,7 @@ watch(
 </script>
 
 <template>
-  <div class="container">
+  <div class="r-textarea-wrapper">
     <Label
       v-if="props.label"
       id="textarea"
@@ -133,11 +133,13 @@ watch(
       :value="state.value"
       @input="onInput"
     />
-    <p v-if="props.errorMsg" class="r-textarea__error">
-      {{ props.errorMsg }}
-    </p>
-    <p v-else class="r-textarea__hint">
-      {{ props.hint }}
-    </p>
+    <div class="r-textarea__details">
+      <p v-if="props.errorMsg" class="r-textarea__error">
+        {{ props.errorMsg }}
+      </p>
+      <p v-else class="r-textarea__hint">
+        {{ props.hint }}
+      </p>
+    </div>
   </div>
 </template>
