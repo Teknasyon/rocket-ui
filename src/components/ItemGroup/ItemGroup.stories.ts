@@ -64,7 +64,7 @@ export const Overview: Story = {
       return { args, selected: [] };
     },
     template: `
-      <ItemGroup v-model="selected" selectedClass="bg-blue-500 text-white">
+      <ItemGroup v-model="selected" selectedClass="bg-blue-500">
         <div class="flex gap-2">
           <Item
           v-for="i in 5"
