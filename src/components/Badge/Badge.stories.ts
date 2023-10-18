@@ -8,8 +8,9 @@ const DefaultArgs = {
   placement: 'right',
   overlap: false,
   hover: false,
-  content: '',
   outside: false,
+  animation: false,
+  class: '',
 };
 const DefaultArgTypes = {
   variant: {
@@ -35,7 +36,7 @@ const BadgeStory = {
     template: `
     <Badge v-bind="args">
       <template v-slot:default>
-        <Icon name="mdiEmail" size="24" />
+        <Icon name="mdiBell" size="24" />
       </template>
     </Badge>
     `,
@@ -55,37 +56,11 @@ export const Overview: Story = {
   },
 };
 
-export const Right: Story = {
-  args: {
-    ...DefaultArgs,
-    placement: 'right',
-  },
-};
-
-export const WithContent = {
-  render: (args: any) => ({
-    components: { Badge, Button },
-    setup() {
-      return { args };
-    },
-    template: `
-    <Badge v-bind="args">
-      <template v-slot:default>
-        <Button icon="add" variant="primary">Hello World</Button>
-      </template>
-    </Badge>
-    `,
-  }),
-  args: {
-    ...DefaultArgs,
-    content: '32',
-  },
-};
-
 export const Hover: Story = {
   args: {
     ...DefaultArgs,
     hover: true,
+    variant: 'primary',
   },
 };
 
@@ -93,6 +68,7 @@ export const Bottom: Story = {
   args: {
     ...DefaultArgs,
     placement: 'bottom',
+    variant: 'success',
   },
 };
 
@@ -100,5 +76,30 @@ export const Left: Story = {
   args: {
     ...DefaultArgs,
     placement: 'left',
+    variant: 'error',
   },
 };
+
+export const Overlap: Story = {
+  args: {
+    ...DefaultArgs,
+    overlap: true,
+    variant: 'warning',
+    animation: true,
+  },
+};
+
+export const Outside: Story = {
+  args: {
+    ...DefaultArgs,
+    outside: true,
+    variant: 'neutral',
+  },
+};
+
+export const WithAnimation: Story = {
+  args: {
+    ...DefaultArgs,
+    animation: true,
+  }
+}

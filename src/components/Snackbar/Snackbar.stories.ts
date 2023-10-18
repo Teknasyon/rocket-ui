@@ -5,7 +5,7 @@ const DefaultArgs = {
   text: 'Single-line snackbar',
   closable: false,
   left: false,
-  show: true,
+  modelValue: true,
   timeout: 0,
   variant: 'info',
 };
@@ -14,7 +14,8 @@ const DefaultArgTypes = {
   variant: {
     type: 'select',
     options: ['info', 'success', 'warning', 'error', ''],
-  }
+  },
+  update: { action: 'update:modelValue' },
 };
 
 const SnackbarStory = {
@@ -23,14 +24,8 @@ const SnackbarStory = {
   setup: (args: typeof Snackbar) => ({
     args,
   }),
-  template: `
-    <div style="position:relative; min-height: 30vh; width: 100%;">
-      <Snackbar 
-        v-bind="args" 
-      />
-    </div>
-  `,
-  args: DefaultArgs,
+  template: '<Snackbar v-bind="args" />',
+  args: { ...DefaultArgs },
   argTypes: {
     ...DefaultArgTypes,
   },

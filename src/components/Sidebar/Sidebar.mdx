@@ -14,8 +14,6 @@ import * as SidebarStories from './Sidebar.stories';
 
 - [Slots](#slots)
 
-- [Stories](#stories)
-
 - [Tips](#tips)
 
 ## Overview <a id="overview" />
@@ -29,3 +27,60 @@ import * as SidebarStories from './Sidebar.stories';
 > Changes you make in the controls will be reflected in the example above.
 
 <Controls of={SidebarStories.Collapsed} />
+
+
+## Usage with props <a id="usage" />
+
+### modelValue (required)
+
+The `modelValue` prop is used to control the visibility of the sidebar.
+
+```html
+<Sidebar v-model="visible" />
+
+<Sidebar modelValue="visible" @update:modelValue="visible = !visible" />
+```
+
+```js
+const visible = ref(false);
+```
+
+### showTrigger
+
+The `showTrigger` prop is used to control the visibility of the show trigger.
+
+### class
+
+The `class` prop is used to add custom classes to the sidebar.
+
+### triggerClass
+
+The `triggerClass` prop is used to add custom classes to the trigger.
+
+## Slots <a id="slots" />
+
+### default
+
+The `default` slot is used to add content to the sidebar.
+
+### actions
+
+The `actions` slot is used to add content to the actions.
+
+### trigger
+
+The `trigger` slot is used to add content to the trigger.
+
+## Tips <a id="tips" />
+
+- You can use the `trigger` slot to add a custom trigger to the sidebar.
+
+- You can use the `actions` slot to add custom actions to the sidebar.
+
+- You can use the `default` slot to add custom content to the sidebar.
+
+- You can use the `showTrigger` prop to hide the trigger.
+
+- You can use the `class` prop to add custom classes to the sidebar.
+
+- You can use the `triggerClass` prop to add custom classes to the trigger.

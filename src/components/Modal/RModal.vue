@@ -11,7 +11,7 @@ export interface ModalProps {
    * @example
    * <Modal :modelValue="true" />
    */
-  modelValue: boolean;
+  modelValue: boolean
   /**
    * Modal width is 100%
    * @type boolean
@@ -19,7 +19,7 @@ export interface ModalProps {
    * @example
    * <Modal block />
    */
-  block?: boolean;
+  block?: boolean
   /**
    * Title of the Modal
    * @type string
@@ -27,7 +27,7 @@ export interface ModalProps {
    * @example
    * <Modal title="Modal Title" />
    */
-  title?: string;
+  title?: string
   /**
    * Description of the Modal
    * @type string
@@ -35,7 +35,7 @@ export interface ModalProps {
    * @example
    * <Modal description="Modal Description" />
    */
-  description?: string;
+  description?: string
   /**
    * Icon of the Modal
    * @type string
@@ -43,7 +43,7 @@ export interface ModalProps {
    * @example
    * <Modal icon="mdiMail" />
    */
-  icon?: string;
+  icon?: string
 
   /**
    * Width of the Modal
@@ -52,7 +52,7 @@ export interface ModalProps {
    * @example
    * <Modal width="500px" />
    */
-  width?: string;
+  width?: string
 
   /**
    * Height of the Modal
@@ -61,7 +61,7 @@ export interface ModalProps {
    * @example
    * <Modal height="500px" />
    */
-  height?: string;
+  height?: string
 
   /**
    * Close the modal when clicking outside
@@ -70,7 +70,7 @@ export interface ModalProps {
    * @example
    * <Modal :modelValue="true" :outsideClick="true" />
    */
-  outsideClick?: boolean;
+  outsideClick?: boolean
 
   /**
    * Class of the Modal
@@ -79,7 +79,7 @@ export interface ModalProps {
    * @example
    * <Modal class="my-class" />
    */
-  class?: string;
+  class?: string
 
   /**
    * Class of the overlay
@@ -88,7 +88,7 @@ export interface ModalProps {
    * @example
    * <Modal overlayClass="my-class" />
    */
-  overlayClass?: string;
+  overlayClass?: string
 
   /**
    * Style of the Modal
@@ -97,7 +97,7 @@ export interface ModalProps {
    * @example
    * <Modal style="color: red" />
    */
-  style?: string;
+  style?: string
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -119,16 +119,28 @@ const styles = computed(() => {
     height: props.height,
   };
 });
-const handleOutside = (event: Event) => {
-  if (!props.outsideClick) return;
-  if (event.target === event.currentTarget) {
+function handleOutside(event: Event) {
+  if (!props.outsideClick)
+    return;
+  if (event.target === event.currentTarget)
     emits('update:modelValue', false);
-  }
-};
+}
 </script>
+
 <template>
-  <div v-show="modelValue" class="r-modal-overlay" :class="overlayClass" @click.stop="handleOutside">
-    <div aria-modal="true" :class="classes" :open="props.modelValue" role="dialog" :style="styles">
+  <div
+    v-show="modelValue"
+    class="r-modal-overlay"
+    :class="overlayClass"
+    @click.stop="handleOutside"
+  >
+    <div
+      aria-modal="true"
+      :class="classes"
+      :open="props.modelValue"
+      role="dialog"
+      :style="styles"
+    >
       <div class="r-dialog__header">
         <slot name="header" />
         <div v-if="props.icon" class="icon">

@@ -29,7 +29,7 @@
     @apply -right-1 -bottom-1;
   }
   &--overlap-right {
-    @apply top-2.5 right-3;
+    @apply top-2.5 right-2.5;
   }
   &--overlap-left {
     @apply top-1 left-1;

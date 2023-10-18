@@ -59,44 +59,27 @@ The **overlap** prop is used to specify the overlapping status of the badge. In 
 
 The **hover** prop is a boolean value that specifies whether the badge should be visible only on hover. If it is set to true, the badge will only be visible when the user hovers over its parent element.
 
-### content (optional)
-
-The **content** prop is used to specify the text or number that should be displayed inside the badge. In this example, it is set to 3.
-
 ### outside (optional)
 
 Finally, the **outside** prop is a boolean value that specifies whether the badge should be displayed outside of its parent element, rather than inside it. In this example, it is set to false, so the badge will be displayed inside its parent element.
 
+### animation (optional)
+
+The **animation** prop is used to specify the animation of the badge. In the example above, it is set to _false_, which will apply the default animation to the badge.
+
+### class(optional)
+
+The **class** prop is used to specify the class of the badge.
+
 ## Variants <a id="variants" />
-
-### Right
-
-<Canvas>
-  <Story of={BadgeStories.Right} />
-</Canvas>
-
-### With Content
-
-<Canvas>
-  <Story of={BadgeStories.WithContent} />
-</Canvas>
-
-### Hover
 
 <Canvas>
   <Story of={BadgeStories.Hover} />
-</Canvas>
-
-### Bottom
-
-<Canvas>
   <Story of={BadgeStories.Bottom} />
-</Canvas>
-
-### Left
-
-<Canvas>
   <Story of={BadgeStories.Left} />
+  <Story of={BadgeStories.Overlap} />
+  <Story of={BadgeStories.Outside} />
+  <Story of={BadgeStories.WithAnimation} />
 </Canvas>
 
 ## Tips

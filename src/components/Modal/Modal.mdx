@@ -23,7 +23,7 @@ Modal is a component that renders a modal dialog. It is used to display content 
 ## Overview <a id="overview" />
 
 <Canvas source="SourceProps['code']">
-  <Story of={ModalStories.Overview} />
+  <Story of={ModalStories.Overview} height="400px" />
 </Canvas>
 
 ## Playground <a id="playground" />
@@ -70,12 +70,16 @@ The `actions` slot is used to render the actions of the modal.
 
 ## Stories <a id="stories" />
 
-<Canvas source="SourceProps['code']">
-  <Story of={ModalStories.WithActionsSlot} />
-</Canvas>
+### Fully Slotable
 
 <Canvas source="SourceProps['code']">
-  <Story of={ModalStories.WithForm} />
+  <Story of={ModalStories.WithActionsSlot} height="600px" />
+</Canvas>
+
+### A Form Dialog
+
+<Canvas source="SourceProps['code']">
+  <Story of={ModalStories.WithForm} height="800px" />
 </Canvas>
 
 ## Tips <a id="tips" />

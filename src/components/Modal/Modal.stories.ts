@@ -17,6 +17,7 @@ const ModalStory = {
       </div>
     `,
   args: {
+    modelValue: true,
     title: 'Create Account',
     description:
       'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
@@ -50,7 +51,7 @@ export const WithActionsSlot: Story = {
           </template>
           <template v-slot:actions>
             <div class="flex gap-2">
-              <Button variant="secondary" @click="args.modelValue = false">
+              <Button color="secondary" @click="args.modelValue = false">
                 <template #custom-icon>
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paw-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -83,7 +84,7 @@ export const WithActionsSlot: Story = {
   }),
   args: {
     modelValue: true,
-    icon: 'pets',
+    icon: 'mdiPaw',
     description: '',
     title: 'Pets ',
   },
@@ -111,7 +112,7 @@ export const WithForm: Story = {
             </div>
           </template>
           <template v-slot:actions>
-            <Button variant="secondary" @click="args.modelValue = false" block>
+            <Button color="secondary" @click="args.modelValue = false" block>
               Cancel
             </Button>
             <Button @click="submit" block>
