@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import Tooltip from './RTooltip.vue';
 import Button from '../Button/RButton.vue';
 import Icon from '../Icon/RIcon.vue';
 import { vTooltip } from '../../directives';
+import Tooltip from './RTooltip.vue';
 
 const DefaultArgTypes = {
   placement: {
@@ -72,14 +72,15 @@ const TooltipStory = {
       @show="show"
       @hide="hide"
     >
-      <template #trigger>
-        <Button variant="primary">Tooltip</Button>
-      </template>
+      <Button>Tooltip</Button>
     </Tooltip>
     `,
   }),
-  argTypes: DefaultArgTypes,
-  args: DefaultArgs,
+  argTypes: { ...DefaultArgTypes },
+  args: { ...DefaultArgs },
+  decorators: [
+    () => ({ template: '<div style="padding: 6rem; display:grid; place-items: center; height:100%;"><story /></div>' }),
+  ]
 } as Meta<typeof Tooltip>;
 
 export default TooltipStory;
@@ -100,9 +101,7 @@ const WithContentSlotStory = {
       @show="show"
       @hide="hide"
     >
-      <template #trigger>
-        <Icon name="mdiInformation" />
-      </template>
+      <Icon name="mdiInformation" />
       <template #content>
         <span style="background: red; color: #fff; padding: 8px;">This is a tooltip</span>
       </template>
@@ -125,9 +124,7 @@ const ToggleTemplate = {
       @show="show"
       @hide="hide"
     >
-      <template #trigger>
-        <span>Toggle tooltip</span>
-      </template>
+      <span>Toggle tooltip</span>
     </Tooltip>
     `,
   }),
@@ -171,15 +168,6 @@ export const WithClickTrigger: Story = {
     triggers: 'click',
     text: 'Clicked!',
     outsideClick: true,
-  },
-};
-
-export const WithManualTrigger: Story = {
-  args: {
-    triggers: 'manual',
-    dark: false,
-    light: true,
-    text: 'Manual!',
   },
 };
 

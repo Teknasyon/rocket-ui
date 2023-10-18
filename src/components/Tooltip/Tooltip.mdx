@@ -22,7 +22,7 @@ A tooltip is a small pop-up window that appears when the user hovers over an ele
 The tooltip component allows developers to easily add tooltips to their applications.
 
 <Canvas>
-  <Story of={TooltipStories.Overview} />
+  <Story of={TooltipStories.Overview}/>
 </Canvas>
 
 ### Playground <a id="playground" />
@@ -31,7 +31,6 @@ The tooltip component allows developers to easily add tooltips to their applicat
 
 <Controls
   of={TooltipStories.Overview}
-  exclude={/^(trigger|content|click|on.*)/}
 />
 
 ## Stories <a id="stories" />
@@ -48,19 +47,13 @@ The tooltip component allows developers to easily add tooltips to their applicat
   <Story of={TooltipStories.WithClickTrigger} />
 </Canvas>
 
-### With Manual Trigger
-
-<Canvas>
-  <Story of={TooltipStories.WithManualTrigger} />
-</Canvas>
-
 ### With Content Slot
 
 <Canvas>
   <Story of={TooltipStories.WithContentSlot} />
 </Canvas>
 
-## With Directives
+## With Directives !not-ready
 
 <Canvas>
   <Story of={TooltipStories.WithDirectives} />
