@@ -59,6 +59,10 @@ The **hint** prop sets a hint text for the switch. This can be used to provide a
 
 The **errorMsg** prop sets an error message for the switch. This can be used to display an error message when the switch is in an invalid state or when it has been used in an incorrect way.
 
+### reverse (optional)
+
+If the **reverse** prop is true, the switch will be reversed, meaning that the "on" state will be on the left and the "off" state will be on the right.
+
 ## Stories <a id="stories" />
 
 ### Small
@@ -83,6 +87,12 @@ The **errorMsg** prop sets an error message for the switch. This can be used to 
 
 <Canvas>
   <Story of={SwitchStories.WithError} />
+</Canvas>
+
+### Reverse
+
+<Canvas>
+  <Story of={SwitchStories.Reverse} />
 </Canvas>
 
 ### Tips <a id="tips" />

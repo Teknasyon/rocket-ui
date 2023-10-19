@@ -3,10 +3,8 @@ import Switch from './RSwitch.vue';
 
 const DefaultArgTypes = {
   size: {
-    control: {
-      type: 'select',
-      options: ['small', 'medium', 'large'],
-    },
+    type: 'select',
+    options: ['small', 'medium', 'large'],
     defaultValue: 'medium',
   },
 };
@@ -18,6 +16,8 @@ const DefaultArgs = {
   disabled: false,
   label: 'Switch',
   hint: 'A control used to switch between two states: often on or off.',
+  errorMsg: '',
+  reverse: false,
 };
 
 const SwitchStory = {
@@ -28,7 +28,7 @@ const SwitchStory = {
       args,
     };
   },
-  template: `<Switch v-bind="args"/>`,
+  template: '<Switch v-bind="args"/>',
   args: DefaultArgs,
   argTypes: {
     ...DefaultArgTypes,
@@ -75,5 +75,13 @@ export const WithError: Story = {
     modelValue: false,
     size: 'medium',
     errorMsg: 'This is an error message',
+  },
+};
+
+export const Reverse: Story = {
+  args: {
+    modelValue: false,
+    size: 'medium',
+    reverse: true,
   },
 };
