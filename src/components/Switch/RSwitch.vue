@@ -85,6 +85,15 @@ export interface Props {
    * <Checkbox hideDetails />
    */
   hideDetails?: boolean
+
+  /**
+   * Reverse the order of the checkbox and the label
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Checkbox reverse />
+   */
+  reverse?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -130,7 +139,13 @@ watch(
 </script>
 
 <template>
-  <div class="r-switch-container">
+  <div
+    class="r-switch-container"
+    :class="{
+      'r-switch-container--reverse': props.reverse,
+      'r-switch-container--hide-details': props.hideDetails,
+    }"
+  >
     <div :class="classes">
       <input
         :id="props.id"

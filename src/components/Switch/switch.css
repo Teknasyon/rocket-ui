@@ -1,7 +1,15 @@
 @import '../../index.css';
 
 .r-switch-container {
-  @apply flex items-start justify-start gap-3;
+  @apply flex items-start justify-start gap-3 w-fit;
+
+  &--reverse {
+    @apply flex-row-reverse;
+  }
+
+  &--hide-details {
+    @apply items-center;
+  }
 }
 
 .slider {
