@@ -151,6 +151,7 @@ watch(
         :id="props.id"
         :checked="state.checked"
         class="r-switch__input"
+        :disabled="props.disabled"
         type="checkbox"
         @change="onChange"
       >

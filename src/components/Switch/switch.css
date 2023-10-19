@@ -57,7 +57,7 @@
   }
 
   &--disabled {
-    @apply cursor-not-allowed;
+    @apply cursor-not-allowed pointer-events-none;
     & > .slider::before {
       @apply bg-[var(--neutral-200)];
     }
@@ -79,6 +79,10 @@
       &:hover {
         @apply bg-[var(--primary-700)];
       }
+    }
+
+    &:disabled + .slider {
+      @apply  pointer-events-none cursor-not-allowed;
     }
   }
 }
