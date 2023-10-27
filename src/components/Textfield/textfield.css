@@ -1,9 +1,5 @@
 @import '../../index.css';
 
-fieldset {
-  @apply border-none m-0 p-0;
-}
-
 .r-textfield__wrapper {
   @apply flex flex-col items-start justify-start;
 }

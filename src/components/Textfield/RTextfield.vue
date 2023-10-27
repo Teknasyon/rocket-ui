@@ -205,13 +205,13 @@ const hasClear = computed(() => {
   return props.clearable && hasValue.value;
 });
 const classes = computed(() => {
-  const { disabled, loading, clearable, errorMsg } = props;
+  const { disabled, loading, } = props;
   return {
     'r-textfield': true,
-    'r-textfield--error': errorMsg?.length,
+    'r-textfield--error': hasErrorMsg.value,
     'r-textfield--loading': loading,
     'r-textfield--disabled': disabled,
-    'r-textfield--clearable': clearable,
+    'r-textfield--clearable': hasClear.value,
     'r-textfield--focus': isFocused.value,
     'r-textfield--filled': isFilled.value,
   };
@@ -333,58 +333,56 @@ watch(
 </script>
 
 <template>
-  <fieldset>
-    <div
-      class="r-textfield__wrapper"
-    >
-      <Label
-        v-if="props.label"
-        :id="props.id"
-        class="r-textfield__label"
-        :for="props.id"
-        :text="props.label"
-        @click="focusInput"
-      />
-      <div class="input-wrapper">
-        <div :class="classes">
-          <slot name="prepend" />
-          <Icon
-            v-if="prependIconName && !$slots.prepend"
-            :class="prependIconClasses"
-            :name="prependIconName"
-            :size="20"
-          />
-          <input
-            :id="props.id"
-            ref="inputRef"
-            :disabled="props.disabled"
-            :max="props.max"
-            :min="props.min"
-            :placeholder="props.placeholder"
-            :type="typeOfInputRef"
-            :value="state.value"
-            @blur="onBlur"
-            @focus="onFocus"
-            @input="onInput"
-          >
-          <slot name="append" />
-          <Icon
-            v-if="appendIconName && !$slots.append"
-            :class="appendIconClasses"
-            :name="`${appendIconName}`"
-            :size="20"
-            @click="clickIcon"
-          />
-        </div>
-        <div v-if="!props.hideDetails" class="r-textfield__details">
-          <p v-if="props.errorMsg" class="r-textfield__error">
-            {{ props.errorMsg }}
-          </p>
-          <p v-if="!props.errorMsg && props.hint" class="r-textfield__hint">
-            {{ props.hint }}
-          </p>
-        </div>
+  <div
+    class="r-textfield__wrapper"
+  >
+    <Label
+      v-if="props.label"
+      :id="props.id"
+      class="r-textfield__label"
+      :for="props.id"
+      :text="props.label"
+      @click="focusInput"
+    />
+    <div class="input-wrapper">
+      <div :class="classes">
+        <slot name="prepend" />
+        <Icon
+          v-if="prependIconName && !$slots.prepend"
+          :class="prependIconClasses"
+          :name="prependIconName"
+          :size="20"
+        />
+        <input
+          :id="props.id"
+          ref="inputRef"
+          :disabled="props.disabled"
+          :max="props.max"
+          :min="props.min"
+          :placeholder="props.placeholder"
+          :type="typeOfInputRef"
+          :value="state.value"
+          @blur="onBlur"
+          @focus="onFocus"
+          @input="onInput"
+        >
+        <slot v-if="!hasErrorMsg" name="append" />
+        <Icon
+          v-if="appendIconName && !$slots.append || hasErrorMsg"
+          :class="appendIconClasses"
+          :name="`${appendIconName}`"
+          :size="20"
+          @click="clickIcon"
+        />
+      </div>
+      <div v-if="!props.hideDetails" class="r-textfield__details">
+        <p v-if="props.errorMsg" class="r-textfield__error">
+          {{ props.errorMsg }}
+        </p>
+        <p v-if="!props.errorMsg && props.hint" class="r-textfield__hint">
+          {{ props.hint }}
+        </p>
       </div>
     </div>
-  </fieldset>
+  </div>
 </template>
