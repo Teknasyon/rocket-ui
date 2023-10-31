@@ -419,6 +419,7 @@ watch(() => props.modelValue, (_value) => {
             </p>
           </div>
           <input
+            v-bind="$attrs"
             :id="props.id"
             ref="input"
             v-model="inputModel"
