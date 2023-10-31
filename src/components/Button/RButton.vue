@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import './button.css';
-import { computed } from 'vue';
-import Icon from '../Icon/RIcon.vue';
+import './button.css'
+import { computed } from 'vue'
+import Icon from '../Icon/RIcon.vue'
 
 export type ButtonType =
   | 'default'
   | 'text'
   | 'outline'
-  ;
-export type ButtonColor = | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info';
-export type ButtonSize = | 'small' | 'medium' | 'large';
+
+export type ButtonColor = | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info'
+export type ButtonSize = | 'small' | 'medium' | 'large'
 export interface Props {
   /**
    * Variant of the Button
@@ -31,7 +31,7 @@ export interface Props {
 
   /**
    * Loading state of the Button
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Button loading />
@@ -40,7 +40,7 @@ export interface Props {
 
   /**
    * Disabled state of the Button
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Button disabled />
@@ -49,7 +49,7 @@ export interface Props {
 
   /**
    * Prepend icon of the Button
-   * @type string
+   * @type { string }
    * @default ''
    * @example
    * <Button prependIcon="icon" />
@@ -58,7 +58,7 @@ export interface Props {
 
   /**
    * Append icon of the Button
-   * @type string
+   * @type { string }
    * @default ''
    * @example
    * <Button appendIcon="icon" />
@@ -67,7 +67,7 @@ export interface Props {
 
   /**
    * Only icon state of the Button
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Button icon />
@@ -76,7 +76,7 @@ export interface Props {
 
   /**
    * Size of the Button
-   * @type 'small' | 'medium' | 'large'
+   * @type { 'small' | 'medium' | 'large' }
    * @default 'medium'
    * @example
    * <Button size="small" />
@@ -85,7 +85,7 @@ export interface Props {
 
   /**
    * Height of the Button
-   * @type string
+   * @type { string }
    * @default ''
    * @example
    * <Button height="40" />
@@ -94,12 +94,21 @@ export interface Props {
 
   /**
    * Block state of the Button
-   * @type boolean
+   * @type { boolean }
    * @default false
    * @example
    * <Button block />
    */
   block?: boolean
+
+  /**
+   * Duration of the Button
+   * @type { number }
+   * @default 300
+   * @example
+   * <Button duration="300" />
+   */
+  duration?: number | { enter: number; leave: number }
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
@@ -111,8 +120,9 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   height: '',
   block: false,
-});
-defineEmits(['click']);
+  duration: 0,
+})
+defineEmits(['click'])
 const classes = computed(() => ({
   'r-button': true,
   [`r-button__${props.variant}`]: true,
@@ -121,19 +131,19 @@ const classes = computed(() => ({
   [`r-button--${props.size || 'medium'}`]: true,
   'r-button--only-icon': props.icon,
   'r-button--block': props.block,
-}));
+}))
 const iconSize = computed(() => {
   return {
     small: 16,
     medium: 16,
     large: 20,
-  }[props.size || 'medium'];
-});
+  }[props.size || 'medium']
+})
 const style = computed(() => {
   return {
     height: props.height ? `${props.height}px` : '',
-  };
-});
+  }
+})
 </script>
 
 <template>
@@ -155,7 +165,10 @@ const style = computed(() => {
       :name="props.prependIcon"
       :size="iconSize"
     />
-    <slot v-if="!props.icon" />
+    <Transition :duration="props.duration" name="fade">
+      <slot v-if="!props.icon" />
+    </Transition>
+
     <Icon
       v-if="!$slots['custom-icon'] && !props.icon && props.appendIcon"
       class="r-button__append-icon"
