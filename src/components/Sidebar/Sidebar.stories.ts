@@ -10,14 +10,17 @@ const SidebarStory = {
     args,
   }),
   template: `
-    <Sidebar v-bind="args">
-      <template v-slot:default>
+    <div style="background-color:red;">
+      <Sidebar v-bind="args">
         test
-      </template>
-      <template v-slot:actions>
-        test
-      </template>
-    </Sidebar>
+        <template #actions>
+          test
+        </template>
+      </Sidebar>
+      <div>
+      test
+      </div>
+    </div>
   `,
 } as Meta<typeof Sidebar>;
 

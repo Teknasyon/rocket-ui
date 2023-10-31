@@ -1,34 +1,39 @@
 @import '../../index.css';
 
 .r-sidebar {
-  @apply relative min-w-fit flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r;
+  @apply bg-red-500 flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r;
 
   &[data-open='true'] {
-    @apply w-[var(--sidebar-width)] items-start transition-[width] ease-in duration-300;
+    @apply w-[var(--sidebar-width)] items-start transition-all duration-500;
 
   }
   &[data-open='false'] {
-    @apply w-[var(--sidebar-collapsed-width)] items-center transition-[width] ease-out duration-300;
+    @apply w-[var(--sidebar-collapsed-width)] items-center transition-all duration-500;
+  }
+
+  &__wrapper {
+    @apply relative;
+
+    &[data-open='true'] {
+      @apply w-[var(--sidebar-width)] transition-all duration-500;
+    }
+
+    &[data-open='false'] {
+      @apply w-[var(--sidebar-collapsed-width)] transition-all duration-500;
+    }  
   }
 
   &__trigger {
-    @apply cursor-pointer absolute top-24 z-10 flex items-center justify-center w-6 h-6 
-    text-[var(--sidebar-trigger-color)] bg-white
-    rounded-full border transition-all duration-300;
+    @apply cursor-pointer absolute top-24 flex items-center justify-center rounded-full border
+    text-[var(--sidebar-trigger-color)] bg-[var(--sidebar-trigger-bg-color)]
+    w-[var(--sidebar-trigger-width)]  h-[var(--sidebar-trigger-height)]
+    ;
 
     &[data-open='true'] {
-      @apply left-[var(--sidebar-width)] rotate-180;
+      @apply -right-3 rotate-180;
     }
     &[data-open='false'] {
-      @apply left-[var(--sidebar-collapsed-width)] rotate-0;
+      @apply -right-3 rotate-0;
     }
-  }
-
-  &__nav {
-    @apply flex flex-col flex-1 space-y-6 w-full;
-  }
-
-  &__actions {
-    @apply flex flex-col space-y-6 w-full;
   }
 }

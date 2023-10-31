@@ -161,6 +161,9 @@
   --sidebar-background: white;
   --sidebar-padding: var(--space-5) var(--space-4);
   --sidebar-trigger-color: var(--neutral-500);
+  --sidebar-trigger-bg-color: var(--white);
+  --sidebar-trigger-width: 24px;
+  --sidebar-trigger-height: 24px;
   /**
   * @tokens-textfield-variables
   * @presenter TextfieldVariables
