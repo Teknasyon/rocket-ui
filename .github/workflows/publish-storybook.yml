@@ -1,6 +1,11 @@
 name: Publish Storybook
 
-on: workflow_dispatch
+on: 
+  push:
+    tags: ['v*']
+    
+  workflow_dispatch:
+
 
 permissions:
   contents: read
