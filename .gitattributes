@@ -1,2 +1,4 @@
 *.html linguist-detectable=false
 *.mdx linguist-detectable=false
+/.yarn/releases/** binary
+/.yarn/plugins/** binary
