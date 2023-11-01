@@ -5,7 +5,7 @@
 }
 
 .r-dropdown {
-  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer;
+  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-[7px] px-4 text-left cursor-pointer;
 
   &--active {
     @apply border border-[var(--primary-500)] ring-inset ring-2;
@@ -55,7 +55,7 @@
   }
 
   &__input {
-    @apply font-medium text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] min-w-[40px];
+    @apply font-medium text-sm text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] min-w-[40px];
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
