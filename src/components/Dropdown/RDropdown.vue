@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue';
-import Chip from '../Chips/RChip.vue';
-import Icon from '../Icon/RIcon.vue';
-import './dropdown.css';
-import RTooltip from '../Tooltip/RTooltip.vue';
+import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue'
+import Chip from '../Chips/RChip.vue'
+import Icon from '../Icon/RIcon.vue'
+import './dropdown.css'
+import RTooltip from '../Tooltip/RTooltip.vue'
 
 export interface Option {
   value: string | number
@@ -185,40 +185,42 @@ const props = withDefaults(defineProps<SelectProps>(), {
   dropdownClass: '',
   optionsClass: '',
   errorMsg: '',
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
-const selected = ref<Option>({ value: '', label: '' });
-const selectedMultiple = reactive<Option[]>([]);
-const active = ref(false);
-const inputModel = ref('');
+const emit = defineEmits(['update:modelValue'])
+const selected = ref<Option>({ value: '', label: '' })
+const selectedMultiple = reactive<Option[]>([])
+const active = ref(false)
+const inputModel = ref('')
+
 /**
  * @description - HTML elements references
  */
-const dropdown = ref<HTMLElement>();
-const input = ref<HTMLInputElement>();
-const wrapper = ref<HTMLElement>();
+const dropdown = ref<HTMLElement>()
+const input = ref<HTMLInputElement>()
+const wrapper = ref<HTMLElement>()
+
 /**
  * @description - Handles the appearance of the select list
  * @param e MouseEvent
  * @returns void
  */
 function setActive(e: MouseEvent, activators?: any) {
-  e.stopPropagation();
+  e.stopPropagation()
   if (props.disabled)
-    return;
-  active.value = !active.value;
+    return
+  active.value = !active.value
   if (activators)
-    activators();
+    activators()
   if (active.value) {
-    dropdown.value?.classList.add('r-dropdown--active');
-    dropdown.value?.focus();
+    dropdown.value?.classList.add('r-dropdown--active')
+    dropdown.value?.focus()
     if (props.searchable)
-      input.value?.focus();
+      input.value?.focus()
 
-    return;
+    return
   }
-  removeActive();
+  removeActive()
 }
 
 /**
@@ -226,10 +228,10 @@ function setActive(e: MouseEvent, activators?: any) {
  * @returns void
  */
 function removeActive() {
-  active.value = false;
-  dropdown.value?.classList.remove('r-dropdown--active');
-  dropdown.value?.blur();
-  input.value?.blur();
+  active.value = false
+  dropdown.value?.classList.remove('r-dropdown--active')
+  dropdown.value?.blur()
+  input.value?.blur()
 }
 
 /**
@@ -238,27 +240,28 @@ function removeActive() {
  * @param option Selected option
  * @returns void
  */
-function selectOption(e: any, option: Option, hide: any) {
-  e.stopPropagation();
+function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
+  e.stopPropagation()
+  updatePosition()
   if (option.disabled)
     return
   if (props.multiple || props.taggable) {
     if (!selectedMultiple.find(opt => opt.value === option.value))
-      selectedMultiple.push(option);
+      selectedMultiple.push(option)
     else
-      selectedMultiple.splice(selectedMultiple.indexOf(option), 1);
+      selectedMultiple.splice(selectedMultiple.indexOf(option), 1)
 
-    inputModel.value = '';
+    inputModel.value = ''
     if (props.searchable)
-      input.value?.focus();
-    return;
+      input.value?.focus()
+    return
   }
 
-  selectOneOption(e, option);
+  selectOneOption(e, option)
 
   if (props.closeOnSelect) {
-    hide();
-    removeActive();
+    hide()
+    removeActive()
   }
 }
 /**
@@ -268,52 +271,54 @@ function selectOption(e: any, option: Option, hide: any) {
  */
 function selectOneOption(e: MouseEvent, option: Option) {
   if (selected.value.value === option.value) {
-    selected.value = {} as Option;
-    inputModel.value = '';
-    return;
+    selected.value = {} as Option
+    inputModel.value = ''
+    return
   }
-  inputModel.value = option.label;
-  selected.value = option;
-  setActive(e);
-  emit('update:modelValue', option);
+  inputModel.value = option.label
+  selected.value = option
+  setActive(e)
+  emit('update:modelValue', option)
 }
 /**
  * @description - Removes an option from the selected options
  * @param e option Option to remove
  * @returns void
  */
-function removeOption(e: MouseEvent | KeyboardEvent, option: Option) {
+function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition: any) {
   if (e instanceof KeyboardEvent && e.key !== 'Backspace')
-    return;
+    return
   if (inputModel.value !== '')
-    return;
-  e.stopPropagation();
-  const index = selectedMultiple.findIndex(opt => opt.value === option.value);
-  selectedMultiple.splice(index, 1);
+    return
+  e.stopPropagation()
+  updatePosition()
+  const index = selectedMultiple.findIndex(opt => opt.value === option.value)
+  selectedMultiple.splice(index, 1)
 }
 /**
  * @description - Handles the not existing options
  * @returns void
  */
-function createTag(e: KeyboardEvent) {
+function createTag(e: KeyboardEvent, updatePosition: any) {
   if (!props.taggable)
-    return;
-  e.stopPropagation();
-  const value = inputModel.value;
+    return
+  e.stopPropagation()
+  updatePosition()
+  const value = inputModel.value
   if (value === '')
-    return;
-  const option = props.options.find(opt => opt.label === value);
+    return
+  const option = props.options.find(opt => opt.label === value)
   if (!option) {
-    selectedMultiple.push({ value, label: value });
-    inputModel.value = '';
-    input.value?.focus();
+    selectedMultiple.push({ value, label: value })
+    inputModel.value = ''
+    input.value?.focus()
   }
 }
 function isSelected(option: Option) {
-  if (props.multiple)
-    return selectedMultiple.find(opt => opt.value === option.value);
+  if (props.multiple || props.taggable)
+    return selectedMultiple.find(opt => opt.value === option.value)
 
-  return selected.value.value === option.value;
+  return selected.value.value === option.value
 }
 /**
  * @description - Search for options
@@ -321,47 +326,47 @@ function isSelected(option: Option) {
  */
 const searchedOptions = computed(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
-    return props.options;
+    return props.options
   const result = props.options.filter((option) => {
-    return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
-  });
-  return result;
-});
+    return option.label.toLowerCase().includes(inputModel.value.toLowerCase())
+  })
+  return result
+})
 
 const isReadOnly = computed(() => {
-  return props.multiple || props.taggable || !props.searchable;
-});
+  return !props.searchable
+})
 
 function reset() {
   if (props.modelValue) {
     if (props.multiple) {
-      selectedMultiple.push(props.modelValue as Option);
+      selectedMultiple.push(props.modelValue as Option)
     }
     else {
-      selected.value = (props.modelValue as Option);
-      inputModel.value = (props.modelValue as Option).label;
+      selected.value = (props.modelValue as Option)
+      inputModel.value = (props.modelValue as Option).label
     }
   }
   else {
-    selected.value = {} as Option;
-    selectedMultiple.splice(0, selectedMultiple.length);
+    selected.value = {} as Option
+    selectedMultiple.splice(0, selectedMultiple.length)
   }
 }
 
 onMounted(() => {
   reset()
-});
+})
 
 /**
  * @description - Watch the selected multiple options
  * @returns void
  */
 watch(selectedMultiple, (value) => {
-  emit('update:modelValue', value);
-});
+  emit('update:modelValue', value)
+})
 watch(() => props.modelValue, (_value) => {
-  reset();
-});
+  reset()
+})
 </script>
 
 <template>
@@ -371,13 +376,14 @@ watch(() => props.modelValue, (_value) => {
       :offset="0"
       outside-click
       placement="bottom"
+      resizable
       tooltip-class="w-max"
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
       @hide="removeActive"
     >
-      <template #default="{ activators }">
+      <template #default="{ activators, updatePosition }">
         <div
           ref="dropdown"
           class="r-dropdown"
@@ -403,15 +409,23 @@ watch(() => props.modelValue, (_value) => {
             </slot>
           </div>
           <div v-if="props.taggable" class="r-dropdown__tags">
-            <Chip
-              v-for="(option, index) in selectedMultiple"
-              :key="index"
-              append-icon="close"
-              class="r-dropdown__tags__chip"
-              :label="option.label"
-              variant="primary"
-              @click:close="removeOption($event, option)"
-            />
+            <slot
+              name="tags"
+              :options="selectedMultiple"
+              :remove-option="removeOption"
+              :update-position="updatePosition"
+            >
+              <Chip
+                v-for="(option, index) in selectedMultiple"
+                :key="index"
+                append-icon="mdiClose"
+                class="r-dropdown__tags__chip"
+                closable
+                :label="option.label"
+                variant="primary"
+                @click:close="removeOption($event, option, updatePosition)"
+              />
+            </slot>
           </div>
           <div v-if="props.multiple" class="r-dropdown__multiple">
             <p v-for="(option, index) in selectedMultiple" :key="index">
@@ -432,9 +446,9 @@ watch(() => props.modelValue, (_value) => {
             :readonly="isReadOnly"
             type="text"
             @keydown.backspace="
-              removeOption($event, selectedMultiple[selectedMultiple.length - 1])
+              removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
             "
-            @keydown.enter="createTag($event)"
+            @keydown.enter="createTag($event, updatePosition)"
           >
           <div
             v-if="props.appendIcon || $slots.append"
@@ -450,7 +464,7 @@ watch(() => props.modelValue, (_value) => {
           </div>
         </div>
       </template>
-      <template #content="{ hide }">
+      <template #content="{ hide, updatePosition }">
         <ul
           class="r-dropdown-options"
           :class="{
@@ -467,19 +481,20 @@ watch(() => props.modelValue, (_value) => {
               'r-dropdown-options__option--active': isSelected(option),
               'r-dropdown-options__option--disabled': option.disabled,
             }"
-            @click.prevent="selectOption($event, option, hide)"
+            @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
             <div style="display: flex; align-items: center">
-              <slot v-if="!option.prependIcon" name="option-prepend" />
-              <Icon
-                v-else
-                class="r-dropdown-options__option__prepend-icon"
-                :class="{
-                  'r-dropdown-options__option__prepend-icon--active':
-                    isSelected(option),
-                }"
-                :name="option.prependIcon"
-              />
+              <slot name="option-prepend">
+                <Icon
+                  v-if="option.prependIcon"
+                  class="r-dropdown-options__option__prepend-icon"
+                  :class="{
+                    'r-dropdown-options__option__prepend-icon--active':
+                      isSelected(option),
+                  }"
+                  :name="option.prependIcon"
+                />
+              </slot>
               <p
                 class="r-dropdown-options__option__label"
                 :class="{
@@ -498,6 +513,13 @@ watch(() => props.modelValue, (_value) => {
               }"
               name="mdiCheck"
             />
+          </li>
+          <li class="r-dropdown-options__no-option">
+            <slot name="not-options">
+              <span v-if="searchedOptions.length === 0">
+                No options
+              </span>
+            </slot>
           </li>
         </ul>
       </template>

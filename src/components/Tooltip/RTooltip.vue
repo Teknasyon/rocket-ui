@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import './tooltip.css';
-import { computed, onMounted, ref, watch, watchEffect } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import './tooltip.css'
+import { computed, onMounted, ref, watchEffect } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 import {
   Placement,
   type Placements,
   Theme,
   Trigger,
   type Triggers,
-  update
-} from './popper';
+  update,
+} from './popper'
 
 export interface IProps {
   /**
@@ -189,32 +189,27 @@ const props = withDefaults(defineProps<IProps>(), {
   triggerClass: '',
   tooltipClass: '',
   type: Theme.Tooltip,
-});
-const emit = defineEmits(['show', 'hide']);
+})
+const emit = defineEmits(['show', 'hide'])
 
-// @ts-expect-error
-const trigger = ref<HTMLDivElement>(null);
-// @ts-expect-error
-const tooltip = ref<HTMLDivElement>(null);
-// @ts-expect-error
-const arrowElement = ref<HTMLDivElement>(null);
+const trigger = ref()
+
+const tooltip = ref()
+const arrowElement = ref()
 
 async function showTooltip() {
-  const { placement, offset, padding, disabled, showDelay, type } = props;
-  if (disabled)
-    return;
-  tooltip.value.style.display = 'block';
+  handleUpdate()
+  tooltip.value.style.display = 'block'
   // document.body.appendChild(tooltip.value);
-  emit('show');
-  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
-  handleAutoHide();
+  emit('show')
+  handleAutoHide()
 }
 
 function hideTooltip() {
   if (props.disabled || !tooltip.value)
-    return;
-  tooltip.value.style.display = '';
-  emit('hide');
+    return
+  tooltip.value.style.display = ''
+  emit('hide')
   // document.removeEventListener('click', hideTooltip);
   // document.body.removeChild(tooltip.value)
 }
@@ -222,47 +217,51 @@ function hideTooltip() {
 function handleAutoHide() {
   if (props.autoHide) {
     setTimeout(() => {
-      hideTooltip();
-    }, props.hideDelay);
+      hideTooltip()
+    }, props.hideDelay)
   }
 }
 
 function onClick() {
   if (props.disabled)
-    return;
+    return
   if (props.triggers.includes(Trigger.Click)) {
     if (tooltip.value.style.display === 'block')
-      hideTooltip();
-    else showTooltip();
+      hideTooltip()
+    else showTooltip()
   }
 }
 
 function onMouseEnter() {
   if (props.disabled)
-    return;
+    return
   if (props.triggers.includes(Trigger.Hover))
-    showTooltip();
+    showTooltip()
 }
 
 function onMouseLeave() {
   if (props.disabled)
-    return;
+    return
   if (tooltip.value.style.display === '' && props.triggers.includes(Trigger.Hover))
-    showTooltip();
+    showTooltip()
 
   else if (
     tooltip.value.style.display !== ''
     && props.triggers.includes(Trigger.Hover)
   )
-    hideTooltip();
+    hideTooltip()
 }
 
 function onMouseMove() {
-  const { placement, offset, padding, disabled, showDelay, type } = props;
-  if (disabled)
-    return;
   if (props.triggers.includes(Trigger.Hover))
-    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
+    handleUpdate()
+}
+
+function handleUpdate() {
+  const { placement, offset, padding, disabled, showDelay, type } = props
+  if (disabled)
+    return
+  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type)
 }
 
 const classes = computed(() => {
@@ -270,42 +269,39 @@ const classes = computed(() => {
     'tooltip': true,
     'tooltip--dark': props.dark,
     'tooltip--light': props.light,
-  };
-});
+  }
+})
 
 /**
  * Listen the resize event of window
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
  */
 window.onresize = () => {
-  const { placement, offset, padding, disabled, showDelay, type } = props;
-  if (disabled)
-    return;
   if (props.resizable)
-    update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type);
-};
+    handleUpdate()
+}
 
 watchEffect(
   () => {
     if (props.disabled)
-      return;
+      return
     if (props.shown && props.triggers.includes(Trigger.Manual))
-      showTooltip();
+      showTooltip()
     else if (!props.shown && props.triggers.includes(Trigger.Manual))
-      hideTooltip();
+      hideTooltip()
   },
-  { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
-);
+  { flush: 'post' }, // this is important to avoid infinite loop & for fire on mounted
+)
 
 onMounted(() => {
   onClickOutside(trigger, () => {
     if (props.outsideClick)
-      hideTooltip();
+      hideTooltip()
   },
   {
     ignore: [tooltip.value],
-  });
-});
+  })
+})
 </script>
 
 <template>
@@ -326,6 +322,7 @@ onMounted(() => {
         mouseleave: onMouseLeave,
         mousemove: onMouseMove,
       }"
+      :update-position="handleUpdate"
     >
       <div v-html="props.triggerContent" />
     </slot>
@@ -337,7 +334,7 @@ onMounted(() => {
       :class="[classes, tooltipClass]"
       role="tooltip"
     >
-      <slot :hide="hideTooltip" name="content">
+      <slot :hide="hideTooltip" name="content" :update-position="handleUpdate">
         <div
           v-if="props.text"
           class="tooltip__content"

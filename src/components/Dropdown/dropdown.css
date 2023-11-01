@@ -5,7 +5,7 @@
 }
 
 .r-dropdown {
-  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer sm:text-sm;
+  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-3 px-4 text-left cursor-pointer;
 
   &--active {
     @apply border border-[var(--primary-500)] ring-inset ring-2;
@@ -36,7 +36,7 @@
   }
 
   &__tags {
-    @apply flex flex-wrap items-center gap-1;
+    @apply flex flex-wrap items-center gap-0.5;
 
     &__chip {
       @apply flex items-center gap-2 rounded-3xl text-xs text-[var(--neutral-900)] bg-[var(--neutral-100)];
@@ -48,14 +48,14 @@
   }
 
   &__multiple {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-0.5 flex-wrap;
     & > * {
       @apply flex-1 whitespace-nowrap;
     }
   }
 
   &__input {
-    @apply font-medium text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] sm:text-sm;
+    @apply font-medium text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] min-w-[40px];
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
@@ -88,12 +88,13 @@
 }
 
 .r-dropdown-options {
-  @apply p-2 left-0 mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none sm:text-sm;
+  @apply p-2 left-0 mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none;
 
   &__option {
-    @apply text-[var(--neutral-900)] transition-all duration-200 ease-in 
+    @apply text-[var(--neutral-900)] transition-all duration-200 
     flex justify-between items-center w-full border border-transparent 
-    rounded-md py-3 px-4 text-left cursor-pointer sm:text-sm min-h-[50px];
+    rounded-md px-3 py-2 text-left cursor-pointer min-h-[40px] mb-0.5
+    font-medium text-sm;
 
     &:hover {
       @apply bg-[var(--neutral-100)];
@@ -129,6 +130,9 @@
         /* @apply text-[var(--primary-500)]; */
       }
     }
+  }
+  &__no-option {
+    @apply text-[var(--neutral-500)] text-center py-2;
   }
 }
 
