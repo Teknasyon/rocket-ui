@@ -167,6 +167,15 @@ export interface SelectProps {
    * <Dropdown hideDetails />
    */
   hideDetails?: boolean
+
+  /**
+   * Autocomplete of the Dropdown
+   * @type {'on' | 'off'}
+   * @default 'off'
+   * @example
+   * <Dropdown autocomplete="on" />
+   */
+  autocomplete?: 'on' | 'off'
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -185,6 +194,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   dropdownClass: '',
   optionsClass: '',
   errorMsg: '',
+  hideDetails: false,
+  autocomplete: 'off',
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -433,10 +444,10 @@ watch(() => props.modelValue, (_value) => {
             </p>
           </div>
           <input
-            v-bind="$attrs"
             :id="props.id"
             ref="input"
             v-model="inputModel"
+            :autocomplete="props.autocomplete"
             class="r-dropdown__input"
             :class="{
               'r-dropdown__input--loading': props.loading,
@@ -514,11 +525,9 @@ watch(() => props.modelValue, (_value) => {
               name="mdiCheck"
             />
           </li>
-          <li class="r-dropdown-options__no-option">
+          <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
-              <span v-if="searchedOptions.length === 0">
-                No options
-              </span>
+              No options
             </slot>
           </li>
         </ul>
