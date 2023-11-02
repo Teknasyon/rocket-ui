@@ -284,6 +284,7 @@ function selectOneOption(e: MouseEvent, option: Option) {
   if (selected.value.value === option.value) {
     selected.value = {} as Option
     inputModel.value = ''
+    emit('update:modelValue', '')
     return
   }
   inputModel.value = option.label
@@ -354,7 +355,7 @@ function reset() {
       selectedMultiple.push(props.modelValue as Option)
     }
     else {
-      selected.value = (props.modelValue as Option)
+      selected.value = props.modelValue as Option
       inputModel.value = (props.modelValue as Option).label
     }
   }
