@@ -23,7 +23,7 @@ input {
   }
   &__prepend-icon {
     &--error {
-      @apply text-red-500;
+      @apply text-[var(--error-500)];
     }
     &--loading {
       @apply animate-spin-reverse;
@@ -31,11 +31,11 @@ input {
   }
   &__append-icon {
     &--error {
-      @apply animate-bounce text-red-500;
+      @apply animate-bounce text-[var(--error-500)];
     }
   }
   &__error {
-    @apply text-red-500 font-light text-xs tracking-wide;
+    @apply text-[var(--error-500)] font-light text-xs tracking-wide;
   }
   &__hint {
     @apply text-[var(--neutral-500)] font-light text-xs tracking-wide;
@@ -67,7 +67,7 @@ input {
   &--error {
     @apply border-red-500 ring-red-50;
     input {
-      @apply text-red-500;
+      @apply text-[var(--error-500)];
       &:focus {
         @apply text-[var(--neutral-900)];
       }
