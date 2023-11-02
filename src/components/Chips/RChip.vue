@@ -83,6 +83,7 @@ const classes = computed<object>(() => {
     'r-chip--disabled': props.disabled,
     [`r-chip__${props.variant}`]: props.variant,
     [`r-chip__${props.variant}--ghost`]: props.ghost,
+    'r-chip--closable': props.closable,
   };
 });
 
