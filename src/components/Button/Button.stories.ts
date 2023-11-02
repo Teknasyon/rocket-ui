@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Icon from '../Icon/RIcon.vue';
-import Button from './RButton.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Icon from '../Icon/RIcon.vue'
+import Button from './RButton.vue'
 
 const DefaultArgTypes = {
   variant: {
@@ -18,30 +18,28 @@ const DefaultArgTypes = {
   onClick: {
     action: 'click',
   },
-};
+}
 
-const WithCustomIconSlot = {
+const WithCustomIcon = {
   render: (args: any) => ({
     components: { Button, Icon },
     setup: () => {
       return {
         args,
-      };
+      }
     },
     template: `
     <Button v-bind="args">
-      <template v-slot:custom-icon>
-        <Icon name="mdiMowerBag"/>
-        <Icon name="mdiGrass"/>
-        <Icon name="mdiHandPeace"/>
-      </template>
+      <Icon name="mdiMowerBag"/>
+      <Icon name="mdiGrass"/>
+      <Icon name="mdiHandPeace"/>
     </Button>`,
   }),
   argTypes: DefaultArgTypes,
   args: {
 
   },
-} as Meta<typeof Button>;
+} as Meta<typeof Button>
 
 const ButtonStory = {
   title: 'Form/Button',
@@ -49,7 +47,7 @@ const ButtonStory = {
   setup(args: typeof Button) {
     return {
       args,
-    };
+    }
   },
   template: '<Button v-bind="args"/>',
   args: {
@@ -57,11 +55,11 @@ const ButtonStory = {
     default: 'Button CTA',
   },
   argTypes: DefaultArgTypes,
-} as Meta<typeof Button>;
+} as Meta<typeof Button>
 
-export default ButtonStory;
+export default ButtonStory
 
-type Story = StoryObj<typeof ButtonStory>;
+type Story = StoryObj<typeof ButtonStory>
 
 export const Overview: Story = {
   args: {
@@ -69,7 +67,7 @@ export const Overview: Story = {
     color: 'primary',
     default: 'Button',
   },
-};
+}
 
 export const Default: Story = {
   args: {
@@ -77,22 +75,31 @@ export const Default: Story = {
     color: 'primary',
     default: 'Primary',
   },
-};
+}
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
     default: 'Outline',
   },
-};
+}
 
 export const Text: Story = {
   args: {
     variant: 'text',
     default: 'Text',
   },
-};
+}
+
+export const IconButton: Story = {
+  args: {
+    prependIcon: 'mdiAccount',
+    variant: 'default',
+    default: '',
+    icon: true,
+  },
+}
 
 export const CustomIcon = {
-  render: WithCustomIconSlot.render,
-};
+  render: WithCustomIcon.render,
+}

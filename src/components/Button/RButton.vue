@@ -100,15 +100,6 @@ export interface Props {
    * <Button block />
    */
   block?: boolean
-
-  /**
-   * Duration of the Button
-   * @type { number }
-   * @default 300
-   * @example
-   * <Button duration="300" />
-   */
-  duration?: number | { enter: number; leave: number }
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
@@ -120,7 +111,6 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   height: '',
   block: false,
-  duration: 0,
 })
 defineEmits(['click'])
 const classes = computed(() => ({
@@ -154,26 +144,26 @@ const style = computed(() => {
     :style="style"
     @click="$emit('click')"
   >
-    <slot name="custom-icon" />
+    <slot name="prepend">
+      <Icon
+        v-if="props.prependIcon"
+        class="r-button__prepend-icon"
+        :class="{
+          'r-button__prepend-icon--only': props.icon,
+        }"
+        :name="props.prependIcon"
+        :size="iconSize"
+      />
+    </slot>
+    <slot />
 
-    <Icon
-      v-if="!$slots['custom-icon'] && props.prependIcon"
-      class="r-button__prepend-icon"
-      :class="{
-        'r-button__prepend-icon--only': props.icon,
-      }"
-      :name="props.prependIcon"
-      :size="iconSize"
-    />
-    <Transition :duration="props.duration" name="fade">
-      <slot v-if="!props.icon" />
-    </Transition>
-
-    <Icon
-      v-if="!$slots['custom-icon'] && !props.icon && props.appendIcon"
-      class="r-button__append-icon"
-      :name="props.appendIcon"
-      :size="iconSize"
-    />
+    <slot name="append">
+      <Icon
+        v-if="!props.icon && props.appendIcon"
+        class="r-button__append-icon"
+        :name="props.appendIcon"
+        :size="iconSize"
+      />
+    </slot>
   </button>
 </template>
