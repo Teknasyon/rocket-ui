@@ -1,14 +1,16 @@
-import Grid from './RGrid.vue';
+import Grid from './RGrid.vue'
 
-const Default = (args) => ({
-  components: { Grid },
-  setup() {
-    return { args };
-  },
-  template: `<Grid v-bind="args">
+function Default(args) {
+  return {
+    components: { Grid },
+    setup() {
+      return { args }
+    },
+    template: `<Grid v-bind="args">
   hello world
   </Grid>`,
-});
+  }
+}
 
 const defaultArgs = {
   templateColumns: {
@@ -80,7 +82,7 @@ const defaultArgs = {
     },
     defaultValue: '1 / 2',
   },
-};
+}
 
 export default {
   title: 'Layout/Grid',
@@ -93,7 +95,7 @@ export default {
   parameters: {
     viewMode: 'docs',
   },
-};
+}
 
 export const Overview = {
   render: Default.bind({}),
@@ -104,4 +106,4 @@ export const Overview = {
   },
 
   args: {},
-};
+}

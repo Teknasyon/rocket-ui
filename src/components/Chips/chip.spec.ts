@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils'
 
-import Chip from './RChip.vue';
+import Chip from './RChip.vue'
 
 describe('Chip', () => {
   it('renders properly', () => {
@@ -13,11 +13,11 @@ describe('Chip', () => {
         size: 'small',
         appendIcon: 'close',
       },
-    });
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.classes()).toContain('chip');
-    expect(wrapper.classes()).toContain('chip__primary');
-    expect(wrapper.classes()).toContain('chip--small');
+    })
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.classes()).toContain('chip')
+    expect(wrapper.classes()).toContain('chip__primary')
+    expect(wrapper.classes()).toContain('chip--small')
     // expect(wrapper.find('.chip__text').text()).toBe('Hello');
     // expect(
     //   wrapper
@@ -27,14 +27,14 @@ describe('Chip', () => {
     //       expect(wrapper.emitted('clickChip')).toBeTruthy();
     //     })
     // );
-    expect(wrapper.find('.chip__append-icon').exists()).toBe(true);
+    expect(wrapper.find('.chip__append-icon').exists()).toBe(true)
     expect(
       wrapper
         .find('.chip__append-icon')
         .trigger('click')
         .then(() => {
-          expect(wrapper.emitted('clickIcon')).toBeTruthy();
-        })
-    );
-  });
-});
+          expect(wrapper.emitted('clickIcon')).toBeTruthy()
+        }),
+    )
+  })
+})

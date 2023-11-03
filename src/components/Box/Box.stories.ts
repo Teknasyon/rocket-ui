@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Box from './RBox.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Box from './RBox.vue'
 
 const DefaultArgTypes = {
   is: {
@@ -23,7 +23,7 @@ const DefaultArgTypes = {
       'none',
     ],
   },
-};
+}
 const DefaultArgs = {
   is: 'div',
   display: 'block',
@@ -33,24 +33,24 @@ const DefaultArgs = {
   minHeight: 'auto',
   maxWidth: 'auto',
   maxHeight: 'auto',
-};
+}
 const BoxStory = {
   title: 'Layout/Box',
   component: Box,
   setup(args: any) {
-    return { args };
+    return { args }
   },
-  template: `<Box v-bind="args" />`,
+  template: '<Box v-bind="args" />',
   args: DefaultArgs,
   argTypes: DefaultArgTypes,
-} as Meta<typeof Box>;
+} as Meta<typeof Box>
 
-export default BoxStory;
+export default BoxStory
 
-type Story = StoryObj<typeof BoxStory>;
+type Story = StoryObj<typeof BoxStory>
 
 export const Overview: Story = {
   args: {
     default: 'Hello World',
   },
-};
+}

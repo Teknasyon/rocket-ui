@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, type CSSProperties, type HTMLAttributes } from 'vue';
-import '../../index.css';
+import { type CSSProperties, type HTMLAttributes, computed } from 'vue'
+import '../../index.css'
+
 export interface IProps {
   /**
    * The HTML tag to use for the root element.
@@ -10,7 +11,7 @@ export interface IProps {
    * <Box is="span" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is
    */
-  is: HTMLAttributes['is'];
+  is: HTMLAttributes['is']
 
   /**
    * Shorthand for `width` style prop
@@ -20,7 +21,7 @@ export interface IProps {
    * <Box width="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
-  width?: CSSProperties['width'];
+  width?: CSSProperties['width']
 
   /**
    * Shorthand for `height` style prop
@@ -30,7 +31,7 @@ export interface IProps {
    * <Box height="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/height
    */
-  height?: CSSProperties['height'];
+  height?: CSSProperties['height']
 
   /**
    * Shorthand for `minWidth` style prop
@@ -39,7 +40,7 @@ export interface IProps {
    * <Box minWidth="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minWidth?: CSSProperties['minWidth'];
+  minWidth?: CSSProperties['minWidth']
 
   /**
    * Shorthand for `minHeight` style prop
@@ -48,7 +49,7 @@ export interface IProps {
    * <Box minHeight="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    */
-  minHeight?: CSSProperties['minHeight'];
+  minHeight?: CSSProperties['minHeight']
 
   /**
    * Shorthand for `maxWidth` style prop
@@ -57,7 +58,7 @@ export interface IProps {
    * <Box maxWidth="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxWidth?: CSSProperties['maxWidth'];
+  maxWidth?: CSSProperties['maxWidth']
 
   /**
    * Shorthand for `maxHeight` style prop
@@ -66,7 +67,7 @@ export interface IProps {
    * <Box maxHeight="100%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    */
-  maxHeight?: CSSProperties['maxHeight'];
+  maxHeight?: CSSProperties['maxHeight']
 
   /**
    * Shorthand for `display` style prop
@@ -76,9 +77,9 @@ export interface IProps {
    * <Box display="flex" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/display
    */
-  display?: CSSProperties['display'];
+  display?: CSSProperties['display']
 }
-const props = defineProps<IProps>();
+const props = defineProps<IProps>()
 const styles = computed(() => ({
   display: props.display || 'block',
   width: props.width,
@@ -86,8 +87,8 @@ const styles = computed(() => ({
   minWidth: props.minWidth,
   minHeight: props.minHeight,
   maxWidth: props.maxWidth,
-}));
-const as = computed(() => props.is || 'div');
+}))
+const as = computed(() => props.is || 'div')
 </script>
 
 <template>

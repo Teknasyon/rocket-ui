@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Button from '../Button/RButton.vue';
-import Textfield from '../Textfield/RTextfield.vue';
-import Dropdown from '../Dropdown/RDropdown.vue';
-import Modal from './RModal.vue';
+import Button from '../Button/RButton.vue'
+import Textfield from '../Textfield/RTextfield.vue'
+import Dropdown from '../Dropdown/RDropdown.vue'
+import Modal from './RModal.vue'
 
 const ModalStory = {
   title: 'Components/Modal',
@@ -23,13 +23,13 @@ const ModalStory = {
       'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
   },
   argTypes: {},
-} as Meta<typeof Modal>;
+} as Meta<typeof Modal>
 
-export default ModalStory;
+export default ModalStory
 
-type Story = StoryObj<typeof ModalStory>;
+type Story = StoryObj<typeof ModalStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}
 
 export const WithActionsSlot: Story = {
   render: args => ({
@@ -37,7 +37,7 @@ export const WithActionsSlot: Story = {
     setup: () => ({
       args,
       submit: () => {
-        alert('Submitted!');
+        alert('Submitted!')
       },
     }),
     template: `
@@ -88,7 +88,7 @@ export const WithActionsSlot: Story = {
     description: '',
     title: 'Pets ',
   },
-};
+}
 
 export const WithForm: Story = {
   render: args => ({
@@ -96,7 +96,7 @@ export const WithForm: Story = {
     setup: () => ({
       args,
       submit: () => {
-        alert('Submitted!');
+        alert('Submitted!')
       },
     }),
     template: `
@@ -123,4 +123,4 @@ export const WithForm: Story = {
       </div>
     `,
   }),
-};
+}

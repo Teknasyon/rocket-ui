@@ -5,9 +5,8 @@ import {
   hide,
   offset,
   shift,
-  size,
-} from '@floating-ui/dom';
-import { type Ref, } from 'vue';
+} from '@floating-ui/dom'
+import { type Ref } from 'vue'
 
 export type Placements =
   | 'top'
@@ -21,7 +20,7 @@ export type Placements =
   | 'bottom-start'
   | 'bottom-end'
   | 'left-start'
-  | 'left-end';
+  | 'left-end'
 
 export enum Placement {
   Top = 'top',
@@ -38,7 +37,7 @@ export enum Placement {
   LeftEnd = 'left-end',
 }
 
-export type Triggers = 'click' | 'hover' | 'manual';
+export type Triggers = 'click' | 'hover' | 'manual'
 
 export enum Trigger {
   Click = 'click',
@@ -63,7 +62,7 @@ export async function update(
   theme: Theme | string,
 ) {
   if (!trigger || !tooltip)
-    return;
+    return
   computePosition(trigger, tooltip, {
     placement,
     middleware: [
@@ -73,11 +72,11 @@ export async function update(
       flip(),
       hide(),
     ],
-  }).then(({ x, y, placement, middlewareData, }) => {
+  }).then(({ x, y, placement, middlewareData }) => {
     if (!tooltip)
-      return;
+      return
 
-    const parentLeft = trigger.offsetParent?.getBoundingClientRect().left || 0;
+    const parentLeft = trigger.offsetParent?.getBoundingClientRect().left || 0
 
     Object.assign(tooltip.style, {
       minWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth - 2}px` : 'auto',
@@ -85,17 +84,17 @@ export async function update(
       top: `${y}px`,
       animation: `tooltip-show ${duration}ms ease-in-out forwards`,
       transformOrigin: 'start',
-    });
+    })
 
     if (arrowElement && middlewareData.arrow) {
-      const { x: arrowX, y: arrowY } = middlewareData.arrow;
+      const { x: arrowX, y: arrowY } = middlewareData.arrow
 
       const staticSide = {
         top: Placement.Bottom,
         right: Placement.Left,
         bottom: Placement.Top,
         left: Placement.Right,
-      }[placement.split('-')[0]];
+      }[placement.split('-')[0]]
 
       Object.assign(arrowElement.style, {
         left: x != null ? `${arrowX}px` : '',
@@ -103,7 +102,7 @@ export async function update(
         right: '',
         bottom: '',
         [`${staticSide}`]: '-4px',
-      });
+      })
     }
-  });
+  })
 }

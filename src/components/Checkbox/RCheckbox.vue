@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import './checkbox.css';
+import './checkbox.css'
 import {
   type HTMLAttributes,
   type InputHTMLAttributes,
@@ -7,9 +7,9 @@ import {
   computed,
   reactive,
   watch,
-} from 'vue';
+} from 'vue'
 
-import Icon from '../Icon/RIcon.vue';
+import Icon from '../Icon/RIcon.vue'
 
 export interface Props {
   /**
@@ -103,27 +103,27 @@ const props = withDefaults(defineProps<Props>(), {
   hint: '',
   errorMsg: '',
   modelValue: false,
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
 const state = reactive<StateTypes>({
   checked: false,
   indeterminate: false,
-});
+})
 
 const icons = {
   checked: 'mdiCheck',
   unchecked: '',
   indeterminate: 'mdiMinus',
-};
+}
 
 const icon = computed(() => {
   if (state.indeterminate)
-    return icons.indeterminate;
+    return icons.indeterminate
 
-  return state.checked ? icons.checked : icons.unchecked;
-});
+  return state.checked ? icons.checked : icons.unchecked
+})
 
 const classes = computed(() => {
   return {
@@ -132,44 +132,44 @@ const classes = computed(() => {
     'r-checkbox--disabled': props.disabled,
     'r-checkbox--indeterminate': state.indeterminate,
     'r-checkbox--error': !!props.errorMsg,
-  };
-});
+  }
+})
 
 function onChange(e: unknown) {
   if (props.disabled)
-    return;
+    return
   // @ts-expect-error: Unreachable code error
-  state.checked = e.target.checked;
-  state.indeterminate = false;
-  emit('update:modelValue', state.checked);
+  state.checked = e.target.checked
+  state.indeterminate = false
+  emit('update:modelValue', state.checked)
 }
 
 watch(
   () => props.indeterminate,
   (value) => {
-    state.indeterminate = value;
+    state.indeterminate = value
     if (value === true) {
-      state.checked = false;
-      emit('update:modelValue', state.checked);
+      state.checked = false
+      emit('update:modelValue', state.checked)
     }
   },
   {
     // need immediate to set the state on first render for storybook
     // TODO: find a better way to do this
     immediate: true,
-  }
-);
+  },
+)
 watch(
   () => props.modelValue,
   (value) => {
-    state.checked = value;
+    state.checked = value
   },
   {
     // need immediate to set the state on first render for storybook
     // TODO: find a better way to do this
     immediate: true,
-  }
-);
+  },
+)
 </script>
 
 <template>

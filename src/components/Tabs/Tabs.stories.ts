@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Tabs from './RTabs.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Tabs from './RTabs.vue'
 
 const DefaultArgs = {
   tabs: [
@@ -12,13 +12,13 @@ const DefaultArgs = {
   block: false,
   activeTab: 0,
   tile: false,
-};
+}
 
 const TabsStory = {
   title: 'Components/Tabs',
   component: Tabs,
   setup(args: typeof Tabs) {
-    return { args };
+    return { args }
   },
   template: `
     <Tabs v-bind="args" >
@@ -32,15 +32,15 @@ const TabsStory = {
   argTypes: {
     'onUpdate:modelValue': { action: 'onUpdate:modelValue' },
   },
-} as Meta<typeof Tabs>;
+} as Meta<typeof Tabs>
 
-export default TabsStory;
+export default TabsStory
 
-type Story = StoryObj<typeof TabsStory>;
+type Story = StoryObj<typeof TabsStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Icon: Story = {
   args: {
@@ -108,7 +108,7 @@ export const Icon: Story = {
       },
     ],
   },
-};
+}
 
 export const Text: Story = {
   args: {
@@ -176,7 +176,7 @@ export const Text: Story = {
       },
     ],
   },
-};
+}
 
 export const Tile: Story = {
   args: {
@@ -188,4 +188,4 @@ export const Tile: Story = {
     ],
     modelValue: 2,
   },
-};
+}

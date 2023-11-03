@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Icon from '../Icon/RIcon.vue';
-import Button from '../Button/RButton.vue';
-import Badge from './RBadge.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Icon from '../Icon/RIcon.vue'
+import Badge from './RBadge.vue'
 
 const DefaultArgs = {
   variant: 'primary',
@@ -11,7 +10,7 @@ const DefaultArgs = {
   outside: false,
   animation: false,
   class: '',
-};
+}
 const DefaultArgTypes = {
   variant: {
     type: 'select',
@@ -24,14 +23,14 @@ const DefaultArgTypes = {
   onClick: {
     action: 'click',
   },
-};
+}
 
 const BadgeStory = {
   title: 'Components/Badge',
   render: (args: any) => ({
     components: { Badge, Icon },
     setup: () => {
-      return { args };
+      return { args }
     },
     template: `
     <Badge v-bind="args">
@@ -43,18 +42,18 @@ const BadgeStory = {
     args: DefaultArgs,
     argTypes: DefaultArgTypes,
   }),
-} as Meta<typeof Badge>;
+} as Meta<typeof Badge>
 
-export default BadgeStory;
+export default BadgeStory
 
-type Story = StoryObj<typeof BadgeStory>;
+type Story = StoryObj<typeof BadgeStory>
 
 export const Overview: Story = {
   args: {
     ...DefaultArgs,
     placement: 'right',
   },
-};
+}
 
 export const Hover: Story = {
   args: {
@@ -62,7 +61,7 @@ export const Hover: Story = {
     hover: true,
     variant: 'primary',
   },
-};
+}
 
 export const Bottom: Story = {
   args: {
@@ -70,7 +69,7 @@ export const Bottom: Story = {
     placement: 'bottom',
     variant: 'success',
   },
-};
+}
 
 export const Left: Story = {
   args: {
@@ -78,7 +77,7 @@ export const Left: Story = {
     placement: 'left',
     variant: 'error',
   },
-};
+}
 
 export const Overlap: Story = {
   args: {
@@ -87,7 +86,7 @@ export const Overlap: Story = {
     variant: 'warning',
     animation: true,
   },
-};
+}
 
 export const Outside: Story = {
   args: {
@@ -95,11 +94,11 @@ export const Outside: Story = {
     outside: true,
     variant: 'neutral',
   },
-};
+}
 
 export const WithAnimation: Story = {
   args: {
     ...DefaultArgs,
     animation: true,
-  }
+  },
 }

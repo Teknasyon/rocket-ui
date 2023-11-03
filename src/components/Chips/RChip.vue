@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import Icon from '../Icon/RIcon.vue';
-import './chip.css';
+import { computed } from 'vue'
+import Icon from '../Icon/RIcon.vue'
+import './chip.css'
 
 export interface Props {
   /**
@@ -11,7 +11,7 @@ export interface Props {
    * @example
    * <Chip variant="primary" />
    */
-  variant: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
+  variant: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
 
   /**
    * Label of the Chip
@@ -20,7 +20,7 @@ export interface Props {
    * @example
    * <Chip label="Label" />
    */
-  label?: string | number;
+  label?: string | number
 
   /**
    * Disabled state of the Chip
@@ -29,7 +29,7 @@ export interface Props {
    * @example
    * <Chip disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Prepend icon of the Chip
@@ -38,7 +38,7 @@ export interface Props {
    * @example
    * <Chip prependIcon="icon" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * Append icon of the Chip
@@ -47,7 +47,7 @@ export interface Props {
    * @example
    * <Chip appendIcon="icon" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Ghost state of the Chip
@@ -56,7 +56,7 @@ export interface Props {
    * @example
    * <Chip ghost />
    */
-  ghost?: boolean;
+  ghost?: boolean
 
   /**
    * Closable state of the Chip
@@ -65,7 +65,7 @@ export interface Props {
    * @example
    * <Chip closable />
    */
-  closable?: boolean;
+  closable?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
@@ -75,8 +75,8 @@ const props = withDefaults(defineProps<Props>(), {
   appendIcon: '',
   ghost: false,
   closable: false,
-});
-const emit = defineEmits(['click:chip', 'click:close']);
+})
+const emit = defineEmits(['click:chip', 'click:close'])
 const classes = computed<object>(() => {
   return {
     'r-chip': true,
@@ -84,32 +84,47 @@ const classes = computed<object>(() => {
     [`r-chip__${props.variant}`]: props.variant,
     [`r-chip__${props.variant}--ghost`]: props.ghost,
     'r-chip--closable': props.closable,
-  };
-});
+  }
+})
 
-const clickChip = (e: MouseEvent) => {
-  if (props.closable) e.stopPropagation();
-  if (props.disabled) return;
-  emit('click:chip', e);
-};
-const clickClose = (e: MouseEvent) => {
-  if (props.disabled || !props.closable) return;
-  e.stopPropagation();
-  emit('click:close', e);
-};
+function clickChip(e: MouseEvent) {
+  if (props.closable)
+    e.stopPropagation()
+  if (props.disabled)
+    return
+  emit('click:chip', e)
+}
+function clickClose(e: MouseEvent) {
+  if (props.disabled || !props.closable)
+    return
+  e.stopPropagation()
+  emit('click:close', e)
+}
 </script>
+
 <template>
   <div :class="classes">
     <div class="r-chip__content" @click="clickChip($event)">
       <slot name="prepend">
-        <Icon v-if="props.prependIcon" :aria-disabled="props.disabled" class="r-chip__content__prepend-icon"
-          :name="props.prependIcon" :size="12" />
+        <Icon
+          v-if="props.prependIcon"
+          :aria-disabled="props.disabled"
+          class="r-chip__content__prepend-icon"
+          :name="props.prependIcon"
+          :size="12"
+        />
       </slot>
       <span class="r-chip__content__label">{{ props.label }}</span>
     </div>
     <slot name="append">
-      <Icon v-if="props.appendIcon" :aria-disabled="props.disabled" class="r-chip__content__append-icon"
-        :name="props.appendIcon" :size="12" @click="clickClose($event)" />
+      <Icon
+        v-if="props.appendIcon"
+        :aria-disabled="props.disabled"
+        class="r-chip__content__append-icon"
+        :name="props.appendIcon"
+        :size="12"
+        @click="clickClose($event)"
+      />
     </slot>
   </div>
 </template>

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Checkbox from './RCheckbox.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Checkbox from './RCheckbox.vue'
 
 const DefaultArgs = {
   id: 'checkbox',
@@ -9,18 +9,18 @@ const DefaultArgs = {
   hint: 'Save my login details for next time.',
   errorMsg: '',
   modelValue: false,
-};
+}
 
 const CheckboxStory = {
   title: 'Form/Checkbox',
   component: Checkbox,
   setup(args: typeof Checkbox) {
-    return { args };
+    return { args }
   },
   template: '<Checkbox v-bind="args" />',
   args: DefaultArgs,
   argTypes: {
-    modelValue: {
+    'modelValue': {
       control: {
         type: 'boolean',
       },
@@ -29,18 +29,18 @@ const CheckboxStory = {
       action: 'update:modelValue',
     },
   },
-} as Meta<typeof Checkbox>;
+} as Meta<typeof Checkbox>
 
-export default CheckboxStory;
+export default CheckboxStory
 
-type Story = StoryObj<typeof CheckboxStory>;
+type Story = StoryObj<typeof CheckboxStory>
 
 export const Overview: Story = {
   args: {
     id: 'checkbox-1',
     label: 'Checkbox label',
   },
-};
+}
 
 export const Checked: Story = {
   args: {
@@ -48,7 +48,7 @@ export const Checked: Story = {
     label: 'Checkbox label',
     modelValue: true,
   },
-};
+}
 
 export const Indeterminate: Story = {
   args: {
@@ -56,7 +56,7 @@ export const Indeterminate: Story = {
     label: 'Checkbox label',
     indeterminate: true,
   },
-};
+}
 
 export const WithError: Story = {
   args: {
@@ -64,4 +64,4 @@ export const WithError: Story = {
     label: 'Checkbox label',
     errorMsg: 'This field is required',
   },
-};
+}

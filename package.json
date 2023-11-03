@@ -120,8 +120,8 @@
     "vue-tsc": "^1.6.5"
   },
   "lint-staged": {
-    "src/{components,directives}": [
-      "eslint --fix"
+    "*": [
+      "yarn lint:fix"
     ]
   }
 }

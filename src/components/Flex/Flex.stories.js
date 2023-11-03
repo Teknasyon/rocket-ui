@@ -1,17 +1,19 @@
-import Flex from './RFlex.vue';
-import Box from '../Box/RBox.vue';
+import Box from '../Box/RBox.vue'
+import Flex from './RFlex.vue'
 
-const Default = (args) => ({
-  components: { Flex, Box },
-  setup() {
-    return { args };
-  },
-  template: `
+function Default(args) {
+  return {
+    components: { Flex, Box },
+    setup() {
+      return { args }
+    },
+    template: `
     <Flex v-bind="args">
       <Box>Box 1</Box>
       <Box>Box 2</Box>
     </Flex>`,
-});
+  }
+}
 
 const defaultArgs = {
   align: {
@@ -100,7 +102,7 @@ const defaultArgs = {
     },
     defaultValue: '1',
   },
-};
+}
 
 export default {
   title: 'Layout/Flex',
@@ -113,7 +115,7 @@ export default {
   parameters: {
     viewMode: 'docs',
   },
-};
+}
 
 export const Overview = {
   render: Default.bind({}),
@@ -124,4 +126,4 @@ export const Overview = {
   },
 
   args: {},
-};
+}

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Pagination from './RPagination.vue';
+import Pagination from './RPagination.vue'
 
 const PaginationStory = {
   title: 'Components/Pagination',
@@ -8,16 +8,16 @@ const PaginationStory = {
   setup: (args: typeof Pagination) => ({
     args,
   }),
-  template: `<Pagination v-bind="args" />`,
+  template: '<Pagination v-bind="args" />',
   args: {},
   argTypes: {
     'onUpdate:page': { action: 'update:page' },
   },
   tags: ['autodocs'],
-} as Meta<typeof Pagination>;
+} as Meta<typeof Pagination>
 
-export default PaginationStory;
+export default PaginationStory
 
-type Story = StoryObj<typeof PaginationStory>;
+type Story = StoryObj<typeof PaginationStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}

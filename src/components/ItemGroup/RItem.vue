@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, withDefaults } from 'vue';
+import { computed, inject, withDefaults } from 'vue'
 
 export interface ItemProps {
   /**
@@ -34,34 +34,34 @@ const props = withDefaults(defineProps<ItemProps>(), {
   disabled: false,
   selectedClass: '',
   value: null,
-});
+})
 
-const RItemGroupSymbol = 'rocket-ui:r-item-group';
+const RItemGroupSymbol = 'rocket-ui:r-item-group'
 
 const isSelected = inject(`${RItemGroupSymbol}:isSelected`) as (
   id: number
-) => boolean;
+) => boolean
 
-const classes = inject(`${RItemGroupSymbol}:selectedClass`, '') as string;
+const classes = inject(`${RItemGroupSymbol}:selectedClass`, '') as string
 const selectedClass = computed(() => {
-  return isSelected(props.value) && [classes, props.selectedClass];
-});
+  return isSelected(props.value) && [classes, props.selectedClass]
+})
 
 const select = inject(`${RItemGroupSymbol}:select`) as (
   id: number,
   value: boolean
-) => void;
+) => void
 
 function handleToggle() {
   if (props.disabled)
-    return;
-  select(props.value as number, !isSelected(props.value as number));
+    return
+  select(props.value as number, !isSelected(props.value as number))
 }
 
 function handleSelect() {
   if (props.disabled)
-    return;
-  select(props.value as number, true);
+    return
+  select(props.value as number, true)
 }
 </script>
 

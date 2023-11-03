@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { mount } from '@vue/test-utils';
-import Dropdown from './RDropdown.vue';
+import { mount } from '@vue/test-utils'
+import Dropdown from './RDropdown.vue'
 
 describe('Dropdown', () => {
   it('renders properly', () => {
@@ -10,26 +10,26 @@ describe('Dropdown', () => {
         options: [{ value: 1, label: '1' }],
         placeholder: 'Select...',
       },
-    });
+    })
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('input').exists()).toBe(true);
-    expect(wrapper.find('input').attributes('type')).toBe('text');
-    expect(wrapper.find('input').attributes('placeholder')).toBe('Select...');
-    expect(wrapper.classes()).toContain('dropdown');
-    expect(wrapper.find('ul').exists()).toBe(true);
-    expect(wrapper.find('.select').exists()).toBe(true);
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.find('input').exists()).toBe(true)
+    expect(wrapper.find('input').attributes('type')).toBe('text')
+    expect(wrapper.find('input').attributes('placeholder')).toBe('Select...')
+    expect(wrapper.classes()).toContain('dropdown')
+    expect(wrapper.find('ul').exists()).toBe(true)
+    expect(wrapper.find('.select').exists()).toBe(true)
     expect(
       wrapper
         .find('.select')
         .trigger('click')
         .then(() => {
           expect(wrapper.find('ul').classes()).toContain(
-            'select-options--active'
-          );
-        })
-    );
-  });
+            'select-options--active',
+          )
+        }),
+    )
+  })
 
   it('multiple', () => {
     const wrapper = mount(Dropdown, {
@@ -40,36 +40,36 @@ describe('Dropdown', () => {
         ],
         multiple: true,
       },
-    });
+    })
     expect(
       wrapper
         .find('.select')
         .trigger('click')
         .then(() => {
           expect(wrapper.find('ul').classes()).toContain(
-            'select-options--active'
-          );
+            'select-options--active',
+          )
         })
         .then(() => {
           document.addEventListener('click', () => {
             expect(wrapper.find('ul').classes()).not.toContain(
-              'select-options--active'
-            );
-          });
-        })
-    );
+              'select-options--active',
+            )
+          })
+        }),
+    )
 
-    expect(wrapper.find('.select__multiple').exists()).toBe(true);
-    expect(wrapper.find('.select-options__option__label').text()).toBe('1');
+    expect(wrapper.find('.select__multiple').exists()).toBe(true)
+    expect(wrapper.find('.select-options__option__label').text()).toBe('1')
     expect(
       wrapper
         .find('.select-options__option')
         .trigger('click')
         .then(() => {
-          expect(wrapper.find('.select__multiple').text()).toBe('1,');
-        })
-    );
-  });
+          expect(wrapper.find('.select__multiple').text()).toBe('1,')
+        }),
+    )
+  })
   it('taggable', () => {
     const wrapper = mount(Dropdown, {
       props: {
@@ -79,10 +79,10 @@ describe('Dropdown', () => {
         ],
         taggable: true,
       },
-    });
+    })
 
-    expect(wrapper.find('.select__tags').exists()).toBe(true);
-    expect(wrapper.find('input').exists()).toBe(true);
+    expect(wrapper.find('.select__tags').exists()).toBe(true)
+    expect(wrapper.find('input').exists()).toBe(true)
     expect(
       wrapper
         .find('.select-options__option')
@@ -90,9 +90,9 @@ describe('Dropdown', () => {
         .then(() => {
           wrapper
             .find('.select__tags')
-            .element.children[0].classList.contains('chip');
-          wrapper.find('.select__tags').element.children[0].textContent === '1';
-        })
-    );
-  });
-});
+            .element.children[0].classList.contains('chip')
+          wrapper.find('.select__tags').element.children[0].textContent === '1'
+        }),
+    )
+  })
+})

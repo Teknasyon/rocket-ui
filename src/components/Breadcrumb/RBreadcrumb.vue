@@ -1,25 +1,27 @@
 <script setup lang="ts">
-import './breadcrumb.css';
-import { defineProps, withDefaults } from 'vue';
-import RIcon from '../Icon/RIcon.vue';
+import './breadcrumb.css'
+import { defineProps, withDefaults } from 'vue'
+import RIcon from '../Icon/RIcon.vue'
+
 export interface BreadcrumbItem {
-  title: string;
-  to: string;
-  icon?: string;
-  onlyIcon?: boolean;
+  title: string
+  to: string
+  icon?: string
+  onlyIcon?: boolean
 }
 
 const props = withDefaults(
   defineProps<{
-    items: BreadcrumbItem[];
-    seperator?: string;
+    items: BreadcrumbItem[]
+    seperator?: string
   }>(),
   {
     items: () => [] as BreadcrumbItem[],
     seperator: 'mdiChevronRight',
-  }
-);
+  },
+)
 </script>
+
 <template>
   <div class="r-breadcrumb">
     <div v-for="(item, i) in props.items" :key="i" class="r-breadcrumb__item">

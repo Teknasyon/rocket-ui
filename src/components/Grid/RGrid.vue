@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, type CSSProperties } from 'vue';
-import '../../index.css';
+import { type CSSProperties, computed } from 'vue'
+import '../../index.css'
+
 export interface IProps {
   /**
    * Shorthand prop for `gridTemplateColumns`
@@ -10,7 +11,7 @@ export interface IProps {
    * <Grid templateColumns="repeat(12, 1fr)" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
    */
-  templateColumns?: CSSProperties['gridTemplateColumns'];
+  templateColumns?: CSSProperties['gridTemplateColumns']
 
   /**
    * Shorthand prop for `gridGap`
@@ -20,7 +21,7 @@ export interface IProps {
    * <Grid gap="0" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
-  gap?: CSSProperties['gap'];
+  gap?: CSSProperties['gap']
 
   /**
    * Shorthand prop for `rowGap`
@@ -30,7 +31,7 @@ export interface IProps {
    * <Grid rowGap="1rem" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
    */
-  rowGap?: CSSProperties['rowGap'];
+  rowGap?: CSSProperties['rowGap']
 
   /**
    * Shorthand prop for `columnGap`
@@ -40,7 +41,7 @@ export interface IProps {
    * <Grid columnGap="1rem" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
-  columnGap?: CSSProperties['columnGap'];
+  columnGap?: CSSProperties['columnGap']
 
   /**
    * Shorthand prop for `gridAutoFlow`
@@ -50,7 +51,7 @@ export interface IProps {
    * <Grid autoFlow="row" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
    */
-  autoFlow?: CSSProperties['gridAutoFlow'];
+  autoFlow?: CSSProperties['gridAutoFlow']
 
   /**
    * Shorthand prop for `gridAutoRows`
@@ -60,7 +61,7 @@ export interface IProps {
    * <Grid autoRows="auto" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
    */
-  autoRows?: CSSProperties['gridAutoRows'];
+  autoRows?: CSSProperties['gridAutoRows']
 
   /**
    * Shorthand prop for `gridAutoColumns`
@@ -70,7 +71,7 @@ export interface IProps {
    * <Grid autoColumns="auto" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
    */
-  autoColumns?: CSSProperties['gridAutoColumns'];
+  autoColumns?: CSSProperties['gridAutoColumns']
 
   /**
    * Shorthand prop for `gridTemplateRows`
@@ -80,7 +81,7 @@ export interface IProps {
    * <Grid templateRows="repeat(12, 1fr)" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
    */
-  templateRows?: CSSProperties['gridTemplateRows'];
+  templateRows?: CSSProperties['gridTemplateRows']
 
   /**
    * Shorthand prop for `gridTemplateAreas`
@@ -90,7 +91,7 @@ export interface IProps {
    * <Grid templateAreas="repeat(12, 1fr)" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
    */
-  templateAreas?: CSSProperties['gridTemplateAreas'];
+  templateAreas?: CSSProperties['gridTemplateAreas']
 
   /**
    * Shorthand prop for `gridColumn`
@@ -99,7 +100,7 @@ export interface IProps {
    * <Grid column="1 / 3" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
    */
-  column?: CSSProperties['gridColumn'];
+  column?: CSSProperties['gridColumn']
 
   /**
    * Shorthand prop for `gridRow`
@@ -108,9 +109,9 @@ export interface IProps {
    * <Grid row="1 / 3" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
    */
-  row?: CSSProperties['gridRow'];
+  row?: CSSProperties['gridRow']
 }
-const props = defineProps<IProps>();
+const props = defineProps<IProps>()
 
 const gridStyle = computed(() => ({
   gridTemplateColumns: props.templateColumns,
@@ -124,13 +125,15 @@ const gridStyle = computed(() => ({
   gridTemplateAreas: props.templateAreas,
   gridColumn: props.column,
   gridRow: props.row,
-}));
+}))
 </script>
+
 <template>
   <div class="grid" :style="gridStyle">
     <slot />
   </div>
 </template>
+
 <style scoped>
 .grid {
   display: grid;

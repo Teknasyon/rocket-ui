@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import ItemGroup from './RItemGroup.vue';
-import Item from './RItem.vue';
+import ItemGroup from './RItemGroup.vue'
+import Item from './RItem.vue'
 
 const ItemGroupStory = {
   title: 'Selections/ItemGroup',
   component: ItemGroup,
   setup(args: typeof ItemGroup) {
-    return { args };
+    return { args }
   },
   tags: ['autodocs'],
   argTypes: {
@@ -51,17 +51,17 @@ const ItemGroupStory = {
       },
     },
   },
-} as Meta<typeof ItemGroup>;
+} as Meta<typeof ItemGroup>
 
-export default ItemGroupStory;
+export default ItemGroupStory
 
-type Story = StoryObj<typeof ItemGroupStory>;
+type Story = StoryObj<typeof ItemGroupStory>
 
 export const Overview: Story = {
   render: (args: any) => ({
     components: { ItemGroup, Item },
     setup() {
-      return { args, selected: [] };
+      return { args, selected: [] }
     },
     template: `
       <ItemGroup v-model="selected" selectedClass="bg-blue-500">
@@ -88,4 +88,4 @@ export const Overview: Story = {
       </ItemGroup>
     `,
   }),
-};
+}

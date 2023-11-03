@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { HTMLAttributes, LabelHTMLAttributes } from 'vue';
-import './label.css';
+import type { HTMLAttributes, LabelHTMLAttributes } from 'vue'
+import './label.css'
+
 export interface LabelProps {
   /**
    * id of the label
@@ -10,7 +11,7 @@ export interface LabelProps {
    * <Label id="label" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
    */
-  id: HTMLAttributes['id'];
+  id: HTMLAttributes['id']
 
   /**
    * for of the label
@@ -20,7 +21,7 @@ export interface LabelProps {
    * <Label for="label" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
    */
-  for: LabelHTMLAttributes['for'];
+  for: LabelHTMLAttributes['for']
 
   /**
    * text of the label
@@ -29,14 +30,15 @@ export interface LabelProps {
    * @example
    * <Label text="Label" />
    */
-  text: string | number;
+  text: string | number
 }
 const props = withDefaults(defineProps<LabelProps>(), {
   id: '',
   for: '',
   text: '',
-});
+})
 </script>
+
 <template>
   <label :id="props.id" class="r-label" :for="props.for">
     <slot>

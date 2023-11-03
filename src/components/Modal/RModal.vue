@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import './modal.css';
-import Icon from '../Icon/RIcon.vue';
+import { computed } from 'vue'
+import './modal.css'
+import Icon from '../Icon/RIcon.vue'
 
 export interface ModalProps {
   /**
@@ -104,26 +104,26 @@ const props = withDefaults(defineProps<ModalProps>(), {
   block: false,
   title: '',
   description: '',
-});
-const emits = defineEmits(['update:modelValue']);
+})
+const emits = defineEmits(['update:modelValue'])
 const classes = computed(() => {
   return {
     'r-dialog': true,
     'r-dialog--block': props.block,
     [`${props.class}`]: true,
-  };
-});
+  }
+})
 const styles = computed(() => {
   return {
     width: props.width,
     height: props.height,
-  };
-});
+  }
+})
 function handleOutside(event: Event) {
   if (!props.outsideClick)
-    return;
+    return
   if (event.target === event.currentTarget)
-    emits('update:modelValue', false);
+    emits('update:modelValue', false)
 }
 </script>
 

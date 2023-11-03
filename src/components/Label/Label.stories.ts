@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Label from './RLabel.vue';
+import Label from './RLabel.vue'
 
 const LabelStory = {
   title: 'Form/Label',
@@ -9,7 +9,7 @@ const LabelStory = {
     setup() {
       return {
         args,
-      };
+      }
     },
     template: `
     <div style="display: flex; flex-direction: column;">
@@ -23,11 +23,11 @@ const LabelStory = {
     for: '',
     text: '',
   },
-} as Meta<typeof Label>;
+} as Meta<typeof Label>
 
-export default LabelStory;
+export default LabelStory
 
-type Story = StoryObj<typeof LabelStory>;
+type Story = StoryObj<typeof LabelStory>
 
 export const Overview: Story = {
   args: {
@@ -35,4 +35,4 @@ export const Overview: Story = {
     for: 'name',
     text: 'Name:',
   },
-};
+}

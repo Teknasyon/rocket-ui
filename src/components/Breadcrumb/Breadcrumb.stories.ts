@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Breadcrumb from './RBreadcrumb.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Breadcrumb from './RBreadcrumb.vue'
 
 const BreadcrumbStory = {
   title: 'Components/Breadcrumb',
   component: Breadcrumb,
   setup: (args: typeof Breadcrumb) => {
-    return { args };
+    return { args }
   },
-  template: `<Breadcrumb v-bind="args" />`,
+  template: '<Breadcrumb v-bind="args" />',
   args: {
     items: [
       {
@@ -26,19 +26,19 @@ const BreadcrumbStory = {
     seperator: 'mdiSlashForward',
   },
   tags: ['autodocs'],
-} as Meta<typeof Breadcrumb>;
+} as Meta<typeof Breadcrumb>
 
-export default BreadcrumbStory;
+export default BreadcrumbStory
 
-type Story = StoryObj<typeof BreadcrumbStory>;
+type Story = StoryObj<typeof BreadcrumbStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}
 
 export const WithSeperator: Story = {
   args: {
     seperator: 'mdiChevronRight',
   },
-};
+}
 
 export const WithItemIcon: Story = {
   args: {
@@ -61,7 +61,7 @@ export const WithItemIcon: Story = {
     ],
     seperator: 'mdiSlashForward',
   },
-};
+}
 
 export const WithItemOnlyIcon: Story = {
   args: {
@@ -87,7 +87,7 @@ export const WithItemOnlyIcon: Story = {
     ],
     seperator: 'mdiChevronRight',
   },
-};
+}
 
 export const LastItemWithIcon: Story = {
   args: {
@@ -112,4 +112,4 @@ export const LastItemWithIcon: Story = {
     ],
     seperator: 'mdiSlashForward',
   },
-};
+}

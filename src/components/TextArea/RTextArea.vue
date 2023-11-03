@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import './textarea.css';
+import './textarea.css'
 import {
   type HTMLAttributes,
   type InputHTMLAttributes,
@@ -8,8 +8,8 @@ import {
   defineProps,
   reactive,
   watch,
-} from 'vue';
-import Label from '../Label/RLabel.vue';
+} from 'vue'
+import Label from '../Label/RLabel.vue'
 
 export interface IProps {
   /**
@@ -98,27 +98,27 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   label: '',
   hint: '',
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
 const state = reactive({
   value: '',
-});
+})
 
 function onInput(e: Event) {
-  emit('update:modelValue', (e.target as HTMLInputElement).value);
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
 }
 
 watch(
   () => props.modelValue,
   (value) => {
-    state.value = value;
+    state.value = value
   },
   {
     immediate: true,
-  }
-);
+  },
+)
 </script>
 
 <template>

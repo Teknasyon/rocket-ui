@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Progressbar from './RProgressbar.vue';
+import Progressbar from './RProgressbar.vue'
 
 const ProgressbarStory = {
   title: 'Components/Progressbar',
@@ -8,7 +8,7 @@ const ProgressbarStory = {
   setup: (args: typeof Progressbar) => ({
     args,
   }),
-  template: `<Progressbar v-bind="args" />`,
+  template: '<Progressbar v-bind="args" />',
   args: {
     value: 50,
     height: 8,
@@ -24,10 +24,10 @@ const ProgressbarStory = {
     },
   },
   tags: ['autodocs'],
-} as Meta<typeof Progressbar>;
+} as Meta<typeof Progressbar>
 
-export default ProgressbarStory;
+export default ProgressbarStory
 
-type Story = StoryObj<typeof ProgressbarStory>;
+type Story = StoryObj<typeof ProgressbarStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}

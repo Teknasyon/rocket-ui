@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Button from '../Button/RButton.vue';
-import Icon from '../Icon/RIcon.vue';
-import { vTooltip } from '../../directives';
-import Tooltip from './RTooltip.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Button from '../Button/RButton.vue'
+import Icon from '../Icon/RIcon.vue'
+import { vTooltip } from '../../directives'
+import Tooltip from './RTooltip.vue'
 
 const DefaultArgTypes = {
   placement: {
@@ -38,7 +38,7 @@ const DefaultArgTypes = {
     },
     defaultValue: 0,
   },
-};
+}
 
 const DefaultArgs = {
   placement: 'top',
@@ -55,7 +55,7 @@ const DefaultArgs = {
   padding: 0,
   outsideClick: false,
   resizable: false,
-};
+}
 
 const TooltipStory = {
   title: 'Components/Tooltip',
@@ -64,7 +64,7 @@ const TooltipStory = {
     setup: () => {
       return {
         args,
-      };
+      }
     },
     template: `
     <Tooltip
@@ -80,12 +80,12 @@ const TooltipStory = {
   args: { ...DefaultArgs },
   decorators: [
     () => ({ template: '<div style="padding: 6rem; display:grid; place-items: center; height:100%;"><story /></div>' }),
-  ]
-} as Meta<typeof Tooltip>;
+  ],
+} as Meta<typeof Tooltip>
 
-export default TooltipStory;
+export default TooltipStory
 
-type Story = StoryObj<typeof TooltipStory>;
+type Story = StoryObj<typeof TooltipStory>
 
 const WithContentSlotStory = {
   render: (args: any) => ({
@@ -93,7 +93,7 @@ const WithContentSlotStory = {
     setup() {
       return {
         args,
-      };
+      }
     },
     template: `
     <Tooltip
@@ -108,7 +108,7 @@ const WithContentSlotStory = {
     </Tooltip>
     `,
   }),
-};
+}
 
 const ToggleTemplate = {
   render: (args: any) => ({
@@ -116,7 +116,7 @@ const ToggleTemplate = {
     setup() {
       return {
         args,
-      };
+      }
     },
     template: `
     <Tooltip
@@ -128,7 +128,7 @@ const ToggleTemplate = {
     </Tooltip>
     `,
   }),
-};
+}
 
 const WithDirectivesStory = {
   render: (args: any) => ({
@@ -151,15 +151,15 @@ const WithDirectivesStory = {
     `,
   }),
   args: {},
-};
+}
 
 export const Overview: Story = {
   args: {},
-};
+}
 
 export const Default: Story = {
   args: {},
-};
+}
 
 export const WithClickTrigger: Story = {
   render: ToggleTemplate.render,
@@ -169,7 +169,7 @@ export const WithClickTrigger: Story = {
     text: 'Clicked!',
     outsideClick: true,
   },
-};
+}
 
 export const WithContentSlot: Story = {
   render: WithContentSlotStory.render,
@@ -178,7 +178,7 @@ export const WithContentSlot: Story = {
     text: '',
     triggers: 'hover',
   },
-};
+}
 
 export const WithDirectives: Story = {
   render: WithDirectivesStory.render,
@@ -188,4 +188,4 @@ export const WithDirectives: Story = {
       disable: true,
     },
   },
-};
+}

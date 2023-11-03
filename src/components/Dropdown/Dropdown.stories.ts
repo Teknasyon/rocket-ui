@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { action } from '@storybook/addon-actions'
 
-import Dropdown from './RDropdown.vue';
+import Dropdown from './RDropdown.vue'
 
 const DefaultArgs = {
   options: [
@@ -25,7 +25,7 @@ const DefaultArgs = {
   appendIcon: 'mdiChevronDown',
   modelValue: '',
   searchable: false,
-};
+}
 const DropdownStory = {
   title: 'Form/Dropdown',
   component: Dropdown,
@@ -40,17 +40,17 @@ const DropdownStory = {
   argTypes: {
     'onUpdate:modelValue': { action: 'update:modelValue' },
   },
-} as Meta<typeof Dropdown>;
+} as Meta<typeof Dropdown>
 
-export default DropdownStory;
+export default DropdownStory
 
-type Story = StoryObj<typeof DropdownStory>;
+type Story = StoryObj<typeof DropdownStory>
 
 export const Overview: Story = {
   args: {
     appendIcon: 'mdiChevronDown',
   },
-};
+}
 
 export const Multiple: Story = {
   args: {
@@ -58,7 +58,7 @@ export const Multiple: Story = {
     placeholder: 'Select multiple options',
     appendIcon: 'mdiChevronDown',
   },
-};
+}
 
 export const Taggable: Story = {
   args: {
@@ -66,7 +66,7 @@ export const Taggable: Story = {
     placeholder: 'Search or create a tag',
     appendIcon: 'mdiChevronDown',
   },
-};
+}
 
 export const Search: Story = {
   args: {
@@ -81,4 +81,4 @@ export const Search: Story = {
     appendIcon: 'mdiChevronDown',
     searchable: true,
   },
-};
+}

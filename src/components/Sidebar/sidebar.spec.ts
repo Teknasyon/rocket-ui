@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils'
 
-import Sidebar from './RSidebar.vue';
+import Sidebar from './RSidebar.vue'
 
 describe('Sidebar', () => {
   it('renders correctly', () => {
@@ -11,10 +11,10 @@ describe('Sidebar', () => {
         default: '<span class="default">test default</span>',
         actions: '<span class="actions">test actions</span>',
       },
-    });
-    expect(wrapper.find('.default').text()).toBe('test default');
-    expect(wrapper.find('.actions').text()).toBe('test actions');
-  });
+    })
+    expect(wrapper.find('.default').text()).toBe('test default')
+    expect(wrapper.find('.actions').text()).toBe('test actions')
+  })
 
   it('renders correctly when open', () => {
     const wrapper = mount(Sidebar, {
@@ -25,9 +25,9 @@ describe('Sidebar', () => {
         default: '<span class="default">test default</span>',
         actions: '<span class="actions">test actions</span>',
       },
-    });
-    expect(wrapper.find('.default').text()).toBe('test default');
-    expect(wrapper.find('.actions').text()).toBe('test actions');
-    expect(wrapper.find('.sidebar').classes()).toContain('sidebar--open');
-  });
-});
+    })
+    expect(wrapper.find('.default').text()).toBe('test default')
+    expect(wrapper.find('.actions').text()).toBe('test actions')
+    expect(wrapper.find('.sidebar').classes()).toContain('sidebar--open')
+  })
+})

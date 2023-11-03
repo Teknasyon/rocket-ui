@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Sidebar from './RSidebar.vue';
+import Sidebar from './RSidebar.vue'
 
 const SidebarStory = {
   title: 'Components/Sidebar',
@@ -22,16 +21,16 @@ const SidebarStory = {
       </div>
     </div>
   `,
-} as Meta<typeof Sidebar>;
+} as Meta<typeof Sidebar>
 
-export default SidebarStory;
+export default SidebarStory
 
-type Story = StoryObj<typeof SidebarStory>;
+type Story = StoryObj<typeof SidebarStory>
 
-export const Collapsed: Story = {};
+export const Collapsed: Story = {}
 
 export const Expanded: Story = {
   args: {
     modelValue: true,
   },
-};
+}

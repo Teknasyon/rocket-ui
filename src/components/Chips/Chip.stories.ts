@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-import Chip from './RChip.vue';
-import Icon from '../Icon/RIcon.vue';
+import Icon from '../Icon/RIcon.vue'
+import Chip from './RChip.vue'
 
 const DefaultArgTypes = {
-  variant: {
+  'variant': {
     type: 'select',
     options: ['primary', 'secondary', 'success', 'error', 'warning', 'info'],
   },
@@ -14,7 +14,7 @@ const DefaultArgTypes = {
   'onClick:close': {
     action: 'click:close',
   },
-};
+}
 
 const DefaultArgs = {
   label: 'Chip',
@@ -24,7 +24,7 @@ const DefaultArgs = {
   variant: 'primary',
   disabled: false,
   closable: true,
-};
+}
 
 const ChipStory = {
   title: 'Components/Chip',
@@ -32,80 +32,80 @@ const ChipStory = {
   setup: (args: typeof Chip) => {
     return {
       args,
-    };
+    }
   },
   template: `
     <Chip v-bind="args"/>
   `,
   args: DefaultArgs,
   argTypes: DefaultArgTypes,
-} as Meta<typeof Chip>;
+} as Meta<typeof Chip>
 
-export default ChipStory;
+export default ChipStory
 
-type Story = StoryObj<typeof ChipStory>;
+type Story = StoryObj<typeof ChipStory>
 
 export const Overview: Story = {
   args: {
     prependIcon: 'mdiFaceMan',
   },
-};
+}
 
-export const Primary: Story = {};
+export const Primary: Story = {}
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
   },
-};
+}
 
 export const Success: Story = {
   args: {
     variant: 'success',
   },
-};
+}
 
 export const Error: Story = {
   args: {
     variant: 'error',
   },
-};
+}
 
 export const Warning: Story = {
   args: {
     variant: 'warning',
   },
-};
+}
 
 export const Info: Story = {
   args: {
     variant: 'info',
   },
-};
+}
 
 export const Ghost: Story = {
   args: {
     ghost: true,
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     disabled: true,
   },
-};
+}
 
 export const Closable: Story = {
   args: {
     closable: true,
   },
-};
+}
 
 export const Slots = {
   render: (args: any) => ({
     components: { Chip, Icon },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
     <Chip v-bind="args">
@@ -119,4 +119,4 @@ export const Slots = {
     `,
   }),
   args: {},
-};
+}

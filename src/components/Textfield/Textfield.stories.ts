@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Textfield from './RTextfield.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Textfield from './RTextfield.vue'
 
 const DefaultArgTypes = {
   type: {
     type: 'select',
     options: ['text', 'password', 'email', 'number', 'tel', 'url'],
   },
-};
+}
 
 const TextfieldStory = {
   title: 'Form/Textfield',
@@ -14,7 +14,7 @@ const TextfieldStory = {
   setup(args: typeof Textfield) {
     return {
       args,
-    };
+    }
   },
   template: '<Textfield v-bind="args" />',
   argTypes: {
@@ -27,11 +27,11 @@ const TextfieldStory = {
   },
 
   args: {},
-} as Meta<typeof Textfield>;
+} as Meta<typeof Textfield>
 
-export default TextfieldStory;
+export default TextfieldStory
 
-type Story = StoryObj<typeof TextfieldStory>;
+type Story = StoryObj<typeof TextfieldStory>
 
 export const Overview: Story = {
   args: {
@@ -39,7 +39,7 @@ export const Overview: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Text: Story = {
   args: {
@@ -48,7 +48,7 @@ export const Text: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Mail: Story = {
   args: {
@@ -57,7 +57,7 @@ export const Mail: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Password: Story = {
   args: {
@@ -66,7 +66,7 @@ export const Password: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Url: Story = {
   args: {
@@ -75,7 +75,7 @@ export const Url: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Tel: Story = {
   args: {
@@ -84,7 +84,7 @@ export const Tel: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Number: Story = {
   args: {
@@ -93,7 +93,7 @@ export const Number: Story = {
     label: 'Textfield label',
     placeholder: 'Textfield placeholder',
   },
-};
+}
 
 export const Error: Story = {
   args: {
@@ -103,4 +103,4 @@ export const Error: Story = {
     placeholder: 'Textfield placeholder',
     errorMsg: 'This is an error message',
   },
-};
+}

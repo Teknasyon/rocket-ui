@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import RButton from './components/Button/RButton.vue';
-import RIcon from './components/Icon/RIcon.vue';
-import RSidebar from './components/Sidebar/RSidebar.vue';
-import RTooltip from './components/Tooltip/RTooltip.vue';
-import RModal from './components/Modal/RModal.vue';
-import RDropdown from './components/Dropdown/RDropdown.vue';
+import { ref } from 'vue'
+import RButton from './components/Button/RButton.vue'
+import RIcon from './components/Icon/RIcon.vue'
+import RTooltip from './components/Tooltip/RTooltip.vue'
+import RModal from './components/Modal/RModal.vue'
+import RDropdown from './components/Dropdown/RDropdown.vue'
 
-const show = ref(false);
+const show = ref(false)
 
-const showModal = ref(false);
+const showModal = ref(false)
 
 const options = [
   { label: 'test 1', value: 1 },
@@ -22,11 +21,11 @@ const options = [
   { label: 'test 8', value: 8 },
 ]
 
-const selected = ref({ label: 'test 1', value: 1 });
+const selected = ref({ label: 'test 1', value: 1 })
 </script>
 
 <template>
-  <div class="flex justify-between flex-col">
+  <div class="flex flex-col justify-between">
     <div class="mr-10">
       <RTooltip
         :auto-hide="false"
@@ -71,11 +70,12 @@ const selected = ref({ label: 'test 1', value: 1 });
       <RDropdown :options="options" searchable />
     </RModal>
 
-    <div class="flex w-full">
+    <div class="flex w-40">
       <RDropdown
         v-model="selected"
         :close-on-select="false"
         :options="options"
+        taggable
       />
       <RDropdown
         v-model="selected"

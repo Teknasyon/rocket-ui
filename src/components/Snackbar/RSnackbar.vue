@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-import Icon from '../Icon/RIcon.vue';
-import './snackbar.css';
+import { computed, watch } from 'vue'
+import Icon from '../Icon/RIcon.vue'
+import './snackbar.css'
 
 export interface IProps {
   /**
@@ -11,7 +11,7 @@ export interface IProps {
    * @example
    * <Snackbar show />
    */
-  modelValue: boolean;
+  modelValue: boolean
   /**
    * Text of the snackbar
    * @type string
@@ -19,7 +19,7 @@ export interface IProps {
    * @example
    * <Snackbar text="Snackbar" />
    */
-  text: string;
+  text: string
 
   /**
    * Show close of the snackbar
@@ -28,7 +28,7 @@ export interface IProps {
    * @example
    * <Snackbar closable />
    */
-  closable?: boolean;
+  closable?: boolean
 
   /**
    * Set the snackbar slide from left otherwise slide from right
@@ -37,7 +37,7 @@ export interface IProps {
    * @example
    * <Snackbar left />
    */
-  left?: boolean;
+  left?: boolean
 
   /**
    * Timeout of the snackbar. <br />
@@ -47,7 +47,7 @@ export interface IProps {
    * @example
    * <Snackbar timeout="1000" />
    */
-  timeout?: number;
+  timeout?: number
 
   /**
    * Variant of the snackbar
@@ -56,7 +56,7 @@ export interface IProps {
    * @example
    * <Snackbar variant="success" />
    */
-  variant?: 'success' | 'error' | 'warning' | 'info';
+  variant?: 'success' | 'error' | 'warning' | 'info'
 
   /**
    * Set the snackbar slide on top otherwise slide on bottom
@@ -65,7 +65,7 @@ export interface IProps {
    * @example
    * <Snackbar top />
    */
-  top?: boolean;
+  top?: boolean
 }
 const props = withDefaults(defineProps<IProps>(), {
   text: '',
@@ -73,23 +73,23 @@ const props = withDefaults(defineProps<IProps>(), {
   left: false,
   modelValue: false,
   timeout: 0,
-});
+})
 
-const emit = defineEmits(['action', 'update:modelValue']);
+const emit = defineEmits(['action', 'update:modelValue'])
 
 watch(
   () => props.modelValue,
   () => {
     if (props.timeout > 0 && props.modelValue) {
       setTimeout(() => {
-        emit('update:modelValue', false);
-      }, props.timeout);
+        emit('update:modelValue', false)
+      }, props.timeout)
     }
   },
   {
     immediate: true,
-  }
-);
+  },
+)
 
 const classes = computed(() => {
   return {
@@ -98,8 +98,8 @@ const classes = computed(() => {
     [props.left ? 'r-snackbar__left' : 'r-snackbar__right']: true,
     [props.modelValue ? 'r-snackbar--shown' : 'r-snackbar--hidden']: true,
     [props.top ? 'r-snackbar__top' : 'r-snackbar__bottom']: true,
-  };
-});
+  }
+})
 
 const variantIcons = computed(() => {
   return {
@@ -108,17 +108,20 @@ const variantIcons = computed(() => {
     warning: 'mdiAlert',
     info: 'mdiInformation',
   }[props.variant || 'info']
-});
+})
 </script>
+
 <template>
   <div :class="classes">
     <slot>
       <Icon v-if="props.variant" class="r-snackbar__icon" :name="variantIcons" />
     </slot>
 
-    <div class="r-snackbar__text">{{ props.text }}</div>
+    <div class="r-snackbar__text">
+      {{ props.text }}
+    </div>
 
-    <slot name="action"> </slot>
+    <slot name="action" />
 
     <div v-if="props.closable" class="r-snackbar__close">
       <slot name="close">

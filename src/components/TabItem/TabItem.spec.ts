@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils'
 
-import TabItem from './RTabItem.vue';
+import TabItem from './RTabItem.vue'
 
 describe('TabItem', () => {
   it('renders properly', () => {
@@ -13,17 +13,17 @@ describe('TabItem', () => {
         icon: 'face',
         active: true,
       },
-    });
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('button').exists()).toBe(true);
-    expect(wrapper.find('button').html().includes('Tab 1'));
+    })
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.find('button').exists()).toBe(true)
+    expect(wrapper.find('button').html().includes('Tab 1'))
     expect(
       wrapper
         .find('button')
         .trigger('click')
         .then(() => {
-          expect(wrapper.emitted('select')).toBeTruthy();
-        })
-    );
-  });
-});
+          expect(wrapper.emitted('select')).toBeTruthy()
+        }),
+    )
+  })
+})

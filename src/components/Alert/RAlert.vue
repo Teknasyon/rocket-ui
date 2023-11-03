@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import './alert.css';
-import { computed } from 'vue';
-import Icon from '../Icon/RIcon.vue';
+import './alert.css'
+import { computed } from 'vue'
+import Icon from '../Icon/RIcon.vue'
 
 export interface Props {
   /**
@@ -11,7 +11,7 @@ export interface Props {
    * @example
    * <Alert type="success" />
    */
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: 'success' | 'error' | 'warning' | 'info'
 
   /**
    * Title of the Alert
@@ -20,7 +20,7 @@ export interface Props {
    * @example
    * <Alert title="Title" />
    */
-  title: string;
+  title: string
 
   /**
    * Variant of the Alert
@@ -29,7 +29,7 @@ export interface Props {
    * @example
    * <Alert variant="ghost" />
    */
-  variant?: 'solid' | 'outline' | 'ghost';
+  variant?: 'solid' | 'outline' | 'ghost'
 
   /**
    * Description of the Alert
@@ -38,7 +38,7 @@ export interface Props {
    * @example
    * <Alert description="Description" />
    */
-  description?: string;
+  description?: string
 
   /**
    * Allow to close the Alert
@@ -47,7 +47,7 @@ export interface Props {
    * @example
    * <Alert closable />
    */
-  closable?: boolean;
+  closable?: boolean
 
   /**
    * Block appearance of the Alert
@@ -56,10 +56,9 @@ export interface Props {
    * @example
    * <Alert block />
    */
-  block?: boolean;
+  block?: boolean
 }
 
-const emit = defineEmits(['close']);
 const props = withDefaults(defineProps<Props>(), {
   type: 'info',
   title: '',
@@ -67,15 +66,16 @@ const props = withDefaults(defineProps<Props>(), {
   description: '',
   closable: true,
   block: false,
-});
+})
+const emit = defineEmits(['close'])
 const classes = computed(() => {
   return {
     ' r-alert': true,
     [`r-alert--${props.variant}`]: true,
     'r-alert--block': props.block,
     [`r-alert--${props.variant}--${props.type}`]: true,
-  };
-});
+  }
+})
 
 const icon = computed(() => {
   return {
@@ -83,13 +83,14 @@ const icon = computed(() => {
     error: 'mdiAlertCircle',
     warning: 'mdiAlert',
     info: 'mdiInformation',
-  }[props.type];
-});
+  }[props.type]
+})
 
-const close = () => {
-  emit('close');
-};
+function close() {
+  emit('close')
+}
 </script>
+
 <template>
   <div :class="classes">
     <div class="r-alert__icon">
@@ -99,7 +100,9 @@ const close = () => {
     </div>
     <div class="r-alert__content">
       <slot name="content">
-        <p class="r-alert__content__title">{{ props.title }}</p>
+        <p class="r-alert__content__title">
+          {{ props.title }}
+        </p>
         <p v-if="props.description" class="r-alert__content__description">
           {{ props.description }}
         </p>

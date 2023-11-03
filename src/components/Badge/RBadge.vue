@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import './badge.css';
-import { computed } from 'vue';
+import './badge.css'
+import { computed } from 'vue'
 
 export interface BadgeProps {
   /**
@@ -68,8 +68,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   outside: false,
   animation: false,
   class: '',
-});
-defineEmits(['click']);
+})
+defineEmits(['click'])
 const classes = computed(() => {
   return {
     'r-badge': true,
@@ -80,8 +80,8 @@ const classes = computed(() => {
     'r-badge--hover': props.hover,
     [`r-badge--${props.variant}`]: props.variant,
     [props.class]: props.class,
-  };
-});
+  }
+})
 </script>
 
 <template>

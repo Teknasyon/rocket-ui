@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, type CSSProperties } from 'vue';
-import '../../index.css';
+import { type CSSProperties, computed } from 'vue'
+import '../../index.css'
 
 export interface IProps {
   /**
@@ -10,7 +10,7 @@ export interface IProps {
    * <Flex align="center" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
    */
-  align?: CSSProperties['alignItems'];
+  align?: CSSProperties['alignItems']
 
   /**
    * Shorthand for `justifyContent` style prop
@@ -19,7 +19,7 @@ export interface IProps {
    * <Flex justify="center" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
    */
-  justify?: CSSProperties['justifyContent'];
+  justify?: CSSProperties['justifyContent']
 
   /**
    * Shorthand for `flexWrap` style prop
@@ -28,7 +28,7 @@ export interface IProps {
    * <Flex wrap="wrap" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
    */
-  wrap?: CSSProperties['flexWrap'];
+  wrap?: CSSProperties['flexWrap']
 
   /**
    * Shorthand for `flexDirection` style prop
@@ -37,7 +37,7 @@ export interface IProps {
    * <Flex direction="column" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
-  direction?: CSSProperties['flexDirection'];
+  direction?: CSSProperties['flexDirection']
 
   /**
    * Shorthand for `flexBasis` style prop
@@ -46,7 +46,7 @@ export interface IProps {
    * <Flex basis="50%" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
    */
-  basis?: CSSProperties['flexBasis'];
+  basis?: CSSProperties['flexBasis']
 
   /**
    * Shorthand for `flexGrow` style prop
@@ -55,7 +55,7 @@ export interface IProps {
    * <Flex grow="1" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
    */
-  grow?: CSSProperties['flexGrow'];
+  grow?: CSSProperties['flexGrow']
 
   /**
    * Shorthand for `flexShrink` style prop
@@ -64,10 +64,10 @@ export interface IProps {
    * <Flex shrink="1" />
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
    */
-  shrink?: CSSProperties['flexShrink'];
+  shrink?: CSSProperties['flexShrink']
 }
 
-const props = defineProps<IProps>();
+const props = defineProps<IProps>()
 const styles = computed(() => ({
   alignItems: props.align,
   justifyContent: props.justify,
@@ -76,7 +76,7 @@ const styles = computed(() => ({
   flexBasis: props.basis,
   flexGrow: props.grow,
   flexShrink: props.shrink,
-}));
+}))
 </script>
 
 <template>
@@ -84,6 +84,7 @@ const styles = computed(() => ({
     <slot />
   </div>
 </template>
+
 <style scoped>
 .flex {
   display: flex;

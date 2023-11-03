@@ -6,8 +6,8 @@ import {
   computed,
   reactive,
   watch,
-} from 'vue';
-import './switch.css';
+} from 'vue'
+import './switch.css'
 
 export interface Props {
   /**
@@ -103,39 +103,39 @@ const props = withDefaults(defineProps<Props>(), {
   label: '',
   hint: '',
   errorMsg: '',
-});
-const emit = defineEmits(['update:modelValue']);
+})
+const emit = defineEmits(['update:modelValue'])
 const state = reactive<{
   checked: InputHTMLAttributes['checked']
 }>({
   checked: false,
-});
+})
 const classes = computed(() => {
   return {
     'r-switch': true,
     'r-switch--disabled': props.disabled,
     [`r-switch--${props.size}`]: props.size,
     'r-switch--error': props.errorMsg,
-  };
-});
+  }
+})
 function onChange(e: unknown) {
   if (props.disabled)
-    return;
+    return
   // @ts-expect-error: Unreachable code error
-  state.checked = e.target.checked;
-  emit('update:modelValue', state.checked);
+  state.checked = e.target.checked
+  emit('update:modelValue', state.checked)
 }
 watch(
   () => props.modelValue,
   (value) => {
-    state.checked = value;
+    state.checked = value
   },
   {
     // need immediate to set the state on first render for storybook
     // TODO: find a better way to do this
     immediate: true,
-  }
-);
+  },
+)
 </script>
 
 <template>

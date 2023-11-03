@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import './avatar.css';
-// @ts-ignore
-import blank from '../../assets/blank-avatar.svg';
+import { computed, defineProps } from 'vue'
+import './avatar.css'
+import blank from '../../assets/blank-avatar.svg'
 
 export interface IProps {
   /**
@@ -12,7 +11,7 @@ export interface IProps {
    * @example
    * <Avatar type="text" />
    */
-  type?: 'image' | 'text';
+  type?: 'image' | 'text'
 
   /**
    * Source of the Avatar
@@ -21,7 +20,7 @@ export interface IProps {
    * @example
    * <Avatar src="https://source.unsplash.com/random" />
    */
-  src?: string;
+  src?: string
 
   /**
    * Alt of the Avatar
@@ -30,7 +29,7 @@ export interface IProps {
    * @example
    * <Avatar alt="Avatar" />
    */
-  alt?: string;
+  alt?: string
 
   /**
    * Size of the Avatar
@@ -39,7 +38,7 @@ export interface IProps {
    * @example
    * <Avatar size="xs" />
    */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
   /**
    * Show online status
@@ -48,7 +47,7 @@ export interface IProps {
    * @example
    * <Avatar online />
    */
-  online?: boolean;
+  online?: boolean
 
   /**
    * Text to show when type is text
@@ -57,7 +56,7 @@ export interface IProps {
    * @example
    * <Avatar type="text" text="John Doe" />
    */
-  text?: string;
+  text?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   type: 'image',
@@ -66,42 +65,51 @@ const props = withDefaults(defineProps<IProps>(), {
   alt: 'Avatar',
   online: false,
   text: '',
-});
+})
 
 const classes = computed(() => ({
   'r-avatar': true,
   [`r-avatar--${props.size}`]: true,
-}));
-const isAnon = computed(() => props.type === 'image' && !props.src);
+}))
+const isAnon = computed(() => props.type === 'image' && !props.src)
 const imgSrc = computed(() => {
-  if (!isAnon.value) {
-    return props.src;
-  }
-  return blank;
-});
-const shortTextWithFirstCharacters = (text: string) => {
-  const words = text.split(' ');
-  if (words.length === 1) {
-    return words[0].substring(0, 2);
-  }
-  return `${words[0].charAt(0)}${words[1].charAt(0)}`;
-};
+  if (!isAnon.value)
+    return props.src
+
+  return blank
+})
+function shortTextWithFirstCharacters(text: string) {
+  const words = text.split(' ')
+  if (words.length === 1)
+    return words[0].substring(0, 2)
+
+  return `${words[0].charAt(0)}${words[1].charAt(0)}`
+}
 </script>
+
 <template>
   <div class="r-avatar__wrapper">
     <div :class="classes">
-      <p v-if="props.type === 'text'" :class="{ 'r-avatar__text': true, [`r-avatar__text--${props.size}`]: true }">
+      <p v-if="props.type === 'text'" class="r-avatar__text" :class="{ [`r-avatar__text--${props.size}`]: true }">
         {{ shortTextWithFirstCharacters(props.text) }}
       </p>
-      <img v-else :alt="props.alt" :class="{
-        'r-avatar__image': true,
-        [`r-avatar__image--${props.size}`]: true,
-        'r-avatar__image--anonymous': isAnon,
-      }" :src="imgSrc" />
+      <img
+        v-else
+        :alt="props.alt"
+        class="r-avatar__image"
+        :class="{
+          [`r-avatar__image--${props.size}`]: true,
+          'r-avatar__image--anonymous': isAnon,
+        }"
+        :src="imgSrc"
+      >
     </div>
-    <span v-if="props.online" :class="{
-      'r-avatar__online': true,
-      [`r-avatar__online--${props.size}`]: true,
-    }" />
+    <span
+      v-if="props.online"
+      class="r-avatar__online"
+      :class="{
+        [`r-avatar__online--${props.size}`]: true,
+      }"
+    />
   </div>
 </template>

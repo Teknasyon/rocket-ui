@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import './pagination.css';
+import { computed } from 'vue'
+import './pagination.css'
 
 export interface PaginationProps {
-  page: number;
-  perPage: number;
-  totalItems: number;
-  pageText?: string;
-  ofText?: string;
-  slash?: boolean;
+  page: number
+  perPage: number
+  totalItems: number
+  pageText?: string
+  ofText?: string
+  slash?: boolean
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -18,16 +18,17 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   pageText: 'Page',
   ofText: 'of',
   slash: false,
-});
+})
 
-const emits = defineEmits(['update:page']);
+const emits = defineEmits(['update:page'])
 
-const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage));
+const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage))
 
-const changePage = (page: number) => {
-  if (page < 1 || page > totalPages.value) return;
-  emits('update:page', page);
-};
+function changePage(page: number) {
+  if (page < 1 || page > totalPages.value)
+    return
+  emits('update:page', page)
+}
 </script>
 
 <template>
@@ -73,7 +74,7 @@ const changePage = (page: number) => {
         type="number"
         :value="props.page"
         @blur="changePage(+$event?.target?.value)"
-      />
+      >
       <button
         class="r-pagination__paginator__next"
         :disabled="props.page === totalPages"
@@ -97,7 +98,9 @@ const changePage = (page: number) => {
           </svg>
         </slot>
       </button>
-      <div class="r-pagination__paginator__total">/ {{ totalPages }}</div>
+      <div class="r-pagination__paginator__total">
+        / {{ totalPages }}
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import Snackbar from './RSnackbar.vue';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import Snackbar from './RSnackbar.vue'
 
 const DefaultArgs = {
   text: 'Single-line snackbar',
@@ -8,7 +8,7 @@ const DefaultArgs = {
   modelValue: true,
   timeout: 0,
   variant: 'info',
-};
+}
 
 const DefaultArgTypes = {
   variant: {
@@ -16,7 +16,7 @@ const DefaultArgTypes = {
     options: ['info', 'success', 'warning', 'error', ''],
   },
   update: { action: 'update:modelValue' },
-};
+}
 
 const SnackbarStory = {
   title: 'Components/Snackbar',
@@ -29,51 +29,51 @@ const SnackbarStory = {
   argTypes: {
     ...DefaultArgTypes,
   },
-} as Meta<typeof Snackbar>;
+} as Meta<typeof Snackbar>
 
-export default SnackbarStory;
+export default SnackbarStory
 
-type Story = StoryObj<typeof SnackbarStory>;
+type Story = StoryObj<typeof SnackbarStory>
 
-export const Overview: Story = {};
+export const Overview: Story = {}
 
-export const OnlyText: Story = {};
+export const OnlyText: Story = {}
 
 export const WithAction: Story = {
   args: {
     text: 'Single-line snackbar with action',
   },
-};
+}
 
 export const WithCloseButton: Story = {
   args: {
     closable: true,
     text: 'Single-line snackbar with close',
   },
-};
+}
 
 export const LongText: Story = {
   args: {
     text: 'This is a very long snackbar message that will not fit on one line. It will wrap to multiple lines and the snackbar will grow in height.',
   },
-};
+}
 
 export const LongTextWithAction: Story = {
   args: {
     text: 'This is a very long snackbar message that will not fit on one line. It will wrap to multiple lines and the snackbar will grow in height.',
   },
-};
+}
 
 export const LongTextWithCloseButton: Story = {
   args: {
     closable: true,
     text: 'This is a very long snackbar message that will not fit on one line. It will wrap to multiple lines and the snackbar will grow in height.',
   },
-};
+}
 
 export const WithTimeout: Story = {
   args: {
     timeout: 5000,
     text: 'Snackbar with timeout',
   },
-};
+}

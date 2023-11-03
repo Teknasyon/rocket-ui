@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue';
+import { computed, provide, ref } from 'vue'
 
 export interface ItemGroupProps {
   /**
@@ -79,44 +79,44 @@ const props = withDefaults(defineProps<ItemGroupProps>(), {
   as: 'div',
   selectedClass: '',
   modelValue: () => [] as number[],
-});
+})
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue'])
 
-const RItemGroupSymbol = 'rocket-ui:r-item-group';
+const RItemGroupSymbol = 'rocket-ui:r-item-group'
 
-const tag = ref<string>(props.as ?? 'div');
+const tag = ref<string>(props.as ?? 'div')
 
-const selectedItems = ref<number[] | string[]>(props.modelValue ?? []);
+const selectedItems = ref<number[] | string[]>(props.modelValue ?? [])
 
-const selectedClass = computed(() => props.selectedClass);
-provide(`${RItemGroupSymbol}:selectedClass`, selectedClass.value);
+const selectedClass = computed(() => props.selectedClass)
+provide(`${RItemGroupSymbol}:selectedClass`, selectedClass.value)
 
 function isSelected(id: never) {
-  return selectedItems.value.includes(id);
+  return selectedItems.value.includes(id)
 }
-provide(`${RItemGroupSymbol}:isSelected`, isSelected);
+provide(`${RItemGroupSymbol}:isSelected`, isSelected)
 
 function select(id: never, value: boolean) {
   if (props.disabled)
-    return;
+    return
   if (props.mandatory && selectedItems.value.length === 1 && value)
-    return;
+    return
   if (props.max && selectedItems.value.length === props.max && value)
-    return;
+    return
   if (props.multiple) {
     if (value)
-      selectedItems.value.push(id);
+      selectedItems.value.push(id)
     else
-      selectedItems.value = selectedItems.value.filter(item => item !== id) as never[];
+      selectedItems.value = selectedItems.value.filter(item => item !== id) as never[]
   }
   else {
-    selectedItems.value = value ? [id] : [];
+    selectedItems.value = value ? [id] : []
   }
 
-  emits('update:modelValue', selectedItems.value);
+  emits('update:modelValue', selectedItems.value)
 }
-provide(`${RItemGroupSymbol}:select`, select);
+provide(`${RItemGroupSymbol}:select`, select)
 </script>
 
 <template>

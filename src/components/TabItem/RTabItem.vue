@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import Icon from '../Icon/RIcon.vue';
-import { computed } from 'vue';
-import './tab-item.css';
-import { TabItemVariants, type TabItemVariant } from './common';
+import { computed } from 'vue'
+import Icon from '../Icon/RIcon.vue'
+import './tab-item.css'
+import { type TabItemVariant, TabItemVariants } from './common'
+
 export interface IProps {
   /**
    * Id of the tab item
@@ -11,7 +12,7 @@ export interface IProps {
    * @example
    * <TabItem id="1" />
    */
-  id: string | number;
+  id: string | number
 
   /**
    * Variant of the tab item
@@ -20,7 +21,7 @@ export interface IProps {
    * @example
    * <TabItem variant="default" />
    */
-  variant?: TabItemVariant;
+  variant?: TabItemVariant
 
   /**
    * Label of the tab item
@@ -29,7 +30,7 @@ export interface IProps {
    * @example
    * <TabItem label="Label" />
    */
-  label?: string;
+  label?: string
 
   /**
    * prependIcon of the tab item
@@ -38,7 +39,7 @@ export interface IProps {
    * @example
    * <TabItem prependIcon="prependIcon" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * appendIcon of the tab item
@@ -47,7 +48,7 @@ export interface IProps {
    * @example
    * <TabItem appendIcon="appendIcon" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Disabled state of the tab item
@@ -56,7 +57,7 @@ export interface IProps {
    * @example
    * <TabItem disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Model value of the tab item
@@ -65,7 +66,7 @@ export interface IProps {
    * @example
    * <TabItem v-model="model" />
    */
-  modelValue?: string | number;
+  modelValue?: string | number
 
   /**
    * Tile state of the tab item
@@ -74,7 +75,7 @@ export interface IProps {
    * @example
    * <TabItem tile />
    */
-  tile?: boolean;
+  tile?: boolean
 
   /**
    * Block state of the tab item
@@ -83,7 +84,7 @@ export interface IProps {
    * @example
    * <TabItem block />
    */
-  block?: boolean;
+  block?: boolean
 
   /**
    * Color of the tab item
@@ -92,7 +93,7 @@ export interface IProps {
    * @example
    * <TabItem color="" />
    */
-  color?: string;
+  color?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   label: '',
@@ -104,9 +105,9 @@ const props = withDefaults(defineProps<IProps>(), {
   tile: false,
   block: false,
   color: '',
-});
+})
 
-const emit = defineEmits(['update:modelValue', 'click:icon']);
+const emit = defineEmits(['update:modelValue', 'click:icon'])
 
 const classes = computed(() => {
   return {
@@ -114,14 +115,14 @@ const classes = computed(() => {
     [`r-tab-item--${props.variant}`]: true,
     'r-tab-item--tile': props.tile,
     'r-tab-item--block': props.block,
-  };
-});
+  }
+})
 
 const style = computed(() => {
   return {
     color: props.color,
-  };
-});
+  }
+})
 
 /**
  * @description Fires when the tab is clicked
@@ -129,7 +130,7 @@ const style = computed(() => {
  * @returns {void}
  */
 function handleTab(id: number | string): void {
-  emit('update:modelValue', id);
+  emit('update:modelValue', id)
 }
 
 /**
@@ -137,15 +138,26 @@ function handleTab(id: number | string): void {
  * @returns {void}
  */
 function handleIconClick(): void {
-  emit('click:icon');
+  emit('click:icon')
 }
 </script>
+
 <template>
-  <button :aria-disabled="props.disabled" :aria-selected="props.modelValue === props.id" :class="classes"
-    :disabled="props.disabled" :style="style" @click.stop="handleTab(props.id)">
+  <button
+    :aria-disabled="props.disabled"
+    :aria-selected="props.modelValue === props.id"
+    :class="classes"
+    :disabled="props.disabled"
+    :style="style"
+    @click.stop="handleTab(props.id)"
+  >
     <slot name="prepend">
-      <Icon v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon" class="r-tab-item__prepend-icon"
-        :name="props.prependIcon" :size="16" />
+      <Icon
+        v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
+        class="r-tab-item__prepend-icon"
+        :name="props.prependIcon"
+        :size="16"
+      />
     </slot>
 
     <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
@@ -153,8 +165,13 @@ function handleIconClick(): void {
     </span>
 
     <slot name="append">
-      <Icon v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon" class="r-tab-item__append-icon"
-        :name="props.appendIcon" :size="16" @click.stop="handleIconClick" />
+      <Icon
+        v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon"
+        class="r-tab-item__append-icon"
+        :name="props.appendIcon"
+        :size="16"
+        @click.stop="handleIconClick"
+      />
     </slot>
   </button>
 </template>

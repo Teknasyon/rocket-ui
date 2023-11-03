@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
-import Accordion from './RAccordion.vue';
+import { describe, expect, it } from 'vitest'
+import { mount } from '@vue/test-utils'
+import Accordion from './RAccordion.vue'
 
 describe('Accordion', () => {
   it('should render correctly', () => {
@@ -13,22 +13,22 @@ describe('Accordion', () => {
           },
         ],
       },
-    });
+    })
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('.accordion__title').text()).toBe('Accordion Title');
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.find('.accordion__title').text()).toBe('Accordion Title')
     expect(wrapper.find('.accordion__content').text()).toBe(
-      'Accordion Description'
-    );
+      'Accordion Description',
+    )
     expect(
       wrapper
         .find('.accordion__header')
         .trigger('click')
         .then(() => {
-          expect(wrapper.emitted('update:modelValue')).toBeTruthy();
-        })
-    );
-  });
+          expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+        }),
+    )
+  })
 
   it('should render correctly with multiple accordions', () => {
     const wrapper = mount(Accordion, {
@@ -44,24 +44,24 @@ describe('Accordion', () => {
           },
         ],
       },
-    });
+    })
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.findAll('.accordion__title').length).toBe(2);
-    expect(wrapper.findAll('.accordion__content').length).toBe(2);
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.findAll('.accordion__title').length).toBe(2)
+    expect(wrapper.findAll('.accordion__content').length).toBe(2)
     expect(wrapper.findAll('.accordion__title')[0].text()).toBe(
-      'Accordion Title 1'
-    );
+      'Accordion Title 1',
+    )
     expect(wrapper.findAll('.accordion__content')[0].text()).toBe(
-      'Accordion Description 1'
-    );
+      'Accordion Description 1',
+    )
     expect(wrapper.findAll('.accordion__title')[1].text()).toBe(
-      'Accordion Title 2'
-    );
+      'Accordion Title 2',
+    )
     expect(wrapper.findAll('.accordion__content')[1].text()).toBe(
-      'Accordion Description 2'
-    );
-  });
+      'Accordion Description 2',
+    )
+  })
 
   it('should render correctly with multiple accordions and one expanded', () => {
     const wrapper = mount(Accordion, {
@@ -78,19 +78,19 @@ describe('Accordion', () => {
           },
         ],
       },
-    });
+    })
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.findAll('.accordion__title').length).toBe(2);
-    expect(wrapper.findAll('.accordion__content').length).toBe(2);
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.findAll('.accordion__title').length).toBe(2)
+    expect(wrapper.findAll('.accordion__content').length).toBe(2)
 
     expect(wrapper.findAll('.accordion')[0].classes()).toContain(
-      'accordion--expanded'
-    );
+      'accordion--expanded',
+    )
     expect(wrapper.findAll('.accordion')[1].classes()).not.toContain(
-      'accordion--expanded'
-    );
-  });
+      'accordion--expanded',
+    )
+  })
 
   it('should render correctly with multiple accordions and one expanded and one disabled', () => {
     const wrapper = mount(Accordion, {
@@ -108,16 +108,16 @@ describe('Accordion', () => {
           },
         ],
       },
-    });
+    })
 
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.findAll('.accordion__title').length).toBe(2);
-    expect(wrapper.findAll('.accordion__content').length).toBe(2);
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.findAll('.accordion__title').length).toBe(2)
+    expect(wrapper.findAll('.accordion__content').length).toBe(2)
     expect(wrapper.findAll('.accordion')[0].classes()).toContain(
-      'accordion--expanded'
-    );
+      'accordion--expanded',
+    )
     expect(wrapper.findAll('.accordion')[1].classes()).toContain(
-      'accordion--disabled'
-    );
-  });
-});
+      'accordion--disabled',
+    )
+  })
+})

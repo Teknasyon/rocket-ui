@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { SVGAttributes } from 'vue';
-// @ts-ignore
-import icons from '@/assets/icons/mdi.js';
+import type { SVGAttributes } from 'vue'
+
+// @ts-expect-error: No types for icons
+import icons from '@/assets/icons/mdi.js'
 
 export interface IProps {
   /**
@@ -11,7 +12,7 @@ export interface IProps {
    * @example
    * <Icon name="icon" />
    */
-  name: SVGAttributes['name'];
+  name: SVGAttributes['name']
 
   /**
    * Size of the icon
@@ -20,7 +21,7 @@ export interface IProps {
    * @example
    * <Icon size="24" />
    */
-  size?: SVGAttributes['width'] | SVGAttributes['height'];
+  size?: SVGAttributes['width'] | SVGAttributes['height']
 
   /**
    * Viewbox of the icon
@@ -29,14 +30,15 @@ export interface IProps {
    * @example
    * <Icon viewBox="0 0 24 24" />
    */
-  viewBox?: SVGAttributes['viewBox'];
+  viewBox?: SVGAttributes['viewBox']
 }
 const props = withDefaults(defineProps<IProps>(), {
   name: '',
   size: 24,
   viewBox: '0 0 24 24',
-});
+})
 </script>
+
 <template>
   <svg
     class="r-icon"
@@ -47,6 +49,7 @@ const props = withDefaults(defineProps<IProps>(), {
     <path :d="icons[props.name]" />
   </svg>
 </template>
+
 <style>
 .r-icon {
   path {

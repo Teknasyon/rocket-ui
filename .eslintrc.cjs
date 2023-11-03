@@ -34,6 +34,15 @@ module.exports = {
       ],
       alphabetical: true,
     }],
+    'vue/custom-event-name-casing': ['error', {
+      ignores: ['foo-bar', '/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'],
+    }],
+    '@typescript-eslint/ban-ts-comment': ['error', {
+      'ts-expect-error': 'allow-with-description',
+      'ts-ignore': true,
+      'ts-nocheck': true,
+      'ts-check': false,
+    }],
   },
   parserOptions: {
     ecmaVersion: 'latest',

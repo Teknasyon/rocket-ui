@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import './tabs.css';
-import TabItem from '../TabItem/RTabItem.vue';
-import type { Tab } from './types';
+import { computed, ref, watch } from 'vue'
+import './tabs.css'
+import TabItem from '../TabItem/RTabItem.vue'
+import type { Tab } from './types'
 
 export interface IProps {
   /**
@@ -57,9 +57,9 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   tile: false,
   scrollable: false,
-});
-const emits = defineEmits(['update:modelValue', 'click:icon']);
-const activeTab = ref(props.modelValue || props.tabs[0].id);
+})
+const emits = defineEmits(['update:modelValue', 'click:icon'])
+const activeTab = ref(props.modelValue || props.tabs[0].id)
 
 const tabsClasses = computed(() => {
   return {
@@ -67,18 +67,18 @@ const tabsClasses = computed(() => {
     'r-tabs--block': props.block,
     'r-tabs--tile': props.tile,
     'r-tabs--scrollable': props.scrollable,
-  };
-});
+  }
+})
 
 watch(
   () => activeTab.value,
   () => {
-    emits('update:modelValue', activeTab.value);
-  }
-);
+    emits('update:modelValue', activeTab.value)
+  },
+)
 
 function handleIconClick() {
-  emits('click:icon');
+  emits('click:icon')
 }
 </script>
 

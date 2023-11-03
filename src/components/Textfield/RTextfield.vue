@@ -7,10 +7,10 @@ import {
   reactive,
   ref,
   watch,
-} from 'vue';
-import './textfield.css';
-import Icon from '../Icon/RIcon.vue';
-import Label from '../Label/RLabel.vue';
+} from 'vue'
+import './textfield.css'
+import Icon from '../Icon/RIcon.vue'
+import Label from '../Label/RLabel.vue'
 
 // import { vFocus } from '../../directives';
 export interface Props {
@@ -171,7 +171,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   clearable: false,
   hideDetails: false,
-});
+})
 const emit = defineEmits([
   'update:modelValue',
   'focus',
@@ -179,12 +179,12 @@ const emit = defineEmits([
   'input',
   'click:icon',
   'click:clear',
-]);
-const inputRef = ref<HTMLInputElement>();
+])
+const inputRef = ref<HTMLInputElement>()
 const state = reactive({
   value: '',
-});
-const typeOfInputRef = ref(props.type);
+})
+const typeOfInputRef = ref(props.type)
 const prependIconsOfType = {
   password: 'mdiLock',
   email: 'mdiEmailOutline',
@@ -192,20 +192,20 @@ const prependIconsOfType = {
   url: 'mdiLink',
   number: 'mdiNumeric',
   text: '',
-};
-const isFocused = ref(false);
-const isFilled = computed(() => !!state.value);
+}
+const isFocused = ref(false)
+const isFilled = computed(() => !!state.value)
 const hasValue = computed(() => {
-  return state.value.length > 0;
-});
+  return state.value.length > 0
+})
 const hasErrorMsg = computed(() => {
-  return props.errorMsg?.length;
-});
+  return props.errorMsg?.length
+})
 const hasClear = computed(() => {
-  return props.clearable && hasValue.value;
-});
+  return props.clearable && hasValue.value
+})
 const classes = computed(() => {
-  const { disabled, loading, } = props;
+  const { disabled, loading } = props
   return {
     'r-textfield': true,
     'r-textfield--error': hasErrorMsg.value,
@@ -214,53 +214,53 @@ const classes = computed(() => {
     'r-textfield--clearable': hasClear.value,
     'r-textfield--focus': isFocused.value,
     'r-textfield--filled': isFilled.value,
-  };
-});
+  }
+})
 const prependIconClasses = computed(() => {
   return {
     'r-textfield__prepend-icon': true,
     'r-textfield__prepend-icon--loading': props.loading,
     'r-textfield__prepend-icon--error': hasErrorMsg.value && isFilled.value,
-  };
-});
+  }
+})
 const appendIconClasses = computed(() => {
   return {
     'r-textfield__append-icon': true,
     'r-textfield__append-icon--clear': hasClear.value,
     'r-textfield__append-icon--error': hasErrorMsg.value,
-  };
-});
+  }
+})
 
 const prependIconName = computed(() => {
-  const { prependIcon, type } = props;
+  const { prependIcon, type } = props
   if (prependIcon === 'none')
-    return '';
+    return ''
   if (prependIcon)
-    return prependIcon;
-  return prependIconsOfType[type];
-});
+    return prependIcon
+  return prependIconsOfType[type]
+})
 const appendIconName = computed(() => {
-  const { appendIcon, type } = props;
+  const { appendIcon, type } = props
   if (appendIcon === 'none')
-    return '';
+    return ''
   if (hasErrorMsg.value)
-    return 'mdiAlertCircleOutline';
+    return 'mdiAlertCircleOutline'
   if (hasClear.value && ['text', 'email'].includes(type))
-    return 'mdiClose';
+    return 'mdiClose'
   if (type === 'password' && typeOfInputRef.value === 'password')
-    return 'mdiEyeOutline';
+    return 'mdiEyeOutline'
   if (type === 'password' && typeOfInputRef.value === 'text')
-    return 'mdiEyeOffOutline';
-  return appendIcon;
-});
+    return 'mdiEyeOffOutline'
+  return appendIcon
+})
 /**
  * @description - focus event handler
  * @param {FocusEvent} e - FocusEvent object
  * @returns {void}
  */
 function onFocus(e: FocusEvent) {
-  isFocused.value = true;
-  emit('focus', e);
+  isFocused.value = true
+  emit('focus', e)
 }
 /**
  * @description - blur event handler
@@ -268,8 +268,8 @@ function onFocus(e: FocusEvent) {
  * @returns {void}
  */
 function onBlur(e: FocusEvent) {
-  isFocused.value = false;
-  emit('blur', e);
+  isFocused.value = false
+  emit('blur', e)
 }
 /**
  * @description - Emit input event with value of input
@@ -277,8 +277,8 @@ function onBlur(e: FocusEvent) {
  * @returns {void}
  */
 function onInput(e: InputEvent): void {
-  state.value = (e.target as HTMLInputElement).value;
-  emit('input', e);
+  state.value = (e.target as HTMLInputElement).value
+  emit('input', e)
 }
 /**
  * @description - Emit click event with value of append icon
@@ -286,18 +286,18 @@ function onInput(e: InputEvent): void {
  */
 function clickIcon(): void {
   if (hasClear.value) {
-    state.value = '';
-    inputRef.value?.focus();
+    state.value = ''
+    inputRef.value?.focus()
     emit('click:clear', {
       value: typeOfInputRef.value === 'number' ? +state.value : state.value,
-    });
-    return;
+    })
+    return
   }
   emit('click:icon', {
     value: typeOfInputRef.value === 'number' ? +state.value : state.value,
-  });
+  })
   if (typeOfInputRef.value === 'password')
-    setPassType();
+    setPassType()
 }
 /**
  * @description - Set type of input to password or text
@@ -305,31 +305,31 @@ function clickIcon(): void {
  */
 function setPassType(): void {
   typeOfInputRef.value
-    = typeOfInputRef.value === 'password' ? 'text' : 'password';
+    = typeOfInputRef.value === 'password' ? 'text' : 'password'
 }
 
 function focusInput() {
-  inputRef.value?.focus();
+  inputRef.value?.focus()
 }
 
 watch(
   () => props.modelValue,
   (value) => {
-    state.value = value;
+    state.value = value
   },
   {
     immediate: true,
-  }
-);
+  },
+)
 watch(
   () => state.value,
   (value) => {
     emit(
       'update:modelValue',
-      typeOfInputRef.value === 'number' ? +value : value
-    );
-  }
-);
+      typeOfInputRef.value === 'number' ? +value : value,
+    )
+  },
+)
 </script>
 
 <template>
