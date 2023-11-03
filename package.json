@@ -121,7 +121,7 @@
   },
   "lint-staged": {
     "*": [
-      "yarn lint:fix"
+      "yarn lint"
     ]
   }
 }
