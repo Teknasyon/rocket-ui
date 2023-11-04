@@ -67,7 +67,7 @@
         @apply ring-[var(--primary-100)] bg-[var(--primary-500)];
       }
       &:disabled {
-        @apply bg-[var(--primary-200)] text-[var(--primary-300)];
+        @apply bg-[var(--primary-100)] text-[var(--primary-200)];
       }
     }
 
@@ -81,7 +81,7 @@
         @apply ring-0 bg-[var(--primary-100)];
       }
       &:disabled {
-        @apply bg-[var(--primary-200)] text-[var(--primary-300)];
+        @apply bg-[var(--primary-100)] text-[var(--primary-200)];
       }
     }
 
@@ -95,7 +95,7 @@
         @apply ring-[var(--error-100)] bg-[var(--error-500)];
       }
       &:disabled {
-        @apply bg-[var(--error-200)] text-[var(--error-300)];
+        @apply bg-[var(--error-100)] text-[var(--error-200)];
       }
     }
 
@@ -109,7 +109,7 @@
         @apply ring-[var(--success-100)] bg-[var(--success-500)];
       }
       &:disabled {
-        @apply bg-[var(--success-200)] text-[var(--success-300)];
+        @apply bg-[var(--success-100)] text-[var(--success-200)];
       }
     }
 
@@ -123,7 +123,7 @@
         @apply ring-[var(--warning-100)] bg-[var(--warning-500)];
       }
       &:disabled {
-        @apply bg-[var(--warning-200)] text-[var(--warning-300)];
+        @apply bg-[var(--warning-100)] text-[var(--warning-200)];
       }
     }
 
@@ -137,7 +137,7 @@
         @apply ring-[var(--info-100)] bg-[var(--info-500)];
       }
       &:disabled {
-        @apply bg-[var(--info-200)] text-[var(--info-300)];
+        @apply bg-[var(--info-100)] text-[var(--info-200)];
       }
     }
   }
@@ -152,7 +152,7 @@
       @apply ring-[var(--neutral-100)] bg-transparent text-[var(--neutral-900)] border-[var(--neutral-200)];
     }
     &:disabled {
-      @apply text-[var(--neutral-500)];
+      @apply text-[var(--neutral-200)];
     }
 
     &--primary {
@@ -165,7 +165,7 @@
         @apply ring-[var(--primary-100)] bg-transparent text-[var(--primary-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--primary-300)];
+        @apply text-[var(--primary-200)];
       }
     }
 
@@ -179,7 +179,7 @@
         @apply ring-[var(--secondary-100)] bg-transparent text-[var(--secondary-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--secondary-300)];
+        @apply text-[var(--secondary-200)];
       }
     }
 
@@ -193,7 +193,7 @@
         @apply ring-[var(--error-100)] bg-transparent text-[var(--error-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--error-300)];
+        @apply text-[var(--error-200)];
       }
     }
 
@@ -207,7 +207,7 @@
         @apply ring-[var(--success-100)] bg-transparent text-[var(--success-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--success-300)];
+        @apply text-[var(--success-200)];
       }
     }
 
@@ -221,7 +221,7 @@
         @apply ring-[var(--warning-100)] bg-transparent text-[var(--warning-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--warning-300)];
+        @apply text-[var(--warning-200)];
       }
     }
 
@@ -235,7 +235,7 @@
         @apply ring-[var(--info-100)] bg-transparent text-[var(--info-500)] border-transparent;
       }
       &:disabled {
-        @apply text-[var(--info-300)];
+        @apply text-[var(--info-200)];
       }
     }
   }
@@ -250,7 +250,7 @@
       @apply ring-[var(--neutral-100)] bg-transparent text-[var(--neutral-900)] border-[var(--neutral-200)];
     }
     &:disabled {
-      @apply bg-transparent text-[var(--neutral-300)];
+      @apply bg-transparent text-[var(--neutral-200)];
     }
 
     &--primary {
@@ -263,7 +263,7 @@
         @apply ring-[var(--primary-100)] bg-transparent text-[var(--primary-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--primary-300)] text-[var(--primary-300)];
+        @apply ring-[var(--primary-100)] text-[var(--primary-200)];
       }
     }
 
@@ -277,7 +277,7 @@
         @apply ring-[var(--secondary-100)] bg-transparent text-[var(--secondary-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--secondary-300)] text-[var(--secondary-300)];
+        @apply ring-[var(--secondary-100)] text-[var(--secondary-200)];
       }
     }
 
@@ -291,7 +291,7 @@
         @apply ring-[var(--error-100)] bg-transparent text-[var(--error-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--error-300)] text-[var(--error-300)];
+        @apply ring-[var(--error-100)] text-[var(--error-200)];
       }
     }
 
@@ -305,7 +305,7 @@
         @apply ring-[var(--success-100)] bg-transparent text-[var(--success-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--success-300)] text-[var(--success-300)];
+        @apply ring-[var(--success-100)] text-[var(--success-200)];
       }
     }
 
@@ -319,7 +319,7 @@
         @apply ring-[var(--warning-100)] bg-transparent text-[var(--warning-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--warning-300)] text-[var(--warning-300)];
+        @apply ring-[var(--warning-100)] text-[var(--warning-200)];
       }
     }
 
@@ -333,7 +333,7 @@
         @apply ring-[var(--info-100)] bg-transparent text-[var(--info-500)] border-transparent;
       }
       &:disabled {
-        @apply ring-[var(--info-300)] text-[var(--info-300)];
+        @apply ring-[var(--info-100)] text-[var(--info-200)];
       }
     }
   }
