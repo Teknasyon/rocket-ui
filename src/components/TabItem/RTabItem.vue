@@ -160,9 +160,11 @@ function handleIconClick(): void {
       />
     </slot>
 
-    <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
-      {{ props.label }}
-    </span>
+    <Transition :duration="150" name="fade">
+      <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
+        {{ props.label }}
+      </span>
+    </Transition>
 
     <slot name="append">
       <Icon
