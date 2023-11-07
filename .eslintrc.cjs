@@ -43,6 +43,7 @@ module.exports = {
       'ts-nocheck': true,
       'ts-check': false,
     }],
+    'jsdoc/valid-types': 'off',
   },
   parserOptions: {
     ecmaVersion: 'latest',
