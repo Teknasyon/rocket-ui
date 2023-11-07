@@ -57,7 +57,7 @@ export interface BadgeProps {
    */
   animation?: boolean
 
-  class?: string
+  class?: string | string[]
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',

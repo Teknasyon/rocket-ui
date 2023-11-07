@@ -19,7 +19,7 @@ export interface ItemGroupProps {
    * @example
    * <RItemGroup selectedClass="bg-blue-500 text-white" />
    */
-  selectedClass?: string
+  selectedClass?: string | string[]
 
   /**
    * Whether the item group is disabled

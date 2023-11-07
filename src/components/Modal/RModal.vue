@@ -79,7 +79,7 @@ export interface ModalProps {
    * @example
    * <Modal class="my-class" />
    */
-  class?: string
+  class?: string | string[]
 
   /**
    * Class of the overlay
@@ -88,7 +88,7 @@ export interface ModalProps {
    * @example
    * <Modal overlayClass="my-class" />
    */
-  overlayClass?: string
+  overlayClass?: string | string[]
 
   /**
    * Style of the Modal

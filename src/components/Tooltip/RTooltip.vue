@@ -157,7 +157,7 @@ export interface IProps {
    * @example
    * <Tooltip triggerClass="trigger" />
    */
-  triggerClass?: string
+  triggerClass?: string | string[]
 
   /**
    * Tooltip class of the tooltip
@@ -166,7 +166,7 @@ export interface IProps {
    * @example
    * <Tooltip tooltipClass="tooltip" />
    */
-  tooltipClass?: string
+  tooltipClass?: string | string[]
 
   type?: Theme | string
 }

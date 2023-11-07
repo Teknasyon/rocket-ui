@@ -4,9 +4,9 @@ import './sidebar.css'
 export interface RSidebarProps {
   modelValue: boolean
   showTrigger?: boolean
-  class?: string
-  triggerClass?: string
-  wrapperClass?: string
+  class?: string | string[]
+  triggerClass?: string | string[]
+  wrapperClass?: string | string[]
 }
 
 const props = withDefaults(defineProps<RSidebarProps>(), {

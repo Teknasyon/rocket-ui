@@ -27,7 +27,7 @@ export interface ItemProps {
    * @example
    * <RItem selectedClass="bg-blue-500 text-white" />
    */
-  selectedClass?: string
+  selectedClass?: string | string[]
 }
 
 const props = withDefaults(defineProps<ItemProps>(), {
