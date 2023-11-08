@@ -155,6 +155,16 @@ export interface Props {
    * <Textfield hideDetails />
    */
   hideDetails?: boolean
+
+  /**
+   * Input role
+   * @type {string}
+   * @default ''
+   * @example
+   * <Textfield role="search" />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#role
+   */
+  role?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -360,6 +370,7 @@ watch(
           :max="props.max"
           :min="props.min"
           :placeholder="props.placeholder"
+          :role="props.role"
           :type="typeOfInputRef"
           :value="state.value"
           @blur="onBlur"
