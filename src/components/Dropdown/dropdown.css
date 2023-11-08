@@ -140,6 +140,9 @@
   @apply text-xs text-[var(--error-500)];
 }
 
+.r-dropdown-hint {
+  @apply text-[var(--neutral-500)] font-light text-xs tracking-wide;
+}
 .r-dropdown-details {
   @apply h-4 px-1 pt-1;
 }

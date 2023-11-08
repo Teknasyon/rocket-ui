@@ -160,6 +160,15 @@ export interface SelectProps {
   errorMsg?: string
 
   /**
+   * Hint message for the Dropdown
+   * @type {string}
+   * @default ''
+   * @example
+   * <Dropdown hint="Hint message" />
+   */
+  hint?: string
+
+  /**
    * Hide the hint and error message
    * @type {boolean}
    * @default false
@@ -537,6 +546,9 @@ watch(() => props.modelValue, (_value) => {
     <div v-if="!$props.hideDetails" class="r-dropdown-details">
       <div v-if="props.errorMsg" class="r-dropdown-error">
         {{ props.errorMsg }}
+      </div>
+      <div v-if="props.hint" class="r-dropdown-hint">
+        {{ props.hint }}
       </div>
     </div>
   </div>
