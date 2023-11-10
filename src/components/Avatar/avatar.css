@@ -25,6 +25,9 @@
   &--2xl {
     @apply w-16 h-16;
   }
+  &--3xl {
+    @apply w-20 h-20;
+  }
 
   &__text {
     @apply text-[var(--primary-500)] font-semibold;

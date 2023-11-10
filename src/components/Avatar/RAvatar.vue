@@ -33,12 +33,12 @@ export interface IProps {
 
   /**
    * Size of the Avatar
-   * @type 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+   * @type 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
    * @default '2xl'
    * @example
    * <Avatar size="xs" />
    */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
   /**
    * Show online status

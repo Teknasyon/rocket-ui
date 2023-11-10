@@ -16,7 +16,7 @@ const DefaultArgTypes = {
   },
   size: {
     type: 'select',
-    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
   },
 }
 
