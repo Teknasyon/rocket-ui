@@ -82,7 +82,7 @@ export async function update(
       minWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth - 2}px` : 'auto',
       left: theme === Theme.Dropdown ? `${parentLeft}px` : `${x}px`,
       top: `${y}px`,
-      animation: `tooltip-show ${duration}ms ease-in-out forwards`,
+      animation: `r-tooltip-show ${duration}ms ease-in-out forwards`,
       transformOrigin: 'start',
     })
 

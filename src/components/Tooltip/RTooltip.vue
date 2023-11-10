@@ -266,9 +266,9 @@ function handleUpdate() {
 
 const classes = computed(() => {
   return {
-    'tooltip': true,
-    'tooltip--dark': props.dark,
-    'tooltip--light': props.light,
+    'r-tooltip': true,
+    'r-tooltip--dark': props.dark,
+    'r-tooltip--light': props.light,
   }
 })
 
@@ -308,7 +308,7 @@ onMounted(() => {
   <div
     ref="trigger"
     :aria-disabled="props.disabled"
-    class="trigger"
+    class="r-tooltip-trigger"
     :class="triggerClass"
     @click="onClick"
     @mouseenter="onMouseEnter"
@@ -337,10 +337,10 @@ onMounted(() => {
       <slot :hide="hideTooltip" name="content" :update-position="handleUpdate">
         <div
           v-if="props.text"
-          class="tooltip__content"
+          class="r-tooltip__content"
           :class="{
-            'tooltip__content--dark': props.dark,
-            'tooltip__content--light': props.light,
+            'r-tooltip__content--dark': props.dark,
+            'r-tooltip__content--light': props.light,
           }"
         >
           {{ props.text }}
@@ -349,10 +349,10 @@ onMounted(() => {
           v-if="props.text"
           id="arrow"
           ref="arrowElement"
-          class="tooltip__arrow"
+          class="r-tooltip__arrow"
           :class="{
-            'tooltip__arrow--dark': props.dark,
-            'tooltip__arrow--light': props.light,
+            'r-tooltip__arrow--dark': props.dark,
+            'r-tooltip__arrow--light': props.light,
           }"
         />
       </slot>
