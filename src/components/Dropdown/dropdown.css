@@ -12,7 +12,7 @@
   }
 
   &--disabled {
-    @apply bg-[var(--primary-50)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed;
+    @apply bg-[var(--primary-50)] text-[var(--neutral-300)] border-[var(--primary-75)] cursor-not-allowed;
   }
 
   &--error {
@@ -70,7 +70,7 @@
     }
 
     &:disabled{
-      @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] placeholder:text-[var(--neutral-300)] cursor-not-allowed pointer-events-none;
+      @apply bg-[var(--primary-50)] text-[var(--neutral-300)] placeholder:text-[var(--neutral-300)] cursor-not-allowed pointer-events-none;
     }
   }
 
@@ -97,14 +97,14 @@
     font-medium text-sm;
 
     &:hover {
-      @apply bg-[var(--neutral-100)];
+      @apply bg-[var(--neutral-200)];
     }
     &--active {
       @apply bg-[var(--primary-100)] text-[var(--primary-500)];
     }
 
     &--disabled {
-      @apply bg-[var(--primary-50)] text-[var(--neutral-300)] cursor-not-allowed;
+      @apply bg-[var(--primary-50)] text-[var(--neutral-300)] cursor-not-allowed hover:bg-[var(--primary-50)];
     }
 
     &__label {
