@@ -267,7 +267,7 @@ function handleUpdate() {
 const classes = computed(() => {
   return {
     'r-tooltip': true,
-    'r-tooltip--dark': props.dark,
+    'r-tooltip--dark': props.dark && !props.light,
     'r-tooltip--light': props.light,
   }
 })
