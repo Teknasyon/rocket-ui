@@ -374,6 +374,11 @@ function reset() {
   }
 }
 
+function checkPosition(updatePosition: any) {
+  if (props.searchable)
+    updatePosition()
+}
+
 onMounted(() => {
   reset()
 })
@@ -466,6 +471,7 @@ watch(() => props.modelValue, (_value) => {
             :placeholder="props.placeholder"
             :readonly="isReadOnly"
             type="text"
+            @input="checkPosition(updatePosition)"
             @keydown.backspace="
               removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
             "
