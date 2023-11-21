@@ -165,6 +165,16 @@ export interface Props {
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#role
    */
   role?: string
+
+  /**
+   * Input readonly state
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Textfield readonly />
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly
+   */
+  readonly?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -181,6 +191,8 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   clearable: false,
   hideDetails: false,
+  role: '',
+  readonly: false,
 })
 const emit = defineEmits([
   'update:modelValue',
@@ -370,6 +382,7 @@ watch(
           :max="props.max"
           :min="props.min"
           :placeholder="props.placeholder"
+          :readonly="props.readonly"
           :role="props.role"
           :type="typeOfInputRef"
           :value="state.value"
