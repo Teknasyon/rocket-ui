@@ -281,6 +281,14 @@ window.onresize = () => {
     handleUpdate()
 }
 
+/**
+ * Listen the scroll event of window
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event
+ */
+document.addEventListener('scroll', () => {
+  handleUpdate()
+})
+
 watchEffect(
   () => {
     if (props.disabled)
