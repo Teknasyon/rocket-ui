@@ -223,7 +223,6 @@ const wrapper = ref<HTMLElement>()
 /**
  * @description - Handles the appearance of the select list
  * @param e MouseEvent
- * @returns void
  */
 function setActive(e: MouseEvent, activators?: any) {
   e.stopPropagation()
@@ -245,7 +244,6 @@ function setActive(e: MouseEvent, activators?: any) {
 
 /**
  * @description - Removes the active state
- * @returns void
  */
 function removeActive() {
   active.value = false
@@ -258,7 +256,6 @@ function removeActive() {
  * @description - Selects an option
  * @param e Click event
  * @param option Selected option
- * @returns void
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   e.stopPropagation()
@@ -287,7 +284,6 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
 /**
  * @description - Selects one option
  * @param e option Selected option
- * @returns void
  */
 function selectOneOption(e: MouseEvent, option: Option) {
   if (selected.value.value === option.value) {
@@ -304,7 +300,6 @@ function selectOneOption(e: MouseEvent, option: Option) {
 /**
  * @description - Removes an option from the selected options
  * @param e option Option to remove
- * @returns void
  */
 function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition: any) {
   if (e instanceof KeyboardEvent && e.key !== 'Backspace')
@@ -318,7 +313,6 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
 }
 /**
  * @description - Handles the not existing options
- * @returns void
  */
 function createTag(e: KeyboardEvent, updatePosition: any) {
   if (!props.taggable)
