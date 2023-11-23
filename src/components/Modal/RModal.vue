@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import './modal.css'
 import Icon from '../Icon/RIcon.vue'
 
@@ -125,6 +125,18 @@ function handleOutside(event: Event) {
   if (event.target === event.currentTarget)
     emits('update:modelValue', false)
 }
+watchEffect(() => {
+  if (props.modelValue)
+    document.body.style.overflow = 'hidden'
+  else
+    document.body.style.overflow = 'auto'
+})
+
+// close on escape
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && props.modelValue && props.outsideClick)
+    emits('update:modelValue', false)
+})
 </script>
 
 <template>
