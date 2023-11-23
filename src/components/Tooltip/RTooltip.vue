@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import './tooltip.css'
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import { t } from 'vitest/dist/types-198fd1d9'
 import {
   Placement,
   type Placements,
@@ -302,6 +303,9 @@ watchEffect(
 )
 
 onMounted(() => {
+  if (props.resizable)
+    trigger.value.parentElement.parentElement.addEventListener('scroll', handleUpdate())
+
   onClickOutside(trigger, () => {
     if (props.outsideClick)
       hideTooltip()
