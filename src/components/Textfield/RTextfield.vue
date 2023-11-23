@@ -318,7 +318,7 @@ function clickIcon(): void {
   emit('click:icon', {
     value: typeOfInputRef.value === 'number' ? +state.value : state.value,
   })
-  if (typeOfInputRef.value === 'password')
+  if (props.type === 'password')
     setPassType()
 }
 /**
