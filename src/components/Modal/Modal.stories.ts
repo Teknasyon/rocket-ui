@@ -37,6 +37,7 @@ export const WithActionsSlot: Story = {
     setup: () => ({
       args,
       submit: () => {
+        // eslint-disable-next-line no-alert
         alert('Submitted!')
       },
     }),
@@ -96,6 +97,7 @@ export const WithForm: Story = {
     setup: () => ({
       args,
       submit: () => {
+        // eslint-disable-next-line no-alert
         alert('Submitted!')
       },
     }),
