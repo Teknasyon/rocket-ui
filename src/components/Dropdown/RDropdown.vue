@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, reactive, ref, watch } from 'vue'
+import { computed, defineEmits, onMounted, reactive, ref, watch, watchEffect } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
@@ -115,6 +115,15 @@ export interface SelectProps {
   searchable?: boolean
 
   /**
+   * Clearable status to selected and searched options
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown clearable />
+   */
+  clearable?: boolean
+
+  /**
    * Id of the Dropdown
    * @type {string}
    * @default 'test'
@@ -197,6 +206,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   prependIcon: '',
   appendIcon: 'mdiChevronDown',
   searchable: false,
+  clearable: false,
   id: 'test',
   label: '',
   closeOnSelect: true,
@@ -224,13 +234,13 @@ const wrapper = ref<HTMLElement>()
  * @description - Handles the appearance of the select list
  * @param e MouseEvent
  */
-function setActive(e: MouseEvent, activators?: any) {
+function setActive(e: MouseEvent, activator?: () => void) {
   e.stopPropagation()
   if (props.disabled)
     return
-  active.value = !active.value
-  if (activators)
-    activators()
+  active.value = true
+  if (activator)
+    activator()
   if (active.value) {
     dropdown.value?.classList.add('r-dropdown--active')
     dropdown.value?.focus()
@@ -368,9 +378,21 @@ function reset() {
   }
 }
 
-function checkPosition(updatePosition: any) {
+function checkPosition(updatePosition: () => void) {
   if (props.searchable)
     updatePosition()
+}
+
+function handleClearable(e: MouseEvent, updatePosition: () => void) {
+  e.stopPropagation()
+  updatePosition()
+  if (props.multiple || props.taggable) {
+    selectedMultiple.splice(0, selectedMultiple.length)
+    return
+  }
+  selected.value = {} as Option
+  inputModel.value = ''
+  emit('update:modelValue', '')
 }
 
 onMounted(() => {
@@ -384,6 +406,7 @@ onMounted(() => {
 watch(selectedMultiple, (value) => {
   emit('update:modelValue', value)
 })
+
 watch(() => props.modelValue, (_value) => {
   reset()
 })
@@ -472,6 +495,21 @@ watch(() => props.modelValue, (_value) => {
             "
             @keydown.enter="createTag($event, updatePosition)"
           >
+          <div
+            v-if="props.clearable"
+            class="r-dropdown__clearable"
+            :data-has-value="
+              (inputModel !== '' || selectedMultiple.length)
+                && active
+            "
+            @click="handleClearable($event, updatePosition)"
+          >
+            <Icon
+
+              name="mdiCloseCircle"
+              size="18"
+            />
+          </div>
           <div
             v-if="props.appendIcon || $slots.append"
             class="r-dropdown__append-icon"

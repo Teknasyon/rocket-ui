@@ -74,6 +74,14 @@
     }
   }
 
+  &__clearable {
+    @apply min-h-[18px] text-[var(--neutral-500)] translate-x-4 opacity-0 pointer-events-none transition-all duration-200 ease-in-out;
+
+    &[data-has-value="true"] {
+      @apply opacity-100 pointer-events-auto translate-x-0;
+    }
+  }
+
   &__append-icon {
     @apply inset-y-0 right-0 flex items-center pointer-events-none;
 
@@ -96,7 +104,7 @@
     rounded-md px-3 py-2 text-left cursor-pointer min-h-[40px] mb-0.5
     font-medium text-sm;
 
-    &:hover {
+    &:hover:not(.r-dropdown-options__option--active, .r-dropdown-options__option--disabled) {
       @apply bg-[var(--neutral-200)];
     }
     &--active {
