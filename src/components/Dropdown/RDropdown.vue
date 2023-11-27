@@ -464,6 +464,7 @@ watch(() => props.modelValue, (_value) => {
             :disabled="props.disabled"
             :placeholder="props.placeholder"
             :readonly="isReadOnly"
+            role="presentation"
             type="text"
             @input="checkPosition(updatePosition)"
             @keydown.backspace="
@@ -504,7 +505,7 @@ watch(() => props.modelValue, (_value) => {
             }"
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
-            <div style="display: flex; align-items: center">
+            <div class="flex items-center">
               <slot name="option-prepend">
                 <Icon
                   v-if="option.prependIcon"
