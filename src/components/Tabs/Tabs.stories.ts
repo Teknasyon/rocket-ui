@@ -3,7 +3,7 @@ import Tabs from './RTabs.vue'
 
 const DefaultArgs = {
   tabs: [
-    { id: 0, label: 'Tab 1', prependIcon: 'mdiHome' },
+    { id: 0, label: 'Tab 1', prependIcon: 'mdiHome', appendIcon: 'mdiNumeric1Circle' },
     { id: 1, label: 'Tab 2', prependIcon: 'mdiPlusCircle', disabled: true },
     { id: 2, label: 'Tab 3', prependIcon: 'mdiHeart' },
     { id: 3, label: 'Tab 4', prependIcon: 'mdiFaceMan' },
