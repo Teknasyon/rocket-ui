@@ -4,10 +4,10 @@
   @apply relative inline-block cursor-pointer bg-transparent rounded-full;
 }
 .r-tooltip {
-  @apply z-50 bg-transparent m-0 p-0 top-0 left-0 absolute w-max hidden;
+  @apply z-50 bg-transparent m-0 p-0 top-0 left-0 absolute hidden;
 
   &__content {
-    @apply font-normal p-4 rounded-lg text-xs max-w-xs;
+    @apply font-normal p-4 rounded-lg text-xs;
 
     &--dark {
       @apply text-white bg-[var(--neutral-900)];

@@ -427,7 +427,7 @@ watch(() => props.modelValue, (_value) => {
       outside-click
       placement="bottom"
       resizable
-      tooltip-class="w-max"
+      tooltip-class="w-full"
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
@@ -458,7 +458,7 @@ watch(() => props.modelValue, (_value) => {
               <Icon v-if="props.prependIcon" :name="props.prependIcon" />
             </slot>
           </div>
-          <div v-if="props.taggable" class="r-dropdown__tags">
+          <div v-if="props.taggable && selectedMultiple.length" class="r-dropdown__tags">
             <slot
               name="tags"
               :options="selectedMultiple"
@@ -477,7 +477,7 @@ watch(() => props.modelValue, (_value) => {
               />
             </slot>
           </div>
-          <div v-if="props.multiple" class="r-dropdown__multiple">
+          <div v-if="props.multiple && selectedMultiple.length" class="r-dropdown__multiple">
             <p v-for="(option, index) in selectedMultiple" :key="index">
               {{ `${option.label},` }}
             </p>
