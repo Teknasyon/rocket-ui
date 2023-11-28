@@ -79,7 +79,8 @@ export async function update(
     const parentLeft = trigger.offsetParent?.getBoundingClientRect().left || 0
 
     Object.assign(tooltip.style, {
-      minWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth - 2}px` : 'auto',
+      maxWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth - 2}px` : 'auto',
+      width: '100%',
       left: theme === Theme.Dropdown ? `${parentLeft}px` : `${x}px`,
       top: `${y}px`,
       animation: `r-tooltip-show ${duration}ms ease-in-out forwards`,
