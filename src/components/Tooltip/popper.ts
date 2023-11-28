@@ -80,7 +80,6 @@ export async function update(
 
     Object.assign(tooltip.style, {
       maxWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth}px` : 'auto',
-      width: '100%',
       left: theme === Theme.Dropdown ? `${parentLeft}px` : `${x}px`,
       top: `${y}px`,
       animation: `r-tooltip-show ${duration}ms ease-in-out forwards`,
