@@ -385,9 +385,10 @@ function handleInput(updatePosition: () => void) {
   if (props.multiple || props.taggable)
     return
 
-  if (inputModel.value === '')
+  if (inputModel.value === '') {
     selected.value = {} as Option
-  emit('update:modelValue', '')
+    emit('update:modelValue', '')
+  }
 }
 
 function handleClearable(e: MouseEvent, updatePosition: () => void) {
@@ -496,7 +497,7 @@ watch(() => props.modelValue, (_value) => {
             :readonly="isReadOnly"
             role="presentation"
             type="text"
-            @input="handleInput(updatePosition)"
+            @input.prevent="handleInput(updatePosition)"
             @keydown.backspace="
               removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
             "
