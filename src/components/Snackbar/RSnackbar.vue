@@ -98,6 +98,7 @@ const classes = computed(() => {
     [props.left ? 'r-snackbar__left' : 'r-snackbar__right']: true,
     [props.modelValue ? 'r-snackbar--shown' : 'r-snackbar--hidden']: true,
     [props.top ? 'r-snackbar__top' : 'r-snackbar__bottom']: true,
+    'r-snackbar--closable': props.closable,
   }
 })
 

@@ -1,8 +1,11 @@
 @import '../../index.css';
 
 .r-snackbar {
-  @apply text-white gap-3 opacity-0 absolute w-[412px] grid items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
-  grid-template-columns: auto 1fr auto;
+  @apply text-white gap-3 opacity-0 absolute w-full max-w-[412px] grid grid-cols-[auto_1fr] items-center bg-[var(--neutral-900)] px-4 py-3.5 rounded-lg;
+
+  &--closable{
+    @apply grid-cols-[auto_1fr_auto];
+  }
 
   &--success {
     @apply bg-[var(--success-500)];
@@ -21,10 +24,10 @@
   }
 
   &__text {
-    @apply text-sm pr-16;
+    @apply text-sm;
   }
   &__close {
-    @apply cursor-pointer grid place-items-center;
+    @apply cursor-pointer flex items-center justify-end pl-4;
   }
 
   &__right {
