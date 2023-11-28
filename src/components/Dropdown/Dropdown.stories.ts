@@ -25,6 +25,7 @@ const DefaultArgs = {
   appendIcon: 'mdiChevronDown',
   modelValue: '',
   searchable: false,
+  clearable: false,
 }
 const DropdownStory = {
   title: 'Form/Dropdown',
@@ -80,5 +81,6 @@ export const Search: Story = {
     prependIcon: 'mdiMagnify',
     appendIcon: 'mdiChevronDown',
     searchable: true,
+    clearable: true,
   },
 }
