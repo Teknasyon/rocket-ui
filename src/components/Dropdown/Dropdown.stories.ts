@@ -72,10 +72,11 @@ export const Taggable: Story = {
 export const Search: Story = {
   args: {
     options: [
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-      { value: '4', label: 'Option 4' },
+      { value: '1', label: 'Istanbul' },
+      { value: '2', label: 'Izmir' },
+      { value: '3', label: 'Ankara' },
+      { value: '4', label: 'Bursa' },
+      { value: '5', label: 'Sakarya' },
     ],
     placeholder: 'Search',
     prependIcon: 'mdiMagnify',
