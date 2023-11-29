@@ -145,7 +145,7 @@
 }
 
 .r-dropdown-error {
-  @apply text-xs text-[var(--error-500)];
+  @apply text-xs font-light text-[var(--error-500)];
 }
 
 .r-dropdown-hint {
