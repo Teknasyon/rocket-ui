@@ -119,7 +119,7 @@
   }
 
   &__content {
-    @apply w-full grid place-items-start items-center justify-items-start px-4 min-w-[21rem] max-w-sm;
+    @apply w-full grid place-items-start items-center justify-items-start px-4 min-w-[16rem] max-w-sm;
 
     &__title {
       @apply font-medium;
