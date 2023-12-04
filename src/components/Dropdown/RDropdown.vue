@@ -194,6 +194,15 @@ export interface SelectProps {
    * <Dropdown autocomplete="on" />
    */
   autocomplete?: 'on' | 'off'
+
+  /**
+   * Text to show when there is no options
+   * @type {string}
+   * @default 'No options'
+   * @example
+   * <Dropdown notOptionsText="No options" />
+   */
+  notOptionsText?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -584,7 +593,7 @@ watch(() => props.modelValue, (_value) => {
           </li>
           <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
-              No options
+              {{ props.notOptionsText || 'No options' }}
             </slot>
           </li>
         </ul>
