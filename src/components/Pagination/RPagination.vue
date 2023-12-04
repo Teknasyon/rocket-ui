@@ -6,18 +6,14 @@ export interface PaginationProps {
   page: number
   perPage: number
   totalItems: number
-  pageText?: string
-  ofText?: string
-  slash?: boolean
+  infoText: string
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   page: 1,
   perPage: 10,
   totalItems: 100,
-  pageText: 'Page',
-  ofText: 'of',
-  slash: false,
+  infoText: '',
 })
 
 const emits = defineEmits(['update:page'])
@@ -34,14 +30,7 @@ function changePage(page: number) {
 <template>
   <div class="r-pagination">
     <div class="r-pagination__page-info">
-      <span v-if="!slash">{{ props.pageText }}</span>
-      <span class="r-pagination__page-info__current-page">
-        {{ props.page }}
-      </span>
-      <span>{{ slash ? '/' : props.ofText }}</span>
-      <span class="r-pagination__page-info__total-pages">
-        {{ totalPages }}
-      </span>
+      <span v-if="props.infoText">{{ props.infoText }}</span>
     </div>
     <div class="r-pagination__paginator">
       <button
