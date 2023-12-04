@@ -200,9 +200,9 @@ export interface SelectProps {
    * @type {string}
    * @default 'No options'
    * @example
-   * <Dropdown notOptionsText="No options" />
+   * <Dropdown noOptionsText="No options" />
    */
-  notOptionsText?: string
+  noOptionsText?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -593,7 +593,7 @@ watch(() => props.modelValue, (_value) => {
           </li>
           <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
-              {{ props.notOptionsText || 'No options' }}
+              {{ props.noOptionsText || 'No options' }}
             </slot>
           </li>
         </ul>
