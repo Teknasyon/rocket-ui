@@ -98,12 +98,29 @@ export interface ModalProps {
    * <Modal style="color: red" />
    */
   style?: string
+
+  /**
+   * Control the scroll of the body
+   * @type boolean
+   * @default false
+   * @example
+   * <Modal :modelValue="true" :allowBodyScroll="true" />
+   */
+  allowBodyScroll?: boolean
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
   block: false,
   title: '',
   description: '',
+  icon: '',
+  width: '',
+  height: '',
+  outsideClick: false,
+  class: '',
+  overlayClass: '',
+  style: '',
+  allowBodyScroll: false,
 })
 const emits = defineEmits(['update:modelValue'])
 const classes = computed(() => {
@@ -126,7 +143,7 @@ function handleOutside(event: Event) {
     emits('update:modelValue', false)
 }
 watchEffect(() => {
-  if (props.modelValue)
+  if (props.modelValue && !props.allowBodyScroll)
     document.body.style.overflow = 'hidden'
   else
     document.body.style.overflow = 'auto'
