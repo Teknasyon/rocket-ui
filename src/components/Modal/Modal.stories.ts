@@ -18,6 +18,7 @@ const ModalStory = {
     `,
   args: {
     modelValue: true,
+    allowBodyScroll: true,
     title: 'Create Account',
     description:
       'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
