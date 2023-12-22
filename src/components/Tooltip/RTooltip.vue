@@ -198,6 +198,8 @@ const tooltip = ref()
 const arrowElement = ref()
 
 async function showTooltip() {
+  if (props.disabled || !tooltip.value)
+    return
   handleUpdate()
   tooltip.value.style.display = 'block'
   // document.body.appendChild(tooltip.value);
