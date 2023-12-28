@@ -11,7 +11,9 @@
     @apply flex items-center gap-2 whitespace-nowrap;
 
     &__prev,
-    &__next {
+    &__next,
+    &__first,
+    &__last {
       @apply flex items-center justify-center bg-[var(--pagination-bg-color)]
       cursor-pointer p-[var(--pagination-btn-padding)] rounded-[var(--pagination-border-radius)];
       border: var(--pagination-border-width) var(--pagination-border-style)
