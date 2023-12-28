@@ -30,7 +30,7 @@ export interface SelectProps {
    *  ]"
    * />
    */
-  options: Option[]
+  options: Option[] | any
 
   /**
    * Value of the Dropdown
@@ -39,7 +39,7 @@ export interface SelectProps {
    * @example
    * <Dropdown v-model="model" />
    */
-  modelValue: string | number | Option | Option[]
+  modelValue: string | number | Option | Option[] | any
 
   /**
    * Placeholder Dropdown
@@ -203,6 +203,15 @@ export interface SelectProps {
    * <Dropdown noOptionsText="No options" />
    */
   noOptionsText?: string
+
+  /**
+   * Hide the check icon of the selected option
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown hideOptionCheckIcon />
+   */
+  hideOptionCheckIcon?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -224,13 +233,48 @@ const props = withDefaults(defineProps<SelectProps>(), {
   errorMsg: '',
   hideDetails: false,
   autocomplete: 'off',
+  noOptionsText: 'No options',
+  hideOptionCheckIcon: false,
 })
 
 const emit = defineEmits(['update:modelValue'])
-const selected = ref<Option>({ value: '', label: '' })
+const selected = ref<Option>({} as Option)
 const selectedMultiple = reactive<Option[]>([])
 const active = ref(false)
 const inputModel = ref('')
+
+function isObject(option: Option) {
+  const [optionKey] = Object.keys(option)
+
+  return ['label', 'value'].includes(optionKey)
+}
+
+const mutatedOptions = computed(() => {
+  const options = props.options
+  if (!isObject(options[0])) {
+    return options.map((option: string) => (
+      {
+        value: option,
+        label: String(option),
+      }
+    ))
+  }
+
+  return options
+})
+
+const mutatedModel = computed(() => {
+  const model = props.modelValue
+
+  if (!isObject(model)) {
+    return {
+      value: model,
+      label: String(model),
+    }
+  }
+
+  return model
+})
 
 /**
  * @description - HTML elements references
@@ -311,6 +355,8 @@ function selectOneOption(e: MouseEvent, option: Option) {
     emit('update:modelValue', '')
     return
   }
+  // console.log('selectOneOption', option, selected.value)
+
   inputModel.value = option.label
   selected.value = option
   setActive(e)
@@ -341,7 +387,7 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
   const value = inputModel.value
   if (value === '')
     return
-  const option = props.options.find(opt => opt.label === value)
+  const option = mutatedOptions.value.find((opt: Option) => opt.label === value)
   if (!option) {
     selectedMultiple.push({ value, label: value })
     inputModel.value = ''
@@ -360,8 +406,8 @@ function isSelected(option: Option) {
  */
 const searchedOptions = computed(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
-    return props.options
-  const result = props.options.filter((option) => {
+    return mutatedOptions.value
+  const result = mutatedOptions.value.filter((option: Option) => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase())
   })
   return result
@@ -372,13 +418,15 @@ const isReadOnly = computed(() => {
 })
 
 function reset() {
-  if (props.modelValue) {
+  if (mutatedModel.value) {
     if (props.multiple) {
-      selectedMultiple.push(props.modelValue as Option)
+      selectedMultiple.push(mutatedModel.value as Option)
     }
     else {
-      selected.value = props.modelValue as Option
-      inputModel.value = (props.modelValue as Option).label
+      // console.log(mutatedModel.value, 'mutatedModel.value')
+
+      selected.value = mutatedModel.value as Option
+      inputModel.value = (mutatedModel.value as Option).label
     }
   }
   else {
@@ -420,11 +468,11 @@ onMounted(() => {
  * @description - Watch the selected multiple options
  * @returns void
  */
-watch(selectedMultiple, (value) => {
-  emit('update:modelValue', value)
+watch(selectedMultiple, (option) => {
+  emit('update:modelValue', option)
 })
 
-watch(() => props.modelValue, (_value) => {
+watch(() => mutatedModel.value, (_value) => {
   reset()
 })
 </script>
@@ -560,36 +608,40 @@ watch(() => props.modelValue, (_value) => {
             }"
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
-            <div class="flex items-center">
-              <slot name="option-prepend">
-                <Icon
-                  v-if="option.prependIcon"
-                  class="r-dropdown-options__option__prepend-icon"
+            <slot :is-selected="isSelected(option)" name="option">
+              <div class="flex items-center">
+                <slot name="option-prepend">
+                  <Icon
+                    v-if="option.prependIcon"
+                    class="r-dropdown-options__option__prepend-icon"
+                    :class="{
+                      'r-dropdown-options__option__prepend-icon--active':
+                        isSelected(option),
+                    }"
+                    :name="option.prependIcon"
+                  />
+                </slot>
+                <p
+                  class="r-dropdown-options__option__label"
                   :class="{
-                    'r-dropdown-options__option__prepend-icon--active':
+                    'r-dropdown-options__option__label--active': isSelected(option),
+                  }"
+                >
+                  {{ option.label }}
+                </p>
+              </div>
+              <slot name="option-append">
+                <Icon
+                  v-if="isSelected(option) && !props.hideOptionCheckIcon"
+                  class="r-dropdown-options__option__append-icon"
+                  :class="{
+                    'r-dropdown-options__option__append-icon--active':
                       isSelected(option),
                   }"
-                  :name="option.prependIcon"
+                  name="mdiCheck"
                 />
               </slot>
-              <p
-                class="r-dropdown-options__option__label"
-                :class="{
-                  'r-dropdown-options__option__label--active': isSelected(option),
-                }"
-              >
-                {{ option.label }}
-              </p>
-            </div>
-            <Icon
-              v-if="isSelected(option)"
-              class="r-dropdown-options__option__append-icon"
-              :class="{
-                'r-dropdown-options__option__append-icon--active':
-                  isSelected(option),
-              }"
-              name="mdiCheck"
-            />
+            </slot>
           </li>
           <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
