@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed, onUnmounted, watchEffect } from 'vue'
 import './modal.css'
 import Icon from '../Icon/RIcon.vue'
 
@@ -147,6 +147,12 @@ watchEffect(() => {
     document.body.style.overflow = 'hidden'
   else
     document.body.style.overflow = 'auto'
+},
+{ flush: 'post' },
+)
+
+onUnmounted(() => {
+  document.body.style.overflow = 'auto'
 })
 
 // close on escape
