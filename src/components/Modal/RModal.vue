@@ -152,7 +152,8 @@ watchEffect(() => {
 )
 
 onUnmounted(() => {
-  document.body.style.overflow = 'auto'
+  if (!props.modelValue && props.allowBodyScroll)
+    document.body.style.overflow = 'auto'
 })
 
 // close on escape
