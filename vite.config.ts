@@ -1,7 +1,7 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import dts from 'vite-plugin-dts';
+import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,23 +10,23 @@ export default defineConfig({
       copyDtsFiles: true,
       outDir: [
         'dist',
-        'types'
+        'types',
         // 'types/inner'
       ],
       // include: ['src/index.ts'],
       exclude: ['src/ignore'],
       staticImport: true,
-      rollupTypes: false,
+      rollupTypes: true,
       // insertTypesEntry: true,
       compilerOptions: {
-        declarationMap: true
+        declarationMap: true,
       },
       rollupConfig: {
         docModel: {
           enabled: true,
-          apiJsonFilePath: '<projectFolder>/rollup-docs/<unscopedPackageName>.api.json'
-        }
-      }
+          apiJsonFilePath: '<projectFolder>/rollup-docs/<unscopedPackageName>.api.json',
+        },
+      },
     }),
     vue(),
   ],
@@ -45,4 +45,4 @@ export default defineConfig({
       external: ['vue'],
     },
   },
-});
+})
