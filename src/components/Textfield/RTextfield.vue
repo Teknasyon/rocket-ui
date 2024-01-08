@@ -360,7 +360,7 @@ watch(
   >
     <Label
       v-if="props.label"
-      :id="props.id"
+      :id="`${props.id}-label`"
       class="r-textfield__label"
       :for="props.id"
       :text="props.label"
