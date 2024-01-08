@@ -7,16 +7,18 @@ export interface PaginationProps {
   page: number
   perPage: number
   totalItems: number
-  infoText: string
-  perPageOptions: number[]
+  perPageOptions?: number[]
+  itemsPerPageText?: string
+  position?: 'left' | 'center' | 'right'
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   page: 1,
   perPage: 10,
   totalItems: 100,
-  infoText: '',
   perPageOptions: () => [10, 20, 50, 100],
+  itemsPerPageText: 'Items per page:',
+  position: 'right',
 })
 
 const emit = defineEmits(['update:page', 'update:perPage'])
@@ -37,12 +39,10 @@ function changePerPage({ value: perPage }: { value: number }) {
 </script>
 
 <template>
-  <div class="r-pagination">
-    <div class="r-pagination__page-info">
-      <span v-if="props.infoText">{{ props.infoText }}</span>
-    </div>
+  <div class="r-pagination" :class="[`r-pagination--${props.position}`]">
     <div class="r-pagination__paginator">
-      <div class="r-pagination__per-page">
+      <div class="r-pagination__paginator__per-page">
+        <span>{{ props.itemsPerPageText }}</span>
         <RDropdown
           v-model="perPage"
           class="w-24"
@@ -59,7 +59,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       >
         <slot name="first">
           <svg
-            class="icon icon-tabler icon-tabler-arrow-bar-to-left"
+            class="icon icon-tabler icon-tabler-chevron-left-pipe"
             :class="{ 'stroke-gray-400': props.page === 1 }"
             fill="none"
             height="20"
@@ -72,10 +72,8 @@ function changePerPage({ value: perPage }: { value: number }) {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-            <path d="M10 12l10 0" />
-            <path d="M10 12l4 4" />
-            <path d="M10 12l4 -4" />
-            <path d="M4 4l0 16" />
+            <path d="M7 6v12" />
+            <path d="M18 6l-6 6l6 6" />
           </svg>
         </slot>
       </button>
@@ -86,7 +84,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       >
         <slot name="prev">
           <svg
-            class="icon icon-tabler icon-tabler-arrow-left"
+            class="icon icon-tabler icon-tabler-chevron-left"
             :class="{ 'stroke-gray-400': props.page === 1 }"
             fill="none"
             height="20"
@@ -99,9 +97,7 @@ function changePerPage({ value: perPage }: { value: number }) {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-            <path d="M5 12l14 0" />
-            <path d="M5 12l6 6" />
-            <path d="M5 12l6 -6" />
+            <path d="M15 6l-6 6l6 6" />
           </svg>
         </slot>
       </button>
@@ -112,7 +108,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       >
         <slot name="next">
           <svg
-            class="icon icon-tabler icon-tabler-arrow-right"
+            class="icon icon-tabler icon-tabler-chevron-right"
             :class="{ 'stroke-gray-400': props.page === totalPages }"
             fill="none"
             height="20"
@@ -125,9 +121,7 @@ function changePerPage({ value: perPage }: { value: number }) {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-            <path d="M5 12l14 0" />
-            <path d="M13 18l6 -6" />
-            <path d="M13 6l6 6" />
+            <path d="M9 6l6 6l-6 6" />
           </svg>
         </slot>
       </button>
@@ -138,7 +132,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       >
         <slot name="last">
           <svg
-            class="icon icon-tabler icon-tabler-arrow-bar-to-right"
+            class="icon icon-tabler icon-tabler-chevron-right-pipe"
             :class="{ 'stroke-gray-400': props.page === totalPages }"
             fill="none"
             height="20"
@@ -151,10 +145,8 @@ function changePerPage({ value: perPage }: { value: number }) {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-            <path d="M14 12l-10 0" />
-            <path d="M14 12l-4 4" />
-            <path d="M14 12l-4 -4" />
-            <path d="M20 4l0 16" />
+            <path d="M6 6l6 6l-6 6" />
+            <path d="M17 5v13" />
           </svg>
         </slot>
       </button>

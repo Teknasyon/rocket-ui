@@ -1,10 +1,18 @@
 @import '../../index.css';
 
 .r-pagination {
-  @apply flex items-center justify-between;
+  @apply flex items-center w-full;
 
-  &__page-info {
-    @apply flex items-center gap-2;
+  &--left{
+    @apply justify-start;
+  }
+
+  &--center{
+    @apply justify-center;
+  }
+
+  &--right{
+    @apply justify-end;
   }
 
   &__paginator {
@@ -16,11 +24,13 @@
     &__last {
       @apply flex items-center justify-center bg-[var(--pagination-bg-color)]
       cursor-pointer p-[var(--pagination-btn-padding)] rounded-[var(--pagination-border-radius)];
-      border: var(--pagination-border-width) var(--pagination-border-style)
-        var(--pagination-border-color);
 
-      &:hover {
-        @apply text-gray-300;
+      &:hover:not(:disabled) {
+        @apply !text-[var(--pagination-hover-color)] bg-[var(--pagination-hover-bg)] transition-all;
+
+        svg {
+          @apply stroke-[var(--pagination-hover-color)];
+        }
       }
 
       &:disabled {
@@ -28,22 +38,8 @@
       }
     }
 
-    &__input {
-      @apply text-center rounded-[var(--pagination-border-radius)] p-[var(--pagination-input-padding)] bg-[var(--pagination-bg-color)];
-      border: var(--pagination-border-width) var(--pagination-border-style)
-        var(--pagination-border-color);
-
-      &:focus {
-        @apply outline-none ring-2 ring-[var(--primary-500)] ring-inset;
-      }
-
-      &::-webkit-inner-spin-button,
-      &::-webkit-outer-spin-button {
-        opacity: 0;
-        pointer-events: none;
-        background: transparent;
-        display: none;
-      }
+    &__per-page {
+      @apply flex items-center gap-2 text-sm;
     }
   }
 }
