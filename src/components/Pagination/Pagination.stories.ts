@@ -18,6 +18,7 @@ const PaginationStory = {
   },
   argTypes: {
     'onUpdate:page': { action: 'update:page' },
+    'onUpdate:perPage': { action: 'update:perPage' },
   },
   tags: ['autodocs'],
 } as Meta<typeof Pagination>

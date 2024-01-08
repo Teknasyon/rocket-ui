@@ -200,13 +200,14 @@
   * @tokens-pagination-variables
   * @presenter Pagination Variables
   */
-  --pagination-border-radius: var(--border-radius-2);
+  --pagination-border-radius: var(--border-radius-6);
   --pagination-border-color: var(--neutral-200);
   --pagination-border-width: 1px;
   --pagination-border-style: solid;
   --pagination-bg: var(--white);
-  --pagination-btn-padding: 0.565rem;
-  --pagination-input-padding: 0.315rem;
+  --pagination-btn-padding: 8px;
+  --pagination-hover-color: var(--primary-500);
+  --pagination-hover-bg: var(--info-100);
   /**
   * @tokens-end
   */
