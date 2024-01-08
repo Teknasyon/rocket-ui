@@ -125,7 +125,7 @@ watch(
   <div class="r-textarea-wrapper">
     <Label
       v-if="props.label"
-      id="textarea"
+      :id="`${props.id}-label`"
       class="r-textarea__label"
       for="textarea"
       :text="props.label"
