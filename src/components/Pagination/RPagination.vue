@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import './pagination.css'
 import RDropdown from '../Dropdown/RDropdown.vue'
 
@@ -9,7 +9,8 @@ export interface PaginationProps {
   totalItems: number
   perPageOptions?: number[]
   itemsPerPageText?: string
-  position?: 'left' | 'center' | 'right'
+  position?: 'left' | 'center' | 'right' | string
+  infoText?: string
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -19,13 +20,23 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   perPageOptions: () => [10, 20, 50, 100],
   itemsPerPageText: 'Items per page:',
   position: 'right',
+  infoText: '1-10 of 100',
 })
 
-const emit = defineEmits(['update:page', 'update:perPage'])
+const emit = defineEmits(['update:page', 'update:perPage', 'update:info'])
 
 const perPage = ref(props.perPage || 10)
 
 const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage))
+
+const info = computed(() => ({
+  start: props.page * props.perPage - props.perPage,
+  end: props.page * props.perPage,
+}))
+
+watch(() => info.value, () => {
+  emit('update:info', info.value)
+})
 
 function changePage(page: number) {
   if (page < 1 || page > totalPages.value)
@@ -52,10 +63,13 @@ function changePerPage({ value: perPage }: { value: number }) {
           @update:modelValue="changePerPage"
         />
       </div>
+      <span class="r-pagination__paginator__info">
+        {{ props.infoText }}
+      </span>
       <button
         class="r-pagination__paginator__first"
         :disabled="props.page === 1"
-        @click="changePage(+props.page - 1)"
+        @click="changePage(1)"
       >
         <slot name="first">
           <svg
@@ -80,7 +94,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       <button
         class="r-pagination__paginator__prev"
         :disabled="props.page === 1"
-        @click="changePage(1)"
+        @click="changePage(+props.page - 1)"
       >
         <slot name="prev">
           <svg
@@ -150,9 +164,6 @@ function changePerPage({ value: perPage }: { value: number }) {
           </svg>
         </slot>
       </button>
-      <div class="r-pagination__paginator__total">
-        <!-- / {{ totalPages }} -->
-      </div>
     </div>
   </div>
 </template>

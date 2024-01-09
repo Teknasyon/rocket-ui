@@ -3,15 +3,15 @@
 .r-pagination {
   @apply flex items-center w-full;
 
-  &--left{
+  &--left {
     @apply justify-start;
   }
 
-  &--center{
+  &--center {
     @apply justify-center;
   }
 
-  &--right{
+  &--right {
     @apply justify-end;
   }
 
@@ -39,7 +39,11 @@
     }
 
     &__per-page {
-      @apply flex items-center gap-2 text-sm;
+      @apply flex items-center gap-8 text-sm;
+    }
+
+    &__info {
+      @apply flex items-center justify-center text-sm min-w-[122px];
     }
   }
 }

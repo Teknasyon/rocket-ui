@@ -14,7 +14,7 @@ const PaginationStory = {
     total: 10,
     perPage: 10,
     totalItems: 100,
-    infoText: 'Showing {from} to {to} of {total} entries',
+    infoText: '1-10 of 100',
   },
   argTypes: {
     'onUpdate:page': { action: 'update:page' },
