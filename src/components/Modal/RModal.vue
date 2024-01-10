@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, watchEffect } from 'vue'
+import { computed, onUnmounted, watch, watchEffect } from 'vue'
 import './modal.css'
 import Icon from '../Icon/RIcon.vue'
 
@@ -142,14 +142,14 @@ function handleOutside(event: Event) {
   if (event.target === event.currentTarget)
     emits('update:modelValue', false)
 }
-watchEffect(() => {
-  if (props.modelValue && !props.allowBodyScroll)
-    document.body.style.overflow = 'hidden'
-  else
-    document.body.style.overflow = 'auto'
-},
-{ flush: 'post' },
-)
+// watchEffect(() => {
+//   if (props.modelValue && !props.allowBodyScroll)
+//     document.body.style.overflow = 'hidden'
+//   else
+//     document.body.style.overflow = 'auto'
+// },
+// { flush: 'post' },
+// )
 
 onUnmounted(() => {
   if (!props.modelValue && props.allowBodyScroll)
@@ -159,8 +159,17 @@ onUnmounted(() => {
 // close on escape
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && props.modelValue && props.outsideClick)
+
     emits('update:modelValue', false)
 })
+
+// watch(() => props.modelValue, (val) => {
+//   if (!val)
+//     document.body.style.overflow = 'auto'
+// }, {
+//   deep: true,
+//   immediate: true,
+// })
 </script>
 
 <template>
