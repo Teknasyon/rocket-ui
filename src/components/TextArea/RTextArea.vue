@@ -131,6 +131,7 @@ watch(
       :text="props.label"
     />
     <textarea
+      v-bind="$attrs"
       :id="props.id"
       class="r-textarea"
       :class="{
