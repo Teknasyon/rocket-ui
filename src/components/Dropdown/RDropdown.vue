@@ -246,7 +246,7 @@ const inputModel = ref('')
 function isObject(option: Option) {
   const [optionKey] = Object.keys(option)
 
-  return ['label', 'value'].includes(optionKey)
+  return ['label', 'value']?.includes(optionKey)
 }
 
 const mutatedOptions = computed(() => {
@@ -265,6 +265,9 @@ const mutatedOptions = computed(() => {
 
 const mutatedModel = computed(() => {
   const model = props.modelValue
+
+  if (Object.keys(model).length === 0 && model.constructor === Object)
+    return model
 
   if (!isObject(model)) {
     return {
