@@ -266,16 +266,12 @@ const mutatedOptions = computed(() => {
 const mutatedModel = computed(() => {
   const model = props.modelValue
 
-  if (Object.keys(model).length === 0 && model.constructor === Object)
-    return model
-
-  if (!isObject(model)) {
+  if (!isObject(model) && !Array.isArray(model) && model.constructor !== Object) {
     return {
       value: model,
       label: String(model),
     }
   }
-
   return model
 })
 
