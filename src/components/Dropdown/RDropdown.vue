@@ -215,7 +215,7 @@ export interface SelectProps {
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
-  modelValue: '',
+  modelValue: {} as Option | Option[] | string | number | any,
   placeholder: '',
   taggable: false,
   multiple: false,
@@ -244,7 +244,7 @@ const active = ref(false)
 const inputModel = ref('')
 
 function isObject(option: Option) {
-  const [optionKey] = Object.keys(option)
+  const [optionKey] = Object?.keys(option)
 
   return ['label', 'value']?.includes(optionKey)
 }
@@ -266,12 +266,13 @@ const mutatedOptions = computed(() => {
 const mutatedModel = computed(() => {
   const model = props.modelValue
 
-  if (!isObject(model) && !Array.isArray(model) && model.constructor !== Object) {
+  if (model && !Array.isArray(model) && model.constructor !== Object && !isObject(model)) {
     return {
       value: model,
       label: String(model),
     }
   }
+
   return model
 })
 
