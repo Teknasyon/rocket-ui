@@ -6,6 +6,7 @@ import './dropdown.css'
 import RTooltip from '../Tooltip/RTooltip.vue'
 
 export interface Option {
+  [key: string]: any
   value: string | number
   label: string
   prependIcon?: string
@@ -244,6 +245,19 @@ const active = ref(false)
 const inputModel = ref('')
 
 function isObject(option: Option) {
+  if (!option)
+    return true
+  if (typeof option === 'object')
+    return true
+  if (typeof option === 'function')
+    return true
+  if (typeof option === 'symbol')
+    return true
+  if (typeof option === 'undefined')
+    return true
+  if (Array.isArray(option))
+    return true
+
   const [optionKey] = Object?.keys(option)
 
   return ['label', 'value']?.includes(optionKey)
@@ -266,7 +280,7 @@ const mutatedOptions = computed(() => {
 const mutatedModel = computed(() => {
   const model = props.modelValue
 
-  if (model && !Array.isArray(model) && model.constructor !== Object && !isObject(model)) {
+  if (!isObject(model)) {
     return {
       value: model,
       label: String(model),
