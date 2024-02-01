@@ -80,11 +80,11 @@ export const Overview: Story = {
               disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100',
             ]"
             @click="toggle"
-          >
-            <div>{{ isSelected ? 'Selected' : 'Click Me!' }}</div>
-          </div>
-        </Item>
-      </div>
+            >
+              <div>{{ isSelected ? 'Selected' : 'Click Me!' }}</div>
+            </div>
+          </Item>
+        </div>
       </ItemGroup>
     `,
   }),

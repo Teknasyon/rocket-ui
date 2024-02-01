@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
 
 export interface ItemGroupProps {
   /**
@@ -87,20 +87,20 @@ const RItemGroupSymbol = 'rocket-ui:r-item-group'
 
 const tag = ref<string>(props.as ?? 'div')
 
-const selectedItems = ref<number[] | string[]>(props.modelValue ?? [])
+const selectedItems = ref<number[] | string[]>(props.modelValue)
 
 const selectedClass = computed(() => props.selectedClass)
 provide(`${RItemGroupSymbol}:selectedClass`, selectedClass.value)
 
 function isSelected(id: never) {
-  return selectedItems.value.includes(id)
+  return selectedItems.value.includes(id) as boolean
 }
 provide(`${RItemGroupSymbol}:isSelected`, isSelected)
 
 function select(id: never, value: boolean) {
   if (props.disabled)
     return
-  if (props.mandatory && selectedItems.value.length === 1 && value)
+  if (props.mandatory && selectedItems.value.length === 1 && !value)
     return
   if (props.max && selectedItems.value.length === props.max && value)
     return
@@ -110,13 +110,20 @@ function select(id: never, value: boolean) {
     else
       selectedItems.value = selectedItems.value.filter(item => item !== id) as never[]
   }
-  else {
-    selectedItems.value = value ? [id] : []
-  }
+  else { selectedItems.value = id ? [id] : [] }
 
   emits('update:modelValue', selectedItems.value)
 }
 provide(`${RItemGroupSymbol}:select`, select)
+
+function isDisabled() {
+  return props.disabled
+}
+provide(`${RItemGroupSymbol}:isDisabled`, isDisabled)
+
+watch(() => props.modelValue, () => {
+  selectedItems.value = props.modelValue
+})
 </script>
 
 <template>

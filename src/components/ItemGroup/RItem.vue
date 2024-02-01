@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, withDefaults } from 'vue'
+import { computed, inject, watch, withDefaults } from 'vue'
 
 export interface ItemProps {
   /**
@@ -10,15 +10,6 @@ export interface ItemProps {
    * <RItem :value="1" />
    */
   value: any
-
-  /**
-   * Whether the item is disabled
-   * @default false
-   * @type boolean
-   * @example
-   * <RItem :disabled="true" />
-   */
-  disabled?: boolean
 
   /**
    * The class to apply to the selected item
@@ -43,14 +34,19 @@ const isSelected = inject(`${RItemGroupSymbol}:isSelected`) as (
 ) => boolean
 
 const classes = inject(`${RItemGroupSymbol}:selectedClass`, '') as string
-const selectedClass = computed(() => {
-  return isSelected(props.value) && [classes, props.selectedClass]
-})
 
 const select = inject(`${RItemGroupSymbol}:select`) as (
   id: number,
   value: boolean
 ) => void
+
+const isDisabled = inject(`${RItemGroupSymbol}:isDisabled`) as (
+  id: number
+) => boolean
+
+const selectedClass = computed(() => {
+  return isSelected(props.value) && [classes, props.selectedClass]
+})
 
 function handleToggle() {
   if (props.disabled)
@@ -67,11 +63,10 @@ function handleSelect() {
 
 <template>
   <slot
-    :disabled="props.disabled"
+    :disabled="isDisabled(props.value as number)"
     :is-selected="isSelected(props.value as number)"
     :select="handleSelect"
     :selected-class="selectedClass"
     :toggle="handleToggle"
-    :value="props.value"
   />
 </template>
