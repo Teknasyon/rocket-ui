@@ -57,7 +57,37 @@ export interface BadgeProps {
    */
   animation?: boolean
 
+  /**
+   * Class of the Badge
+   * @type { string | string[] }
+   * @example
+   * <Badge class="text-red-500" />
+   */
   class?: string | string[]
+
+  /**
+   * Content of the Badge
+   * @type { string }
+   * @example
+   * <Badge content="99+" />
+   */
+  content?: string
+
+  /**
+   * Class of the content of the Badge
+   * @type { string | string[] }
+   * @example
+   * <Badge contentClass="text-red-500" />
+   */
+  contentClass?: string | string[]
+
+  /**
+   * Wrapper class of the Badge
+   * @type { string | string[] }
+   * @example
+   * <Badge wrapperClass="text-red-500" />
+   */
+  wrapperClass?: string | string[]
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
@@ -68,26 +98,28 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   outside: false,
   animation: false,
   class: '',
+  contentClass: '',
+  wrapperClass: '',
 })
 defineEmits(['click'])
 const classes = computed(() => {
   return {
     'r-badge': true,
-    'r-badge__content': props.content,
+    [`r-badge--content ${props.contentClass}`]: props.content,
     [`r-badge--overlap-${props.placement}`]: props.overlap,
     [`r-badge--${props.placement}`]: props.placement,
     [`r-badge--outside-${props.placement}`]: props.outside,
     'r-badge--hover': props.hover,
     [`r-badge--${props.variant}`]: props.variant,
-    [props.class]: props.class,
+    [props.class as string]: props.class,
   }
 })
 </script>
 
 <template>
-  <div class="r-badge-wrapper group">
+  <div class="r-badge-wrapper group" :class="[props.wrapperClass]">
     <span :class="[{ 'animate-ping-2': props.animation }, classes]" />
-    <span :class="classes" />
+    <span :class="classes" v-html="props.content" />
     <slot />
   </div>
 </template>
