@@ -10,6 +10,9 @@ const DefaultArgs = {
   outside: false,
   animation: false,
   class: '',
+  content: '',
+  contentClass: '',
+  wrapperClass: '',
 }
 const DefaultArgTypes = {
   variant: {
@@ -100,5 +103,13 @@ export const WithAnimation: Story = {
   args: {
     ...DefaultArgs,
     animation: true,
+  },
+}
+
+export const WithCustomContent: Story = {
+  args: {
+    ...DefaultArgs,
+    content: '99+',
+    contentClass: 'text-[8px] w-5 h-5',
   },
 }
