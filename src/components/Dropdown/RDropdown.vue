@@ -240,7 +240,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 const selected = ref<Option>({} as Option)
-const selectedMultiple = reactive<Option[]>([])
+const selectedMultiple = ref<Option[]>([])
 const active = ref(false)
 const inputModel = ref('')
 
@@ -340,10 +340,11 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   if (option.disabled)
     return
   if (props.multiple || props.taggable) {
-    if (!selectedMultiple.find(opt => opt.value === option.value))
-      selectedMultiple.push(option)
+    if (!selectedMultiple.value.find(opt => opt.value === option.value))
+      selectedMultiple.value.push(option)
+
     else
-      selectedMultiple.splice(selectedMultiple.indexOf(option), 1)
+      selectedMultiple.value.splice(selectedMultiple.value.indexOf(option), 1)
 
     inputModel.value = ''
     if (props.searchable)
@@ -387,8 +388,8 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
     return
   e.stopPropagation()
   updatePosition()
-  const index = selectedMultiple.findIndex(opt => opt.value === option.value)
-  selectedMultiple.splice(index, 1)
+  const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
+  selectedMultiple.value.splice(index, 1)
 }
 /**
  * @description - Handles the not existing options
@@ -403,14 +404,14 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
     return
   const option = mutatedOptions.value.find((opt: Option) => opt.label === value)
   if (!option) {
-    selectedMultiple.push({ value, label: value })
+    selectedMultiple.value.push({ value, label: value })
     inputModel.value = ''
     input.value?.focus()
   }
 }
 function isSelected(option: Option) {
   if (props.multiple || props.taggable)
-    return selectedMultiple.find(opt => opt.value === option.value)
+    return selectedMultiple.value.find(opt => opt.value === option.value)
 
   return selected.value.value === option.value
 }
@@ -433,19 +434,17 @@ const isReadOnly = computed(() => {
 
 function reset() {
   if (mutatedModel.value) {
-    if (props.multiple) {
-      selectedMultiple.push(mutatedModel.value as Option)
+    if (props.multiple || props.taggable) {
+      selectedMultiple.value = mutatedModel.value as Option[]
     }
     else {
-      // console.log(mutatedModel.value, 'mutatedModel.value')
-
       selected.value = mutatedModel.value as Option
       inputModel.value = (mutatedModel.value as Option).label
     }
   }
   else {
     selected.value = {} as Option
-    selectedMultiple.splice(0, selectedMultiple.length)
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
   }
 }
 
@@ -466,7 +465,7 @@ function handleClearable(e: MouseEvent, updatePosition: () => void) {
   e.stopPropagation()
   updatePosition()
   if (props.multiple || props.taggable) {
-    selectedMultiple.splice(0, selectedMultiple.length)
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
   }
   selected.value = {} as Option
