@@ -4,6 +4,7 @@ import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
 import RTooltip from '../Tooltip/RTooltip.vue'
+import { o } from 'vitest/dist/types-198fd1d9'
 
 export interface Option {
   [key: string]: any
@@ -410,10 +411,12 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
   }
 }
 function isSelected(option: Option) {
+  if (!option || option?.value === undefined || option?.value === null)
+    return false
   if (props.multiple || props.taggable)
-    return selectedMultiple.value.find(opt => opt.value === option.value)
+    return selectedMultiple.value.find(opt => opt?.value === option?.value)
 
-  return selected.value.value === option.value
+  return selected.value?.value === option?.value
 }
 /**
  * @description - Search for options
