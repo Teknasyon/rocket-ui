@@ -66,6 +66,15 @@ export interface Props {
    * <Chip closable />
    */
   closable?: boolean
+
+  /**
+   * No wrap state of the Chip
+   * @type boolean
+   * @default false
+   * @example
+   * <Chip noWrap />
+   */
+  noWrap?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
@@ -75,6 +84,7 @@ const props = withDefaults(defineProps<Props>(), {
   appendIcon: '',
   ghost: false,
   closable: false,
+  noWrap: false,
 })
 const emit = defineEmits(['click:chip', 'click:close'])
 const classes = computed<object>(() => {
@@ -114,7 +124,12 @@ function clickClose(e: MouseEvent) {
           :size="12"
         />
       </slot>
-      <span class="r-chip__content__label">{{ props.label }}</span>
+      <span
+        class="r-chip__content__label"
+        :class="[props.noWrap && 'whitespace-nowrap']"
+      >
+        {{ props.label }}
+      </span>
     </div>
     <slot name="append">
       <Icon
