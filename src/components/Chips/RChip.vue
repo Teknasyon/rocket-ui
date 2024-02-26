@@ -59,13 +59,13 @@ export interface Props {
   ghost?: boolean
 
   /**
-   * Closable state of the Chip
+   * Clearable state of the Chip
    * @type boolean
    * @default false
    * @example
-   * <Chip closable />
+   * <Chip clearable />
    */
-  closable?: boolean
+  clearable?: boolean
 
   /**
    * No wrap state of the Chip
@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<Props>(), {
   prependIcon: '',
   appendIcon: '',
   ghost: false,
-  closable: false,
+  clearable: false,
   noWrap: false,
 })
 const emit = defineEmits(['click:chip', 'click:close'])
@@ -93,23 +93,29 @@ const classes = computed<object>(() => {
     'r-chip--disabled': props.disabled,
     [`r-chip__${props.variant}`]: props.variant,
     [`r-chip__${props.variant}--ghost`]: props.ghost,
-    'r-chip--closable': props.closable,
+    'r-chip--clearable': props.clearable,
   }
 })
 
 function clickChip(e: MouseEvent) {
-  if (props.closable)
+  if (props.clearable)
     e.stopPropagation()
   if (props.disabled)
     return
   emit('click:chip', e)
 }
 function clickClose(e: MouseEvent) {
-  if (props.disabled || !props.closable)
+  if (props.disabled || !props.clearable)
     return
   e.stopPropagation()
   emit('click:close', e)
 }
+
+const appendIcon = computed(() => {
+  if (props.clearable)
+    return 'mdiClose'
+  return props.appendIcon
+})
 </script>
 
 <template>
@@ -133,10 +139,10 @@ function clickClose(e: MouseEvent) {
     </div>
     <slot name="append">
       <Icon
-        v-if="props.appendIcon"
+        v-if="appendIcon"
         :aria-disabled="props.disabled"
         class="r-chip__content__append-icon"
-        :name="props.appendIcon"
+        :name="appendIcon"
         :size="12"
         @click="clickClose($event)"
       />
