@@ -1,11 +1,11 @@
 @import '../../index.css';
 
 .r-dropdown-wrapper {
-  @apply relative;
+  @apply relative w-full;
 }
 
 .r-dropdown {
-  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-[7px] px-4 text-left cursor-pointer;
+  @apply flex items-center bg-white border border-[var(--neutral-200)] rounded-md shadow-sm py-[7px] px-4 text-left cursor-pointer w-full;
 
   &--active {
     @apply border border-[var(--primary-500)] ring-inset ring-2;
@@ -35,27 +35,14 @@
     }
   }
 
-  &__tags {
-    @apply flex flex-wrap items-center gap-0.5 mr-2;
 
-    &__chip {
-      @apply flex items-center gap-2 rounded-3xl text-xs text-[var(--neutral-900)] bg-[var(--neutral-100)];
+  &__selections {
+    @apply flex items-center gap-0.5 flex-wrap mr-2 w-full;
 
-      & > .chip__text {
-        @apply whitespace-nowrap;
-      }
-    }
-  }
-
-  &__multiple {
-    @apply flex items-center gap-0.5 flex-wrap mr-2;
-    & > * {
-      @apply flex-1 whitespace-nowrap;
-    }
   }
 
   &__input {
-    @apply font-medium text-sm text-[var(--neutral-900)] caret-[var(--primary-500)] block w-full placeholder-[var(--neutral-500)] min-w-[40px];
+    @apply flex-1 font-medium text-sm text-[var(--neutral-900)] caret-[var(--primary-500)] placeholder-[var(--neutral-500)] min-w-0 w-full;
 
     &--loading {
       @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
@@ -75,7 +62,7 @@
   }
 
   &__clearable {
-    @apply min-h-[18px] text-[var(--neutral-500)] translate-x-4 opacity-0 pointer-events-none transition-all duration-200 ease-in-out;
+    @apply min-h-[18px] text-[var(--neutral-500)] translate-x-4 opacity-0 pointer-events-none transition-all duration-200 ease-in-out group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100;
 
     &[data-has-value="true"] {
       @apply opacity-100 pointer-events-auto translate-x-0;

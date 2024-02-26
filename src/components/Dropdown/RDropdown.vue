@@ -4,7 +4,6 @@ import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
 import RTooltip from '../Tooltip/RTooltip.vue'
-import { o } from 'vitest/dist/types-198fd1d9'
 
 export interface Option {
   [key: string]: any
@@ -54,13 +53,13 @@ export interface SelectProps {
   placeholder?: string
 
   /**
-   * Allow to create new options
+   * Allow to select multiple options as chips
    * @type {boolean}
    * @default false
    * @example
-   * <Dropdown taggable />
+   * <Dropdown chips />
    */
-  taggable?: boolean
+  chips?: boolean
 
   /**
    * Allow to select multiple options
@@ -219,7 +218,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   modelValue: {} as Option | Option[] | string | number | any,
   placeholder: '',
-  taggable: false,
+  chips: false,
   multiple: false,
   disabled: false,
   loading: false,
@@ -340,7 +339,7 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   updatePosition()
   if (option.disabled)
     return
-  if (props.multiple || props.taggable) {
+  if (props.multiple) {
     if (!selectedMultiple.value.find(opt => opt.value === option.value))
       selectedMultiple.value.push(option)
 
@@ -371,7 +370,6 @@ function selectOneOption(e: MouseEvent, option: Option) {
     emit('update:modelValue', '')
     return
   }
-  // console.log('selectOneOption', option, selected.value)
 
   inputModel.value = option.label
   selected.value = option
@@ -396,7 +394,7 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
  * @description - Handles the not existing options
  */
 function createTag(e: KeyboardEvent, updatePosition: any) {
-  if (!props.taggable)
+  if (!props.multiple)
     return
   e.stopPropagation()
   updatePosition()
@@ -413,7 +411,7 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
 function isSelected(option: Option) {
   if (!option || option?.value === undefined || option?.value === null)
     return false
-  if (props.multiple || props.taggable)
+  if (props.multiple)
     return selectedMultiple.value.find(opt => opt?.value === option?.value)
 
   return selected.value?.value === option?.value
@@ -437,7 +435,7 @@ const isReadOnly = computed(() => {
 
 function reset() {
   if (mutatedModel.value) {
-    if (props.multiple || props.taggable) {
+    if (props.multiple) {
       selectedMultiple.value = mutatedModel.value as Option[]
     }
     else {
@@ -455,7 +453,7 @@ function handleInput(updatePosition: () => void) {
   if (props.searchable)
     updatePosition()
 
-  if (props.multiple || props.taggable)
+  if (props.multiple)
     return
 
   if (inputModel.value === '') {
@@ -467,7 +465,7 @@ function handleInput(updatePosition: () => void) {
 function handleClearable(e: MouseEvent, updatePosition: () => void) {
   e.stopPropagation()
   updatePosition()
-  if (props.multiple || props.taggable) {
+  if (props.multiple) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
   }
@@ -516,6 +514,7 @@ watch(() => mutatedModel.value, (_value) => {
             'r-dropdown--loading': props.loading,
             [props.dropdownClass]: props.dropdownClass,
             'r-dropdown--error': props.errorMsg,
+            'group': inputModel !== '' || selectedMultiple.length,
           }"
           role="select"
           @click="setActive($event, activators.click)"
@@ -532,50 +531,52 @@ watch(() => mutatedModel.value, (_value) => {
               <Icon v-if="props.prependIcon" :name="props.prependIcon" />
             </slot>
           </div>
-          <div v-if="props.taggable && selectedMultiple.length" class="r-dropdown__tags">
-            <slot
-              name="tags"
-              :options="selectedMultiple"
-              :remove-option="removeOption"
-              :update-position="updatePosition"
+
+          <div class="r-dropdown__selections">
+            <div v-for="(option, index) in selectedMultiple" :key="index">
+              <slot :index="index" name="selection" :option="option">
+                <p v-if="!props.chips">
+                  {{ `${option.label}, ` }}
+                </p>
+
+                <slot
+                  v-else
+                  name="chip"
+                  :remove-option="removeOption"
+                >
+                  <Chip
+                    append-icon="mdiClose"
+                    closable
+                    :label="option.label"
+                    no-wrap
+                    variant="primary"
+                    @click:close="removeOption($event, option, updatePosition)"
+                  />
+                </slot>
+              </slot>
+            </div>
+            <input
+              :id="props.id"
+              ref="input"
+              v-model="inputModel"
+              :autocomplete="props.autocomplete"
+              class="r-dropdown__input"
+              :class="{
+                'r-dropdown__input--loading': props.loading,
+              }"
+              :disabled="props.disabled"
+              :placeholder="props.placeholder"
+              :readonly="isReadOnly"
+              role="presentation"
+              type="text"
+              @input.prevent="handleInput(updatePosition)"
+              @keydown.backspace="
+                removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
+              "
+              @keydown.enter="createTag($event, updatePosition)"
             >
-              <Chip
-                v-for="(option, index) in selectedMultiple"
-                :key="index"
-                append-icon="mdiClose"
-                class="r-dropdown__tags__chip"
-                closable
-                :label="option.label"
-                variant="primary"
-                @click:close="removeOption($event, option, updatePosition)"
-              />
-            </slot>
           </div>
-          <div v-if="props.multiple && selectedMultiple.length" class="r-dropdown__multiple">
-            <p v-for="(option, index) in selectedMultiple" :key="index">
-              {{ `${option.label},` }}
-            </p>
-          </div>
-          <input
-            :id="props.id"
-            ref="input"
-            v-model="inputModel"
-            :autocomplete="props.autocomplete"
-            class="r-dropdown__input"
-            :class="{
-              'r-dropdown__input--loading': props.loading,
-            }"
-            :disabled="props.disabled"
-            :placeholder="props.placeholder"
-            :readonly="isReadOnly"
-            role="presentation"
-            type="text"
-            @input.prevent="handleInput(updatePosition)"
-            @keydown.backspace="
-              removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
-            "
-            @keydown.enter="createTag($event, updatePosition)"
-          >
+
           <div
             v-if="props.clearable"
             class="r-dropdown__clearable"
