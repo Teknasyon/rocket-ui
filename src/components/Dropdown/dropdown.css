@@ -37,7 +37,7 @@
 
 
   &__selections {
-    @apply flex items-center gap-0.5 flex-wrap mr-2 w-full;
+    @apply flex items-center gap-0.5 flex-wrap w-full;
 
   }
 

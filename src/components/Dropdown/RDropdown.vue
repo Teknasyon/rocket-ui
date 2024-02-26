@@ -213,6 +213,15 @@ export interface SelectProps {
    * <Dropdown hideOptionCheckIcon />
    */
   hideOptionCheckIcon?: boolean
+
+  /**
+   * Clearable state of the chips
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown clearableChip />
+   */
+  clearableChip?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -236,6 +245,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   autocomplete: 'off',
   noOptionsText: 'No options',
   hideOptionCheckIcon: false,
+  clearableChip: false,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -545,8 +555,7 @@ watch(() => mutatedModel.value, (_value) => {
                   :remove-option="removeOption"
                 >
                   <Chip
-                    append-icon="mdiClose"
-                    closable
+                    :clearable="props.clearableChip"
                     :label="option.label"
                     no-wrap
                     variant="primary"
@@ -662,7 +671,12 @@ watch(() => mutatedModel.value, (_value) => {
           </li>
           <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
-              {{ props.noOptionsText || 'No options' }}
+              {{
+
+                props.multiple
+                  ? 'No options hit to enter for create'
+                  : props.noOptionsText
+              }}
             </slot>
           </li>
         </ul>
