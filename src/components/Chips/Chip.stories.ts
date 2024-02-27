@@ -23,7 +23,7 @@ const DefaultArgs = {
   ghost: false,
   variant: 'primary',
   disabled: false,
-  closable: true,
+  clearable: true,
 }
 
 const ChipStory = {
@@ -95,9 +95,9 @@ export const Disabled: Story = {
   },
 }
 
-export const Closable: Story = {
+export const clearable: Story = {
   args: {
-    closable: true,
+    clearable: true,
   },
 }
 

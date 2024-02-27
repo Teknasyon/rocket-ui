@@ -17,7 +17,7 @@ const DefaultArgs = {
     { value: '10', label: 'Option 10' },
   ],
   placeholder: 'Select an option',
-  taggable: false,
+  chips: false,
   multiple: false,
   disabled: false,
   loading: false,
@@ -26,6 +26,17 @@ const DefaultArgs = {
   modelValue: '',
   searchable: false,
   clearable: false,
+  clearableChip: true,
+  hideOptionCheckIcon: false,
+  noOptionsText: 'No options found',
+  autocomplete: 'off',
+  hideDetails: false,
+  errorMsg: '',
+  optionsClass: '',
+  dropdownClass: '',
+  closeOnSelect: true,
+  label: '',
+  id: 'r-dropdown',
 }
 const DropdownStory = {
   title: 'Form/Dropdown',
@@ -61,9 +72,9 @@ export const Multiple: Story = {
   },
 }
 
-export const Taggable: Story = {
+export const Chips: Story = {
   args: {
-    taggable: true,
+    chips: true,
     placeholder: 'Search or create a tag',
     appendIcon: 'mdiChevronDown',
   },

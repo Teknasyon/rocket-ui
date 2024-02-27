@@ -68,13 +68,13 @@ The **disabled** prop disables the option and prevent the user from interacting 
 
 The **placeholder** prop allows you to define the default text displayed in the dropdown button before a user makes a selection.
 
-### taggable (optional)
+### chips (optional)
 
-The **taggable** prop allows users to create new options on-the-fly, rather than just selecting from pre-defined options.
+The **chips** prop allows you to display the selected options as chips, which can be removed by the user.
 
 ### multiple (optional)
 
-The **multiple** prop allows users to select more than one option at a time.
+The **multiple** prop allows users to select more than one option at a time and allows users to create new options on-the-fly.
 
 ### disabled (optional)
 
@@ -87,6 +87,18 @@ The **loading** prop allows you to indicate that the component is in a loading s
 ### modelValue (optional)
 
 The **modelValue** prop allows you to define the value of the selected option.
+
+## clearable (optional)
+
+The **clearable** prop allows you to clear the selected options.
+
+## searchable (optional)
+
+The **searchable** prop allows you to search for options.
+
+## clearableChip (optional)
+
+The **clearableChip** prop allows you to clear the selected option.
 
 ## Slots <a id="slots" />
 
@@ -110,10 +122,16 @@ The **prependIcon** slot allows you to define the content that will be displayed
   <Story of={DropdownStories.Multiple} />
 </Canvas>
 
-### Taggable
+### Chips
 
 <Canvas>
-  <Story of={DropdownStories.Taggable} />
+  <Story of={DropdownStories.Chips} />
+</Canvas>
+
+### Search
+
+<Canvas>
+  <Story of={DropdownStories.Search} />
 </Canvas>
 
 ### Tips <a id="tips" />
