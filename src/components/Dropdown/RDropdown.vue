@@ -219,9 +219,9 @@ export interface SelectProps {
    * @type {boolean}
    * @default false
    * @example
-   * <Dropdown clearableChip />
+   * <Dropdown hideChipClear />
    */
-  clearableChip?: boolean
+  hideChipClear?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -245,7 +245,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   autocomplete: 'off',
   noOptionsText: 'No options',
   hideOptionCheckIcon: false,
-  clearableChip: true,
+  hideChipClear: false,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -542,27 +542,28 @@ watch(() => mutatedModel.value, (_value) => {
           </div>
 
           <div class="r-dropdown__selections">
-            <div v-for="(option, index) in selectedMultiple" :key="index">
-              <slot :index="index" name="selection" :option="option">
-                <p v-if="!props.chips">
-                  {{ `${option.label}, ` }}
-                </p>
+            <slot
+              v-for="(option, index) in selectedMultiple"
+              :key="index"
+              :index="index"
+              name="selection"
+              :option="option"
+              :remove-option="removeOption"
+            >
+              <p v-if="!props.chips">
+                {{ `${option.label}, ` }}
+              </p>
 
-                <slot
-                  v-else
-                  name="chip"
-                  :remove-option="removeOption"
-                >
-                  <Chip
-                    :clearable="props.clearableChip"
-                    :label="option.label"
-                    no-wrap
-                    variant="primary"
-                    @click:close="removeOption($event, option, updatePosition)"
-                  />
-                </slot>
-              </slot>
-            </div>
+              <Chip
+                v-else
+                :clearable="!props.hideChipClear"
+                :label="option.label"
+                no-wrap
+                variant="primary"
+                @click:close="removeOption($event, option, updatePosition)"
+              />
+            </slot>
+
             <input
               :id="props.id"
               ref="input"
