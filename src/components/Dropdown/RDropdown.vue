@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, defineEmits, onMounted, ref, watch } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
@@ -235,7 +235,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   appendIcon: 'mdiChevronDown',
   searchable: false,
   clearable: false,
-  id: 'test',
+  id: 'r-dropdown',
   label: '',
   closeOnSelect: true,
   dropdownClass: '',
@@ -245,7 +245,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   autocomplete: 'off',
   noOptionsText: 'No options',
   hideOptionCheckIcon: false,
-  clearableChip: false,
+  clearableChip: true,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -321,8 +321,7 @@ function setActive(e: MouseEvent, activator?: () => void) {
   if (active.value) {
     dropdown.value?.classList.add('r-dropdown--active')
     dropdown.value?.focus()
-    if (props.searchable)
-      input.value?.focus()
+    input.value?.focus()
 
     return
   }
