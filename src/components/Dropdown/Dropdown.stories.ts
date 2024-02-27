@@ -26,7 +26,7 @@ const DefaultArgs = {
   modelValue: '',
   searchable: false,
   clearable: false,
-  clearableChip: true,
+  hideChipClear: true,
   hideOptionCheckIcon: false,
   noOptionsText: 'No options found',
   autocomplete: 'off',
