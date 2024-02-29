@@ -259,11 +259,11 @@ function onMouseMove() {
     handleUpdate()
 }
 
-function handleUpdate() {
+function handleUpdate(extraData?: any) {
   const { placement, offset, padding, disabled, showDelay, type } = props
   if (disabled)
     return
-  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type)
+  update(trigger, tooltip, arrowElement, placement, offset, padding, showDelay, type, extraData)
 }
 
 const classes = computed(() => {

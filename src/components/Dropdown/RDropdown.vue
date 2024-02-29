@@ -345,7 +345,7 @@ function removeActive() {
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   e.stopPropagation()
-  updatePosition()
+  updatePosition({ hideDetails: props.hideDetails })
   if (option.disabled)
     return
   if (props.multiple) {
@@ -395,7 +395,7 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
   if (inputModel.value !== '')
     return
   e.stopPropagation()
-  updatePosition()
+  updatePosition({ hideDetails: props.hideDetails })
   const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
   selectedMultiple.value.splice(index, 1)
 }
@@ -406,7 +406,7 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
   if (!props.multiple)
     return
   e.stopPropagation()
-  updatePosition()
+  updatePosition({ hideDetails: props.hideDetails })
   const value = inputModel.value
   if (value === '')
     return
@@ -460,7 +460,7 @@ function reset() {
 
 function handleInput(updatePosition: () => void) {
   if (props.searchable)
-    updatePosition()
+    updatePosition({ hideDetails: props.hideDetails })
 
   if (props.multiple)
     return
@@ -473,7 +473,7 @@ function handleInput(updatePosition: () => void) {
 
 function handleClearable(e: MouseEvent, updatePosition: () => void) {
   e.stopPropagation()
-  updatePosition()
+  updatePosition({ hideDetails: props.hideDetails })
   if (props.multiple) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
@@ -559,7 +559,7 @@ watch(() => mutatedModel.value, (_value) => {
                 :clearable="!props.hideChipClear"
                 :label="option.label"
                 no-wrap
-                variant="primary"
+                variant="info"
                 @click:close="removeOption($event, option, updatePosition)"
               />
             </slot>

@@ -60,6 +60,7 @@ export async function update(
   padding: number,
   duration: number = 300,
   theme: Theme | string,
+  extraData: any,
 ) {
   if (!trigger || !tooltip)
     return
@@ -76,12 +77,18 @@ export async function update(
     if (!tooltip)
       return
 
-    const parentLeft = trigger.offsetParent?.getBoundingClientRect().left || 0
+    middlewareData.flip && tooltip.setAttribute('data-placement', placement)
+
+    const parentLeft = trigger.offsetParent?.getBoundingClientRect().left
+    const parentBottom = trigger.offsetParent?.getBoundingClientRect().bottom
+    const parentWidth = trigger.offsetParent?.getBoundingClientRect().width
+
+    const safeParentBottom = extraData?.hideDetails ? Number(parentBottom) - 16 : parentBottom
 
     Object.assign(tooltip.style, {
-      maxWidth: theme === Theme.Dropdown ? `${trigger.offsetWidth}px` : 'auto',
+      maxWidth: theme === Theme.Dropdown ? `${parentWidth}px` : 'auto',
       left: theme === Theme.Dropdown ? `${parentLeft}px` : `${x}px`,
-      top: `${y}px`,
+      top: theme === Theme.Dropdown ? `${safeParentBottom}px` : `${y}px`,
       animation: `r-tooltip-show ${duration}ms ease-in-out forwards`,
       transformOrigin: 'start',
     })
