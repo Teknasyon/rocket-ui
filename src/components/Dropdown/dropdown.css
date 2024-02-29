@@ -83,7 +83,7 @@
 }
 
 .r-dropdown-options {
-  @apply p-2 left-0 mt-1 bg-white rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none;
+  @apply p-2 left-0 mt-1 bg-white rounded-md shadow-lg max-h-40 overflow-auto focus:outline-none;
 
   &__option {
     @apply text-[var(--neutral-900)] transition-all duration-200 

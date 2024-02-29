@@ -311,7 +311,7 @@ const wrapper = ref<HTMLElement>()
  * @description - Handles the appearance of the select list
  * @param e MouseEvent
  */
-function setActive(e: MouseEvent, activator?: () => void) {
+function setActive(e: MouseEvent, activator?: () => void, updatePosition?: any) {
   e.stopPropagation()
   if (props.disabled)
     return
@@ -345,7 +345,7 @@ function removeActive() {
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   e.stopPropagation()
-  updatePosition({ hideDetails: props.hideDetails })
+  updatePosition()
   if (option.disabled)
     return
   if (props.multiple) {
@@ -395,7 +395,7 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
   if (inputModel.value !== '')
     return
   e.stopPropagation()
-  updatePosition({ hideDetails: props.hideDetails })
+  updatePosition()
   const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
   selectedMultiple.value.splice(index, 1)
 }
@@ -406,7 +406,7 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
   if (!props.multiple)
     return
   e.stopPropagation()
-  updatePosition({ hideDetails: props.hideDetails })
+  updatePosition()
   const value = inputModel.value
   if (value === '')
     return
@@ -458,9 +458,9 @@ function reset() {
   }
 }
 
-function handleInput(updatePosition: () => void) {
+function handleInput(updatePosition: any) {
   if (props.searchable)
-    updatePosition({ hideDetails: props.hideDetails })
+    updatePosition()
 
   if (props.multiple)
     return
@@ -471,9 +471,9 @@ function handleInput(updatePosition: () => void) {
   }
 }
 
-function handleClearable(e: MouseEvent, updatePosition: () => void) {
+function handleClearable(e: MouseEvent, updatePosition: any) {
   e.stopPropagation()
-  updatePosition({ hideDetails: props.hideDetails })
+  updatePosition()
   if (props.multiple) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
@@ -485,6 +485,10 @@ function handleClearable(e: MouseEvent, updatePosition: () => void) {
 
 onMounted(() => {
   reset()
+  if (navigator.userAgent.includes('iPhone')) {
+    // @ts-expect-error - iOS viewport fix
+    document.querySelector('[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1')
+  }
 })
 
 /**
@@ -526,7 +530,7 @@ watch(() => mutatedModel.value, (_value) => {
             'group': inputModel !== '' || selectedMultiple.length,
           }"
           role="select"
-          @click="setActive($event, activators.click)"
+          @click="setActive($event, activators.click, updatePosition)"
         >
           <div
             v-if="props.prependIcon || $slots.prepend"
@@ -623,6 +627,28 @@ watch(() => mutatedModel.value, (_value) => {
             [props.optionsClass]: props.optionsClass,
           }"
         >
+          <!-- <li>
+            <input
+              :id="props.id"
+              ref="input2"
+              v-model="inputModel"
+              :autocomplete="props.autocomplete"
+              class="r-dropdown__input"
+              :class="{
+                'r-dropdown__input--loading': props.loading,
+              }"
+              :disabled="props.disabled"
+              :placeholder="props.placeholder"
+              :readonly="isReadOnly"
+              role="presentation"
+              type="text"
+              @input.prevent="handleInput(updatePosition)"
+              @keydown.backspace="
+                removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
+              "
+              @keydown.enter="createTag($event, updatePosition)"
+            >
+          </li> -->
           <li
             v-for="option in searchedOptions"
             :key="option.value"
