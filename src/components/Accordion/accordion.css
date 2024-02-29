@@ -40,7 +40,7 @@
   }
 
   &[data-state='opened'] {
-    @apply border-[var(--primary-500)] ring-inset ring-2 ring-[var(--primary-200)];
+    @apply border-[var(--primary-500)] ring ring-[var(--primary-75)];
   }
 
   &[data-state='opened'] &__icon {

@@ -17,7 +17,7 @@ input {
 }
 
 .r-textfield {
-  @apply h-10 gap-2 box-border w-full flex items-center text-sm border border-solid border-[var(--neutral-200)] text-[var(--neutral-500)] bg-[var(--textfield-bg)]  rounded-lg px-4 py-2.5;
+  @apply h-10 gap-2 box-border w-full flex items-center text-sm border border-solid border-[var(--primary-75)] text-[var(--neutral-500)] bg-[var(--textfield-bg)] rounded-lg px-4 py-2.5;
 
   &__label {
   }
@@ -45,7 +45,7 @@ input {
   }
 
   &--focus {
-    @apply ring-inset ring-2 ring-[var(--primary-75)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
+    @apply ring ring-[var(--primary-75)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
   }
   &--filled {
     @apply bg-[var(--textfield-bg)] text-[var(--neutral-900)] font-medium;
