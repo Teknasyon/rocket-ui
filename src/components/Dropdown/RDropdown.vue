@@ -222,6 +222,15 @@ export interface SelectProps {
    * <Dropdown hideChipClear />
    */
   hideChipClear?: boolean
+
+  /**
+   * Tooltip class
+   * @type {string}
+   * @default ''
+   * @example
+   * <Dropdown tooltipClass="w-96" />
+   */
+  tooltipClass?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -246,6 +255,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   noOptionsText: 'No options',
   hideOptionCheckIcon: false,
   hideChipClear: false,
+  tooltipClass: '',
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -512,7 +522,7 @@ watch(() => mutatedModel.value, (_value) => {
       outside-click
       placement="bottom"
       resizable
-      tooltip-class="w-full"
+      :tooltip-class="['w-full', props.tooltipClass]"
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
@@ -561,9 +571,10 @@ watch(() => mutatedModel.value, (_value) => {
               <Chip
                 v-else
                 :clearable="!props.hideChipClear"
+                ghost
                 :label="option.label"
                 no-wrap
-                variant="info"
+                variant="primary"
                 @click:close="removeOption($event, option, updatePosition)"
               />
             </slot>
