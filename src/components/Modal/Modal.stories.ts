@@ -102,11 +102,11 @@ export const WithForm: Story = {
       <div>
         <Modal v-bind="args">
           <template v-slot:default>
-            <div>
+            <div class="px-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">Account Type</label>
               <Dropdown placeholder="Select a option" :options="[{label: 'Option 1', value:'Option 1'}, {label: 'Option 2', value: 'Option 2'}]" />
               <Textfield id="name" label="Name" placeholder="type a name" />
-              <Textfield id="email" label="Email" placeholder="type a email" />
+              <Textfield id="email" label="Email" placeholder="type an email" />
               <Textfield id="password" label="Password" placeholder="type a password" type="password" />
             </div>
           </template>
