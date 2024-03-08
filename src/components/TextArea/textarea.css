@@ -5,7 +5,7 @@
 }
 
 .r-textarea {
-  @apply outline-none px-3 py-2 rounded-lg border border-[var(--neutral-200)] text-[var(--neutral-900)] min-h-[80px] min-w-[320px];
+  @apply outline-none px-3 py-2 rounded-lg border border-[var(--neutral-75)] text-[var(--neutral-900)] min-h-[80px] min-w-[320px];
 
   &:hover {
     @apply border-[var(--primary-500)];

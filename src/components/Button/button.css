@@ -67,7 +67,7 @@
         @apply ring-[var(--primary-100)] bg-[var(--primary-500)];
       }
       &:disabled {
-        @apply bg-[var(--primary-100)] text-[var(--primary-200)];
+        @apply bg-[var(--primary-75)];
       }
     }
 
@@ -244,7 +244,7 @@
     @apply bg-transparent text-[var(--neutral-900)] border-[var(--neutral-200)];
 
     &:hover {
-      @apply bg-[var(--neutral-100)];
+      @apply bg-[var(--neutral-50)];
     }
     &:active {
       @apply ring-[var(--neutral-100)] bg-transparent text-[var(--neutral-900)] border-[var(--neutral-200)];
@@ -288,7 +288,7 @@
         @apply bg-[var(--error-100)];
       }
       &:active {
-        @apply ring-[var(--error-100)] bg-transparent text-[var(--error-500)] border-transparent;
+        @apply ring-[var(--error-100)] bg-transparent text-[var(--error-500)] border-[var(--error-500)];
       }
       &:disabled {
         @apply ring-[var(--error-100)] text-[var(--error-200)];
