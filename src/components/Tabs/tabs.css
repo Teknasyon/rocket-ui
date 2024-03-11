@@ -1,17 +1,14 @@
-@tailwind components;
+@import '../../index.css';
 
 .r-tabs {
-  @apply w-fit flex transition-all;
+  @apply w-full flex flex-col transition-all duration-300 relative;
+
+  &:not(.r-tabs--tile)::after {
+    @apply block w-full h-[1px] bg-[var(--neutral-75)] -bottom-0 absolute -z-10;
+    content: '';
+  }
 
   &--tile {
-    @apply bg-slate-100 rounded-md p-1;
-  }
-
-  &--block {
-    @apply w-full;
-  }
-
-  &--scrollable {
-    @apply overflow-x-auto;
+    @apply w-fit bg-[var(--neutral-100)] rounded-md p-1;
   }
 }

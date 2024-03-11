@@ -58,15 +58,14 @@ const props = withDefaults(defineProps<IProps>(), {
   tile: false,
   scrollable: false,
 })
-const emits = defineEmits(['update:modelValue', 'click:icon'])
+const emits = defineEmits(['update:modelValue'])
 const activeTab = ref(props.modelValue || props.tabs[0].id)
 
 const tabsClasses = computed(() => {
   return {
     'r-tabs': true,
-    'r-tabs--block': props.block,
     'r-tabs--tile': props.tile,
-    'r-tabs--scrollable': props.scrollable,
+
   }
 })
 
@@ -76,30 +75,33 @@ watch(
     emits('update:modelValue', activeTab.value)
   },
 )
-
-function handleIconClick() {
-  emits('click:icon')
-}
 </script>
 
 <template>
   <div :class="tabsClasses">
-    <slot>
-      <TabItem
-        v-for="(tab, index) in props.tabs"
-        :id="tab.id"
-        :key="index"
-        v-model="activeTab"
-        :active="index === activeTab"
-        :append-icon="tab.appendIcon"
-        :block="block"
-        :disabled="tab.disabled"
-        :label="tab.label"
-        :prepend-icon="tab.prependIcon"
-        :tile="tile"
-        :variant="tab.variant"
-        @click:icon="handleIconClick"
-      />
-    </slot>
+    <div
+      class=" flex"
+      :class="[{
+        'w-full': props.block,
+        'overflow-x-auto': props.scrollable,
+      }]"
+    >
+      <slot :active-tab="activeTab">
+        <TabItem
+          v-for="(tab, index) in props.tabs"
+          :id="tab.id"
+          :key="index"
+          v-model="activeTab"
+          :active="index === activeTab"
+          :append-icon="tab.appendIcon"
+          :block="block"
+          :disabled="tab.disabled"
+          :label="tab.label"
+          :prepend-icon="tab.prependIcon"
+          :tile="tile"
+          :variant="tab.variant"
+        />
+      </slot>
+    </div>
   </div>
 </template>
