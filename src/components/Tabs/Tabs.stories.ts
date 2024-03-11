@@ -12,6 +12,8 @@ const DefaultArgs = {
   block: false,
   activeTab: 0,
   tile: false,
+  modelValue: 0,
+  scrollable: false,
 }
 
 const TabsStory = {
