@@ -14,7 +14,7 @@
   }
 
   &[aria-selected='true'] {
-    @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)];
+    @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)] font-semibold;
   }
 
   &--text {
