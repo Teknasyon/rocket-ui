@@ -171,6 +171,8 @@
   --sidebar-trigger-bg-color: var(--white);
   --sidebar-trigger-width: 24px;
   --sidebar-trigger-height: 24px;
+  --sidebar-border-color: var(--neutral-75);
+  --sidebar-trigger-border-color: var(--neutral-75);
   /**
   * @tokens-textfield-variables
   * @presenter TextfieldVariables
