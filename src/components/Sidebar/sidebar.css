@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-sidebar {
-  @apply bg-red-500 flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r;
+  @apply flex flex-col h-screen p-[var(--sidebar-padding)] overflow-y-auto bg-[var(--sidebar-background)] border-r border-[var(--sidebar-border-color)];
 
   &[data-open='true'] {
     @apply w-[var(--sidebar-width)] items-start transition-all duration-500;
@@ -24,7 +24,7 @@
   }
 
   &__trigger {
-    @apply cursor-pointer absolute top-24 flex items-center justify-center rounded-full border
+    @apply cursor-pointer absolute top-24 flex items-center justify-center rounded-full border border-[var(--sidebar-trigger-border-color)]
     text-[var(--sidebar-trigger-color)] bg-[var(--sidebar-trigger-bg-color)]
     w-[var(--sidebar-trigger-width)]  h-[var(--sidebar-trigger-height)]
     ;
