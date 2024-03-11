@@ -114,19 +114,17 @@ const variantIcons = computed(() => {
 
 <template>
   <div :class="classes">
-    <slot>
+    <slot name="icon">
       <Icon v-if="props.variant" class="r-snackbar__icon" :name="variantIcons" />
     </slot>
 
     <div class="r-snackbar__text">
-      {{ props.text }}
+      <slot>{{ props.text }}</slot>
     </div>
 
-    <slot name="action" />
-
-    <div v-if="props.closable" class="r-snackbar__close">
+    <div v-if="props.closable" class="r-snackbar__close" @click.stop="$emit('update:modelValue', false)">
       <slot name="close">
-        <Icon name="mdiClose" :size="16" @click.stop="$emit('update:modelValue', false)" />
+        <Icon name="mdiClose" :size="16" />
       </slot>
     </div>
   </div>
