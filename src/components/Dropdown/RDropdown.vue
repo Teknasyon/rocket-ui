@@ -550,7 +550,7 @@ watch(() => mutatedModel.value, (_value) => {
               'r-dropdown__prepend-icon--error': props.errorMsg,
             }"
           >
-            <slot name="prepend">
+            <slot :active="active" name="prepend">
               <Icon v-if="props.prependIcon" :name="props.prependIcon" />
             </slot>
           </div>
@@ -625,7 +625,7 @@ watch(() => mutatedModel.value, (_value) => {
               'r-dropdown__append-icon--error': props.errorMsg,
             }"
           >
-            <slot name="append">
+            <slot :active="active" name="append">
               <Icon v-if="props.appendIcon" :name="props.appendIcon" />
             </slot>
           </div>
@@ -652,7 +652,7 @@ watch(() => mutatedModel.value, (_value) => {
           >
             <slot :is-selected="isSelected(option)" name="option">
               <div class="flex items-center">
-                <slot name="option-prepend">
+                <slot :is-selected="isSelected(option)" name="option-prepend">
                   <Icon
                     v-if="option.prependIcon"
                     class="r-dropdown-options__option__prepend-icon"
@@ -672,7 +672,7 @@ watch(() => mutatedModel.value, (_value) => {
                   {{ option.label }}
                 </p>
               </div>
-              <slot name="option-append">
+              <slot :is-selected="isSelected(option)" name="option-append">
                 <Icon
                   v-if="isSelected(option) && !props.hideOptionCheckIcon"
                   class="r-dropdown-options__option__append-icon"
