@@ -109,7 +109,7 @@ function close() {
       </slot>
     </div>
     <div v-if="props.closable" class="r-alert__close">
-      <slot name="custom-close">
+      <slot :close="close" name="custom-close" slot-class="r-alert__close__button">
         <Icon
           class="r-alert__close__button"
           name="mdiClose"
