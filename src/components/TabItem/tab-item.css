@@ -1,7 +1,13 @@
 @import '../../index.css';
 
 .r-tab-item {
-  @apply border-b-2 border-transparent transition-all gap-2 min-w-fit py-3 px-6 bg-transparent flex justify-center items-center text-[var(--neutral-500)] text-sm font-medium cursor-pointer;
+  @apply border-b-2 border-transparent transition-all gap-2 min-w-fit py-3 px-6 
+  bg-transparent flex justify-center items-center text-[var(--neutral-500)] text-sm 
+  font-medium cursor-pointer whitespace-nowrap;
+
+  &:hover:not(:disabled) {
+    @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)];
+  }
 
   &:disabled {
     @apply cursor-not-allowed bg-inherit opacity-50;
