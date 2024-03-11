@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-tab-item {
-  @apply border-b-2 border-transparent transition-all gap-2 min-w-fit py-3 px-6 
+  @apply border-b-2 border-transparent transition-all gap-2 min-w-fit py-3 px-4 
   bg-transparent flex justify-center items-center text-[var(--neutral-500)] text-sm 
   font-medium cursor-pointer whitespace-nowrap;
 
@@ -17,8 +17,8 @@
     @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)];
   }
 
-  &--text-only {
-    @apply block;
+  &--text {
+    @apply px-5;
   }
 
   &--tile {
