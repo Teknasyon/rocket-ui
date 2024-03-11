@@ -143,7 +143,7 @@ function handleTab(id: number | string): void {
     :style="style"
     @click.stop="handleTab(props.id)"
   >
-    <slot name="prepend">
+    <slot :active="props.modelValue === props.id" name="prepend">
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
         class="r-tab-item__prepend-icon"
@@ -152,13 +152,13 @@ function handleTab(id: number | string): void {
       />
     </slot>
 
-    <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
+    <span v-if="props.variant !== TabItemVariants.ICON">
       <slot>
         {{ props.label }}
       </slot>
     </span>
 
-    <slot name="append">
+    <slot :active="props.modelValue === props.id" name="append">
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon"
         class="r-tab-item__append-icon"
