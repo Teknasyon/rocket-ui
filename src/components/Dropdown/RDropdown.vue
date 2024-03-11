@@ -610,11 +610,12 @@ watch(() => mutatedModel.value, (_value) => {
             "
             @click="handleClearable($event, updatePosition)"
           >
-            <Icon
-
-              name="mdiCloseCircle"
-              size="18"
-            />
+            <slot name="clearable">
+              <Icon
+                name="mdiCloseCircle"
+                size="18"
+              />
+            </slot>
           </div>
           <div
             v-if="props.appendIcon || $slots.append"
@@ -638,28 +639,6 @@ watch(() => mutatedModel.value, (_value) => {
             [props.optionsClass]: props.optionsClass,
           }"
         >
-          <!-- <li>
-            <input
-              :id="props.id"
-              ref="input2"
-              v-model="inputModel"
-              :autocomplete="props.autocomplete"
-              class="r-dropdown__input"
-              :class="{
-                'r-dropdown__input--loading': props.loading,
-              }"
-              :disabled="props.disabled"
-              :placeholder="props.placeholder"
-              :readonly="isReadOnly"
-              role="presentation"
-              type="text"
-              @input.prevent="handleInput(updatePosition)"
-              @keydown.backspace="
-                removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
-              "
-              @keydown.enter="createTag($event, updatePosition)"
-            >
-          </li> -->
           <li
             v-for="option in searchedOptions"
             :key="option.value"
@@ -709,7 +688,6 @@ watch(() => mutatedModel.value, (_value) => {
           <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
               {{
-
                 props.multiple
                   ? 'No options hit to enter for create'
                   : props.noOptionsText
