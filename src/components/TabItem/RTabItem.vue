@@ -132,14 +132,6 @@ const style = computed(() => {
 function handleTab(id: number | string): void {
   emit('update:modelValue', id)
 }
-
-/**
- * @description Fires when the icon is clicked
- * @returns {void}
- */
-function handleIconClick(): void {
-  emit('click:icon')
-}
 </script>
 
 <template>
@@ -160,11 +152,11 @@ function handleIconClick(): void {
       />
     </slot>
 
-    <Transition :duration="150" name="fade">
-      <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
+    <span v-if="props.variant !== TabItemVariants.ICON" class="r-tab-item__label">
+      <slot>
         {{ props.label }}
-      </span>
-    </Transition>
+      </slot>
+    </span>
 
     <slot name="append">
       <Icon
@@ -172,7 +164,6 @@ function handleIconClick(): void {
         class="r-tab-item__append-icon"
         :name="props.appendIcon"
         :size="16"
-        @click.stop="handleIconClick"
       />
     </slot>
   </button>
