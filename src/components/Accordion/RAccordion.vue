@@ -63,7 +63,7 @@ function handleAccordion(selectedIndex: number) {
         </div>
       </slot>
       <div class="r-accordion__icon">
-        <slot name="icon">
+        <slot name="icon" :open="accordion.open">
           <Icon name="mdiChevronUp" />
         </slot>
       </div>
