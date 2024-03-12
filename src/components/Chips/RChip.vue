@@ -121,7 +121,7 @@ const appendIcon = computed(() => {
 <template>
   <div :class="classes">
     <div class="r-chip__content" @click="clickChip($event)">
-      <slot name="prepend">
+      <slot :disabled="props.disabled" name="prepend">
         <Icon
           v-if="props.prependIcon"
           :aria-disabled="props.disabled"
@@ -137,7 +137,7 @@ const appendIcon = computed(() => {
         {{ props.label }}
       </span>
     </div>
-    <slot name="append">
+    <slot :disabled="props.disabled" name="append">
       <Icon
         v-if="appendIcon"
         :aria-disabled="props.disabled"

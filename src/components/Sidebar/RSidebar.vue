@@ -20,7 +20,7 @@ const emit = defineEmits(['update:modelValue'])
 <template>
   <div class="r-sidebar__wrapper" :class="[$props.wrapperClass]" :data-open="props.modelValue">
     <aside class="r-sidebar" :class="[props.class]" :data-open="props.modelValue">
-      <slot />
+      <slot :open="props.modelValue" />
     </aside>
     <div
       v-if="props.showTrigger"
@@ -29,7 +29,7 @@ const emit = defineEmits(['update:modelValue'])
       :data-open="props.modelValue"
       @click="emit('update:modelValue', !props.modelValue)"
     >
-      <slot name="trigger">
+      <slot name="trigger" :open="props.modelValue">
         >
       </slot>
     </div>

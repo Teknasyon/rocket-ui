@@ -550,7 +550,13 @@ watch(() => mutatedModel.value, (_value) => {
               'r-dropdown__prepend-icon--error': props.errorMsg,
             }"
           >
-            <slot :active="active" name="prepend">
+            <slot
+              :active="active"
+              :disabled="props.disabled"
+              :error="props.errorMsg.length"
+              :loading="props.loading"
+              name="prepend"
+            >
               <Icon v-if="props.prependIcon" :name="props.prependIcon" />
             </slot>
           </div>
@@ -625,7 +631,13 @@ watch(() => mutatedModel.value, (_value) => {
               'r-dropdown__append-icon--error': props.errorMsg,
             }"
           >
-            <slot :active="active" name="append">
+            <slot
+              :active="active"
+              :disabled="props.disabled"
+              :error="props.errorMsg.length"
+              :loading="props.loading"
+              name="append"
+            >
               <Icon v-if="props.appendIcon" :name="props.appendIcon" />
             </slot>
           </div>
@@ -650,9 +662,9 @@ watch(() => mutatedModel.value, (_value) => {
             }"
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
-            <slot :is-selected="isSelected(option)" name="option">
+            <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option">
               <div class="flex items-center">
-                <slot :is-selected="isSelected(option)" name="option-prepend">
+                <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option-prepend">
                   <Icon
                     v-if="option.prependIcon"
                     class="r-dropdown-options__option__prepend-icon"
@@ -672,7 +684,7 @@ watch(() => mutatedModel.value, (_value) => {
                   {{ option.label }}
                 </p>
               </div>
-              <slot :is-selected="isSelected(option)" name="option-append">
+              <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option-append">
                 <Icon
                   v-if="isSelected(option) && !props.hideOptionCheckIcon"
                   class="r-dropdown-options__option__append-icon"

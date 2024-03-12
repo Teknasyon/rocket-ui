@@ -1,19 +1,15 @@
 @import '../../index.css';
 
 .r-tab-item {
-  @apply border-b-2 border-transparent transition-all gap-2 min-w-fit py-3 px-4 
+  @apply border-b-2 border-transparent transition-all duration-300 gap-2 min-w-fit py-3 px-4 
   bg-transparent flex justify-center items-center text-[var(--neutral-500)] text-sm 
-  font-medium cursor-pointer whitespace-nowrap;
-
-  &:hover:not(:disabled) {
-    @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)];
-  }
+  cursor-pointer whitespace-nowrap;
 
   &:disabled {
     @apply cursor-not-allowed bg-inherit opacity-50;
   }
 
-  &[aria-selected='true'] {
+  &[aria-selected='true']:not(.r-tab-item--tile) {
     @apply text-[var(--primary-500)] border-b-2 border-[var(--primary-500)] font-semibold;
   }
 
@@ -22,10 +18,14 @@
   }
 
   &--tile {
-    @apply border-none py-2.5 px-7  text-[var(--neutral-900)];
+    @apply border-none py-2.5 px-7 text-[var(--neutral-900)] font-normal;
 
     &[aria-selected='true'] {
       @apply bg-white rounded-md shadow-sm text-[var(--neutral-900)];
+    }
+
+    &:hover {
+      @apply text-[var(--neutral-900)] bg-white rounded-md shadow-sm;
     }
   }
 

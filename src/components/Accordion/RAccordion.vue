@@ -57,7 +57,7 @@ function handleAccordion(selectedIndex: number) {
     :data-state="accordion.open ? 'opened' : 'closed'"
   >
     <div class="r-accordion__header" @click="handleAccordion(index)">
-      <slot name="title">
+      <slot :accordion="accordion" name="title">
         <div class="r-accordion__title">
           {{ accordion.title }}
         </div>

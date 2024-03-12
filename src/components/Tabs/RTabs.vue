@@ -84,6 +84,7 @@ watch(
       :class="[{
         'w-full': props.block,
         'overflow-x-auto': props.scrollable,
+        'gap-0.5': props.tile,
       }]"
     >
       <slot :active-tab="activeTab">

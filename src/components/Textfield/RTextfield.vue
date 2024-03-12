@@ -368,13 +368,19 @@ watch(
     />
     <div class="input-wrapper">
       <div :class="classes">
-        <slot name="prepend" />
-        <Icon
-          v-if="prependIconName && !$slots.prepend"
-          :class="prependIconClasses"
-          :name="prependIconName"
-          :size="20"
-        />
+        <slot
+          :disabled="props.disabled"
+          :error="hasErrorMsg"
+          :loading="props.loading"
+          name="prepend"
+        >
+          <Icon
+            v-if="prependIconName"
+            :class="prependIconClasses"
+            :name="prependIconName"
+            :size="20"
+          />
+        </slot>
         <input
           :id="props.id"
           ref="inputRef"
@@ -390,14 +396,20 @@ watch(
           @focus="onFocus"
           @input="onInput"
         >
-        <slot v-if="!hasErrorMsg" name="append" />
-        <Icon
-          v-if="appendIconName && !$slots.append || hasErrorMsg"
-          :class="appendIconClasses"
-          :name="`${appendIconName}`"
-          :size="20"
-          @click="clickIcon"
-        />
+        <slot
+          :disabled="props.disabled"
+          :error="hasErrorMsg"
+          :loading="props.loading"
+          name="append"
+        >
+          <Icon
+            v-if="appendIconName && !$slots.append || hasErrorMsg"
+            :class="appendIconClasses"
+            :name="`${appendIconName}`"
+            :size="20"
+            @click="clickIcon"
+          />
+        </slot>
       </div>
       <div v-if="!props.hideDetails" class="r-textfield__details">
         <p v-if="props.errorMsg" class="r-textfield__error">

@@ -24,7 +24,7 @@
   }
 
   &--error {
-    @apply border-[var(--error-500)] ring-0;
+    @apply border-[var(--error-500)] ring-[var(--error-100)];
   }
 
   &--loading {

@@ -144,7 +144,7 @@ const style = computed(() => {
     :style="style"
     @click="$emit('click')"
   >
-    <slot name="prepend">
+    <slot name="prepend" :only-icon="props.icon">
       <Icon
         v-if="props.prependIcon"
         class="r-button__prepend-icon"
@@ -155,9 +155,9 @@ const style = computed(() => {
         :size="iconSize"
       />
     </slot>
-    <slot />
+    <slot :disabled="disabled" />
 
-    <slot name="append">
+    <slot name="append" :only-icon="props.icon">
       <Icon
         v-if="!props.icon && props.appendIcon"
         class="r-button__append-icon"
