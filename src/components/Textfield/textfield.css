@@ -17,7 +17,9 @@ input {
 }
 
 .r-textfield {
-  @apply h-10 gap-2 box-border w-full flex items-center text-sm font-medium border border-solid border-[var(--neutral-75)] text-[var(--neutral-500)] bg-[var(--textfield-bg)] rounded-lg px-4 py-2.5;
+  @apply h-10 gap-2 box-border w-full flex items-center text-sm font-medium border border-solid 
+  border-[var(--neutral-75)] text-[var(--neutral-500)] bg-[var(--textfield-bg)] 
+  rounded-lg px-3 py-2.5;
 
   &__label {
   }
