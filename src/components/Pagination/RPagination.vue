@@ -88,6 +88,12 @@ watch(() => info.value, () => {
   emit('update:info', info.value)
 })
 
+watch(() => props.perPage, () => {
+  perPage.value = props.perPage
+
+  changePage(1)
+})
+
 function changePage(page: number) {
   const ceiled = Math.ceil(page)
   if (ceiled < 1 || ceiled > totalPages.value)
@@ -193,7 +199,7 @@ function changePerPage({ value: perPage }: { value: number }) {
       <button
         class="r-pagination__paginator__last"
         :disabled="props.page === totalPages"
-        @click="changePage(+props.totalItems / +props.perPage)"
+        @click="changePage(totalPages)"
       >
         <slot name="last">
           <svg
