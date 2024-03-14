@@ -75,6 +75,16 @@ watch(
     emits('update:modelValue', activeTab.value)
   },
 )
+
+watch(
+  () => props.modelValue,
+  () => {
+    activeTab.value = props.modelValue
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <template>

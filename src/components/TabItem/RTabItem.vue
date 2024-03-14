@@ -107,7 +107,7 @@ const props = withDefaults(defineProps<IProps>(), {
   color: '',
 })
 
-const emit = defineEmits(['update:modelValue', 'click:icon'])
+const emit = defineEmits(['update:modelValue'])
 
 const classes = computed(() => {
   return {
@@ -124,6 +124,10 @@ const style = computed(() => {
   }
 })
 
+const isSelected = computed(() => {
+  return props.modelValue === props.id
+})
+
 /**
  * @description Fires when the tab is clicked
  * @param {id} id - The id of the tab
@@ -137,13 +141,13 @@ function handleTab(id: number | string): void {
 <template>
   <button
     :aria-disabled="props.disabled"
-    :aria-selected="props.modelValue === props.id"
+    :aria-selected="isSelected"
     :class="classes"
     :disabled="props.disabled"
     :style="style"
     @click.stop="handleTab(props.id)"
   >
-    <slot :active="props.modelValue === props.id" :disabled="props.disabled" name="prepend">
+    <slot :active="isSelected" :disabled="props.disabled" name="prepend">
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
         class="r-tab-item__prepend-icon"
@@ -158,7 +162,7 @@ function handleTab(id: number | string): void {
       </slot>
     </span>
 
-    <slot :active="props.modelValue === props.id" :disabled="props.disabled" name="append">
+    <slot :active="isSelected" :disabled="props.disabled" name="append">
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon"
         class="r-tab-item__append-icon"
