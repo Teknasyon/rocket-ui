@@ -4,12 +4,56 @@ import './pagination.css'
 import RDropdown from '../Dropdown/RDropdown.vue'
 
 export interface PaginationProps {
+  /**
+   * @default 1
+   * The current page number.
+   * @type number
+   */
   page: number
+
+  /**
+   * @default 10
+   * The number of items per page.
+   * @type number
+   */
   perPage: number
+
+  /**
+   * @default 100
+   * The total number of items.
+   * @type number
+   */
   totalItems: number
+
+  /**
+   * @default [10, 20, 50, 100]
+   * The options to display in the per page dropdown.
+   * @type number[]
+   */
   perPageOptions?: number[]
+
+  /**
+   * @default 'Items per page:'
+   * The text to display for the items per page label.
+   */
   itemsPerPageText?: string
+
+  /**
+   * @default 'right'
+   * The position of the pagination component.
+   * @type 'left' | 'center' | 'right' | string
+   */
   position?: 'left' | 'center' | 'right' | string
+
+  /**
+   * @default '1-10 of 100'
+   * The text to display for the info section.
+   * The text can contain the following placeholders:
+   * - `{{ start }}` - The start index of the current page.
+   * - `{{ end }}` - The end index of the current page.
+   * - `{{ total }}` - The total number of items.
+   * @type string
+   */
   infoText?: string
 }
 
@@ -34,14 +78,21 @@ const info = computed(() => ({
   end: props.page * props.perPage,
 }))
 
+const infoText = computed(() => props.infoText || `${info.value.start + 1}-${info.value.end} of ${props.totalItems}`)
+
+const disabledNextAndLast = computed(() => +props.page === +totalPages.value)
+
+const disabledPrevAndFirst = computed(() => +props.page === 1)
+
 watch(() => info.value, () => {
   emit('update:info', info.value)
 })
 
 function changePage(page: number) {
-  if (page < 1 || page > totalPages.value)
+  const ceiled = Math.ceil(page)
+  if (ceiled < 1 || ceiled > totalPages.value)
     return
-  emit('update:page', page)
+  emit('update:page', ceiled)
 }
 
 function changePerPage({ value: perPage }: { value: number }) {
@@ -64,17 +115,17 @@ function changePerPage({ value: perPage }: { value: number }) {
         />
       </div>
       <span class="r-pagination__paginator__info">
-        {{ props.infoText }}
+        {{ infoText }}
       </span>
       <button
         class="r-pagination__paginator__first"
-        :disabled="props.page === 1"
+        :disabled="disabledPrevAndFirst"
         @click="changePage(1)"
       >
         <slot name="first">
           <svg
             class="icon icon-tabler icon-tabler-chevron-left-pipe"
-            :class="{ 'stroke-gray-400': props.page === 1 }"
+            :class="{ 'stroke-gray-400': disabledPrevAndFirst }"
             fill="none"
             height="20"
             stroke="#000000"
@@ -93,13 +144,13 @@ function changePerPage({ value: perPage }: { value: number }) {
       </button>
       <button
         class="r-pagination__paginator__prev"
-        :disabled="props.page === 1"
+        :disabled="disabledPrevAndFirst"
         @click="changePage(+props.page - 1)"
       >
         <slot name="prev">
           <svg
             class="icon icon-tabler icon-tabler-chevron-left"
-            :class="{ 'stroke-gray-400': props.page === 1 }"
+            :class="{ 'stroke-gray-400': disabledPrevAndFirst }"
             fill="none"
             height="20"
             stroke="#000000"
@@ -117,13 +168,13 @@ function changePerPage({ value: perPage }: { value: number }) {
       </button>
       <button
         class="r-pagination__paginator__next"
-        :disabled="props.page === totalPages"
+        :disabled="disabledNextAndLast"
         @click="changePage(+props.page + 1)"
       >
         <slot name="next">
           <svg
             class="icon icon-tabler icon-tabler-chevron-right"
-            :class="{ 'stroke-gray-400': props.page === totalPages }"
+            :class="{ 'stroke-gray-400': disabledNextAndLast }"
             fill="none"
             height="20"
             stroke="#000000"
@@ -142,12 +193,12 @@ function changePerPage({ value: perPage }: { value: number }) {
       <button
         class="r-pagination__paginator__last"
         :disabled="props.page === totalPages"
-        @click="changePage(props.totalItems / props.perPage)"
+        @click="changePage(+props.totalItems / +props.perPage)"
       >
         <slot name="last">
           <svg
             class="icon icon-tabler icon-tabler-chevron-right-pipe"
-            :class="{ 'stroke-gray-400': props.page === totalPages }"
+            :class="{ 'stroke-gray-400': disabledNextAndLast }"
             fill="none"
             height="20"
             stroke="#000000"
