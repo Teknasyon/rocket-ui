@@ -5,7 +5,7 @@
 }
 
 .r-dropdown {
-  @apply flex items-center bg-white border border-[var(--neutral-75)] rounded-md shadow-sm py-2 px-3 h-10 text-left cursor-pointer;
+  @apply flex items-center bg-white border border-[var(--neutral-75)] rounded-md shadow-sm py-[7px] px-3 text-left cursor-pointer;
 
   &:hover:not(.r-dropdown--disabled):not(.r-dropdown--loading):not(.r-dropdown--active):not(.r-dropdown--error) {
     @apply bg-[var(--neutral-50)];
