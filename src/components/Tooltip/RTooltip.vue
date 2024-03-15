@@ -2,6 +2,7 @@
 import './tooltip.css'
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import { createGuid } from '../../utils/helpers'
 import {
   Placement,
   type Placements,
@@ -197,23 +198,43 @@ const trigger = ref()
 const tooltip = ref()
 const arrowElement = ref()
 
+const tooltipId = createGuid()
+
 async function showTooltip() {
   if (props.disabled || !tooltip.value)
     return
-  handleUpdate()
-  tooltip.value.style.display = 'block'
-  // document.body.appendChild(tooltip.value);
-  emit('show')
-  handleAutoHide()
+
+  const otherTooltips = document.querySelectorAll('.r-tooltip--active') as unknown as HTMLElement[]
+
+  if (otherTooltips.length > 0) {
+    otherTooltips.forEach((otherTooltip: HTMLElement) => {
+      otherTooltip.style.display = ''
+      otherTooltip.classList.remove('r-tooltip--active')
+      otherTooltip.dataset.show = 'false'
+      emit('hide', otherTooltip.id)
+    })
+  }
+
+  if (tooltip.value.classList.contains('r-tooltip--active')) {
+    hideTooltip()
+  }
+  else {
+    handleUpdate()
+    tooltip.value.style.display = 'block'
+    tooltip.value.classList.add('r-tooltip--active')
+    tooltip.value.dataset.show = 'true'
+    emit('show', tooltip.value.id)
+    handleAutoHide()
+  }
 }
 
-function hideTooltip() {
+function hideTooltip(e: Event | null = null) {
   if (props.disabled || !tooltip.value)
     return
   tooltip.value.style.display = ''
-  emit('hide')
-  // document.removeEventListener('click', hideTooltip);
-  // document.body.removeChild(tooltip.value)
+  tooltip.value.classList.remove('r-tooltip--active')
+  tooltip.value.dataset.show = 'false'
+  emit('hide', tooltip.value.id)
 }
 
 function handleAutoHide() {
@@ -224,9 +245,10 @@ function handleAutoHide() {
   }
 }
 
-function onClick() {
+function onClick(e: MouseEvent) {
   if (props.disabled)
     return
+
   if (props.triggers.includes(Trigger.Click)) {
     if (tooltip.value.style.display === 'block')
       hideTooltip()
@@ -307,13 +329,10 @@ onMounted(() => {
   if (props.resizable)
     trigger.value.parentElement.parentElement.addEventListener('scroll', handleUpdate())
 
-  onClickOutside(trigger, () => {
-    if (props.outsideClick)
-      hideTooltip()
-  },
-  {
-    ignore: [tooltip.value],
-  })
+  onClickOutside(trigger, (e: MouseEvent) => {
+    if (tooltip.value.classList.contains('r-tooltip--active'))
+      hideTooltip(e)
+  }, { ignore: [tooltip] })
 })
 </script>
 
@@ -335,6 +354,7 @@ onMounted(() => {
         mouseleave: onMouseLeave,
         mousemove: onMouseMove,
       }"
+      :tooltip-id="tooltipId"
       :update-position="handleUpdate"
     >
       <div v-html="props.triggerContent" />
@@ -342,9 +362,10 @@ onMounted(() => {
   </div>
   <Teleport to="body">
     <div
-      id="tooltip"
+      :id="tooltipId"
       ref="tooltip"
       :class="[classes, tooltipClass]"
+      data-show="false"
       role="tooltip"
     >
       <slot :hide="hideTooltip" name="content" :update-position="handleUpdate">

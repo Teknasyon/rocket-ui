@@ -319,33 +319,60 @@ const wrapper = ref<HTMLElement>()
 
 /**
  * @description - Handles the appearance of the select list
- * @param e MouseEvent
  */
-function setActive(e: MouseEvent, activator?: () => void, updatePosition?: any) {
-  e.stopPropagation()
+function toggleActive(id: string) {
   if (props.disabled)
     return
-  active.value = true
-  if (activator)
-    activator()
-  if (active.value) {
-    dropdown.value?.classList.add('r-dropdown--active')
+
+  const dropdownWithId = document.getElementById(id)
+
+  const otherDropdowns = document.querySelectorAll('.r-dropdown--active')
+
+  otherDropdowns.forEach((otherDropdown) => {
+    if (otherDropdown.id !== dropdown.value?.id && otherDropdown.classList.contains('r-dropdown--active')) {
+      otherDropdown.childNodes.forEach((child: any) => {
+        if (child?.classList) {
+          Object?.values(child?.classList).filter((cls: any) => cls.includes('--active'))
+            .forEach((cls: any) => {
+              child?.classList.remove(cls)
+            })
+        }
+      })
+      otherDropdown.classList.remove('r-dropdown--active')
+    }
+  })
+
+  if (dropdownWithId?.classList.contains('r-dropdown--active')) {
+    dropdownWithId.classList.remove('r-dropdown--active')
+    active.value = false
+    dropdown.value?.blur()
+    input.value?.blur()
+  }
+  else {
+    dropdownWithId?.classList.add('r-dropdown--active')
+    active.value = true
     dropdown.value?.focus()
     input.value?.focus()
-
-    return
+    dropdownWithId?.childNodes.forEach((child: any) => {
+      if (child?.classList) {
+        Object?.values(child?.classList).forEach((cls: any) => {
+          child?.classList.add(`${cls}--active`)
+        })
+      }
+    })
   }
-  removeActive()
 }
 
 /**
- * @description - Removes the active state
+ * @description - Removes the active class from the dropdown
  */
-function removeActive() {
-  active.value = false
-  dropdown.value?.classList.remove('r-dropdown--active')
-  dropdown.value?.blur()
-  input.value?.blur()
+
+function removeActive(id: string) {
+  const dropdownWithId = document.getElementById(id)
+  if (dropdownWithId?.classList.contains('r-dropdown--active')) {
+    dropdownWithId.classList.remove('r-dropdown--active')
+    active.value = false
+  }
 }
 
 /**
@@ -354,7 +381,6 @@ function removeActive() {
  * @param option Selected option
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
-  e.stopPropagation()
   updatePosition()
   if (option.disabled)
     return
@@ -375,7 +401,7 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
 
   if (props.closeOnSelect) {
     hide()
-    removeActive()
+    toggleActive(dropdown.value?.id as string)
   }
 }
 /**
@@ -392,7 +418,6 @@ function selectOneOption(e: MouseEvent, option: Option) {
 
   inputModel.value = option.label
   selected.value = option
-  setActive(e)
   emit('update:modelValue', option)
 }
 /**
@@ -519,19 +544,21 @@ watch(() => mutatedModel.value, (_value) => {
     <RTooltip
       :auto-hide="false"
       :offset="0"
-      outside-click
       placement="bottom"
       resizable
       :tooltip-class="['w-full', props.tooltipClass]"
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
-      @hide="removeActive"
+      @hide="($event) => {
+        removeActive($event);
+      }"
     >
-      <template #default="{ activators, updatePosition }">
+      <template #default="{ updatePosition, tooltipId }">
         <div
+          :id="tooltipId"
           ref="dropdown"
-          class="r-dropdown"
+          class="r-dropdown "
           :class="{
             'r-dropdown--disabled': props.disabled,
             'r-dropdown--loading': props.loading,
@@ -540,7 +567,7 @@ watch(() => mutatedModel.value, (_value) => {
             'group': inputModel !== '' || selectedMultiple.length,
           }"
           role="select"
-          @click="setActive($event, activators.click, updatePosition)"
+          @click="toggleActive(tooltipId)"
         >
           <div
             v-if="props.prependIcon || $slots.prepend"
