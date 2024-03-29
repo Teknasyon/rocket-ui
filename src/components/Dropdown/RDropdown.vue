@@ -369,10 +369,8 @@ function toggleActive(id: string) {
 
 function removeActive(id: string) {
   const dropdownWithId = document.getElementById(id)
-  if (dropdownWithId?.classList.contains('r-dropdown--active')) {
-    dropdownWithId.classList.remove('r-dropdown--active')
-    active.value = false
-  }
+  dropdownWithId?.classList.remove('r-dropdown--active')
+  active.value = false
 }
 
 /**
@@ -399,10 +397,8 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
 
   selectOneOption(e, option)
 
-  if (props.closeOnSelect) {
+  if (props.closeOnSelect)
     hide()
-    toggleActive(dropdown.value?.id as string)
-  }
 }
 /**
  * @description - Selects one option
