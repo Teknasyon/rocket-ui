@@ -102,7 +102,12 @@ function changePage(page: number) {
 }
 
 function changePerPage({ value: perPage }: { value: number }) {
-  emit('update:perPage', perPage)
+  if (perPage) {
+    emit('update:perPage', perPage)
+    return
+  }
+
+  emit('update:perPage', 10)
 }
 </script>
 
