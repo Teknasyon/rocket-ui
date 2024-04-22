@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ComputedRef } from 'vue'
 import { computed, defineEmits, onMounted, ref, watch } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
@@ -231,6 +232,24 @@ export interface SelectProps {
    * <Dropdown tooltipClass="w-96" />
    */
   tooltipClass?: string
+
+  /**
+   * Show select all option
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown showSelectAll />
+   */
+  showSelectAll?: boolean
+
+  /**
+   * Text of the select all option
+   * @type {string}
+   * @default 'Select all'
+   * @example
+   * <Dropdown selectAllText="Select all" />
+   */
+  selectAllText?: string
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -256,6 +275,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   hideOptionCheckIcon: false,
   hideChipClear: false,
   tooltipClass: '',
+  showSelectAll: false,
+  selectAllText: 'Select all',
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -457,10 +478,10 @@ function isSelected(option: Option) {
   return selected.value?.value === option?.value
 }
 /**
- * @description - Search for options
- * @returns {Option[]} - Returns an array of options
+ * @description Filtered options based on the search input
+ * @returns {Option[]} Returns an array of latest options
  */
-const searchedOptions = computed(() => {
+const filteredOptions = computed<Option[]>(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
     return mutatedOptions.value
   const result = mutatedOptions.value.filter((option: Option) => {
@@ -512,6 +533,15 @@ function handleClearable(e: MouseEvent, updatePosition: any) {
   selected.value = {} as Option
   inputModel.value = ''
   emit('update:modelValue', '')
+}
+
+function selectAll(e: MouseEvent, updatePosition: any) {
+  if (selectedMultiple.value.length === filteredOptions.value.length) {
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
+    return
+  }
+  selectedMultiple.value = filteredOptions.value
+  updatePosition()
 }
 
 onMounted(() => {
@@ -675,7 +705,34 @@ watch(() => mutatedModel.value, (_value) => {
           }"
         >
           <li
-            v-for="option in searchedOptions"
+            v-if="props.showSelectAll && props.multiple"
+            class="r-dropdown-options__option"
+            :class="{
+              'r-dropdown-options__option--active': selectedMultiple.length === filteredOptions.length,
+              'r-dropdown-options__option--disabled': false,
+            }"
+            @click.prevent="selectAll($event, updatePosition)"
+          >
+            <div class="flex items-center">
+              <p
+                class="r-dropdown-options__option__label"
+              >
+                {{ props.selectAllText }}
+              </p>
+            </div>
+            <Icon
+              v-if="selectedMultiple.length === filteredOptions.length && !props.hideOptionCheckIcon"
+              class="r-dropdown-options__option__append-icon"
+              :class="{
+                'r-dropdown-options__option__append-icon--active':
+                  selectedMultiple.length === filteredOptions.length,
+              }"
+              name="mdiCheck"
+            />
+          </li>
+          <hr v-if="props.showSelectAll" class="r-dropdown-options__divider">
+          <li
+            v-for="option in filteredOptions"
             :key="option.value"
             :aria-disabled="option.disabled"
             class="r-dropdown-options__option"
@@ -720,7 +777,7 @@ watch(() => mutatedModel.value, (_value) => {
               </slot>
             </slot>
           </li>
-          <li v-if="searchedOptions.length === 0" class="r-dropdown-options__no-option">
+          <li v-if="filteredOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
               {{
                 props.multiple
