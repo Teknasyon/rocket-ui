@@ -536,12 +536,13 @@ function handleClearable(e: MouseEvent, updatePosition: any) {
 }
 
 function selectAll(e: MouseEvent, updatePosition: any) {
+  updatePosition()
+
   if (selectedMultiple.value.length === filteredOptions.value.length) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
   }
   selectedMultiple.value = filteredOptions.value
-  updatePosition()
 }
 
 onMounted(() => {
