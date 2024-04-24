@@ -403,6 +403,10 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
   updatePosition()
   if (option.disabled)
     return
+  if (option.value === 'select-all') {
+    selectAll()
+    return
+  }
   if (props.multiple) {
     if (!selectedMultiple.value.find(opt => opt.value === option.value))
       selectedMultiple.value.push(option)
@@ -535,9 +539,7 @@ function handleClearable(e: MouseEvent, updatePosition: any) {
   emit('update:modelValue', '')
 }
 
-function selectAll(e: MouseEvent, updatePosition: any) {
-  updatePosition()
-
+function selectAll() {
   if (selectedMultiple.value.length === filteredOptions.value.length) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
     return
@@ -559,6 +561,9 @@ onMounted(() => {
  */
 watch(selectedMultiple, (option) => {
   emit('update:modelValue', option)
+},
+{
+  deep: true,
 })
 
 watch(() => mutatedModel.value, (_value) => {
@@ -712,7 +717,7 @@ watch(() => mutatedModel.value, (_value) => {
               'r-dropdown-options__option--active': selectedMultiple.length === filteredOptions.length,
               'r-dropdown-options__option--disabled': false,
             }"
-            @click.prevent="selectAll($event, updatePosition)"
+            @click.prevent="selectOption($event, { label: props.selectAllText, value: 'select-all' }, hide, updatePosition)"
           >
             <div class="flex items-center">
               <p
