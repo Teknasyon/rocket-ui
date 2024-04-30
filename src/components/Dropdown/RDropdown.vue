@@ -711,7 +711,7 @@ watch(() => mutatedModel.value, (_value) => {
           }"
         >
           <li
-            v-if="props.showSelectAll && props.multiple"
+            v-if="props.showSelectAll && props.multiple && filteredOptions.length > 0"
             class="r-dropdown-options__option"
             :class="{
               'r-dropdown-options__option--active': selectedMultiple.length === filteredOptions.length,
@@ -736,7 +736,7 @@ watch(() => mutatedModel.value, (_value) => {
               name="mdiCheck"
             />
           </li>
-          <hr v-if="props.showSelectAll" class="r-dropdown-options__divider">
+          <hr v-if="props.showSelectAll && filteredOptions.length > 0" class="r-dropdown-options__divider">
           <li
             v-for="option in filteredOptions"
             :key="option.value"
@@ -785,11 +785,7 @@ watch(() => mutatedModel.value, (_value) => {
           </li>
           <li v-if="filteredOptions.length === 0" class="r-dropdown-options__no-option">
             <slot name="not-options">
-              {{
-                props.multiple
-                  ? 'No options hit to enter for create'
-                  : props.noOptionsText
-              }}
+              {{ props.noOptionsText }}
             </slot>
           </li>
         </ul>
