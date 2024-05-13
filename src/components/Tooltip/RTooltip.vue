@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import './tooltip.css'
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { createGuid } from '../../utils/helpers'
 import {
@@ -305,14 +305,6 @@ window.onresize = () => {
     handleUpdate()
 }
 
-/**
- * Listen the scroll event of window
- * @link https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event
- */
-document.addEventListener('scroll', () => {
-  handleUpdate()
-})
-
 watchEffect(
   () => {
     if (props.disabled)
@@ -327,12 +319,26 @@ watchEffect(
 
 onMounted(() => {
   if (props.resizable)
-    trigger.value.parentElement.parentElement.addEventListener('scroll', handleUpdate())
+    trigger.value?.parentElement?.parentElement.addEventListener('scroll', handleUpdate())
 
   onClickOutside(trigger, (e: MouseEvent) => {
     if (tooltip.value.classList.contains('r-tooltip--active'))
       hideTooltip(e)
   }, { ignore: [tooltip] })
+
+  if (props.type === Theme.Dropdown) {
+    document.addEventListener('scroll', () => {
+      handleUpdate()
+    })
+  }
+})
+
+onUnmounted(() => {
+  if (props.resizable)
+    trigger.value?.parentElement?.parentElement.removeEventListener('scroll', handleUpdate())
+
+  if (tooltip.value)
+    document.body.removeChild(tooltip.value)
 })
 </script>
 
