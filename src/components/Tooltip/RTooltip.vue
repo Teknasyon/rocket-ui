@@ -332,11 +332,6 @@ onMounted(() => {
     })
   }
 })
-
-onUnmounted(() => {
-  if (props.resizable)
-    trigger.value?.parentElement?.parentElement.removeEventListener('scroll', handleUpdate())
-})
 </script>
 
 <template>
