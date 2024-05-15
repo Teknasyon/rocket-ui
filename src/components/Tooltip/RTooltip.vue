@@ -336,9 +336,6 @@ onMounted(() => {
 onUnmounted(() => {
   if (props.resizable)
     trigger.value?.parentElement?.parentElement.removeEventListener('scroll', handleUpdate())
-
-  if (tooltip.value)
-    document.body.removeChild(tooltip.value)
 })
 </script>
 
