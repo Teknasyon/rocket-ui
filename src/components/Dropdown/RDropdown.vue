@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { ComputedRef } from 'vue'
 import { computed, defineEmits, onMounted, ref, watch } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
@@ -279,7 +278,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   selectAllText: 'Select all',
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'clear'])
 const selected = ref<Option>({} as Option)
 const selectedMultiple = ref<Option[]>([])
 const active = ref(false)
@@ -530,13 +529,14 @@ function handleInput(updatePosition: any) {
 function handleClearable(e: MouseEvent, updatePosition: any) {
   e.stopPropagation()
   updatePosition()
-  if (props.multiple) {
+  if (props.multiple)
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
-    return
-  }
+
   selected.value = {} as Option
   inputModel.value = ''
   emit('update:modelValue', '')
+
+  emit('clear')
 }
 
 function selectAll() {

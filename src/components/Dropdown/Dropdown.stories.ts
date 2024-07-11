@@ -51,6 +51,7 @@ const DropdownStory = {
   args: DefaultArgs,
   argTypes: {
     'onUpdate:modelValue': { action: 'update:modelValue' },
+    'onClear': { action: 'clear' },
   },
 } as Meta<typeof Dropdown>
 
