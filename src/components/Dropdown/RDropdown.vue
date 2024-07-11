@@ -278,7 +278,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   selectAllText: 'Select all',
 })
 
-const emit = defineEmits(['update:modelValue', 'clear'])
+const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
 const selected = ref<Option>({} as Option)
 const selectedMultiple = ref<Option[]>([])
 const active = ref(false)
@@ -407,11 +407,12 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
     return
   }
   if (props.multiple) {
-    if (!selectedMultiple.value.find(opt => opt.value === option.value))
-      selectedMultiple.value.push(option)
+    if (!selectedMultiple.value.find(opt => opt.value === option.value)) { selectedMultiple.value.push(option) }
 
-    else
+    else {
       selectedMultiple.value.splice(selectedMultiple.value.indexOf(option), 1)
+      emit('removeOption', option)
+    }
 
     inputModel.value = ''
     if (props.searchable)
@@ -433,6 +434,7 @@ function selectOneOption(e: MouseEvent, option: Option) {
     selected.value = {} as Option
     inputModel.value = ''
     emit('update:modelValue', '')
+    emit('removeOption', option)
     return
   }
 
@@ -453,6 +455,7 @@ function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosit
   updatePosition()
   const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
   selectedMultiple.value.splice(index, 1)
+  emit('removeOption', option)
 }
 /**
  * @description - Handles the not existing options
@@ -523,6 +526,7 @@ function handleInput(updatePosition: any) {
   if (inputModel.value === '') {
     selected.value = {} as Option
     emit('update:modelValue', '')
+    emit('removeOption', selected.value)
   }
 }
 
