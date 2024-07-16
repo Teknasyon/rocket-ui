@@ -533,14 +533,17 @@ function handleInput(updatePosition: any) {
 function handleClearable(e: MouseEvent, updatePosition: any) {
   e.stopPropagation()
   updatePosition()
-  if (props.multiple)
+  if (props.multiple) {
     selectedMultiple.value.splice(0, selectedMultiple.value.length)
+    emit('clear', selectedMultiple.value)
+    return
+  }
 
   selected.value = {} as Option
   inputModel.value = ''
   emit('update:modelValue', '')
 
-  emit('clear')
+  emit('clear', selected.value)
 }
 
 function selectAll() {
