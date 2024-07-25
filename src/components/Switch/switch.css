@@ -21,7 +21,7 @@
   @apply relative inline-block w-16 h-9 box-border;
 
   &--small {
-    @apply w-9 h-5;
+    @apply w-9 h-5 min-w-[2.25rem];
 
     & > .slider::before {
       @apply w-3 h-3;
@@ -33,7 +33,7 @@
     }
   }
   &--medium {
-    @apply w-11 h-6;
+    @apply w-11 h-6 min-w-[2.75rem];
     & > .slider::before {
       @apply w-4 h-4;
     }
@@ -44,7 +44,7 @@
     }
   }
   &--large {
-    @apply w-[3.25rem] h-7;
+    @apply w-[3.25rem] h-7 min-w-[3.25rem];
 
     & > .slider::before {
       @apply w-5 h-5;
