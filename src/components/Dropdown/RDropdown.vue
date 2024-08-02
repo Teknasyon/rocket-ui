@@ -755,7 +755,12 @@ watch(() => mutatedModel.value, (_value) => {
             }"
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
-            <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option">
+            <slot
+              :disabled="option.disabled"
+              :is-selected="isSelected(option)"
+              :item="option"
+              name="option"
+            >
               <div class="flex items-center">
                 <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option-prepend">
                   <Icon
