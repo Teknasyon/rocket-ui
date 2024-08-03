@@ -403,6 +403,12 @@ watch(
           name="append"
         >
           <Icon
+            v-if="$props.type === 'password' && hasErrorMsg"
+            name="mdiEyeOutline"
+            :size="20"
+            @click="clickIcon"
+          />
+          <Icon
             v-if="appendIconName && !$slots.append || hasErrorMsg"
             :class="appendIconClasses"
             :name="`${appendIconName}`"
