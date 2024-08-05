@@ -261,6 +261,7 @@ const prependIconName = computed(() => {
     return prependIcon
   return prependIconsOfType[type]
 })
+
 const appendIconName = computed(() => {
   const { appendIcon, type } = props
   if (appendIcon === 'none')
@@ -404,7 +405,7 @@ watch(
         >
           <Icon
             v-if="$props.type === 'password' && hasErrorMsg"
-            name="mdiEyeOutline"
+            :name="typeOfInputRef === 'password' ? 'mdiEyeOutline' : 'mdiEyeOffOutline'"
             :size="20"
             @click="clickIcon"
           />
