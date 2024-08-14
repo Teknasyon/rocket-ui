@@ -249,6 +249,15 @@ export interface SelectProps {
    * <Dropdown selectAllText="Select all" />
    */
   selectAllText?: string
+
+  /**
+   * Disable deselecting the selected option
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown disableDeselect />
+   */
+  disableDeselect?: boolean
 }
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -276,6 +285,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   tooltipClass: '',
   showSelectAll: false,
   selectAllText: 'Select all',
+  disableDeselect: false,
 })
 
 const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
@@ -407,7 +417,9 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
     return
   }
   if (props.multiple) {
-    if (!selectedMultiple.value.find(opt => opt.value === option.value)) { selectedMultiple.value.push(option) }
+    if (!selectedMultiple.value.find(opt => opt.value === option.value)) {
+      selectedMultiple.value.push(option)
+    }
 
     else {
       selectedMultiple.value.splice(selectedMultiple.value.indexOf(option), 1)
@@ -430,7 +442,7 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
  * @param e option Selected option
  */
 function selectOneOption(e: MouseEvent, option: Option) {
-  if (selected.value.value === option.value) {
+  if (selected.value.value === option.value && !props.disableDeselect) {
     selected.value = {} as Option
     inputModel.value = ''
     emit('update:modelValue', '')
@@ -752,6 +764,7 @@ watch(() => mutatedModel.value, (_value) => {
             :class="{
               'r-dropdown-options__option--active': isSelected(option),
               'r-dropdown-options__option--disabled': option.disabled,
+              'r-dropdown-options__option--deselect': isSelected(option) && props.disableDeselect,
             }"
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >

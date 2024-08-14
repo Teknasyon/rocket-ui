@@ -110,6 +110,10 @@
       @apply bg-[var(--primary-50)] text-[var(--neutral-300)] cursor-not-allowed hover:bg-[var(--primary-50)];
     }
 
+    &--deselect {
+      /* @apply cursor-not-allowed; */
+    }
+
     &__label {
       /* @apply ml-2; */
 
