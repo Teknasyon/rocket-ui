@@ -47,7 +47,7 @@ input {
   }
 
   &--focus {
-    @apply ring ring-[var(--primary-75)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
+    @apply ring ring-[var(--primary-100)] border border-solid border-[var(--primary-500)] text-[var(--neutral-900)];
   }
   &--filled {
     @apply bg-[var(--textfield-bg)] text-[var(--neutral-900)] font-medium;
