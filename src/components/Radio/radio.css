@@ -1,0 +1,87 @@
+/* General Radio container styling */
+.r-radio {
+  @apply flex flex-col cursor-pointer mb-4;
+}
+
+/* Hide the default radio input */
+.r-radio__input {
+  @apply sr-only;
+}
+
+/* Custom Radio Circle */
+.r-radio__custom {
+  @apply w-5 h-5 border border-[var(--primary-500)] rounded-full mr-2.5 inline-block relative flex-shrink-0 transition-all duration-300 ease-in-out;
+}
+
+/* Add the inner dot when checked */
+.r-radio__input:checked + .r-radio__label .r-radio__custom::before {
+  @apply content-[''] block w-2 h-2 bg-[var(--white)] rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
+.r-radio__input:checked + .r-radio__label .r-radio__custom {
+  @apply bg-[var(--primary-500)] border-[var(--primary-500)];
+}
+
+/* Style the label */
+.r-radio__label {
+  @apply flex items-center cursor-pointer text-xs font-medium text-[var(--neutral-900)] select-none;
+}
+
+/* Disabled state */
+.r-radio--disabled .r-radio__label {
+  @apply text-[var(--neutral-300)] cursor-not-allowed;
+}
+
+.r-radio--disabled .r-radio__custom {
+  @apply border-[var(--neutral-300)];
+}
+
+.r-radio__input:disabled + .r-radio__label .r-radio__custom::before {
+  @apply bg-[var(--neutral-300)];
+}
+
+/* Hint styling */
+.r-radio__hint {
+  @apply text-xs font-normal text-[var(--neutral-500)] mt-1 ml-8;
+}
+
+.r-radio__hint--disabled {
+  @apply text-[var(--neutral-300)] cursor-not-allowed;
+}
+
+/* Error state */
+.r-radio--error .r-radio__custom {
+  @apply border-[var(--error-500)];
+}
+
+.r-radio--error .r-radio__label {
+  @apply text-[var(--error-500)];
+}
+
+.r-radio__error {
+  @apply ml-8 text-xs font-normal text-[var(--error-500)];
+}
+
+.r-radio__input:checked + .r-radio__label--error .r-radio__custom--error {
+  @apply bg-[var(--error-500)] border-[var(--error-500)];
+}
+
+.r-radio__custom--error:hover {
+  @apply shadow-[0px_0px_0px_4px_var(--error-50)];
+}
+
+.r-radio__custom:hover:not(.r-radio__custom--disabled) {
+  @apply shadow-[0px_0px_0px_4px_var(--primary-50)];
+}
+
+.r-radio__title {
+  @apply text-sm font-medium text-[var(--neutral-900)];
+}
+
+.r-radio__title--disabled {
+  @apply text-[var(--neutral-300)] cursor-not-allowed;
+}
+
+.r-radio__title--error {
+  @apply text-[var(--error-500)];
+}
