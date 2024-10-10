@@ -4,7 +4,7 @@ import { computed, defineProps, ref, watch } from 'vue'
 
 export interface Props {
   id: string
-  modelValue?: string | number | boolean
+  modelValue?: boolean
   name?: string
   disabled?: boolean
   label?: string
