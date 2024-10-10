@@ -54,10 +54,14 @@ watch(() => props.modelValue, (newVal) => {
       :disabled="props.disabled"
       :name="props.name"
       type="radio"
-      @input="$emit('update:modelValue', !checked)"
+      @input="$emit('update:modelValue')"
     >
 
-    <label class="r-radio__label" :class="[props.errorMsg && 'r-radio__label--error']" :for="props.id">
+    <span
+      class="r-radio__label"
+      :class="[props.errorMsg && 'r-radio__label--error']"
+      @click="$emit('update:modelValue')"
+    >
       <span
         class="r-radio__custom"
         :class="[props.errorMsg && 'r-radio__custom--error', props.disabled && 'r-radio__custom--disabled']"
@@ -74,7 +78,7 @@ watch(() => props.modelValue, (newVal) => {
           {{ props.label }}
         </span>
       </div>
-    </label>
+    </span>
     <span
       v-if="props.hint && !props.errorMsg"
       class="r-radio__hint"
