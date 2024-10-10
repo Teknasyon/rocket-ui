@@ -1,6 +1,6 @@
 /* General Radio container styling */
 .r-radio {
-  @apply flex flex-col cursor-pointer mb-4;
+  @apply flex flex-col cursor-pointer;
 }
 
 /* Hide the default radio input */
