@@ -11,6 +11,7 @@ export interface Props {
   hint?: string
   errorMsg?: string
   title?: string
+  value?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   hint: '',
   errorMsg: '',
   title: '',
+  value: '',
 })
 
 // Emits 'update:modelValue' event when the value changes
@@ -41,7 +43,7 @@ const classes = computed(() => [
 // Watch for changes in modelValue and update the checked ref
 watch(() => props.modelValue, (newVal) => {
   checked.value = newVal
-})
+}, { immediate: true })
 </script>
 
 <template>
@@ -54,7 +56,8 @@ watch(() => props.modelValue, (newVal) => {
       :disabled="props.disabled"
       :name="props.name"
       type="radio"
-      @input="$emit('update:modelValue')"
+      :value="props.value"
+      @change="$emit('update:modelValue')"
     >
 
     <span
