@@ -73,6 +73,15 @@ export interface ModalProps {
   outsideClick?: boolean
 
   /**
+   * Clear the content of the Modal
+   * @type boolean
+   * @default false
+   * @example
+   * <Modal :modelValue="true" :clearContent="true" />
+   */
+  clearContent?: boolean
+
+  /**
    * Class of the Modal
    * @type string
    * @default ''
@@ -117,6 +126,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   width: '',
   height: '',
   outsideClick: false,
+  clearContent: false,
   class: '',
   overlayClass: '',
   style: '',
@@ -127,6 +137,7 @@ const classes = computed(() => {
   return {
     'r-dialog': true,
     'r-dialog--block': props.block,
+    'p-0 gap-0': props.clearContent,
     [`${props.class}`]: true,
   }
 })
@@ -186,6 +197,7 @@ window.addEventListener('keydown', (event) => {
       role="dialog"
       :style="styles"
     >
+      <slot name="wrapper" />
       <div class="r-dialog__header">
         <slot name="header" />
         <div v-if="props.icon" class="icon">
