@@ -73,7 +73,7 @@ export interface ModalProps {
   outsideClick?: boolean
 
   /**
-   * Clear the content of the Modal
+   * Remove padding and gap from the modal
    * @type boolean
    * @default false
    * @example
@@ -197,25 +197,26 @@ window.addEventListener('keydown', (event) => {
       role="dialog"
       :style="styles"
     >
-      <slot name="wrapper" />
-      <div class="r-dialog__header">
-        <slot name="header" />
-        <div v-if="props.icon" class="icon">
-          <Icon :name="props.icon" />
+      <slot name="wrapper">
+        <div class="r-dialog__header">
+          <slot name="header" />
+          <div v-if="props.icon" class="icon">
+            <Icon :name="props.icon" />
+          </div>
+          <div v-if="props.title" class="title">
+            {{ props.title }}
+          </div>
+          <div v-if="props.description" class="description">
+            {{ props.description }}
+          </div>
         </div>
-        <div v-if="props.title" class="title">
-          {{ props.title }}
+        <div class="r-dialog__body">
+          <slot />
         </div>
-        <div v-if="props.description" class="description">
-          {{ props.description }}
+        <div class="r-dialog__actions">
+          <slot name="actions" />
         </div>
-      </div>
-      <div class="r-dialog__body">
-        <slot />
-      </div>
-      <div class="r-dialog__actions">
-        <slot name="actions" />
-      </div>
+      </slot>
     </div>
   </div>
 </template>
