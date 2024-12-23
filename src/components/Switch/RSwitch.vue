@@ -5,6 +5,7 @@ import {
   type LabelHTMLAttributes,
   computed,
   reactive,
+  ref,
   watch,
 } from 'vue'
 import './switch.css'
@@ -94,6 +95,15 @@ export interface Props {
    * <Checkbox reverse />
    */
   reverse?: boolean
+
+  /**
+   * Name of the checkbox
+   * @type {string}
+   * @default ''
+   * @example
+   * <Checkbox name="checkbox" />
+   */
+  name?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -105,7 +115,7 @@ const props = withDefaults(defineProps<Props>(), {
   errorMsg: '',
 })
 const emit = defineEmits(['update:modelValue'])
-const state = reactive<{
+const state = ref<{
   checked: InputHTMLAttributes['checked']
 }>({
   checked: false,
@@ -122,13 +132,13 @@ function onChange(e: unknown) {
   if (props.disabled)
     return
   // @ts-expect-error: Unreachable code error
-  state.checked = e.target.checked
-  emit('update:modelValue', state.checked)
+  state.value.checked = e.target.checked
+  emit('update:modelValue', state.value.checked)
 }
 watch(
   () => props.modelValue,
   (value) => {
-    state.checked = value
+    state.value.checked = value
   },
   {
     // need immediate to set the state on first render for storybook
@@ -152,6 +162,7 @@ watch(
         :checked="state.checked"
         class="r-switch__input"
         :disabled="props.disabled"
+        :name="props.name"
         type="checkbox"
         @change="onChange"
       >
