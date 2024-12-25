@@ -1,7 +1,7 @@
 @import '../../index.css';
 
 .r-accordion {
-  @apply rounded-lg px-4 py-3 border-[var(--neutral-200)] border mb-6;
+  @apply rounded-lg px-4 py-3 border-[var(--neutral-200)] border mb-6 [&_*]:transition-all [&_*]:duration-300;
 
   &:hover:not(&--disabled) {
     @apply border-[var(--primary-500)];
@@ -36,7 +36,7 @@
   }
 
   &__content {
-    @apply max-h-0 overflow-y-auto text-[var(--neutral-500)] font-normal text-sm transition-all;
+    @apply max-h-0 overflow-y-auto text-[var(--neutral-500)] font-normal text-sm;
   }
 
   &[data-state='opened'] {
@@ -48,11 +48,11 @@
   }
 
   &[data-state='opened'] &__content {
-    @apply max-h-[var(--accordion-content-max-height)] mt-3 animate-[slideDown] duration-300;
+    @apply max-h-[var(--accordion-content-max-height)] mt-3 animate-[slideDown];
   }
 
   &[data-state='closed'] &__content {
-    @apply max-h-0 mt-0 animate-[slideUp] duration-300 overflow-hidden;
+    @apply max-h-0 mt-0 animate-[slideUp] overflow-hidden;
   }
 }
 

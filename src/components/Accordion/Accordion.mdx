@@ -39,9 +39,9 @@ The Accordion component provides a compact way of displaying large amounts of in
 
 The **accordions** prop is an array that holds the data for each panel in the accordion component. Each panel is an object with properties such as header and body.
 
-### modelValue (optional)
+### multiple (optional)
 
-The **modelValue** prop is a boolean that determines whether the accordion component is in an expanded or collapsed state. A value of true indicates that the accordion component is expanded, and a value of false indicates that it is collapsed.
+The **multiple** prop is a boolean that determines whether multiple panels can be expanded at the same time. A value of true indicates that multiple panels can be expanded, and a value of false indicates that only one panel can be expanded at a time.
 
 ### accordions: title (required)
 
@@ -70,7 +70,11 @@ The **disabled** prop is a boolean that determines whether the panel is disabled
 ### Accordion
 
 <Canvas>
-  <Story of={AccordionStories.Accordion1} />
+  <Story of={AccordionStories.Accordions} />
+</Canvas>
+
+<Canvas>
+  <Story of={AccordionStories.AccordionsMultipleOpen} />
 </Canvas>
 
 ## Customizable Slots <a id="customizable-slots" />

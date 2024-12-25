@@ -23,6 +23,13 @@ export interface AccordionProps {
    * ```
    */
   accordions: Accordion[]
+
+  /**
+   * Allow multiple accordions to be open at the same time
+   * @default false
+   * @type boolean
+   */
+  multiple?: boolean
 }
 
 const props = defineProps<AccordionProps>()
@@ -39,6 +46,12 @@ const accordions = reactive(
 function handleAccordion(selectedIndex: number) {
   if (accordions[selectedIndex].disabled)
     return
+
+  if (props.multiple) {
+    accordions[selectedIndex].open = !accordions[selectedIndex].open
+    return
+  }
+
   accordions.forEach((_, index) => {
     accordions[index].open
       = index === selectedIndex ? !accordions[index].open : false
@@ -53,23 +66,25 @@ function handleAccordion(selectedIndex: number) {
     class="r-accordion"
     :class="{
       'r-accordion--disabled': accordion.disabled,
+      'cursor-pointer': !accordion.open,
     }"
     :data-state="accordion.open ? 'opened' : 'closed'"
+    @click="handleAccordion(index)"
   >
-    <div class="r-accordion__header" @click="handleAccordion(index)">
+    <div class="r-accordion__header">
       <slot :accordion="accordion" name="title">
         <div class="r-accordion__title">
           {{ accordion.title }}
         </div>
       </slot>
       <div class="r-accordion__icon">
-        <slot name="icon" :open="accordion.open">
-          <Icon name="mdiChevronUp" />
+        <slot :item="accordion" name="icon" :open="accordion.open">
+          <Icon name="mdiChevronDown" />
         </slot>
       </div>
     </div>
     <div class="r-accordion__content">
-      <slot name="content">
+      <slot :accordion="accordion" name="content">
         <span>
           {{ accordion.content }}
         </span>
