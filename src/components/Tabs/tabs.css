@@ -9,6 +9,6 @@
   }
 
   &--tile {
-    @apply w-fit bg-[var(--neutral-100)] rounded-lg p-1;
+    @apply w-fit bg-[var(--primary-50)] rounded-lg p-1;
   }
 }
