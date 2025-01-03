@@ -20,6 +20,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src"]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "emitDeclarationOnly": true
   }
 }
