@@ -682,19 +682,25 @@ export default {
               <div class="flex flex-wrap items-center gap-2">
                 <template v-if="props.multiple && props.chips">
                   <template v-for="option in visibleSelectedOptions" :key="option.value">
-                    <div class="flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-blue-800">
-                      {{ option.label }}
-                      <span
-                        class="material-icons cursor-pointer text-sm"
-                        @click.stop="(e) => removeOption(e, option, updatePosition)"
-                      >
-                        close
-                      </span>
-                    </div>
+                    <Chip
+                      clearable
+                      ghost
+                      :label="option.label"
+                      variant="primary"
+                      @click:close="(e) => removeOption(e, option, updatePosition)"
+                    />
                   </template>
                   <span v-if="remainingOptionsCount > 0" class="text-sm text-gray-600">
                     +{{ remainingOptionsCount }}
                   </span>
+                </template>
+                <template v-else-if="props.multiple">
+                  <span v-for="(option, index) in selectedMultiple" :key="option.value">
+                    {{ option.label }}{{ index < selectedMultiple.length - 1 ? ', ' : '' }}
+                  </span>
+                </template>
+                <template v-else>
+                  {{ selected.label }}
                 </template>
               </div>
             </slot>
