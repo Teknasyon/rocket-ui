@@ -258,7 +258,17 @@ export interface SelectProps {
    * <Dropdown disableDeselect />
    */
   disableDeselect?: boolean
+
+  /**
+   * Maximum number of visible chips
+   * @type {number}
+   * @default 2
+   * @example
+   * <Dropdown :maxVisibleChips="3" />
+   */
+  maxVisibleChips?: number
 }
+
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   modelValue: {} as Option | Option[] | string | number | any,
@@ -286,9 +296,11 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showSelectAll: false,
   selectAllText: 'Select all',
   disableDeselect: false,
+  maxVisibleChips: 2,
 })
 
 const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
+
 const selected = ref<Option>({} as Option)
 const selectedMultiple = ref<Option[]>([])
 const active = ref(false)
@@ -458,13 +470,12 @@ function selectOneOption(e: MouseEvent, option: Option) {
  * @description - Removes an option from the selected options
  * @param e option Option to remove
  */
-function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition: any) {
-  if (e instanceof KeyboardEvent && e.key !== 'Backspace')
-    return
+function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition?: () => void) {
+  e.stopPropagation()
+  if (updatePosition)
+    updatePosition()
   if (inputModel.value !== '')
     return
-  e.stopPropagation()
-  updatePosition()
   const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
   selectedMultiple.value.splice(index, 1)
   emit('removeOption', option)
@@ -566,6 +577,18 @@ function selectAll() {
   selectedMultiple.value = filteredOptions.value
 }
 
+const visibleSelectedOptions = computed(() => {
+  if (!props.multiple || !Array.isArray(props.modelValue))
+    return []
+  return props.modelValue.slice(0, props.maxVisibleChips)
+})
+
+const remainingOptionsCount = computed(() => {
+  if (!props.multiple || !Array.isArray(props.modelValue))
+    return 0
+  return Math.max(0, props.modelValue.length - props.maxVisibleChips)
+})
+
 onMounted(() => {
   reset()
   if (navigator.userAgent.includes('iPhone')) {
@@ -588,6 +611,17 @@ watch(selectedMultiple, (option) => {
 watch(() => mutatedModel.value, (_value) => {
   reset()
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'RDropdown',
+  components: {
+    Chip,
+    Icon,
+    RTooltip,
+  },
+}
 </script>
 
 <template>
@@ -640,28 +674,20 @@ watch(() => mutatedModel.value, (_value) => {
           </div>
 
           <div class="r-dropdown__selections">
-            <slot
-              v-for="(option, index) in selectedMultiple"
-              :key="index"
-              :index="index"
-              name="selection"
-              :option="option"
-              :remove-option="removeOption"
-            >
-              <p v-if="!props.chips">
-                {{ `${option.label}, ` }}
-              </p>
-
-              <Chip
-                v-else
-                :clearable="!props.hideChipClear"
-                ghost
-                :label="option.label"
-                no-wrap
-                variant="primary"
-                @click:close="removeOption($event, option, updatePosition)"
-              />
-            </slot>
+            <div class="flex flex-wrap items-center gap-2">
+              <template v-if="props.multiple && props.chips">
+                <template v-for="option in visibleSelectedOptions" :key="option.value">
+                  <Chip
+                    :clearable="!props.hideChipClear"
+                    :text="option.label"
+                    @clear="(e) => removeOption(e, option, updatePosition)"
+                  />
+                </template>
+                <span v-if="remainingOptionsCount > 0" class="text-sm text-gray-600">
+                  +{{ remainingOptionsCount }}
+                </span>
+              </template>
+            </div>
 
             <input
               :id="props.id"
