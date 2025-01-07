@@ -636,14 +636,14 @@ export default {
       :triggers="['click']"
       type="dropdown"
       @hide="($event) => {
-        removeActive($event);
+        removeActive($event)
       }"
     >
       <template #default="{ updatePosition, tooltipId }">
         <div
           :id="tooltipId"
           ref="dropdown"
-          class="r-dropdown "
+          class="r-dropdown"
           :class="{
             'r-dropdown--disabled': props.disabled,
             'r-dropdown--loading': props.loading,
@@ -674,20 +674,30 @@ export default {
           </div>
 
           <div class="r-dropdown__selections">
-            <div class="flex flex-wrap items-center gap-2">
-              <template v-if="props.multiple && props.chips">
-                <template v-for="option in visibleSelectedOptions" :key="option.value">
-                  <Chip
-                    :clearable="!props.hideChipClear"
-                    :text="option.label"
-                    @clear="(e) => removeOption(e, option, updatePosition)"
-                  />
+            <slot
+              name="selection"
+              :remove-option="removeOption"
+              :selected="selectedMultiple"
+            >
+              <div class="flex flex-wrap items-center gap-2">
+                <template v-if="props.multiple && props.chips">
+                  <template v-for="option in visibleSelectedOptions" :key="option.value">
+                    <div class="flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-blue-800">
+                      {{ option.label }}
+                      <span
+                        class="material-icons cursor-pointer text-sm"
+                        @click.stop="(e) => removeOption(e, option, updatePosition)"
+                      >
+                        close
+                      </span>
+                    </div>
+                  </template>
+                  <span v-if="remainingOptionsCount > 0" class="text-sm text-gray-600">
+                    +{{ remainingOptionsCount }}
+                  </span>
                 </template>
-                <span v-if="remainingOptionsCount > 0" class="text-sm text-gray-600">
-                  +{{ remainingOptionsCount }}
-                </span>
-              </template>
-            </div>
+              </div>
+            </slot>
 
             <input
               :id="props.id"
