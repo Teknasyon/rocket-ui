@@ -679,7 +679,7 @@ export default {
               :remove-option="removeOption"
               :selected="selectedMultiple"
             >
-              <div class="flex flex-wrap items-center gap-2">
+              <div class="flex flex-wrap items-center gap-2 text-sm">
                 <template v-if="props.multiple && props.chips">
                   <template v-for="option in visibleSelectedOptions" :key="option.value">
                     <Chip
@@ -698,9 +698,6 @@ export default {
                   <span v-for="(option, index) in selectedMultiple" :key="option.value">
                     {{ option.label }}{{ index < selectedMultiple.length - 1 ? ', ' : '' }}
                   </span>
-                </template>
-                <template v-else>
-                  {{ selected.label }}
                 </template>
               </div>
             </slot>
