@@ -40,3 +40,9 @@ const showPlaceholder = computed(() => {
     />
   </div>
 </template>
+
+<style>
+.r-dropdown__remaining-count-text {
+  @apply text-sm text-red-500;
+}
+</style>

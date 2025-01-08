@@ -31,6 +31,10 @@
     @apply bg-[var(--neutral-100)] text-[var(--neutral-300)] border-[var(--neutral-200)] cursor-not-allowed animate-pulse;
   }
 
+  &__remaining-count-text {
+    @apply text-sm text-gray-600;
+  }
+
   &__prepend-icon {
     @apply inset-y-0 right-0 flex items-center pointer-events-none pr-2;
 
