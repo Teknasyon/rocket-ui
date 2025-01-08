@@ -470,15 +470,17 @@ function selectOneOption(e: MouseEvent, option: Option) {
  * @description - Removes an option from the selected options
  * @param e option Option to remove
  */
-function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition?: () => void) {
-  e.stopPropagation()
-  if (updatePosition)
-    updatePosition()
+function removeOption(e: MouseEvent | KeyboardEvent, option: Option, updatePosition: any) {
+  if (e instanceof KeyboardEvent && e.key !== 'Backspace')
+    return
   if (inputModel.value !== '')
     return
+  e.stopPropagation()
+  updatePosition()
   const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
   selectedMultiple.value.splice(index, 1)
   emit('removeOption', option)
+  emit('update:modelValue', selectedMultiple.value)
 }
 /**
  * @description - Handles the not existing options
@@ -611,17 +613,6 @@ watch(selectedMultiple, (option) => {
 watch(() => mutatedModel.value, (_value) => {
   reset()
 })
-</script>
-
-<script lang="ts">
-export default {
-  name: 'RDropdown',
-  components: {
-    Chip,
-    Icon,
-    RTooltip,
-  },
-}
 </script>
 
 <template>
