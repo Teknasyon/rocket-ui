@@ -681,9 +681,14 @@ watch(() => mutatedModel.value, (_value) => {
                       @click:close="(e) => removeOption(e, option, updatePosition)"
                     />
                   </template>
-                  <span v-if="remainingOptionsCount > 0" class="text-sm text-gray-600">
-                    +{{ remainingOptionsCount }}
-                  </span>
+                  <slot
+                    :count="remainingOptionsCount"
+                    name="remaining-count"
+                  >
+                    <span v-if="remainingOptionsCount > 0" class="r-dropdown__remaining-count-text">
+                      +{{ remainingOptionsCount }}
+                    </span>
+                  </slot>
                 </template>
                 <template v-else-if="props.multiple">
                   <span v-for="(option, index) in selectedMultiple" :key="option.value">
