@@ -84,6 +84,7 @@
     "@types/node": "^16.11.48",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitest/coverage-c8": "^0.22.1",
+    "@vitest/coverage-v8": "^2.1.8",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/test-utils": "^2.0.0",
     "@vue/tsconfig": "^0.1.3",
