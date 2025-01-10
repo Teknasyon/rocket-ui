@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, watch, watchEffect } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue'
 import './modal.css'
 import Icon from '../Icon/RIcon.vue'
 
@@ -116,6 +116,27 @@ export interface ModalProps {
    * <Modal :modelValue="true" :allowBodyScroll="true" />
    */
   allowBodyScroll?: boolean
+
+  /**
+   * ID of the modal for accessibility
+   * @type string
+   * @default generated unique id
+   */
+  id?: string
+
+  /**
+   * Label for the modal (for screen readers)
+   * @type string
+   * @default ''
+   */
+  ariaLabel?: string
+
+  /**
+   * Description for the modal (for screen readers)
+   * @type string
+   * @default ''
+   */
+  ariaDescription?: string
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -131,6 +152,9 @@ const props = withDefaults(defineProps<ModalProps>(), {
   overlayClass: '',
   style: '',
   allowBodyScroll: false,
+  id: undefined,
+  ariaLabel: '',
+  ariaDescription: '',
 })
 const emits = defineEmits(['update:modelValue'])
 const classes = computed(() => {
@@ -162,25 +186,77 @@ function handleOutside(event: Event) {
 // { flush: 'post' },
 // )
 
+const modalId = ref(props.id || `modal-${Math.random().toString(36).substr(2, 9)}`)
+const previousActiveElement = ref<HTMLElement | null>(null)
+
+// Focus trap implementation
+const firstFocusableElement = ref<HTMLElement | null>(null)
+const lastFocusableElement = ref<HTMLElement | null>(null)
+
+function updateFocusableElements() {
+  const modal = document.getElementById(modalId.value)
+  if (!modal)
+    return
+
+  const focusableElements = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+  )
+
+  firstFocusableElement.value = focusableElements[0] as HTMLElement
+  lastFocusableElement.value = focusableElements[focusableElements.length - 1] as HTMLElement
+}
+
+function handleTabKey(e: KeyboardEvent) {
+  if (!props.modelValue)
+    return
+
+  if (!e.shiftKey && document.activeElement === lastFocusableElement.value) {
+    e.preventDefault()
+    firstFocusableElement.value?.focus()
+  }
+
+  if (e.shiftKey && document.activeElement === firstFocusableElement.value) {
+    e.preventDefault()
+    lastFocusableElement.value?.focus()
+  }
+}
+
+// Keyboard event handlers
+function handleKeyDown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && props.modelValue && props.outsideClick)
+    emits('update:modelValue', false)
+
+  if (event.key === 'Tab')
+    handleTabKey(event)
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown)
+})
+
 onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown)
   if (!props.modelValue && props.allowBodyScroll)
     document.body.style.overflow = 'auto'
 })
 
-// close on escape
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && props.modelValue && props.outsideClick)
-
-    emits('update:modelValue', false)
+// Watch for modal state changes
+watch(() => props.modelValue, (isOpen) => {
+  if (isOpen) {
+    previousActiveElement.value = document.activeElement as HTMLElement
+    nextTick(() => {
+      updateFocusableElements()
+      firstFocusableElement.value?.focus()
+    })
+    if (!props.allowBodyScroll)
+      document.body.style.overflow = 'hidden'
+  }
+  else {
+    previousActiveElement.value?.focus()
+    document.body.style.overflow = 'auto'
+  }
 })
-
-// watch(() => props.modelValue, (val) => {
-//   if (!val)
-//     document.body.style.overflow = 'auto'
-// }, {
-//   deep: true,
-//   immediate: true,
-// })
 </script>
 
 <template>
@@ -191,22 +267,29 @@ window.addEventListener('keydown', (event) => {
     @click.stop="handleOutside"
   >
     <div
+      :id="modalId"
+      :aria-describedby="ariaDescription ? `${modalId}-desc` : undefined"
+      :aria-label="ariaLabel || title"
       aria-modal="true"
       :class="classes"
-      :open="props.modelValue"
       role="dialog"
       :style="styles"
+      tabindex="-1"
     >
       <slot name="wrapper">
         <div class="r-dialog__header">
           <slot name="header" />
-          <div v-if="props.icon" class="icon">
+          <div v-if="props.icon" aria-hidden="true" class="icon">
             <Icon :name="props.icon" />
           </div>
-          <div v-if="props.title" class="title">
+          <div v-if="props.title" :id="`${modalId}-title`" class="title">
             {{ props.title }}
           </div>
-          <div v-if="props.description" class="description">
+          <div
+            v-if="props.description"
+            :id="`${modalId}-desc`"
+            class="description"
+          >
             {{ props.description }}
           </div>
         </div>

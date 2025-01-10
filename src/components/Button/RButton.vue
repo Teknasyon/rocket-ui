@@ -100,6 +100,42 @@ export interface Props {
    * <Button block />
    */
   block?: boolean
+
+  /**
+   * Aria label for the button
+   * @type { string }
+   * @default ''
+   * @example
+   * <Button aria-label="Close dialog" />
+   */
+  ariaLabel?: string
+
+  /**
+   * Aria pressed state for toggle buttons
+   * @type { boolean }
+   * @default undefined
+   * @example
+   * <Button :aria-pressed="isPressed" />
+   */
+  ariaPressed?: boolean
+
+  /**
+   * Aria expanded state for buttons that control expandable elements
+   * @type { boolean }
+   * @default undefined
+   * @example
+   * <Button :aria-expanded="isExpanded" />
+   */
+  ariaExpanded?: boolean
+
+  /**
+   * Aria controls - ID of the element this button controls
+   * @type { string }
+   * @default ''
+   * @example
+   * <Button aria-controls="menu-1" />
+   */
+  ariaControls?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
@@ -111,6 +147,8 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   height: '',
   block: false,
+  ariaLabel: '',
+  ariaControls: '',
 })
 defineEmits(['click'])
 const classes = computed(() => ({
@@ -134,19 +172,32 @@ const style = computed(() => {
     height: props.height ? `${props.height}px` : '',
   }
 })
+const ariaAttributes = computed(() => ({
+  'aria-label': props.ariaLabel || undefined,
+  'aria-pressed': props.ariaPressed,
+  'aria-expanded': props.ariaExpanded,
+  'aria-controls': props.ariaControls || undefined,
+  'aria-disabled': props.disabled,
+  'aria-busy': props.loading,
+  'role': 'button',
+}))
 </script>
 
 <template>
   <button
-    v-bind="$attrs"
+    v-bind="{ ...$attrs, ...ariaAttributes }"
     :class="classes"
     :disabled="disabled"
     :style="style"
     @click="$emit('click')"
+    @keydown.enter="$emit('click')"
+    @keydown.space.prevent="$emit('click')"
   >
+    <span v-if="loading" class="sr-only">Loading</span>
     <slot name="prepend" :only-icon="props.icon">
       <Icon
         v-if="props.prependIcon"
+        aria-hidden="true"
         class="r-button__prepend-icon"
         :class="{
           'r-button__prepend-icon--only': props.icon,
@@ -160,6 +211,7 @@ const style = computed(() => {
     <slot name="append" :only-icon="props.icon">
       <Icon
         v-if="!props.icon && props.appendIcon"
+        aria-hidden="true"
         class="r-button__append-icon"
         :name="props.appendIcon"
         :size="iconSize"
