@@ -1,94 +1,171 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import './radio.css'
-import { computed, defineProps, ref, watch } from 'vue'
 
 export interface Props {
-  id: string
-  modelValue?: boolean
-  name?: string
-  disabled?: boolean
+  /**
+   * ID of the radio button
+   * @type string
+   * @default ''
+   */
+  id?: string
+
+  /**
+   * Value of the radio button
+   * @type any
+   * @required
+   */
+  value: any
+
+  /**
+   * Model value for v-model binding
+   * @type any
+   */
+  modelValue?: any
+
+  /**
+   * Label for the radio button
+   * @type string
+   * @default ''
+   */
   label?: string
-  hint?: string
+
+  /**
+   * Whether the radio button is disabled
+   * @type boolean
+   * @default false
+   */
+  disabled?: boolean
+
+  /**
+   * Whether the radio button is required
+   * @type boolean
+   * @default false
+   */
+  required?: boolean
+
+  /**
+   * Name attribute for the radio button
+   * @type string
+   * @default ''
+   */
+  name?: string
+
+  /**
+   * Error message
+   * @type string
+   * @default ''
+   */
   errorMsg?: string
-  title?: string
-  value?: string
+
+  /**
+   * Hint text
+   * @type string
+   * @default ''
+   */
+  hint?: string
+
+  /**
+   * Hide details (error and hint messages)
+   * @type boolean
+   * @default false
+   */
+  hideDetails?: boolean
+
+  /**
+   * Aria label for the radio button
+   * @type string
+   * @default ''
+   */
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  id: 'radio-id',
-  modelValue: false,
-  name: 'radio-group',
-  disabled: false,
+  id: '',
+  modelValue: undefined,
   label: '',
-  hint: '',
+  disabled: false,
+  required: false,
+  name: '',
   errorMsg: '',
-  title: '',
-  value: '',
+  hint: '',
+  hideDetails: false,
+  ariaLabel: '',
 })
 
-// Emits 'update:modelValue' event when the value changes
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
-const checked = ref(props.modelValue)
+const radioId = computed(() => props.id || `radio-${Math.random().toString(36).substr(2, 9)}`)
 
-// Classes to control the radio's styling
-const classes = computed(() => [
-  'r-radio group',
-  {
-    'r-radio--disabled': props.disabled,
-    'r-radio--error': props.errorMsg,
-  },
-])
+const isChecked = computed(() => props.modelValue === props.value)
 
-// Watch for changes in modelValue and update the checked ref
-watch(() => props.modelValue, (newVal) => {
-  checked.value = newVal
-}, { immediate: true })
+const classes = computed(() => ({
+  'r-radio': true,
+  'r-radio--checked': isChecked.value,
+  'r-radio--disabled': props.disabled,
+  'r-radio--error': !!props.errorMsg,
+}))
+
+function onChange() {
+  if (props.disabled)
+    return
+  emit('update:modelValue', props.value)
+}
 </script>
 
 <template>
-  <div :class="classes">
-    <input
-      v-bind="$attrs"
-      :id="props.id"
-      :checked="checked"
-      class="r-radio__input"
-      :disabled="props.disabled"
-      :name="props.name"
-      type="radio"
-      :value="props.value"
-      @change="$emit('update:modelValue')"
-    >
-
-    <span
-      class="r-radio__label"
-      :class="[props.errorMsg && 'r-radio__label--error']"
-      @click="$emit('update:modelValue')"
-    >
-      <span
-        class="r-radio__custom"
-        :class="[props.errorMsg && 'r-radio__custom--error', props.disabled && 'r-radio__custom--disabled']"
-      />
-      <div class="flex flex-col">
-        <span
-          v-if="props.title"
-          class="r-radio__title"
-          :class="[props.errorMsg && 'r-radio__title--error', props.disabled && 'r-radio__title--disabled']"
-        >
-          {{ props.title }}
-        </span>
-        <span>
-          {{ props.label }}
-        </span>
+  <div class="r-radio-wrapper">
+    <div class="r-radio-container">
+      <input
+        :id="radioId"
+        :aria-describedby="errorMsg ? `${radioId}-error` : hint ? `${radioId}-hint` : undefined"
+        :aria-disabled="disabled"
+        :aria-invalid="!!errorMsg"
+        :aria-label="ariaLabel || label"
+        :aria-required="required"
+        :checked="isChecked"
+        class="r-radio-container__input"
+        :disabled="disabled"
+        :name="name"
+        :required="required"
+        type="radio"
+        :value="value"
+        @change="onChange"
+      >
+      <div
+        aria-hidden="true"
+        :class="classes"
+        :data-disabled="disabled"
+      >
+        <div class="r-radio__inner" />
       </div>
-    </span>
-    <span
-      v-if="props.hint && !props.errorMsg"
-      class="r-radio__hint"
-      :class="[props.disabled && 'r-radio__hint--disabled']"
-    >{{ props.hint }}</span>
-
-    <!-- Display error message if it exists -->
-    <span v-if="props.errorMsg" class="r-radio__error">{{ props.errorMsg }}</span>
+    </div>
+    <div class="r-radio-texts">
+      <label
+        class="r-radio-texts__label"
+        :data-disabled="disabled"
+        :for="radioId"
+      >
+        <span v-if="required" class="sr-only">Required - </span>
+        {{ label }}
+      </label>
+      <div v-if="!hideDetails && (errorMsg || hint)" class="r-radio-texts__details">
+        <p
+          v-if="errorMsg"
+          :id="`${radioId}-error`"
+          class="r-radio-texts__error"
+          role="alert"
+        >
+          {{ errorMsg }}
+        </p>
+        <p
+          v-else-if="hint"
+          :id="`${radioId}-hint`"
+          class="r-radio-texts__hint"
+        >
+          {{ hint }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>

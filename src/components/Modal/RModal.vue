@@ -187,18 +187,36 @@ function handleOutside(event: Event) {
 // )
 
 const modalId = ref(props.id || `modal-${Math.random().toString(36).substr(2, 9)}`)
+const titleId = ref(`${modalId.value}-title`)
+const descriptionId = ref(`${modalId.value}-description`)
 const previousActiveElement = ref<HTMLElement | null>(null)
 
 // Focus trap implementation
+const modalRef = ref<HTMLElement | null>(null)
 const firstFocusableElement = ref<HTMLElement | null>(null)
 const lastFocusableElement = ref<HTMLElement | null>(null)
 
+interface AriaAttributes {
+  role: 'dialog'
+  'aria-modal': 'true'
+  'aria-labelledby'?: string
+  'aria-describedby'?: string
+  'aria-label'?: string
+}
+
+const ariaAttributes = computed<AriaAttributes>(() => ({
+  'role': 'dialog',
+  'aria-modal': 'true',
+  'aria-labelledby': props.title ? titleId.value : undefined,
+  'aria-describedby': props.description ? descriptionId.value : undefined,
+  'aria-label': !props.title ? props.ariaLabel : undefined,
+}))
+
 function updateFocusableElements() {
-  const modal = document.getElementById(modalId.value)
-  if (!modal)
+  if (!modalRef.value)
     return
 
-  const focusableElements = modal.querySelectorAll(
+  const focusableElements = modalRef.value.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   )
 
@@ -207,99 +225,171 @@ function updateFocusableElements() {
 }
 
 function handleTabKey(e: KeyboardEvent) {
-  if (!props.modelValue)
+  if (!props.modelValue || !firstFocusableElement.value || !lastFocusableElement.value)
     return
 
-  if (!e.shiftKey && document.activeElement === lastFocusableElement.value) {
-    e.preventDefault()
-    firstFocusableElement.value?.focus()
-  }
+  const isTabPressed = e.key === 'Tab'
 
-  if (e.shiftKey && document.activeElement === firstFocusableElement.value) {
-    e.preventDefault()
-    lastFocusableElement.value?.focus()
+  if (!isTabPressed)
+    return
+
+  if (e.shiftKey) {
+    if (document.activeElement === firstFocusableElement.value) {
+      e.preventDefault()
+      lastFocusableElement.value.focus()
+    }
+  }
+  else {
+    if (document.activeElement === lastFocusableElement.value) {
+      e.preventDefault()
+      firstFocusableElement.value.focus()
+    }
   }
 }
 
-// Keyboard event handlers
-function handleKeyDown(event: KeyboardEvent) {
-  if (event.key === 'Escape' && props.modelValue && props.outsideClick)
+function handleEscapeKey(e: KeyboardEvent) {
+  if (e.key === 'Escape' && props.modelValue && props.outsideClick) {
+    e.preventDefault()
     emits('update:modelValue', false)
-
-  if (event.key === 'Tab')
-    handleTabKey(event)
+  }
 }
 
-// Lifecycle hooks
-onMounted(() => {
-  window.addEventListener('keydown', handleKeyDown)
-})
+function handleKeyDown(e: KeyboardEvent) {
+  handleTabKey(e)
+  handleEscapeKey(e)
+}
 
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyDown)
-  if (!props.modelValue && props.allowBodyScroll)
-    document.body.style.overflow = 'auto'
-})
+// Add MutationObserver to watch for content changes
+const observer = ref<MutationObserver | null>(null)
 
-// Watch for modal state changes
-watch(() => props.modelValue, (isOpen) => {
+watch(() => props.modelValue, async (isOpen) => {
   if (isOpen) {
     previousActiveElement.value = document.activeElement as HTMLElement
+    document.body.style.overflow = props.allowBodyScroll ? 'auto' : 'hidden'
+
+    await nextTick()
+    updateFocusableElements()
+    firstFocusableElement.value?.focus()
+
+    // Set up observer for content changes
+    if (modalRef.value && !observer.value) {
+      observer.value = new MutationObserver(() => {
+        nextTick(() => {
+          updateFocusableElements()
+        })
+      })
+      observer.value.observe(modalRef.value, {
+        childList: true,
+        subtree: true,
+      })
+    }
+
+    // Announce modal opening to screen readers
+    const announcement = document.createElement('div')
+    announcement.setAttribute('role', 'status')
+    announcement.setAttribute('aria-live', 'polite')
+    announcement.textContent = `Dialog ${props.title || ''} opened`
+    document.body.appendChild(announcement)
+    setTimeout(() => announcement.remove(), 1000)
+  }
+  else {
+    document.body.style.overflow = 'auto'
+    previousActiveElement.value?.focus()
+
+    // Announce modal closing to screen readers
+    const announcement = document.createElement('div')
+    announcement.setAttribute('role', 'status')
+    announcement.setAttribute('aria-live', 'polite')
+    announcement.textContent = `Dialog ${props.title || ''} closed`
+    document.body.appendChild(announcement)
+    setTimeout(() => announcement.remove(), 1000)
+  }
+})
+
+onMounted(() => {
+  if (props.modelValue) {
     nextTick(() => {
       updateFocusableElements()
       firstFocusableElement.value?.focus()
     })
-    if (!props.allowBodyScroll)
-      document.body.style.overflow = 'hidden'
   }
-  else {
-    previousActiveElement.value?.focus()
-    document.body.style.overflow = 'auto'
-  }
+})
+
+onUnmounted(() => {
+  document.body.style.overflow = 'auto'
+  observer.value?.disconnect()
 })
 </script>
 
 <template>
-  <div
-    v-show="modelValue"
-    class="r-modal-overlay"
-    :class="overlayClass"
-    @click.stop="handleOutside"
-  >
-    <div
-      :id="modalId"
-      :aria-describedby="ariaDescription ? `${modalId}-desc` : undefined"
-      :aria-label="ariaLabel || title"
-      aria-modal="true"
-      :class="classes"
-      role="dialog"
-      :style="styles"
-      tabindex="-1"
-    >
-      <slot name="wrapper">
-        <div class="r-dialog__header">
-          <slot name="header" />
-          <div v-if="props.icon" aria-hidden="true" class="icon">
-            <Icon :name="props.icon" />
-          </div>
-          <div v-if="props.title" :id="`${modalId}-title`" class="title">
-            {{ props.title }}
+  <Teleport to="body">
+    <transition name="modal">
+      <div
+        v-if="modelValue"
+        :id="modalId"
+        ref="modalRef"
+        class="r-modal-overlay"
+        :class="[`${overlayClass}`]"
+        v-bind="ariaAttributes"
+        tabindex="-1"
+        @click="handleOutside"
+        @keydown="handleKeyDown"
+      >
+        <div
+          :class="classes"
+          role="document"
+          :style="styles"
+        >
+          <div v-if="!clearContent" class="r-dialog__header">
+            <div class="r-dialog__header-content">
+              <Icon
+                v-if="icon"
+                aria-hidden="true"
+                class="r-dialog__icon"
+                :name="icon"
+              />
+              <div class="r-dialog__texts">
+                <h2
+                  v-if="title"
+                  :id="titleId"
+                  class="r-dialog__title"
+                >
+                  {{ title }}
+                </h2>
+                <p
+                  v-if="description"
+                  :id="descriptionId"
+                  class="r-dialog__description"
+                >
+                  {{ description }}
+                </p>
+              </div>
+            </div>
+            <button
+              v-if="outsideClick"
+              aria-label="Close dialog"
+              class="r-dialog__close"
+              @click="$emit('update:modelValue', false)"
+            >
+              <Icon aria-hidden="true" name="mdiClose" />
+            </button>
           </div>
           <div
-            v-if="props.description"
-            :id="`${modalId}-desc`"
-            class="description"
+            class="r-dialog__body"
+            :class="{
+              'r-dialog__body--clear': clearContent,
+            }"
           >
-            {{ props.description }}
+            <slot />
+          </div>
+          <div
+            v-if="!clearContent && $slots.actions"
+            class="r-dialog__actions"
+          >
+            <slot name="actions" />
           </div>
         </div>
-        <div class="r-dialog__body">
-          <slot />
-        </div>
-        <div class="r-dialog__actions">
-          <slot name="actions" />
-        </div>
-      </slot>
-    </div>
-  </div>
+      </div>
+    </transition>
+  </Teleport>
 </template>

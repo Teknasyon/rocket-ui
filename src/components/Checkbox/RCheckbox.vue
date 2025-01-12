@@ -88,6 +88,42 @@ export interface Props {
    * <Checkbox hideDetails />
    */
   hideDetails?: boolean
+
+  /**
+   * Whether the checkbox is required
+   * @type boolean
+   * @default false
+   * @example
+   * <Checkbox required />
+   */
+  required?: boolean
+
+  /**
+   * Aria label for the checkbox
+   * @type string
+   * @default ''
+   * @example
+   * <Checkbox aria-label="Accept terms" />
+   */
+  ariaLabel?: string
+
+  /**
+   * Name attribute for the checkbox
+   * @type string
+   * @default ''
+   * @example
+   * <Checkbox name="terms" />
+   */
+  name?: string
+
+  /**
+   * Value attribute for the checkbox
+   * @type string | number | boolean
+   * @default ''
+   * @example
+   * <Checkbox value="1" />
+   */
+  value?: string | number | boolean
 }
 
 interface StateTypes {
@@ -103,6 +139,10 @@ const props = withDefaults(defineProps<Props>(), {
   hint: '',
   errorMsg: '',
   modelValue: false,
+  required: false,
+  ariaLabel: '',
+  name: '',
+  value: '',
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -170,34 +210,64 @@ watch(
     immediate: true,
   },
 )
+
+const checkboxId = computed(() => props.id || `checkbox-${Math.random().toString(36).substr(2, 9)}`)
 </script>
 
 <template>
   <div class="r-checkbox-wrapper">
     <div class="r-checkbox-container">
       <input
-        :id="props.id"
+        :id="checkboxId"
+        :aria-checked="state.indeterminate ? 'mixed' : undefined"
+        :aria-describedby="props.errorMsg ? `${checkboxId}-error` : props.hint ? `${checkboxId}-hint` : undefined"
+        :aria-disabled="props.disabled"
+        :aria-invalid="!!props.errorMsg"
+        :aria-label="props.ariaLabel || props.label"
+        :aria-required="props.required"
         :checked="state.checked"
         class="r-checkbox-container__input"
         :disabled="props.disabled"
         :indeterminate="state.indeterminate"
+        :name="name"
+        :required="required"
         type="checkbox"
+        :value="value"
         @change="onChange"
+        @keydown.space.prevent="onChange"
       >
-      <div :class="classes" :data-disabled="props.disabled">
+      <div
+        aria-hidden="true"
+        :class="classes"
+        :data-disabled="props.disabled"
+      >
         <Icon :name="icon" :size="24" />
       </div>
     </div>
     <div class="r-checkbox-texts">
-      <label class="r-checkbox-texts__label" :data-disabled="props.disabled" :for="props.id">
-        {{ props.label }}
+      <label
+        class="r-checkbox-texts__label"
+        :data-disabled="props.disabled"
+        :for="checkboxId"
+      >
+        <span v-if="required" class="sr-only">Required - </span>
+        {{ label }}
       </label>
-      <div v-if="!props.hideDetails" class="r-checkbox-texts__details">
-        <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
-          {{ props.errorMsg }}
+      <div v-if="!hideDetails && (errorMsg || hint)" class="r-checkbox-texts__details">
+        <p
+          v-if="!!errorMsg"
+          :id="`${checkboxId}-error`"
+          class="r-checkbox-texts__error"
+          role="alert"
+        >
+          {{ errorMsg }}
         </p>
-        <p v-else class="r-checkbox-texts__hint">
-          {{ props.hint }}
+        <p
+          v-else-if="hint"
+          :id="`${checkboxId}-hint`"
+          class="r-checkbox-texts__hint"
+        >
+          {{ hint }}
         </p>
       </div>
     </div>

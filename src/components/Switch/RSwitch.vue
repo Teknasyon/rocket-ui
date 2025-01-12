@@ -23,13 +23,12 @@ export interface Props {
 
   /**
    * Input checked state
-   * @type InputHTMLAttributes['checked']
+   * @type boolean
    * @default false
    * @example
    * <Checkbox modelValue="true" />
-   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#checked
    */
-  modelValue?: InputHTMLAttributes['checked']
+  modelValue?: boolean
 
   /**
    * Input disabled state
@@ -104,6 +103,69 @@ export interface Props {
    * <Checkbox name="checkbox" />
    */
   name?: string
+
+  /**
+   * Whether the switch is required
+   * @type boolean
+   * @default false
+   * @example
+   * <Switch required />
+   */
+  required?: boolean
+
+  /**
+   * Aria label for the switch
+   * @type string
+   * @default ''
+   * @example
+   * <Switch aria-label="Enable notifications" />
+   */
+  ariaLabel?: string
+
+  /**
+   * Text to display when switch is on
+   * @type string
+   * @default ''
+   * @example
+   * <Switch onText="Enabled" />
+   */
+  onText?: string
+
+  /**
+   * Text to display when switch is off
+   * @type string
+   * @default ''
+   * @example
+   * <Switch offText="Disabled" />
+   */
+  offText?: string
+
+  /**
+   * ID of the element this switch controls
+   * @type string
+   * @default ''
+   * @example
+   * <Switch aria-controls="content-1" />
+   */
+  ariaControls?: string
+
+  /**
+   * Whether the controlled element is expanded
+   * @type boolean
+   * @default undefined
+   * @example
+   * <Switch :aria-expanded="isExpanded" />
+   */
+  ariaExpanded?: boolean
+
+  /**
+   * Whether to use aria-pressed instead of aria-checked
+   * @type boolean
+   * @default false
+   * @example
+   * <Switch use-pressed-state />
+   */
+  usePressedState?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   id: 'switch',
@@ -113,13 +175,18 @@ const props = withDefaults(defineProps<Props>(), {
   label: '',
   hint: '',
   errorMsg: '',
+  required: false,
+  ariaLabel: '',
+  onText: '',
+  offText: '',
+  ariaControls: '',
+  ariaExpanded: undefined,
+  usePressedState: false,
+  hideDetails: false,
 })
 const emit = defineEmits(['update:modelValue'])
-const state = ref<{
-  checked: InputHTMLAttributes['checked']
-}>({
-  checked: false,
-})
+const checked = ref<boolean>(false)
+
 const classes = computed(() => {
   return {
     'r-switch': true,
@@ -128,22 +195,38 @@ const classes = computed(() => {
     'r-switch--error': props.errorMsg,
   }
 })
-function onChange(e: unknown) {
+
+function onChange(e: Event) {
   if (props.disabled)
     return
-  // @ts-expect-error: Unreachable code error
-  state.value.checked = e.target.checked
-  emit('update:modelValue', state.value.checked)
+  const target = e.target as HTMLInputElement
+  checked.value = target.checked
+  emit('update:modelValue', target.checked)
 }
+
+function onKeyDown(e: KeyboardEvent) {
+  if (props.disabled)
+    return
+
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault()
+    checked.value = !checked.value
+    emit('update:modelValue', checked.value)
+  }
+  else if (e.key === 'Tab') {
+    // Let the default tab behavior work
+    return true
+  }
+}
+
 watch(
   () => props.modelValue,
   (value) => {
-    state.value.checked = value
+    checked.value = value ?? false
   },
   {
-    // need immediate to set the state on first render for storybook
-    // TODO: find a better way to do this
     immediate: true,
+    flush: 'sync', // Ensure immediate updates for testing
   },
 )
 </script>
@@ -152,37 +235,66 @@ watch(
   <div
     class="r-switch-container"
     :class="{
-      'r-switch-container--reverse': props.reverse,
-      'r-switch-container--hide-details': props.hideDetails,
+      'r-switch-container--reverse': reverse,
+      'r-switch-container--hide-details': hideDetails,
     }"
   >
     <div :class="classes">
       <input
-        :id="props.id"
-        :checked="state.checked"
+        :id="id"
+        :aria-checked="!usePressedState ? (checked ? 'true' : 'false') : undefined"
+        :aria-controls="ariaControls"
+        :aria-describedby="errorMsg ? `${id}-error` : hint ? `${id}-hint` : undefined"
+        :aria-disabled="disabled ? 'true' : undefined"
+        :aria-expanded="ariaExpanded"
+        :aria-invalid="errorMsg ? 'true' : undefined"
+        :aria-label="ariaLabel || label"
+        :aria-pressed="usePressedState ? (checked ? 'true' : 'false') : undefined"
+        :aria-required="required ? 'true' : undefined"
+        :checked="checked"
         class="r-switch__input"
-        :disabled="props.disabled"
-        :name="props.name"
+        :disabled="disabled"
+        :name="name"
+        :required="required"
+        role="switch"
         type="checkbox"
         @change="onChange"
+        @keydown="onKeyDown"
       >
-      <span class="slider round" />
+      <span
+        aria-hidden="true"
+        class="slider round"
+      >
+        <span v-if="onText || offText" class="sr-only">
+          {{ checked ? onText : offText }}
+        </span>
+      </span>
     </div>
     <div
       class="r-switch-texts"
       :class="{
-        [`r-switch-texts--${props.size}`]: true,
+        [`r-switch-texts--${size}`]: true,
       }"
     >
-      <label :id="`${props.id}-label`" class="r-switch-texts__label" :for="props.id">
-        {{ props.label }}
+      <label :id="`${id}-label`" class="r-switch-texts__label" :for="id">
+        <span v-if="required" class="sr-only">Required -</span>
+        {{ label }}
       </label>
-      <div v-if="!props.hideDetails" class="r-switch-texts__details">
-        <p v-if="props.errorMsg" class="r-switch-texts__error">
-          {{ props.errorMsg }}
+      <div v-if="!hideDetails && (errorMsg || hint)" class="r-switch-texts__details">
+        <p
+          v-if="errorMsg"
+          :id="`${id}-error`"
+          class="r-switch-texts__error"
+          role="alert"
+        >
+          {{ errorMsg }}
         </p>
-        <p v-else class="r-switch-texts__hint">
-          {{ props.hint }}
+        <p
+          v-else-if="hint"
+          :id="`${id}-hint`"
+          class="r-switch-texts__hint"
+        >
+          {{ hint }}
         </p>
       </div>
     </div>

@@ -175,6 +175,42 @@ export interface Props {
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly
    */
   readonly?: boolean
+
+  /**
+   * Aria label for the input
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield aria-label="Search" />
+   */
+  ariaLabel?: string
+
+  /**
+   * Whether the input is required
+   * @type boolean
+   * @default false
+   * @example
+   * <Textfield required />
+   */
+  required?: boolean
+
+  /**
+   * Input autocomplete attribute
+   * @type string
+   * @default 'off'
+   * @example
+   * <Textfield autocomplete="email" />
+   */
+  autocomplete?: string
+
+  /**
+   * Input name attribute
+   * @type string
+   * @default ''
+   * @example
+   * <Textfield name="email" />
+   */
+  name?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   id: '',
@@ -193,6 +229,10 @@ const props = withDefaults(defineProps<Props>(), {
   hideDetails: false,
   role: '',
   readonly: false,
+  ariaLabel: '',
+  required: false,
+  autocomplete: 'off',
+  name: '',
 })
 const emit = defineEmits([
   'update:modelValue',
@@ -221,7 +261,7 @@ const hasValue = computed(() => {
   return state.value.length > 0
 })
 const hasErrorMsg = computed(() => {
-  return props.errorMsg?.length
+  return !!props.errorMsg
 })
 const hasClear = computed(() => {
   return props.clearable && hasValue.value
@@ -336,6 +376,16 @@ function focusInput() {
 }
 
 watch(
+  () => props.type,
+  (value) => {
+    typeOfInputRef.value = value
+  },
+  {
+    immediate: true,
+  },
+)
+
+watch(
   () => props.modelValue,
   (value) => {
     state.value = value
@@ -344,6 +394,7 @@ watch(
     immediate: true,
   },
 )
+
 watch(
   () => state.value,
   (value) => {
@@ -356,27 +407,26 @@ watch(
 </script>
 
 <template>
-  <div
-    class="r-textfield__wrapper"
-  >
+  <div class="r-textfield__wrapper">
     <Label
-      v-if="props.label"
+      v-if="label"
       :id="`${props.id}-label`"
       class="r-textfield__label"
       :for="props.id"
-      :text="props.label"
+      :text="label"
       @click="focusInput"
     />
     <div class="input-wrapper">
       <div :class="classes">
         <slot
-          :disabled="props.disabled"
+          :disabled="disabled"
           :error="hasErrorMsg"
-          :loading="props.loading"
+          :loading="loading"
           name="prepend"
         >
           <Icon
             v-if="prependIconName"
+            aria-hidden="true"
             :class="prependIconClasses"
             :name="prependIconName"
             :size="20"
@@ -385,12 +435,19 @@ watch(
         <input
           :id="props.id"
           ref="inputRef"
-          :disabled="props.disabled"
-          :max="props.max"
-          :min="props.min"
-          :placeholder="props.placeholder"
-          :readonly="props.readonly"
-          :role="props.role"
+          :aria-describedby="hasErrorMsg ? `${props.id}-error` : hint ? `${props.id}-hint` : undefined"
+          :aria-disabled="disabled"
+          :aria-invalid="hasErrorMsg || undefined"
+          :aria-label="ariaLabel || label"
+          :aria-readonly="readonly"
+          :aria-required="required"
+          :disabled="disabled"
+          :max="max"
+          :min="min"
+          :name="name"
+          :placeholder="placeholder"
+          :readonly="readonly"
+          :required="required"
           :type="typeOfInputRef"
           :value="state.value"
           @blur="onBlur"
@@ -398,32 +455,43 @@ watch(
           @input="onInput"
         >
         <slot
-          :disabled="props.disabled"
+          :disabled="disabled"
           :error="hasErrorMsg"
-          :loading="props.loading"
+          :loading="loading"
           name="append"
         >
           <Icon
-            v-if="$props.type === 'password' && hasErrorMsg"
+            v-if="type === 'password'"
+            aria-hidden="true"
             :name="typeOfInputRef === 'password' ? 'mdiEyeOutline' : 'mdiEyeOffOutline'"
             :size="20"
             @click="clickIcon"
           />
           <Icon
-            v-if="appendIconName && !$slots.append || hasErrorMsg"
+            v-else-if="(appendIconName && !$slots.append) || hasErrorMsg"
+            aria-hidden="true"
             :class="appendIconClasses"
-            :name="`${appendIconName}`"
+            :name="appendIconName"
             :size="20"
             @click="clickIcon"
           />
         </slot>
       </div>
-      <div v-if="!props.hideDetails" class="r-textfield__details">
-        <p v-if="props.errorMsg" class="r-textfield__error">
-          {{ props.errorMsg }}
+      <div v-if="!hideDetails && (errorMsg || hint)" class="r-textfield__details">
+        <p
+          v-if="errorMsg"
+          :id="`${props.id}-error`"
+          class="r-textfield__error"
+          role="alert"
+        >
+          {{ errorMsg }}
         </p>
-        <p v-if="!props.errorMsg && props.hint" class="r-textfield__hint">
-          {{ props.hint }}
+        <p
+          v-else-if="hint"
+          :id="`${props.id}-hint`"
+          class="r-textfield__hint"
+        >
+          {{ hint }}
         </p>
       </div>
     </div>

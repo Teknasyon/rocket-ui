@@ -1,87 +1,71 @@
-/* General Radio container styling */
+.r-radio-wrapper {
+  @apply flex items-start gap-2;
+}
+
+.r-radio-container {
+  @apply relative flex items-center justify-center;
+}
+
+.r-radio-container__input {
+  @apply absolute w-5 h-5 opacity-0 cursor-pointer;
+  
+  &:focus-visible + .r-radio {
+    @apply ring-2 ring-offset-2 ring-[var(--primary-500)];
+  }
+
+  &:checked + .r-radio .r-radio__inner {
+    @apply scale-100;
+  }
+
+  &:disabled + .r-radio {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
 .r-radio {
-  @apply flex flex-col cursor-pointer;
+  @apply relative flex items-center justify-center w-5 h-5 border-2 border-neutral-300 rounded-full transition-all cursor-pointer;
+
+  &:hover {
+    @apply border-[var(--primary-500)];
+  }
+
+  &--checked {
+    @apply border-[var(--primary-500)];
+  }
+
+  &--disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  &--error {
+    @apply border-[var(--error-500)];
+  }
+
+  &__inner {
+    @apply w-2.5 h-2.5 bg-[var(--primary-500)] rounded-full transform scale-0 transition-transform;
+  }
 }
 
-/* Hide the default radio input */
-.r-radio__input {
-  @apply sr-only;
-}
+.r-radio-texts {
+  @apply flex flex-col gap-1;
 
-/* Custom Radio Circle */
-.r-radio__custom {
-  @apply w-5 h-5 border border-[var(--primary-500)] rounded-full mr-2.5 inline-block relative flex-shrink-0 transition-all duration-300 ease-in-out;
-}
+  &__label {
+    @apply text-sm font-medium text-neutral-900 cursor-pointer;
 
-/* Add the inner dot when checked */
-.r-radio__input:checked + .r-radio__label .r-radio__custom::before {
-  @apply content-[''] block w-2 h-2 bg-[var(--white)] rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-}
+    &[data-disabled="true"] {
+      @apply cursor-not-allowed opacity-50;
+    }
+  }
 
-.r-radio__input:checked + .r-radio__label .r-radio__custom {
-  @apply bg-[var(--primary-500)] border-[var(--primary-500)];
-}
+  &__details {
+    @apply text-xs;
+  }
 
-/* Style the label */
-.r-radio__label {
-  @apply flex items-center cursor-pointer text-xs font-medium text-[var(--neutral-900)] select-none;
-}
+  &__error {
+    @apply text-[var(--error-500)];
+  }
 
-/* Disabled state */
-.r-radio--disabled .r-radio__label {
-  @apply text-[var(--neutral-300)] cursor-not-allowed;
-}
-
-.r-radio--disabled .r-radio__custom {
-  @apply border-[var(--neutral-300)];
-}
-
-.r-radio__input:disabled + .r-radio__label .r-radio__custom::before {
-  @apply bg-[var(--neutral-300)];
-}
-
-/* Hint styling */
-.r-radio__hint {
-  @apply text-xs font-normal text-[var(--neutral-500)] mt-1 ml-8;
-}
-
-.r-radio__hint--disabled {
-  @apply text-[var(--neutral-300)] cursor-not-allowed;
-}
-
-/* Error state */
-.r-radio--error .r-radio__custom {
-  @apply border-[var(--error-500)];
-}
-
-.r-radio--error .r-radio__label {
-  @apply text-[var(--error-500)];
-}
-
-.r-radio__error {
-  @apply ml-8 text-xs font-normal text-[var(--error-500)];
-}
-
-.r-radio__input:checked + .r-radio__label--error .r-radio__custom--error {
-  @apply bg-[var(--error-500)] border-[var(--error-500)];
-}
-
-.r-radio__custom--error:hover {
-  @apply shadow-[0px_0px_0px_4px_var(--error-50)];
-}
-
-.r-radio__custom:hover:not(.r-radio__custom--disabled) {
-  @apply shadow-[0px_0px_0px_4px_var(--primary-50)];
-}
-
-.r-radio__title {
-  @apply text-sm font-medium text-[var(--neutral-900)];
-}
-
-.r-radio__title--disabled {
-  @apply text-[var(--neutral-300)] cursor-not-allowed;
-}
-
-.r-radio__title--error {
-  @apply text-[var(--error-500)];
+  &__hint {
+    @apply text-[var(--neutral-500)];
+  }
 }

@@ -267,6 +267,42 @@ export interface SelectProps {
    * <Dropdown :maxVisibleChips="3" />
    */
   maxVisibleChips?: number
+
+  /**
+   * Label for the dropdown
+   * @type string
+   * @default ''
+   * @example
+   * <Dropdown label="Select an option" />
+   */
+  label?: string
+
+  /**
+   * Whether the dropdown is required
+   * @type boolean
+   * @default false
+   * @example
+   * <Dropdown required />
+   */
+  required?: boolean
+
+  /**
+   * Aria label for the dropdown
+   * @type string
+   * @default ''
+   * @example
+   * <Dropdown aria-label="Select a country" />
+   */
+  ariaLabel?: string
+
+  /**
+   * Name attribute for the dropdown
+   * @type string
+   * @default ''
+   * @example
+   * <Dropdown name="country" />
+   */
+  name?: string
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -297,6 +333,9 @@ const props = withDefaults(defineProps<SelectProps>(), {
   selectAllText: 'Select all',
   disableDeselect: false,
   maxVisibleChips: 2,
+  required: false,
+  ariaLabel: '',
+  name: '',
 })
 
 const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
@@ -500,19 +539,8 @@ function createTag(e: KeyboardEvent, updatePosition: any) {
     input.value?.focus()
   }
 }
-function isSelected(option: Option) {
-  if (!option || option?.value === undefined || option?.value === null)
-    return false
-  if (props.multiple)
-    return selectedMultiple.value.find(opt => opt?.value === option?.value)
 
-  return selected.value?.value === option?.value
-}
-/**
- * @description Filtered options based on the search input
- * @returns {Option[]} Returns an array of latest options
- */
-const filteredOptions = computed<Option[]>(() => {
+const filteredOptions = computed(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
     return mutatedOptions.value
   const result = mutatedOptions.value.filter((option: Option) => {
@@ -520,6 +548,14 @@ const filteredOptions = computed<Option[]>(() => {
   })
   return result
 })
+
+function isSelected(option: Option): boolean {
+  if (option.value === 'select-all')
+    return selectedMultiple.value.length === filteredOptions.value.length
+  if (props.multiple)
+    return selectedMultiple.value.some(selected => selected.value === option.value)
+  return props.modelValue === option.value
+}
 
 const isReadOnly = computed(() => {
   return !props.searchable
@@ -613,6 +649,30 @@ watch(selectedMultiple, (option) => {
 watch(() => mutatedModel.value, (_value) => {
   reset()
 })
+
+const dropdownId = computed(() => props.id || `dropdown-${Math.random().toString(36).substr(2, 9)}`)
+const listboxId = computed(() => `${dropdownId.value}-listbox`)
+
+const ariaAttributes = computed(() => ({
+  'aria-label': props.ariaLabel || props.label,
+  'aria-expanded': active.value,
+  'aria-haspopup': 'listbox' as const,
+  'aria-controls': listboxId.value,
+  'aria-required': props.required || undefined,
+  'aria-disabled': props.disabled || undefined,
+  'aria-invalid': !!props.errorMsg,
+  'aria-describedby': props.errorMsg ? `${dropdownId.value}-error` : props.hint ? `${dropdownId.value}-hint` : undefined,
+  'role': 'combobox',
+}))
+
+function getOptionAttributes(option: Option, index: number): { role: string; id: string; 'aria-selected': boolean; 'aria-disabled': boolean | undefined } {
+  return {
+    'role': 'option',
+    'id': `${listboxId.value}-${index}`,
+    'aria-selected': isSelected(option),
+    'aria-disabled': option.disabled,
+  }
+}
 </script>
 
 <template>
@@ -622,13 +682,11 @@ watch(() => mutatedModel.value, (_value) => {
       :offset="0"
       placement="bottom"
       resizable
-      :tooltip-class="['w-full', props.tooltipClass]"
+      :tooltip-class="['w-full', tooltipClass]"
       trigger-class="w-full"
       :triggers="['click']"
       type="dropdown"
-      @hide="($event) => {
-        removeActive($event)
-      }"
+      @hide="removeActive"
     >
       <template #default="{ updatePosition, tooltipId }">
         <div
@@ -636,31 +694,35 @@ watch(() => mutatedModel.value, (_value) => {
           ref="dropdown"
           class="r-dropdown"
           :class="{
-            'r-dropdown--disabled': props.disabled,
-            'r-dropdown--loading': props.loading,
-            [props.dropdownClass]: props.dropdownClass,
-            'r-dropdown--error': props.errorMsg,
+            'r-dropdown--disabled': disabled,
+            'r-dropdown--loading': loading,
+            [dropdownClass]: dropdownClass,
+            'r-dropdown--error': errorMsg,
             'group': inputModel !== '' || selectedMultiple.length,
           }"
-          role="select"
+          v-bind="ariaAttributes"
           @click="toggleActive(tooltipId)"
         >
           <div
-            v-if="props.prependIcon || $slots.prepend"
+            v-if="prependIcon || $slots.prepend"
             class="r-dropdown__prepend-icon"
             :class="{
               'r-dropdown__prepend-icon--active': active,
-              'r-dropdown__prepend-icon--error': props.errorMsg,
+              'r-dropdown__prepend-icon--error': errorMsg,
             }"
           >
             <slot
               :active="active"
-              :disabled="props.disabled"
-              :error="props.errorMsg.length"
-              :loading="props.loading"
+              :disabled="disabled"
+              :error="!!errorMsg"
+              :loading="loading"
               name="prepend"
             >
-              <Icon v-if="props.prependIcon" :name="props.prependIcon" />
+              <Icon
+                v-if="prependIcon"
+                aria-hidden="true"
+                :name="prependIcon"
+              />
             </slot>
           </div>
 
@@ -671,10 +733,10 @@ watch(() => mutatedModel.value, (_value) => {
               :selected="selectedMultiple"
             >
               <div class="flex flex-wrap items-center gap-2 text-sm">
-                <template v-if="props.multiple && props.chips">
+                <template v-if="multiple && chips">
                   <template v-for="option in visibleSelectedOptions" :key="option.value">
                     <Chip
-                      clearable
+                      :clearable="!hideChipClear"
                       ghost
                       :label="option.label"
                       variant="primary"
@@ -690,7 +752,7 @@ watch(() => mutatedModel.value, (_value) => {
                     </span>
                   </slot>
                 </template>
-                <template v-else-if="props.multiple">
+                <template v-else-if="multiple">
                   <span v-for="(option, index) in selectedMultiple" :key="option.value">
                     {{ option.label }}{{ index < selectedMultiple.length - 1 ? ', ' : '' }}
                   </span>
@@ -699,102 +761,113 @@ watch(() => mutatedModel.value, (_value) => {
             </slot>
 
             <input
-              :id="props.id"
+              :id="id"
               ref="input"
               v-model="inputModel"
-              :autocomplete="props.autocomplete"
+              :aria-controls="listboxId"
+              :aria-describedby="errorMsg ? `${dropdownId}-error` : hint ? `${dropdownId}-hint` : undefined"
+              :aria-disabled="disabled"
+              :aria-expanded="active"
+              :aria-invalid="!!errorMsg"
+              :aria-label="ariaLabel || label"
+              :aria-required="required"
+              :autocomplete="autocomplete"
               class="r-dropdown__input"
               :class="{
-                'r-dropdown__input--loading': props.loading,
+                'r-dropdown__input--loading': loading,
               }"
-              :disabled="props.disabled"
-              :placeholder="props.placeholder"
+              :disabled="disabled"
+              :name="name"
+              :placeholder="placeholder"
               :readonly="isReadOnly"
-              role="presentation"
+              :required="required"
+              role="combobox"
               type="text"
               @input.prevent="handleInput(updatePosition)"
-              @keydown.backspace="
-                removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)
-              "
+              @keydown.backspace="removeOption($event, selectedMultiple[selectedMultiple.length - 1], updatePosition)"
               @keydown.enter="createTag($event, updatePosition)"
             >
           </div>
 
           <div
-            v-if="props.clearable"
+            v-if="clearable"
             class="r-dropdown__clearable"
-            :data-has-value="
-              (inputModel !== '' || selectedMultiple.length)
-                && active
-            "
+            :data-has-value="(inputModel !== '' || selectedMultiple.length) && active"
             @click="handleClearable($event, updatePosition)"
           >
             <slot name="clearable">
               <Icon
+                aria-hidden="true"
                 name="mdiCloseCircle"
                 size="18"
               />
             </slot>
           </div>
           <div
-            v-if="props.appendIcon || $slots.append"
+            v-if="appendIcon || $slots.append"
             class="r-dropdown__append-icon"
             :class="{
               'r-dropdown__append-icon--active': active,
-              'r-dropdown__append-icon--error': props.errorMsg,
+              'r-dropdown__append-icon--error': errorMsg,
             }"
           >
             <slot
               :active="active"
-              :disabled="props.disabled"
-              :error="props.errorMsg.length"
-              :loading="props.loading"
+              :disabled="disabled"
+              :error="!!errorMsg"
+              :loading="loading"
               name="append"
             >
-              <Icon v-if="props.appendIcon" :name="props.appendIcon" />
+              <Icon
+                v-if="appendIcon"
+                aria-hidden="true"
+                :name="appendIcon"
+              />
             </slot>
           </div>
         </div>
       </template>
       <template #content="{ hide, updatePosition }">
         <ul
+          :id="listboxId"
+          :aria-multiselectable="multiple"
           class="r-dropdown-options"
           :class="{
             'r-dropdown-options--active': active,
-            [props.optionsClass]: props.optionsClass,
+            [optionsClass]: optionsClass,
           }"
+          role="listbox"
         >
           <li
-            v-if="props.showSelectAll && props.multiple && filteredOptions.length > 0"
+            v-if="showSelectAll && multiple && filteredOptions.length > 0"
+            :aria-selected="selectedMultiple.length === filteredOptions.length"
             class="r-dropdown-options__option"
             :class="{
               'r-dropdown-options__option--active': selectedMultiple.length === filteredOptions.length,
-              'r-dropdown-options__option--disabled': false,
             }"
-            @click.prevent="selectOption($event, { label: props.selectAllText, value: 'select-all' }, hide, updatePosition)"
+            role="option"
+            @click.prevent="selectOption($event, { label: selectAllText, value: 'select-all' }, hide, updatePosition)"
           >
             <div class="flex items-center">
-              <p
-                class="r-dropdown-options__option__label"
-              >
-                {{ props.selectAllText }}
+              <p class="r-dropdown-options__option__label">
+                {{ selectAllText }}
               </p>
             </div>
             <Icon
-              v-if="selectedMultiple.length === filteredOptions.length && !props.hideOptionCheckIcon"
+              v-if="selectedMultiple.length === filteredOptions.length && !hideOptionCheckIcon"
+              aria-hidden="true"
               class="r-dropdown-options__option__append-icon"
               :class="{
-                'r-dropdown-options__option__append-icon--active':
-                  selectedMultiple.length === filteredOptions.length,
+                'r-dropdown-options__option__append-icon--active': selectedMultiple.length === filteredOptions.length,
               }"
               name="mdiCheck"
             />
           </li>
-          <hr v-if="props.showSelectAll && filteredOptions.length > 0" class="r-dropdown-options__divider">
+          <hr v-if="showSelectAll && filteredOptions.length > 0" class="r-dropdown-options__divider">
           <li
-            v-for="option in filteredOptions"
+            v-for="(option, index) in filteredOptions"
             :key="option.value"
-            :aria-disabled="option.disabled"
+            v-bind="getOptionAttributes(option, index)"
             class="r-dropdown-options__option"
             :class="{
               'r-dropdown-options__option--active': isSelected(option),
@@ -851,7 +924,7 @@ watch(() => mutatedModel.value, (_value) => {
         </ul>
       </template>
     </RTooltip>
-    <div v-if="!$props.hideDetails" class="r-dropdown-details">
+    <div v-if="!props.hideDetails && (props.errorMsg || props.hint)" class="r-dropdown-details">
       <div v-if="props.errorMsg" class="r-dropdown-error">
         {{ props.errorMsg }}
       </div>

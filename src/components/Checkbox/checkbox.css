@@ -52,7 +52,7 @@
   @apply flex flex-col ml-3.5;
 
   &__label {
-    @apply text-[var(--neutral-900)] cursor-auto text-sm;
+    @apply text-[var(--neutral-900)] cursor-pointer text-sm;
 
     &[data-disabled='true'] {
       @apply cursor-not-allowed;

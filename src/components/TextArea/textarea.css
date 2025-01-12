@@ -1,54 +1,53 @@
 @import '../../index.css';
 
 .r-textarea-wrapper {
-  @apply flex flex-col items-start justify-center;
+  @apply flex flex-col gap-1;
+}
+
+.r-textarea-container {
+  @apply relative;
 }
 
 .r-textarea {
-  @apply outline-none px-3 py-2 rounded-lg border border-[var(--neutral-75)] text-[var(--neutral-900)] min-h-[80px] min-w-[320px];
+  @apply w-full px-3 py-2 text-sm text-neutral-900 bg-white border border-neutral-300 rounded-lg transition-all;
+  @apply placeholder:text-neutral-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+  @apply disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed;
+  @apply resize-y;
 
-  &:hover {
-    @apply border-[var(--primary-500)];
+  &--focused {
+    @apply border-primary-500 ring-2 ring-primary-500;
   }
 
-  &:focus-visible {
-    @apply border-[var(--primary-500)] ring ring-[var(--primary-100)];
+  &--disabled {
+    @apply bg-neutral-100 text-neutral-500 cursor-not-allowed;
   }
 
-  &::placeholder {
-    @apply text-[var(--neutral-500)];
-  }
-
-  &:disabled {
-    @apply bg-[var(--primary-50)] cursor-not-allowed text-[var(--neutral-300)];
-  }
-
-  &:disabled:hover {
-    @apply border-[var(--neutral-200)];
+  &--readonly {
+    @apply bg-neutral-50 cursor-default;
   }
 
   &--error {
-    @apply border-[var(--error-500)] text-[var(--error-500)];
-    &:hover {
-      @apply border-[var(--error-500)];
-    }
-    &:focus-visible {
-      @apply text-[var(--neutral-900)] border-[var(--error-500)] ring-[4px] ring-[var(--error-100)];
-    }
+    @apply border-error-500 focus:ring-error-500 focus:border-error-500;
+  }
+
+  &--auto-resize {
+    @apply resize-none;
   }
 
   &__label {
-  }
-
-  &__hint {
-    @apply text-[var(--neutral-500)] text-xs;
-  }
-
-  &__error {
-    @apply text-xs text-[var(--error-500)];
+    @apply text-sm font-medium text-neutral-900;
   }
 
   &__details {
-    @apply h-4 px-1 mt-2;
+    @apply mt-1 text-xs;
+  }
+
+  &__error {
+    @apply text-error-500;
+  }
+
+  &__hint {
+    @apply text-neutral-500;
   }
 }

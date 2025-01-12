@@ -18,6 +18,8 @@ Modal is a component that renders a modal dialog. It is used to display content 
 
 - [Stories](#stories)
 
+- [Accessibility](#accessibility)
+
 - [Tips](#tips)
 
 ## Overview <a id="overview" />
@@ -40,7 +42,7 @@ The `modelValue` prop is used to control the visibility of the modal. It is a bo
 
 ### block (optional)
 
-The `block` prop is used to control the block behavior of the modal. It is a boolean value that defaults to `true`.
+The `block` prop is used to control the block behavior of the modal. It is a boolean value that defaults to `false`.
 
 ### title (optional)
 
@@ -53,6 +55,30 @@ The `description` prop is used to set the description of the modal. It is a stri
 ### icon (optional)
 
 The `icon` prop is used to set the icon of the modal. It is a string value that defaults to `null`.
+
+### width (optional)
+
+The `width` prop is used to set the width of the modal. It accepts any valid CSS width value.
+
+### height (optional)
+
+The `height` prop is used to set the height of the modal. It accepts any valid CSS height value.
+
+### outsideClick (optional)
+
+The `outsideClick` prop determines if the modal should close when clicking outside. Defaults to `false`.
+
+### clearContent (optional)
+
+The `clearContent` prop removes padding and gap from the modal. Defaults to `false`.
+
+### allowBodyScroll (optional)
+
+The `allowBodyScroll` prop controls whether the body can be scrolled while the modal is open. Defaults to `false`.
+
+### overlayClass (optional)
+
+The `overlayClass` prop allows adding custom classes to the modal overlay.
 
 ## Slots <a id="slots" />
 
@@ -67,6 +93,24 @@ The `default` slot is used to render the body of the modal.
 ### actions (optional)
 
 The `actions` slot is used to render the actions of the modal.
+
+## Accessibility <a id="accessibility" />
+
+The Modal component is built with accessibility in mind and follows WAI-ARIA guidelines for dialog components:
+
+- Uses proper ARIA roles (`dialog`, `document`)
+- Manages focus trap within the modal
+- Provides keyboard navigation (Tab, Shift+Tab, Escape)
+- Announces modal state changes to screen readers
+- Supports aria-labelledby and aria-describedby
+- Prevents background interaction when modal is open
+- Supports custom aria labels and descriptions
+
+### Keyboard Navigation
+
+- `Tab`: Move focus to the next focusable element within the modal
+- `Shift + Tab`: Move focus to the previous focusable element within the modal
+- `Escape`: Close the modal (when outsideClick is enabled)
 
 ## Stories <a id="stories" />
 
@@ -93,3 +137,19 @@ The `actions` slot is used to render the actions of the modal.
 - Use the `description` prop to set the description of the modal.
 
 - Use the `icon` prop to set the icon of the modal.
+
+- Use descriptive titles and clear action buttons.
+
+- Consider using the `outsideClick` prop for better user experience.
+
+- Utilize the `clearContent` prop when you need custom padding.
+
+- Keep modal content focused and concise.
+
+- Use appropriate icons to enhance visual communication.
+
+- Consider mobile responsiveness when setting width and height.
+
+- Ensure proper focus management for accessibility.
+
+- Use semantic HTML within modal content.
