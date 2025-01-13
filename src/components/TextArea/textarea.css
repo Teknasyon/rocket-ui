@@ -11,12 +11,12 @@
 .r-textarea {
   @apply w-full px-3 py-2 text-sm text-neutral-900 bg-white border border-neutral-300 rounded-lg transition-all;
   @apply placeholder:text-neutral-500;
-  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:border-[var(--primary-500)];
   @apply disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed;
   @apply resize-y;
 
   &--focused {
-    @apply border-primary-500 ring-2 ring-primary-500;
+    @apply border-[var(--primary-500)] ring-2 ring-[var(--primary-500)];
   }
 
   &--disabled {
@@ -28,7 +28,7 @@
   }
 
   &--error {
-    @apply border-error-500 focus:ring-error-500 focus:border-error-500;
+    @apply border-[var(--error-500)] focus:ring-[var(--error-500)] focus:border-[var(--error-500)];
   }
 
   &--auto-resize {
@@ -44,7 +44,7 @@
   }
 
   &__error {
-    @apply text-error-500;
+    @apply text-[var(--error-500)];
   }
 
   &__hint {
