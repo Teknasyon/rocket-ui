@@ -6,23 +6,29 @@ import dts from 'vite-plugin-dts'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
     dts({
-      include: ['src/components/**/*.vue', 'src/lib/**/*.ts'],
-      beforeWriteFile: (filePath, content) => {
-        return {
-          filePath: filePath.replace('/src/', '/'),
-          content,
-        }
-      },
       copyDtsFiles: true,
-      outDir: 'dist/types',
+      outDir: [
+        'dist',
+        'types',
+        // 'types/inner'
+      ],
+      // include: ['src/index.ts'],
+      exclude: ['src/ignore'],
       staticImport: true,
-      insertTypesEntry: true,
+      rollupTypes: false,
+      // insertTypesEntry: true,
       compilerOptions: {
         declarationMap: true,
       },
+      rollupConfig: {
+        docModel: {
+          enabled: true,
+          apiJsonFilePath: '<projectFolder>/rollup-docs/<unscopedPackageName>.api.json',
+        },
+      },
     }),
+    vue(),
   ],
   resolve: {
     alias: {
@@ -37,11 +43,6 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue',
-        },
-      },
     },
   },
 })
