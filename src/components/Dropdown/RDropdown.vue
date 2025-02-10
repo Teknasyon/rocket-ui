@@ -421,9 +421,9 @@ function removeActive(id: string) {
  * @param option Selected option
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
-  updatePosition()
-  if (option.disabled)
+  if (props.disabled || option.disabled)
     return
+  updatePosition()
   if (option.value === 'select-all') {
     selectAll()
     return
@@ -619,6 +619,7 @@ watch(() => mutatedModel.value, (_value) => {
   <div ref="wrapper" class="r-dropdown-wrapper">
     <RTooltip
       :auto-hide="false"
+      :disabled="props.disabled"
       :offset="0"
       placement="bottom"
       resizable
