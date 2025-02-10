@@ -1,7 +1,7 @@
 {
   "name": "@rocketui/vue",
   "type": "module",
-  "version": "0.2.72",
+  "version": "0.2.73",
   "packageManager": "yarn@1.22.17",
   "description": "A set of customizable UI components for Vue 3, built with TypeScript",
   "homepage": "https://teknasyon.github.io/rocket-ui/",
