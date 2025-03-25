@@ -51,6 +51,7 @@ const DefaultArgs = {
   showDelay: 0,
   shown: false,
   disabled: false,
+  persistent: false,
   offset: 12,
   padding: 0,
   outsideClick: false,
