@@ -169,6 +169,15 @@ export interface IProps {
    */
   tooltipClass?: string | string[]
 
+  /**
+   * Persistent state of the tooltip
+   * @type boolean
+   * @default false
+   * @example
+   * <Tooltip persistent />
+   */
+  persistent?: boolean
+
   type?: Theme | string
 }
 const props = withDefaults(defineProps<IProps>(), {
@@ -182,6 +191,7 @@ const props = withDefaults(defineProps<IProps>(), {
   showDelay: 300,
   shown: false,
   disabled: false,
+  persistent: false,
   offset: 0,
   padding: 2,
   outsideClick: false,
@@ -206,7 +216,7 @@ async function showTooltip() {
 
   const otherTooltips = document.querySelectorAll('.r-tooltip--active') as unknown as HTMLElement[]
 
-  if (otherTooltips.length > 0) {
+  if (otherTooltips.length > 0 && !props.persistent) {
     otherTooltips.forEach((otherTooltip: HTMLElement) => {
       otherTooltip.style.display = ''
       otherTooltip.classList.remove('r-tooltip--active')
