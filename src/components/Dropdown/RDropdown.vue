@@ -723,6 +723,7 @@ watch(() => mutatedModel.value, (_value) => {
 
           <div
             v-if="props.clearable"
+            :id="props.id ? `${props.id}-clearable-icon` : 'clearable-icon'"
             class="r-dropdown__clearable"
             :data-has-value="
               (inputModel !== '' || selectedMultiple.length)
