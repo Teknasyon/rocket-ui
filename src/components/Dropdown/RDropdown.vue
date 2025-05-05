@@ -434,7 +434,8 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
     }
 
     else {
-      selectedMultiple.value.splice(selectedMultiple.value.indexOf(option), 1)
+      const index = selectedMultiple.value.findIndex(opt => opt.value === option.value)
+      selectedMultiple.value.splice(index, 1)
       emit('removeOption', option)
     }
 
