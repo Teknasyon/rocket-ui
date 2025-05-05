@@ -383,6 +383,7 @@ watch(
           />
         </slot>
         <input
+          v-bind="$attrs"
           :id="props.id"
           ref="inputRef"
           :disabled="props.disabled"
