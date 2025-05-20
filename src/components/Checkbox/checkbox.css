@@ -44,7 +44,7 @@
     }
   }
   &[data-disabled='true'] {
-    @apply bg-[var(--neutral-100)] border-[var(--neutral-200)] text-[var(--neutral-200)] cursor-not-allowed;
+    @apply bg-[var(--neutral-50)] border-[var(--neutral-200)] text-[var(--neutral-200)] cursor-not-allowed;
   }
 }
 
@@ -55,7 +55,7 @@
     @apply text-[var(--neutral-900)] cursor-auto text-sm;
 
     &[data-disabled='true'] {
-      @apply cursor-not-allowed;
+      @apply cursor-not-allowed text-[var(--neutral-300)];
     }
   }
   &__hint {
