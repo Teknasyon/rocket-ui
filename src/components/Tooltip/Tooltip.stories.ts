@@ -26,7 +26,14 @@ const DefaultArgTypes = {
     type: 'select',
     options: ['hover', 'click', 'manual'],
   },
-
+  outsideClick: {
+    control: 'boolean',
+    description: 'Close tooltip when clicking outside',
+  },
+  persistent: {
+    control: 'boolean',
+    description: 'Keep tooltip open when other tooltips are opened',
+  },
   offset: {
     control: {
       type: 'range',
@@ -167,9 +174,88 @@ export const WithClickTrigger: Story = {
 
   args: {
     triggers: 'click',
-    text: 'Clicked!',
-    outsideClick: true,
+    text: 'Click to toggle tooltip',
+    outsideClick: false,
   },
+}
+
+export const WithOutsideClick: Story = {
+  render: ToggleTemplate.render,
+
+  args: {
+    triggers: 'click',
+    text: 'Click outside to close this tooltip',
+    outsideClick: true,
+    autoHide: false,
+  },
+}
+
+export const Persistent: Story = {
+  render: ToggleTemplate.render,
+
+  args: {
+    triggers: 'click',
+    text: 'This is a persistent tooltip - other tooltips cannot close it',
+    persistent: true,
+    outsideClick: false,
+    autoHide: false,
+  },
+}
+
+export const MultipleTooltips: Story = {
+  render: (args: any) => ({
+    components: { Tooltip, Button },
+    setup() {
+      return {
+        args,
+      }
+    },
+    template: `
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <Tooltip
+        text="Normal tooltip - will be closed by other tooltips"
+        triggers="click"
+        :auto-hide="false"
+        :outside-click="false"
+        :persistent="false"
+      >
+        <Button>Normal Tooltip</Button>
+      </Tooltip>
+      
+      <Tooltip
+        text="Persistent tooltip - stays open when others are opened"
+        triggers="click"
+        :auto-hide="false"
+        :outside-click="false"
+        :persistent="true"
+      >
+        <Button>Persistent Tooltip</Button>
+      </Tooltip>
+      
+      <Tooltip
+        text="Outside click tooltip - click outside to close"
+        triggers="click"
+        :auto-hide="false"
+        :outside-click="true"
+        :persistent="false"
+      >
+        <Button>Outside Click Tooltip</Button>
+      </Tooltip>
+      
+      <Tooltip
+        text="Persistent + Outside click tooltip"
+        triggers="click"
+        :auto-hide="false"
+        :outside-click="true"
+        :persistent="true"
+      >
+        <Button>Persistent + Outside Click</Button>
+      </Tooltip>
+    </div>
+    `,
+  }),
+
+  args: {},
 }
 
 export const WithContentSlot: Story = {

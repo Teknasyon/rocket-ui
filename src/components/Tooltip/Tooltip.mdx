@@ -47,6 +47,30 @@ The tooltip component allows developers to easily add tooltips to their applicat
   <Story of={TooltipStories.WithClickTrigger} />
 </Canvas>
 
+### With Outside Click
+
+This tooltip will close when you click outside of it.
+
+<Canvas>
+  <Story of={TooltipStories.WithOutsideClick} />
+</Canvas>
+
+### Persistent Tooltip
+
+This tooltip will remain open even when other tooltips are opened.
+
+<Canvas>
+  <Story of={TooltipStories.Persistent} />
+</Canvas>
+
+### Multiple Tooltips
+
+Demonstrates different tooltip behaviors when multiple tooltips are present.
+
+<Canvas>
+  <Story of={TooltipStories.MultipleTooltips} />
+</Canvas>
+
 ### With Content Slot
 
 <Canvas>
@@ -81,6 +105,10 @@ The **shown** prop can be used to manually control the visibility of the tooltip
 
 The **offset** and **padding** props can be used to adjust the position of the tooltip, and the **outsideClick** prop allows developers to specify whether the tooltip should be hidden when the user clicks outside of it.
 
+## persistent (optional)
+
+The **persistent** prop allows you to create tooltips that remain open even when other tooltips are opened. This is useful for tooltips that contain important information that should stay visible while the user interacts with other parts of the interface.
+
 ## resizable (optional)
 
 The **resizable** prop can be used to specify whether the tooltip should be resizable.
@@ -100,5 +128,11 @@ The **resizable** prop can be used to specify whether the tooltip should be resi
 💡 The padding prop can be used to add space around the tooltip text, which can make it easier to read.
 
 💡 This can improve the user experience by preventing the tooltip from staying visible when the user is no longer interacting with the trigger element.
+
+💡 Use the **outsideClick** prop when you want tooltips to close when users click elsewhere. This is particularly useful for click-triggered tooltips that contain interactive content.
+
+💡 Use the **persistent** prop for important tooltips that should remain visible while users interact with other parts of the interface. However, use this sparingly as too many persistent tooltips can clutter the interface.
+
+💡 When using multiple tooltips, consider the interaction between **persistent** and non-persistent tooltips. Non-persistent tooltips will close each other, but persistent tooltips will remain open.
 
 💡 Always test the tooltip with real users to see how it works in practice and to gather feedback on how it can be improved.

@@ -32,7 +32,7 @@ export interface IProps {
   text?: string;
 
   /**
-   * Dark theme of the tooltip deneme 1 2 3
+   * Dark theme of the tooltip
    * @type boolean
    * @default true
    * @example
