@@ -7,13 +7,15 @@ export type ButtonType =
   | 'default'
   | 'text'
   | 'outline'
+  | 'link'
+  | 'ghost'
 
 export type ButtonColor = | 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info'
 export type ButtonSize = | 'small' | 'medium' | 'large'
 export interface Props {
   /**
    * Variant of the Button
-   * @type  { 'default' | 'text' | 'outline' | 'ghost'}
+   * @type  { 'default' | 'text' | 'outline' | 'link' | 'ghost'}
    * @default 'default'
    * @example
    * <Button variant="default" />
