@@ -5,7 +5,7 @@ import Button from './RButton.vue'
 const DefaultArgTypes = {
   variant: {
     type: 'select',
-    options: ['default', 'text', 'outline'],
+    options: ['default', 'text', 'link', 'outline'],
   },
   color: {
     type: 'select',

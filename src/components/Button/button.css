@@ -337,4 +337,102 @@
       }
     }
   }
+
+  &__link {
+    @apply bg-transparent text-[var(--neutral-900)] border-transparent underline;
+
+    &:hover {
+      @apply text-[var(--neutral-700)];
+    }
+    &:active {
+      @apply ring-[var(--neutral-100)] bg-transparent text-[var(--neutral-900)];
+    }
+    &:disabled {
+      @apply text-[var(--neutral-200)];
+    }
+
+    &--primary {
+      @apply text-[var(--primary-500)];
+
+      &:hover {
+        @apply text-[var(--primary-700)];
+      }
+      &:active {
+        @apply ring-[var(--primary-100)] bg-transparent text-[var(--primary-500)];
+      }
+      &:disabled {
+        @apply text-[var(--primary-200)];
+      }
+    }
+
+    &--secondary {
+      @apply text-[var(--secondary-500)];
+
+      &:hover {
+        @apply text-[var(--secondary-700)];
+      }
+      &:active {
+        @apply ring-[var(--secondary-100)] bg-transparent text-[var(--secondary-500)];
+      }
+      &:disabled {
+        @apply text-[var(--secondary-200)];
+      }
+    }
+
+    &--danger {
+      @apply text-[var(--error-500)];
+
+      &:hover {
+        @apply text-[var(--error-700)];
+      }
+      &:active {
+        @apply ring-[var(--error-100)] bg-transparent text-[var(--error-500)];
+      }
+      &:disabled {
+        @apply text-[var(--error-200)];
+      }
+    }
+
+    &--success {
+      @apply text-[var(--success-500)];
+
+      &:hover {
+        @apply text-[var(--success-700)];
+      }
+      &:active {
+        @apply ring-[var(--success-100)] bg-transparent text-[var(--success-500)];
+      }
+      &:disabled {
+        @apply text-[var(--success-200)];
+      }
+    }
+
+    &--warning {
+      @apply text-[var(--warning-500)];
+
+      &:hover {
+        @apply text-[var(--warning-700)];
+      }
+      &:active {
+        @apply ring-[var(--warning-100)] bg-transparent text-[var(--warning-500)];
+      }
+      &:disabled {
+        @apply text-[var(--warning-200)];
+      }
+    }
+
+    &--info {
+      @apply text-[var(--info-500)];
+
+      &:hover {
+        @apply text-[var(--info-700)];
+      }
+      &:active {
+        @apply ring-[var(--info-100)] bg-transparent text-[var(--info-500)];
+      }
+      &:disabled {
+        @apply text-[var(--info-200)];
+      }
+    }
+  }
 }
