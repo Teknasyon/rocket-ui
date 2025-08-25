@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import './tooltip.css';
-import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue';
-import { onClickOutside } from '@vueuse/core';
-import { createGuid } from '../../utils/helpers';
+import './tooltip.css'
+import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+import { createGuid } from '../../utils/helpers'
 import {
   Placement,
   type Placements,
@@ -10,7 +10,7 @@ import {
   Trigger,
   type Triggers,
   update,
-} from './popper';
+} from './popper'
 
 export interface IProps {
   /**
@@ -20,7 +20,7 @@ export interface IProps {
    * @example
    * <Tooltip placement="top" />
    */
-  placement?: Placements;
+  placement?: Placements
 
   /**
    * Text of the tooltip content
@@ -29,7 +29,7 @@ export interface IProps {
    * @example
    * <Tooltip text="Tooltip" />
    */
-  text?: string;
+  text?: string
 
   /**
    * Dark theme of the tooltip
@@ -38,7 +38,7 @@ export interface IProps {
    * @example
    * <Tooltip dark />
    */
-  dark?: boolean;
+  dark?: boolean
 
   /**
    * Light theme of the tooltip
@@ -47,7 +47,7 @@ export interface IProps {
    * @example
    * <Tooltip light />
    */
-  light?: boolean;
+  light?: boolean
 
   /**
    * Triggers of the tooltip
@@ -56,7 +56,7 @@ export interface IProps {
    * @example
    * <Tooltip triggers="hover" />
    */
-  triggers?: Array<Triggers>;
+  triggers?: Array<Triggers>
 
   /**
    * Auto hide of the tooltip
@@ -65,7 +65,7 @@ export interface IProps {
    * @example
    * <Tooltip autoHide />
    */
-  autoHide?: boolean;
+  autoHide?: boolean
 
   /**
    * Hide delay of the tooltip
@@ -74,7 +74,7 @@ export interface IProps {
    * @example
    * <Tooltip hideDelay={3000} />
    */
-  hideDelay?: number;
+  hideDelay?: number
 
   /**
    * Show delay of the tooltip
@@ -83,7 +83,7 @@ export interface IProps {
    * @example
    * <Tooltip showDelay={0} />
    */
-  showDelay?: number;
+  showDelay?: number
 
   /**
    * Shown state of the tooltip
@@ -92,7 +92,7 @@ export interface IProps {
    * @example
    * <Tooltip shown />
    */
-  shown?: boolean;
+  shown?: boolean
 
   /**
    * Disabled state of the tooltip
@@ -101,7 +101,7 @@ export interface IProps {
    * @example
    * <Tooltip disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Offset of the tooltip
@@ -111,7 +111,7 @@ export interface IProps {
    * <Tooltip offset={0} />
    * @link https://floating-ui.com/docs/tutorial#offset-middleware
    */
-  offset?: number;
+  offset?: number
 
   /**
    * Padding of the tooltip
@@ -121,7 +121,7 @@ export interface IProps {
    * <Tooltip padding={0} />
    * @link https://floating-ui.com/docs/tutorial#shift-middleware
    */
-  padding?: number;
+  padding?: number
 
   /**
    * Outside click of the tooltip
@@ -130,7 +130,7 @@ export interface IProps {
    * @example
    * <Tooltip outsideClick />
    */
-  outsideClick?: boolean;
+  outsideClick?: boolean
 
   /**
    * Trigger content of the tooltip
@@ -139,7 +139,7 @@ export interface IProps {
    * @example
    * <Tooltip triggerContent="Trigger" />
    */
-  triggerContent?: string;
+  triggerContent?: string
 
   /**
    * Resizable of the tooltip
@@ -149,7 +149,7 @@ export interface IProps {
    * <Tooltip resizable />
    * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
    */
-  resizable?: boolean;
+  resizable?: boolean
 
   /**
    * Trigger class of the tooltip
@@ -158,7 +158,7 @@ export interface IProps {
    * @example
    * <Tooltip triggerClass="trigger" />
    */
-  triggerClass?: string | string[];
+  triggerClass?: string | string[]
 
   /**
    * Tooltip class of the tooltip
@@ -167,7 +167,7 @@ export interface IProps {
    * @example
    * <Tooltip tooltipClass="tooltip" />
    */
-  tooltipClass?: string | string[];
+  tooltipClass?: string | string[]
 
   /**
    * Persistent state of the tooltip
@@ -176,9 +176,9 @@ export interface IProps {
    * @example
    * <Tooltip persistent />
    */
-  persistent?: boolean;
+  persistent?: boolean
 
-  type?: Theme | string;
+  type?: Theme | string
 }
 const props = withDefaults(defineProps<IProps>(), {
   placement: Placement.Top,
@@ -200,106 +200,116 @@ const props = withDefaults(defineProps<IProps>(), {
   triggerClass: '',
   tooltipClass: '',
   type: Theme.Tooltip,
-});
-const emit = defineEmits(['show', 'hide']);
+})
+const emit = defineEmits(['show', 'hide'])
 
-const trigger = ref();
+const trigger = ref()
 
-const tooltip = ref();
-const arrowElement = ref();
+const tooltip = ref()
+const arrowElement = ref()
 
-const tooltipId = createGuid();
-let outsideClickCleanup: (() => void) | null = null;
+const tooltipId = createGuid()
+let outsideClickCleanup: (() => void) | null = null
 
 async function showTooltip() {
-  if (props.disabled || !tooltip.value) return;
+  if (props.disabled || !tooltip.value)
+    return
 
   // If current tooltip is persistent, don't interfere with other tooltips
   // If current tooltip is not persistent, close other non-persistent tooltips
   if (!props.persistent) {
     const otherTooltips = document.querySelectorAll(
-      '.r-tooltip--active'
-    ) as unknown as HTMLElement[];
+      '.r-tooltip--active',
+    ) as unknown as HTMLElement[]
 
     if (otherTooltips.length > 0) {
       otherTooltips.forEach((otherTooltip: HTMLElement) => {
         // Only close non-persistent tooltips (check data-persistent attribute)
-        const isPersistent = otherTooltip.dataset.persistent === 'true';
+        const isPersistent = otherTooltip.dataset.persistent === 'true'
         if (!isPersistent) {
-          otherTooltip.style.display = '';
-          otherTooltip.classList.remove('r-tooltip--active');
-          otherTooltip.dataset.show = 'false';
+          otherTooltip.style.display = ''
+          otherTooltip.classList.remove('r-tooltip--active')
+          otherTooltip.dataset.show = 'false'
           // Note: We can't emit hide event for other components from here
         }
-      });
+      })
     }
   }
 
   if (tooltip.value.classList.contains('r-tooltip--active')) {
-    hideTooltip();
-  } else {
-    handleUpdate();
-    tooltip.value.style.display = 'block';
-    tooltip.value.classList.add('r-tooltip--active');
-    tooltip.value.dataset.show = 'true';
-    tooltip.value.dataset.persistent = props.persistent.toString();
-    emit('show', tooltip.value.id);
-    handleAutoHide();
+    hideTooltip()
+  }
+  else {
+    handleUpdate()
+    tooltip.value.style.display = 'block'
+    tooltip.value.classList.add('r-tooltip--active')
+    tooltip.value.dataset.show = 'true'
+    tooltip.value.dataset.persistent = props.persistent.toString()
+    emit('show', tooltip.value.id)
+    handleAutoHide()
   }
 }
 
 function hideTooltip(e: Event | null = null) {
-  if (props.disabled || !tooltip.value) return;
-  tooltip.value.style.display = '';
-  tooltip.value.classList.remove('r-tooltip--active');
-  tooltip.value.dataset.show = 'false';
-  tooltip.value.dataset.persistent = 'false';
-  emit('hide', tooltip.value.id);
+  if (props.disabled || !tooltip.value)
+    return
+  tooltip.value.style.display = ''
+  tooltip.value.classList.remove('r-tooltip--active')
+  tooltip.value.dataset.show = 'false'
+  tooltip.value.dataset.persistent = 'false'
+  emit('hide', tooltip.value.id)
 }
 
 function handleAutoHide() {
   if (props.autoHide) {
     setTimeout(() => {
-      hideTooltip();
-    }, props.hideDelay);
+      hideTooltip()
+    }, props.hideDelay)
   }
 }
 
 function onClick(e: MouseEvent) {
-  if (props.disabled) return;
+  if (props.disabled)
+    return
 
   if (props.triggers.includes(Trigger.Click)) {
-    if (tooltip.value.style.display === 'block') hideTooltip();
-    else showTooltip();
+    if (tooltip.value.style.display === 'block')
+      hideTooltip()
+    else showTooltip()
   }
 }
 
 function onMouseEnter() {
-  if (props.disabled) return;
-  if (props.triggers.includes(Trigger.Hover)) showTooltip();
+  if (props.disabled)
+    return
+  if (props.triggers.includes(Trigger.Hover))
+    showTooltip()
 }
 
 function onMouseLeave() {
-  if (props.disabled) return;
+  if (props.disabled)
+    return
   if (
-    tooltip.value.style.display === '' &&
-    props.triggers.includes(Trigger.Hover)
+    tooltip.value.style.display === ''
+    && props.triggers.includes(Trigger.Hover)
   )
-    showTooltip();
+    showTooltip()
   else if (
-    tooltip.value.style.display !== '' &&
-    props.triggers.includes(Trigger.Hover)
+    tooltip.value.style.display !== ''
+    && props.triggers.includes(Trigger.Hover)
   )
-    hideTooltip();
+    hideTooltip()
 }
 
 function onMouseMove() {
-  if (props.triggers.includes(Trigger.Hover)) handleUpdate();
+  if (props.triggers.includes(Trigger.Hover))
+    handleUpdate()
 }
 
-function handleUpdate(extraData?: any) {
-  const { placement, offset, padding, disabled, showDelay, type } = props;
-  if (disabled) return;
+function handleUpdate() {
+  const { placement, offset, padding, disabled, showDelay, type } = props
+  if (disabled)
+    return
   update(
     trigger,
     tooltip,
@@ -309,8 +319,7 @@ function handleUpdate(extraData?: any) {
     padding,
     showDelay,
     type,
-    extraData
-  );
+  )
 }
 
 const classes = computed(() => {
@@ -318,32 +327,35 @@ const classes = computed(() => {
     'r-tooltip': true,
     'r-tooltip--dark': props.dark && !props.light,
     'r-tooltip--light': props.light,
-  };
-});
+  }
+})
 
 /**
  * Listen the resize event of window
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
  */
 window.onresize = () => {
-  if (props.resizable) handleUpdate();
-};
+  if (props.resizable)
+    handleUpdate()
+}
 
 watchEffect(
   () => {
-    if (props.disabled) return;
-    if (props.shown && props.triggers.includes(Trigger.Manual)) showTooltip();
+    if (props.disabled)
+      return
+    if (props.shown && props.triggers.includes(Trigger.Manual))
+      showTooltip()
     else if (!props.shown && props.triggers.includes(Trigger.Manual))
-      hideTooltip();
+      hideTooltip()
   },
-  { flush: 'post' } // this is important to avoid infinite loop & for fire on mounted
-);
+  { flush: 'post' }, // this is important to avoid infinite loop & for fire on mounted
+)
 
 watchEffect(() => {
   // Clean up previous outside click listener
   if (outsideClickCleanup) {
-    outsideClickCleanup();
-    outsideClickCleanup = null;
+    outsideClickCleanup()
+    outsideClickCleanup = null
   }
 
   // Set up outside click listener only if prop is true
@@ -352,36 +364,37 @@ watchEffect(() => {
       trigger,
       (e: MouseEvent) => {
         if (
-          tooltip.value &&
-          tooltip.value.classList.contains('r-tooltip--active')
+          tooltip.value
+          && tooltip.value.classList.contains('r-tooltip--active')
         )
-          hideTooltip(e);
+          hideTooltip(e)
       },
-      { ignore: [tooltip] }
-    );
+      { ignore: [tooltip] },
+    ) ?? null
   }
-});
+})
 
 onMounted(() => {
-  if (props.resizable)
+  if (props.resizable) {
     trigger.value?.parentElement?.parentElement.addEventListener(
       'scroll',
-      handleUpdate()
-    );
+      () => handleUpdate(),
+    )
+  }
 
   if (props.type === Theme.Dropdown) {
     document.addEventListener('scroll', () => {
-      handleUpdate();
-    });
+      handleUpdate()
+    })
   }
-});
+})
 
 onUnmounted(() => {
   if (outsideClickCleanup) {
-    outsideClickCleanup();
-    outsideClickCleanup = null;
+    outsideClickCleanup()
+    outsideClickCleanup = null
   }
-});
+})
 </script>
 
 <template>

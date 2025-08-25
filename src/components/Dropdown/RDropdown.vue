@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, ref, watch } from 'vue'
+import { computed, defineEmits, onMounted, onUnmounted, ref, watch } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
@@ -306,6 +306,48 @@ const selectedMultiple = ref<Option[]>([])
 const active = ref(false)
 const inputModel = ref('')
 
+/**
+ * Scroll locking for open dropdowns (shared per scroll container via dataset)
+ */
+const scrollParent = ref<HTMLElement | null>(null)
+
+function isScrollable(element: HTMLElement) {
+  const style = window.getComputedStyle(element)
+  return /(auto|scroll|overlay)/.test(style.overflowY)
+}
+
+function findNearestScrollParent(element: HTMLElement | null): HTMLElement {
+  let current: HTMLElement | null = element
+  while (current && current !== document.body) {
+    if (isScrollable(current))
+      return current
+    current = current.parentElement
+  }
+  return document.body as HTMLElement
+}
+
+function lockScroll(target: HTMLElement) {
+  const currentCount = Number(target.dataset.rScrollLockCount || '0')
+  if (currentCount === 0) {
+    target.dataset.rPreviousOverflowY = target.style.overflowY
+    target.style.overflowY = 'hidden'
+  }
+  target.dataset.rScrollLockCount = String(currentCount + 1)
+}
+
+function unlockScroll(target: HTMLElement) {
+  const currentCount = Number(target.dataset.rScrollLockCount || '0')
+  if (currentCount <= 1) {
+    const previous = target.dataset.rPreviousOverflowY ?? ''
+    target.style.overflowY = previous
+    delete target.dataset.rScrollLockCount
+    delete target.dataset.rPreviousOverflowY
+  }
+  else {
+    target.dataset.rScrollLockCount = String(currentCount - 1)
+  }
+}
+
 function isObject(option: Option) {
   if (!option)
     return true
@@ -320,7 +362,7 @@ function isObject(option: Option) {
   if (Array.isArray(option))
     return true
 
-  const [optionKey] = Object?.keys(option)
+  const [optionKey] = Object.keys(option as any)
 
   return ['label', 'value']?.includes(optionKey)
 }
@@ -372,6 +414,10 @@ function toggleActive(id: string) {
 
   otherDropdowns.forEach((otherDropdown) => {
     if (otherDropdown.id !== dropdown.value?.id && otherDropdown.classList.contains('r-dropdown--active')) {
+      // unlock scroll for the container of the other dropdown being closed
+      const otherScrollParent = findNearestScrollParent(otherDropdown as HTMLElement)
+      if (otherScrollParent)
+        unlockScroll(otherScrollParent)
       otherDropdown.childNodes.forEach((child: any) => {
         if (child?.classList) {
           Object?.values(child?.classList).filter((cls: any) => cls.includes('--active'))
@@ -389,12 +435,18 @@ function toggleActive(id: string) {
     active.value = false
     dropdown.value?.blur()
     input.value?.blur()
+    if (scrollParent.value)
+      unlockScroll(scrollParent.value)
   }
   else {
     dropdownWithId?.classList.add('r-dropdown--active')
     active.value = true
     dropdown.value?.focus()
     input.value?.focus()
+    if (!scrollParent.value)
+      scrollParent.value = findNearestScrollParent(wrapper.value || dropdown.value as HTMLElement)
+    if (scrollParent.value)
+      lockScroll(scrollParent.value)
     dropdownWithId?.childNodes.forEach((child: any) => {
       if (child?.classList) {
         Object?.values(child?.classList).forEach((cls: any) => {
@@ -413,6 +465,8 @@ function removeActive(id: string) {
   const dropdownWithId = document.getElementById(id)
   dropdownWithId?.classList.remove('r-dropdown--active')
   active.value = false
+  if (scrollParent.value)
+    unlockScroll(scrollParent.value)
 }
 
 /**
@@ -613,6 +667,11 @@ watch(selectedMultiple, (option) => {
 
 watch(() => mutatedModel.value, (_value) => {
   reset()
+})
+
+onUnmounted(() => {
+  if (active.value && scrollParent.value)
+    unlockScroll(scrollParent.value)
 })
 </script>
 
