@@ -1,59 +1,101 @@
 <script setup lang="ts">
-import { type Component, computed, ref } from 'vue';
-import RDropdownVue from './components/Dropdown/RDropdown.vue';
-import RTooltip from './components/Tooltip/RTooltip.vue';
+import { type Component, computed, ref } from 'vue'
+import RDropdownVue from './components/Dropdown/RDropdown.vue'
+import RTooltip from './components/Tooltip/RTooltip.vue'
 
-const RDropdown = RDropdownVue as Component;
+const RDropdown = RDropdownVue as Component
 
 interface City {
-  value: number;
-  label: string;
+  value: number
+  label: string
 }
 
 const options = ref<City[]>([
-  { value: 1, label: 'İstanbul' },
+  { value: 1, label: 'Istanbul' },
   { value: 2, label: 'Ankara' },
-  { value: 3, label: 'İzmir' },
+  { value: 3, label: 'Izmir' },
   { value: 4, label: 'Bursa' },
   { value: 5, label: 'Antalya' },
-]);
+])
 
-const selectedCities = ref<City[]>([]);
+const selectedCities = ref<City[]>([])
 
 const showPlaceholder = computed(() => {
-  return selectedCities.value.length === 0;
-});
+  return selectedCities.value.length === 0
+})
 </script>
 
 <template>
   <div class="p-4">
-    <h1 class="mb-4 text-2xl">Şehir Seçimi</h1>
+    <h1 class="mb-4 text-2xl">
+      City Selection
+    </h1>
 
-    <RDropdown
-      v-model="selectedCities"
-      chips
-      class="w-96"
-      multiple
-      :options="options"
-      :placeholder="showPlaceholder ? 'Şehir seçiniz' : ''"
-    />
+    <div class="flex h-20 flex-col gap-4 overflow-y-auto border border-red-500">
+      <RDropdown
+        v-model="selectedCities"
+        chips
+        class="w-full"
+        multiple
+        :options="options"
+        :placeholder="showPlaceholder ? 'Select a city' : ''"
+      />
+      <RDropdown
+        v-model="selectedCities"
+        chips
+        class="w-full"
+        multiple
+        :options="options"
+        :placeholder="showPlaceholder ? 'Select a city' : ''"
+      />
+      <RDropdown
+        v-model="selectedCities"
+        chips
+        class="w-full"
+        multiple
+        :options="options"
+        :placeholder="showPlaceholder ? 'Select a city' : ''"
+      />
+      <RDropdown
+        v-model="selectedCities"
+        chips
+        class="w-full"
+        multiple
+        :options="options"
+        :placeholder="showPlaceholder ? 'Select a city' : ''"
+      />
+    </div>
 
-    <RTooltip :auto-hide="false" persistent text="test" triggers="click">
+    <RTooltip
+      :auto-hide="false"
+      persistent
+      text="test"
+      :triggers="['click']"
+    >
       <span class="text-blue-500">test</span>
       <template #content>
-        <div class="p-2 bg-red-500 text-white rounded">
-          <p class="text-sm">Bu bir tooltip içeriğidir.</p>
-          <p class="text-sm">Daha fazla bilgi için tıklayın.</p>
-          <RTooltip :auto-hide="false" text="test 2" triggers="click">
+        <div class="rounded bg-red-500 p-2 text-white">
+          <p class="text-sm">
+            This is a tooltip content.
+          </p>
+          <p class="text-sm">
+            Click for more information.
+          </p>
+          <RTooltip :auto-hide="false" text="test 2" :triggers="['click']">
             <span class="text-blue-500">test 2</span>
           </RTooltip>
         </div>
       </template>
     </RTooltip>
-    <RTooltip :auto-hide="false" text="test 2" triggers="click" outsideClick>
+    <RTooltip
+      :auto-hide="false"
+      outside-click
+      text="test 2"
+      :triggers="['click']"
+    >
       <span class="text-blue-500">test 2</span>
     </RTooltip>
-    <RTooltip :auto-hide="false" text="test 3" triggers="click">
+    <RTooltip :auto-hide="false" text="test 3" :triggers="['click']">
       <span class="text-blue-500">test 3</span>
     </RTooltip>
   </div>
