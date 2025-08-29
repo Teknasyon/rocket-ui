@@ -14,28 +14,31 @@ const props = withDefaults(
   defineProps<{
     items: BreadcrumbItem[]
     seperator?: string
+    id?: string
   }>(),
   {
     items: () => [] as BreadcrumbItem[],
     seperator: 'mdiChevronRight',
+    id: 'r-breadcrumb',
   },
 )
 </script>
 
 <template>
-  <div class="r-breadcrumb">
+  <div :id="id" class="r-breadcrumb">
     <div v-for="(item, i) in props.items" :key="i" class="r-breadcrumb__item">
-      <router-link class="r-breadcrumb__link" :to="item.to">
+      <router-link :id="`${id}-link-${i}`" class="r-breadcrumb__link" :to="item.to">
         <slot name="item-icon">
           <RIcon v-if="item.icon" :name="item.icon" />
         </slot>
-        <span v-if="!item.onlyIcon" class="r-breadcrumb__title">{{
+        <span v-if="!item.onlyIcon" :id="`${id}-title-${i}`" class="r-breadcrumb__title">{{
           item.title
         }}</span>
       </router-link>
-      <slot name="custom-seperator">
+      <slot :id="`${id}-separator-${i}`" name="custom-seperator">
         <RIcon
           v-if="i !== items.length - 1 && props.seperator"
+          :id="`${id}-separator-${i}`"
           class="r-breadcrumb__separator"
           :name="props.seperator"
         />

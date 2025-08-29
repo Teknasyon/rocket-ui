@@ -19,12 +19,22 @@ export interface ItemProps {
    * <RItem selectedClass="bg-blue-500 text-white" />
    */
   selectedClass?: string | string[]
+
+  /**
+   * Id of the Item
+   * @type string
+   * @default 'r-item'
+   * @example
+   * <RItem id="custom-item" />
+   */
+  id?: string
 }
 
 const props = withDefaults(defineProps<ItemProps>(), {
   disabled: false,
   selectedClass: '',
   value: null,
+  id: 'r-item',
 })
 
 const RItemGroupSymbol = 'rocket-ui:r-item-group'
@@ -63,6 +73,7 @@ function handleSelect() {
 
 <template>
   <slot
+    :id="`${id}-slot`"
     :disabled="isDisabled(props.value as number)"
     :is-selected="isSelected(props.value as number)"
     :select="handleSelect"

@@ -70,6 +70,15 @@ export interface ItemGroupProps {
    * <RItemGroup :multiple="true" />
    */
   multiple?: boolean
+
+  /**
+   * Id of the ItemGroup
+   * @type string
+   * @default 'r-item-group'
+   * @example
+   * <RItemGroup id="custom-item-group" />
+   */
+  id?: string
 }
 
 const props = withDefaults(defineProps<ItemGroupProps>(), {
@@ -79,6 +88,7 @@ const props = withDefaults(defineProps<ItemGroupProps>(), {
   as: 'div',
   selectedClass: '',
   modelValue: () => [] as number[],
+  id: 'r-item-group',
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -127,7 +137,12 @@ watch(() => props.modelValue, () => {
 </script>
 
 <template>
-  <component :is="tag">
-    <slot :is-selected="isSelected" :select="select" :selected="selectedItems" />
+  <component :is="tag" :id="id">
+    <slot
+      :id="`${id}-slot`"
+      :is-selected="isSelected"
+      :select="select"
+      :selected="selectedItems"
+    />
   </component>
 </template>
