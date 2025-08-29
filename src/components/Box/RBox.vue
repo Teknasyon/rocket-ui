@@ -78,8 +78,19 @@ export interface IProps {
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/display
    */
   display?: CSSProperties['display']
+
+  /**
+   * Id of the Box
+   * @type string
+   * @default 'r-box'
+   * @example
+   * <Box id="custom-box" />
+   */
+  id?: string
 }
-const props = defineProps<IProps>()
+const props = withDefaults(defineProps<IProps>(), {
+  id: 'r-box',
+})
 const styles = computed(() => ({
   display: props.display || 'block',
   width: props.width,
@@ -92,7 +103,12 @@ const as = computed(() => props.is || 'div')
 </script>
 
 <template>
-  <component :is="as" class="box" :style="styles">
-    <slot />
+  <component
+    :is="as"
+    :id="id"
+    class="box"
+    :style="styles"
+  >
+    <slot :id="`${id}-slot`" />
   </component>
 </template>

@@ -88,6 +88,14 @@ export interface BadgeProps {
    * <Badge wrapperClass="text-red-500" />
    */
   wrapperClass?: string | string[]
+
+  /**
+   * Id of the Badge
+   * @type { string }
+   * @example
+   * <Badge id="custom-badge" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
@@ -100,6 +108,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   class: '',
   contentClass: '',
   wrapperClass: '',
+  id: 'r-badge',
 })
 defineEmits(['click'])
 const classes = computed(() => {
@@ -117,9 +126,9 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="r-badge-wrapper group" :class="[props.wrapperClass]">
-    <span :class="[{ 'animate-ping-2': props.animation }, classes]" />
-    <span :class="classes" v-html="props.content" />
-    <slot />
+  <div :id="id" class="r-badge-wrapper group" :class="[props.wrapperClass]">
+    <span :id="`${id}-badge`" :class="[{ 'animate-ping-2': props.animation }, classes]" />
+    <span :id="`${id}-content`" :class="classes" v-html="props.content" />
+    <slot :id="`${id}-slot`" />
   </div>
 </template>

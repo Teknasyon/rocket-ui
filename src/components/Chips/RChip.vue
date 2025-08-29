@@ -75,6 +75,15 @@ export interface Props {
    * <Chip noWrap />
    */
   noWrap?: boolean
+
+  /**
+   * Id of the Chip
+   * @type string
+   * @default 'r-chip'
+   * @example
+   * <Chip id="custom-chip" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
@@ -85,6 +94,7 @@ const props = withDefaults(defineProps<Props>(), {
   ghost: false,
   clearable: false,
   noWrap: false,
+  id: 'r-chip',
 })
 const emit = defineEmits(['click:chip', 'click:close'])
 const classes = computed<object>(() => {
@@ -119,11 +129,12 @@ const appendIcon = computed(() => {
 </script>
 
 <template>
-  <div :class="classes">
-    <div class="r-chip__content" @click="clickChip($event)">
+  <div :id="id" :class="classes">
+    <div :id="`${id}-content`" class="r-chip__content" @click="clickChip($event)">
       <slot :disabled="props.disabled" name="prepend">
         <Icon
           v-if="props.prependIcon"
+          :id="`${id}-prepend-icon`"
           :aria-disabled="props.disabled"
           class="r-chip__content__prepend-icon"
           :name="props.prependIcon"
@@ -131,6 +142,7 @@ const appendIcon = computed(() => {
         />
       </slot>
       <span
+        :id="`${id}-label`"
         class="r-chip__content__label"
         :class="[props.noWrap && 'whitespace-nowrap']"
       >
@@ -140,6 +152,7 @@ const appendIcon = computed(() => {
     <slot :disabled="props.disabled" name="append">
       <Icon
         v-if="appendIcon"
+        :id="`${id}-append-icon`"
         :aria-disabled="props.disabled"
         class="r-chip__content__append-icon"
         :name="appendIcon"

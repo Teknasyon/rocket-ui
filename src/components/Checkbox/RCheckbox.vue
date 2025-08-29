@@ -170,13 +170,15 @@ watch(
     immediate: true,
   },
 )
+
+const componentId = computed(() => props.id || 'r-checkbox')
 </script>
 
 <template>
-  <div class="r-checkbox-wrapper">
-    <div class="r-checkbox-container">
+  <div :id="componentId" class="r-checkbox-wrapper">
+    <div :id="`${componentId}-container`" class="r-checkbox-container">
       <input
-        :id="props.id"
+        :id="`${componentId}-input`"
         :checked="state.checked"
         class="r-checkbox-container__input"
         :disabled="props.disabled"
@@ -184,19 +186,24 @@ watch(
         type="checkbox"
         @change="onChange"
       >
-      <div :class="classes" :data-disabled="props.disabled">
+      <div :id="`${componentId}-icon`" :class="classes" :data-disabled="props.disabled">
         <Icon :name="icon" :size="24" />
       </div>
     </div>
-    <div class="r-checkbox-texts">
-      <label class="r-checkbox-texts__label" :data-disabled="props.disabled" :for="props.id">
+    <div :id="`${componentId}-texts`" class="r-checkbox-texts">
+      <label
+        :id="`${componentId}-label`"
+        class="r-checkbox-texts__label"
+        :data-disabled="props.disabled"
+        :for="props.id"
+      >
         {{ props.label }}
       </label>
-      <div v-if="!props.hideDetails" class="r-checkbox-texts__details">
-        <p v-if="!!props.errorMsg" class="r-checkbox-texts__error">
+      <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-checkbox-texts__details">
+        <p v-if="!!props.errorMsg" :id="`${componentId}-error`" class="r-checkbox-texts__error">
           {{ props.errorMsg }}
         </p>
-        <p v-else class="r-checkbox-texts__hint">
+        <p v-else :id="`${componentId}-hint`" class="r-checkbox-texts__hint">
           {{ props.hint }}
         </p>
       </div>

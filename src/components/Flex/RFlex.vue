@@ -65,6 +65,15 @@ export interface IProps {
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
    */
   shrink?: CSSProperties['flexShrink']
+
+  /**
+   * Id of the Flex
+   * @type string
+   * @default 'r-flex'
+   * @example
+   * <Flex id="custom-flex" />
+   */
+  id?: string
 }
 
 const props = defineProps<IProps>()
@@ -80,8 +89,8 @@ const styles = computed(() => ({
 </script>
 
 <template>
-  <div class="flex" :style="styles">
-    <slot />
+  <div :id="id" class="flex" :style="styles">
+    <slot :id="`${id}-slot`" />
   </div>
 </template>
 

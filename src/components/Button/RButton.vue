@@ -100,6 +100,15 @@ export interface Props {
    * <Button block />
    */
   block?: boolean
+
+  /**
+   * Id of the Button
+   * @type string
+   * @default 'r-button'
+   * @example
+   * <Button id="custom-button" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
@@ -111,6 +120,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   height: '',
   block: false,
+  id: 'r-button',
 })
 defineEmits(['click'])
 const classes = computed(() => ({
@@ -139,6 +149,7 @@ const style = computed(() => {
 <template>
   <button
     v-bind="$attrs"
+    :id="id"
     :class="classes"
     :disabled="disabled"
     :style="style"
@@ -147,6 +158,7 @@ const style = computed(() => {
     <slot name="prepend" :only-icon="props.icon">
       <Icon
         v-if="props.prependIcon"
+        :id="`${id}-prepend-icon`"
         class="r-button__prepend-icon"
         :class="{
           'r-button__prepend-icon--only': props.icon,
@@ -155,11 +167,12 @@ const style = computed(() => {
         :size="iconSize"
       />
     </slot>
-    <slot :disabled="disabled" />
+    <slot :id="`${id}-slot`" :disabled="disabled" />
 
     <slot name="append" :only-icon="props.icon">
       <Icon
         v-if="!props.icon && props.appendIcon"
+        :id="`${id}-append-icon`"
         class="r-button__append-icon"
         :name="props.appendIcon"
         :size="iconSize"

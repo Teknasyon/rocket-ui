@@ -110,6 +110,15 @@ export interface IProps {
    * @link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
    */
   row?: CSSProperties['gridRow']
+
+  /**
+   * Id of the Grid
+   * @type string
+   * @default 'r-grid'
+   * @example
+   * <Grid id="custom-grid" />
+   */
+  id?: string
 }
 const props = defineProps<IProps>()
 
@@ -129,8 +138,8 @@ const gridStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="grid" :style="gridStyle">
-    <slot />
+  <div :id="id" class="grid" :style="gridStyle">
+    <slot :id="`${id}-slot`" />
   </div>
 </template>
 

@@ -676,8 +676,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="wrapper" class="r-dropdown-wrapper">
+  <div :id="id" ref="wrapper" class="r-dropdown-wrapper">
     <RTooltip
+      :id="`${id}-tooltip`"
       :auto-hide="false"
       :disabled="props.disabled"
       :offset="0"
@@ -693,7 +694,7 @@ onUnmounted(() => {
     >
       <template #default="{ updatePosition, tooltipId }">
         <div
-          :id="tooltipId"
+          :id="`${id}-dropdown`"
           ref="dropdown"
           class="r-dropdown"
           :class="{
@@ -708,6 +709,7 @@ onUnmounted(() => {
         >
           <div
             v-if="props.prependIcon || $slots.prepend"
+            :id="`${id}-prepend-icon`"
             class="r-dropdown__prepend-icon"
             :class="{
               'r-dropdown__prepend-icon--active': active,
@@ -715,26 +717,29 @@ onUnmounted(() => {
             }"
           >
             <slot
+              :id="`${id}-prepend-icon`"
               :active="active"
               :disabled="props.disabled"
               :error="props.errorMsg.length"
               :loading="props.loading"
               name="prepend"
             >
-              <Icon v-if="props.prependIcon" :name="props.prependIcon" />
+              <Icon v-if="props.prependIcon" :id="`${id}-prepend-icon`" :name="props.prependIcon" />
             </slot>
           </div>
 
-          <div class="r-dropdown__selections">
+          <div :id="`${id}-selections`" class="r-dropdown__selections">
             <slot
+              :id="`${id}-selection`"
               name="selection"
               :remove-option="removeOption"
               :selected="selectedMultiple"
             >
-              <div class="flex flex-wrap items-center gap-2 text-sm">
+              <div :id="`${id}-selections-content`" class="flex flex-wrap items-center gap-2 text-sm">
                 <template v-if="props.multiple && props.chips">
                   <template v-for="option in visibleSelectedOptions" :key="option.value">
                     <Chip
+                      :id="`${id}-chip-${option.value}`"
                       clearable
                       ghost
                       :label="option.label"
@@ -743,16 +748,17 @@ onUnmounted(() => {
                     />
                   </template>
                   <slot
+                    :id="`${id}-remaining-count`"
                     :count="remainingOptionsCount"
                     name="remaining-count"
                   >
-                    <span v-if="remainingOptionsCount > 0" class="r-dropdown__remaining-count-text">
+                    <span v-if="remainingOptionsCount > 0" :id="`${id}-remaining-count-text`" class="r-dropdown__remaining-count-text">
                       +{{ remainingOptionsCount }}
                     </span>
                   </slot>
                 </template>
                 <template v-else-if="props.multiple">
-                  <span v-for="(option, index) in selectedMultiple" :key="option.value">
+                  <span v-for="(option, index) in selectedMultiple" :id="`${id}-selected-option-${index}`" :key="option.value">
                     {{ option.label }}{{ index < selectedMultiple.length - 1 ? ', ' : '' }}
                   </span>
                 </template>
@@ -760,7 +766,7 @@ onUnmounted(() => {
             </slot>
 
             <input
-              :id="props.id"
+              :id="`${id}-input`"
               ref="input"
               v-model="inputModel"
               :autocomplete="props.autocomplete"
@@ -793,6 +799,7 @@ onUnmounted(() => {
           >
             <slot name="clearable">
               <Icon
+                :id="`${id}-clearable-icon`"
                 name="mdiCloseCircle"
                 size="18"
               />
@@ -800,6 +807,7 @@ onUnmounted(() => {
           </div>
           <div
             v-if="props.appendIcon || $slots.append"
+            :id="`${id}-append-icon`"
             class="r-dropdown__append-icon"
             :class="{
               'r-dropdown__append-icon--active': active,
@@ -807,6 +815,7 @@ onUnmounted(() => {
             }"
           >
             <slot
+              :id="`${id}-append-icon`"
               :active="active"
               :disabled="props.disabled"
               :error="props.errorMsg.length"
@@ -820,6 +829,7 @@ onUnmounted(() => {
       </template>
       <template #content="{ hide, updatePosition }">
         <ul
+          :id="`${id}-options`"
           class="r-dropdown-options"
           :class="{
             'r-dropdown-options--active': active,
@@ -852,9 +862,10 @@ onUnmounted(() => {
               name="mdiCheck"
             />
           </li>
-          <hr v-if="props.showSelectAll && filteredOptions.length > 0" class="r-dropdown-options__divider">
+          <hr v-if="props.showSelectAll && filteredOptions.length > 0" :id="`${id}-divider`" class="r-dropdown-options__divider">
           <li
             v-for="option in filteredOptions"
+            :id="`${id}-option-${option.value}`"
             :key="option.value"
             :aria-disabled="option.disabled"
             class="r-dropdown-options__option"
@@ -866,15 +877,22 @@ onUnmounted(() => {
             @click.prevent="selectOption($event, option, hide, updatePosition)"
           >
             <slot
+              :id="`${id}-option-${option.value}`"
               :disabled="option.disabled"
               :is-selected="isSelected(option)"
               :item="option"
               name="option"
             >
-              <div class="flex items-center">
-                <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option-prepend">
+              <div :id="`${id}-option-content-${option.value}`" class="flex items-center">
+                <slot
+                  :id="`${id}-option-prepend-${option.value}`"
+                  :disabled="option.disabled"
+                  :is-selected="isSelected(option)"
+                  name="option-prepend"
+                >
                   <Icon
                     v-if="option.prependIcon"
+                    :id="`${id}-option-prepend-icon-${option.value}`"
                     class="r-dropdown-options__option__prepend-icon"
                     :class="{
                       'r-dropdown-options__option__prepend-icon--active':
@@ -884,6 +902,7 @@ onUnmounted(() => {
                   />
                 </slot>
                 <p
+                  :id="`${id}-option-label-${option.value}`"
                   class="r-dropdown-options__option__label"
                   :class="{
                     'r-dropdown-options__option__label--active': isSelected(option),
@@ -892,7 +911,12 @@ onUnmounted(() => {
                   {{ option.label }}
                 </p>
               </div>
-              <slot :disabled="option.disabled" :is-selected="isSelected(option)" name="option-append">
+              <slot
+                :id="`${id}-option-append-${option.value}`"
+                :disabled="option.disabled"
+                :is-selected="isSelected(option)"
+                name="option-append"
+              >
                 <Icon
                   v-if="isSelected(option) && !props.hideOptionCheckIcon"
                   class="r-dropdown-options__option__append-icon"
@@ -905,7 +929,7 @@ onUnmounted(() => {
               </slot>
             </slot>
           </li>
-          <li v-if="filteredOptions.length === 0" class="r-dropdown-options__no-option">
+          <li v-if="filteredOptions.length === 0" :id="`${id}-no-option`" class="r-dropdown-options__no-option">
             <slot name="not-options">
               {{ props.noOptionsText }}
             </slot>
@@ -913,11 +937,11 @@ onUnmounted(() => {
         </ul>
       </template>
     </RTooltip>
-    <div v-if="!$props.hideDetails" class="r-dropdown-details">
-      <div v-if="props.errorMsg" class="r-dropdown-error">
+    <div v-if="!$props.hideDetails" :id="`${id}-details`" class="r-dropdown-details">
+      <div v-if="props.errorMsg" :id="`${id}-error`" class="r-dropdown-error">
         {{ props.errorMsg }}
       </div>
-      <div v-if="props.hint" class="r-dropdown-hint">
+      <div v-if="props.hint" :id="`${id}-hint`" class="r-dropdown-hint">
         {{ props.hint }}
       </div>
     </div>
