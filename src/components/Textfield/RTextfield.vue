@@ -276,6 +276,11 @@ const appendIconName = computed(() => {
     return 'mdiEyeOffOutline'
   return appendIcon
 })
+
+const componentId = computed(() => {
+  return props.id || 'r-textfield'
+})
+
 /**
  * @description - focus event handler
  * @param {FocusEvent} e - FocusEvent object
@@ -357,19 +362,21 @@ watch(
 
 <template>
   <div
+    :id="componentId"
     class="r-textfield__wrapper"
   >
     <Label
       v-if="props.label"
-      :id="`${props.id}-label`"
+      :id="`${componentId}-label`"
       class="r-textfield__label"
-      :for="props.id"
+      :for="componentId"
       :text="props.label"
       @click="focusInput"
     />
-    <div class="input-wrapper">
-      <div :class="classes">
+    <div :id="`${componentId}-input-wrapper`" class="input-wrapper">
+      <div :id="`${componentId}-input-wrapper-inner`" :class="classes">
         <slot
+          :id="`${componentId}-prepend-slot`"
           :disabled="props.disabled"
           :error="hasErrorMsg"
           :loading="props.loading"
@@ -377,6 +384,7 @@ watch(
         >
           <Icon
             v-if="prependIconName"
+            :id="`${componentId}-prepend-icon`"
             :class="prependIconClasses"
             :name="prependIconName"
             :size="20"
@@ -384,7 +392,7 @@ watch(
         </slot>
         <input
           v-bind="$attrs"
-          :id="props.id"
+          :id="`${componentId}-input`"
           ref="inputRef"
           :disabled="props.disabled"
           :max="props.max"
@@ -399,6 +407,7 @@ watch(
           @input="onInput"
         >
         <slot
+          :id="`${componentId}-append-slot`"
           :disabled="props.disabled"
           :error="hasErrorMsg"
           :loading="props.loading"
@@ -406,12 +415,14 @@ watch(
         >
           <Icon
             v-if="$props.type === 'password' && hasErrorMsg"
+            :id="`${componentId}-append-icon`"
             :name="typeOfInputRef === 'password' ? 'mdiEyeOutline' : 'mdiEyeOffOutline'"
             :size="20"
             @click="clickIcon"
           />
           <Icon
             v-if="appendIconName && !$slots.append || hasErrorMsg"
+            :id="`${componentId}-append-icon`"
             :class="appendIconClasses"
             :name="`${appendIconName}`"
             :size="20"
@@ -419,8 +430,8 @@ watch(
           />
         </slot>
       </div>
-      <div v-if="!props.hideDetails" class="r-textfield__details">
-        <p v-if="props.errorMsg" class="r-textfield__error">
+      <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-textfield__details">
+        <p v-if="props.errorMsg" :id="`${componentId}-error`" class="r-textfield__error">
           {{ props.errorMsg }}
         </p>
         <p v-if="!props.errorMsg && props.hint" class="r-textfield__hint">

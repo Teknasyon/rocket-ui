@@ -116,6 +116,15 @@ export interface ModalProps {
    * <Modal :modelValue="true" :allowBodyScroll="true" />
    */
   allowBodyScroll?: boolean
+
+  /**
+   * Id of the Modal
+   * @type string
+   * @default 'r-modal'
+   * @example
+   * <Modal id="custom-modal" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<ModalProps>(), {
   modelValue: false,
@@ -131,6 +140,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   overlayClass: '',
   style: '',
   allowBodyScroll: false,
+  id: 'r-modal',
 })
 const emits = defineEmits(['update:modelValue'])
 const classes = computed(() => {
@@ -186,35 +196,37 @@ window.addEventListener('keydown', (event) => {
 <template>
   <div
     v-show="modelValue"
+    :id="id"
     class="r-modal-overlay"
     :class="overlayClass"
     @click.stop="handleOutside"
   >
     <div
+      :id="`${id}-dialog`"
       aria-modal="true"
       :class="classes"
       :open="props.modelValue"
       role="dialog"
       :style="styles"
     >
-      <slot name="wrapper">
-        <div class="r-dialog__header">
-          <slot name="header" />
-          <div v-if="props.icon" class="icon">
+      <slot :id="`${id}-wrapper`" name="wrapper">
+        <div :id="`${id}-header`" class="r-dialog__header">
+          <slot :id="`${id}-header`" name="header" />
+          <div v-if="props.icon" :id="`${id}-icon`" class="icon">
             <Icon :name="props.icon" />
           </div>
-          <div v-if="props.title" class="title">
+          <div v-if="props.title" :id="`${id}-title`" class="title">
             {{ props.title }}
           </div>
-          <div v-if="props.description" class="description">
+          <div v-if="props.description" :id="`${id}-description`" class="description">
             {{ props.description }}
           </div>
         </div>
-        <div class="r-dialog__body">
-          <slot />
+        <div :id="`${id}-body`" class="r-dialog__body">
+          <slot :id="`${id}-body`" />
         </div>
-        <div class="r-dialog__actions">
-          <slot name="actions" />
+        <div :id="`${id}-actions`" class="r-dialog__actions">
+          <slot :id="`${id}-actions`" name="actions" />
         </div>
       </slot>
     </div>

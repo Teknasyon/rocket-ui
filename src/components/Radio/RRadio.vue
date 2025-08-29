@@ -15,7 +15,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  id: 'radio-id',
+  id: '',
   modelValue: false,
   name: 'radio-group',
   disabled: false,
@@ -29,6 +29,9 @@ const props = withDefaults(defineProps<Props>(), {
 // Emits 'update:modelValue' event when the value changes
 defineEmits(['update:modelValue'])
 
+const componentId = computed(() => {
+  return props.id || 'r-radio'
+})
 const checked = ref(props.modelValue)
 
 // Classes to control the radio's styling
@@ -47,10 +50,10 @@ watch(() => props.modelValue, (newVal) => {
 </script>
 
 <template>
-  <div :class="classes">
+  <div :id="componentId" :class="classes">
     <input
       v-bind="$attrs"
-      :id="props.id"
+      :id="`${componentId}-input`"
       :checked="checked"
       class="r-radio__input"
       :disabled="props.disabled"
@@ -61,17 +64,20 @@ watch(() => props.modelValue, (newVal) => {
     >
 
     <span
+      :id="`${componentId}-label`"
       class="r-radio__label"
       :class="[props.errorMsg && 'r-radio__label--error']"
       @click="$emit('update:modelValue')"
     >
       <span
+        :id="`${componentId}-custom`"
         class="r-radio__custom"
         :class="[props.errorMsg && 'r-radio__custom--error', props.disabled && 'r-radio__custom--disabled']"
       />
       <div class="flex flex-col">
         <span
           v-if="props.title"
+          :id="`${componentId}-title`"
           class="r-radio__title"
           :class="[props.errorMsg && 'r-radio__title--error', props.disabled && 'r-radio__title--disabled']"
         >
@@ -84,11 +90,12 @@ watch(() => props.modelValue, (newVal) => {
     </span>
     <span
       v-if="props.hint && !props.errorMsg"
+      :id="`${componentId}-hint`"
       class="r-radio__hint"
       :class="[props.disabled && 'r-radio__hint--disabled']"
     >{{ props.hint }}</span>
 
     <!-- Display error message if it exists -->
-    <span v-if="props.errorMsg" class="r-radio__error">{{ props.errorMsg }}</span>
+    <span v-if="props.errorMsg" :id="`${componentId}-error`" class="r-radio__error">{{ props.errorMsg }}</span>
   </div>
 </template>

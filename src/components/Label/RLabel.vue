@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { HTMLAttributes, LabelHTMLAttributes } from 'vue'
 import './label.css'
 
@@ -31,17 +32,22 @@ export interface LabelProps {
    * <Label text="Label" />
    */
   text: string | number
+
 }
 const props = withDefaults(defineProps<LabelProps>(), {
   id: '',
   for: '',
   text: '',
 })
+
+const componentId = computed(() => {
+  return props.id || 'r-label'
+})
 </script>
 
 <template>
-  <label :id="props.id" class="r-label" :for="props.for">
-    <slot>
+  <label :id="componentId" class="r-label" :for="props.for">
+    <slot :id="`${componentId}-slot`">
       {{ props.text }}
     </slot>
   </label>

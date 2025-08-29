@@ -49,6 +49,15 @@ export interface IProps {
    * <Tabs scrollable />
    */
   scrollable?: boolean
+
+  /**
+   * Id of the Tabs
+   * @type string
+   * @default 'r-tabs'
+   * @example
+   * <Tabs id="custom-tabs" />
+   */
+  id?: string
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -57,6 +66,7 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   tile: false,
   scrollable: false,
+  id: 'r-tabs',
 })
 const emits = defineEmits(['update:modelValue'])
 const activeTab = ref(props.modelValue || props.tabs[0].id)
@@ -88,8 +98,9 @@ watch(
 </script>
 
 <template>
-  <div :class="tabsClasses">
+  <div :id="id" :class="tabsClasses">
     <div
+      :id="`${id}-tabs`"
       class=" flex"
       :class="[{
         'w-full': props.block,
@@ -97,10 +108,10 @@ watch(
         'gap-0.5': props.tile,
       }]"
     >
-      <slot :active-tab="activeTab">
+      <slot :id="`${id}-slot`" :active-tab="activeTab">
         <TabItem
           v-for="(tab, index) in props.tabs"
-          :id="tab.id"
+          :id="`${id}-tab-${tab.index}`"
           :key="index"
           v-model="activeTab"
           :active="index === activeTab"

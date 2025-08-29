@@ -66,6 +66,15 @@ export interface IProps {
    * <Snackbar top />
    */
   top?: boolean
+
+  /**
+   * Id of the Snackbar
+   * @type string
+   * @default 'r-snackbar'
+   * @example
+   * <Snackbar id="custom-snackbar" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   text: '',
@@ -73,6 +82,7 @@ const props = withDefaults(defineProps<IProps>(), {
   left: false,
   modelValue: false,
   timeout: 0,
+  id: 'r-snackbar',
 })
 
 const emit = defineEmits(['action', 'update:modelValue'])
@@ -113,18 +123,20 @@ const variantIcons = computed(() => {
 </script>
 
 <template>
-  <div :class="classes">
-    <slot name="icon">
+  <div :id="id" :class="classes">
+    <slot :id="`${id}-icon`" name="icon">
       <Icon v-if="props.variant" class="r-snackbar__icon" :name="variantIcons" />
     </slot>
 
-    <div class="r-snackbar__text">
-      <slot>{{ props.text }}</slot>
+    <div :id="`${id}-text`" class="r-snackbar__text">
+      <slot :id="`${id}-text-slot`">
+        {{ props.text }}
+      </slot>
     </div>
 
     <div v-if="props.closable" class="r-snackbar__close" @click.stop="$emit('update:modelValue', false)">
-      <slot name="close">
-        <Icon name="mdiClose" :size="16" />
+      <slot :id="`${id}-close-slot`" name="close">
+        <Icon :id="`${id}-close-icon`" name="mdiClose" :size="16" />
       </slot>
     </div>
   </div>
