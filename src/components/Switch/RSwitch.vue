@@ -128,6 +128,9 @@ const classes = computed(() => {
     'r-switch--error': props.errorMsg,
   }
 })
+const componentId = computed(() => {
+  return props.id || 'r-switch'
+})
 function onChange(e: unknown) {
   if (props.disabled)
     return
@@ -150,6 +153,7 @@ watch(
 
 <template>
   <div
+    :id="componentId"
     class="r-switch-container"
     :class="{
       'r-switch-container--reverse': props.reverse,
@@ -158,7 +162,7 @@ watch(
   >
     <div :class="classes">
       <input
-        :id="props.id"
+        :id="`${componentId}-input`"
         :checked="state.checked"
         class="r-switch__input"
         :disabled="props.disabled"
@@ -174,14 +178,14 @@ watch(
         [`r-switch-texts--${props.size}`]: true,
       }"
     >
-      <label :id="`${props.id}-label`" class="r-switch-texts__label" :for="props.id">
+      <label :id="`${componentId}-label`" class="r-switch-texts__label" :for="props.id">
         {{ props.label }}
       </label>
-      <div v-if="!props.hideDetails" class="r-switch-texts__details">
-        <p v-if="props.errorMsg" class="r-switch-texts__error">
+      <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-switch-texts__details">
+        <p v-if="props.errorMsg" :id="`${componentId}-error`" class="r-switch-texts__error">
           {{ props.errorMsg }}
         </p>
-        <p v-else class="r-switch-texts__hint">
+        <p v-else :id="`${componentId}-hint`" class="r-switch-texts__hint">
           {{ props.hint }}
         </p>
       </div>

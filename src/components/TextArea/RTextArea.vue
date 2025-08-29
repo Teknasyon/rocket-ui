@@ -119,20 +119,24 @@ watch(
     immediate: true,
   },
 )
+
+const componentId = computed(() => {
+  return props.id || 'r-textarea'
+})
 </script>
 
 <template>
-  <div class="r-textarea-wrapper">
+  <div :id="componentId" class="r-textarea-wrapper">
     <Label
       v-if="props.label"
-      :id="`${props.id}-label`"
+      :id="`${componentId}-label`"
       class="r-textarea__label"
       for="textarea"
       :text="props.label"
     />
     <textarea
       v-bind="$attrs"
-      :id="props.id"
+      :id="`${componentId}-input`"
       class="r-textarea"
       :class="{
         'r-textarea--error': props.errorMsg,
@@ -143,11 +147,11 @@ watch(
       :value="state.value"
       @input="onInput"
     />
-    <div v-if="!props.hideDetails" class="r-textarea__details">
-      <p v-if="props.errorMsg" class="r-textarea__error">
+    <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-textarea__details">
+      <p v-if="props.errorMsg" :id="`${componentId}-error`" class="r-textarea__error">
         {{ props.errorMsg }}
       </p>
-      <p v-else class="r-textarea__hint">
+      <p v-else :id="`${componentId}-hint`" class="r-textarea__hint">
         {{ props.hint }}
       </p>
     </div>

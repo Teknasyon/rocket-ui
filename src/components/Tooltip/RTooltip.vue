@@ -178,6 +178,13 @@ export interface IProps {
    */
   persistent?: boolean
 
+  /**
+   * Type of the tooltip
+   * @type Theme | string
+   * @default Theme.Tooltip
+   * @example
+   * <Tooltip type="dropdown" />
+   */
   type?: Theme | string
 }
 const props = withDefaults(defineProps<IProps>(), {
@@ -200,6 +207,7 @@ const props = withDefaults(defineProps<IProps>(), {
   triggerClass: '',
   tooltipClass: '',
   type: Theme.Tooltip,
+  id: 'r-tooltip',
 })
 const emit = defineEmits(['show', 'hide'])
 
@@ -399,6 +407,7 @@ onUnmounted(() => {
 
 <template>
   <div
+    :id="id"
     ref="trigger"
     :aria-disabled="props.disabled"
     class="r-tooltip-trigger"
@@ -409,6 +418,7 @@ onUnmounted(() => {
     @mousemove="onMouseMove"
   >
     <slot
+      :id="`${id}-slot`"
       :activators="{
         click: onClick,
         mouseenter: onMouseEnter,
@@ -423,13 +433,18 @@ onUnmounted(() => {
   </div>
   <Teleport to="body">
     <div
-      :id="tooltipId"
+      :id="`${id}-tooltip`"
       ref="tooltip"
       :class="[classes, tooltipClass]"
       data-show="false"
       role="tooltip"
     >
-      <slot :hide="hideTooltip" name="content" :update-position="handleUpdate">
+      <slot
+        :id="`${id}-content-slot`"
+        :hide="hideTooltip"
+        name="content"
+        :update-position="handleUpdate"
+      >
         <div
           v-if="props.text"
           class="r-tooltip__content"
@@ -442,7 +457,7 @@ onUnmounted(() => {
         </div>
         <div
           v-if="props.text"
-          id="arrow"
+          :id="`${id}-arrow`"
           ref="arrowElement"
           class="r-tooltip__arrow"
           :class="{
