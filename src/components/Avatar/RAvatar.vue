@@ -57,6 +57,15 @@ export interface IProps {
    * <Avatar type="text" text="John Doe" />
    */
   text?: string
+
+  /**
+   * Id of the Avatar
+   * @type string
+   * @default 'r-avatar'
+   * @example
+   * <Avatar id="custom-avatar" />
+   */
+  id?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   type: 'image',
@@ -65,6 +74,7 @@ const props = withDefaults(defineProps<IProps>(), {
   alt: 'Avatar',
   online: false,
   text: '',
+  id: 'r-avatar',
 })
 
 const classes = computed(() => ({
@@ -88,13 +98,19 @@ function shortTextWithFirstCharacters(text: string) {
 </script>
 
 <template>
-  <div class="r-avatar__wrapper">
-    <div :class="classes">
-      <p v-if="props.type === 'text'" class="r-avatar__text" :class="{ [`r-avatar__text--${props.size}`]: true }">
+  <div :id="id" class="r-avatar__wrapper">
+    <div :id="`${id}-wrapper`" :class="classes">
+      <p
+        v-if="props.type === 'text'"
+        :id="`${id}-text`"
+        class="r-avatar__text"
+        :class="{ [`r-avatar__text--${props.size}`]: true }"
+      >
         {{ shortTextWithFirstCharacters(props.text) }}
       </p>
       <img
         v-else
+        :id="`${id}-image`"
         :alt="props.alt"
         class="r-avatar__image"
         :class="{
@@ -106,6 +122,7 @@ function shortTextWithFirstCharacters(text: string) {
     </div>
     <span
       v-if="props.online"
+      :id="`${id}-online`"
       class="r-avatar__online"
       :class="{
         [`r-avatar__online--${props.size}`]: true,

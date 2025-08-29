@@ -57,6 +57,16 @@ export interface Props {
    * <Alert block />
    */
   block?: boolean
+
+  /**
+   * Id of the Alert
+   * @type string
+   * @default ''
+   * @example
+   * <Alert id="custom-alert" />
+   */
+  id?: string
+
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,6 +74,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   variant: 'ghost',
   description: '',
+  id: 'r-alert',
   closable: true,
   block: false,
 })
@@ -92,13 +103,13 @@ function close() {
 </script>
 
 <template>
-  <div :class="classes">
-    <div class="r-alert__icon">
+  <div :id="id" :class="classes">
+    <div :id="`${id}-icon`" class="r-alert__icon">
       <slot name="alert-icon">
         <Icon :name="icon" :size="24" />
       </slot>
     </div>
-    <div class="r-alert__content">
+    <div :id="`${id}-content`" class="r-alert__content">
       <slot name="content">
         <p class="r-alert__content__title">
           {{ props.title }}
@@ -108,9 +119,10 @@ function close() {
         </p>
       </slot>
     </div>
-    <div v-if="props.closable" class="r-alert__close">
+    <div v-if="props.closable" :id="`${id}-close`" class="r-alert__close">
       <slot :close="close" name="custom-close" slot-class="r-alert__close__button">
         <Icon
+          :id="`${id}-close-button`"
           class="r-alert__close__button"
           name="mdiClose"
           :size="16"
