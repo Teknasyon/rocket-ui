@@ -111,10 +111,10 @@ watch(
         'gap-0.5': props.tile,
       }]"
     >
-      <slot :active-tab="activeTab">
+      <slot :id="`${id}-slot`" :active-tab="activeTab">
         <TabItem
           v-for="(tab, index) in props.tabs"
-          :id="tab.id"
+          :id="`${id}-tab-${tab.index}`"
           :key="index"
           v-model="activeTab"
           :append-icon="tab.appendIcon"
