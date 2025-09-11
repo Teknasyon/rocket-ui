@@ -2,6 +2,7 @@
 import { type Component, computed, ref } from 'vue'
 import RDropdownVue from './components/Dropdown/RDropdown.vue'
 import RTooltip from './components/Tooltip/RTooltip.vue'
+import RTabs from './components/Tabs/RTabs.vue'
 
 const RDropdown = RDropdownVue as Component
 
@@ -18,6 +19,16 @@ const options = ref<City[]>([
   { value: 5, label: 'Antalya' },
 ])
 
+const tabs = ref<Tab[]>([
+  { id: 0, label: 'Tab 1', prependIcon: 'mdiHome', appendIcon: 'mdiNumeric1Circle' },
+  { id: 1, label: 'Tab 2', prependIcon: 'mdiPlusCircle', disabled: true },
+  { id: 2, label: 'Tab 3', prependIcon: 'mdiHeart' },
+  { id: 3, label: 'Tab 4', prependIcon: 'mdiFaceMan' },
+  { id: 4, label: 'Tab 5', prependIcon: 'mdiCog', appendIcon: 'mdiClose' },
+])
+
+const activeTab = ref(0)
+
 const selectedCities = ref<City[]>([])
 
 const showPlaceholder = computed(() => {
@@ -31,7 +42,7 @@ const showPlaceholder = computed(() => {
       City Selection
     </h1>
 
-    <div class="flex h-20 flex-col gap-4 overflow-y-auto border border-red-500">
+    <!-- <div class="flex h-20 flex-col gap-4 overflow-y-auto border border-red-500">
       <RDropdown
         v-model="selectedCities"
         chips
@@ -97,7 +108,12 @@ const showPlaceholder = computed(() => {
     </RTooltip>
     <RTooltip :auto-hide="false" text="test 3" :triggers="['click']">
       <span class="text-blue-500">test 3</span>
-    </RTooltip>
+    </RTooltip> -->
+
+    <RTabs
+      v-model="activeTab"
+      :tabs="tabs"
+    />
   </div>
 </template>
 
