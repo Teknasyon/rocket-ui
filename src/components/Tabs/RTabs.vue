@@ -114,7 +114,7 @@ watch(
       <slot :id="`${id}-slot`" :active-tab="activeTab">
         <RTabItem
           v-for="(tab, index) in props.tabs"
-          :id="`${id}-tab-${tab.id}`"
+          :id="tab.id"
           :key="index"
           v-model="activeTab"
           :append-icon="tab.appendIcon"

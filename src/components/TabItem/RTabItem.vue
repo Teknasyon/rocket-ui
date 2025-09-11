@@ -118,10 +118,6 @@ const classes = computed(() => {
   }
 })
 
-const componentId = computed(() => {
-  return `r-tab-item-${props.id}`
-})
-
 const style = computed(() => {
   return {
     color: props.color,
@@ -144,7 +140,7 @@ function handleTab(id: number | string): void {
 
 <template>
   <button
-    :id="componentId"
+    :id="`r-tab-item-${props.id}` as string"
     :aria-disabled="props.disabled"
     :aria-selected="isSelected"
     :class="classes"
@@ -159,7 +155,6 @@ function handleTab(id: number | string): void {
     >
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
-        :id="`${componentId}-prepend-icon`"
         class="r-tab-item__prepend-icon"
         :name="props.prependIcon"
         :size="16"
@@ -168,7 +163,6 @@ function handleTab(id: number | string): void {
 
     <span
       v-if="props.variant !== TabItemVariants.ICON"
-      :id="`${componentId}-label`"
     >
       <slot :label="props.label">
         {{ props.label }}
@@ -182,7 +176,6 @@ function handleTab(id: number | string): void {
     >
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.appendIcon"
-        :id="`${componentId}-append-icon`"
         class="r-tab-item__append-icon"
         :name="props.appendIcon"
         :size="16"
