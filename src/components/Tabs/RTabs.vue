@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import './tabs.css'
-import TabItem from '../TabItem/RTabItem.vue'
+import RTabItem from '../TabItem/RTabItem.vue'
 import type { Tab } from './types'
 
 export interface IProps {
@@ -69,7 +69,7 @@ const props = withDefaults(defineProps<IProps>(), {
   id: 'r-tabs',
 })
 const emits = defineEmits(['update:modelValue'])
-const activeTab = ref(props.modelValue || props.tabs[0].id)
+const activeTab = ref(props.modelValue || (props.tabs.length > 0 ? props.tabs[0].id : ''))
 
 const tabsClasses = computed(() => {
   return {
@@ -112,9 +112,9 @@ watch(
       }]"
     >
       <slot :id="`${id}-slot`" :active-tab="activeTab">
-        <TabItem
+        <RTabItem
           v-for="(tab, index) in props.tabs"
-          :id="`${id}-tab-${tab.index}`"
+          :id="`${id}-tab-${tab.id}`"
           :key="index"
           v-model="activeTab"
           :append-icon="tab.appendIcon"
