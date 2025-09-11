@@ -119,7 +119,7 @@ const classes = computed(() => {
 })
 
 const componentId = computed(() => {
-  return props.id || 'r-tab-item'
+  return `r-tab-item-${props.id}`
 })
 
 const style = computed(() => {
@@ -153,27 +153,29 @@ function handleTab(id: number | string): void {
     @click.stop="handleTab(props.id)"
   >
     <slot
-      :id="`${componentId}-prepend-slot`"
       :active="isSelected"
       :disabled="props.disabled"
       name="prepend"
     >
       <Icon
         v-if="props.variant !== TabItemVariants.TEXT && props.prependIcon"
+        :id="`${componentId}-prepend-icon`"
         class="r-tab-item__prepend-icon"
         :name="props.prependIcon"
         :size="16"
       />
     </slot>
 
-    <span v-if="props.variant !== TabItemVariants.ICON">
-      <slot :id="`${componentId}-label-slot`" :label="props.label">
+    <span
+      v-if="props.variant !== TabItemVariants.ICON"
+      :id="`${componentId}-label`"
+    >
+      <slot :label="props.label">
         {{ props.label }}
       </slot>
     </span>
 
     <slot
-      :id="`${componentId}-append-slot`"
       :active="isSelected"
       :disabled="props.disabled"
       name="append"

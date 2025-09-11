@@ -98,7 +98,10 @@ watch(
 </script>
 
 <template>
-  <div :id="id" :class="tabsClasses">
+  <div
+    :id="id"
+    :class="tabsClasses"
+  >
     <div
       :id="`${id}-tabs`"
       class=" flex"
@@ -108,13 +111,12 @@ watch(
         'gap-0.5': props.tile,
       }]"
     >
-      <slot :id="`${id}-slot`" :active-tab="activeTab">
+      <slot :active-tab="activeTab">
         <TabItem
           v-for="(tab, index) in props.tabs"
-          :id="`${id}-tab-${tab.index}`"
+          :id="tab.id"
           :key="index"
           v-model="activeTab"
-          :active="index === activeTab"
           :append-icon="tab.appendIcon"
           :block="block"
           :disabled="tab.disabled"
