@@ -132,7 +132,7 @@ const componentId = computed(() => {
       v-if="props.label"
       :id="`${componentId}`"
       class="r-textarea__label"
-      for="textarea"
+      :for="componentId"
       :text="props.label"
     />
     <textarea

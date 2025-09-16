@@ -178,7 +178,7 @@ watch(
         [`r-switch-texts--${props.size}`]: true,
       }"
     >
-      <label :id="`${componentId}`" class="r-switch-texts__label" :for="props.id">
+      <label :id="`${componentId}`" class="r-switch-texts__label" :for="componentId">
         {{ props.label }}
       </label>
       <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-switch-texts__details">
