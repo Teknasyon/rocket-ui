@@ -64,7 +64,7 @@ watch(() => props.modelValue, (newVal) => {
     >
 
     <span
-      :id="`${componentId}-label`"
+      :id="`${componentId}`"
       class="r-radio__label"
       :class="[props.errorMsg && 'r-radio__label--error']"
       @click="$emit('update:modelValue')"

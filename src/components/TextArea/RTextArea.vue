@@ -4,6 +4,7 @@ import {
   type HTMLAttributes,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
+  computed,
   defineEmits,
   defineProps,
   reactive,
@@ -129,7 +130,7 @@ const componentId = computed(() => {
   <div :id="componentId" class="r-textarea-wrapper">
     <Label
       v-if="props.label"
-      :id="`${componentId}-label`"
+      :id="`${componentId}`"
       class="r-textarea__label"
       for="textarea"
       :text="props.label"

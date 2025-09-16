@@ -192,7 +192,7 @@ const componentId = computed(() => props.id || 'r-checkbox')
     </div>
     <div :id="`${componentId}-texts`" class="r-checkbox-texts">
       <label
-        :id="`${componentId}-label`"
+        :id="`${componentId}`"
         class="r-checkbox-texts__label"
         :data-disabled="props.disabled"
         :for="props.id"

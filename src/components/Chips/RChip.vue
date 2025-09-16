@@ -142,7 +142,7 @@ const appendIcon = computed(() => {
         />
       </slot>
       <span
-        :id="`${id}-label`"
+        :id="`${id}`"
         class="r-chip__content__label"
         :class="[props.noWrap && 'whitespace-nowrap']"
       >

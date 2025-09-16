@@ -367,7 +367,7 @@ watch(
   >
     <Label
       v-if="props.label"
-      :id="`${componentId}-label`"
+      :id="`${componentId}`"
       class="r-textfield__label"
       :for="componentId"
       :text="props.label"
