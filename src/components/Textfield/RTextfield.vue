@@ -392,7 +392,7 @@ watch(
         </slot>
         <input
           v-bind="$attrs"
-          :id="`${componentId}-input`"
+          :id="`${componentId}`"
           ref="inputRef"
           :disabled="props.disabled"
           :max="props.max"

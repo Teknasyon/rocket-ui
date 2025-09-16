@@ -53,7 +53,7 @@ watch(() => props.modelValue, (newVal) => {
   <div :id="componentId" :class="classes">
     <input
       v-bind="$attrs"
-      :id="`${componentId}-input`"
+      :id="`${componentId}`"
       :checked="checked"
       class="r-radio__input"
       :disabled="props.disabled"

@@ -766,7 +766,7 @@ onUnmounted(() => {
             </slot>
 
             <input
-              :id="`${id}-input`"
+              :id="`${id}`"
               ref="input"
               v-model="inputModel"
               :autocomplete="props.autocomplete"

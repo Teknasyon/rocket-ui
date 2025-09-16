@@ -137,7 +137,7 @@ const componentId = computed(() => {
     />
     <textarea
       v-bind="$attrs"
-      :id="`${componentId}-input`"
+      :id="`${componentId}`"
       class="r-textarea"
       :class="{
         'r-textarea--error': props.errorMsg,

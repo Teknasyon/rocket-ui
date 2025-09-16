@@ -178,7 +178,7 @@ const componentId = computed(() => props.id || 'r-checkbox')
   <div :id="componentId" class="r-checkbox-wrapper">
     <div :id="`${componentId}-container`" class="r-checkbox-container">
       <input
-        :id="`${componentId}-input`"
+        :id="`${componentId}`"
         :checked="state.checked"
         class="r-checkbox-container__input"
         :disabled="props.disabled"

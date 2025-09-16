@@ -162,7 +162,7 @@ watch(
   >
     <div :class="classes">
       <input
-        :id="`${componentId}-input`"
+        :id="`${componentId}`"
         :checked="state.checked"
         class="r-switch__input"
         :disabled="props.disabled"
