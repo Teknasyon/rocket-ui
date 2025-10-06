@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { action } from '@storybook/addon-actions'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { action } from '@storybook/addon-actions';
 
-import Dropdown from './RDropdown.vue'
+import Dropdown from './RDropdown.vue';
 
 const DefaultArgs = {
   options: [
@@ -37,7 +37,8 @@ const DefaultArgs = {
   closeOnSelect: true,
   label: '',
   id: 'r-dropdown',
-}
+  persistent: false,
+};
 const DropdownStory = {
   title: 'Form/Dropdown',
   component: Dropdown,
@@ -51,19 +52,19 @@ const DropdownStory = {
   args: DefaultArgs,
   argTypes: {
     'onUpdate:modelValue': { action: 'update:modelValue' },
-    'onClear': { action: 'clear' },
+    onClear: { action: 'clear' },
   },
-} as Meta<typeof Dropdown>
+} as Meta<typeof Dropdown>;
 
-export default DropdownStory
+export default DropdownStory;
 
-type Story = StoryObj<typeof DropdownStory>
+type Story = StoryObj<typeof DropdownStory>;
 
 export const Overview: Story = {
   args: {
     appendIcon: 'mdiChevronDown',
   },
-}
+};
 
 export const Multiple: Story = {
   args: {
@@ -71,7 +72,7 @@ export const Multiple: Story = {
     placeholder: 'Select multiple options',
     appendIcon: 'mdiChevronDown',
   },
-}
+};
 
 export const Chips: Story = {
   args: {
@@ -79,7 +80,7 @@ export const Chips: Story = {
     placeholder: 'Search or create a tag',
     appendIcon: 'mdiChevronDown',
   },
-}
+};
 
 export const Search: Story = {
   args: {
@@ -96,4 +97,4 @@ export const Search: Story = {
     searchable: true,
     clearable: true,
   },
-}
+};
