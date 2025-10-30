@@ -317,7 +317,7 @@ const active = ref(false);
 const inputModel = ref('');
 
 /**
- * Scroll locking for open dropdowns (shared per scroll container via dataset)
+ * Simple scroll parent finder - no locking
  */
 const scrollParent = ref<HTMLElement | null>(null);
 
@@ -332,28 +332,7 @@ function findNearestScrollParent(element: HTMLElement | null): HTMLElement {
     if (isScrollable(current)) return current;
     current = current.parentElement;
   }
-  return document.body as HTMLElement;
-}
-
-function lockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0');
-  if (currentCount === 0) {
-    target.dataset.rPreviousOverflowY = target.style.overflowY;
-    target.style.overflowY = 'hidden';
-  }
-  target.dataset.rScrollLockCount = String(currentCount + 1);
-}
-
-function unlockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0');
-  if (currentCount <= 1) {
-    const previous = target.dataset.rPreviousOverflowY ?? '';
-    target.style.overflowY = previous;
-    delete target.dataset.rScrollLockCount;
-    delete target.dataset.rPreviousOverflowY;
-  } else {
-    target.dataset.rScrollLockCount = String(currentCount - 1);
-  }
+  return document.body as HTMLElement
 }
 
 function isObject(option: Option) {
@@ -416,11 +395,6 @@ function toggleActive(id: string) {
       otherDropdown.id !== dropdown.value?.id &&
       otherDropdown.classList.contains('r-dropdown--active')
     ) {
-      // unlock scroll for the container of the other dropdown being closed
-      const otherScrollParent = findNearestScrollParent(
-        otherDropdown as HTMLElement
-      );
-      if (otherScrollParent) unlockScroll(otherScrollParent);
       otherDropdown.childNodes.forEach((child: any) => {
         if (child?.classList) {
           Object?.values(child?.classList)
@@ -439,7 +413,6 @@ function toggleActive(id: string) {
     active.value = false;
     dropdown.value?.blur();
     input.value?.blur();
-    if (scrollParent.value) unlockScroll(scrollParent.value);
   } else {
     dropdownWithId?.classList.add('r-dropdown--active');
     active.value = true;
@@ -449,7 +422,6 @@ function toggleActive(id: string) {
       scrollParent.value = findNearestScrollParent(
         wrapper.value || (dropdown.value as HTMLElement)
       );
-    if (scrollParent.value) lockScroll(scrollParent.value);
     dropdownWithId?.childNodes.forEach((child: any) => {
       if (child?.classList) {
         Object?.values(child?.classList).forEach((cls: any) => {
@@ -468,7 +440,6 @@ function removeActive(id: string) {
   const dropdownWithId = document.getElementById(id);
   dropdownWithId?.classList.remove('r-dropdown--active');
   active.value = false;
-  if (scrollParent.value) unlockScroll(scrollParent.value);
 }
 
 /**
@@ -678,7 +649,7 @@ watch(
 );
 
 onUnmounted(() => {
-  if (active.value && scrollParent.value) unlockScroll(scrollParent.value);
+  // Simple cleanup - no scroll operations needed
 });
 </script>
 
@@ -689,12 +660,12 @@ onUnmounted(() => {
       :auto-hide="false"
       :disabled="props.disabled"
       :offset="0"
+      :persistent="props.persistent"
       placement="bottom"
       resizable
       :tooltip-class="['w-full', props.tooltipClass]"
       trigger-class="w-full"
       :triggers="['click']"
-      :persistent="props.persistent"
       type="dropdown"
       @hide="
         ($event) => {
