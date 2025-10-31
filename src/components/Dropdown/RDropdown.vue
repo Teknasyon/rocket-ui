@@ -308,8 +308,8 @@ const inputModel = ref('')
 
 /**
  * Scroll locking for open dropdowns (shared per scroll container via dataset)
+ * Note: Targets are now automatically tracked in lockScroll/unlockScroll functions
  */
-const scrollParent = ref<HTMLElement | null>(null)
 
 function isScrollable(element: HTMLElement) {
   const style = window.getComputedStyle(element)
@@ -324,28 +324,6 @@ function findNearestScrollParent(element: HTMLElement | null): HTMLElement {
     current = current.parentElement
   }
   return document.body as HTMLElement
-}
-
-function lockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0')
-  if (currentCount === 0) {
-    target.dataset.rPreviousOverflowY = target.style.overflowY
-    target.style.overflowY = 'hidden'
-  }
-  target.dataset.rScrollLockCount = String(currentCount + 1)
-}
-
-function unlockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0')
-  if (currentCount <= 1) {
-    const previous = target.dataset.rPreviousOverflowY ?? ''
-    target.style.overflowY = previous
-    delete target.dataset.rScrollLockCount
-    delete target.dataset.rPreviousOverflowY
-  }
-  else {
-    target.dataset.rScrollLockCount = String(currentCount - 1)
-  }
 }
 
 function isObject(option: Option) {
@@ -399,6 +377,36 @@ const dropdown = ref<HTMLElement>()
 const input = ref<HTMLInputElement>()
 const wrapper = ref<HTMLElement>()
 
+// Store the scroll parent for this dropdown instance
+const scrollParent = ref<HTMLElement | null>(null)
+
+function manageScrollLock(): void {
+  // Find scroll parent if not already found
+  if (!scrollParent.value) {
+    const referenceElement = wrapper.value || dropdown.value
+    if (referenceElement)
+      scrollParent.value = findNearestScrollParent(referenceElement)
+  }
+
+  if (!scrollParent.value)
+    return
+
+  if (active.value) {
+    // Lock scroll when dropdown is active
+    if (!scrollParent.value.dataset.rOriginalOverflow) {
+      scrollParent.value.dataset.rOriginalOverflow = scrollParent.value.style.overflowY || ''
+      scrollParent.value.style.overflowY = 'hidden'
+    }
+  }
+  else {
+    // Unlock scroll when dropdown is inactive
+    if (scrollParent.value.dataset.rOriginalOverflow !== undefined) {
+      scrollParent.value.style.overflowY = scrollParent.value.dataset.rOriginalOverflow
+      delete scrollParent.value.dataset.rOriginalOverflow
+    }
+  }
+}
+
 /**
  * @description - Handles the appearance of the select list
  */
@@ -419,8 +427,10 @@ function toggleActive(id: string) {
       const otherScrollParent = findNearestScrollParent(
         otherDropdown as HTMLElement,
       )
-      if (otherScrollParent)
-        unlockScroll(otherScrollParent)
+      if (otherScrollParent && otherScrollParent.dataset.rOriginalOverflow !== undefined) {
+        otherScrollParent.style.overflowY = otherScrollParent.dataset.rOriginalOverflow
+        delete otherScrollParent.dataset.rOriginalOverflow
+      }
       otherDropdown.childNodes.forEach((child: any) => {
         if (child?.classList) {
           Object?.values(child?.classList)
@@ -439,21 +449,12 @@ function toggleActive(id: string) {
     active.value = false
     dropdown.value?.blur()
     input.value?.blur()
-    if (scrollParent.value)
-      unlockScroll(scrollParent.value)
   }
   else {
     dropdownWithId?.classList.add('r-dropdown--active')
     active.value = true
     dropdown.value?.focus()
     input.value?.focus()
-    if (!scrollParent.value) {
-      scrollParent.value = findNearestScrollParent(
-        wrapper.value || (dropdown.value as HTMLElement),
-      )
-    }
-    if (scrollParent.value)
-      lockScroll(scrollParent.value)
     dropdownWithId?.childNodes.forEach((child: any) => {
       if (child?.classList) {
         Object?.values(child?.classList).forEach((cls: any) => {
@@ -472,8 +473,6 @@ function removeActive(id: string) {
   const dropdownWithId = document.getElementById(id)
   dropdownWithId?.classList.remove('r-dropdown--active')
   active.value = false
-  if (scrollParent.value)
-    unlockScroll(scrollParent.value)
 }
 
 /**
@@ -698,17 +697,17 @@ watch(
 
 watch(
   () => active.value,
-  (value) => {
-    if (value && scrollParent.value)
-      lockScroll(scrollParent.value)
-    else if (!value && scrollParent.value)
-      unlockScroll(scrollParent.value)
+  () => {
+    manageScrollLock()
   },
 )
 
 onUnmounted(() => {
-  if (active.value && scrollParent.value)
-    unlockScroll(scrollParent.value)
+  // Clean up scroll lock when component unmounts
+  if (scrollParent.value && scrollParent.value.dataset.rOriginalOverflow !== undefined) {
+    scrollParent.value.style.overflowY = scrollParent.value.dataset.rOriginalOverflow
+    delete scrollParent.value.dataset.rOriginalOverflow
+  }
 })
 </script>
 
