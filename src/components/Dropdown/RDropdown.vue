@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, onUnmounted, ref, watch } from 'vue';
-import Chip from '../Chips/RChip.vue';
-import Icon from '../Icon/RIcon.vue';
-import './dropdown.css';
-import RTooltip from '../Tooltip/RTooltip.vue';
+import { computed, defineEmits, onMounted, onUnmounted, ref, watch } from 'vue'
+import Chip from '../Chips/RChip.vue'
+import Icon from '../Icon/RIcon.vue'
+import './dropdown.css'
+import RTooltip from '../Tooltip/RTooltip.vue'
 
 export interface Option {
-  [key: string]: any;
-  value: string | number;
-  label: string;
-  prependIcon?: string;
-  disabled?: boolean;
+  [key: string]: any
+  value: string | number
+  label: string
+  prependIcon?: string
+  disabled?: boolean
 }
 export interface SelectProps {
   /**
@@ -31,7 +31,7 @@ export interface SelectProps {
    *  ]"
    * />
    */
-  options: Option[] | any;
+  options: Option[] | any
 
   /**
    * Value of the Dropdown
@@ -40,7 +40,7 @@ export interface SelectProps {
    * @example
    * <Dropdown v-model="model" />
    */
-  modelValue: string | number | Option | Option[] | any;
+  modelValue: string | number | Option | Option[] | any
 
   /**
    * Placeholder Dropdown
@@ -50,7 +50,7 @@ export interface SelectProps {
    * <Dropdown placeholder="Placeholder" />
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder
    */
-  placeholder?: string;
+  placeholder?: string
 
   /**
    * Allow to select multiple options as chips
@@ -59,7 +59,7 @@ export interface SelectProps {
    * @example
    * <Dropdown chips />
    */
-  chips?: boolean;
+  chips?: boolean
 
   /**
    * Allow to select multiple options
@@ -68,7 +68,7 @@ export interface SelectProps {
    * @example
    * <Dropdown multiple />
    */
-  multiple?: boolean;
+  multiple?: boolean
 
   /**
    * Disable the Dropdown
@@ -77,7 +77,7 @@ export interface SelectProps {
    * @example
    * <Dropdown disabled />
    */
-  disabled?: boolean;
+  disabled?: boolean
 
   /**
    * Loading state of the Dropdown
@@ -86,7 +86,7 @@ export interface SelectProps {
    * @example
    * <Dropdown loading />
    */
-  loading?: boolean;
+  loading?: boolean
 
   /**
    * Icon to prepend
@@ -95,7 +95,7 @@ export interface SelectProps {
    * @example
    * <Dropdown prependIcon="search" />
    */
-  prependIcon?: string;
+  prependIcon?: string
 
   /**
    * Icon to append
@@ -104,7 +104,7 @@ export interface SelectProps {
    * @example
    * <Dropdown appendIcon="expand_more" />
    */
-  appendIcon?: string;
+  appendIcon?: string
 
   /**
    * Allow to search for options
@@ -113,7 +113,7 @@ export interface SelectProps {
    * @example
    * <Dropdown searchable />
    */
-  searchable?: boolean;
+  searchable?: boolean
 
   /**
    * Clearable status to selected and searched options
@@ -122,7 +122,7 @@ export interface SelectProps {
    * @example
    * <Dropdown clearable />
    */
-  clearable?: boolean;
+  clearable?: boolean
 
   /**
    * Id of the Dropdown
@@ -131,7 +131,7 @@ export interface SelectProps {
    * @example
    * <Dropdown id="test" />
    */
-  id?: string;
+  id?: string
 
   /**
    * Close the Dropdown on select
@@ -140,7 +140,7 @@ export interface SelectProps {
    * @example
    * <Dropdown :closeOnSelect="false" />
    */
-  closeOnSelect?: boolean;
+  closeOnSelect?: boolean
 
   /**
    * Class of the Dropdown
@@ -149,7 +149,7 @@ export interface SelectProps {
    * @example
    * <Dropdown dropdownClass="w-96" />
    */
-  dropdownClass?: string;
+  dropdownClass?: string
 
   /**
    * Class of the options
@@ -158,7 +158,7 @@ export interface SelectProps {
    * @example
    * <Dropdown optionsClass="w-96" />
    */
-  optionsClass?: string;
+  optionsClass?: string
 
   /**
    * Error message for error state
@@ -167,7 +167,7 @@ export interface SelectProps {
    * @example
    * <Dropdown errorMsg="Error message" />
    */
-  errorMsg?: string;
+  errorMsg?: string
 
   /**
    * Hint message for the Dropdown
@@ -176,7 +176,7 @@ export interface SelectProps {
    * @example
    * <Dropdown hint="Hint message" />
    */
-  hint?: string;
+  hint?: string
 
   /**
    * Hide the hint and error message
@@ -185,7 +185,7 @@ export interface SelectProps {
    * @example
    * <Dropdown hideDetails />
    */
-  hideDetails?: boolean;
+  hideDetails?: boolean
 
   /**
    * Autocomplete of the Dropdown
@@ -194,7 +194,7 @@ export interface SelectProps {
    * @example
    * <Dropdown autocomplete="on" />
    */
-  autocomplete?: 'on' | 'off';
+  autocomplete?: 'on' | 'off'
 
   /**
    * Text to show when there is no options
@@ -203,7 +203,7 @@ export interface SelectProps {
    * @example
    * <Dropdown noOptionsText="No options" />
    */
-  noOptionsText?: string;
+  noOptionsText?: string
 
   /**
    * Hide the check icon of the selected option
@@ -212,7 +212,7 @@ export interface SelectProps {
    * @example
    * <Dropdown hideOptionCheckIcon />
    */
-  hideOptionCheckIcon?: boolean;
+  hideOptionCheckIcon?: boolean
 
   /**
    * Clearable state of the chips
@@ -221,7 +221,7 @@ export interface SelectProps {
    * @example
    * <Dropdown hideChipClear />
    */
-  hideChipClear?: boolean;
+  hideChipClear?: boolean
 
   /**
    * Tooltip class
@@ -230,7 +230,7 @@ export interface SelectProps {
    * @example
    * <Dropdown tooltipClass="w-96" />
    */
-  tooltipClass?: string;
+  tooltipClass?: string
 
   /**
    * Show select all option
@@ -239,7 +239,7 @@ export interface SelectProps {
    * @example
    * <Dropdown showSelectAll />
    */
-  showSelectAll?: boolean;
+  showSelectAll?: boolean
 
   /**
    * Text of the select all option
@@ -248,7 +248,7 @@ export interface SelectProps {
    * @example
    * <Dropdown selectAllText="Select all" />
    */
-  selectAllText?: string;
+  selectAllText?: string
 
   /**
    * Disable deselecting the selected option
@@ -257,7 +257,7 @@ export interface SelectProps {
    * @example
    * <Dropdown disableDeselect />
    */
-  disableDeselect?: boolean;
+  disableDeselect?: boolean
 
   /**
    * Maximum number of visible chips
@@ -266,16 +266,7 @@ export interface SelectProps {
    * @example
    * <Dropdown :maxVisibleChips="3" />
    */
-  maxVisibleChips?: number;
-
-  /**
-   * Persistent dropdown
-   * @type {boolean}
-   * @default false
-   * @example
-   * <Dropdown :persistent="true" />
-   */
-  persistent?: boolean;
+  maxVisibleChips?: number
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -306,157 +297,170 @@ const props = withDefaults(defineProps<SelectProps>(), {
   selectAllText: 'Select all',
   disableDeselect: false,
   maxVisibleChips: 2,
-  persistent: false,
-});
+})
 
-const emit = defineEmits(['update:modelValue', 'clear', 'removeOption']);
+const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
 
-const selected = ref<Option>({} as Option);
-const selectedMultiple = ref<Option[]>([]);
-const active = ref(false);
-const inputModel = ref('');
+const selected = ref<Option>({} as Option)
+const selectedMultiple = ref<Option[]>([])
+const active = ref(false)
+const inputModel = ref('')
 
 /**
  * Scroll locking for open dropdowns (shared per scroll container via dataset)
  */
-const scrollParent = ref<HTMLElement | null>(null);
+const scrollParent = ref<HTMLElement | null>(null)
 
 function isScrollable(element: HTMLElement) {
-  const style = window.getComputedStyle(element);
-  return /(auto|scroll|overlay)/.test(style.overflowY);
+  const style = window.getComputedStyle(element)
+  return /(auto|scroll|overlay)/.test(style.overflowY)
 }
 
 function findNearestScrollParent(element: HTMLElement | null): HTMLElement {
-  let current: HTMLElement | null = element;
+  let current: HTMLElement | null = element
   while (current && current !== document.body) {
-    if (isScrollable(current)) return current;
-    current = current.parentElement;
+    if (isScrollable(current))
+      return current
+    current = current.parentElement
   }
-  return document.body as HTMLElement;
+  return document.body as HTMLElement
 }
 
 function lockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0');
+  const currentCount = Number(target.dataset.rScrollLockCount || '0')
   if (currentCount === 0) {
-    target.dataset.rPreviousOverflowY = target.style.overflowY;
-    target.style.overflowY = 'hidden';
+    target.dataset.rPreviousOverflowY = target.style.overflowY
+    target.style.overflowY = 'hidden'
   }
-  target.dataset.rScrollLockCount = String(currentCount + 1);
+  target.dataset.rScrollLockCount = String(currentCount + 1)
 }
 
 function unlockScroll(target: HTMLElement) {
-  const currentCount = Number(target.dataset.rScrollLockCount || '0');
+  const currentCount = Number(target.dataset.rScrollLockCount || '0')
   if (currentCount <= 1) {
-    const previous = target.dataset.rPreviousOverflowY ?? '';
-    target.style.overflowY = previous;
-    delete target.dataset.rScrollLockCount;
-    delete target.dataset.rPreviousOverflowY;
-  } else {
-    target.dataset.rScrollLockCount = String(currentCount - 1);
+    const previous = target.dataset.rPreviousOverflowY ?? ''
+    target.style.overflowY = previous
+    delete target.dataset.rScrollLockCount
+    delete target.dataset.rPreviousOverflowY
+  }
+  else {
+    target.dataset.rScrollLockCount = String(currentCount - 1)
   }
 }
 
 function isObject(option: Option) {
-  if (!option) return true;
-  if (typeof option === 'object') return true;
-  if (typeof option === 'function') return true;
-  if (typeof option === 'symbol') return true;
-  if (typeof option === 'undefined') return true;
-  if (Array.isArray(option)) return true;
+  if (!option)
+    return true
+  if (typeof option === 'object')
+    return true
+  if (typeof option === 'function')
+    return true
+  if (typeof option === 'symbol')
+    return true
+  if (typeof option === 'undefined')
+    return true
+  if (Array.isArray(option))
+    return true
 
-  const [optionKey] = Object.keys(option as any);
+  const [optionKey] = Object.keys(option as any)
 
-  return ['label', 'value']?.includes(optionKey);
+  return ['label', 'value']?.includes(optionKey)
 }
 
 const mutatedOptions = computed(() => {
-  const options = props.options;
+  const options = props.options
   if (!isObject(options[0])) {
     return options.map((option: string) => ({
       value: option,
       label: String(option),
-    }));
+    }))
   }
 
-  return options;
-});
+  return options
+})
 
 const mutatedModel = computed(() => {
-  const model = props.modelValue;
+  const model = props.modelValue
 
   if (!isObject(model)) {
     return {
       value: model,
       label: String(model),
-    };
+    }
   }
 
-  return model;
-});
+  return model
+})
 
 /**
  * @description - HTML elements references
  */
-const dropdown = ref<HTMLElement>();
-const input = ref<HTMLInputElement>();
-const wrapper = ref<HTMLElement>();
+const dropdown = ref<HTMLElement>()
+const input = ref<HTMLInputElement>()
+const wrapper = ref<HTMLElement>()
 
 /**
  * @description - Handles the appearance of the select list
  */
 function toggleActive(id: string) {
-  if (props.disabled) return;
+  if (props.disabled)
+    return
 
-  const dropdownWithId = document.getElementById(id);
+  const dropdownWithId = document.getElementById(id)
 
-  const otherDropdowns = document.querySelectorAll('.r-dropdown--active');
+  const otherDropdowns = document.querySelectorAll('.r-dropdown--active')
 
   otherDropdowns.forEach((otherDropdown) => {
     if (
-      otherDropdown.id !== dropdown.value?.id &&
-      otherDropdown.classList.contains('r-dropdown--active')
+      otherDropdown.id !== dropdown.value?.id
+      && otherDropdown.classList.contains('r-dropdown--active')
     ) {
       // unlock scroll for the container of the other dropdown being closed
       const otherScrollParent = findNearestScrollParent(
-        otherDropdown as HTMLElement
-      );
-      if (otherScrollParent) unlockScroll(otherScrollParent);
+        otherDropdown as HTMLElement,
+      )
+      if (otherScrollParent)
+        unlockScroll(otherScrollParent)
       otherDropdown.childNodes.forEach((child: any) => {
         if (child?.classList) {
           Object?.values(child?.classList)
             .filter((cls: any) => cls.includes('--active'))
             .forEach((cls: any) => {
-              child?.classList.remove(cls);
-            });
+              child?.classList.remove(cls)
+            })
         }
-      });
-      otherDropdown.classList.remove('r-dropdown--active');
+      })
+      otherDropdown.classList.remove('r-dropdown--active')
     }
-  });
+  })
 
   if (dropdownWithId?.classList.contains('r-dropdown--active')) {
-    dropdownWithId.classList.remove('r-dropdown--active');
-    active.value = false;
-    dropdown.value?.blur();
-    input.value?.blur();
-    if (scrollParent.value) unlockScroll(scrollParent.value);
-  } else {
-    dropdownWithId?.classList.add('r-dropdown--active');
-    active.value = true;
-    dropdown.value?.focus();
-    input.value?.focus();
-    if (!scrollParent.value)
+    dropdownWithId.classList.remove('r-dropdown--active')
+    active.value = false
+    dropdown.value?.blur()
+    input.value?.blur()
+    if (scrollParent.value)
+      unlockScroll(scrollParent.value)
+  }
+  else {
+    dropdownWithId?.classList.add('r-dropdown--active')
+    active.value = true
+    dropdown.value?.focus()
+    input.value?.focus()
+    if (!scrollParent.value) {
       scrollParent.value = findNearestScrollParent(
-        wrapper.value || (dropdown.value as HTMLElement)
-      );
-    if (scrollParent.value) lockScroll(scrollParent.value);
+        wrapper.value || (dropdown.value as HTMLElement),
+      )
+    }
+    if (scrollParent.value)
+      lockScroll(scrollParent.value)
     dropdownWithId?.childNodes.forEach((child: any) => {
       if (child?.classList) {
         Object?.values(child?.classList).forEach((cls: any) => {
-          child?.classList.add(`${cls}--active`);
-        });
+          child?.classList.add(`${cls}--active`)
+        })
       }
-    });
+    })
   }
 }
 
@@ -465,10 +469,11 @@ function toggleActive(id: string) {
  */
 
 function removeActive(id: string) {
-  const dropdownWithId = document.getElementById(id);
-  dropdownWithId?.classList.remove('r-dropdown--active');
-  active.value = false;
-  if (scrollParent.value) unlockScroll(scrollParent.value);
+  const dropdownWithId = document.getElementById(id)
+  dropdownWithId?.classList.remove('r-dropdown--active')
+  active.value = false
+  if (scrollParent.value)
+    unlockScroll(scrollParent.value)
 }
 
 /**
@@ -477,31 +482,35 @@ function removeActive(id: string) {
  * @param option Selected option
  */
 function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
-  if (props.disabled || option.disabled) return;
-  updatePosition();
+  if (props.disabled || option.disabled)
+    return
+  updatePosition()
   if (option.value === 'select-all') {
-    selectAll();
-    return;
+    selectAll()
+    return
   }
   if (props.multiple) {
-    if (!selectedMultiple.value.find((opt) => opt.value === option.value)) {
-      selectedMultiple.value.push(option);
-    } else {
+    if (!selectedMultiple.value.find(opt => opt.value === option.value)) {
+      selectedMultiple.value.push(option)
+    }
+    else {
       const index = selectedMultiple.value.findIndex(
-        (opt) => opt.value === option.value
-      );
-      selectedMultiple.value.splice(index, 1);
-      emit('removeOption', option);
+        opt => opt.value === option.value,
+      )
+      selectedMultiple.value.splice(index, 1)
+      emit('removeOption', option)
     }
 
-    inputModel.value = '';
-    if (props.searchable) input.value?.focus();
-    return;
+    inputModel.value = ''
+    if (props.searchable)
+      input.value?.focus()
+    return
   }
 
-  selectOneOption(e, option);
+  selectOneOption(e, option)
 
-  if (props.closeOnSelect) hide();
+  if (props.closeOnSelect)
+    hide()
 }
 /**
  * @description - Selects one option
@@ -509,16 +518,16 @@ function selectOption(e: any, option: Option, hide: any, updatePosition: any) {
  */
 function selectOneOption(e: MouseEvent, option: Option) {
   if (selected.value.value === option.value && !props.disableDeselect) {
-    selected.value = {} as Option;
-    inputModel.value = '';
-    emit('update:modelValue', '');
-    emit('removeOption', option);
-    return;
+    selected.value = {} as Option
+    inputModel.value = ''
+    emit('update:modelValue', '')
+    emit('removeOption', option)
+    return
   }
 
-  inputModel.value = option.label;
-  selected.value = option;
-  emit('update:modelValue', option);
+  inputModel.value = option.label
+  selected.value = option
+  emit('update:modelValue', option)
 }
 /**
  * @description - Removes an option from the selected options
@@ -527,44 +536,48 @@ function selectOneOption(e: MouseEvent, option: Option) {
 function removeOption(
   e: MouseEvent | KeyboardEvent,
   option: Option,
-  updatePosition: any
+  updatePosition: any,
 ) {
-  if (e instanceof KeyboardEvent && e.key !== 'Backspace') return;
-  if (inputModel.value !== '') return;
-  e.stopPropagation();
-  updatePosition();
+  if (e instanceof KeyboardEvent && e.key !== 'Backspace')
+    return
+  if (inputModel.value !== '')
+    return
+  e.stopPropagation()
+  updatePosition()
   const index = selectedMultiple.value.findIndex(
-    (opt) => opt.value === option.value
-  );
-  selectedMultiple.value.splice(index, 1);
-  emit('removeOption', option);
-  emit('update:modelValue', selectedMultiple.value);
+    opt => opt.value === option.value,
+  )
+  selectedMultiple.value.splice(index, 1)
+  emit('removeOption', option)
+  emit('update:modelValue', selectedMultiple.value)
 }
 /**
  * @description - Handles the not existing options
  */
 function createTag(e: KeyboardEvent, updatePosition: any) {
-  if (!props.multiple) return;
-  e.stopPropagation();
-  updatePosition();
-  const value = inputModel.value;
-  if (value === '') return;
+  if (!props.multiple)
+    return
+  e.stopPropagation()
+  updatePosition()
+  const value = inputModel.value
+  if (value === '')
+    return
   const option = mutatedOptions.value.find(
-    (opt: Option) => opt.label === value
-  );
+    (opt: Option) => opt.label === value,
+  )
   if (!option) {
-    selectedMultiple.value.push({ value, label: value });
-    inputModel.value = '';
-    input.value?.focus();
+    selectedMultiple.value.push({ value, label: value })
+    inputModel.value = ''
+    input.value?.focus()
   }
 }
 function isSelected(option: Option) {
   if (!option || option?.value === undefined || option?.value === null)
-    return false;
+    return false
   if (props.multiple)
-    return selectedMultiple.value.find((opt) => opt?.value === option?.value);
+    return selectedMultiple.value.find(opt => opt?.value === option?.value)
 
-  return selected.value?.value === option?.value;
+  return selected.value?.value === option?.value
 }
 /**
  * @description Filtered options based on the search input
@@ -572,89 +585,95 @@ function isSelected(option: Option) {
  */
 const filteredOptions = computed<Option[]>(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
-    return mutatedOptions.value;
+    return mutatedOptions.value
   const result = mutatedOptions.value.filter((option: Option) => {
-    return option.label.toLowerCase().includes(inputModel.value.toLowerCase());
-  });
-  return result;
-});
+    return option.label.toLowerCase().includes(inputModel.value.toLowerCase())
+  })
+  return result
+})
 
 const isReadOnly = computed(() => {
-  return !props.searchable;
-});
+  return !props.searchable
+})
 
 function reset() {
   if (mutatedModel.value) {
     if (props.multiple) {
-      selectedMultiple.value = mutatedModel.value as Option[];
-    } else {
-      selected.value = mutatedModel.value as Option;
-      inputModel.value = (mutatedModel.value as Option).label;
+      selectedMultiple.value = mutatedModel.value as Option[]
     }
-  } else {
-    selected.value = {} as Option;
-    selectedMultiple.value.splice(0, selectedMultiple.value.length);
+    else {
+      selected.value = mutatedModel.value as Option
+      inputModel.value = (mutatedModel.value as Option).label
+    }
+  }
+  else {
+    selected.value = {} as Option
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
   }
 }
 
 function handleInput(updatePosition: any) {
-  if (props.searchable) updatePosition();
+  if (props.searchable)
+    updatePosition()
 
-  if (props.multiple) return;
+  if (props.multiple)
+    return
 
   if (inputModel.value === '') {
-    selected.value = {} as Option;
-    emit('update:modelValue', '');
-    emit('removeOption', selected.value);
+    selected.value = {} as Option
+    emit('update:modelValue', '')
+    emit('removeOption', selected.value)
   }
 }
 
 function handleClearable(e: MouseEvent, updatePosition: any) {
-  e.stopPropagation();
-  updatePosition();
+  e.stopPropagation()
+  updatePosition()
   if (props.multiple) {
-    selectedMultiple.value.splice(0, selectedMultiple.value.length);
-    emit('clear', selectedMultiple.value);
-    return;
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
+    emit('clear', selectedMultiple.value)
+    return
   }
 
-  selected.value = {} as Option;
-  inputModel.value = '';
-  emit('update:modelValue', '');
+  selected.value = {} as Option
+  inputModel.value = ''
+  emit('update:modelValue', '')
 
-  emit('clear', selected.value);
+  emit('clear', selected.value)
 }
 
 function selectAll() {
   if (selectedMultiple.value.length === filteredOptions.value.length) {
-    selectedMultiple.value.splice(0, selectedMultiple.value.length);
-    return;
+    selectedMultiple.value.splice(0, selectedMultiple.value.length)
+    return
   }
-  selectedMultiple.value = filteredOptions.value;
+  selectedMultiple.value = filteredOptions.value
 }
 
 const visibleSelectedOptions = computed(() => {
-  if (!props.multiple || !Array.isArray(props.modelValue)) return [];
-  return props.modelValue.slice(0, props.maxVisibleChips);
-});
+  if (!props.multiple || !Array.isArray(props.modelValue))
+    return []
+  return props.modelValue.slice(0, props.maxVisibleChips)
+})
 
 const remainingOptionsCount = computed(() => {
-  if (!props.multiple || !Array.isArray(props.modelValue)) return 0;
-  return Math.max(0, props.modelValue.length - props.maxVisibleChips);
-});
+  if (!props.multiple || !Array.isArray(props.modelValue))
+    return 0
+  return Math.max(0, props.modelValue.length - props.maxVisibleChips)
+})
 
 onMounted(() => {
-  reset();
+  reset()
   if (navigator.userAgent.includes('iPhone')) {
     // @ts-expect-error - iOS viewport fix
     document
       .querySelector('[name=viewport]')
       .setAttribute(
         'content',
-        'width=device-width, initial-scale=1, maximum-scale=1'
-      );
+        'width=device-width, initial-scale=1, maximum-scale=1',
+      )
   }
-});
+})
 
 /**
  * @description - Watch the selected multiple options
@@ -663,23 +682,34 @@ onMounted(() => {
 watch(
   selectedMultiple,
   (option) => {
-    emit('update:modelValue', option);
+    emit('update:modelValue', option)
   },
   {
     deep: true,
-  }
-);
+  },
+)
 
 watch(
   () => mutatedModel.value,
   (_value) => {
-    reset();
-  }
-);
+    reset()
+  },
+)
+
+watch(
+  () => active.value,
+  (value) => {
+    if (value && scrollParent.value)
+      lockScroll(scrollParent.value)
+    else if (!value && scrollParent.value)
+      unlockScroll(scrollParent.value)
+  },
+)
 
 onUnmounted(() => {
-  if (active.value && scrollParent.value) unlockScroll(scrollParent.value);
-});
+  if (active.value && scrollParent.value)
+    unlockScroll(scrollParent.value)
+})
 </script>
 
 <template>
@@ -694,7 +724,6 @@ onUnmounted(() => {
       :tooltip-class="['w-full', props.tooltipClass]"
       trigger-class="w-full"
       :triggers="['click']"
-      :persistent="props.persistent"
       type="dropdown"
       @hide="
         ($event) => {
@@ -712,7 +741,7 @@ onUnmounted(() => {
             'r-dropdown--loading': props.loading,
             [props.dropdownClass]: props.dropdownClass,
             'r-dropdown--error': props.errorMsg,
-            group: inputModel !== '' || selectedMultiple.length,
+            'group': inputModel !== '' || selectedMultiple.length,
           }"
           role="select"
           @click="toggleActive(tooltipId)"
@@ -815,11 +844,11 @@ onUnmounted(() => {
                 removeOption(
                   $event,
                   selectedMultiple[selectedMultiple.length - 1],
-                  updatePosition
+                  updatePosition,
                 )
               "
               @keydown.enter="createTag($event, updatePosition)"
-            />
+            >
           </div>
 
           <div
@@ -872,9 +901,9 @@ onUnmounted(() => {
         >
           <li
             v-if="
-              props.showSelectAll &&
-              props.multiple &&
-              filteredOptions.length > 0
+              props.showSelectAll
+                && props.multiple
+                && filteredOptions.length > 0
             "
             class="r-dropdown-options__option"
             :class="{
@@ -887,7 +916,7 @@ onUnmounted(() => {
                 $event,
                 { label: props.selectAllText, value: 'select-all' },
                 hide,
-                updatePosition
+                updatePosition,
               )
             "
           >
@@ -898,8 +927,8 @@ onUnmounted(() => {
             </div>
             <Icon
               v-if="
-                selectedMultiple.length === filteredOptions.length &&
-                !props.hideOptionCheckIcon
+                selectedMultiple.length === filteredOptions.length
+                  && !props.hideOptionCheckIcon
               "
               class="r-dropdown-options__option__append-icon"
               :class="{
@@ -913,7 +942,7 @@ onUnmounted(() => {
             v-if="props.showSelectAll && filteredOptions.length > 0"
             :id="`${id}-divider`"
             class="r-dropdown-options__divider"
-          />
+          >
           <li
             v-for="option in filteredOptions"
             :id="`${id}-option-${option.value}`"
