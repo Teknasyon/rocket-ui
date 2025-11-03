@@ -33,7 +33,7 @@
   }
 
   &--dropdown {
-    @apply z-[100];
+    @apply z-[10000];
   }
 }
 

@@ -5,7 +5,7 @@
 }
 
 .r-dropdown-overlay {
-  @apply fixed inset-0 z-[99];
+  @apply fixed inset-0 z-[9999];
 }
 
 .r-dropdown {
