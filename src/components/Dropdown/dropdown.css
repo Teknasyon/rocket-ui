@@ -4,6 +4,10 @@
   @apply relative w-full;
 }
 
+.r-dropdown-overlay {
+  @apply fixed inset-0 z-[99];
+}
+
 .r-dropdown {
   @apply flex items-center bg-white border border-[var(--neutral-75)] rounded-md shadow-sm py-[7px] px-3 text-left cursor-pointer;
 

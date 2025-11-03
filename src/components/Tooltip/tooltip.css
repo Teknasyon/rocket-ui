@@ -31,6 +31,10 @@
   &--light {
     @apply shadow-2xl rounded-lg;
   }
+
+  &--dropdown {
+    @apply z-[100];
+  }
 }
 
 @keyframes r-tooltip-show {

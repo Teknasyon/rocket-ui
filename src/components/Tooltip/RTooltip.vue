@@ -14,6 +14,14 @@ import {
 
 export interface IProps {
   /**
+   * ID of the tooltip
+   * @type string
+   * @default 'r-tooltip'
+   * @example
+   * <Tooltip id="r-tooltip" />
+   */
+  id?: string
+  /**
    * Placement of the tooltip
    * @type Placements
    * @default Placement.Top
@@ -335,6 +343,7 @@ const classes = computed(() => {
     'r-tooltip': true,
     'r-tooltip--dark': props.dark && !props.light,
     'r-tooltip--light': props.light,
+    'r-tooltip--dropdown': props.type === Theme.Dropdown,
   }
 })
 

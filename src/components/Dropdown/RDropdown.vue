@@ -377,6 +377,13 @@ const dropdown = ref<HTMLElement>()
 const input = ref<HTMLInputElement>()
 const wrapper = ref<HTMLElement>()
 
+// Store the hide function from tooltip slot
+const tooltipHideFunction = ref<((e?: Event | null) => void) | null>(null)
+
+function setTooltipHideFunction(hideFunc: (e?: Event | null) => void) {
+  tooltipHideFunction.value = hideFunc
+}
+
 // Store the scroll parent for this dropdown instance
 const scrollParent = ref<HTMLElement | null>(null)
 
@@ -473,6 +480,13 @@ function removeActive(id: string) {
   const dropdownWithId = document.getElementById(id)
   dropdownWithId?.classList.remove('r-dropdown--active')
   active.value = false
+}
+
+/**
+ * @description - Handles overlay click to close dropdown
+ */
+function handleOverlayClick() {
+  tooltipHideFunction.value?.()
 }
 
 /**
@@ -713,6 +727,15 @@ onUnmounted(() => {
 
 <template>
   <div :id="id" ref="wrapper" class="r-dropdown-wrapper">
+    <!-- Overlay teleported to body -->
+    <Teleport to="body">
+      <div
+        v-if="active"
+        :id="`${id}-overlay`"
+        class="r-dropdown-overlay"
+        @click="handleOverlayClick"
+      />
+    </Teleport>
     <RTooltip
       :id="`${id}-tooltip`"
       :auto-hide="false"
@@ -817,8 +840,8 @@ onUnmounted(() => {
                     :id="`${id}-selected-option-${index}`"
                     :key="option.value"
                   >
-                    {{ option.label
-                    }}{{ index < selectedMultiple.length - 1 ? ', ' : '' }}
+                    {{ option.label }}
+                    {{ index < selectedMultiple.length - 1 ? ', ' : '' }}
                   </span>
                 </template>
               </div>
@@ -890,6 +913,8 @@ onUnmounted(() => {
         </div>
       </template>
       <template #content="{ hide, updatePosition }">
+        <!-- Set the tooltip hide function to the dropdown -->
+        {{ setTooltipHideFunction(hide) }}
         <ul
           :id="`${id}-options`"
           class="r-dropdown-options"
