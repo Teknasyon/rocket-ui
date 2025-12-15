@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import Chip from '../Chips/RChip.vue'
 import Icon from '../Icon/RIcon.vue'
 import './dropdown.css'
@@ -267,6 +267,16 @@ export interface SelectProps {
    * <Dropdown :maxVisibleChips="3" />
    */
   maxVisibleChips?: number
+
+  /**
+   * Allow to search for options inside the dropdown
+   * @type {boolean}
+   * @default true
+   * @example
+   * <Dropdown innerSearch />
+   * <Dropdown :innerSearch="false" />
+   */
+  innerSearch?: boolean
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -297,9 +307,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
   selectAllText: 'Select all',
   disableDeselect: false,
   maxVisibleChips: 2,
+  innerSearch: true,
 })
 
-const emit = defineEmits(['update:modelValue', 'clear', 'removeOption'])
+const emit = defineEmits(['update:modelValue', 'clear', 'removeOption', 'input'])
 
 const selected = ref<Option>({} as Option)
 const selectedMultiple = ref<Option[]>([])
@@ -599,6 +610,10 @@ function isSelected(option: Option) {
 const filteredOptions = computed<Option[]>(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
     return mutatedOptions.value
+
+  if (!props.innerSearch)
+    return mutatedOptions.value
+
   const result = mutatedOptions.value.filter((option: Option) => {
     return option.label.toLowerCase().includes(inputModel.value.toLowerCase())
   })
@@ -1047,6 +1062,7 @@ onUnmounted(() => {
               {{ props.noOptionsText }}
             </slot>
           </li>
+          <slot name="pagination" />
         </ul>
       </template>
     </RTooltip>
