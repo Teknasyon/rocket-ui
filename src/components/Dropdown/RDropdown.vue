@@ -277,6 +277,15 @@ export interface SelectProps {
    * <Dropdown :innerSearch="false" />
    */
   innerSearch?: boolean
+
+  /**
+   * Loading state of the search
+   * @type {boolean}
+   * @default false
+   * @example
+   * <Dropdown searchLoading />
+   */
+  searchLoading?: boolean
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -308,9 +317,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
   disableDeselect: false,
   maxVisibleChips: 2,
   innerSearch: true,
+  searchLoading: false,
 })
 
-const emit = defineEmits(['update:modelValue', 'clear', 'removeOption', 'input'])
+const emit = defineEmits(['update:modelValue', 'clear', 'removeOption', 'search'])
 
 const selected = ref<Option>({} as Option)
 const selectedMultiple = ref<Option[]>([])
@@ -611,7 +621,7 @@ const filteredOptions = computed<Option[]>(() => {
   if (!props.searchable || selected.value.label === inputModel.value)
     return mutatedOptions.value
 
-  if (!props.innerSearch)
+  if (!props.innerSearch && props.searchable)
     return mutatedOptions.value
 
   const result = mutatedOptions.value.filter((option: Option) => {
@@ -728,6 +738,17 @@ watch(
   () => active.value,
   () => {
     manageScrollLock()
+  },
+)
+
+/**
+ * @description - Watch the input model to emit search event for external search
+ */
+watch(
+  () => inputModel.value,
+  (newValue) => {
+    if (!props.innerSearch && props.searchable && selected.value.label !== newValue)
+      emit('search', newValue.trim())
   },
 )
 
@@ -930,6 +951,7 @@ onUnmounted(() => {
       <template #content="{ hide, updatePosition }">
         <!-- Set the tooltip hide function to the dropdown -->
         {{ setTooltipHideFunction(hide) }}
+
         <ul
           :id="`${id}-options`"
           class="r-dropdown-options"
@@ -938,131 +960,136 @@ onUnmounted(() => {
             [props.optionsClass]: props.optionsClass,
           }"
         >
-          <li
-            v-if="
-              props.showSelectAll
-                && props.multiple
-                && filteredOptions.length > 0
-            "
-            class="r-dropdown-options__option"
-            :class="{
-              'r-dropdown-options__option--active':
-                selectedMultiple.length === filteredOptions.length,
-              'r-dropdown-options__option--disabled': false,
-            }"
-            @click.prevent="
-              selectOption(
-                $event,
-                { label: props.selectAllText, value: 'select-all' },
-                hide,
-                updatePosition,
-              )
-            "
-          >
-            <div class="flex items-center">
-              <p class="r-dropdown-options__option__label">
-                {{ props.selectAllText }}
-              </p>
-            </div>
-            <Icon
+          <div v-if="props.searchLoading" class="r-dropdown-options__loading">
+            <Icon name="mdiLoading" size="24" />
+          </div>
+          <div v-else>
+            <li
               v-if="
-                selectedMultiple.length === filteredOptions.length
-                  && !props.hideOptionCheckIcon
+                props.showSelectAll
+                  && props.multiple
+                  && filteredOptions.length > 0
               "
-              class="r-dropdown-options__option__append-icon"
+              class="r-dropdown-options__option"
               :class="{
-                'r-dropdown-options__option__append-icon--active':
+                'r-dropdown-options__option--active':
                   selectedMultiple.length === filteredOptions.length,
+                'r-dropdown-options__option--disabled': false,
               }"
-              name="mdiCheck"
-            />
-          </li>
-          <hr
-            v-if="props.showSelectAll && filteredOptions.length > 0"
-            :id="`${id}-divider`"
-            class="r-dropdown-options__divider"
-          >
-          <li
-            v-for="option in filteredOptions"
-            :id="`${id}-option-${option.value}`"
-            :key="option.value"
-            :aria-disabled="option.disabled"
-            class="r-dropdown-options__option"
-            :class="{
-              'r-dropdown-options__option--active': isSelected(option),
-              'r-dropdown-options__option--disabled': option.disabled,
-              'r-dropdown-options__option--deselect':
-                isSelected(option) && props.disableDeselect,
-            }"
-            @click.prevent="selectOption($event, option, hide, updatePosition)"
-          >
-            <slot
-              :id="`${id}-option-${option.value}`"
-              :disabled="option.disabled"
-              :is-selected="isSelected(option)"
-              :item="option"
-              name="option"
+              @click.prevent="
+                selectOption(
+                  $event,
+                  { label: props.selectAllText, value: 'select-all' },
+                  hide,
+                  updatePosition,
+                )
+              "
             >
-              <div
-                :id="`${id}-option-content-${option.value}`"
-                class="flex items-center"
-              >
-                <slot
-                  :id="`${id}-option-prepend-${option.value}`"
-                  :disabled="option.disabled"
-                  :is-selected="isSelected(option)"
-                  name="option-prepend"
-                >
-                  <Icon
-                    v-if="option.prependIcon"
-                    :id="`${id}-option-prepend-icon-${option.value}`"
-                    class="r-dropdown-options__option__prepend-icon"
-                    :class="{
-                      'r-dropdown-options__option__prepend-icon--active':
-                        isSelected(option),
-                    }"
-                    :name="option.prependIcon"
-                  />
-                </slot>
-                <p
-                  :id="`${id}-option-label-${option.value}`"
-                  class="r-dropdown-options__option__label"
-                  :class="{
-                    'r-dropdown-options__option__label--active':
-                      isSelected(option),
-                  }"
-                >
-                  {{ option.label }}
+              <div class="flex items-center">
+                <p class="r-dropdown-options__option__label">
+                  {{ props.selectAllText }}
                 </p>
               </div>
+              <Icon
+                v-if="
+                  selectedMultiple.length === filteredOptions.length
+                    && !props.hideOptionCheckIcon
+                "
+                class="r-dropdown-options__option__append-icon"
+                :class="{
+                  'r-dropdown-options__option__append-icon--active':
+                    selectedMultiple.length === filteredOptions.length,
+                }"
+                name="mdiCheck"
+              />
+            </li>
+            <hr
+              v-if="props.showSelectAll && filteredOptions.length > 0"
+              :id="`${id}-divider`"
+              class="r-dropdown-options__divider"
+            >
+            <li
+              v-for="option in filteredOptions"
+              :id="`${id}-option-${option.value}`"
+              :key="option.value"
+              :aria-disabled="option.disabled"
+              class="r-dropdown-options__option"
+              :class="{
+                'r-dropdown-options__option--active': isSelected(option),
+                'r-dropdown-options__option--disabled': option.disabled,
+                'r-dropdown-options__option--deselect':
+                  isSelected(option) && props.disableDeselect,
+              }"
+              @click.prevent="selectOption($event, option, hide, updatePosition)"
+            >
               <slot
-                :id="`${id}-option-append-${option.value}`"
+                :id="`${id}-option-${option.value}`"
                 :disabled="option.disabled"
                 :is-selected="isSelected(option)"
-                name="option-append"
+                :item="option"
+                name="option"
               >
-                <Icon
-                  v-if="isSelected(option) && !props.hideOptionCheckIcon"
-                  class="r-dropdown-options__option__append-icon"
-                  :class="{
-                    'r-dropdown-options__option__append-icon--active':
-                      isSelected(option),
-                  }"
-                  name="mdiCheck"
-                />
+                <div
+                  :id="`${id}-option-content-${option.value}`"
+                  class="flex items-center"
+                >
+                  <slot
+                    :id="`${id}-option-prepend-${option.value}`"
+                    :disabled="option.disabled"
+                    :is-selected="isSelected(option)"
+                    name="option-prepend"
+                  >
+                    <Icon
+                      v-if="option.prependIcon"
+                      :id="`${id}-option-prepend-icon-${option.value}`"
+                      class="r-dropdown-options__option__prepend-icon"
+                      :class="{
+                        'r-dropdown-options__option__prepend-icon--active':
+                          isSelected(option),
+                      }"
+                      :name="option.prependIcon"
+                    />
+                  </slot>
+                  <p
+                    :id="`${id}-option-label-${option.value}`"
+                    class="r-dropdown-options__option__label"
+                    :class="{
+                      'r-dropdown-options__option__label--active':
+                        isSelected(option),
+                    }"
+                  >
+                    {{ option.label }}
+                  </p>
+                </div>
+                <slot
+                  :id="`${id}-option-append-${option.value}`"
+                  :disabled="option.disabled"
+                  :is-selected="isSelected(option)"
+                  name="option-append"
+                >
+                  <Icon
+                    v-if="isSelected(option) && !props.hideOptionCheckIcon"
+                    class="r-dropdown-options__option__append-icon"
+                    :class="{
+                      'r-dropdown-options__option__append-icon--active':
+                        isSelected(option),
+                    }"
+                    name="mdiCheck"
+                  />
+                </slot>
               </slot>
-            </slot>
-          </li>
-          <li
-            v-if="filteredOptions.length === 0"
-            :id="`${id}-no-option`"
-            class="r-dropdown-options__no-option"
-          >
-            <slot name="not-options">
-              {{ props.noOptionsText }}
-            </slot>
-          </li>
-          <slot name="pagination" />
+            </li>
+            <li
+              v-if="filteredOptions.length === 0"
+              :id="`${id}-no-option`"
+              class="r-dropdown-options__no-option"
+            >
+              <slot name="not-options">
+                {{ props.noOptionsText }}
+              </slot>
+            </li>
+            <slot name="pagination" />
+          </div>
         </ul>
       </template>
     </RTooltip>
