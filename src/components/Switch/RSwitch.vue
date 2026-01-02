@@ -162,7 +162,7 @@ watch(
   >
     <div :class="classes">
       <input
-        :id="`${componentId}`"
+        :id="componentId"
         :checked="state.checked"
         class="r-switch__input"
         :disabled="props.disabled"
@@ -178,7 +178,7 @@ watch(
         [`r-switch-texts--${props.size}`]: true,
       }"
     >
-      <label :id="`${componentId}`" class="r-switch-texts__label" :for="componentId">
+      <label :id="`${componentId}-label`" class="r-switch-texts__label" :for="componentId">
         {{ props.label }}
       </label>
       <div v-if="!props.hideDetails" :id="`${componentId}-details`" class="r-switch-texts__details">

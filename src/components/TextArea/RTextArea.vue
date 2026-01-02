@@ -130,7 +130,7 @@ const componentId = computed(() => {
   <div :id="componentId" class="r-textarea-wrapper">
     <Label
       v-if="props.label"
-      :id="`${componentId}`"
+      :id="`${componentId}-label`"
       class="r-textarea__label"
       :for="componentId"
       :text="props.label"

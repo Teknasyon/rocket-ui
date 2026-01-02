@@ -178,7 +178,7 @@ const componentId = computed(() => props.id || 'r-checkbox')
   <div :id="componentId" class="r-checkbox-wrapper">
     <div :id="`${componentId}-container`" class="r-checkbox-container">
       <input
-        :id="`${componentId}`"
+        :id="componentId"
         :checked="state.checked"
         class="r-checkbox-container__input"
         :disabled="props.disabled"
@@ -192,7 +192,7 @@ const componentId = computed(() => props.id || 'r-checkbox')
     </div>
     <div :id="`${componentId}-texts`" class="r-checkbox-texts">
       <label
-        :id="`${componentId}`"
+        :id="`${componentId}-label`"
         class="r-checkbox-texts__label"
         :data-disabled="props.disabled"
         :for="componentId"
