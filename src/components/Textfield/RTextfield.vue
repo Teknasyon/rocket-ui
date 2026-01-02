@@ -362,7 +362,6 @@ watch(
 
 <template>
   <div
-    :id="componentId"
     class="r-textfield__wrapper"
   >
     <Label

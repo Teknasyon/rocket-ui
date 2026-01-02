@@ -153,7 +153,6 @@ watch(
 
 <template>
   <div
-    :id="componentId"
     class="r-switch-container"
     :class="{
       'r-switch-container--reverse': props.reverse,

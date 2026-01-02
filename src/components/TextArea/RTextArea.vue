@@ -127,7 +127,7 @@ const componentId = computed(() => {
 </script>
 
 <template>
-  <div :id="componentId" class="r-textarea-wrapper">
+  <div class="r-textarea-wrapper">
     <Label
       v-if="props.label"
       :id="`${componentId}-label`"

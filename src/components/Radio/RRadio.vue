@@ -50,7 +50,7 @@ watch(() => props.modelValue, (newVal) => {
 </script>
 
 <template>
-  <div :id="componentId" :class="classes">
+  <div :class="classes">
     <input
       v-bind="$attrs"
       :id="`${componentId}`"

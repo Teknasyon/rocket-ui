@@ -175,7 +175,7 @@ const componentId = computed(() => props.id || 'r-checkbox')
 </script>
 
 <template>
-  <div :id="componentId" class="r-checkbox-wrapper">
+  <div class="r-checkbox-wrapper">
     <div :id="`${componentId}-container`" class="r-checkbox-container">
       <input
         :id="componentId"
